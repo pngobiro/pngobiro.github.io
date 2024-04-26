@@ -26,6 +26,7 @@ Visual Enhancements:
 Strategically incorporate relevant and engaging images (img) with descriptive alt text to aid comprehension, reinforce key concepts, and maintain visual interest throughout the lesson.
 Embed relevant and educational YouTube videos (iframe) to provide multi-modal learning experiences, enhancing student engagement and retention.
 Apply the provided CSS styles and leverage additional visual enhancements (e.g., icons, diagrams, interactive elements) to create an aesthetically pleasing and memorable learning experience.
+Add relevant  images , with relevant alt name in relevant section . make sure the image name is also relelvant
 
 Language Appropriateness:
 
