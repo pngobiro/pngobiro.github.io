@@ -23,6 +23,10 @@ Lists: Key points, steps, and examples will be organized using unordered lists (
 
 Key information will be emphasized using <strong> (bold) or <em> (italics) tags where necessary.
 
+Use tables (table, th, tr, td) to present structured data or information in a well-formatted and accessible manner, ensuring clarity and ease of comprehension.
+
+use table to summarize , compare or contrast information in a structured manner
+
 Headings: The lesson will be divided into sections using <h1> for the main title ("Track and Field Events"), <h2> for each event (e.g., "High Jump," "Javelin Throw," "Shot Put"), and <h3> for sub-sections within each event (e.g., "Safety Instructions," "Warm-up Activities").
 
 
