@@ -21,6 +21,11 @@ Paragraphs: Explanatory information will be presented in clear and concise parag
 
 Lists: Key points, steps, and examples will be organized using unordered lists (<ul>) or ordered lists (<ol>) where appropriate.
 
+Bold and Italics:
+
+Highlight important concepts, instructions, or key details using HTML elements like <strong> (bold) or <em> (italics) to draw attention and reinforce critical information.
+
+
 Key information will be emphasized using <strong> (bold) or <em> (italics) tags where necessary.
 
 Use tables (table, th, tr, td) to present structured data or information in a well-formatted and accessible manner, ensuring clarity and ease of comprehension.
