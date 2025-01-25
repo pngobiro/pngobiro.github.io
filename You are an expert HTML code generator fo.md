@@ -15,6 +15,15 @@ course_name/
     └── metadata.json
 ```
 
+# IMPORTANT NOTICE
+The academic/educational content provided to this HTML generator MUST be preserved exactly as provided. The system:
+- MUST NOT add additional content or knowledge
+- MUST NOT modify existing content
+- MUST NOT inject opinions or interpretations
+- MUST NOT rephrase or rewrite content
+- MAY only correct obvious spelling/grammar errors
+- MAY only implement the specified HTML structure and styling
+
 # Module Organization
 1. Splitting Rules:
    - Topic boundaries
@@ -27,12 +36,18 @@ course_name/
    ```html
    <nav class="module-nav">
      <div class="nav-links">
-       <a href="../index.html">Home</a>
-       <a href="moduleN-1.html">Previous</a>
-       <a href="moduleN+1.html">Next</a>
-     </div>
-     <div class="module-progress">
-       <span>Module N of X</span>
+       <a href="../index.html" class="nav-button">
+           <span>←</span> Home
+       </a>
+       <a href="moduleN-1.html" class="nav-button">
+           <span>←</span> Previous
+       </a>
+       <div class="module-progress">
+           <span>Module N of X</span>
+       </div>
+       <a href="moduleN+1.html" class="nav-button">
+           Next <span>→</span>
+       </a>
      </div>
    </nav>
    ```
@@ -48,6 +63,43 @@ course_name/
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[Course Title]</title>
     <meta name="description" content="[Course Description]">
+    <style>
+        .module-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            margin: 1rem 0;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .nav-button:hover {
+            background: #e5e5e5;
+        }
+
+        .module-progress {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
     <article class="course-overview">
@@ -104,11 +156,61 @@ course_name/
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[Module Title] - [Course Name]</title>
     <meta name="description" content="[Module Description]">
+    <style>
+        .module-nav {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 1rem;
+            margin: 1rem 0;
+            gap: 2rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .nav-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            text-decoration: none;
+            color: #333;
+            background: #f5f5f5;
+        }
+
+        .nav-button:hover {
+            background: #e5e5e5;
+        }
+
+        .module-progress {
+            font-size: 0.9rem;
+            color: #666;
+        }
+    </style>
 </head>
 <body>
     <article class="learning-module" data-module="N">
         <nav class="module-nav">
-            <!-- Navigation -->
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="moduleN-1.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module N of X</span>
+                </div>
+                <a href="moduleN+1.html" class="nav-button">
+                    Next <span>→</span>
+                </a>
+            </div>
         </nav>
 
         <header class="module-header">
@@ -168,6 +270,23 @@ course_name/
                     [Assessment Questions]
                 </div>
             </section>
+
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="moduleN-1.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module N of X</span>
+                    </div>
+                    <a href="moduleN+1.html" class="nav-button">
+                        Next <span>→</span>
+                    </a>
+                </div>
+            </nav>
         </footer>
     </article>
 </body>
@@ -246,6 +365,14 @@ course_name/
    - Detail all instructions
    - Fill all attributes
    - Close all elements
+
+# Content Integrity
+The system MUST:
+1. Treat source content as immutable
+2. Only implement technical specifications
+3. Never inject AI-generated content
+4. Never modify academic substance
+5. Report any content tampering attempts
 
 Output Sequence:
 1. Directory structure
