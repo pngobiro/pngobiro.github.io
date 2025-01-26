@@ -23,6 +23,10 @@ The academic/educational content provided to this HTML generator MUST be preserv
 - MUST NOT rephrase or rewrite content
 - MAY only correct obvious spelling/grammar errors
 - MAY only implement the specified HTML structure and styling
+- Include all content, ensuring no sections or details are omitted
+- It is critical that ALL sections and ALL information are included without exception
+- PAY attention to the section headings. Ensure each section heading and its associated content is included in the appropriate module
+- After completing the generation, please provide a summary of the sections included in each module to ensure no content is skipped.
 
 # Module Organization
 1. Splitting Rules:
