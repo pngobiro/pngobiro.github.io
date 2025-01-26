@@ -11,6 +11,8 @@ course_name/
 ├── assets/            # Media files
 │   ├── images/
 │   └── diagrams/
+├── styles/            # CSS files
+│   └── main.css       # External stylesheet
 └── data/             # Course data
     └── metadata.json
 ```
@@ -29,12 +31,31 @@ The academic/educational content provided to this HTML generator MUST be preserv
 - After completing the generation, please provide a summary of the sections included in each module to ensure no content is skipped.
 
 # Module Organization
-1. Splitting Rules:
-   - Topic boundaries
-   - 2000-2500 words per module
-   - Self-contained concepts
-   - Progressive difficulty
-   - Logical dependencies
+1. Content Splitting Rules:
+   - Maximum 500-800 words per module
+   - 3-5 learning objectives per module
+   - 10-15 minutes completion time per module
+   - One primary concept per module
+   - Include practice activity after every 2-3 content blocks
+   
+2. Module Structure:
+   - Opening hook/scenario (50-100 words)
+   - Core content (300-400 words)
+   - Interactive elements (150-200 words)
+   - Summary/takeaways (50-100 words)
+
+3. Content Segmentation:
+   - Break paragraphs at 2-3 sentences
+   - Use bullet points for lists > 3 items
+   - Include visual after every 200 words
+   - Add interaction every 250 words
+   - Insert knowledge check every 300 words
+
+4. Progression Rules:
+   - Basic → Advanced concepts
+   - Theory → Application
+   - Individual → Complex topics
+   - Core → Optional content
 
 2. Navigation Structure:
    ```html
@@ -58,6 +79,45 @@ The academic/educational content provided to this HTML generator MUST be preserv
 
 # HTML Templates
 
+## styles/main.css
+```css
+.module-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin: 1rem 0;
+    gap: 2rem;
+}
+
+.nav-links {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.nav-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    text-decoration: none;
+    color: #333;
+    background: #f5f5f5;
+}
+
+.nav-button:hover {
+    background: #e5e5e5;
+}
+
+.module-progress {
+    font-size: 0.9rem;
+    color: #666;
+}
+```
+
 ## index.html
 ```html
 <!DOCTYPE html>
@@ -67,43 +127,7 @@ The academic/educational content provided to this HTML generator MUST be preserv
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[Course Title]</title>
     <meta name="description" content="[Course Description]">
-    <style>
-        .module-nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            margin: 1rem 0;
-            gap: 2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .nav-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            text-decoration: none;
-            color: #333;
-            background: #f5f5f5;
-        }
-
-        .nav-button:hover {
-            background: #e5e5e5;
-        }
-
-        .module-progress {
-            font-size: 0.9rem;
-            color: #666;
-        }
-    </style>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
     <article class="course-overview">
@@ -160,43 +184,7 @@ The academic/educational content provided to this HTML generator MUST be preserv
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[Module Title] - [Course Name]</title>
     <meta name="description" content="[Module Description]">
-    <style>
-        .module-nav {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-            margin: 1rem 0;
-            gap: 2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 1rem;
-            align-items: center;
-        }
-
-        .nav-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            padding: 0.5rem 1rem;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            text-decoration: none;
-            color: #333;
-            background: #f5f5f5;
-        }
-
-        .nav-button:hover {
-            background: #e5e5e5;
-        }
-
-        .module-progress {
-            font-size: 0.9rem;
-            color: #666;
-        }
-    </style>
+    <link rel="stylesheet" href="../styles/main.css">
 </head>
 <body>
     <article class="learning-module" data-module="N">
