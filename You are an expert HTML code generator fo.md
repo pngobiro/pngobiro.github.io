@@ -348,6 +348,7 @@ course_name/
    - No "// comments"
    - No "[placeholder]"
    - No "etc."
+   - No Placeholders for other images)
 
 3. Full Implementation:
    - Complete all sections
