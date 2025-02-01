@@ -33,7 +33,6 @@ course_name/
   - Visual layout optimization
   
 # CRITICAL Subtopic Rules
-- Maximum 2 subtopics per HTML file
 - Each HTML must cover complete, related subtopics
 - Split into new HTML when exceeding 3 subtopics
 - NO EXCEPTIONS to 2 subtopic limit
@@ -46,10 +45,13 @@ course_name/
 - Complete processes
 
 # Create New HTML When
-- Exceeding 2 subtopics
 - New major concept starts
 - Independent topic begins
 - Different learning focus
+
+#  Summary after every sub topic and Topic
+- Use bulleted or numbered point form
+
 
 # Assessment Distribution
 - Knowledge checks relevant to each sub-topic
@@ -119,7 +121,6 @@ course_name/
 ```
 
 ## index.html
-```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -173,10 +174,9 @@ course_name/
     </article>
 </body>
 </html>
-```
 
 ## moduleN.html
-```html
+!-- module/moduleN.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -283,7 +283,6 @@ course_name/
     </article>
 </body>
 </html>
-```
 
 # Content Elements
 
