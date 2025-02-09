@@ -1,37 +1,46 @@
 **EXPERT HTML eLEARNING MODULE GENERATOR PROTOCOL**
 
 # MISSION
-
 Transform academic documents into strictly compliant HTML eLearning modules while preserving 100% of original content. Maintain exact information hierarchy and semantic structure.
 
 # Directory Structure
 ```
 course_name/
-├── index.html          # Course overview
-├── modules/            # Module files
+├── index.html          
+├── modules/            
 │   ├── module1.html
 │   ├── module2.html
 │   └── moduleN.html
-├── assets/            # Media files
+├── assets/            
 │   ├── images/
+│   │   ├── hero/
+│   │   │   ├── module1-introduction-hero.jpg (800x400)
+│   │   │   └── module2-overview-hero.jpg (800x400)
+│   │   ├── content/
+│   │   │   ├── diagram-workflow-basic.jpg (600x300)
+│   │   │   └── screenshot-interface-main.jpg (600x300)
+│   │   └── icons/
+│   │       ├── icon-objective-target.svg (200x200)
+│   │       └── icon-summary-book.svg (200x200)
 │   └── diagrams/
-├── styles/            # CSS files
-│   └── main.css       # External stylesheet
-└── data/             # Course data
+├── styles/            
+│   └── main.css       
+└── data/             
     └── metadata.json
 ```
 
-- **STRICT CONTENT RULES:**
-  - NO additions/omissions
-  - NO paraphrasing/rewriting/
-  - NO opinion injection
-  - NO conceptual merging
-  - No rewording or paraphrasing
-- **Permitted Adjustments:**
-  - Spelling/grammar fixes
-  - HTML formatting
-  - Visual layout optimization
-  
+# STRICT CONTENT RULES
+- NO additions/omissions
+- NO paraphrasing/rewriting
+- NO opinion injection
+- NO conceptual merging
+- No rewording or paraphrasing
+
+# Permitted Adjustments
+- Spelling/grammar fixes
+- HTML formatting
+- Visual layout optimization
+
 # CRITICAL Subtopic Rules
 - Each HTML must cover complete, related subtopics
 - Split into new HTML when exceeding 3 subtopics
@@ -39,50 +48,57 @@ course_name/
 
 # Subtopic Organization Rules
 - Keep Together in Same HTML:
-- Directly related subtopics
-- Sequential procedures
-- Dependent concepts
-- Complete processes
+  - Directly related subtopics
+  - Sequential procedures
+  - Dependent concepts
+  - Complete processes
 
 # Create New HTML When
 - New major concept starts
 - Independent topic begins
 - Different learning focus
 
-#  Summary after every sub topic and Topic
+# Summary Requirements
+- Summary after every sub-topic and Topic
 - Use bulleted or numbered point form
-
+- Include key concepts and learning points
 
 # Assessment Distribution
 - Knowledge checks relevant to each sub-topic
 - Practice activities focused on specific concepts
-- Final assessment covers all three modules
+- Final assessment covers all modules
 
-
-# Navigation Structure:
-   ```html
-   <nav class="module-nav">
-     <div class="nav-links">
-       <a href="../index.html" class="nav-button">
-           <span>←</span> Home
-       </a>
-       <a href="moduleN-1.html" class="nav-button">
-           <span>←</span> Previous
-       </a>
-       <div class="module-progress">
-           <span>Module N of X</span>
-       </div>
-       <a href="moduleN+1.html" class="nav-button">
-           Next <span>→</span>
-       </a>
-     </div>
-   </nav>
-   ```
+# Content Elements with Icons
+- 📚 Content
+- ✍️ Activities
+- 💡 Tips
+- ⚠️ Important
+- 🎯 Objectives
+- ⚡ Assessments
+- 📝 Summary
+- 🔍 Deep Dive
 
 # HTML Templates
 
 ## styles/main.css
 ```css
+/* Tables */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 1rem 0;
+}
+
+table, th, td {
+    border: 1px solid #ccc;
+    padding: 0.5rem;
+}
+
+th {
+    background-color: #f5f5f5;
+}
+
+/* Navigation */
 .module-nav {
     display: flex;
     justify-content: center;
@@ -121,6 +137,7 @@ course_name/
 ```
 
 ## index.html
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -133,28 +150,57 @@ course_name/
 <body>
     <article class="course-overview">
         <header class="course-header">
+            <img src="assets/images/hero/course-overview-hero.jpg" 
+                 alt="Course Overview Banner"
+                 width="800" height="400">
             <h1>[Course Title]</h1>
             <div class="course-meta">
                 <span class="duration">Duration: [X] hours</span>
                 <span class="level">Level: [Beginner/Intermediate/Advanced]</span>
             </div>
-            <section class="course-intro">
-                <h2>Course Overview</h2>
-                <p>[Course Description]</p>
-            </section>
-            <section class="learning-path">
-                <h2>🎯 Course Objectives</h2>
-                <ul>
-                    <li>[Specific Objective]</li>
-                </ul>
-            </section>
         </header>
+
+        <section class="course-intro">
+            <h2>Course Overview</h2>
+            <p>[Course Description]</p>
+            <table border="1">
+                <thead>
+                    <tr>
+                        <th>Module</th>
+                        <th>Duration</th>
+                        <th>Topics Covered</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Module 1: Introduction</td>
+                        <td>45 minutes</td>
+                        <td>Topic 1, Topic 2, Topic 3</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+        <section class="learning-path">
+            <h2>
+                <img src="assets/images/icons/icon-objective-target.svg" 
+                     alt="Objectives Icon"
+                     width="24" height="24">
+                Course Objectives
+            </h2>
+            <ul>
+                <li>[Specific Objective]</li>
+            </ul>
+        </section>
 
         <nav class="module-list">
             <h2>Course Modules</h2>
             <ol>
                 <li>
                     <a href="modules/module1.html">
+                        <img src="assets/images/hero/module1-introduction-hero.jpg" 
+                             alt="Module 1 Overview"
+                             width="400" height="200">
                         <h3>[Module Title]</h3>
                         <p>[Brief Description]</p>
                         <span class="duration">[X] minutes</span>
@@ -162,21 +208,13 @@ course_name/
                 </li>
             </ol>
         </nav>
-
-        <footer class="course-footer">
-            <section class="prerequisites">
-                <h2>Prerequisites</h2>
-                <ul>
-                    <li>[Requirement]</li>
-                </ul>
-            </section>
-        </footer>
     </article>
 </body>
 </html>
+```
 
 ## moduleN.html
-!-- module/moduleN.html -->
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -206,13 +244,10 @@ course_name/
         </nav>
 
         <header class="module-header">
+            <img src="../assets/images/hero/moduleN-overview-hero.jpg" 
+                 alt="Module N Overview"
+                 width="800" height="400">
             <h1>[Module Title]</h1>
-            <section class="module-objectives">
-                <h2>🎯 Learning Objectives</h2>
-                <ul>
-                    <li>[Specific Objective]</li>
-                </ul>
-            </section>
         </header>
 
         <main class="module-content">
@@ -221,21 +256,38 @@ course_name/
                 <div class="content-block">
                     <p>[Content]</p>
                     <figure class="content-image">
-                        <img src="../assets/images/[image].jpg" 
+                        <img src="../assets/images/content/diagram-workflow-basic.jpg" 
                              alt="[Detailed Description]"
                              width="600" height="300">
                         <figcaption>[Caption]</figcaption>
                     </figure>
                 </div>
                 
-                <aside class="learning-tip">
-                    <h3>💡 Pro Tip</h3>
-                    <p>[Helpful Advice]</p>
-                </aside>
+                <table border="1">
+                    <thead>
+                        <tr>
+                            <th>Feature</th>
+                            <th>Description</th>
+                            <th>Example</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>[Feature Name]</td>
+                            <td>[Description]</td>
+                            <td>[Example]</td>
+                        </tr>
+                    </tbody>
+                </table>
             </section>
 
             <section class="practice-activity">
-                <h2>✍️ Practice Exercise</h2>
+                <h2>
+                    <img src="../assets/images/icons/icon-practice-pencil.svg" 
+                         alt="Practice Icon"
+                         width="24" height="24">
+                    Practice Exercise
+                </h2>
                 <div class="activity-content">
                     <p>[Exercise Instructions]</p>
                     <details class="solution">
@@ -250,66 +302,129 @@ course_name/
 
         <footer class="module-footer">
             <section class="key-takeaways">
-                <h2>📚 Key Takeaways</h2>
+                <h2>
+                    <img src="../assets/images/icons/icon-summary-book.svg" 
+                         alt="Summary Icon"
+                         width="24" height="24">
+                    Key Takeaways
+                </h2>
                 <ul>
                     <li>[Key Point]</li>
                 </ul>
             </section>
-
-            <section class="knowledge-check">
-                <h2>⚡ Knowledge Check</h2>
-                <div class="quiz-content">
-                    [Assessment Questions]
-                </div>
-            </section>
-
-            <nav class="module-nav">
-                <div class="nav-links">
-                    <a href="../index.html" class="nav-button">
-                        <span>←</span> Home
-                    </a>
-                    <a href="moduleN-1.html" class="nav-button">
-                        <span>←</span> Previous
-                    </a>
-                    <div class="module-progress">
-                        <span>Module N of X</span>
-                    </div>
-                    <a href="moduleN+1.html" class="nav-button">
-                        Next <span>→</span>
-                    </a>
-                </div>
-            </nav>
         </footer>
     </article>
 </body>
 </html>
+```
 
-# Content Elements
+# Progress Tracking in Metadata
+```json
+{
+  "progress": {
+    "lastSection": "section-id",
+    "completedModules": ["module1", "module2"],
+    "pendingTasks": [
+      {
+        "type": "content/asset/validation",
+        "status": "incomplete",
+        "details": "Specific task information"
+      }
+    ],
+    "sessionState": {
+      "currentModule": "moduleN",
+      "currentSection": "section-id",
+      "validationStatus": "partial/complete"
+    }
+  }
+}
 
-1. Visual Indicators:
-   - 📚 Content
-   - ✍️ Activities
-   - 💡 Tips
-   - ⚠️ Important
-   - 🎯 Objectives
-   - ⚡ Assessments
-   - 📝 Summary
-   - 🔍 Deep Dive
+# Data Manifest (data/metadata.json)
+```json
+{
+  "course": {
+    "id": "course-unique-id",
+    "title": "Course Title", 
+    "description": "Course description",
+    "version": "1.0.0",
+    "lastUpdated": "YYYY-MM-DD",
+    "duration": "X hours",
+    "level": "Beginner/Intermediate/Advanced",
+    "prerequisites": ["prerequisite1", "prerequisite2"],
+    "objectives": ["objective1", "objective2"]
+  },
+  "modules": [
+    {
+      "id": "module1",
+      "title": "Module 1 Title",
+      "description": "Module description",
+      "duration": "X minutes",
+      "assets": {
+        "hero": "module1-introduction-hero.jpg",
+        "images": [
+          {
+            "filename": "diagram-workflow-basic.jpg",
+            "alt": "Diagram description",
+            "type": "content"
+          }
+        ],
+        "icons": [
+          {
+            "filename": "icon-objective-target.svg",
+            "alt": "Icon description",
+            "usage": "objectives"
+          }
+        ]
+      },
+      "sections": [
+        {
+          "id": "section1",
+          "title": "Section Title",
+          "type": "content/practice/assessment",
+          "hasTable": true
+        }
+      ]
+    }
+  ],
+  "assets": {
+    "totalImages": "X",
+    "totalIcons": "X",
+    "totalDiagrams": "X"
+  }
+}
+```
 
-2. Image Standards:
-   - Hero: 800x400
-   - Content: 600x300
-   - Icons: 200x200
-   ```html
-   <figure class="[type]-image">
-     <img src="/api/placeholder/[width]/[height]" 
-          alt="[Description]">
-     <figcaption>[Caption]</figcaption>
-   </figure>
-   ```
+# Session Continuation Guidelines
+
+1. Stopping Points:
+   - End only after complete sections
+   - Never stop mid-explanation
+   - Complete current module before stopping
+   - Ensure navigation remains functional
+   - Save progress in metadata.json
+
+2. Progress Tracking:
+   - Update metadata with last completed section
+   - Mark incomplete sections clearly
+   - Document pending tasks
+   - Log asset status
+   - Record validation state
+
+3. Continuation Protocol:
+   - Resume from last complete section
+   - Verify previous content
+   - Check asset consistency
+   - Validate navigation links
+   - Ensure seamless transitions
+
+4. Emergency Stop Handling:
+   - Save current state
+   - Complete current HTML element
+   - Close all open tags
+   - Update navigation references
+   - Document stopping point
 
 # Processing Steps
-
 1. Document Analysis:
    - Scan content
    - Mark divisions
@@ -331,13 +446,12 @@ course_name/
    - Navigation testing
 
 # Completeness Requirements
-
 1. Every generated file must include:
    - Full HTML structure
    - Complete content
    - Working navigation
    - Proper metadata
-   - Image placeholders
+   - Specific image filenames
    - Alt text
    - ARIA labels
 
@@ -347,7 +461,7 @@ course_name/
    - No "// comments"
    - No "[placeholder]"
    - No "etc."
-   - No Placeholders for other images)
+   - No generic image names
 
 3. Full Implementation:
    - Complete all sections
@@ -358,10 +472,10 @@ course_name/
    - Fill all attributes
    - Close all elements
 
-
 Output Sequence:
 1. Directory structure
 2. Module breakdown
 3. Index.html
 4. Module files
-5. Completion report
+5. Asset list with specific filenames
+6. Completion report
