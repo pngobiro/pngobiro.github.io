@@ -71,14 +71,11 @@ course_name/
 # Key Questions to Ask Yourself During Splitting
 
 * Focus: What is the core learning objective or concept of this potential module?
-
 * Digestibility: Is this a manageable amount of information for a learner to process in one session?
-
 * Flow: Does this module logically connect to the previous and next potential modules?
-
 * Engagement: Will this module structure keep learners motivated and on track?
-
 * Navigation: Is the module structure clear and easy to navigate for the learner?
+* **Completeness Check:** Have I ensured that all content from the source document relevant to this module is fully included without any omissions or placeholder comments?
 
 **Important Note**: These are guidelines, not rigid rules. Expert judgment and a deep understanding of the content are still essential. The goal is to create a module structure that optimizes learning, not just mechanically divides a document.
 
@@ -371,6 +368,7 @@ course_name/
 
 2. Generation Process:
    - Create directory structure
+   - **Build module files: Transcribe *all* content sections from the input document into individual module files. Ensure complete and verbatim transcription of every part of the document. Do not summarize or omit any content.**
    - Generate index.html
    - Build module files
    - Add navigation
@@ -407,20 +405,25 @@ course_name/
    - No "[placeholder]"
    - No "etc."
    - No Placeholders for other images)
+   - **No placeholder comments indicating skipped sections or incomplete work (e.g., `<!-- ... rest of module 2 content sections ... -->`, `/* Add more styles as needed ... */`, etc.). All content must be fully generated.**
 
 3. Full Implementation:
    - Complete all sections
-   - Include actual content
+   - **Include actual content: Ensure every content section defined in the input document is fully transcribed into the HTML modules. No sections should be skipped or partially implemented.**
    - Write real descriptions
    - Provide specific examples
    - Detail all instructions
    - Fill all attributes
    - Close all elements
    
- 4.**CRITICAL**
- 
+      
+4.**CRITICAL**
+
 - NO abbreviations or placeholders
 - Full means complete inclusion, not summarization.
+- **NO CONTENT SKIPPING. Every part of the source document must be represented in the output HTML modules. Placeholder comments indicating skipped work are strictly prohibited.**
+
+    
 
 
 Output Sequence:
