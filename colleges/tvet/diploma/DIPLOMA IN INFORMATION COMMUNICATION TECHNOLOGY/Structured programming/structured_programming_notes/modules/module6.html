@@ -1,0 +1,1018 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6: Control Structures - Structured Programming Notes</title>
+    <meta name="description" content="Control Structures Module">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <article class="learning-module" data-module="6">
+        <nav class="module-nav">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="module5.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module 6 of 8</span>
+                </div>
+                <a href="module7.html" class="nav-button">
+                    Next <span>→</span>
+                </a>
+            </div>
+        </nav>
+
+        <header class="module-header">
+            <h1>Module 6: Control Structures</h1>
+            <section class="module-objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Define control structures and flow of control.</li>
+                    <li>Understand the importance of control structures in programming.</li>
+                    <li>Identify different types of control structures: sequence, selection, and iteration.</li>
+                    <li>Master selection structures: if, if-else, if-else-if, nested if, and switch statements.</li>
+                    <li>Master repetition/iterative/loop structures: while, for, do-while loops, and nested loops.</li>
+                    <li>Learn about branching statements: break, continue, goto, and return statements.</li>
+                </ul>
+            </section>
+        </header>
+
+        <main class="module-content">
+
+
+            <section class="content-section">
+                <h2>📚 PRECEDENCE OF OPERATORS</h2>
+                <div class="content-block">
+                    <p>If more than one operator is involved in an expression then, C language has a predefined rule of
+<b>priority of operators</b>. This rule of priority of operators is called <b>operator precedence</b>.</p>
+                    <p>Here, operators with the highest precedence appear at the top of the table, those with the lowest
+appear at the bottom. Within an expression, higher precedence operators will be evaluated first.</p>
+                     <table>
+                        <thead>
+                            <tr>
+                                <th>Category</th>
+                                <th>Operator</th>
+                                <th>Associativity</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Postfix</td>
+                                <td><code>() [] -> . ++ --</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                            <tr>
+                                <td>Unary</td>
+                                <td><code>+ - ! ~ ++ -- (type)* & sizeof</code></td>
+                                <td>Right to left</td>
+                            </tr>
+                            <tr>
+                                <td>Multiplicative</td>
+                                <td><code>* / %</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                            <tr>
+                                <td>Additive</td>
+                                <td><code>+ -</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                            <tr>
+                                <td>Relational</td>
+                                <td><code>&lt; &lt;= > >=</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                            <tr>
+                                <td>Equality</td>
+                                <td><code>== !=</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                            <tr>
+                                <td>Bitwise AND</td>
+                                <td><code>&</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                            <tr>
+                                <td>Bitwise XOR</td>
+                                <td><code>^</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                            <tr>
+                                <td>Bitwise OR</td>
+                                <td><code>|</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                            <tr>
+                                <td>Logical AND</td>
+                                <td><code>&&</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                            <tr>
+                                <td>Logical OR</td>
+                                <td><code>||</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                            <tr>
+                                <td>Conditional</td>
+                                <td><code>?:</code></td>
+                                <td>Right to left</td>
+                            </tr>
+                            <tr>
+                                <td>Assignment</td>
+                                <td><code>= += -= *= /= %=>>= <<= &= ^= |=</code></td>
+                                <td>Right to left</td>
+                            </tr>
+                            <tr>
+                                <td>Comma</td>
+                                <td><code>,</code></td>
+                                <td>Left to right</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 ASSOCIATIVITY OF OPERATORS</h2>
+                <div class="content-block">
+                    <p><b>Associativity</b> indicates in which order two operators of same precedence (priority) executes. Let us
+suppose an expression:</p>
+                    <pre><code>a==b!=c
+</code></pre>
+                    <p>Here, operators <code>==</code> and <code>!=</code> have the same precedence. The associativity of both <code>==</code> and <code>!=</code> is <b>left to
+right</b>, i.e., the expression in left is executed first and execution take pale towards right. Thus,
+<code>a==b!=c</code> equivalent to :</p>
+                    <pre><code>(a==b)!=c
+</code></pre>
+                    <p>Operators may be <b>left-associative</b> (meaning the operations are grouped from the left), <b>right-
+associative</b> (meaning the operations are grouped from the right)</p>
+                     <table>
+                        <thead>
+                            <tr>
+                                <th>Operator Name</th>
+                                <th>Associativity</th>
+                                <th>Operators</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Unary</td>
+                                <td>right to left</td>
+                                <td><code>++ --  ! ~</code></td>
+                            </tr>
+                            <tr>
+                                <td>Multiplicative</td>
+                                <td>left to right</td>
+                                <td><code>* / %</code></td>
+                            </tr>
+                            <tr>
+                                <td>Additive</td>
+                                <td>left to right</td>
+                                <td><code>+ -</code></td>
+                            </tr>
+                            <tr>
+                                <td>Bitwise Shift</td>
+                                <td>left to right</td>
+                                <td><code>&lt;&lt; >></code></td>
+                            </tr>
+                            <tr>
+                                <td>Relational</td>
+                                <td>left to right</td>
+                                <td><code>&lt; > &lt;= >=</code></td>
+                            </tr>
+                            <tr>
+                                <td>Equality</td>
+                                <td>left to right</td>
+                                <td><code>== !=</code></td>
+                            </tr>
+                            <tr>
+                                <td>Bitwise AND</td>
+                                <td>left to right</td>
+                                <td><code>&</code></td>
+                            </tr>
+                            <tr>
+                                <td>Bitwise Exclusive OR</td>
+                                <td>left to right</td>
+                                <td><code>^</code></td>
+                            </tr>
+                            <tr>
+                                <td>Bitwise Inclusive OR</td>
+                                <td>left to right</td>
+                                <td><code>|</code></td>
+                            </tr>
+                            <tr>
+                                <td>Logical AND</td>
+                                <td>left to right</td>
+                                <td><code>&&</code></td>
+                            </tr>
+                            <tr>
+                                <td>Logical OR</td>
+                                <td>left to right</td>
+                                <td><code>||</code></td>
+                            </tr>
+                            <tr>
+                                <td>Conditional</td>
+                                <td>right to left</td>
+                                <td><code>?:</code></td>
+                            </tr>
+                            <tr>
+                                <td>Assignment</td>
+                                <td>right to left</td>
+                                <td><code>= += -= *= /=  <<= >>= %= &= ^= |=</code></td>
+                            </tr>
+                            <tr>
+                                <td>Comma</td>
+                                <td>left to right</td>
+                                <td><code>,</code></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 CONTROL STRUCTURES</h2>
+                <div class="content-block">
+                    <p><b>Definition</b></p>
+                    <p><b>Control structures</b> represent the forms by which statements in a program are executed. <b>Flow of control</b>
+refers to the order in which the individual statements, instructions or function calls of a program are
+executed or evaluated.</p>
+                    <p><b>IMPORTANCE OF CONTROL STRUCTURES</b></p>
+                    <p>Generally, a program should execute the statements one by one until the defined end. This type of a
+program structure is called <b>sequential structure</b>. The functionality of this type of program is limited
+since it flows in a single direction. However, all high-level programming languages enable the
+programmer to change the flow of program execution. This is done by the use of control structures whose
+main benefits are to enable <b>decision making</b> and <b>repetition</b> as well as giving the power to do far more
+<b>complex processing</b> and <b>provide flexibility with logic</b>. The sophisticated logic is necessary for a
+program to solve complex problems.</p>
+                    <p>The kinds of control flow statements supported by different languages vary, but can be categorized by
+their effect:</p>
+                    <ul>
+                        <li>continuation at a different statement i.e. unconditional jump e.g. <code>GoTo</code> statements</li>
+                        <li>executing a set of statements only if some condition is met i.e. choice</li>
+                        <li>executing a set of statements zero or more times, until some condition is met i.e. loop</li>
+                        <li>executing a set of distant statements, after which the flow of control usually returns e.g.
+subroutines/functions</li>
+                    </ul>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 TYPES OF CONTROL STRUCTURES</h2>
+                <div class="content-block">
+                    <p>There are three types in C:</p>
+                    <p><b>1. Sequence structures</b></p>
+                    <p>Program statements are executed in the sequence in which they appear in the program.</p>
+                    <p><b>2. Selection structures/Decision Structures</b></p>
+                    <p>Statement block is executed only if some condition is met. These structures include <code>if</code>, <code>if/else</code>, and
+<code>switch</code>. Selection structures are extensively used in programming because they allow the program to
+decide an action based upon user's input or other processes for instance in password checking.</p>
+                    <p><b>3. Repetition/Iterative structures</b></p>
+                    <p>This is where a group of statements in a program may have to be executed repeatedly until some
+condition is satisfied. These include <code>while</code>, <code>do/while</code> and <code>for</code></p>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 SELECTION STRUCTURES</h2>
+                <div class="content-block">
+                    <p><b>(a)THE IF SELECTION STRUCTURE</b></p>
+                    <p>Used to choose among alternative courses of action i.e. the <code>if</code> statement provides a junction at which
+the program has to select which path to follow. The <code>if</code> selection performs an action only if the
+condition is <b>true</b>,</p>
+                    <p><b>General form</b></p>
+                    <pre><code>If (expression)
+statement
+</code></pre>
+                    <p><b>Pseudocode:</b></p>
+                    <pre><code>If student's marks is greater than or equal to 600
+    Print "Passed"
+</code></pre>
+                    <p>As in</p>
+                    <pre><code>if (marks>=600)
+    printf("Passed");
+</code></pre>
+                    <p>If condition is <b>true</b></p>
+                    <ul>
+                        <li>Print statement executed and program goes on to next statement</li>
+                    </ul>
+                    <p>If <b>false</b>, print statement is ignored and the program goes onto the next statement</p>
+                    <p><b>NB/ Indenting makes programs easier to read</b></p>
+                     <figure class="content-image">
+                        <img src="../assets/images/flowchart_if_structure.png"
+                             alt="Flowchart for IF selection structure"
+                             width="400" height="300">
+                        <figcaption>Flow chart for the if selection structure</figcaption>
+                    </figure>
+                    <p><b>NB/</b> The statement in the <code>if</code> structure can be a single statement or a block (Compound statement).
+If it's a block of statements, it must be marked off by braces.</p>
+                     <pre><code>if (expression)
+{
+    Block of statements
+}
+</code></pre>
+                    <p>As in</p>
+                     <pre><code>If (salary>5000)
+{
+    tax_amount = salary * 1.5;
+    printf("Tax charged is %f", tax_amount);
+}
+</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 (b) THE IF/ELSE</h2>
+                <div class="content-block">
+                    <p>While <code>if</code> only performs an action if the condition is true, <code>if/else</code> specifies an action to be performed both
+when the condition is <b>true</b> and when it is <b>false</b>. E.g.</p>
+                    <p><b>Pseudocode:</b></p>
+                     <pre><code>If student's grade is greater than or equal to 60
+    Print "Passed"
+else
+    Print "Failed"
+</code></pre>
+                     <figure class="content-image">
+                        <img src="../assets/images/flowchart_if_else_structure.png"
+                             alt="Flowchart for IF-ELSE selection structure"
+                             width="400" height="300">
+                        <figcaption>Flow chart for the if/else selection structure</figcaption>
+                    </figure>
+                    <p><b>Example</b></p>
+                     <pre><code>if (x >=100)
+{
+    printf("Let us increment x:\\n");
+    x++;
+}
+else
+    printf(“x < 0 \\n);
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 (c) THE IF...ELSE IF...ELSE STATEMENT</h2>
+                <div class="content-block">
+                    <ul>
+                        <li>Test for multiple cases/conditions.</li>
+                        <li>Once a condition is met, the other statements are skipped</li>
+                        <li>Deep indentation usually not used in practice</li>
+                    </ul>
+                    <p><b>Pseudocode for an if..else if..else structure</b></p>
+                     <pre><code>If student's grade is greater than or equal to 90
+    Print "A"
+Else If student's grade is greater than or equal to 80
+    Print "B"
+else If student's grade is greater than or equal to 70
+    Print "C"
+else If student's grade is greater than or equal to 60
+    Print "D"
+else
+    Print "F"
+</code></pre>
+                    <p><b>Example</b></p>
+                     <pre><code>#include &lt;stdio.h&gt;
+main()
+{
+    int marks;
+    printf("Please enter your MARKS:");
+    scanf("%d", &marks);
+
+    if (marks>=90 && marks <=100)
+        printf("Your grade is A\\n");
+    else if (marks>=80 && marks <=89)
+        printf("Your grade is B\\n");
+    else if (marks>=70 && marks <=79)
+        printf("Your grade is C\\n");
+    else if (marks>=60 && marks <=69)
+        printf("Your grade is D\\n");
+    else if (marks >100)
+        printf("Marks out of range\\n");
+    else
+        printf("Your grade is F\\n");
+}
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 (d) NESTED IF STATEMENTS</h2>
+                <div class="content-block">
+                    <p>One <code>if</code> or <code>else if</code> statement can be used inside another <code>if</code> or <code>else if</code> statement(s).</p>
+                    <p><b>Syntax</b></p>
+                    <p>The syntax for a <b>nested if</b> statement is as follows:</p>
+                     <pre><code>if (boolean_expression 1)
+{
+    /* Executes when the boolean expression 1 is true */
+    if(boolean_expression 2)
+    {
+        /* Executes when the boolean expression 2 is true */
+    }
+}
+</code></pre>
+                    <p>You can nest <code>else if...else</code> in the similar way as you have nested <code>if</code> statement.</p>
+                    <p><b>Example</b></p>
+                     <pre><code>#include &lt;stdio.h&gt;
+int main ()
+{
+    /* local variable definition */
+    int a = 100;
+    int b = 200;
+
+    /* check the boolean condition */
+    if(a == 100)
+    {
+        /* if condition is true then check the following */
+        if( b == 200 )
+        {
+            /* if condition is true then print the following */
+            printf("Value of a is 100 and b is 200\\n" );
+        }
+    }
+    return 0;
+}
+</code></pre>
+                    <p>When the above code is compiled and executed, it produces the following result:</p>
+                     <pre><code>Value of a is 100 and b is 200
+Exact value of a is: 100
+Exact value of b is: 200
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 (e) SWITCH STATEMENT</h2>
+                <div class="content-block">
+                    <p>A <b>switch statement</b> allows a variable to be tested for equality against a list of values. Each value is called
+a <b>case</b>, and the variable being switched on is checked for each switch case.</p>
+                    <p><b>Syntax</b></p>
+                    <p>The syntax for a switch statement in C programming language is as follows:</p>
+                     <pre><code>switch(expression)
+{
+    case constant-expression  :
+       statement(s);
+       break; /* optional */
+    case constant-expression  :
+       statement(s);
+       break; /* optional */
+    /* you can have any number of case statements */
+    default : /* Optional */
+       statement(s);
+}
+</code></pre>
+                     <figure class="content-image">
+                        <img src="../assets/images/flowchart_switch_case.png"
+                             alt="Flowchart for SWITCH CASE statement"
+                             width="600" height="300">
+                        <figcaption>Figure: Flowchart of switch...case statement</figcaption>
+                    </figure>
+                    <p><b>The following rules apply to a switch statement:</b></p>
+                    <ol>
+                        <li>You can have any number of case statements within a switch. Each case is followed by the value
+to be compared to and a colon.</li>
+                        <li>The <b>constant-expression</b> for a case must be the same data type as the variable in the switch</li>
+                        <li>When the variable being switched on is equal to a case, the statements following that case will
+execute until a <code>break</code> statement is reached.</li>
+                        <li>When a <code>break</code> statement is reached, the switch terminates, and the flow of control jumps to the
+next line following the switch statement.</li>
+                        <li>Not every case needs to contain a <code>break</code>. If no <code>break</code> appears, the flow of control will fall through
+to subsequent cases until a <code>break</code> is reached.</li>
+                        <li>A <code>switch</code> statement can have an optional <b>default</b> case, which must appear at the end of the switch.
+The default case can be used for performing a task when none of the cases is true. No <code>break</code> is
+needed in the default case.</li>
+                    </ol>
+                    <p><b>Sample Switch Statement</b></p>
+                     <pre><code>#include&lt;stdio.h&gt;
+void main()
+{
+    char grade;
+
+    printf("Enter your grade:" );
+    scanf("%c", &grade);
+
+    switch (grade) {
+    case 'A' :
+        printf("Excellent!\\n" );
+        break;
+    case 'B' :
+        printf("Very Good!\\n");
+        break;
+    case 'C' :
+        printf("Good!\\n");
+        break;
+    case 'D' :
+        printf("Work harder!\\n");
+        break;
+    default :
+        printf("Fail!\\n" );
+        break;
+    }
+
+}
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 (f) NESTED SWITCH STATEMENTS</h2>
+                <div class="content-block">
+                    <p>It is possible to have a <code>switch</code> as part of the statement sequence of an <b>outer switch</b>. Even
+if the case constants of the inner and outer switch contain common values, no conflicts
+will arise.</p>
+                    <p><b>Syntax</b></p>
+                    <p>The syntax for a <b>nested switch</b> statement is as follows:</p>
+                     <pre><code>switch(ch1) {
+   case 'A':
+      printf("This A is part of outer switch" );
+      switch(ch2) {
+         case 'A':
+            printf("This A is part of inner switch" );
+            break;
+         case 'B': /* ... */
+      }
+      break;
+   case 'B': /* ... */
+}
+</code></pre>
+                    <p><b>Example</b></p>
+                     <pre><code>#include &lt;stdio.h&gt;
+int main ()
+{
+    /* local variable definition */
+    int a = 100;
+    int b = 200;
+
+    switch(a) {
+    case 100:
+        printf("This is part of outer switch\\n", a );
+        switch(b) {
+        case 200:
+            printf("This is part of inner switch\\n", a );
+            printf("A is equals to %d and B is equals to %d", a, b);
+        }
+    }
+    printf("Exact value of a is : %d\\n", a );
+    printf("Exact value of b is : %d\\n", b );
+
+    return 0;
+}
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 REPETITION/ITERATIVE/LOOP STRUCTURES</h2>
+                <div class="content-block">
+                    <p>A <b>loop statement</b> allows the execution of a statement or a group of statements multiple times until a
+condition either tests true or false. There are two types of loops: <b>Pre-test</b> and <b>post-test loops</b>.</p>
+                    <p>In a pretest loop, a logical condition is checked before each repetition to determine if the loop should
+terminate. These loops include:</p>
+                    <ul>
+                        <li>while loop</li>
+                        <li>for loop</li>
+                    </ul>
+                    <p>Post-test loops check a logical condition after each repetition for termination. The do-while loop is a post-
+test loop.</p>
+                     <figure class="content-image">
+                        <img src="../assets/images/loop_types.png"
+                             alt="Pretest and Posttest Loop Flowcharts"
+                             width="600" height="300">
+                        <figcaption>Pretest Loop vs Posttest Loop</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 (a) WHILE LOOP IN C</h2>
+                <div class="content-block">
+                    <p>A <b>while loop</b> statement repeatedly executes a target statement as long as a given condition is true.</p>
+                    <p>The syntax of a <b>while loop</b> in C programming language is:</p>
+                     <pre><code>while(condition)
+{
+    statement(s);
+    update expression;
+}
+</code></pre>
+                    <p>The statement(s) may be a single statement or a block of statements. The loop iterates while the condition
+is true.</p>
+                    <p>When the condition becomes false, program control passes to the line immediately following the loop.</p>
+                    <p><b>Example</b></p>
+                     <pre><code>#include &lt;stdio.h&gt;
+int main ()
+{
+    /* local variable definition */
+    int a = 10; //loop index
+
+    /* while loop execution */
+    while( a < 20 )
+    {
+        printf("value of a: %d\\n", a);
+        a++;
+    }
+    return 0;
+}
+</code></pre>
+                    <p>When the above code is compiled and executed, it produces the following result:</p>
+                     <pre><code>value of a: 10
+value of a: 11
+value of a: 12
+value of a: 13
+value of a: 14
+value of a: 15
+value of a: 16
+value of a: 17
+value of a: 18
+value of a: 19
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 (b) FOR LOOP IN C</h2>
+                <div class="content-block">
+                    <p>A <b>for loop</b> is a repetition control structure that allows you to efficiently write a loop that needs to execute
+a specific number of times.</p>
+                    <p><b>Syntax</b></p>
+                    <p>The syntax of a <b>for loop</b> in C programming language is:</p>
+                     <pre><code>for ( initial expression; test expression/logical codition; update
+expression )
+{
+    statement(s);
+}
+</code></pre>
+                    <p>Here is the flow of control in a <b>for</b> loop:</p>
+                    <ol>
+                        <li>This step <b>initializes</b> any loop control variables. You are not required to put a statement here, as
+long as a semicolon appears.</li>
+                        <li>Next, the <b>condition</b> is evaluated. If it is true, the body of the loop is executed. If it is false, the
+body of the loop does not execute and flow of control jumps to the next statement just after the <code>for</code>
+loop.</li>
+                        <li>After the body of the <code>for</code> loop executes, the flow of control jumps back up to the <b>update
+expression</b>. This statement allows you to update any loop control variables. This statement can be
+left blank, as long as a semicolon appears after the condition.</li>
+                        <li>The <b>condition</b> is now evaluated again. If it is true, the loop executes and the process repeats itself.
+After the condition becomes false, the <code>for</code> loop terminates.</li>
+                    </ol>
+
+                     <figure class="content-image">
+                        <img src="../assets/images/flowchart_for_loop.png"
+                             alt="Flowchart for FOR loop"
+                             width="400" height="400">
+                        <figcaption>Flow Diagram of FOR loop</figcaption>
+                    </figure>
+                    <p><b>Example</b></p>
+                     <pre><code>#include &lt;stdio.h&gt;
+int main ()
+{
+    int a;//loop index
+    /* for loop execution */
+    for(a = 10; a < 20; a++)
+    {
+        printf("value of a: %d\\n", a);
+    }
+    return 0;
+}
+</code></pre>
+                    <p>When the above code is compiled and executed, it produces the following result:</p>
+                     <pre><code>value of a: 10
+value of a: 11
+value of a: 12
+value of a: 13
+value of a: 14
+value of a: 15
+value of a: 16
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 (c) DO...WHILE LOOP IN C</h2>
+                <div class="content-block">
+                    <p>Unlike <code>for</code> and <code>while</code> loops, which test the loop condition at the top of the loop, the <b>do...while loop</b> in C
+programming language checks its condition at the bottom of the loop.</p>
+                    <p>A <b>do...while loop</b> is similar to a <code>while</code> loop, except that a <b>do...while loop</b> is guaranteed to execute at least
+one time. The structure, therefore loops until a condition tests false i.e. loop until.</p>
+                    <p><b>Syntax</b></p>
+                     <pre><code>do
+{
+    statement(s);
+}while( condition );
+</code></pre>
+                    <p>If the condition is <b>true</b>, the flow of control jumps back up to <code>do</code>, and the statement(s) in the loop execute
+again. This process repeats until the given condition becomes <b>false</b>.</p>
+                     <figure class="content-image">
+                        <img src="../assets/images/flowchart_do_while_loop.png"
+                             alt="Flowchart for DO-WHILE loop"
+                             width="400" height="400">
+                        <figcaption>Flow Diagram of DO-WHILE loop</figcaption>
+                    </figure>
+                    <p><b>Example</b></p>
+                     <pre><code>#include &lt;stdio.h&gt;
+int main ()
+{
+    /* local variable definition */
+    int a = 10;
+
+    /* do loop execution */
+    do
+    {
+        printf("value of a: %d\\n", a);
+        a = a + 1;
+    }while( a < 20 );
+
+    return
+}
+</code></pre>
+                    <p>When the above code is compiled and executed, it produces the following result:</p>
+                     <pre><code>value of a: 10
+value of a: 11
+value of a: 12
+value of a: 13
+value of a: 14
+value of a: 15
+value of a: 16
+value of a: 17
+value of a: 18
+value of a: 19
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 (d) NESTED LOOPS IN C</h2>
+                <div class="content-block">
+                    <p>C programming language allows the use of one loop inside another loop. The following section shows a
+few examples to illustrate the concept.</p>
+                    <p><b>Syntax</b></p>
+                    <p>The syntax for a <b>nested for loop</b> statement in C is as follows:</p>
+                     <pre><code>for (init; condition; increment)
+{
+    for (init; condition; increment )
+    {
+        statement(s);
+    }
+    statement(s);
+}
+</code></pre>
+                    <p>The syntax for a <b>nested while loop</b> statement in C programming language is as follows:</p>
+                     <pre><code>while(condition)
+{
+    while(condition)
+    {
+        statement(s);
+    }
+    statement(s);
+}
+</code></pre>
+                    <p>The syntax for a <b>nested do...while loop</b> statement in C programming language is as follows:</p>
+                     <pre><code>do
+{
+    statement(s);
+    do
+    {
+        statement(s);
+    }while( condition );
+
+} while( condition );
+</code></pre>
+                    <p>A final note on loop nesting is that you can put any type of loop inside of any other type of loop. For
+example, a <code>for</code> loop can be inside a <code>while</code> loop or vice versa.</p>
+                    <p><b>Example</b></p>
+                     <pre><code>#include &lt;stdio.h&gt;
+int main()
+{
+    int n, c, k;
+
+    printf("Enter number of rows:");
+    scanf("%d",&n);
+
+    for (c = 1 ; c <= n; c++)
+    {
+        for( k = 1 ; k <= c ; k++ )
+        {
+            printf("%d",k);
+        }
+        printf("\\n");
+    }
+    return 0;
+}
+</code></pre>
+                    <p><b>Result:</b></p>
+                    <p>If the user interred 5 as the number of rows, the output would be:</p>
+                     <pre><code>1
+12
+123
+1234
+12345
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 TERMINATING LOOPS</h2>
+                <div class="content-block">
+                    <ul>
+                        <li><b>Counter-controlled loops</b> - a loop controlled by a counter variable, generally where the number of times
+the loop will execute is known ahead of time especially in <code>for</code> loops.</li>
+                        <li><b>Event-controlled loops</b> - loops where termination depends on an event rather than executing a fixed
+number of times for example when a zero value is keyed in or search through data until an item is found.
+Used mostly in <code>while</code> loops and <code>do-while</code> loops.</li>
+                    </ul>
+                    <p><b>Using a Sentinel</b></p>
+                    <ul>
+                        <li>The value <b>-999</b> is sometimes referred to as a <b>sentinel value</b>. The value serves as the “guardian” for the
+termination of the loop. It is a good idea to make the sentinel a constant:</li>
+                    </ul>
+                    <pre><code>#define STOPNUMBER -999
+while (number != STOPNUMBER)
+...
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 BRANCHING STATEMENTS</h2>
+                <div class="content-block">
+                    <p><b>(a) BREAK STATEMENT IN C</b></p>
+                    <p>The <b>break statement</b> has the following two uses:</p>
+                    <ol>
+                        <li>When the <code>break</code> statement is encountered inside a loop, the loop is immediately terminated and
+program control resumes at the next statement following the loop.</li>
+                        <li>It can be used to terminate a case in the <code>switch</code> statement.</li>
+                        <li>If you are using <b>nested loops</b> (i.e., one loop inside another loop), the <code>break</code> statement will stop the
+execution of the innermost loop and start executing the next line of code after the block.</li>
+                    </ol>
+                    <pre><code>#include &lt;stdio.h&gt;
+int main ()
+{
+    /* local variable definition */
+    int a = 10;
+
+    /* do loop execution */
+    do
+    {
+        if(a == 15)
+        {
+            /* skip the iteration */
+            break;
+        }
+        printf("value of a: %d\\n", a);
+        a++;
+
+    }while( a < 20 );
+
+    return 0;
+}
+</code></pre>
+                    <p><b>(b) CONTINUE STATEMENT IN C</b></p>
+                    <p>The <b>continue statement</b> works somewhat like the <code>break</code> statement. Instead of forcing termination,
+however, <code>continue</code> forces the next iteration of the loop to take place, skipping any code in between.</p>
+                    <p>For the <code>for</code> loop, <code>continue</code> statement causes the conditional test and increment portions of the loop to
+execute. For the <code>while</code> and <code>do...while</code> loops, <code>continue</code> statement causes the program control to pass to the
+conditional tests.</p>
+                    <p><b>Example</b></p>
+                     <pre><code>//program to demonstrate the working of continue statement in C programming
+#include &lt;stdio.h&gt;
+int main(){
+    int i,num,product;
+
+    for(i=1,product=1;i&lt;=4;++i){
+        printf("Enter num%d:",i);
+        scanf("%d",&num);
+        if(num==0)
+            continue; /*In this program, when num equals to zero, it skips
+                         the statement product*=num and continue the loop. */
+        product*=num;
+    }
+    printf("product=%d",product);
+}
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 (c) GOTO STATEMENT IN C</h2>
+                <div class="content-block">
+                    <p>A <b>goto statement</b> provides an unconditional jump from the <code>goto</code> to a labeled statement in the same
+function.</p>
+                    <p><b>NOTE:</b> Use of <code>goto</code> statement is highly discouraged in any programming language because it makes
+difficult to trace the control flow of a program, making the program hard to understand and hard to
+modify. Any program that uses a <code>goto</code> can be rewritten so that it doesn't need the <code>goto</code>.</p>
+                    <p><b>Syntax</b></p>
+                    <p>The syntax for a <code>goto</code> statement in C is as follows:</p>
+                     <pre><code>goto label;
+..
+label:
+statement;
+</code></pre>
+                    <p><b>Example</b></p>
+                     <pre><code>#include &lt;stdio.h&gt;
+int main ()
+{
+    /* for loop execution */
+    int a,userinput,sum=0;
+
+    for(a = 0; a < 5;a++)
+    {
+        printf("Enter a number: ");
+        scanf("%d",&userinput);
+
+        if (userinput <1)
+            goto jump;
+        sum+=userinput;
+    }
+
+jump:
+    printf("The sum of the values is %d\\n", sum);
+    return 0;
+}
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 (d) THE RETURN STATEMENT</h2>
+                <div class="content-block">
+                    <p>The last of the branching statements is the <b>return statement</b>. The <code>return</code> statement exits from the current
+function, and control flow returns to where the function was invoked. The <code>return</code> statement has two
+forms: one that returns a value, and one that doesn't. To return a value, simply put the value (or an
+expression that calculates the value) after the <code>return</code> keyword.</p>
+                     <pre><code>return count;
+</code></pre>
+                    <p>The data type of the returned value must match the type of the method's declared return value. When a
+function is declared <code>void</code>, use the form of <code>return</code> that doesn't return a value.</p>
+                     <pre><code>return;
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 THE INFINITE LOOP</h2>
+                <div class="content-block">
+                    <p>A loop becomes <b>infinite loop</b> if a condition never becomes <b>false</b>. The <code>for</code> loop is traditionally used for
+this purpose. Since none of the three expressions that form the <code>for</code> loop are required, you can make an
+endless loop by leaving the conditional expression empty.</p>
+                     <pre><code>#include &lt;stdio.h&gt;
+int main ()
+{
+    for( ; ; )
+    {
+        printf("This loop will run forever.\\n");
+    }
+    return 0;
+}
+</code></pre>
+                    <p>When the conditional expression is absent, it is assumed to be <b>true</b>. You may have an initialization and
+increment expression, but C programmers more commonly use the <code>for(;;)</code> construct to signify an infinite
+loop.</p>
+                    <p><b>NOTE:</b> You can terminate an infinite loop by pressing <b>Ctrl + C</b> keys.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="module-footer">
+            <section class="key-takeaways">
+                <h2>📝 Key Takeaways</h2>
+                <ul>
+                    <li>Operator precedence and associativity determine the order of operations in expressions.</li>
+                    <li>Control structures manage the flow of execution in a program, enabling decision making and repetition.</li>
+                    <li>Selection structures (if, if-else, switch) allow conditional execution of code blocks.</li>
+                    <li>Repetition structures (while, for, do-while) facilitate looping and repeated execution of code.</li>
+                    <li>Branching statements (break, continue, goto, return) alter the flow of control within loops and functions.</li>
+                </ul>
+            </section>
+
+            <section class="knowledge-check">
+                <h2>⚡ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <p><b>Question 1:</b> What is operator precedence and why is it important in C?</p>
+                    <p><b>Question 2:</b> Describe the three main types of control structures in C.</p>
+                    <p><b>Question 3:</b> Explain the difference between a 'while' loop and a 'do-while' loop.</p>
+                    <p><b>Question 4:</b> In what situations would you use a 'switch' statement over 'if-else-if' statements?</p>
+                    <p><b>Question 5:</b> Why is the 'goto' statement generally discouraged in structured programming?</p>
+                </div>
+            </section>
+
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="module5.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module 6 of 8</span>
+                    </div>
+                    <a href="module7.html" class="nav-button">
+                        Next <span>→</span>
+                    </a>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</body>
+</html>
