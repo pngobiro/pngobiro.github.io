@@ -10,19 +10,72 @@ Treat the content within each section as inviolable and needing direct transcrip
 
 ```
 course_name/
-├── index.html        # Course overview
-├── modules/          # Module files
-│   ├── module1.html
-│   ├── module2.html
-│   └── moduleN.html
-├── assets/          # Media files
+├── index.html                    # Course overview
+├── modules/                      # Module files
+│   ├── module1.html              # Module Structure and Content Rules
+│   ├── module2.html              # HTML Templates and Navigation
+│   ├── module3.html              # Content Elements and Visual Standards
+│   └── module4.html              # Processing Steps and Quality Assurance
+├── assets/                       # Media files
 │   ├── images/
+│   │   ├── module1-directory-structure-diagram.png
+│   │   ├── module1-structural-scan-example.png
+│   │   ├── module1-related-topics-diagram.png
+│   │   ├── module2-navigation-structure-example.png
+│   │   
+│   │   
+│   │   
+│   │  
+│   │   
+│   │   
+│   │   
+│   │   
+│   │  
+│   │   
 │   └── diagrams/
-├── styles/          # CSS files
-│   └── main.css     # External stylesheet
-└── data/           # Course data
-    └── metadata.json
+│       └── course-structure-diagram.svg
+├── styles/                       # CSS files
+│   └── main.css                  # External stylesheet
+└── data/                         # Course data
+    └── metadata.json             # Course metadata
+
 ```
+
+
+# When converting content to HTML eLearning modules:
+
+1. ALWAYS implement navigation at BOTH the top AND bottom of each module page using this structure:
+<nav class="module-nav">
+  <div class="nav-links">
+    <a href="../index.html" class="nav-button">
+      <span>←</span> Home
+    </a>
+    <a href="previousModule.html" class="nav-button">
+      <span>←</span> Previous
+    </a>
+    <div class="module-progress">
+      <span>Module N of X</span>
+    </div>
+    <a href="nextModule.html" class="nav-button">
+      Next <span>→</span>
+    </a>
+  </div>
+</nav>
+
+2. For ALL images, include the full relative path to the image location in the assets directory, following this pattern:
+<img src="../assets/images/moduleN-descriptive-name.png" alt="Descriptive alt text explaining image content" width="600" height="300">
+
+3. For diagrams, use this path structure:
+<img src="../assets/diagrams/diagram-name.svg" alt="Descriptive alt text explaining diagram purpose" width="600" height="300">
+
+4. All navigation must be implemented identically at both top and bottom of each module for consistent user experience.
+
+5. Every image must have:
+   - Correct relative path using ../assets/images/ or ../assets/diagrams/
+   - Descriptive alt text
+   - Appropriate width and height attributes
+   - Filename following module-specific naming conventions (moduleN-purpose-description.extension)
+
 
 ## Strict Content Rules
 
@@ -400,6 +453,7 @@ Ensure that every `<table>` tag includes the attribute `border="1"` to display t
 * No "etc."
 * No placeholders for images
 * No placeholder comments indicating skipped sections
+* <!-- Module footer content here -->
 
 ### Full Implementation
 * Complete all sections
