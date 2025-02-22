@@ -1,113 +1,213 @@
-Convert the provided PDF content into a fully functional HTML source code that meets the following specifications:
-Requirements
-Structure and Content:
+# Expert HTML Generator Protocol
 
-Mandatory Header Information:
+## Core Principles
 
-Exam code/number (exactly as shown)
-Exam body name (exactly as shown)
-Course title (complete, unabbreviated)
-Subject name/Module title
-Exam duration in hours
-Exam date/period (month/year)
-Module number if specified
-KNEC logo placement if provided
+### Primary Objective
+Transform source documents into strictly compliant HTML eLearning modules while preserving:
 
+- Complete information fidelity and semantic structure
+- Original content hierarchy and educational integrity
+- Sample answers and learning materials
+- Document authenticity and accuracy
 
-Document Processing:
+### Content Preservation Requirements
 
-Process ALL questions and sub-questions exactly as shown
-Include mark allocations in brackets (e.g., "(4 marks)")
-Preserve exact question numbering (1., 2., or (a), (b) etc.)
-For each question, provide:
+- Source material must be transcribed with 100% accuracy
+- Section structure and information hierarchy must remain intact
+- Original meaning and context must be preserved
+- Sample answers must be provided for all questions:
+  - Use verbatim answers when available in source material
+  - Generate educationally sound model answers when source lacks explicit answers
+  - Ensure answers align with mark allocation and difficulty level
 
-Main question text
-All sub-parts
-Mark allocation for each part
-Realistic sample answers matching mark count
+## Technical Specifications
 
+### Document Structure
 
-Don't abbreviate or summarize content
-Preserve any italicized or emphasized text
+#### Required Metadata
+Every document must include:
 
+- Exam code/number (exact match from source)
+- Exam body name (complete, unabbreviated)
+- Course title (full, unabbreviated form)
+- Subject/Module name and number
+- Exam duration in hours
+- Exam period (month/year)
+- Additional identifiers as specified in source
 
-Image/Figure Handling:
+#### HTML Architecture
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Course Title] - [Exam Code]</title>
+</head>
+<body>
+    <header><!-- Metadata --></header>
+    <main><!-- Content --></main>
+    <footer><!-- Additional Info --></footer>
+</body>
+</html>
+```
 
-Use actual figure numbers as referenced (e.g., "Figure 2")
-Create filenames using format: examcode_period_year_figureX.jpg
-Include complete figure captions
-Use descriptive alt text
-Maintain original image references in questions
-Add figure numbering as shown in exam
-Ensure images scale properly on mobile
+### Content Processing Guidelines
 
+#### Question Processing Requirements
 
-Special Elements:
+1. Question Structure:
+   - Preserve exact numbering systems (1., 2., (a), (b))
+   - Include all mark allocations "(X marks)"
+   - Maintain question hierarchy and relationships
+   - Process all sub-questions with proper nesting
 
-Include all examination instructions verbatim
-Preserve any formula sheets/tables
-Maintain exact formatting of:
+2. Answer Section Requirements:
+   ```html
+   <section class="question-answer">
+       <h3>[Question Number and Text]</h3>
+       <!-- Question content -->
+       <div class="answer-section">
+           <h4>Answer:</h4>
+           <!-- Answer content -->
+       </div>
+   </section>
+   ```
 
-Lists (bullet points/numbering)
-Tables
-Special characters
-Mathematical equations
+3. Generated Answer Guidelines:
+   - Must be educationally sound and factually accurate
+   - Address all parts of the question comprehensively
+   - Match expected answer length based on mark allocation
+   - Include clear formatting for readability
+   - Mark as 'Sample Answer' when generated
 
+#### Mathematical Content
 
-Keep any notes about number of pages
-Include any warnings/important notices
+1. Equation Handling:
+   - Use MathML for all mathematical expressions
+   - Preserve original formula notation
+   - Maintain mathematical symbol integrity
+   - Include complete formula sheets
 
+2. MathML Implementation:
+   - Ensure proper tag nesting and closure
+   - Validate against MathML specifications
+   - Preserve mathematical semantics
 
+#### Table Implementation
 
-Styling Requirements:
+1. Structure Requirements:
+   ```html
+   <table>
+       <caption>Table Title</caption>
+       <thead>
+           <tr><th scope="col">Header</th></tr>
+       </thead>
+       <tbody>
+           <tr><td>Content</td></tr>
+       </tbody>
+   </table>
+   ```
 
-Color Scheme:
+2. Table Features:
+   - Semantic HTML structure
+   - Proper headers and captions
+   - Responsive design implementation
+   - Accessibility features
 
-Course title: Blue (#0066cc)
-Year/Subtitle: Green (#28a745)
-Question headings: Red (#dc3545)
-Body text: Dark gray (#333)
-Answer background: Light gray (#f8f9fa)
+### Design Specifications
 
+#### Color Scheme
+| Element | Hex Code |
+|---------|----------|
+| Course Title | #0066cc |
+| Year/Subtitle | #28a745 |
+| Questions | #dc3545 |
+| Body Text | #333333 |
+| Answer Background | #f8f9fa |
 
-Typography:
+#### Typography
+- Base Font: Arial, sans-serif
+- Base Size: 16px
+- Line Height: 1.6
+- Question Size: 1.25rem
+- Sub-question Size: 1rem
 
-Base font: Arial, sans-serif
-Base font size: 16px
-Line height: 1.6
-Question headings: 1.25rem
-Sub-questions: 1rem
-Consistent spacing between elements
+#### Responsive Design
 
+1. Breakpoints:
+   - Mobile: ≥320px
+   - Tablet: ≥768px
+   - Desktop: ≥1024px
 
-Layout:
+2. Mobile Optimization:
+   ```css
+   @media screen and (max-width: 768px) {
+       .content {
+           padding: 10px;
+       }
+       table {
+           display: block;
+           overflow-x: auto;
+       }
+       img {
+           max-width: 100%;
+           height: auto;
+       }
+   }
+   ```
 
-Maximum content width: 1200px
-Centered content
-Padding: 20px (desktop), 10px (mobile)
-Question spacing: 2rem
-Sub-question spacing: 1.5rem
-Answer box padding: 1rem
-Clear borders around questions
-Distinct answer sections
+### Quality Assurance Requirements
 
+#### Validation Checklist
 
+1. Technical Validation:
+   - W3C HTML validation
+   - Responsive design testing
+   - Mathematical rendering verification
+   - Image and media loading
+   - Table responsiveness
+   - Accessibility compliance
 
-Mobile-Friendly Design:
+2. Content Validation:
+   - Information accuracy
+   - Answer completeness and correctness
+   - Mathematical precision
+   - Image and figure references
+   - Mark scheme alignment
 
-Breakpoints:
+#### Implementation Requirements
 
-Mobile: 320px+
-Tablet: 768px+
-Desktop: 1024px+
+1. Critical Elements:
+   - All examination instructions
+   - Exact mark allocations
+   - Page number references
+   - Warnings and notices
+   - Special formatting
+   - Equation formatting
+   - Figure references
 
+2. Best Practices:
+   - Semantic HTML usage
+   - ARIA label implementation
+   - Keyboard navigation support
+   - Print stylesheet inclusion
+   - Screen reader optimization
+   - Proper meta tag usage
+   - Correct heading hierarchy
 
-Flexible layouts
-Touch-friendly spacing
-Readable font sizes
-Responsive images
-Scrollable tables
-No horizontal scrolling
+### Permitted Modifications
 
-Document Structure:
-html
+1. Content Improvements:
+   - Spelling corrections
+   - Grammar improvements
+   - HTML formatting optimization
+   - Layout enhancement for accessibility
+   - Mobile responsiveness adjustments
+
+2. Answer Enhancement:
+   - Generation of missing sample answers
+   - Improvement of existing answers
+   - Addition of explanatory notes
+   - Format optimization for clarity
+
