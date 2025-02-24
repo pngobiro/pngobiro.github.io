@@ -21,30 +21,19 @@ course_name/
 │   │   ├── module1-directory-structure-diagram.png
 │   │   ├── module1-structural-scan-example.png
 │   │   ├── module1-related-topics-diagram.png
-│   │   ├── module2-navigation-structure-example.png
-│   │   
-│   │   
-│   │   
-│   │  
-│   │   
-│   │   
-│   │   
-│   │   
-│   │  
-│   │   
+│   │   └── module2-navigation-structure-example.png
 │   └── diagrams/
 │       └── course-structure-diagram.svg
 ├── styles/                       # CSS files
 │   └── main.css                  # External stylesheet
 └── data/                         # Course data
     └── metadata.json             # Course metadata
-
 ```
-
 
 # When converting content to HTML eLearning modules:
 
 1. ALWAYS implement navigation at BOTH the top AND bottom of each module page using this structure:
+```html
 <nav class="module-nav">
   <div class="nav-links">
     <a href="../index.html" class="nav-button">
@@ -61,12 +50,17 @@ course_name/
     </a>
   </div>
 </nav>
+```
 
 2. For ALL images, include the full relative path to the image location in the assets directory, following this pattern:
+```html
 <img src="../assets/images/moduleN-descriptive-name.png" alt="Descriptive alt text explaining image content" width="600" height="300">
+```
 
 3. For diagrams, use this path structure:
+```html
 <img src="../assets/diagrams/diagram-name.svg" alt="Descriptive alt text explaining diagram purpose" width="600" height="300">
+```
 
 4. All navigation must be implemented identically at both top and bottom of each module for consistent user experience.
 
@@ -76,14 +70,15 @@ course_name/
    - Appropriate width and height attributes
    - Filename following module-specific naming conventions (moduleN-purpose-description.extension)
 
-
 ## Strict Content Rules
 
 ### Initial Structural Scan
 
 * **Chapters/Major Sections**: Does the document have clear chapters, parts, or major sections? If yes, this is your primary starting point. Each chapter or major section is a strong candidate for a new module.
 
-* **Significant Headings (H1, H2)**: If no formal chapters, look for major headings (especially <h1> and <h2>). Do these headings demarcate substantial shifts in topic? If yes, these can also indicate module boundaries.
+
+
+* **Significant Topics and Subtopics: If no formal chapters, look for major Topic and subtopics . Do these demarcate substantial shifts in concept? If yes, these can also indicate module boundaries.
 
 * **Logical Breaks in Outline**: Even without explicit headings, does the document's outline (Table of Contents, if available) reveal natural divisions? If yes, use these as potential split points.
 
@@ -99,7 +94,7 @@ course_name/
 
 ### Pedagogical Flow and Learner Experience
 
-* **Cognitive Load**: Is the current module becoming too dense or overwhelming? If yes, split it. Long modules can lead to fatigue and reduced retention. Break down complex topics into smaller, digestible chunks.
+* **Cognitive Load**: Is the current module becoming too dense or overwhelming? If yes, split it. Long modules can lead to fatigue and reduced retention. Break down complex topics into smaller, digestible chunks (VERY IMPORTANT)
 
 * **Learning Curve**: Does the difficulty level of the content increase significantly? If yes, a new module can mark a transition to more advanced material. This helps learners build skills progressively.
 
@@ -336,139 +331,34 @@ course_name/
 
 **Guidelines:**
 
-*   **Descriptive and Meaningful:** Image filenames MUST be descriptive and clearly indicate the content of the image. Avoid generic names like "image1.jpg" or "diagram.png". Instead, use names that are easily understood and searchable.  For example, "module2-client-server-diagram.png" is better than "diagram1.png".
+* **Descriptive and Meaningful:** Image filenames MUST be descriptive and clearly indicate the content of the image. Avoid generic names like "image1.jpg" or "diagram.png". Instead, use names that are easily understood and searchable. For example, "module2-client-server-diagram.png" is better than "diagram1.png".
 
-*   **Lowercase:** All filenames MUST be in lowercase. This ensures compatibility across different web servers and operating systems, especially Linux-based servers which are case-sensitive.
+* **Lowercase:** All filenames MUST be in lowercase. This ensures compatibility across different web servers and operating systems, especially Linux-based servers which are case-sensitive.
 
-*   **Use Hyphens or Underscores:** Separate words in filenames using hyphens (-) or underscores (_). Do NOT use spaces. Hyphens are generally preferred for readability in URLs.  Example:  "module3-html-structure.png" or "module4_dreamweaver_interface.jpg".
+* **Use Hyphens or Underscores:** Separate words in filenames using hyphens (-) or underscores (_). Do NOT use spaces. Hyphens are generally preferred for readability in URLs. Example: "module3-html-structure.png" or "module4_dreamweaver_interface.jpg".
 
-*   **File Extension:**  Always use the correct and consistent file extension (e.g., `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`). Choose the extension appropriate for the image type (e.g., `.png` for diagrams and illustrations, `.jpg` for photographs).
+* **File Extension:** Always use the correct and consistent file extension (e.g., `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`). Choose the extension appropriate for the image type (e.g., `.png` for diagrams and illustrations, `.jpg` for photographs).
 
-*   **Module Prefix (Recommended):** Consider prefixing filenames with the module number or a module identifier to easily associate images with their respective modules. Example: `module1-internet-programming-hero.jpg`, `module3-html-table-example.png`.
+* **Module Prefix (Recommended):** Consider prefixing filenames with the module number or a module identifier to easily associate images with their respective modules. Example: `module1-internet-programming-hero.jpg`, `module3-html-table-example.png`.
 
-*   **Consistency is Key:**  Maintain a consistent naming convention throughout the entire course. Once you choose a style (e.g., hyphen vs. underscore, module prefix), stick with it.
+* **Consistency is Key:** Maintain a consistent naming convention throughout the entire course. Once you choose a style (e.g., hyphen vs. underscore, module prefix), stick with it.
 
 **Examples of Good Image Names:**
 
-*   `module2-client-server-diagram.png` (Diagram illustrating client-server interaction in Module 2)
-*   `module3-html-structure-example.jpg` (Example image for HTML structure in Module 3)
-*   `module4-dreamweaver-toolbar-icon.png` (Icon of a specific tool in Adobe Dreamweaver, Module 4)
-*   `topic1-website-benefits-icon.svg` (Icon representing benefits of a website for Topic 1)
+* `module2-client-server-diagram.png` (Diagram illustrating client-server interaction in Module 2)
+* `module3-html-structure-example.jpg` (Example image for HTML structure in Module 3)
+* `module4-dreamweaver-toolbar-icon.png` (Icon of a specific tool in Adobe Dreamweaver, Module 4)
+* `topic1-website-benefits-icon.svg` (Icon representing benefits of a website for Topic 1)
 
 **Examples of Bad Image Names (Avoid These):**
 
-*   `image1.jpg` (Too generic, doesn't describe content)
-*   `Diagram.PNG` (Uppercase, inconsistent extension)
-*   `client server diagram.png` (Spaces in filename)
-*   `IMG0001.JPG` (Uninformative, automatically generated name)
-*   `module_image.png` (Not specific enough)
-
+* `image1.jpg` (Too generic, doesn't describe content)
+* `Diagram.PNG` (Uppercase, inconsistent extension)
+* `client server diagram.png` (Spaces in filename)
+* `IMG0001.JPG` (Uninformative, automatically generated name)
+* `module_image.png` (Not specific enough)
 
 **Enforcement:**
 
-*   **Image Completeness Check (Quality Checks Section):**  The Quality Checks section will now explicitly include a check for "Image Filename Compliance" to ensure that all image filenames adhere to these naming conventions.
-*   **Completeness Requirements:** The "Completeness Requirements" section will reiterate that image filenames must be descriptive and properly implemented, not just placeholders.
-
-### Image Standards
-
-* Hero: 800x400
-* Content: 600x300
-* Icons: 200x200
-
-
-## Table Handling
-
-### HTML Table Transcription
-All tables present in the source document MUST be transcribed into HTML `<table>` elements.
-
-### Border Attribute
-Ensure that every `<table>` tag includes the attribute `border="1"` to display table borders visually. This aids in content structure and readability.
-
-### Example Table HTML
-
-```html
-<table border="1">
-  <caption>[Table Caption - if available in source]</caption>
-  <thead>
-    <tr>
-      <th>Header 1</th>
-      <th>Header 2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Row 1, Cell 1</td>
-      <td>Row 1, Cell 2</td>
-    </tr>
-    <tr>
-      <td>Row 2, Cell 1</td>
-      <td>Row 2, Cell 2</td>
-    </tr>
-  </tbody>
-</table>
-```
-
-## Processing Steps
-
-### Document Analysis
-* Scan content
-* Mark divisions
-* Map dependencies
-* Plan modules
-* Identify and list all images and diagrams mentioned or used in the document, noting their intended location and a descriptive alt text
-
-### Generation Process
-* Create directory structure
-* Build module files
-* Generate index.html
-* Add navigation
-* Link assets
-
-### Quality Checks
-* HTML validation
-* Link verification
-* Content completeness
-* Accessibility compliance
-* Navigation testing
-* Table Border Check
-* Image Completeness Check
-
-## Completeness Requirements
-
-### Required Elements
-* Full HTML structure
-* Complete content
-* Working navigation
-* Proper metadata
-* Image placeholders
-* Alt text
-* ARIA labels
-* `border="1"` attribute in all `<table>` elements
-
-### NO Abbreviations or Placeholders
-* No "..."
-* No "content here"
-* No "// comments"
-* No "[placeholder]"
-* No "etc."
-* No placeholders for images
-* No placeholder comments indicating skipped sections
-* <!-- Module footer content here -->
-
-### Full Implementation
-* Complete all sections
-* Include actual content
-* Write real descriptions
-* Provide specific examples
-* Detail all instructions
-* Fill all attributes
-* Close all elements
-* Generate and include an Image/Diagram List
-
-## Output Sequence
-1. Directory structure
-2. Module breakdown
-3. Index.html
-4. Module files
-5. Image/Diagram List
-6. Completion report
+* **Image Completeness Check (Quality Checks Section):** The Quality Checks section will now explicitly include a check for "Image Filename Compliance" to ensure that all image filenames adhere to these naming conventions.
+* **Completeness Requirements:** The "Completeness Requirements" section will r
