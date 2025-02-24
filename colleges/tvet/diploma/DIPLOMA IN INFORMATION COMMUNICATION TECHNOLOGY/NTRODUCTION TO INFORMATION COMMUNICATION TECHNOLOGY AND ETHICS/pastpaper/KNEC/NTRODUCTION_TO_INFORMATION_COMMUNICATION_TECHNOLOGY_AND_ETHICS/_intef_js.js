@@ -3,6 +3,11 @@ var myTheme = {
     init : function(){
 		var ie_v = $exe.isIE();
 		if (ie_v && ie_v<8) return false;
+        setTimeout(function(){
+            $(window).resize(function() {
+                myTheme.reset();
+            });
+        },1000);
 		var tit = $exe_i18n.menu+" ("+$exe_i18n.hide.toLowerCase()+")";
 		var navToggler = '<p id="header-options">';
 				navToggler += '<a href="#" class="hide-nav" id="toggle-nav" title="'+tit+'">';
@@ -99,6 +104,9 @@ var myTheme = {
         $("A",".pagination").each(function(){
             myTheme.param(this,act);
         });
+    },
+    reset : function() {
+        myTheme.toggleMenu();        
     },
 	inIframe : function(){
 		try {
