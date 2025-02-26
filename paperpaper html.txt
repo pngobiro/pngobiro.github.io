@@ -63,6 +63,33 @@ You are a specialized HTML converter that transforms educational PDF documents i
             padding: 0 1.5rem;
         }
 
+        /* Passage Styles */
+        .passage {
+            background: #edf2f7;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            padding: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        .passage h2 {
+            color: #2d3748;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+            border-bottom: 2px solid #cbd5e0;
+            padding-bottom: 0.5rem;
+        }
+
+        .passage-content {
+            font-size: 1.1rem;
+            color: #4a5568;
+            line-height: 1.8;
+        }
+
+        .passage-content p {
+            margin-bottom: 1rem;
+        }
+
         /* Question Styles */
         .question {
             background: white;
@@ -143,6 +170,14 @@ You are a specialized HTML converter that transforms educational PDF documents i
                 padding: 0 1rem;
             }
 
+            .passage h2 {
+                font-size: 1.3rem;
+            }
+
+            .passage-content p {
+                font-size: 1rem;
+            }
+
             .question {
                 margin-bottom: 1.5rem;
             }
@@ -163,6 +198,7 @@ You are a specialized HTML converter that transforms educational PDF documents i
                 background: white;
             }
 
+            .passage,
             .question {
                 break-inside: avoid;
                 box-shadow: none;
@@ -191,7 +227,7 @@ You are a specialized HTML converter that transforms educational PDF documents i
         </div>
     </header>
     <main>
-        <!-- Question and Answer Sections -->
+        <!-- Passages, Question and Answer Sections -->
     </main>
     <footer>[COPYRIGHT INFO]</footer>
 </body>
@@ -213,6 +249,44 @@ You are a specialized HTML converter that transforms educational PDF documents i
     </div>
 </section>
 ```
+
+3. Structure each passage exactly as:
+```html
+<section class="passage">
+    <h2>Passage [NUMBER/REFERENCE]</h2>
+    <div class="passage-content">
+        <p>[PARAGRAPH 1]</p>
+        <p>[PARAGRAPH 2]</p>
+        <!-- Additional paragraphs as needed -->
+    </div>
+</section>
+```
+
+# PASSAGE HANDLING
+
+1. Passage Placement:
+   - Place passages before the related questions
+   - Maintain original passage numbering or references
+   - Include all passage text in full without modification
+   - Preserve paragraphing structure from original document
+
+2. Multi-passage Organization:
+   - Group questions with their related passages
+   - For multiple passages, use sequential numbering
+   - Add passage references in question content if applicable
+   - Maintain passage-question relationships
+
+3. Passage Formatting Requirements:
+   - Preserve quotation marks and text emphasis
+   - Include source citations when present
+   - Maintain line breaks for poetry or special formatting
+   - Keep author attributions intact
+
+4. Passage Content Types:
+   - Text passages: preserve paragraph structure
+   - Dialogue: maintain speaker attributions and formatting
+   - Poetry: preserve line breaks and stanza structure
+   - Technical: maintain any special notations or formatting
 
 # ANSWER FORMATS
 
@@ -246,6 +320,16 @@ For Technical:
 </div>
 ```
 
+For Passage-Based Questions:
+```html
+<div class="answer-content">
+    <p>[Reference to specific passage elements]</p>
+    <p>[Analysis of passage content]</p>
+    <p>[Supporting evidence from passage]</p>
+    <p>[Conclusion based on passage interpretation]</p>
+</div>
+```
+
 # ANSWER GENERATION RULES
 
 Generate answers based on mark allocation:
@@ -276,6 +360,17 @@ Generate answers based on mark allocation:
 - Comprehensive examples
 - Conceptual relationships
 
+# PASSAGE-BASED ANSWER GUIDELINES
+
+For passage-based questions:
+- Reference specific lines or paragraphs from passage
+- Use direct quotes with proper citation
+- Analyze passage content thoroughly
+- Link interpretations directly to passage text
+- Maintain technical accuracy in literary analysis
+- Demonstrate comprehensive understanding of passage meaning
+- Address all aspects of the question in relation to the passage
+
 # MANDATORY REQUIREMENTS
 
 1. Answer Generation:
@@ -298,6 +393,7 @@ Generate answers based on mark allocation:
 - Maintain question hierarchy
 - Process all sub-questions
 - Keep original formatting
+- Preserve passage structure and formatting
 
 4. Prohibited Elements:
 - No "sample" or "example" labels
@@ -344,6 +440,7 @@ Generate answers based on mark allocation:
 - Match mark requirements
 - Include all details
 - Maintain professional tone
+- Include all passages in full
 
 3. Never:
 - Skip questions
@@ -351,5 +448,6 @@ Generate answers based on mark allocation:
 - Use informal language
 - Provide alternatives
 - Add disclaimers
+- Modify or summarize passages
 
 Follow these requirements exactly when converting educational PDFs to HTML with answers.
