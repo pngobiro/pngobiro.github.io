@@ -1,0 +1,231 @@
+* styles/main.css */
+
+/* --- General Styles --- */
+
+body {
+  font-family: sans-serif;
+  line-height: 1.6;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  color: #333;
+}
+
+.course-overview, .learning-module {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2, h3 {
+  color: #22577a; /* Darker heading color */
+  margin-bottom: 0.5rem;
+}
+
+h1 { font-size: 2.5rem; }
+h2 { font-size: 2rem; }
+h3 { font-size: 1.5rem; }
+
+ul, ol {
+  padding-left: 2rem;
+}
+
+li {
+  margin-bottom: 0.5rem;
+}
+
+a {
+  color: #38a3a5; /* Link color */
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* --- Course Overview Styles --- */
+
+.course-header {
+  border-bottom: 2px solid #22577a;
+  padding-bottom: 1rem;
+  margin-bottom: 1rem;
+}
+
+.course-meta {
+  display: flex;
+  gap: 1rem;
+  color: #666;
+}
+
+.course-intro, .learning-path {
+  margin-bottom: 1.5rem;
+}
+
+.module-list {
+    list-style-type: none; /*Removes the number*/
+    counter-reset: item; /*Counter for the custom list*/
+}
+
+.module-list > li {
+  margin-bottom: 1rem;
+}
+
+.module-list > li::before {
+    counter-increment: item;
+    content: counter(item) ". ";
+    font-weight: bold;
+    margin-right: .5rem;
+    color: #22577a;
+}
+
+.module-list a {
+  display: block;
+  padding: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  transition: background-color 0.2s ease;
+}
+
+.module-list a:hover {
+  background-color: #f0f8ff; /* Light blue on hover */
+  text-decoration: none; /* Remove underline on hover */
+}
+
+.module-list h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.module-list p {
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.module-list .duration {
+  font-size: 0.9rem;
+  color: #888;
+}
+
+.course-footer {
+  border-top: 1px solid #ddd;
+  padding-top: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* --- Module Navigation Styles (from the protocol) --- */
+
+.module-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+  margin: 1rem 0;
+  gap: 2rem;
+    background-color: #f8f8f8;
+  border-top: 1px solid #ddd;
+  border-bottom: 1px solid #ddd;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.nav-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #333;
+  background: #f5f5f5;
+  transition: background-color 0.2s ease; /* Smooth hover transition */
+}
+
+.nav-button:hover {
+  background: #e5e5e5;
+}
+
+.nav-button.disabled {
+    opacity: 0.5;
+    pointer-events: none; /* Prevent clicks on disabled buttons */
+}
+
+.module-progress {
+  font-size: 0.9rem;
+  color: #666;
+}
+
+/* --- Module Content Styles --- */
+
+.module-header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.module-objectives ul {
+  list-style-type: disc; /* Use disc bullets for objectives */
+  margin-left: 1.5rem;
+}
+
+.module-content section {
+  margin-bottom: 2rem; /* Spacing between sections */
+}
+
+/* --- Code Styles --- */
+
+pre {
+  background-color: #f0f0f0;
+  padding: 1rem;
+  border-radius: 4px;
+  overflow-x: auto; /* Horizontal scrolling for long code lines */
+  font-family: monospace;
+  white-space: pre-wrap; /* Wrap long lines */
+  word-wrap: break-word;
+}
+
+code {
+  font-family: monospace;
+  background-color: #eee;
+  padding: 0.1em 0.3em;
+  border-radius: 3px;
+}
+
+/* --- Figure Styles --- */
+figure {
+    margin: 1rem 0;
+    text-align: center; /* Center images and captions */
+}
+
+figcaption {
+    font-style: italic;
+    color: #666;
+    margin-top: 0.5rem;
+}
+
+/* --- Responsive Styles (Media Queries) --- */
+
+@media (max-width: 768px) {
+  .module-nav {
+    flex-direction: column; /* Stack navigation elements vertically */
+  }
+
+  .nav-links {
+    flex-direction: column; /* Stack navigation links */
+    width: 100%; /* Full width */
+  }
+
+  .nav-button {
+    width: 100%; /* Full width buttons */
+    justify-content: center; /* Center button content */
+  }
+    .course-meta {
+        flex-direction: column;  /* Stack metadata vertically */
+    }
+}
