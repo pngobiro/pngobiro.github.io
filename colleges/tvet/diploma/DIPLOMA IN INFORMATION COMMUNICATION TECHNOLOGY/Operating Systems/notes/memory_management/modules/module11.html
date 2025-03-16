@@ -1,0 +1,108 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 11 - Thrashing and Working Set Model</title>
+  <meta name="description" content="Thrashing, causes, and the working set model.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="11">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module10.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 11 of 16</span>
+        </div>
+        <a href="module12.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Thrashing and Working Set Model</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Define Thrashing</li>
+          <li>Explain the causes of thrashing.</li>
+          <li>Describe the working-set model.</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 Thrashing</h2>
+        <p>If a process cannot maintain its minimum required number of frames, then it must be swapped out, freeing up frames for other processes. This is an intermediate level of CPU scheduling.</p>
+        <p>But what about a process that it is currently using on a regular basis? In this case it is forced to page out pages that it will need again in the very near future, leading to large numbers of page faults.</p>
+        <p>A process that is spending more time paging than executing is said to be thrashing.</p>
+      </section>
+
+      <section>
+        <h2>📚 Cause of Thrashing</h2>
+        <p>Early process scheduling schemes would control the level of multiprogramming allowed based on CPU utilization, adding in more processes when CPU utilization was low.</p>
+        <p>The problem is that when memory filled up and processes started spending lots of time waiting for their pages to page in, then CPU utilization would lower, causing the schedule to add in even more processes and exacerbating the problem! Eventually the system would essentially grind to a halt.</p>
+        <p>Local page replacement policies can prevent one thrashing process from taking pages away from other processes, but it still tends to clog up the I/O queue, thereby slowing</p>
+        <p><img src="../assets/images/module11-thrashing-diagram.png" alt="Thrashing diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 CPU utilization</li>
+            <li>🔍 degree of multiprogramming</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>📚 Working-Set Model</h2>
+        <p>The working set model is based on the concept of locality, and defines a working set window, of length delta. Whatever pages are included in the most recent delta page references are said to be in the processes working set window, and comprise its current working set, as illustrated in below Figure:</p>
+        <p><img src="../assets/images/module11-working-set-diagram.png" alt="Working-set model diagram" width="600" height="300"></p>
+        <ul>
+          <li>🔍 page reference table</li>
+          <li>🔍 delta</li>
+          <li>🔍 t1</li>
+          <li>🔍 t2</li>
+          <li>🔍 WS(t₁) = {1,2,5,6,7}</li>
+          <li>🔍 WS(t₂) = {3,4}</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📝 Summary</h2>
+        <p>This module explains Thrashing, which describes the situation when processes are spending more time paging than executing. Causes of thrashing are early process scheduling schemes and the working-set model.</p>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module10.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 11 of 16</span>
+          </div>
+          <a href="module12.html" class="nav-button">
+            Next <span>→</span>
+          </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>
+
+    

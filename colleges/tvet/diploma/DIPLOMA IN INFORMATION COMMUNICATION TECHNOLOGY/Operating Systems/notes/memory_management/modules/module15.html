@@ -1,0 +1,179 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 15 - Other Considerations</title>
+  <meta name="description" content="Prepaging, Page Size, TLB Reach, Inverted Page Tables, and OS examples.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="15">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module14.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 15 of 16</span>
+        </div>
+        <a href="module16.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Other Considerations</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Define prepaging and page size.</li>
+          <li>Understand the TLB Reach and Inverted Page Tables.</li>
+          <li>Give I/O Interlock and Page Locking</li>
+          <li>Learn operating-system examples.</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 Prepaging</h2>
+        <p>The basic idea behind prepaging is to predict the pages that will be needed in the near future, and page them in before they are actually requested.</p>
+        <ul>
+          <li>If a process was swapped out and we know what its working set was at the time, then when we swap it back in we can go ahead and page back in the entire working set, before the page faults actually occur.</li>
+          <li>With small ( data ) files we can go ahead and prepage all of the pages at one time.</li>
+          <li>Prepaging can be of benefit if the prediction is good and the pages are needed eventually, but slows the system down if the prediction is wrong.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Page Size</h2>
+        <p>There are quite a few trade-offs of small versus large page sizes:</p>
+        <ul>
+          <li>Small pages waste less memory due to internal fragmentation.</li>
+          <li>Large pages require smaller page tables.</li>
+          <li>For disk access, the latency and seek times greatly outweigh the actual data transfer times. This makes it much faster to transfer one large page of data than two or more smaller pages containing the same amount of data.</li>
+          <li>Smaller pages match locality better, because we are not bringing in data that is not really needed.</li>
+          <li>Small pages generate more page faults, with attending overhead.</li>
+          <li>The physical hardware may also play a part in determining page size.</li>
+          <li>It is hard to determine an "optimal" page size for any given system. Current norms range from 4K to 4M, and tend towards larger page sizes as time passes.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 TLB Reach</h2>
+        <p>TLB Reach is defined as the amount of memory that can be reached by the pages listed in the TLB.</p>
+        <ul>
+          <li>Ideally the working set would fit within the reach of the TLB.</li>
+          <li>Increasing the size of the TLB is an obvious way of increasing TLB reach, but TLB memory is very expensive and also draws lots of power.</li>
+          <li>Increasing page sizes increases TLB reach, but also leads to increased fragmentation loss.</li>
+          <li>Some systems provide multiple size pages to increase TLB reach while keeping fragmentation low.</li>
+          <li>Multiple page sizes requires that the TLB be managed by software, not hardware.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Inverted Page Tables</h2>
+        <p>Inverted page tables store one entry for each frame instead of one entry for each virtual page. This reduces the memory requirement for the page table, but loses the information needed to implement virtual memory paging.</p>
+        <p>A solution is to keep a separate page table for each process, for virtual memory management purposes. These are kept on disk, and only paged in when a page fault occurs. ( I.e. they are not referenced with every memory access the way a traditional page table would be. )</p>
+      </section>
+
+      <section>
+        <h2>📚 Program Structure</h2>
+        <p>Consider a pair of nested loops to access every element in a 1024 x 1024 two-dimensional array of 32-bit ints.</p>
+        <p>Arrays in C are stored in row-major order, which means that each row of the array would occupy a page of memory.</p>
+        <p>If the loops are nested so that the outer loop increments the row and the inner loop increments the column, then an entire row can be processed before the next page fault, yielding 1024 page faults total.</p>
+        <p>On the other hand, if the loops are nested the other way, so that the program worked down the columns instead of across the rows, then every access would be to a different page, yielding a new page fault for each access, or over a million page faults all together.</p>
+        <p>Be aware that different languages store their arrays differently. FORTRAN for example stores arrays in column-major format instead of row-major. This means that blind translation of code from one language to another may turn a fast program into a very slow one, strictly because of the extra page faults.</p>
+      </section>
+
+      <section>
+        <h2>📚 I/O Interlock and Page Locking</h2>
+        <p>There are several occasions when it may be desirable to lock pages in memory, and not let them get paged out:</p>
+        <ul>
+          <li>Certain kernel operations cannot tolerate having their pages swapped out.</li>
+          <li>If an I/O controller is doing direct-memory access, it would be wrong to change pages in the middle of the I/O operation.</li>
+          <li>In a priority based scheduling system, low priority jobs may need to wait quite a while before getting their turn on the CPU, and there is a danger of their pages being paged out before they get a chance to use them even once after paging them in. In this situation pages may be locked when they are paged in, until the process that requested them gets at least one turn in the CPU.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Operating-System Examples (Optional)</h2>
+        <section>
+          <h3>Windows</h3>
+            <ul>
+              <li>Windows uses demand paging with clustering, meaning they page in multiple pages whenever a page fault occurs.</li>
+              <li>The working set minimum and maximum are normally set at 50 and 345 pages respectively. ( Maximums can be exceeded in rare circumstances. )</li>
+              <li>Free pages are maintained on a free list, with a minimum threshold indicating when there are enough free frames available.</li>
+              <li>If a page fault occurs and the process is below their maximum, then additional pages are allocated. Otherwise some pages from this process must be replaced, using a local page replacement algorithm.</li>
+              <li>If the amount of free frames falls below the allowable threshold, then working set trimming occurs, taking frames away from any processes which are above their minimum, until all are at their minimums. Then additional frames can be allocated to processes that need them.</li>
+              <li>The algorithm for selecting victim frames depends on the type of processor:
+              <ul>
+                <li>On single processor 80x86 systems, a variation of the clock ( second chance ) algorithm is used.</li>
+                <li>On Alpha and multiprocessor systems, clearing the reference bits may require invalidating entries in the TLB on other processors, which is an expensive operation. In this case Windows uses a variation of FIFO.</li>
+              </ul>
+              </li>
+            </ul>
+        </section>
+
+        <section>
+          <h3>Solaris</h3>
+            <ul>
+              <li>Solaris maintains a list of free pages, and allocates one to a faulting thread whenever a fault occurs. It is therefore imperative that a minimum amount of free memory be kept on hand at all times.</li>
+              <li>Solaris has a parameter, lotsfree, usually set at 1/64 of total physical memory. Solaris checks 4 times per second to see if the free memory falls below this threshold, and if it does, then the page out process is started.</li>
+              <li>Pageout uses a variation of the clock ( second chance ) algorithm, with two hands rotating around through the frame table. The first hand clears the reference bits, and the second hand comes by afterwards and checks them. Any frame whose reference bit has not been reset before the second hand gets there gets paged out.</li>
+              <li>The Pageout method is adjustable by the distance between the two hands, ( the handspan ), and the speed at which the hands move. For example, if the hands each check 100 frames per second, and the handspan is 1000 frames, then there would be a 10 second interval between the time when the leading hand clears the reference bits and the time when the trailing hand checks them.</li>
+              <li>The speed of the hands is usually adjusted according to the amount of free memory, as shown below. Slowscan is usually set at 100 pages per second, and fastscan is usually set at the smaller of 1/2 of the total physical pages per second and 8192 pages per second.</li>
+            </ul>
+            <p><img src="../assets/images/module15-solaris-page-scanner-diagram.png" alt="Solaris Page Scanner" width="600" height="300"></p>
+              <ul>
+                <li>🔍 scan rate</li>
+                <li>🔍 minfree</li>
+                <li>🔍 desfree</li>
+                <li>🔍 lotsfree</li>
+                <li>🔍 amount of free memory</li>
+              </ul>
+            <ul>
+              <li>Solaris also maintains a cache of pages that have been reclaimed but which have not yet been overwritten, as opposed to the free list which only holds pages whose current contents are invalid. If one of the pages from the cache is needed before it gets moved to the free list, then it can be quickly recovered.</li>
+              <li>Normally page out runs 4 times per second to check if memory has fallen below lotsfree. However if it falls below desfree, then page out will run at 100 times per second in an</li>
+            </ul>
+      </section>
+
+      <section>
+        <h2>📝 Summary</h2>
+        <p>This module looked at prepaging, TLB reach, inverted page tables and program structure. The module also gave examples of how Windows and Solaris manages the different algorithms and processes.</p>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module14.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 15 of 16</span>
+          </div>
+          <a href="module16.html" class="nav-button">
+            Next <span>→</span>
+          </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>
+
+    

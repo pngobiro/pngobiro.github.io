@@ -1,0 +1,125 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 14 - Kernel Memory Management</title>
+  <meta name="description" content="Kernel memory allocation, buddy system, and slab allocation.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="14">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module13.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 14 of 16</span>
+        </div>
+        <a href="module15.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Allocating Kernel Memory</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Explain how to allocate kernel memory.</li>
+          <li>Understand Buddy System.</li>
+          <li>Define Slab Allocation and its purpose.</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 Allocating Kernel Memory</h2>
+        <p>Previous discussions have centered on process memory, which can be conveniently broken up into page-sized chunks, and the only fragmentation that occurs is the average half-page lost to internal fragmentation for each process ( segment. )</p>
+        <p>There is also additional memory allocated to the kernel, however, which cannot be so easily paged. Some of it is used for I/O buffering and direct access by devices, example, and must therefore be contiguous and not affected by paging. Other memory is used for internal kernel data structures of various sizes, and since kernel memory is often locked ( restricted from being ever swapped out ), management of this resource must be done carefully to avoid internal fragmentation or other waste. ( I.e. you would like the kernel to consume as little memory as possible, leaving as much as possible for user processes. ) Accordingly there are several classic algorithms in place for allocating kernel memory structures.</p>
+      </section>
+
+      <section>
+        <h2>📚 Buddy System</h2>
+        <p>The Buddy System allocates memory using a power of two allocator.</p>
+        <ul>
+          <li>Under this scheme, memory is always allocated as a power of 2 ( 4K, 8K, 16K, etc ), rounding up to the next nearest power of two if necessary.</li>
+          <li>If a block of the correct size is not currently available, then one is formed by splitting the next larger block in two, forming two matched buddies. ( And if that larger size is not available, then the next largest available size is split, and so on. )</li>
+          <li>One nice feature of the buddy system is that if the address of a block is exclusively ORed with the size of the block, the resulting address is the address of the buddy of the same size, which allows for fast and easy coalescing of free blocks back into larger blocks.
+          <ul>
+            <li>Free lists are maintained for every size block.</li>
+            <li>If the necessary block size is not available upon request, a free block from the next largest size is split into two buddies of the desired size. ( Recursively splitting larger size blocks if necessary.)</li>
+            <li>When a block is freed, its buddy's address is calculated, and the free list for that size block is checked to see if the buddy is also free. If it is, then the two buddies are coalesced into one larger free block, and the process is repeated with successively larger free lists.</li>
+          </ul>
+          </li>
+        </ul>
+        <p><img src="../assets/images/module14-buddy-system-diagram.png" alt="Buddy System Allocation diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 physically contiguous pages</li>
+            <li>🔍 256 KB</li>
+            <li>🔍 128 KB</li>
+            <li>🔍 64 KB</li>
+            <li>🔍 32 KB</li>
+            <li>🔍 A</li>
+            <li>🔍 B</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>📚 Slab Allocation</h2>
+        <p>Slab Allocation allocates memory to the kernel in chunks called slabs, consisting of one or more contiguous pages. The kernel then creates separate caches for each type of data structure it might need from one or more slabs. Initially the caches are marked empty, and are marked full as they are used.</p>
+        <p>New requests for space in the cache is first granted from empty or partially empty slabs, and if all slabs are full, then additional slabs are allocated.</p>
+        <p>(This essentially amounts to allocating space for arrays of structures, in large chunks suitable to the size of the structure being stored. For example if a particular structure were 512 bytes long, space for them would be allocated in groups of 8 using 4K pages. If the structure were 3K, then space for 4 of them could be allocated at one time in a slab of 12K using three 4K pages.</p>
+        <p>Benefits of slab allocation include lack of internal fragmentation and fast allocation of space for individual structures</p>
+        <p>Solaris uses slab allocation for the kernel and also for certain user-mode memory allocations. Linux used the buddy system prior to 2.2 and switched to slab allocation since then.</p>
+        <p><img src="../assets/images/module14-slab-allocation-diagram.png" alt="Slab Allocation diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 kernel objects</li>
+            <li>🔍 caches</li>
+            <li>🔍 slabs</li>
+            <li>🔍 physically contiguous pages</li>
+            <li>🔍 3-KB objects</li>
+            <li>🔍 7-KB objects</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>📝 Summary</h2>
+        <p>This module explained how kernel memory is allocated using the buddy system and slab allocation. There are free lists that are maintained for every size block. The kernel creates separate caches for each type of data structure it might need from one or more slabs.</p>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module13.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 14 of 16</span>
+          </div>
+          <a href="module15.html" class="nav-button">
+            Next <span>→</span>
+          </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>
+
+    

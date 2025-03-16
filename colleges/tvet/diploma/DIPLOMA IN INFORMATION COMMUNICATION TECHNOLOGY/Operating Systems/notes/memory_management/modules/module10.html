@@ -1,0 +1,119 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 10 - Allocation Algorithms</title>
+  <meta name="description" content="Frame allocation algorithms, global vs. local allocation, and NUMA.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="10">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module9.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 10 of 16</span>
+        </div>
+        <a href="module11.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Allocation Algorithms</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Understand Minimum Number of Frames</li>
+          <li>Explain Frame Allocation Algorithms.</li>
+          <li>Differentiate between Global and Local Allocation.</li>
+          <li>Describe Non-Uniform Memory Access (NUMA).</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 Minimum Number of Frames</h2>
+        <ul>
+          <li>The absolute minimum number of frames that a process must be allocated is dependent on system architecture, and corresponds to the worst-case scenario of the number of pages that could be touched by a single ( machine ) instruction.</li>
+          <li>If an instruction ( and its operands ) spans a page boundary, then multiple pages could be needed just for the instruction fetch.</li>
+          <li>Memory references in an instruction touch more pages, and if those memory locations can span page boundaries, then multiple pages could be needed for operand access also.</li>
+          <li>The worst case involves indirect addressing, particularly where multiple levels of indirect addressing are allowed. Left unchecked, a pointer to a pointer to a pointer to a pointer to a... could theoretically touch every page in the virtual address space in a single machine instruction, requiring every virtual page be loaded into physical memory simultaneously.</li>
+          <li>For this reason architectures place a limit (say 16 ) on the number of levels of indirection allowed in an instruction, which is enforced with a counter initialized to the limit and decremented with every level of indirection in an instruction - If the counter reaches zero, then an "excessive indirection" trap occurs. This example would still require a minimum frame allocation of 17 per process.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Allocation Algorithms</h2>
+          <ul>
+            <li>Equal Allocation - If there are m frames available and n processes to share them, each process gets m / n frames, and the leftovers are kept in a free-frame buffer pool.</li>
+            <li>Proportional Allocation - Allocate the frames proportionally to the size of the process, relative to the total size of all processes. So if the size of process i is S_i, and S is the sum of all S_i, then the allocation for process P_i is a_i = m * S_i/S.</li>
+            <li>Variations on proportional allocation could consider priority of process rather than just their size.</li>
+            <li>Obviously all allocations fluctuate over time as the number of available free frames, m, fluctuates, and all are also subject to the constraints of minimum allocation. ( If the minimum allocations cannot be met, then processes must either be swapped out or not allowed to start until more free frames become available. )</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>📚 Global versus Local Allocation</h2>
+        <ul>
+          <li>One big question is whether frame allocation ( page replacement ) occurs on a local or global level.</li>
+          <li>With local replacement, the number of pages allocated to a process is fixed, and page replacement occurs only amongst the pages allocated to this process.</li>
+          <li>With global replacement, any page may be a potential victim, whether it currently belongs to the process seeking a free frame or not.</li>
+          <li>Local page replacement allows processes to better control their own page fault rates, and leads to more consistent performance of a given process over different system load levels.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Non-Uniform Memory Access</h2>
+        <p>The above arguments all assume that all memory is equivalent, or at least has equivalent access times.</p>
+        <ul>
+          <li>This may not be the case in multiple-processor systems, especially where each CPU is physically located on a separate circuit board which also holds some portion of the overall system memory.</li>
+          <li>In these latter systems, CPUs can access memory that is physically located on the same board much faster than the memory on the other boards.</li>
+          <li>The basic solution is akin to processor affinity - At the same time that we try to schedule processes on the same CPU to minimize cache misses, we also try to allocate memory for those processes on the same boards, to minimize access times.</li>
+          <li>The presence of threads complicates the picture, especially when the threads get loaded onto different processors.</li>
+          <li>Solaris uses an lgroup as a solution, in a hierarchical fashion based on relative latency. For example, all processors and RAM on a single board would probably be in the same lgroup. Memory assignments are made within the same lgroup if possible, or to the next nearest lgroup otherwise. ( Where "nearest" is defined as having the lowest access time.)</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📝 Summary</h2>
+        <p>This module discussed frame allocation algorithms and their different types. The allocation algorithms include Equal allocation, proportional allocation. The module also focused on global versus local allocation and NUMA.</p>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module9.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 10 of 16</span>
+          </div>
+          <a href="module11.html" class="nav-button">
+            Next <span>→</span>
+          </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>
+
+    
