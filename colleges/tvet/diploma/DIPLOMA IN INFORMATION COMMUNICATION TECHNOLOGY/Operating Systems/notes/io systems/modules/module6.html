@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I/O Systems - Module 6</title>
+  <meta name="description" content="Detailed transcription of Kernel I/O Subsystem section">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="6">
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module5.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 6 of 8</span>
+        </div>
+        <a href="module7.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="module-content">
+      <h1>5.1.4 Kernel I/O Subsystem</h1>
+
+      <h2>5.1.4.1 I/O Scheduling</h2>
+      
+      <p>Scheduling I/O requests can greatly improve overall efficiency. Priorities can also play a part in request scheduling.</p>
+      
+      <p>The classic example is the scheduling of disk accesses as discussed in detail in chapter 12.</p>
+      
+      <p>Buffering and caching can also help and can allow for more flexible scheduling options.</p>
+      
+      <p>On systems with many devices separate request queues are often kept for each device:</p>
+
+      <h2>5.1.4.2 Buffering</h2>
+      
+      <p>Buffering of I/O is performed for (at least) 3 major reasons:</p>
+      
+      <ol>
+        <li>Speed differences between two devices. (See Figure 13.10 below.) A slow device may write data into a buffer and when the buffer is full the entire buffer is sent to the fast device all at once. So that the slow device still has somewhere to write while this is going on a second buffer is used and the two buffers alternate as each becomes full. This is known as double buffering. (Double buffering is often used in (animated) graphics so that one screen image can be generated in a buffer while the other (completed) buffer is displayed on the screen. This prevents the user from ever seeing any half-finished screen images.)</li>
+        <li>Data transfer size differences. Buffers are used in particular in networking systems to break messages up into smaller packets for transfer and then for re-assembly at the receiving side.</li>
+        <li>To support copy semantics. For example when an application makes a request for a disk write the data is copied from the user's memory area into a kernel buffer. Now the application can change their copy of the data but the data which eventually gets written out to disk is the version of the data at the time the write request was made.</li>
+      </ol>
+      
+      <figure>
+        <img src="../assets/images/module6-device-transfer-rates.jpg" alt="Sun Enterprise 6000 device-transfer rates (logarithmic) showing the wide range of transfer speeds for different devices" width="600" height="400">
+        <figcaption>Fig: Sun Enterprise 6000 device-transfer rates (logarithmic)</figcaption>
+      </figure>
+
+      <h2>5.1.4.3 Caching</h2>
+      
+      <p>Caching involves keeping a copy of data in a faster-access location than where the data is normally stored.</p>
+      
+      <p>Buffering and caching are very similar except that a buffer may hold the only copy of a given data item whereas a cache is just a duplicate copy of some other data stored elsewhere.</p>
+      
+      <p>Buffering and caching go hand-in-hand and often the same storage space may be used for both purposes. For example after a buffer is written to disk then the copy in memory can be used as a cached copy (until that buffer is needed for other purposes.)</p>
+
+      <h2>5.1.4.4 Spooling and Device Reservation</h2>
+      
+      <p>A spool (Simultaneous Peripheral Operations On-Line) buffers data for (peripheral) devices such as printers that cannot support interleaved data streams.</p>
+      
+      <p>If multiple processes want to print at the same time they each send their print data to files stored in the spool directory. When each file is closed then the application sees that print job as complete and the print scheduler sends each file to the appropriate printer one at a time.</p>
+      
+      <p>Support is provided for viewing the spool queues removing jobs from the queues moving jobs from one queue to another queue and in some cases changing the priorities of jobs in the queues.</p>
+      
+      <p>Spool queues can be general (any laser printer) or specific (printer number 42.)</p>
+      
+      <p>OSes can also provide support for processes to request/get exclusive access to a particular device and/or to wait until a device becomes available.</p>
+
+      <h2>5.1.4.5 Error Handling</h2>
+      
+      <p>I/O requests can fail for many reasons either transient (buffers overflow) or permanent (disk crash).</p>
+      
+      <p>I/O requests usually return an error bit (or more) indicating the problem. UNIX systems also set the global variable errno to one of a hundred or so well-defined values to indicate the specific error that has occurred. (See errno.h for a complete listing or man errno.)</p>
+      
+      <p>Some devices such as SCSI devices are capable of providing much more detailed information about errors and even keep an on-board error log that can be requested by the host.</p>
+
+      <h2>5.1.4.6 I/O Protection</h2>
+      
+      <p>The I/O system must protect against either accidental or deliberate erroneous I/O.</p>
+      
+      <p>User applications are not allowed to perform I/O in user mode - All I/O requests are handled through system calls that must be performed in kernel mode.</p>
+      
+      <p>Memory mapped areas and I/O ports must be protected by the memory management system but access to these areas cannot be totally denied to user programs. (Video games and some other applications need to be able to write directly to video memory for optimal performance for example.) Instead the memory protection system restricts access so that only one process at a time can access particular parts of memory such as the portion of the screen memory corresponding to a particular window.</p>
+      
+      <figure>
+        <img src="../assets/images/module6-system-call-io.jpg" alt="Use of a system call to perform I/O showing the transition between user mode and kernel mode" width="600" height="400">
+        <figcaption>Fig: Use of a system call to perform I/O.</figcaption>
+      </figure>
+
+      <h2>5.1.4.7 Kernel Data Structures</h2>
+      
+      <p>The kernel maintains a number of important data structures pertaining to the I/O system such as the open file table.</p>
+      
+      <p>These structures are object-oriented and flexible to allow access to a wide variety of I/O devices through a common interface. (See Figure below.)</p>
+      
+      <p>Windows NT carries the object-orientation one step further implementing I/O as a message-passing system from the source through various intermediaries to the device.</p>
+      
+      <figure>
+        <img src="../assets/images/module6-unix-io-kernel-structure.jpg" alt="UNIX I/O kernel structure showing the relationships between different kernel components" width="600" height="400">
+        <figcaption>Fig: UNIX I/O kernel structure.</figcaption>
+      </figure>
+
+      <h2>5.1.4.8 Kernel I/O Subsystem Summary</h2>
+      
+      <div class="summary">
+        <h2>📝 Summary</h2>
+        <ul>
+          <li>The kernel I/O subsystem provides numerous services to efficiently manage I/O operations</li>
+          <li>I/O scheduling improves system performance by organizing request sequences</li>
+          <li>Buffering bridges speed and size differences between devices</li>
+          <li>Caching improves performance by keeping frequently accessed data in faster storage</li>
+          <li>Spooling and device reservation handle concurrent device access requests</li>
+          <li>Error handling provides mechanisms to detect and respond to I/O failures</li>
+          <li>I/O protection prevents unauthorized or incorrect device access</li>
+          <li>Kernel data structures provide a flexible, object-oriented approach to device management</li>
+        </ul>
+      </div>
+    </main>
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module5.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 6 of 8</span>
+        </div>
+        <a href="module7.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</body>
+</html>
