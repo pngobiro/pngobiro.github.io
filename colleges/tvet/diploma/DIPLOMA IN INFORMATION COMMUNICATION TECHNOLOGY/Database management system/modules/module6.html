@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Database Normalization - Database Management Systems</title>
+  <meta name="description" content="Learn about database normalization principles and techniques">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="6">
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module5.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 6 of 9</span>
+        </div>
+        <a href="module7.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>Database Normalization</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Understand the concept and importance of normalization</li>
+          <li>Learn different normal forms and their rules</li>
+          <li>Master the process of normalizing databases</li>
+          <li>Identify and resolve data anomalies</li>
+          <li>Understand functional dependencies</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+      <section id="introduction">
+        <h2>What is Normalization?</h2>
+        <p>Database normalization is the process of organizing data in a database to reduce redundancy and improve data integrity. It involves breaking down larger tables into smaller ones and defining relationships between them.</p>
+        
+        <h3>Importance of Normalization</h3>
+        <ul>
+          <li>Eliminates redundant data</li>
+          <li>Ensures data dependencies make sense</li>
+          <li>Reduces likelihood of data anomalies</li>
+          <li>Improves data consistency</li>
+          <li>Makes database more flexible for future changes</li>
+        </ul>
+      </section>
+
+      <section id="problems-without-normalization">
+        <h2>Problems Without Normalization</h2>
+        <h3>Update Anomalies</h3>
+        <ul>
+          <li>Same information needs to be changed in multiple places</li>
+          <li>Risk of inconsistency if all copies aren't updated</li>
+          <li>Requires more storage space</li>
+        </ul>
+
+        <h3>Insertion Anomalies</h3>
+        <ul>
+          <li>Cannot store certain information without having other related data</li>
+          <li>Forced to enter null values for some attributes</li>
+        </ul>
+
+        <h3>Deletion Anomalies</h3>
+        <ul>
+          <li>Deleting one fact might cause unintended loss of other facts</li>
+          <li>Risk of losing important information</li>
+        </ul>
+      </section>
+
+      <section id="normal-forms">
+        <h2>Normal Forms</h2>
+        
+        <h3>First Normal Form (1NF)</h3>
+        <ul>
+          <li>Each table cell should contain a single value</li>
+          <li>Each record needs to be unique</li>
+          <li>No repeating groups of columns</li>
+        </ul>
+
+        <h3>Second Normal Form (2NF)</h3>
+        <ul>
+          <li>Must be in 1NF</li>
+          <li>All non-key attributes must fully depend on the primary key</li>
+          <li>No partial dependencies</li>
+        </ul>
+
+        <h3>Third Normal Form (3NF)</h3>
+        <ul>
+          <li>Must be in 2NF</li>
+          <li>No transitive dependencies</li>
+          <li>All non-key attributes depend only on the primary key</li>
+        </ul>
+
+        <h3>Boyce-Codd Normal Form (BCNF)</h3>
+        <ul>
+          <li>Stricter version of 3NF</li>
+          <li>Every determinant must be a candidate key</li>
+          <li>Addresses certain anomalies that 3NF doesn't handle</li>
+        </ul>
+      </section>
+
+      <section id="functional-dependencies">
+        <h2>Functional Dependencies</h2>
+        <p>A functional dependency is a relationship between attributes where one attribute's value determines another attribute's value.</p>
+
+        <h3>Types of Dependencies</h3>
+        <ul>
+          <li><strong>Full Functional Dependency</strong> - Attribute depends on entire primary key</li>
+          <li><strong>Partial Dependency</strong> - Attribute depends on part of primary key</li>
+          <li><strong>Transitive Dependency</strong> - Attribute depends on non-key attribute</li>
+        </ul>
+      </section>
+
+      <section id="normalization-process">
+        <h2>Steps to Normalize a Database</h2>
+        <ol>
+          <li><strong>Identify the entities</strong>
+            <ul>
+              <li>List all attributes</li>
+              <li>Determine primary keys</li>
+              <li>Identify relationships</li>
+            </ul>
+          </li>
+          <li><strong>Achieve 1NF</strong>
+            <ul>
+              <li>Eliminate repeating groups</li>
+              <li>Create separate tables for each set of related data</li>
+              <li>Identify primary keys</li>
+            </ul>
+          </li>
+          <li><strong>Achieve 2NF</strong>
+            <ul>
+              <li>Remove partial dependencies</li>
+              <li>Create separate tables for sets of values that apply to multiple records</li>
+              <li>Relate these tables with foreign keys</li>
+            </ul>
+          </li>
+          <li><strong>Achieve 3NF</strong>
+            <ul>
+              <li>Remove transitive dependencies</li>
+              <li>Create separate tables for sets of values that are dependent on non-key attributes</li>
+            </ul>
+          </li>
+        </ol>
+      </section>
+
+      <section id="denormalization">
+        <h2>Denormalization</h2>
+        <p>Sometimes it's beneficial to denormalize a database for performance reasons.</p>
+        
+        <h3>When to Consider Denormalization</h3>
+        <ul>
+          <li>When read performance is critical</li>
+          <li>When data is rarely updated</li>
+          <li>When joins are too complex</li>
+          <li>When query response time needs improvement</li>
+        </ul>
+
+        <h3>Risks of Denormalization</h3>
+        <ul>
+          <li>Increased data redundancy</li>
+          <li>More complex data updates</li>
+          <li>Potential data inconsistencies</li>
+          <li>Higher storage requirements</li>
+        </ul>
+      </section>
+    </main>
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module5.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 6 of 9</span>
+        </div>
+        <a href="module7.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</body>
+</html>
