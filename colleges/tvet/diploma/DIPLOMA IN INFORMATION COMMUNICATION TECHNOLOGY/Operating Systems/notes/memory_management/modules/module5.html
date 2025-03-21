@@ -1,0 +1,147 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 5 - Virtual Memory</title>
+  <meta name="description" content="Virtual memory and demand paging.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="5">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module4.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 5 of 16</span>
+        </div>
+        <a href="module6.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Virtual Memory</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Define virtual memory.</li>
+          <li>Explain the concept of demand paging.</li>
+          <li>Understand the basic concepts of demand paging.</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 3.2 Virtual Memory</h2>
+        <ul>
+          <li>Preceding sections talked about how to avoid memory fragmentation by breaking process memory requirements down into smaller bites ( pages ), and storing the pages non-contiguously in memory. However the entire process still had to be stored in memory somewhere.</li>
+          <li>In practice, most real processes do not need all their pages, or at least not all at once, for several reasons:
+            <ul>
+              <li>Error handling code is not needed unless that specific error occurs, some of which are quite rare.</li>
+              <li>Arrays are often over-sized for worst-case scenarios, and only a small fraction of the arrays are actually used in practice.</li>
+              <li>Certain features of certain programs are rarely used, such as the routine to balance the federal budget. :-)</li>
+            </ul>
+          </li>
+          <li>The ability to load only the portions of processes that were actually needed ( and only when they were needed ) has several benefits:
+            <ul>
+              <li>Programs could be written for a much larger address space ( virtual memory space ) than physically exists on the computer.</li>
+              <li>Because each process is only using a fraction of their total address space, there is more memory left for other programs, improving CPU utilization and system throughput.</li>
+              <li>Less I/O is needed for swapping processes in and out of RAM, speeding things up.</li>
+            </ul>
+          </li>
+        </ul>
+        <p>Figure below shows the general layout of virtual memory, which can be much larger than physical memory:</p>
+        <p><img src="../assets/images/module5-virtual-memory-diagram.png" alt="Diagram showing virtual memory that is larger than physical memory" width="600" height="300"></p>
+        <ul>
+          <li>🔍 page v</li>
+          <li>🔍 virtual memory</li>
+          <li>🔍 memory map</li>
+          <li>🔍 physical memory</li>
+        </ul>
+        <p>Figure below shows virtual address space, which is the programmer's logical view of process memory storage. The actual physical layout is controlled by the process's page table.</p>
+        <p>Note that the address space shown in Figure is sparse - A great hole in the middle of the address space is never used, unless the stack and/or the heap grow to fill the hole.</p>
+        <p><img src="../assets/images/module5-virtual-address-space-diagram.png" alt="Virtual address space diagram" width="600" height="300"></p>
+        <ul>
+          <li>🔍 Max</li>
+          <li>🔍 stack</li>
+          <li>🔍 heap</li>
+          <li>🔍 data</li>
+          <li>🔍 code</li>
+          <li>🔍 0</li>
+        </ul>
+        <p>Virtual memory also allows the sharing of files and memory by multiple processes, with several benefits:</p>
+          <ul>
+              <li>System libraries can be shared mapping them into the virtual address space of more than one process.</li>
+              <li>Processes can also share virtual memory by mapping the same block of memory to more than one process.</li>
+              <li>Process pages can be shared during a fork( ) system call, eliminating the need to copy all of the pages of the original ( parent ) process.</li>
+          </ul>
+        <p><img src="../assets/images/module5-shared-library-virtual-memory-diagram.png" alt="Shared library using virtual memory diagram" width="600" height="300"></p>
+            <ul>
+              <li>🔍 stack</li>
+              <li>🔍 shared library</li>
+              <li>🔍 shared pages</li>
+              <li>🔍 heap</li>
+              <li>🔍 data</li>
+              <li>🔍 code</li>
+            </ul>
+      </section>
+
+      <section>
+        <h2>📚 Demand Paging</h2>
+        <p>The basic idea behind demand paging is that when a process is swapped in, its pages are not swapped in all at once. Rather they are swapped in only when the process needs them. ( on demand. ) This is termed a lazy swapper, although a pager is a more accurate term.</p>
+        <p><img src="../assets/images/module5-demand-paging-diagram.png" alt="Transfer of a paged memory to contiguous disk space diagram" width="600" height="300"></p>
+        <ul>
+          <li>🔍 program A</li>
+          <li>🔍 program B</li>
+          <li>🔍 swap out</li>
+          <li>🔍 swap in</li>
+          <li>🔍 main memory</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📝 Basic Concepts</h2>
+        <ul>
+          <li>📚 The basic idea behind paging is that when a process is swapped in, the pager only loads into memory those pages that it expects the process to need ( right away. )</li>
+          <li>📚 Pages that are not loaded into memory are marked as invalid in the page table, using the invalid bit. ( The rest of the page table entry may either be blank or contain information about where to find the swapped-out page on the hard drive. )</li>
+          <li>📚 If the process only ever accesses pages that are loaded in memory ( memory resident pages), then the process runs exactly as if all the pages were loaded in to memory.</li>
+        </ul>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module4.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 5 of 16</span>
+          </div>
+          <a href="module6.html" class="nav-button">
+            Next <span>→</span>
+          </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>
+
+    

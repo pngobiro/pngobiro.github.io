@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LINKING TO DATABASES - Visual Programming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <div class="container">
+    <article class="document-section">
+      <!-- Navigation (top) -->
+      <nav class="document-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span class="nav-icon">←</span> 
+            <span class="nav-text">Table of Contents</span>
+          </a>
+          <a href="chapter8.html" class="nav-button">
+            <span class="nav-icon">←</span> 
+            <span class="nav-text">Previous Chapter</span>
+          </a>
+          <div class="document-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 90%;"></div>
+            </div>
+            <span class="progress-text">Chapter 9 of 10</span>
+          </div>
+          <a href="chapter10.html" class="nav-button">
+            <span class="nav-text">Next Chapter</span> 
+            <span class="nav-icon">→</span>
+          </a>
+        </div>
+      </nav>
+      
+      <header class="section-header">
+        <h1>CHAPTER 9: LINKING TO DATABASES</h1>
+      </header>
+      
+      <main class="section-content">
+        <section class="content-section">
+          <h2>Introduction to Database Connectivity</h2>
+          <p>Visual Basic provides robust support for database connectivity through various methods and technologies. The most common approaches include ADO.NET, ODBC, and direct database providers. These technologies enable applications to perform Create, Read, Update, and Delete (CRUD) operations on databases.</p>
+        </section>
+
+        <section class="content-section">
+          <h2>ADO.NET Overview</h2>
+          <p>ADO.NET is the primary data access technology for .NET applications. It provides a comprehensive set of classes for working with databases:</p>
+
+          <h3>Basic Database Connection</h3>
+          <pre><code>Imports System.Data.SqlClient
+
+' Creating a connection
+Dim connectionString As String = "Server=myServer;Database=myDB;Trusted_Connection=True;"
+Dim connection As New SqlConnection(connectionString)
+
+Try
+    connection.Open()
+    ' Perform database operations here
+Finally
+    connection.Close()
+End Try</code></pre>
+
+          <h3>Executing SQL Commands</h3>
+          <pre><code>' Simple SELECT query
+Dim command As New SqlCommand("SELECT * FROM Customers", connection)
+Dim reader As SqlDataReader = command.ExecuteReader()
+
+While reader.Read()
+    Debug.Print(reader("CustomerName"))
+End While
+reader.Close()</code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>Working with DataSets and DataAdapters</h2>
+          <p>DataSets provide a disconnected way to work with data, while DataAdapters bridge the gap between DataSets and the database:</p>
+
+          <pre><code>' Creating a DataSet and DataAdapter
+Dim dataSet As New DataSet()
+Dim adapter As New SqlDataAdapter("SELECT * FROM Products", connection)
+
+' Fill the DataSet
+adapter.Fill(dataSet, "Products")
+
+' Modify data
+Dim productsTable As DataTable = dataSet.Tables("Products")
+Dim newRow As DataRow = productsTable.NewRow()
+newRow("ProductName") = "New Product"
+newRow("Price") = 19.99
+productsTable.Rows.Add(newRow)
+
+' Update the database
+adapter.Update(dataSet, "Products")</code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>Data Binding</h2>
+          <p>Visual Basic supports binding database data directly to form controls:</p>
+
+          <pre><code>' Binding to a DataGridView
+Dim dataAdapter As New SqlDataAdapter("SELECT * FROM Employees", connection)
+Dim dataTable As New DataTable()
+dataAdapter.Fill(dataTable)
+DataGridView1.DataSource = dataTable
+
+' Binding to individual controls
+TextBox1.DataBindings.Add("Text", dataTable, "EmployeeName")
+ComboBox1.DataSource = dataTable
+ComboBox1.DisplayMember = "Department"
+ComboBox1.ValueMember = "DepartmentID"</code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>Parameterized Queries</h2>
+          <p>Using parameterized queries helps prevent SQL injection and improves security:</p>
+
+          <pre><code>' Insert with parameters
+Dim cmd As New SqlCommand("INSERT INTO Customers (Name, Email) VALUES (@name, @email)", connection)
+
+cmd.Parameters.AddWithValue("@name", "John Doe")
+cmd.Parameters.AddWithValue("@email", "john@example.com")
+
+cmd.ExecuteNonQuery()</code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>Transaction Management</h2>
+          <p>Transactions ensure data integrity by grouping multiple operations:</p>
+
+          <pre><code>Dim transaction As SqlTransaction = Nothing
+
+Try
+    connection.Open()
+    transaction = connection.BeginTransaction()
+
+    ' First operation
+    Dim cmd1 As New SqlCommand("UPDATE Account SET Balance = Balance - 100 WHERE ID = 1", connection, transaction)
+    cmd1.ExecuteNonQuery()
+
+    ' Second operation
+    Dim cmd2 As New SqlCommand("UPDATE Account SET Balance = Balance + 100 WHERE ID = 2", connection, transaction)
+    cmd2.ExecuteNonQuery()
+
+    ' Commit if both operations succeed
+    transaction.Commit()
+
+Catch ex As Exception
+    ' Rollback on error
+    If transaction IsNot Nothing Then
+        transaction.Rollback()
+    End If
+    Throw
+Finally
+    connection.Close()
+End Try</code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>Error Handling in Database Operations</h2>
+          <p>Proper error handling is crucial when working with databases:</p>
+
+          <pre><code>Try
+    ' Attempt database operation
+    connection.Open()
+    Dim command As New SqlCommand("SELECT * FROM NonExistentTable", connection)
+    command.ExecuteReader()
+
+Catch ex As SqlException
+    ' Handle specific database errors
+    Select Case ex.Number
+        Case 208  ' Invalid object name
+            MessageBox.Show("Table does not exist")
+        Case 18456  ' Login failed
+            MessageBox.Show("Database authentication failed")
+        Case Else
+            MessageBox.Show("Database error: " & ex.Message)
+    End Select
+
+Catch ex As Exception
+    ' Handle other errors
+    MessageBox.Show("An unexpected error occurred: " & ex.Message)
+
+Finally
+    If connection.State = ConnectionState.Open Then
+        connection.Close()
+    End If
+End Try</code></pre>
+        </section>
+
+        <!-- Key Points Section -->
+        <section class="key-points-section">
+          <div class="key-points-container">
+            <div class="key-points-header">
+              <span class="key-points-icon">📝</span>
+              <h3 class="key-points-title">Key Points</h3>
+            </div>
+            <div class="key-points-content">
+              <ul class="key-points-list">
+                <li class="key-point-item">ADO.NET provides comprehensive database connectivity</li>
+                <li class="key-point-item">DataSets offer disconnected data manipulation</li>
+                <li class="key-point-item">Parameterized queries prevent SQL injection</li>
+                <li class="key-point-item">Transactions ensure data integrity</li>
+                <li class="key-point-item">Proper error handling is essential for database operations</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+      
+      <!-- Navigation (bottom) -->
+      <nav class="document-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span class="nav-icon">←</span> 
+            <span class="nav-text">Table of Contents</span>
+          </a>
+          <a href="chapter8.html" class="nav-button">
+            <span class="nav-icon">←</span> 
+            <span class="nav-text">Previous Chapter</span>
+          </a>
+          <div class="document-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 90%;"></div>
+            </div>
+            <span class="progress-text">Chapter 9 of 10</span>
+          </div>
+          <a href="chapter10.html" class="nav-button">
+            <span class="nav-text">Next Chapter</span> 
+            <span class="nav-icon">→</span>
+          </a>
+        </div>
+      </nav>
+    </article>
+  </div>
+</body>
+</html>
