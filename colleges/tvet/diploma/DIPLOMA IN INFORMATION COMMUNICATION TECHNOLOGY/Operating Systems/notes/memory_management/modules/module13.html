@@ -1,0 +1,107 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 13 - Shared Memory and I/O</title>
+  <meta name="description" content="Shared memory in Win32 API, and Memory Mapped I/O.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="13">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module12.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 13 of 16</span>
+        </div>
+        <a href="module14.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Shared Memory and I/O</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Explain how to implement shared memory in the Win32 API.</li>
+          <li>Understand Memory-Mapped I/O.</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 Shared Memory in the Win32 API</h2>
+        <p>Shared memory can be implemented via shared memory-mapped files ( Windows ), or it can be implemented through a separate process ( Linux, UNIX. )</p>
+        <p>Windows implements shared memory using shared memory-mapped files, involving three basic steps:</p>
+        <ol>
+          <li>Create a file, producing a HANDLE to the new file.</li>
+          <li>Name the file as a shared object, producing a HANDLE to the shared object.</li>
+          <li>Map the shared object to virtual memory address space, returning its base address as a void pointer ( LPVOID ).</li>
+        </ol>
+        <p>This is illustrated in below Figure</p>
+        <p><img src="../assets/images/module13-shared-memory-win32-diagram.png" alt="Shared memory in windows using memory-mapped I/O diagram" width="600" height="300"></p>
+        <ul>
+          <li>🔍 process</li>
+          <li>🔍 shared memory</li>
+          <li>🔍 memory-mapped file</li>
+          <li>🔍 process 2</li>
+          <li>🔍 shared memory</li>
+          <li>🔍 shared memory</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Memory-Mapped I/O</h2>
+        <p>All access to devices is done by writing into (or reading from ) the device's registers.</p>
+        <p>Normally this is done via special I/O instructions.</p>
+        <p>For certain devices it makes sense to simply map the device's registers to addresses in the process's virtual address space, making device I/O as fast and simple as any other memory access. Video controller cards are a classic example of this.</p>
+        <p>Serial and parallel devices can also use memory mapped I/O, mapping the device registers to specific memory addresses known as I/O Ports, e.g. 0xF8. Transferring a series of bytes must be done one at a time, moving only as fast as the I/O device is prepared to process the data, through one of two mechanisms:</p>
+        <ul>
+          <li>Programmed I/O ( PIO ), also known as polling. The CPU periodically checks the control bit on the device, to see if it is ready to handle another byte of data.</li>
+          <li>Interrupt Driven. The device generates an interrupt when it either has another byte of data to deliver or is ready to receive another byte.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📝 Summary</h2>
+        <p>Shared Memory and I/O are essential for operating systems. This module discussed shared memory, memory-mapped files in Windows and PIO along with Interrupt Driven operations.</p>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module12.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 13 of 16</span>
+          </div>
+          <a href="module14.html" class="nav-button">
+            Next <span>→</span>
+          </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>
+
+    

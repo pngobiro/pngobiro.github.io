@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I/O Systems - Module 4</title>
+  <meta name="description" content="Detailed transcription of Direct Memory Access section">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="4">
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module3.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 4 of 8</span>
+        </div>
+        <a href="module5.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="module-content">
+      <h2>5.1.2.3 Direct Memory Access</h2>
+      
+      <p>For devices that transfer large quantities of data (such as disk drives) it is wasteful to tie up the CPU transferring data in and out of registers one byte at a time.</p>
+      
+      <p>This work can be off-loaded to a special processor called a Direct Memory Access (DMA) Controller.</p>
+      
+      <p>The host issues a command to the DMA controller by setting up the control registers (shown in Figure 13.6 below):</p>
+      
+      <ul>
+        <li>A memory address register</li>
+        <li>A byte count register</li>
+        <li>One or more control registers indicating the I/O device to use the direction of the transfer (memory to device or device to memory) and the transfer unit size.</li>
+      </ul>
+      
+      <figure>
+        <img src="../assets/images/module4-dma-transfer-steps.jpg" alt="Steps in a DMA transfer showing the sequence of operations between CPU, DMA controller, and device" width="600" height="400">
+        <figcaption>Fig: Steps in a DMA transfer</figcaption>
+      </figure>
+      
+      <p>The DMA controller then proceeds to transfer the entire block of data directly to or from memory without further CPU intervention. (The CPU is free to do other tasks.)</p>
+      
+      <p>When the transfer is complete the DMA controller sends an interrupt signal to the CPU.</p>
+      
+      <p>There are three steps in a DMA transfer as shown in Figure 13.6 above:</p>
+      
+      <ol>
+        <li>The device driver is instructed to transfer data from the file system to the disk controller and sets up the DMA controller with the memory address and block count.</li>
+        <li>The DMA controller initiates the data transfer and the disk controller sends the data to the DMA controller.</li>
+        <li>The DMA controller transfers the data to memory and increments its addresses and decrements its counters until the entire block has been transferred. When the counters reach zero the DMA controller interrupts the CPU to signal completion.</li>
+      </ol>
+      
+      <p>A simple DMA controller is a standard component in modern PCs and many buses such as PCI support bus mastering by which devices can gain control of the bus and perform their own transfers.</p>
+      
+      <p>Variations on the basic DMA controller include:</p>
+      
+      <ul>
+        <li>Bus-mastering controllers which can request control of the system bus from the CPU and perform transfers directly between the device and memory without the DMA controller.</li>
+        <li>Cycle stealing where the device controller gains access to the system bus by telling the CPU to temporarily suspend its use of the bus. The CPU does not relinquish control of the bus during this time but merely pauses one bus cycle (i.e. the device controller steals a bus cycle.)</li>
+        <li>Flyby mode in which the data is transferred with a single bus cycle rather than the two shown in Figure 13.6. (The cycle is a memory read/write cycle with the data being transferred directly between the device and memory.)</li>
+      </ul>
+      
+      <p>DMA controllers vary in the amount of data that they can transfer in one operation from as little as a few bytes to many megabytes. They may contain multiple independent channels allowing multiple I/O operations to proceed in parallel.</p>
+      
+      <p>Some devices such as network controllers implement their own DMA controllers which operate independently from the system DMA controller.</p>
+      
+      <p>The OS must be careful when using DMA to transfer data into memory pages that are also in the CPU cache as the data in the CPU cache would then be out of sync with the data in main memory. Either the cache needs to be bypassed/disabled or the cache needs to be flushed after the DMA transfer completes.</p>
+      
+      <p>Figure 13.7 below shows the typical I/O device I/O port locations on a PC:</p>
+      
+      <figure>
+        <img src="../assets/images/module4-io-device-characteristics.jpg" alt="I/O device characteristics showing port locations and interrupt assignments for common PC devices" width="600" height="400">
+        <figcaption>Fig: I/O device characteristics</figcaption>
+      </figure>
+    </main>
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module3.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 4 of 8</span>
+        </div>
+        <a href="module5.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</body>
+</html>

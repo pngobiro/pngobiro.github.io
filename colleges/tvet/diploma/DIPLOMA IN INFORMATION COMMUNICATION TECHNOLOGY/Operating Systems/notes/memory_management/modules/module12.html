@@ -1,0 +1,113 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 12 - Memory Optimization Techniques</title>
+  <meta name="description" content="Working set model, page fault frequency and memory-mapped files.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="12">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module11.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 12 of 16</span>
+        </div>
+        <a href="module13.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Memory Optimization Techniques</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Understand how to select Delata is crital to success of working set model.</li>
+          <li>Explain Page-Fault Frequency and its purpose.</li>
+          <li>Define memory-mapped files.</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 Selection of Delata is critical to success of working set model</h2>
+        <p>The selection of delta is critical to the success of the working set model - If it is too small then it does not encompass all of the pages of the current locality, and if it is too large, then it encompasses pages that are no longer being frequently accessed.</p>
+        <p>The total demand, D, is the sum of the sizes of the working sets for all processes. If D exceeds the total number of available frames, then at least one process is thrashing, because there are not enough frames available to satisfy its minimum working set. If D is significantly less than the currently available frames, then additional processes can be launched.</p>
+        <p>The hard part of the working-set model is keeping track of what pages are in the current working set, since every reference adds one to the set and removes one older page. An approximation can be made using reference bits and a timer that goes off after a set interval of memory references:</p>
+        <ul>
+          <li>For example, suppose that we set the timer to go off after every 5000 references ( by any process ), and we can store two additional historical reference bits in addition to the current reference bit.</li>
+          <li>Every time the timer goes off, the current reference bit is copied to one of the two historical bits, and then cleared.</li>
+          <li>If any of the three bits is set, then that page was referenced within the last 15,000 references, and is considered to be in that processes reference set.</li>
+          <li>Finer resolution can be achieved with more historical bits and a more frequent timer, at the expense of greater overhead.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Page-Fault Frequency</h2>
+        <p>A more direct approach is to recognize that what we really want to control is the page-fault rate, and to allocate frames based on this directly measurable value. If the page-fault rate exceeds a certain upper bound then that process needs more frames, and if it is below a given lower bound, then it can afford to give up some of its frames to other processes.</p>
+        <p><img src="../assets/images/module12-page-fault-frequency-graph.png" alt="Page-fault frequency graph" width="600" height="300"></p>
+        <ul>
+          <li>🔍 page-fault rate</li>
+          <li>🔍 upper bound</li>
+          <li>🔍 lower bound</li>
+          <li>🔍 increase number of frames</li>
+          <li>🔍 decrease number of frames</li>
+          <li>🔍 number of frames</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Memory-mapped files</h2>
+        <p>Rather than accessing data files directly via the file system with every file access, data files can be paged into memory the same as process files, resulting in much faster accesses ( except of course when page-faults occur. ) This is known as memory-mapping a file.</p>
+        <p>Basic Mechanism</p>
+        <ul>
+          <li>Basically a file is mapped to an address range within a process's virtual address space, and then paged in as needed using the ordinary demand paging system.</li>
+          <li>Note that file writes are made to the memory page frames, and are not immediately written out to disk. ( This is the purpose of the "flush()" system call, which may also be needed for stdout in some cases. See the time killer program for an example of this. )</li>
+          <li>This is also why it is important to "close( )" a file when one is done writing to it - So that the data can be safely flushed out to disk and so that the memory frames can be freed up for other purposes.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📝 Summary</h2>
+        <p>This module covers the selection of delata in the working set model, and the usage of page fault frequency. This module also explains memory-mapped files and it's basic mechanism.</p>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module11.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 12 of 16</span>
+          </div>
+          <a href="module13.html" class="nav-button">
+            Next <span>→</span>
+          </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>
+
+    

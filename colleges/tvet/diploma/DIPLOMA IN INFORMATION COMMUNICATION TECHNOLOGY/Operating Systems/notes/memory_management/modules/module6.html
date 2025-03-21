@@ -1,0 +1,147 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 6 - Page Fault Handling and Performance</title>
+  <meta name="description" content="Handling page faults, Performance, and Copy-on-Write.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="6">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module5.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 6 of 16</span>
+        </div>
+        <a href="module7.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Page Fault Handling and Performance</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Describe page fault handling.</li>
+          <li>Understand the performance considerations of Demand Paging.</li>
+          <li>Explain the Copy-on-Write optimization.</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 Page Fault Handling</h2>
+          <p>On the other hand, if a page is needed that was not originally loaded up, then a page fault trap is generated, which must be handled in a series of steps:</p>
+          <ol>
+            <li>The memory address requested is first checked, to make sure it was a valid memory request.</li>
+            <li>If the reference was invalid, the process is terminated. Otherwise, the page must be paged in.</li>
+            <li>A free frame is located, possibly from a free-frame list.</li>
+            <li>A disk operation is scheduled to bring in the necessary page from disk. ( This will usually block the process on an I/O wait, allowing some other process to use the CPU in the meantime. )</li>
+            <li>When the I/O operation is complete, the process's page table is updated with the new frame number, and the invalid bit is changed to indicate that this is now a valid page reference.</li>
+            <li>The instruction that caused the page fault must now be restarted from the beginning, ( as soon as this process gets another turn on the CPU. )</li>
+          </ol>
+        <p><img src="../assets/images/module6-page-fault-handling-diagram.png" alt="Steps in handling a page fault diagram" width="600" height="300"></p>
+            <ul>
+              <li>🔍 operating system</li>
+              <li>🔍 reference</li>
+              <li>🔍 trap</li>
+              <li>🔍 load M</li>
+              <li>🔍 restart instruction</li>
+              <li>🔍 page table</li>
+              <li>🔍 free frame</li>
+              <li>🔍 reset page table</li>
+              <li>🔍 bring in missing page</li>
+              <li>🔍 physical memory</li>
+              <li>🔍 backing store</li>
+            </ul>
+      </section>
+
+      <section>
+        <h2>📚 Performance of Demand Paging</h2>
+        <ul>
+          <li>Obviously there is some slowdown and performance hit whenever a page fault occurs and the system has to go get it from memory, but just how big a hit is it exactly?</li>
+          <li>There are many steps that occur when servicing a page fault ( see book for full details ), and some of the steps are optional or variable. But just for the sake of discussion, suppose that a normal memory access requires 200 nanoseconds, and that servicing a page fault takes 8 milliseconds. ( 8,000,000 nanoseconds, or 40,000 times a normal memory access. ) With a page fault rate of p, ( on a scale from 0 to 1 ), the effective access time is now:
+          <ul>
+            <li>(1-p) * ( 200 ) + p * 8000000</li>
+            <li>= 200 + 7,999,800 * p</li>
+          </ul>
+          </li>
+          <li>which clearly depends heavily on p! Even if only one access in 1000 causes a page fault, the effective access time drops from 200 nanoseconds to 8.2 microseconds, a slowdown of a factor of 40 times. In order to keep the slowdown less than 10%, the page fault rate must be less than 0.0000025, or one in 399,990 accesses.</li>
+          <li>A subtlety is that swap space is faster to access than the regular file system, because it does not have to go through the whole directory structure. For this reason some systems will transfer an entire process from the file system to swap space before starting up the process, so that future paging all occurs from the ( relatively) faster swap space.</li>
+          <li>Some systems use demand paging directly from the file system for binary code (which never changes and hence does not have to be stored on a page operation ), and to reserve the swap space for data segments that must be stored. This approach is used by both Solaris and BSD Unix.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Copy-on-Write</h2>
+        <p>The idea behind a copy-on-write fork is that the pages for a parent process do not have to be actually copied for the child until one or the other of the processes changes the page. They can be simply shared between the two processes in the meantime, with a bit set that the page needs to be copied if it ever gets written to. This is a reasonable approach, since the child process usually issues an exec() system call immediately after the fork.</p>
+        <p><img src="../assets/images/module6-copy-on-write-before-diagram.png" alt="Before process modifies page C diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 process</li>
+            <li>🔍 physical memory</li>
+            <li>🔍 page A</li>
+            <li>🔍 page B</li>
+            <li>🔍 page C</li>
+            <li>🔍 process 2</li>
+          </ul>
+        <p><img src="../assets/images/module6-copy-on-write-after-diagram.png" alt="After process 1 modifies page C diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 process</li>
+            <li>🔍 physical memory</li>
+            <li>🔍 page A</li>
+            <li>🔍 page B</li>
+            <li>🔍 page C</li>
+            <li>🔍 Copy of page C</li>
+            <li>🔍 process 2</li>
+          </ul>
+        <ul>
+          <li>Obviously only pages that can be modified even need to be labeled as copy-on-write. Code segments can simply be shared.</li>
+          <li>Pages used to satisfy copy-on-write duplications are typically allocated using zero-fill-on-demand, meaning that their previous contents are zeroed out before the copy proceeds.</li>
+          <li>Some systems provide an alternative to the fork( ) system call called a virtual memory fork, vfork( ). In this case the parent is suspended, and the child uses the parent's memory pages. This is very fast for process creation, but requires that the child not modify any of the shared memory pages before performing the exec( ) system call. ( In essence this addresses the question of which process executes first after a call to fork, the parent or the child. With vfork, the parent is suspended, allowing the child to execute first until it calls exec(), sharing pages with the parent in the meantime.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📝 Summary</h2>
+        <p>This module explores the steps in page fault handling and the performance aspects of demand paging. It also discusses copy-on-write, an optimization technique where pages are shared between processes until they are modified, improving performance and memory utilization.</p>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module5.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 6 of 16</span>
+          </div>
+          <a href="module7.html" class="nav-button">
+            Next <span>→</span>
+          </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>
+
+    
