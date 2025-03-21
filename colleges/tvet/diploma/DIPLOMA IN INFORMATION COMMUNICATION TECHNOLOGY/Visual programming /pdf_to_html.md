@@ -35,6 +35,9 @@
    - For vector graphics: `../assets/diagrams/filename.svg`
 5. All images must include proper alt text that describes the image content
 
+
+
+
 ## 1. Core Mission
 Transform PDF documents into visually engaging, pedagogically effective HTML pages with **100% verbatim content preservation**. The goal is to create highly appealing learning materials while maintaining absolute fidelity to the original text content.
 
@@ -149,24 +152,25 @@ File 2: [EXACT SECTION HEADING] through [EXACT SECTION HEADING]
 Maintain a clear directory structure for all files:
 
 ```
-project-name/
-├── index.html                # Main landing page
-├── topics/                   # Topic HTML files
-│   ├── chapter1.html
-│   ├── chapter2.html
-│   └── chapter3.html
-├── assets/                   # Media resources
-│   ├── images/               # Photographs and raster images
-│   │   ├── chapter1-image1.jpg
-│   │   ├── chapter1-image2.png
-│   │   └── chapter2-screenshot.png
-│   └── diagrams/             # Vector graphics and diagrams
-│       ├── chapter1-diagram1.svg
-│       └── chapter2-flowchart.svg
-├── styles/                   # CSS files
-│   └── main.css
-└── data/                     # JSON/XML data if needed
-    └── metadata.json
+course_name/
+├── index.html                    # Course overview
+├── modules/                      # Module files
+│   ├── module1.html              # Module Structure and Content Rules
+│   ├── module2.html              # HTML Templates and Navigation
+│   ├── module3.html              # Content Elements and Visual Standards
+│   └── module4.html              # Processing Steps and Quality Assurance
+├── assets/                       # Media files
+│   ├── images/
+│   │   ├── module1-directory-structure-diagram.png
+│   │   ├── module1-structural-scan-example.png
+│   │   ├── module1-related-topics-diagram.png
+│   │   └── module2-navigation-structure-example.png
+│   └── diagrams/
+│       └── course-structure-diagram.svg
+├── styles/                       # CSS files
+│   └── main.css                  # External stylesheet
+└── data/                         # Course data
+    └── metadata.json             # Course metadata
 ```
 
 ### 5.2 Proper File Naming
@@ -187,6 +191,57 @@ All files must follow a consistent naming convention:
    - Organized by function
    - Clear, descriptive names
    - Example: `typography.css`, `layout.css`
+
+
+### 5.3 For ALL images, include the full relative path to the image location in the assets directory, following this pattern:
+```html
+<img src="../assets/images/moduleN-descriptive-name.png" alt="Descriptive alt text explaining image content" width="600" height="300">
+```
+
+1. For diagrams, use this path structure:
+```html
+<img src="../assets/diagrams/diagram-name.svg" alt="Descriptive alt text explaining diagram purpose" width="600" height="300">
+```
+
+2. Every image must have:
+   - Correct relative path using ../assets/images/ or ../assets/diagrams/
+   - Descriptive alt text
+   - Appropriate width and height attributes
+   - Filename following module-specific naming conventions (moduleN-purpose-description.extension)
+
+
+### Image Naming Conventions
+
+**Purpose:** To establish a clear and consistent system for naming image and diagram files within the eLearning module. Consistent naming improves project organization, maintainability, and ease of asset management.
+
+**Guidelines:**
+
+* **Descriptive and Meaningful:** Image filenames MUST be descriptive and clearly indicate the content of the image. Avoid generic names like "image1.jpg" or "diagram.png". Instead, use names that are easily understood and searchable. For example, "module2-client-server-diagram.png" is better than "diagram1.png".
+
+* **Lowercase:** All filenames MUST be in lowercase. This ensures compatibility across different web servers and operating systems, especially Linux-based servers which are case-sensitive.
+
+* **Use Hyphens or Underscores:** Separate words in filenames using hyphens (-) or underscores (_). Do NOT use spaces. Hyphens are generally preferred for readability in URLs. Example: "module3-html-structure.png" or "module4_dreamweaver_interface.jpg".
+
+* **File Extension:** Always use the correct and consistent file extension (e.g., `.png`, `.jpg`, `.jpeg`, `.gif`, `.svg`). Choose the extension appropriate for the image type (e.g., `.png` for diagrams and illustrations, `.jpg` for photographs).
+
+* **Module Prefix (Recommended):** Consider prefixing filenames with the module number or a module identifier to easily associate images with their respective modules. Example: `module1-internet-programming-hero.jpg`, `module3-html-table-example.png`.
+
+* **Consistency is Key:** Maintain a consistent naming convention throughout the entire course. Once you choose a style (e.g., hyphen vs. underscore, module prefix), stick with it.
+
+**Examples of Good Image Names:**
+
+* `module2-client-server-diagram.png` (Diagram illustrating client-server interaction in Module 2)
+* `module3-html-structure-example.jpg` (Example image for HTML structure in Module 3)
+* `module4-dreamweaver-toolbar-icon.png` (Icon of a specific tool in Adobe Dreamweaver, Module 4)
+* `topic1-website-benefits-icon.svg` (Icon representing benefits of a website for Topic 1)
+
+**Examples of Bad Image Names (Avoid These):**
+
+* `image1.jpg` (Too generic, doesn't describe content)
+* `Diagram.PNG` (Uppercase, inconsistent extension)
+* `client server diagram.png` (Spaces in filename)
+* `IMG0001.JPG` (Uninformative, automatically generated name)
+* `module_image.png` (Not specific enough)
 
 ## 6. HTML Implementation Process
 
