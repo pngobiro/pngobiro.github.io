@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DATA STRUCTURES - Visual Programming</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <div class="container">
+    <article class="document-section">
+      <!-- Navigation (top) -->
+      <nav class="document-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span class="nav-icon">←</span> 
+            <span class="nav-text">Table of Contents</span>
+          </a>
+          <a href="chapter7.html" class="nav-button">
+            <span class="nav-icon">←</span> 
+            <span class="nav-text">Previous Chapter</span>
+          </a>
+          <div class="document-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 80%;"></div>
+            </div>
+            <span class="progress-text">Chapter 8 of 10</span>
+          </div>
+          <a href="chapter9.html" class="nav-button">
+            <span class="nav-text">Next Chapter</span> 
+            <span class="nav-icon">→</span>
+          </a>
+        </div>
+      </nav>
+      
+      <header class="section-header">
+        <h1>CHAPTER 8: DATA STRUCTURES</h1>
+      </header>
+      
+      <main class="section-content">
+        <section class="content-section">
+          <h2>Introduction to Data Structures in Visual Basic</h2>
+          <p>Data structures are organized formats for efficiently storing, accessing, and manipulating data in Visual Basic applications. They provide ways to represent complex data relationships and organize information in memory. Visual Basic supports several built-in data structures that help developers manage data effectively.</p>
+        </section>
+
+        <section class="content-section">
+          <h2>Arrays</h2>
+          <p>Arrays are the most fundamental data structures in Visual Basic, allowing you to store multiple values of the same data type in a single variable.</p>
+
+          <h3>Fixed-Size Arrays</h3>
+          <pre><code>Dim numbers(4) As Integer  ' Creates an array with 5 elements (0 to 4)
+numbers(0) = 10
+numbers(1) = 20
+numbers(2) = 30
+numbers(3) = 40
+numbers(4) = 50</code></pre>
+
+          <h3>Dynamic Arrays</h3>
+          <pre><code>Dim dynamicArray() As String  ' Declare dynamic array
+ReDim dynamicArray(10)     ' Resize array to 11 elements
+ReDim Preserve dynamicArray(20)  ' Resize while preserving data</code></pre>
+
+          <h3>Multi-dimensional Arrays</h3>
+          <pre><code>Dim matrix(3, 3) As Integer  ' 4x4 two-dimensional array
+' Accessing elements
+matrix(0, 0) = 1  ' First element
+matrix(3, 3) = 16 ' Last element</code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>Collections</h2>
+          <p>Collections provide more flexible ways to store and manage groups of objects compared to arrays. Visual Basic offers several collection types:</p>
+
+          <h3>ArrayList</h3>
+          <pre><code>Dim list As New ArrayList()
+list.Add("First Item")
+list.Add(123)
+list.Add(True)
+' ArrayList can store different data types</code></pre>
+
+          <h3>Dictionary</h3>
+          <p>Dictionaries store key-value pairs, allowing quick lookup of values using unique keys.</p>
+          <pre><code>Dim dict As New Dictionary
+dict.Add "Name", "John"
+dict.Add "Age", 30
+dict.Add "City", "New York"
+
+' Accessing values
+MsgBox dict("Name")  ' Displays "John"</code></pre>
+
+          <h3>Collection</h3>
+          <p>The Collection object is a simple way to store ordered items:</p>
+          <pre><code>Dim col As New Collection
+col.Add "First"
+col.Add "Second"
+col.Add "Third"
+
+' Accessing items by index
+Debug.Print col(2)  ' Prints "Second"</code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>User-Defined Types (UDT)</h2>
+          <p>User-Defined Types allow you to create custom data structures that group related data together:</p>
+
+          <pre><code>Type Person
+    FirstName As String
+    LastName As String
+    Age As Integer
+    Email As String
+End Type
+
+' Using the UDT
+Dim employee As Person
+employee.FirstName = "John"
+employee.LastName = "Doe"
+employee.Age = 30
+employee.Email = "john.doe@example.com"</code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>Queues and Stacks</h2>
+          
+          <h3>Queue</h3>
+          <p>A Queue implements First-In-First-Out (FIFO) behavior:</p>
+          <pre><code>Dim queue As New Queue
+queue.Enqueue "First"
+queue.Enqueue "Second"
+queue.Enqueue "Third"
+
+' Remove and return the first item
+Dim item As String = queue.Dequeue()  ' Returns "First"</code></pre>
+
+          <h3>Stack</h3>
+          <p>A Stack implements Last-In-First-Out (LIFO) behavior:</p>
+          <pre><code>Dim stack As New Stack
+stack.Push "First"
+stack.Push "Second"
+stack.Push "Third"
+
+' Remove and return the last item
+Dim item As String = stack.Pop()  ' Returns "Third"</code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>Linked Lists</h2>
+          <p>Linked Lists are dynamic data structures where each element points to the next element:</p>
+
+          <pre><code>Public Class Node
+    Public Value As String
+    Public NextNode As Node
+End Class
+
+' Creating a linked list
+Dim firstNode As New Node
+firstNode.Value = "First"
+
+Dim secondNode As New Node
+secondNode.Value = "Second"
+firstNode.NextNode = secondNode
+
+Dim thirdNode As New Node
+thirdNode.Value = "Third"
+secondNode.NextNode = thirdNode</code></pre>
+        </section>
+
+        <section class="content-section">
+          <h2>Working with Data Structures</h2>
+          
+          <h3>Iterating Through Data Structures</h3>
+          <pre><code>' Array iteration
+Dim numbers(4) As Integer
+For i = 0 To UBound(numbers)
+    Debug.Print numbers(i)
+Next i
+
+' Collection iteration
+For Each item In collection
+    Debug.Print item
+Next item
+
+' Dictionary iteration
+For Each key In dict.Keys
+    Debug.Print key & ": " & dict(key)
+Next key</code></pre>
+
+          <h3>Searching and Sorting</h3>
+          <pre><code>' Array sorting
+Array.Sort(numbers)
+
+' Array searching
+Dim index As Integer = Array.IndexOf(numbers, searchValue)
+
+' Collection searching
+If dict.ContainsKey("Name") Then
+    Debug.Print "Found: " & dict("Name")
+End If</code></pre>
+        </section>
+
+        <!-- Key Points Section -->
+        <section class="key-points-section">
+          <div class="key-points-container">
+            <div class="key-points-header">
+              <span class="key-points-icon">📝</span>
+              <h3 class="key-points-title">Key Points</h3>
+            </div>
+            <div class="key-points-content">
+              <ul class="key-points-list">
+                <li class="key-point-item">Arrays provide fixed and dynamic storage for elements of the same type</li>
+                <li class="key-point-item">Collections offer flexible storage for different types of data</li>
+                <li class="key-point-item">User-Defined Types allow creation of custom data structures</li>
+                <li class="key-point-item">Queues and Stacks provide specialized data access patterns</li>
+                <li class="key-point-item">Proper selection of data structure impacts program performance</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+      </main>
+      
+      <!-- Navigation (bottom) -->
+      <nav class="document-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span class="nav-icon">←</span> 
+            <span class="nav-text">Table of Contents</span>
+          </a>
+          <a href="chapter7.html" class="nav-button">
+            <span class="nav-icon">←</span> 
+            <span class="nav-text">Previous Chapter</span>
+          </a>
+          <div class="document-progress">
+            <div class="progress-bar">
+              <div class="progress-fill" style="width: 80%;"></div>
+            </div>
+            <span class="progress-text">Chapter 8 of 10</span>
+          </div>
+          <a href="chapter9.html" class="nav-button">
+            <span class="nav-text">Next Chapter</span> 
+            <span class="nav-icon">→</span>
+          </a>
+        </div>
+      </nav>
+    </article>
+  </div>
+</body>
+</html>
