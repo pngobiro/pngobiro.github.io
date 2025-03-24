@@ -1,200 +1,316 @@
-# Past Paper PDF to HTML Converter Documentation
+# Past Paper PDF to HTML Converter Guide
 
-## Overview
-This system converts KNEC past papers from PDF to HTML format with a consistent structure, styling, and navigation. It includes OCR capabilities for scanned documents and a component-based architecture for maintainability.
+This comprehensive guide details the process of converting KNEC Computer Applications II past papers from PDF to structured HTML format with solutions.
+
+## Table of Contents
+1. [Project Structure](#project-structure)
+2. [Required Tools](#required-tools)
+3. [Templates](#templates)
+4. [Styling](#styling)
+5. [Conversion Process](#conversion-process)
+6. [Navigation System](#navigation-system)
+7. [Index Page](#index-page)
 
 ## Project Structure
 ```
-.
-├── pdf-converter-server/   # PDF processing server
-│   ├── src/
-│   │   ├── index.ts       # Main converter script
-│   │   └── types/        
-│   │       └── pdf-parse.d.ts
-│   ├── package.json
-│   └── tsconfig.json
-├── styles.css             # Shared styles
-├── components/           
-│   └── sidebar.html      # Reusable sidebar component
-├── js/
-│   ├── sidebar-navigation.js  # Navigation functionality
-│   └── sidebar-include.js     # Sidebar injection script
-└── past-papers/          # Converted HTML papers
+pastpapers/
+├── knec/
+│   ├── js/
+│   │   ├── sidebar-navigation.js
+│   │   └── sidebar-include.js
+│   ├── components/
+│   │   └── sidebar.html
+│   ├── styles.css
+│   ├── index.html
+│   ├── template.html
+│   └── paper-YYYY-[month].html
 ```
 
-## Setup Instructions
+## Required Tools
 
-### 1. Install System Dependencies
-```bash
-# Install Tesseract OCR and Poppler utils
-sudo apt-get update
-sudo apt-get install -y tesseract-ocr poppler-utils
-```
+1. PDF OCR Tool:
+```typescript
+// OCR conversion script
+import * as fs from 'fs';
+import * as path from 'path';
+import * as pdf from 'pdf-parse';
+import * as Tesseract from 'tesseract.js';
 
-### 2. Set up PDF Converter Server
-```bash
-# Create and enter project directory
-mkdir pdf-converter-server && cd pdf-converter-server
-
-# Initialize Node.js project
-npm init -y
-
-# Install dependencies
-npm install pdf-lib tesseract.js sharp typescript @types/node
-```
-
-### 3. Configure TypeScript
-Create `tsconfig.json`:
-```json
-{
-  "compilerOptions": {
-    "target": "ES2020",
-    "module": "ES2020",
-    "moduleResolution": "node",
-    "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "strict": true,
-    "outDir": "build",
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
-    "typeRoots": ["./node_modules/@types", "./src/types"]
-  },
-  "include": ["src/**/*"],
-  "exclude": ["node_modules", "build"]
+async function convertPDFToText(inputPath: string, outputPath: string) {
+    // Implementation details...
 }
 ```
 
-## Converting PDFs
+2. HTML Template System
+3. CSS Preprocessor
+4. JavaScript for Navigation
 
-### 1. Extract Text from PDF
-```bash
-# Convert PDF to text using OCR
-cd pdf-converter-server
-npx tsc && node build/index.js "path/to/pdf" "output.txt"
-```
+## Templates
 
-### 2. Create HTML Template
-Use the following structure for each past paper:
-
+### Base Paper Template
 ```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[Month Year] - Computer Application II Past Paper</title>
+    <title>[Month] [Year] - Computer Application II Past Paper</title>
     <link rel="stylesheet" href="styles.css">
     <script src="js/sidebar-navigation.js" defer></script>
     <script src="js/sidebar-include.js" defer></script>
 </head>
 <body>
-    <!-- Header Section -->
-    <header>...</header>
+    <header>
+        <div class="container">
+            <h1>Computer Application II</h1>
+            <h2>[Month] [Year] Past Paper</h2>
+            <div class="exam-details">
+                <p>Paper Code: 2920/202A</p>
+                <p>Duration: 2 hours</p>
+                <p>Module II</p>
+            </div>
+        </div>
+    </header>
     
-    <!-- Main Content -->
     <div class="container main-content">
         <!-- Sidebar will be injected here -->
         <main>
-            <!-- Questions and Answers -->
+            <!-- Paper content -->
         </main>
     </div>
     
-    <!-- Footer -->
-    <footer>...</footer>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Computer Application II Past Papers Collection</p>
+        </div>
+    </footer>
 </body>
 </html>
 ```
 
-### 3. Format Questions and Answers
-Structure each question as follows:
+### Question Template
 ```html
 <div class="question">
-    <h3>Question X (Y marks)</h3>
+    <h3>Question [N] ([X] marks)</h3>
     <div class="question-content">
         <!-- Question text -->
     </div>
     <div class="answer-section">
         <h4>Answer</h4>
         <div class="answer-content">
-            <!-- Answer content -->
+            <!-- Structured answer -->
         </div>
     </div>
 </div>
 ```
 
-## Components
+## Styling
 
-### 1. Sidebar (sidebar.html)
-The sidebar component is a reusable navigation element that's dynamically injected into each page. Update `components/sidebar.html` to add new papers.
+### Core CSS
+```css
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --text-color: #333;
+    --border-color: #ddd;
+    --background-color: #f5f6fa;
+    --highlight-color: #3498db;
+}
 
-### 2. Styles (styles.css)
-The stylesheet provides consistent styling across all pages, including:
-- Responsive layout
-- Question formatting
-- Code block styling
-- Print-friendly styles
-- Mobile adaptations
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
 
-### 3. Navigation Scripts
-Two JavaScript files handle navigation:
+/* Header Styles */
+header {
+    background: var(--primary-color);
+    color: white;
+    padding: 2rem 0;
+}
 
-1. `sidebar-navigation.js`: Handles keyboard shortcuts and scroll-to-top functionality
-2. `sidebar-include.js`: Injects and updates the sidebar component
+/* Question Styles */
+.question {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+}
 
-## Usage Instructions
+/* Answer Section */
+.answer-section {
+    border-top: 2px solid var(--border-color);
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+}
 
-1. Convert PDF:
+/* Tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+}
+
+/* Navigation */
+.paper-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--highlight-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+}
+```
+
+## Conversion Process
+
+1. **PDF Text Extraction**
 ```bash
-cd pdf-converter-server
+cd /path/to/converter
 npx tsc && node build/index.js "input.pdf" "output.txt"
 ```
 
-2. Create new HTML file:
-```bash
-cp template.html paper-yyyy-month.html
+2. **Content Structuring**
+- Parse OCR output
+- Identify questions and sections
+- Format answers with proper HTML structure
+
+3. **HTML Generation**
+```javascript
+function generateHTML(paperData) {
+    const template = fs.readFileSync('template.html', 'utf8');
+    return template.replace(
+        '[CONTENT]',
+        formatQuestions(paperData.questions)
+    );
+}
 ```
 
-3. Format content:
-- Copy questions from OCR output
-- Add detailed answers
-- Format using standard HTML structure
-- Include code samples and tables as needed
+4. **Answer Formatting Guidelines**
+- Use tables for comparing concepts
+- Ordered lists for steps/procedures
+- Unordered lists for properties/characteristics
+- Code blocks for calculations
+- Bold text for key terms
 
-4. Update navigation:
-- Add new paper to sidebar.html
-- Update navigation links in adjacent papers
+## Navigation System
 
-## Maintenance
+### JavaScript Navigation
+```javascript
+// sidebar-navigation.js
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebar = document.querySelector('.sidebar');
+    // Implementation...
+});
+```
 
-### Adding New Papers
-1. Convert PDF using converter
-2. Create HTML file from template
-3. Format content and answers
-4. Update sidebar navigation
-5. Update adjacent paper links
+### Paper Navigation
+```html
+<div class="paper-navigation">
+    <a href="previous-paper.html" class="btn">Previous Paper</a>
+    <a href="index.html" class="btn">Home</a>
+    <a href="next-paper.html" class="btn">Next Paper</a>
+</div>
+```
 
-### Updating Components
-1. Modify component files:
-   - `components/sidebar.html`
-   - `styles.css`
-   - JavaScript files
-2. Test changes across all pages
+## Index Page Structure
 
-### Troubleshooting
-1. OCR Quality Issues:
-   - Increase image resolution
-   - Adjust preprocessing parameters
-   - Manual correction if needed
+### Paper Card Template
+```html
+<div class="paper-card">
+    <h3>[Month] [Year]</h3>
+    <div class="meta">
+        <p>Questions: 6 | Duration: 2 hours</p>
+        <p>Topics: [Topics List]</p>
+    </div>
+    <div class="actions">
+        <a href="paper-[year]-[month].html" class="btn">View Paper</a>
+    </div>
+</div>
+```
 
-2. Navigation Problems:
-   - Check sidebar links
-   - Verify JavaScript includes
-   - Test keyboard shortcuts
+### Year Section Template
+```html
+<section class="year-section">
+    <h2>[Year]</h2>
+    <div class="paper-grid">
+        <!-- Paper cards -->
+    </div>
+</section>
+```
+
+## Command Reference
+
+### PDF Conversion
+```bash
+# Convert PDF to text
+node pdf-converter.js input.pdf output.txt
+
+# Generate HTML
+node html-generator.js output.txt template.html paper-output.html
+```
+
+### File Management
+```bash
+# Create necessary directories
+mkdir -p js components
+
+# Copy static assets
+cp templates/styles.css .
+cp templates/sidebar.html components/
+```
 
 ## Best Practices
-1. Maintain consistent formatting
-2. Add detailed answers
-3. Include code samples where relevant
-4. Ensure mobile responsiveness
-5. Keep navigation updated
-6. Regular testing across browsers
+
+1. **Content Organization**
+   - Group questions by topic
+   - Use consistent formatting for similar content
+   - Include detailed explanations in answers
+
+2. **Code Quality**
+   - Follow HTML5 semantic structure
+   - Use CSS custom properties for theming
+   - Implement responsive design
+
+3. **Documentation**
+   - Comment complex code sections
+   - Maintain README with setup instructions
+   - Version control all changes
+
+4. **Accessibility**
+   - Include proper ARIA labels
+   - Ensure keyboard navigation
+   - Maintain color contrast ratios
+
+## Troubleshooting
+
+1. **OCR Issues**
+   - Clean PDF scans before processing
+   - Verify text recognition accuracy
+   - Manual correction of complex formulas
+
+2. **Styling Problems**
+   - Check CSS specificity
+   - Verify class names
+   - Test across browsers
+
+3. **Navigation Errors**
+   - Validate file paths
+   - Check JavaScript console
+   - Test all navigation links
+
+This guide serves as a comprehensive reference for converting and formatting KNEC Computer Applications II past papers into structured HTML format with detailed solutions.
