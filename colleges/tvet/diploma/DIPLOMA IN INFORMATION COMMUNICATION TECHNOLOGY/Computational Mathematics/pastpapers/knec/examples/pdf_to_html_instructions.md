@@ -287,7 +287,24 @@ This is a crucial step. We will add the intro, all question blocks (including an
     *   `REPLACE`: Three `<a>` tags with correct `href` values and link text ("Previous Paper", "Home", "Next Paper"). Ensure `index.html` is the target for the "Home" link.
     *   Use the correct line numbers obtained from `read_file`.
 
-### Step 7: Formatting Special Content
+### Step 7: Verify All Links (Crucial Final Check)
+
+After creating or updating multiple paper files, it's essential to ensure all navigation and sidebar links are consistent and correct across *all* existing HTML files, including `index.html`.
+
+1.  **List Existing HTML Files:** Use `list_files` to get the definitive list of all `.html` files currently in the directory (excluding those in `examples/`).
+2.  **Generate Strict Sidebar HTML:** Create the correct sidebar HTML code, including *only* links to the HTML files identified in the previous step. Omit or comment out links for any papers where the HTML file does not exist.
+3.  **Update `index.html`:**
+    *   Use `apply_diff` to replace the entire sidebar section in `index.html` with the strict version generated above.
+    *   Verify that the main content area of `index.html` only lists and links to the existing HTML files. Remove any entries for non-existent files.
+4.  **Update Each Past Paper HTML File:**
+    *   Iterate through the list of existing HTML past paper files (e.g., `2010n.html`, `2011j.html`, ...).
+    *   For each file:
+        *   Use `apply_diff` to replace its entire sidebar section with the strict version generated in step 2.
+        *   Determine the correct "Previous Paper" and "Next Paper" links by finding the immediately preceding and succeeding *existing* HTML files in chronological order based on the list from step 1.
+        *   If no previous or next existing file exists, use `href="#"` and add the `disabled` class to the corresponding link.
+        *   Use `apply_diff` to update both the top (`<div class="paper-navigation top">`) and bottom (`<div class="paper-navigation bottom">`) navigation sections with the correct "Previous", "Home", and "Next" links, including descriptive text (e.g., "Previous Paper (Nov 2015)"). Ensure the `id="nav-top"` and `id="nav-bottom"` attributes are present.
+
+### Step 8: Formatting Special Content
 
 Apply these formats *within* the `question-content` or `answer-content` divs during Step 4 or later using `apply_diff` if needed.
 
