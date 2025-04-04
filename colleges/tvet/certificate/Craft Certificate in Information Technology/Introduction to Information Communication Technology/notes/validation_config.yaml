@@ -1,0 +1,66 @@
+# Configuration for the Web Page Validation Tool
+
+# Browser options
+headless: true # Run browser in headless mode (true/false)
+screenshot_on_fail: true # Take screenshot on validation failure (true/false)
+screenshot_dir: "validation_screenshots" # Directory to save screenshots
+
+# List of pages to validate
+pages:
+  - url: "https://example.com" # URL of the page to test
+    checks:
+      - type: element_presence # Check if element exists
+        selector: "h1" # CSS selector (or use 'xpath' key for XPath)
+        description: "Verify H1 heading exists"
+      - type: element_visibility # Check if element is visible
+        selector: "body > div > p:nth-child(3) > a"
+        description: "Verify 'More information...' link is visible"
+      - type: element_count # Check count of elements
+        selector: "p"
+        expected_count: 2
+        description: "Verify there are exactly 2 paragraphs"
+      - type: attribute_value # Check attribute value
+        selector: "body > div > p:nth-child(3) > a"
+        attribute: "href"
+        expected_value: "https://www.iana.org/domains/example"
+        description: "Verify 'More information...' link URL"
+      - type: text_content # Check text content (exact match)
+        selector: "h1"
+        expected_text: "Example Domain"
+        description: "Verify H1 text content"
+      - type: link_status # Check status of all links on the page
+        description: "Verify all links return non-4xx/5xx status"
+        # Optional: exclude specific patterns
+        # exclude_patterns:
+        #   - "mailto:"
+        #   - "javascript:"
+        #   - "#"
+      - type: js_console_errors # Check for JavaScript errors in the console
+        description: "Verify no severe JS console errors"
+
+  - url: "introduction-to-ict/index.html" # Local file path (relative)
+    checks:
+      - type: element_presence
+        selector: "h1.section-title"
+        description: "Verify main title exists"
+      - type: element_count
+        selector: "ol.toc-list > li"
+        expected_count: 11
+        description: "Verify 11 items in Table of Contents"
+      - type: attribute_value
+        selector: "ol.toc-list > li:nth-child(1) > span.item-text > a"
+        attribute: "href"
+        expected_value: "file:///home/ngobiro/projects/pngobiro.github.io/colleges/tvet/certificate/Craft%20Certificate%20in%20Information%20Technology/Introduction%20to%20Information%20Communication%20Technology/notes/introduction-to-ict/topics/topic1-intro-ict.html"
+        description: "Verify link for Topic 1"
+      - type: link_status
+        description: "Verify all internal topic links work"
+        # Only check relative links starting with 'topics/'
+        include_patterns:
+          - "^topics/"
+      - type: js_console_errors
+        description: "Verify no severe JS console errors"
+
+# Add more pages as needed
+# - url: "https://another-site.com"
+#   checks:
+#     - ...
