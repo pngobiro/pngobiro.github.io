@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Matrices And Transformations (Part 3b) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-3a.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 9 (Part 3b)</span>
+                    </div>
+                    <a href="chapter-9-part-3c.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 9: Matrices And Transformations (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-9-points-remember -->
+                <section id="chapter-9-points-remember" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📌</span>
+                        <span class="heading-text">Points to Remember (Matrices & Transformations)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>Definition of a matrix.</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">A matrix is a rectangle array of m rows and n columns.</li>
+                        </ul>
+                        <p><strong>Order of matrix.</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">A matrix is said to be of order m*n if it has m rows and n columns.</li>
+                        </ul>
+                        <p><strong>Algebra of matrix.</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><strong>Addition/subtraction.</strong> This can be carried out provided the matrices are of the same order. The resultant matrix will have the same order as well.</li>
+                            <li class="list-item"><strong>Scalar product.</strong> A matrix can be multiplied by a constant (scalar). Each element in the matrix will be multiplied by that constant.</li>
+                            <li class="list-item"><strong>Product of matrices.</strong> This can be done provided the number of columns of the first matrix corresponds to number of rows of the second matrix.</li>
+                        </ul>
+                        <p>If C = A * B</p>
+                        <p>Let <span class="math-inline">$a_{i,j}$</span> denote the element in matrix A, <span class="math-inline">$b_{m,n}$</span> denote the element in matrix B, and <span class="math-inline">$c_{p,q}$</span> denote the element in matrix C, where (i, j), (m, n) and (p, q) denote the row and column number respectively.</p>
+                        <p>Then <span class="math-inline">$C_{p,q} = \sum_{r=1}^{N} a_{p,r} \times b_{r,q}$</span></p>
+                        <p>where N = number of columns in matrix A = number of rows in matrix B</p>
+                        <p>For example, <span class="math-inline">$C_{3,2} = a_{3,1} b_{1,2} + a_{3,2} b_{2,2} + a_{3,3} b_{3,2} + \ldots + a_{3,N} b_{N, 2}$</span></p>
+
+                        <p><strong>Transformations:</strong></p>
+                        <p>Table giving matrices corresponding to transformations:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Transformations</th><th>Matrices</th><th>Matrix Equation</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Translation</td><td><span class="math-inline">$\begin{pmatrix} h \\ k \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} x \\ y \end{pmatrix} + \begin{pmatrix} h \\ k \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Enlargement with centre at origin and scale factor k</td><td><span class="math-inline">$\begin{pmatrix} k & 0 \\ 0 & k \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} k & 0 \\ 0 & k \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Reflection in x-axis</td><td><span class="math-inline">$\begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Reflection in y-axis</td><td><span class="math-inline">$\begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} -1 & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Reflection in line y=x</td><td><span class="math-inline">$\begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Reflection in line y=-x</td><td><span class="math-inline">$\begin{pmatrix} 0 & -1 \\ -1 & 0 \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} 0 & -1 \\ -1 & 0 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Rotation of 90° anti-clockwise about origin</td><td><span class="math-inline">$\begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} 0 & -1 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Rotation of 90° clockwise about origin</td><td><span class="math-inline">$\begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} 0 & 1 \\ -1 & 0 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Rotation of 180° about origin</td><td><span class="math-inline">$\begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} -1 & 0 \\ 0 & -1 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Shear parallel to x-axis, shear factor k</td><td><span class="math-inline">$\begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} 1 & k \\ 0 & 1 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Shear parallel to y-axis, shear factor h</td><td><span class="math-inline">$\begin{pmatrix} 1 & 0 \\ h & 1 \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ h & 1 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Stretch parallel to x-axis, stretch factor k</td><td><span class="math-inline">$\begin{pmatrix} k & 0 \\ 0 & 1 \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} k & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Stretch parallel to y-axis, stretch factor h</td><td><span class="math-inline">$\begin{pmatrix} 1 & 0 \\ 0 & h \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 0 & h \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                    <tr><td>Stretch parallel to x-axis and y-axis with factors k and h respectively</td><td><span class="math-inline">$\begin{pmatrix} k & 0 \\ 0 & h \end{pmatrix}$</span></td><td><span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} k & 0 \\ 0 & h \end{pmatrix} \begin{pmatrix} x \\ y \end{pmatrix}$</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: chapter-9-points-remember -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-9-part-3a.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 9 (Part 3b)</span>
+                    </div>
+                    <a href="chapter-9-part-3c.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

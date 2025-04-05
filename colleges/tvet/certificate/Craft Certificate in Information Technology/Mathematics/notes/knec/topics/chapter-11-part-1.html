@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11: Errors And Accuracy (Part 1) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-10-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 11 (Part 1)</span>
+                    </div>
+                    <a href="chapter-11-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 11 : Errors And Accuracy</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-11-objectives -->
+                <section id="chapter-11-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you should be able to:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">identify different types of errors;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">calculate absolute and relative error;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">estimate maximum absolute error;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">generate check digit.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-11-objectives -->
+
+                <!-- START: chapter-11-introduction -->
+                <section id="section-11-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💡</span>
+                        <span class="heading-text">11.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In building a system, measures must be taken against possible human mistakes. Procedures must be set up to help people to detect any mistakes. The role of data preparation or data entry are prone to errors, therefore they must not be overlooked as the ill effect may affect the entire system seriously.</p> <!-- MMD typos: takel ázainst, pron -->
+                    </div>
+                </section>
+                <!-- END: chapter-11-introduction -->
+
+                <!-- START: chapter-11-mistakes -->
+                <section id="section-11-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❌</span>
+                        <span class="heading-text">11.2 Mistakes</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the man/machine interface, i.e. when a person wants to enter data into a computer system, the common mistakes are:</p> <!-- MMD typo: infa-, te -->
+                        <ul class="enhanced-list">
+                            <li class="list-item">Lose track of the source documents.</li> <!-- MMD typo: tiee -->
+                            <li class="list-item">Enter data wrongly.</li>
+                            <li class="list-item">Invalid datatype. e.g. enter alphabets instead of numeric data.</li>
+                            <li class="list-item">Out of the valid data range. e.g. enter 102 while the valid range is 1 to 100.</li>
+                            <li class="list-item">Transposition of characters. e.g. enter 23322 while the actual data is 23223.</li>
+                            <li class="list-item">Interference in data transmission from a remote site. e.g. 00100101 is transmitted along a cable and on the way due to voltage surge, the data becomes 10100101.</li>
+                            <li class="list-item">and many more.</li>
+                        </ul>
+                        <p>Mistakes are due to human carelessness.</p>
+                        <p><strong>Parity bit check.</strong></p>
+                        <p>Example:</p>
+                        <p>If 'B' is represented as 1000010, we can use even parity conversion to produce a parity bit.</p>
+                        <pre class="code-block"><code>IF odd number of 1's THEN
+  parity bit ← 1
+ELSE
+  parity bit ← 0
+ENDIF</code></pre>
+                        <p>The parity bit may be appended to the left of the 1000010. 'B' is represented as 01000010. Suppose the data is received as 01100010, there are three 1's which should give 1 in the parity bit, then the mistake is detected.</p>
+
+                        <p><strong>Check digit method.</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">A Check digit is derived from the true data before transmission, which is then appended to the right of the true data for validation.</li>
+                        </ul>
+                        <p>Step 1: A true data 445, each of the digits is assigned a weight,</p>
+                        <img src="../assets/images/ch11-check-digit-weights.jpg" alt="Diagram showing weights 4, 3, 2 assigned to digits 4, 4, 5">
+                        <p>Step 2: The sum of (digit * weight) = (4*4) + (4*3) + (5*2) = 16 + 12 + 10 = 38. The sum of 38 is to be divided by a modulus.</p> <!-- MMD typo: Tin ram -->
+                        <p>(In this example, 11 is used as it can detect most of the mistakes).</p>
+                        <p>38 / 11 gives quotient 3 and the remainder 5.</p>
+                        <p>Step 3: Remainder 5 is subtracted from the modulus (11) to obtain the check digit '6'.</p>
+                        <p>11 - 5 = 6</p>
+                        <p>Step 4: The check digit can be appended to the right of 445, to give 4456, which could be validated.</p>
+                        <p>In order to verify the correctness of 4456, we could just multiply 4456 by the set of weight, 6 is assigned the weight of 1,</p>
+                        <pre class="code-block"><code>Weights:  4 3 2 1
+Data:     4 4 5 6
+Sum = (4*4) + (4*3) + (5*2) + (6*1) = 16 + 12 + 10 + 6 = 44</code></pre>
+                        <p>44 is divisible by 11, thus conclude that 4456 is received correctly.</p>
+                        <p>It has been tested that MOD 11 is most efficient in detecting mistakes, reason being 11 is a prime number. Though bigger number is better, the small increase in efficiency is overwhelmed by large increase in processing.</p>
+
+                        <p><strong>Check point</strong></p>
+                        <ol>
+                            <li>List five types of mistakes which may occur during the data preparation and data entry stages of the processing cycle.</li>
+                            <li>Give one other example each of the appropriate use of the hash and batch totals. Describe the principle of a parity check and how even and odd parity differ.</li>
+                            <li>Using mod 7 and weighting 2,3,4,5..., append appropriate check digits to:
+                                <ol type="a">
+                                    <li>439</li>
+                                    <li>1058535</li>
+                                </ol>
+                            </li>
+                            <li>Using the same mod 7, determine whether the following are valid:
+                                <ol type="a">
+                                    <li>1794</li>
+                                    <li>10545722</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-11-mistakes -->
+
+                <!-- START: chapter-11-errors -->
+                <section id="section-11-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚠️</span>
+                        <span class="heading-text">11.3 Errors</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">11.3.1 Inherent Error</h3>
+                        <p>It is error that already exist by itself in the measurement scale. E.g. Take a ruler of measurement, though there are many small divisions, there is still the smallest division that is not sub-divided further. Thus there is uncertainty in reading the length as mentioned above.</p> <!-- MMD typo: itse!f -->
+                        <p>If the length fall between 5.1 cm and 5.2 cm, the smallest division is 0.1 cm, then the reported reading may be 5.15 cm and the inherent error is 0.05 cm.</p>
+
+                        <h3 class="subsection-heading">11.3.2 Induced Error</h3>
+                        <p>It is the error which is brought in from 'outside' due to external factors.</p>
+                        <p>Example: In a fixed point 8-bit register in computer, the implied point is to the right of 5 bits.</p>
+                        <p>If a data 1010.01110 is to be stored, rounding or truncation is necessary.</p>
+                        <p>Rounding the above data is stored as:</p>
+                        <pre class="code-block"><code>0 1 0 1 0 | 1 0 0</code></pre> <!-- Assuming 5 bits integer, 3 bits fraction -->
+                        <p>(Original: 10.4375, Rounded: 10.5)</p>
+                        <p>Thus the error is brought in due to the limitation of computer.</p>
+
+                        <p><strong>Check point</strong></p>
+                        <ol>
+                            <li>What is the difference between error and mistakes?</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-11-errors -->
+
+                <!-- START: chapter-11-measurement-error -->
+                <section id="section-11-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📏</span>
+                        <span class="heading-text">11.4 Measurement of Error</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>Absolute error</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">If a true value 2.5 is reported to be 3 (round to full number) an error of 0.5 is induced. This error is called the absolute error.</li>
+                            <li class="list-item">Absolute error <span class="math-inline">$E_a = | \text{reported value} - \text{true value} |$</span></li>
+                            <li class="list-item">| | means the absolute value is taken, the sign is not considered at all.</li>
+                        </ul>
+
+                        <p><strong>Relative error</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Another more meaningful measurement of error is relative error, because it expresses the absolute error as a proportion of the true value (if the true value is not available, the reported value is used.)</li>
+                            <li class="list-item"><span class="math-inline">$E_r = \frac{| \text{absolute error} |}{| \text{True Value} |}$</span></li>
+                            <li class="list-item"><span class="math-inline">$E_r (\%) = \frac{| \text{absolute error} |}{| \text{True Value} |} \times 100\%$</span></li> <!-- MMD typo: errer -->
+                        </ul>
+                        <p>Maximum relative error between any two values reported as R:</p> <!-- MMD typo: TWE -->
+                        <div class="equation">$$ E_{r_{max}} (\%) = 100 \times \frac{\text{error bound}}{R} $$</div>
+                        <p>Example: 3.6 is rounded to 1D. The true value lies between 3.55 and 3.65. Error bound = (3.65 - 3.55) / 2 = 0.05. Maximum relative error = <span class="math-inline">$100 \times (0.05 / 3.6) \approx 1.39\%$</span></p> <!-- Corrected MMD example -->
+
+                        <p><strong>Check point</strong></p>
+                        <ol>
+                            <li>What is the error bound of the value reported as:
+                                <ol type="a">
+                                    <li>3.5 cm</li>
+                                    <li>45.3 seconds</li> <!-- MMD typo: serconis -->
+                                </ol>
+                            </li>
+                            <li>Calculate the maximum relative error on:
+                                <ol type="a">
+                                    <li>13.5</li>
+                                    <li>130.5</li>
+                                    <li>1300.5</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-11-measurement-error -->
+
+                <!-- START: chapter-11-error-propagation -->
+                <section id="section-11-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">11.5 Error Propagation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Inherent errors in data values, may produce further errors as they are operated on arithmetically, these errors may be termed as Induced errors. This spread of errors is called the Error Propagation.</p>
+
+                        <p><strong>Addition</strong></p>
+                        <p>Example: 5 + 7, each of the data values are rounded to whole number.</p>
+                        <p>Max value = 5.5 + 7.5 = 13</p>
+                        <p>Min value = 4.5 + 6.5 = 11</p>
+                        <p>Reported sum = 5 + 7 = 12. Error bound = (13 - 11) / 2 = 1.</p>
+                        <p>Absolute error of sum <span class="math-inline">$E_a(A+B) = E_a(A) + E_a(B) = 0.5 + 0.5 = 1$</span></p>
+                        <p>Relative error of sum <span class="math-inline">$E_r = 100 \times (1 / 12) \approx 8.33\%$</span></p>
+                        <p>Relative error of 5 = <span class="math-inline">$100 \times (0.5 / 5) = 10\%$</span></p>
+                        <p>Relative error of 7 = <span class="math-inline">$100 \times (0.5 / 7) \approx 7.1\%$</span></p>
+                        <p>You may try 13 + 6, a conclusion may be derived.</p>
+                        <p>Conclusion: Relative error of the sum is between the relative error of the individual reported values.</p>
+
+                        <p><strong>Subtraction</strong></p>
+                        <p>Example: 8 - 4, each rounded to whole number.</p>
+                        <p>Max value = 8.5 - 3.5 = 5</p>
+                        <p>Min value = 7.5 - 4.5 = 3</p>
+                        <p>Reported difference = 8 - 4 = 4. Error bound = (5 - 3) / 2 = 1.</p>
+                        <p>Absolute error of difference <span class="math-inline">$E_a(A-B) = E_a(A) + E_a(B) = 0.5 + 0.5 = 1$</span></p> <!-- MMD typo: M=13 -->
+                        <p>Relative error of difference <span class="math-inline">$E_r = 100 \times (1 / 4) = 25\%$</span></p>
+                        <p>Relative error of 8 = <span class="math-inline">$100 \times (0.5 / 8) = 6.25\%$</span></p>
+                        <p>Relative error of 4 = <span class="math-inline">$100 \times (0.5 / 4) = 12.5\%$</span></p>
+                        <p>You may try 3 - 2</p>
+                        <p>Conclusion: Relative error of the subtraction can be significantly larger than the relative errors of the individual reported values, especially when subtracting numbers that are close in value.</p> <!-- MMD typo: Conclusi n -->
+
+                        <p><strong>Multiplication</strong></p>
+                        <p>Example: 3 * 4 * 5, each rounded to whole number. Reported product = 60.</p>
+                        <p>Max value = 3.5 * 4.5 * 5.5 = 86.625</p>
+                        <p>Min value = 2.5 * 3.5 * 4.5 = 39.375</p>
+                        <p>Error bound = (86.625 - 39.375) / 2 = 47.25 / 2 = 23.625</p>
+                        <p>This error bound is very big indeed, and it is not symmetrical about 60 (the result of multiplying 3, 4 and 5). If we quantify the relative error, it would be as follow:</p>
+                        <p>Take half of the error bound,</p>
+                        <p>Relative error of product <span class="math-inline">$E_r \approx 100 \times (23.625 / 60) \approx 39.375\%$</span></p>
+                        <p>Relative error of 3 = <span class="math-inline">$100 \times (0.5 / 3) \approx 16.667\%$</span></p>
+                        <p>Relative error of 4 = <span class="math-inline">$100 \times (0.5 / 4) = 12.5\%$</span></p>
+                        <p>Relative error of 5 = <span class="math-inline">$100 \times (0.5 / 5) = 10\%$</span></p>
+                        <!-- Content continues in next chunk -->
+                    </div>
+                </section>
+                <!-- END: chapter-11-error-propagation -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-10-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 11 (Part 1)</span>
+                    </div>
+                    <a href="chapter-11-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

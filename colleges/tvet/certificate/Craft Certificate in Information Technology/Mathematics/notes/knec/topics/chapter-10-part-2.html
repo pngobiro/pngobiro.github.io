@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10: Representation Of Instruction (Part 2) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-10-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 10 (Part 2)</span>
+                    </div>
+                    <a href="chapter-11-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 10 : Representation Of Instruction (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-10-instruction-types-cont -->
+                <section id="section-10-6-cont" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚙️</span>
+                        <span class="heading-text">10.6 Instruction Types (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">10.6.1 Data Transfer Instructions (Continued)</h3>
+                        <p>Data transfer instructions move data and addresses between register and a memory location or I/O ports.</p> <!-- MMD typo: transite -->
+                        <p>Example: Move [MOV]</p>
+                        <p>The general form is: <code>MOV destination, source</code></p>
+                        <p>The fundamental general-purpose instruction is move[MOV]. It can transfer byte or word data between register and a memory location or between two registers. The source can also be a numeric value. It can also transfer an immediate data value into a register or memory location.</p>
+                        <p>However, the following must be noted:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">data cannot be moved between two memory locations directly.</li>
+                            <li class="list-item">cannot load an immediate value. E.g. load the offset address of a segment into a segment register.</li>
+                        </ul>
+
+                        <h3 class="subsection-heading">10.6.2 Arithmetic Instructions</h3>
+                        <p>These instructions perform arithmetic operations on binary or BCD numbers. There are instructions for the four standard arithmetic functions namely:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">addition</li>
+                            <li class="list-item">subtraction</li>
+                            <li class="list-item">multiplication</li>
+                            <li class="list-item">division</li>
+                            <li class="list-item">logical (AND, OR, XOR, NOT)</li> <!-- Added logical operations -->
+                        </ul>
+
+                        <h3 class="subsection-heading">10.6.3 Control Transfer</h3>
+                        <p>These are instructions that can transfer program execution from one part of memory to another. These instructions can be divided into 3 groups:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Unconditional transfers</li>
+                            <li class="list-item">Conditional transfers</li>
+                            <li class="list-item">Iteration controls</li>
+                        </ul>
+
+                        <h4 class="subsubsection-heading">10.6.3.1 Unconditional Transfers</h4>
+                        <p>It is generally used to skip over groups of instructions that are executed from some other part of the program.</p> <!-- MMD typo: grove -->
+                        <p>Example: Call Procedure - <code>CALL procedure_name</code></p>
+
+                        <h4 class="subsubsection-heading">10.6.3.2 Conditional Transfer</h4>
+                        <p>In the Conditional Transfer instructions, if the condition is satisfied, the instruction will be executed, otherwise it will continue on to the next instruction in the program.</p> <!-- MMD typo: instrution -->
+                        <p>All conditional transfer instructions occupy two bytes in memory. The first byte holds the operations code and the second bytes holds the relative displacement.</p>
+
+                        <h4 class="subsubsection-heading">10.6.3.3 Iteration Controls</h4>
+                        <p>The general form is <code>LOOP target</code>.</p>
+                        <p>The iteration control instructions are conditional transfer, but have a very special purpose. They set up repetitive loops.</p>
+
+                        <h3 class="subsection-heading">10.6.4 String Instructions</h3>
+                        <p>The string instructions enable us to operate on blocks of bytes or words in memory. These blocks, or strings, may be up to 64 K bytes long, and may consist of numeric values (either binary or BCD), alphanumeric values (such as ASCII text characters) or, for that matter, any kind of information that can be stored in memory as binary patterns.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-10-instruction-types-cont -->
+
+                <!-- START: chapter-10-exercises -->
+                <section id="section-10-7" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✏️</span>
+                        <span class="heading-text">10.7 Exercises</span>
+                    </h2>
+                    <div class="content-card">
+                        <ol>
+                            <li>Briefly describe what is direct, indirect and indexed addressing.</li>
+                            <li>Describe the difference between direct and indirect addressing.</li>
+                            <li>Briefly describe three instruction types.</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-10-exercises -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-10-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 10 (Part 2)</span>
+                    </div>
+                    <a href="chapter-11-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

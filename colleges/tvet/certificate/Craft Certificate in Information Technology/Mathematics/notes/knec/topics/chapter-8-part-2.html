@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Data Structures (II) (Part 2) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 8 (Part 2)</span>
+                    </div>
+                    <a href="chapter-9-part-1a.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 8 : Data Structures (II) (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-8-points-remember -->
+                <section id="chapter-8-points-remember" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📌</span>
+                        <span class="heading-text">Points to Remember (Data Structures II)</span>
+                    </h2>
+                    <div class="content-card">
+                         <p>A comparison.</p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr><th></th><th>Sorted Linear Array</th><th>Linked List</th><th>Binary Tree</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Search</td><td>Quick (Binary Search)</td><td>Slow (Linear Search)</td><td>Quick (Binary Search)</td></tr>
+                                    <tr><td>Insert and Delete</td><td>Expensive</td><td>Easy</td><td>Easy</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: chapter-8-points-remember -->
+
+                <!-- START: chapter-8-past-questions -->
+                <section id="section-8-8" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">8.8 Past Years Questions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>19. Produce a binary tree diagram of the following data:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tbody>
+                                    <tr><td>Node</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td></tr>
+                                    <tr><td>Content</td><td>C</td><td>J</td><td>P</td><td>T</td><td>K</td><td>B</td><td>M</td><td>S</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>a. Construct a dictionary-order binary tree for the fruits below:</p>
+                        <p>Durian, Apple, Pineapple, Mango, Avocado, Mangosteen, Watermelon, Pear.</p>
+                        <p>b. Use a table to show the left, right, back and trace pointers for the above tree.</p> <!-- MMD typo: mmmmmm -->
+                        <p>c. i. Write down all the pointers for the table below: [4]</p> <!-- MMD typo: nnnnnn -->
+                        <p>Note: that contents are to be arranged in ascending order.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Address</th><th>Contents</th><th>Pointer</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>101</td><td></td></tr>
+                                    <tr><td>2</td><td>90</td><td></td></tr>
+                                    <tr><td>3</td><td>102</td><td></td></tr> <!-- MMD typo: 5 -->
+                                    <tr><td>4</td><td>85</td><td></td></tr> <!-- MMD typo: 6 -->
+                                    <tr><td>5</td><td>105</td><td></td></tr> <!-- MMD typo: 5 -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>ii. Re-arrange the pointers if contents 102 and 85 are removed.</p>
+                        <p>Given the following items in series, construct the dictionary-order binary tree. [4]</p>
+                        <p>Malaysia, India, Singapore, Bahrain, China, Turkey, Pakistan, Hong Kong</p>
+                        <p>4. a. i. Construct the binary tree for the following data:</p>
+                        <p>Keyboard, CPU, Mouse, Monitor, Scanner, Disk, Cables, Drives, Printer, Software</p>
+                        <p>ii. From the above binary tree, build a table to show its Left, Right, Back (parent). Use -1 to represent a null value.</p>
+                        <p>b. i. Write down the pointers for the table below, where elements are linked in numerical order:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Index</th><th>Key</th><th>Linked to next record</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>50</td><td></td></tr>
+                                    <tr><td>2</td><td>100</td><td></td></tr>
+                                    <tr><td>3</td><td>87</td><td></td></tr>
+                                    <tr><td>4</td><td>34</td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>ii. Modify the table to reflect the additional of index 5 with key value 66 and index 6 with key value 104.</p>
+                        <p>iii. Modify the table to reflect the deletion of index 2, key 100. [2]</p>
+                        <p>Given the following items:</p>
+                        <p>Hockey, Baseball, Soccer, Tennis, Squash, Golf.</p>
+                        <ol type="a"> <!-- Assuming oooooo starts list a -->
+                            <li>Construct an alphabetically-ordered binary tree.</li>
+                            <li>From the binary tree, build a table with Left and Right Pointers.</li> <!-- MMD typo: pppppp -->
+                        </ol>
+                        <p>A table to represent the contents of a BINARY TREE is:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Node</th><th>Contents</th><th>Left Pointer</th><th>Right Pointer</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>Gooch</td><td>2</td><td>4</td></tr>
+                                    <tr><td>2</td><td>Atherton</td><td>-1</td><td>3</td></tr>
+                                    <tr><td>3</td><td>Botham</td><td>-1</td><td>-1</td></tr>
+                                    <tr><td>4</td><td>Gower</td><td>-1</td><td>5</td></tr>
+                                    <tr><td>5</td><td>Smith</td><td>-1</td><td>-1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ol type="a" start="3"> <!-- Assuming qqqqqq starts list c -->
+                            <li>Draw the binary tree which this information represents.</li>
+                            <li>Show the changes to the TABLE when Fraser is added to the contents.</li> <!-- MMD typo: rrrrrr -->
+                            <li>Explain how a BINARY TREE can be used to SORT a large amount of data by computer.</li> <!-- MMD typo: SSSSSS, amount of data amount -->
+                        </ol>
+                        <p>a. Produce a BINARY TREE diagram using the data below:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tbody>
+                                    <tr><td>Node</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td></tr>
+                                    <tr><td>Contents</td><td>Rice</td><td>Soya</td><td>Tea</td><td>Coffee</td><td>Melon</td><td>Yams</td><td>Bead</td><td>Potatoes</td><td>Cocoa</td><td>Sugar</td><td>Bananas</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>b. Represent the tree in the form of a TABLE including columns for the LEFT and RIGHT pointers.</p> <!-- MMD typo: tttttt -->
+                        <p>c. Show how the TABLE would be used to search for SUGAR. [3]</p> <!-- MMD typo: uuuuuu -->
+                        <p>d. Show the changes to the TABLE when MILK is added to the tree. [3]</p> <!-- MMD typo: vvvvvv -->
+                        <p>e. State two reasons why a BINARY TREE is often preferred to a linear list for holding data.</p> <!-- MMD typo: wwwwww -->
+                        <p>f. If a tree is ideally shaped with 1,000 nodes, what is the MAXIMUM number of nodes you would expect to check when searching for a given value? Briefly justify your answer.</p> <!-- MMD typo: xxxxxx -->
+                        <p>Produce a Tree diagram using the data below:</p>
+                        <div class="table-container">
+                             <table class="content-table">
+                                <tbody>
+                                    <tr><td>Node</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>8</td><td>9</td><td>10</td></tr> <!-- MMD missing 7 -->
+                                    <tr><td>Contents</td><td>Malaysia</td><td>India</td><td>Kuwait</td><td>Nigeria</td><td>Bahrain</td><td>Pakistan</td><td>Namibia</td><td>Singapore</td><td>Hong Kong</td><td>Australia</td></tr> <!-- MMD typo: Nanibia -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>a. Make a table from your tree, ADD Left and Right Pointer columns and complete the table.</p> <!-- MMD typo: yyyyyy, you -->
+                        <p>A baker sells bread to ten shops every day. When he delivers the bread in the morning, he collects the bread which was not sold the previous day, and gives it to the local zoo for their animals. One day, he gets the following number of loaves returned:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tbody>
+                                    <tr><td>ShopA</td><td>3</td></tr>
+                                    <tr><td>ShopB</td><td>6</td></tr>
+                                    <tr><td>ShopC</td><td>2</td></tr>
+                                    <tr><td>ShopD</td><td>8</td></tr>
+                                    <tr><td>ShopE</td><td>0</td></tr>
+                                    <tr><td>ShopF</td><td>4</td></tr>
+                                    <tr><td>ShopG</td><td>7</td></tr>
+                                    <tr><td>ShopH</td><td>5</td></tr>
+                                    <tr><td>ShopI</td><td>12</td></tr>
+                                    <tr><td>ShopJ</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ol type="a"> <!-- Assuming zzzzzz starts list a -->
+                            <li>Construct a binary tree for the above data, such that traversing the tree will list the shops in increasing order of loaves returned. Mark each node in the tree with both the shop name and the number of loaves e.g. A(3)</li>
+                            <li>For your binary tree, build a table to show each node's left, right and back pointer. Use -1 to represent a null pointer.</li> <!-- MMD typo: aaaaaaa -->
+                            <li>Redraw your table to reflect the deletion of shop I from the tree.</li> <!-- MMD typo: bbbbbbb -->
+                            <li>Redraw your table to reflect the further deletion of shop D from your tree.</li> <!-- MMD typo: ccccccc -->
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-8-past-questions -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-8-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 8 (Part 2)</span>
+                    </div>
+                    <a href="chapter-9-part-1a.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

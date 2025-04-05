@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Matrices And Transformations (Part 2) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-1b.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 9 (Part 2)</span>
+                    </div>
+                    <a href="chapter-9-part-3a.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 9: Matrices And Transformations (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-9-rules-algebra-cont -->
+                <section id="section-9-3-cont" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕➖✖️</span>
+                        <span class="heading-text">9.3 Rules/Matrix Algebra (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>If A and B represent two matrices, then in general <span class="math-inline">$A \cdot B \neq B \cdot A$</span> (Matrix multiplication is not commutative).</p>
+                        <p>Two matrices are equal if and only if their corresponding elements are equal.</p>
+                        <p>Thus, if <span class="math-inline">$\begin{pmatrix} a & c \\ b & d \end{pmatrix} = \begin{pmatrix} e & g \\ f & h \end{pmatrix}$</span></p>
+                        <p>then it follows that a=e, b=f, c=g and d=h.</p>
+                        <p>If <span class="math-inline">$\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 2 \\ 3 \end{pmatrix}$</span> then it follows that x=2 and y=3.</p>
+                        <p>When a matrix is multiplied by a constant, every element in the matrix is enlarged by the constant.</p>
+                        <p>Thus, <span class="math-inline">$c \begin{pmatrix} p & q \\ r & s \end{pmatrix} = \begin{pmatrix} cp & cq \\ cr & cs \end{pmatrix}$</span></p>
+                        <p>If A and B are any two matrices, <span class="math-inline">$A B = 0$</span> does not necessarily imply that either A=0 or B=0.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>If <span class="math-inline">$A = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$</span> and <span class="math-inline">$B = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$</span></p>
+                        <div class="equation">$$ A B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} $$</div>
+                        <p>Unlike ordinary algebra, the fact that AB = AC does not necessarily imply that B = C.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>If <span class="math-inline">$A = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$</span> and <span class="math-inline">$B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$</span> and <span class="math-inline">$C = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$</span></p>
+                        <p>then <span class="math-inline">$AB = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$</span></p>
+                        <p>and <span class="math-inline">$AC = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$</span></p>
+                        <p>So AB = AC.</p>
+                        <p>But <span class="math-inline">$B \neq C$</span> and <span class="math-inline">$A \neq 0$</span></p>
+                        <p><strong>Example:</strong></p>
+                        <p>Given <span class="math-inline">$A = \begin{pmatrix} 1 & 3 \\ 2 & -1 \end{pmatrix}$</span> and <span class="math-inline">$B = \begin{pmatrix} 2 & 0 & -4 \\ 3 & -2 & 6 \end{pmatrix}$</span></p>
+                        <p>Solution.</p>
+                        <p>Since A is 2x2 and B is 2x3, the product matrix AB is defined and is a 2x3 matrix. To obtain the elements in the first row of the product matrix AB, multiply the first row (1 3) of A by the columns <span class="math-inline">$\begin{pmatrix} 2 \\ 3 \end{pmatrix}, \begin{pmatrix} 0 \\ -2 \end{pmatrix}$</span> and <span class="math-inline">$\begin{pmatrix} -4 \\ 6 \end{pmatrix}$</span> of B respectively.</p>
+                        <p>Step 1 (Row 1):</p>
+                        <p><span class="math-inline">$(1 \times 2 + 3 \times 3 \quad 1 \times 0 + 3 \times (-2) \quad 1 \times (-4) + 3 \times 6) = (2+9 \quad 0-6 \quad -4+18) = (11 \quad -6 \quad 14)$</span></p>
+                        <p>To obtain the elements in the second row of the product matrix AB, multiply the second row (2 -1) of A by the columns of B respectively.</p>
+                        <p>Step 2 (Row 2):</p>
+                        <p><span class="math-inline">$(2 \times 2 + (-1) \times 3 \quad 2 \times 0 + (-1) \times (-2) \quad 2 \times (-4) + (-1) \times 6) = (4-3 \quad 0+2 \quad -8-6) = (1 \quad 2 \quad -14)$</span></p>
+                        <p>Result:</p>
+                        <div class="equation">$$ AB = \begin{pmatrix} 11 & -6 & 14 \\ 1 & 2 & -14 \end{pmatrix} $$</div>
+                        <p>Matrix multiplication does not obey the commutative law, i.e. the products AB and BA of matrices need not be equal.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-9-rules-algebra-cont -->
+
+                <!-- START: chapter-9-equivalent-matrices -->
+                <section id="section-9-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">＝</span>
+                        <span class="heading-text">9.4 Equivalent Matrices</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Two matrices are equal if and only if their corresponding elements are equal. For instance, if</p>
+                        <p><span class="math-inline">$A = \begin{pmatrix} 2 & 3 \\ 4 & 5 \end{pmatrix}$</span>, and <span class="math-inline">$B = \begin{pmatrix} 2 & 3 \\ 4 & 5 \end{pmatrix}$</span></p>
+                        <p>then matrix A = matrix B.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>Given <span class="math-inline">$A = \begin{pmatrix} x & 2 \\ 1 & y \end{pmatrix}$</span>, <span class="math-inline">$B = \begin{pmatrix} 3 & -5 \\ 4 & 2 \end{pmatrix}$</span> and <span class="math-inline">$C = \begin{pmatrix} 8 & -3 \\ 5 & 0 \end{pmatrix}$</span></p>
+                        <ol type="a">
+                            <li>Find the values of x and y if A + B = C.</li>
+                            <li>Is BC = CB?</li>
+                            <li>Evaluate 3B.</li>
+                        </ol>
+                        <p><strong>Solution:</strong></p>
+                        <ol type="a">
+                            <li><span class="math-inline">$A + B = \begin{pmatrix} x & 2 \\ 1 & y \end{pmatrix} + \begin{pmatrix} 3 & -5 \\ 4 & 2 \end{pmatrix} = \begin{pmatrix} x+3 & 2-5 \\ 1+4 & y+2 \end{pmatrix} = \begin{pmatrix} x+3 & -3 \\ 5 & y+2 \end{pmatrix}$</span></li>
+                            <li>Since A + B = C</li>
+                            <li><span class="math-inline">$\Rightarrow \begin{pmatrix} x+3 & -3 \\ 5 & y+2 \end{pmatrix} = \begin{pmatrix} 8 & -3 \\ 5 & 0 \end{pmatrix}$</span></li>
+                            <li><span class="math-inline">$\Rightarrow x+3=8$</span> and <span class="math-inline">$y+2=0$</span></li>
+                            <li>Therefore x=5, y=-2</li>
+                            <li><span class="math-inline">$BC = \begin{pmatrix} 3 & -5 \\ 4 & 2 \end{pmatrix} \begin{pmatrix} 8 & -3 \\ 5 & 0 \end{pmatrix} = \begin{pmatrix} 24-25 & -9+0 \\ 32+10 & -12+0 \end{pmatrix} = \begin{pmatrix} -1 & -9 \\ 42 & -12 \end{pmatrix}$</span></li>
+                            <li><span class="math-inline">$CB = \begin{pmatrix} 8 & -3 \\ 5 & 0 \end{pmatrix} \begin{pmatrix} 3 & -5 \\ 4 & 2 \end{pmatrix} = \begin{pmatrix} 24-12 & -40-6 \\ 15+0 & -25+0 \end{pmatrix} = \begin{pmatrix} 12 & -46 \\ 15 & -25 \end{pmatrix}$</span></li>
+                            <li>Thus <span class="math-inline">$BC \neq CB$</span></li>
+                            <li><span class="math-inline">$3B = 3 \begin{pmatrix} 3 & -5 \\ 4 & 2 \end{pmatrix} = \begin{pmatrix} 3 \times 3 & 3 \times (-5) \\ 3 \times 4 & 3 \times 2 \end{pmatrix} = \begin{pmatrix} 9 & -15 \\ 12 & 6 \end{pmatrix}$</span></li>
+                        </ol>
+                        <p><strong>Example: (A typical examination question)</strong></p>
+                        <p>A company makes two microcomputers, named SOLAR and GEM, using three main components X, Y and Z</p>
+                        <p>SOLAR is made of 3 X components and 2 Y components.</p>
+                        <p>GEM is made of 2 X components and 3 Z components.</p>
+                        <ol type="i">
+                            <li>Express this information as a 2 by 3 array Q.</li>
+                        </ol>
+                        <p>The company receives an ORDER for 100 SOLAR and 50 GEM microcomputers.</p>
+                        <ol type="i" start="2">
+                            <li>Express the ORDER as a row matrix (array) P.</li>
+                            <li>Find the product PQ and interpret its meaning.</li>
+                            <li>If it takes 2 hours to produce the component X, 1 hour to produce Y and 3 hours to produce Z, represent this information as a column matrix R.</li>
+                            <li>Calculate PQR and interpret its meaning?</li>
+                        </ol>
+                        <p>A second order for 50 solar and 100 gem microcomputer is subsequently received but by then New Production Techniques have resulted in the time needed to produce X cut by 20%, and the time to produce Z cut by a third. The time taken to produce Y is unchanged.</p>
+                        <ol type="i" start="6">
+                            <li>Use matrix (array) techniques to determine the COMPONENT REQUIREMENTS for the Second Order.</li>
+                            <li>Determine the HOURS needed to produce the SECOND ORDER.</li>
+                        </ol>
+                        <p>For the FIRST ORDER labour costs were 3 units per hour, but had INCREASED by 10% for the SECOND ORDER.</p>
+                        <ol type="i" start="8">
+                            <li>Determine whether these LABOUR COSTS are greater or smaller than those for the FIRST ORDER.</li>
+                        </ol>
+                        <p><strong>Solution:</strong></p>
+                        <ol type="i">
+                            <li>Matrix Q (Components per Computer): <span class="math-inline">$\begin{matrix} & X & Y & Z \\ SOLAR & \begin{pmatrix} 3 & 2 & 0 \\ 2 & 0 & 3 \end{pmatrix} \\ GEM \end{matrix}$</span></li>
+                            <li>Matrix P (Order 1): <span class="math-inline">$\begin{pmatrix} SOLAR & GEM \\ 100 & 50 \end{pmatrix}$</span></li>
+                            <li>PQ (Total Components for Order 1): <span class="math-inline">$\begin{pmatrix} 100 & 50 \end{pmatrix} \begin{pmatrix} 3 & 2 & 0 \\ 2 & 0 & 3 \end{pmatrix} = \begin{pmatrix} (100 \times 3 + 50 \times 2) & (100 \times 2 + 50 \times 0) & (100 \times 0 + 50 \times 3) \end{pmatrix} = \begin{pmatrix} 400 & 200 & 150 \end{pmatrix}$</span>. This means that the ORDER requires 400 of X, 200 of Y and 150 of Z.</li>
+                            <li>Matrix R (Hours per Component): <span class="math-inline">$\begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix} \begin{matrix} X \\ Y \\ Z \end{matrix}$</span></li>
+                            <li>PQR (Total Hours for Order 1): <span class="math-inline">$(PQ)R = \begin{pmatrix} 400 & 200 & 150 \end{pmatrix} \begin{pmatrix} 2 \\ 1 \\ 3 \end{pmatrix} = (400 \times 2 + 200 \times 1 + 150 \times 3) = (800 + 200 + 450) = 1450$</span>. This means that the order will require 1450 hours to produce.</li>
+                            <li>Matrix P2 (Order 2): <span class="math-inline">$\begin{pmatrix} 50 & 100 \end{pmatrix}$</span>. Component Requirements = P2 * Q = <span class="math-inline">$\begin{pmatrix} 50 & 100 \end{pmatrix} \begin{pmatrix} 3 & 2 & 0 \\ 2 & 0 & 3 \end{pmatrix} = \begin{pmatrix} (50 \times 3 + 100 \times 2) & (50 \times 2 + 100 \times 0) & (50 \times 0 + 100 \times 3) \end{pmatrix} = \begin{pmatrix} 350 & 100 & 300 \end{pmatrix}$</span>. Hence it requires 350 of X, 100 of Y and 300 of Z.</li>
+                            <li>New Production Times: X = 2 * (1 - 0.20) = 1.6 hours. Y = 1 hour. Z = 3 * (1 - 1/3) = 2 hours. New Matrix R2 = <span class="math-inline">$\begin{pmatrix} 1.6 \\ 1 \\ 2 \end{pmatrix}$</span>. Hours for Order 2 = (P2 * Q) * R2 = <span class="math-inline">$\begin{pmatrix} 350 & 100 & 300 \end{pmatrix} \begin{pmatrix} 1.6 \\ 1 \\ 2 \end{pmatrix} = (350 \times 1.6 + 100 \times 1 + 300 \times 2) = (560 + 100 + 600) = 1260$</span> hours.</li>
+                            <li>Labour costs for first order = 3 units/hour * 1450 hours = 4350 units.</li>
+                            <li>New Labour Cost = 3 * (1 + 0.10) = 3.3 units/hour. Labour costs for second order = 3.3 units/hour * 1260 hours = 4158 units.</li>
+                            <li>Hence the labour costs for the second order (4158) are smaller than those for the first order (4350).</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-9-equivalent-matrices -->
+
+                <!-- START: chapter-9-transformations -->
+                <section id="section-9-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">9.5 Transformations</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A transformation is an operation which transforms a point or a figure into another point or figure.</p>
+
+                        <h3 class="subsection-heading">9.5.1 Translation</h3>
+                        <p>A translation is a transformation which moves all points in a plane through the same distance in the same direction.</p>
+                        <p>E.g. The triangle ABC has been transformed onto the triangle A'B'C' by a translation <span class="math-inline">$\begin{pmatrix} 3 \\ 2 \end{pmatrix}$</span> i.e. 3 squares to the right and 2 squares up in the plane of the paper.</p>
+                        <img src="../assets/images/ch9-translation-example.jpg" alt="Diagram showing triangle ABC translated to A'B'C' by vector (3, 2)">
+                        <p>Point A is mapped onto A' by T = <span class="math-inline">$\begin{pmatrix} 3 \\ 2 \end{pmatrix}$</span>.</p>
+                        <p>If A = (x, y) and A' = (x', y'), then <span class="math-inline">$\begin{pmatrix} x' \\ y' \end{pmatrix} = \begin{pmatrix} x \\ y \end{pmatrix} + \begin{pmatrix} 3 \\ 2 \end{pmatrix}$</span>.</p>
+                        <p>Example: A(1,1) -> A'(1+3, 1+2) = A'(4,3).</p>
+
+                        <h3 class="subsection-heading">9.5.2 Enlargement (E)</h3>
+                        <p>An enlargement with centre O, scale factor k is a transformation which enlarges a given figure by k times the original size.</p>
+                        <p>If k > 0, the given figure and its image are on the same side of the centre of enlargement O.</p>
+                        <p>If k < 0, the given figure and its image are on opposite sides of O.</p>
+                        <p>The figure and its image after an enlargement are similar. The scale factor <span class="math-inline">$k = \frac{OA'}{OA} = \frac{OB'}{OB} = \frac{OC'}{OC}$</span></p>
+                        <img src="../assets/images/ch9-enlargement-example.jpg" alt="Diagram showing triangle ABC enlarged to A'B'C' with center O">
+                        <p>Under an enlargement, <span class="math-inline">$\frac{\text{Area of Image}}{\text{Area of Figure}} = k^2$</span></p>
+                        <p>If the image of a point (x, y) under a transformation is the point itself i.e. (x, y), the point (x, y) is called an <strong>invariant point</strong> of the transformation.</p>
+                        <p>If a line is mapped onto itself under a transformation, the line is said to be an <strong>invariant line</strong> under the transformation.</p>
+
+                        <h3 class="subsection-heading">9.5.3 Reflection</h3>
+                        <p>A reflection is a transformation which reflects all points of a plane in a line (on the plane) called the mirror line.</p>
+                        <p>Triangle ABC is mapped onto Triangle A'B'C' under a reflection in the line XY which is the perpendicular bisector of AA', BB' or CC'.</p>
+                        <p>Under a reflection, the figure and its image are congruent.</p>
+                        <p><strong>Example:</strong></p>
+                        <img src="../assets/images/ch9-reflection-example.jpg" alt="Diagram showing triangle ABC reflected across line XY to A'B'C'">
+
+                        <h3 class="subsection-heading">9.5.4 Rotation (R)</h3>
+                        <p>A rotation is a transformation which rotates all points on a plane about a fixed point known as the centre of rotation, through a given angle in anti-clockwise or clockwise direction.</p>
+                        <p>The angle through which the points are rotated is called the angle of rotation.</p>
+                        <p>The triangle ABC is rotated about the origin O through 90° in the anti-clockwise direction, and mapped onto triangle A'B'C'.</p>
+                        <img src="../assets/images/ch9-rotation-example.jpg" alt="Diagram showing triangle ABC rotated 90 degrees anti-clockwise about the origin to A'B'C'">
+                    </div>
+                </section>
+                <!-- END: chapter-9-transformations -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-9-part-1b.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 9 (Part 2)</span>
+                    </div>
+                    <a href="chapter-9-part-3a.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
