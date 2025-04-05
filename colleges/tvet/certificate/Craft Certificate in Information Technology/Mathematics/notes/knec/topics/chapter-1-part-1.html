@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Number Bases (Part 1) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="#" class="nav-button disabled" aria-disabled="true"> <!-- No Previous Section -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 1 (Part 1)</span>
+                    </div>
+                    <a href="chapter-1-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 1 : Number Bases</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-1-objectives -->
+                <section id="chapter-1-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you should be able to:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">identify the different types of numbers;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">convert between denary and other base;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">convert between binary, octal and hexadecimal;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">understand the column system and number bases;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">understand modular arithmetic;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">hexadecimal, octal addition.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-1-objectives -->
+
+                <!-- START: chapter-1-introduction -->
+                <section id="section-1-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">1.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In this chapter, we start to explore arious sets of numbers which are used to represent data in real life problem. Namely, natural numbers, integers, rational, irrational, real and complex numıers. Numbers are used to represent quantities, measurement, and others in Gir surroundings. They are essential representations of data that will be processed by computer systems to produce useful information. The computer system, ysiing a digital electronic device, has to handle data in binary numbers.</p>
+                        <p>In binary nurieers, each binary digit has only two states rather than ten states in decimal nuiniers. Therefore, binary, octal and hexadecimal number systems are dealt with in subsequent parts of the chapter.</p>
+
+                        <h3 class="subsection-heading">1.1.1 Number Sets</h3>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tbody>
+                                    <tr> <td><strong>N</strong></td> <td>Natural Positive integers Example: 3, 71</td> </tr>
+                                    <tr> <td><strong>Z</strong></td> <td>Integers Whole numbers Example: 3, -71</td> </tr>
+                                    <tr> <td><strong>Q</strong></td> <td>Rational Real numbers which can be expressed as the ratio of 2 integer Example: 1/2, 0.57, -3</td> </tr>
+                                    <tr> <td><strong>F</strong></td> <td>Irrational Real numbers which are not rational Example: <span class="math-inline">$\sqrt{2}, \pi$</span></td> </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                         <div class="table-container">
+                            <table class="content-table">
+                               <tbody>
+                                    <tr> <td><strong>R</strong></td> <td>Real Can be represented by points a the straight line Example: -2.31, <span class="math-inline">$\sqrt{5}, 6$</span></td> </tr>
+                                    <tr> <td><strong>C</strong></td> <td>Complex No real number that can satisfy the equation X2 = -1 Example: <span class="math-inline">$\sqrt{-1}, \sqrt{-5.75}, \sqrt{-88}$</span></td> </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-introduction -->
+
+                <!-- START: chapter-1-level-of-precisions -->
+                <section id="section-1-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">1.2 Level of Precisions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Some translator software have two levels of precisions in storing real numbers. Namely single-precision and double precision.</p>
+                        <h3 class="subsection-heading">1.2.1 Single Precision</h3>
+                        <p>The real number is calculated to 8 and displayed to 7 significant figures.</p>
+                        <p>Example: <span class="math-inline">$\pi \quad = \quad 3.1415926$</span> calculated</p>
+                        <p>= 3.141593 displayed</p>
+                        <h3 class="subsection-heading">1.2.2 Double Precision</h3>
+                        <p>The computer will need longer processing time to produce double precision numbers. The real number is calculated to 16 and displayed on the screen to 15 significant figures.</p>
+                        <p>Example: <span class="math-inline">$\pi \quad = \quad 3.141592653589793$</span> calculated</p>
+                        <p>= 3.14159265358979 displayed</p>
+                    </div>
+                </section>
+                <!-- END: chapter-1-level-of-precisions -->
+
+                <!-- START: chapter-1-number-base -->
+                <section id="section-1-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">1.3 Number Base</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A fundamental counting group consists of a number various symbols.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr><th>Counting Groups</th><th>Symbols of the Group</th><th>No. of Symbols</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Binary</td><td>0,1</td><td>2</td></tr>
+                                    <tr><td>Octal</td><td>0,1,2,3,4,5,7</td><td>8</td></tr>
+                                    <tr><td>Hexadecimal</td><td>0,1,2,3,<span class="math-inline">$\cdots$</span>,9, A, B, C, D, E, F</td><td>16</td></tr>
+                                    <tr><td>Denary</td><td>0,1,2,3,4,5,6,7,8,9</td><td>10</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-number-base -->
+
+                <!-- START: chapter-1-column-system -->
+                <section id="section-1-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🏛️</span>
+                        <span class="heading-text">1.4 Column System</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Enable us th represent any conceivable number by combining numerals and zeros.</p>
+                        <p>For e example, 423524 is derived from this column system:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr><th>Column No</th><th>6</th><th>5</th><th>4</th><th>3</th><th>2</th><th>1</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Value</td><td>100,000</td><td>10,000</td><td>1,000</td><td>100</td><td>10</td><td>1</td></tr>
+                                    <tr><td>Power of Magnification</td><td><span class="math-inline">$10^{5}$</span></td><td><span class="math-inline">$10^{4}$</span></td><td><span class="math-inline">$10^{3}$</span></td><td><span class="math-inline">$10^{2}$</span></td><td><span class="math-inline">$10^{1}$</span></td><td><span class="math-inline">$10^{0}$</span></td></tr>
+                                    <tr><td>Numerals</td><td>4</td><td>2</td><td>3</td><td>5</td><td>2</td><td>4</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="equation">$$423524 = 4 \times 10^{5} + 2 \times 10^{4} + 3 \times 10^{3} + 5 \times 10^{2} + 2 \times 10^{1} + 4 \times 10^{0}$$</div>
+                        <p>The Power of Magnification for each individual column is derived as,</p>
+                        <div class="equation">$$ \text{Power of Magnification} = \text{Base}^{(\text{Column no} - 1)} $$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-column-system -->
+
+                <!-- START: chapter-1-conversion-other-to-denary -->
+                <section id="section-1-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">1.5 Conversion from Other Bases to Denary</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>We can use this column system to convert a number in other bases to its equivalence in Denary.</p>
+                        <p>Example: Convert <span class="math-inline">$111001_{2}$</span> to denary</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr><th>Column No</th><th>6</th><th>5</th><th>4</th><th>3</th><th>2</th><th>1</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Value</td><td>32</td><td>16</td><td>8</td><td>4</td><td>2</td><td>1</td></tr>
+                                    <tr><td>Power of Magnification</td><td><span class="math-inline">$2^{5}$</span></td><td><span class="math-inline">$2^{4}$</span></td><td><span class="math-inline">$2^{3}$</span></td><td><span class="math-inline">$2^{2}$</span></td><td><span class="math-inline">$2^{1}$</span></td><td><span class="math-inline">$2^{0}$</span></td></tr>
+                                    <tr><td>Numerals</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="equation">$$ \begin{aligned} 111001_{2} & = 1 \times 2^{5} + 1 \times 2^{4} + 1 \times 2^{3} + 1 \times 2^{0} \\ & = 32 + 16 + 8 + 1 \\ & = 57_{10} \end{aligned} $$</div>
+                        <p>Example: Convert <span class="math-inline">$4BEEF8_{16}$</span> to denary</p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr><th>Column No</th><th>6</th><th>5</th><th>4</th><th>3</th><th>2</th><th>1</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Value</td><td>1048576</td><td>65536</td><td>4096</td><td>256</td><td>16</td><td>1</td></tr>
+                                    <tr><td>Power of Magnification</td><td><span class="math-inline">$16^{5}$</span></td><td><span class="math-inline">$16^{4}$</span></td><td><span class="math-inline">$16^{3}$</span></td><td><span class="math-inline">$16^{2}$</span></td><td><span class="math-inline">$16^{1}$</span></td><td><span class="math-inline">$16^{0}$</span></td></tr>
+                                    <tr><td>Numerals</td><td>4</td><td>B</td><td>E</td><td>E</td><td>F</td><td>8</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p><span class="math-inline">$4BEEF8_{16} = 4 \times 16^{5} + 11 \times 16^{4} + 14 \times 16^{3} + 14 \times 16^{2} + 15 \times 16^{1} + 8 \times 16^{0}$</span></p> <!-- MMD had 15^5, corrected to 16^5 -->
+                        <div class="equation">$$ = 4976376_{10} $$</div> <!-- MMD had 9:976496, corrected calculation -->
+                    </div>
+                </section>
+                <!-- END: chapter-1-conversion-other-to-denary -->
+
+                <!-- START: chapter-1-conversion-denary-to-other -->
+                 <section id="section-1-6" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">1.6 Conversion from Denary to Other Bases</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>To convert a denary number to other bases, we do a repeated division by the desired base until a quotient 0 is obtained.</p>
+                        <p>Example: Convert <span class="math-inline">$475_{10}$</span> to octal</p>
+                        <img src="../assets/images/ch1-denary-to-octal-example.jpg" alt="Example calculation showing repeated division of 475 by 8 to get octal 733">
+                        <p>0 remainder 7</p>
+                        <p>The octal number is obtained by reading the last integer 7 and upwards to include all remainders; <span class="math-inline">$475_{10} = 733_{8}$</span></p>
+                        <p>Example: Convert <span class="math-inline">$475_{10}$</span> to binary</p>
+                        <img src="../assets/images/ch1-denary-to-binary-example.jpg" alt="Example calculation showing repeated division of 475 by 2 to get binary 111011011">
+                        <div class="equation">$$ 475_{10} = 111011011_{2} $$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-conversion-denary-to-other -->
+
+                <!-- START: chapter-1-conversion-among-other -->
+                <section id="section-1-7" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">↔️</span>
+                        <span class="heading-text">1.7 Conversion Among Other Base</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>We have illustrated the conversions between denary and other bases. How about converting a binary number to an octal number? Or, an octal number to a hexadecimal one?</p>
+                        <h3 class="subsection-heading">1.7.1 Binary to Octal</h3>
+                        <p>We know that <span class="math-inline">$9_{10} = 1001_{2}$</span> and <span class="math-inline">$9_{10} = 11_{8}$</span> so, we can conclude that <span class="math-inline">$1001_{2} = 11_{8}$</span>. To convert a binary number to an octal number in this case will involve a lot of calculations.</p>
+                        <p>Is there a better way to convert these numbers?</p>
+                        <p>Yes. How many binary bits do we need to represent an octal digit?</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Binary</th><th>Octal</th></tr></thead>
+                                <tbody>
+                                    <tr><td>000</td><td>0</td></tr>
+                                    <tr><td>001</td><td>1</td></tr>
+                                    <tr><td>010</td><td>2</td></tr>
+                                    <tr><td>011</td><td>3</td></tr>
+                                    <tr><td>100</td><td>4</td></tr>
+                                    <tr><td>101</td><td>5</td></tr>
+                                    <tr><td>110</td><td>6</td></tr>
+                                    <tr><td>111</td><td>7</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>No. of symbols in octal = <span class="math-inline">$2^{\text{no. of binary bits}}$</span></p>
+                        <p>We need three binary bits to represent symbols in octal! Likewise, one octal number will produce three binary bits.</p>
+                        <p>To prove it, try whether <span class="math-inline">$374_{8} = 011111100_{2}$</span>?</p>
+
+                        <h3 class="subsection-heading">1.7.2 Binary to Hexadecimal</h3>
+                        <p>Following the same argument, it is not so difficult to see why we need to have four binary bits to represent one hexadecimal numb</p> <!-- MMD typo: numb -->
+                        <p>No. of symbols in Hexadecimal = <span class="math-inline">$2^{\text{no. of binary bits}}$</span></p> <!-- MMD had 011:, corrected -->
+                        <p>Now can you see why <span class="math-inline">$110101100_{2} = 1AC_{16}$</span>?</p> <!-- MMD had 1 A C, corrected -->
+                        <p>0001 1010 1100</p>
+                        <p>1 &nbsp;&nbsp;&nbsp;&nbsp; A &nbsp;&nbsp;&nbsp;&nbsp; C</p>
+                        <img src="../assets/images/ch1-binary-to-hex-example.jpg" alt="Binary 110101100 grouped into 4 bits (0001 1010 1100) converting to Hex 1AC">
+
+                        <h3 class="subsection-heading">1.7.3 Conversion Between Octal and Hexadecimal</h3> <!-- MMD typo: Pativen -->
+                        <p>Since every octal number will produce three binary bits, and every four binary bits will produce one hexadecimal number. We can make use of the binary base as the "conversion medium" to convert a hexadecimal number to an octal number or vice versa.</p> <!-- MMD typo: verst -->
+                        <p>Example: Convert <span class="math-inline">$733_{8}$</span> to a hex no.</p>
+                        <p>Step 1. Convert <span class="math-inline">$733_{8}$</span> to a binary number.</p>
+                        <p>111 011 011</p>
+                        <p>Step 2. Rearrange this binary number into 4-bit groups.</p>
+                        <p>0001 1101 1011</p>
+                        <p>Step 3. Convert this binary number to a hex.</p>
+                        <p>1 &nbsp;&nbsp;&nbsp;&nbsp; D &nbsp;&nbsp;&nbsp;&nbsp; B</p>
+                        <p>Hence, <span class="math-inline">$733_{8} = 1DB_{16}$</span></p>
+                    </div>
+                </section>
+                <!-- END: chapter-1-conversion-among-other -->
+
+                <!-- START: chapter-1-real-number -->
+                <section id="section-1-8" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">ℝ</span>
+                        <span class="heading-text">1.8 Real Number</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In real numbers, e.g. <span class="math-inline">$(4.75)_{10}$</span>, the 4 is an integer part while 0.75 is a fractional part. What is the way to convert 0.75 to a binary fraction? The method is to multiply 0.75 by 2 continuously until the fraction becomes zero or the degree of accuracy is satisfied.</p>
+                        <p><span class="math-inline">$4.75 = 4 + 0.75 = (100)_{2} + (0.11)_{2} = (100.11)_{2}$</span></p>
+                        <img src="../assets/images/ch1-real-to-binary-example1.jpg" alt="Calculation showing 0.75 multiplied by 2 repeatedly to get binary fraction 0.11">
+                        <p>Let's look at another example.</p>
+                        <p><span class="math-inline">$(6.1)_{10}$</span> to be converted to binary places.</p>
+                        <p><span class="math-inline">$6.1 = 6 + 0.1 = (110)_{2} + (0.000110)_{2}$</span></p>
+                        <p><span class="math-inline">$=(110.000110)_{2}$</span> correct to 6 binary places.</p>
+                        <img src="../assets/images/ch1-real-to-binary-example2.jpg" alt="Calculation showing 0.1 multiplied by 2 repeatedly to get binary fraction 0.000110...">
+                        <!-- MMD had raw calculation steps, omitted as they are in the image -->
+                        <p>On the other hand, how can we convert <span class="math-inline">$(110.000110)_{2}$</span> to denary real numbers?</p>
+                        <p><strong>Method:</strong></p>
+                        <ol>
+                            <li>Write down the value of each bit (binary digit).</li>
+                            <li>Multiply the value by every bit.</li>
+                            <li>Take the sum of products.</li>
+                        </ol>
+                        <div class="equation">$$ \begin{array}{ccccccccc} 4 & 2 & 1 & . & 2^{-1} & 2^{-2} & 2^{-3} & 2^{-4} & 2^{-5} & 2^{-6} \\ 1 & 1 & 0 & . & 0 & 0 & 0 & 1 & 1 & 0 \end{array} $$</div>
+                        <div class="equation">$$ = 4 \times 1 + 2 \times 1 + 1 \times 0 + 0.5 \times 0 + 0.25 \times 0 + 0.125 \times 0 + 0.0625 \times 1 + 0.03125 \times 1 + 0.015625 \times 0 $$</div>
+                        <div class="equation">$$ = 4 + 2 + 0 + 0 + 0 + 0 + 0.0625 + 0.03125 + 0 = 6.09375_{10} $$</div> <!-- MMD calculation was incomplete/incorrect -->
+                    </div>
+                </section>
+                <!-- END: chapter-1-real-number -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="#" class="nav-button disabled" aria-disabled="true"> <!-- No Previous Section -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 1 (Part 1)</span>
+                    </div>
+                    <a href="chapter-1-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Corrected path -->
+</body>
+</html>
