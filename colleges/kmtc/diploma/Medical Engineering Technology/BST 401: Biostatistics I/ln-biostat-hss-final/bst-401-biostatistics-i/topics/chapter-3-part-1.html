@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3 (Part 1): Summarizing Data (Mean, Median) - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Enable automatic equation numbering if needed
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-part-5.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 3 (Part 1): Central Tendency</span>
+                    </div>
+                    <a href="chapter-3-part-2.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-3-part-1 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER THREE <br> Summarizing data</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-3-learning-objectives">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">3.1 Learning Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the end of this chapter, the student is expected to be able to:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Describe the purposes of measures of central tendency and dispersion</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Calculate the different measures of central tendency and dispersion</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Identify the properties and limitations of the different measures of central tendency and dispersion</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Understand the criterion for the selection of a measure of central tendency and dispersion</span></li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-3-introduction">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📖</span>
+                        <span class="heading-text">3.2 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The frequency distribution gives a general picture of the data. However, sometimes we need a more precise description, especially when comparing two or more sets of data.</p>
+                        <p>Statistical measures can be used to summarize the main characteristics of the data. These measures are broadly divided into two categories:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Measures of Central Tendency (Averages):</strong> These measures indicate the center or typical value of the data set. Common measures include the mean, median, and mode.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Measures of Variation (Dispersion):</strong> These measures indicate the spread or variability of the data around the center. Common measures include the range, variance, standard deviation, and coefficient of variation.</span></li>
+                        </ol>
+                        <p>These summary measures are also known as descriptive statistics.</p>
+                        <p>When calculating descriptive statistics, we distinguish between:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Parameters:</strong> Summary measures calculated for a population.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Statistics:</strong> Summary measures calculated for a sample.</span></li>
+                        </ul>
+                        <p>We often use sample statistics to estimate population parameters.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-3-central-tendency">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">3.3 Measures of Central Tendency</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A measure of central tendency is a single value that attempts to describe a set of data by identifying the central position within that set of data. As such, measures of central tendency are sometimes called measures of central location. They are also classed as summary statistics.</p>
+
+                        <h3 class="subsection-heading">The Mean</h3>
+                        <p>The mean is the most commonly used measure of central tendency. It is calculated by summing all the observations and dividing by the total number of observations.</p>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Mean for Ungrouped Data</h4>
+                        <p>Let $x_1, x_2, ..., x_n$ be the n observations in a sample.</p>
+                        <p>The sample mean, denoted by $\bar{x}$ (read as "x-bar"), is calculated as:</p>
+                        <div class="equation">
+                            $$ \bar{x} = \frac{\sum_{i=1}^{n} x_i}{n} = \frac{x_1 + x_2 + ... + x_n}{n} $$
+                        </div>
+                        <p>Let $X_1, X_2, ..., X_N$ be the N observations in a population.</p>
+                        <p>The population mean, denoted by $\mu$ (Greek letter mu), is calculated as:</p>
+                        <div class="equation">
+                            $$ \mu = \frac{\sum_{i=1}^{N} X_i}{N} = \frac{X_1 + X_2 + ... + X_N}{N} $$
+                        </div>
+
+                        <p><strong>Example:</strong> Calculate the mean weight of the first 5 students from the data in the previous chapter's example (68, 62, 75, 60, 58 kg).</p>
+                        <div class="equation">
+                            $$ \bar{x} = \frac{68 + 62 + 75 + 60 + 58}{5} = \frac{323}{5} = 64.6 \text{ kg} $$
+                        </div>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Mean for Grouped Data</h4>
+                        <p>When data are grouped into a frequency distribution, we approximate the mean using the class midpoints.</p>
+                        <p>Let $m_1, m_2, ..., m_k$ be the midpoints of the k classes, and let $f_1, f_2, ..., f_k$ be the corresponding class frequencies.</p>
+                        <p>The mean for grouped data is calculated as:</p>
+                        <div class="equation">
+                            $$ \bar{x} = \frac{\sum_{i=1}^{k} f_i m_i}{\sum_{i=1}^{k} f_i} = \frac{\sum_{i=1}^{k} f_i m_i}{n} $$
+                        </div>
+                        <p>where $n = \sum f_i$ is the total number of observations.</p>
+
+                        <p><strong>Example:</strong> Calculate the mean weight using the grouped frequency distribution from Table 2.3.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Table 3.1 Calculation of Mean Weight from Grouped Data</caption>
+                                <thead>
+                                    <tr><th>Weight (kg)</th><th>Midpoint ($m_i$)</th><th>Frequency ($f_i$)</th><th>$f_i m_i$</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>55 - 60</td><td>57.5</td><td>6</td><td>345.0</td></tr>
+                                    <tr><td>61 - 66</td><td>63.5</td><td>8</td><td>508.0</td></tr>
+                                    <tr><td>67 - 72</td><td>69.5</td><td>9</td><td>625.5</td></tr>
+                                    <tr><td>73 - 78</td><td>75.5</td><td>7</td><td>528.5</td></tr>
+                                    <tr><td>79 - 84</td><td>81.5</td><td>4</td><td>326.0</td></tr>
+                                    <tr><td>85 - 90</td><td>87.5</td><td>4</td><td>350.0</td></tr>
+                                    <tr><td>91 - 96</td><td>93.5</td><td>2</td><td>187.0</td></tr>
+                                    <tr><td><strong>Total</strong></td><td></td><td><strong>n=40</strong></td><td><strong>$\sum f_i m_i = 2870.0$</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="equation">
+                            $$ \bar{x} = \frac{2870.0}{40} = 71.75 \text{ kg} $$
+                        </div>
+                        <p>(Note: The mean calculated from the original ungrouped data for all 40 students would be slightly different due to the approximation using midpoints).</p>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Properties of the Mean:</h4>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Uniqueness: For a given set of data there is one and only one mean.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Simplicity: The mean is easily understood and easy to compute.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Uses all data: The mean takes into account every value in the data set.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Affected by extreme values: The mean is sensitive to outliers (very large or very small values), which can pull the mean towards them.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The sum of the deviations of the values from their mean is zero: $\sum (x_i - \bar{x}) = 0$.</span></li>
+                        </ul>
+
+                        <h3 class="subsection-heading">The Median</h3>
+                        <p>The median is the middle value in an ordered data set. It divides the data into two equal halves: 50% of the observations are below the median, and 50% are above.</p>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Median for Ungrouped Data</h4>
+                        <p>Steps:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Arrange the data in ascending (or descending) order.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Determine the position of the median: $(n+1)/2$.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">
+                                If n is odd, the median is the value at the $(n+1)/2$ position. <br>
+                                If n is even, the median is the average of the values at the $n/2$ and $(n/2)+1$ positions.
+                            </span></li>
+                        </ol>
+
+                        <p><strong>Example 1 (n is odd):</strong> Find the median for the data: 2, 5, 8, 3, 6.</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Ordered data: 2, 3, 5, 6, 8</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Position: (5+1)/2 = 3rd position</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Median = 5</span></li>
+                        </ol>
+
+                        <p><strong>Example 2 (n is even):</strong> Find the median for the data: 10, 4, 7, 12, 6, 9.</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Ordered data: 4, 6, 7, 9, 10, 12</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Position: (6+1)/2 = 3.5th position (between 3rd and 4th)</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Median = Average of 3rd (7) and 4th (9) values = (7+9)/2 = 8</span></li>
+                        </ol>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Median for Grouped Data</h4>
+                        <p>The median for grouped data is found using the following formula:</p>
+                        <div class="equation">
+                            $$ \text{Median} = L_m + \left( \frac{n/2 - cf_{m-1}}{f_m} \right) w $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$L_m$ = Lower class boundary of the median class (the class containing the n/2-th observation).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$n$ = Total number of observations.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$cf_{m-1}$ = Cumulative frequency of the class preceding the median class.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$f_m$ = Frequency of the median class.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$w$ = Width of the median class.</span></li>
+                        </ul>
+
+                        <p><strong>Example:</strong> Calculate the median weight using the grouped frequency distribution from Table 2.3.</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Find the position of the median: n/2 = 40/2 = 20th observation.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Identify the median class: Look at the cumulative frequency (cf) column in Table 2.3. The 20th observation falls in the class 67-72 (cf goes from 14 to 23).</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Determine the values for the formula:
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>$L_m$ = Lower boundary of 67-72 class = 66.5</li>
+                                    <li>$n/2 = 20$</li>
+                                    <li>$cf_{m-1}$ = Cumulative frequency of the preceding class (61-66) = 14</li>
+                                    <li>$f_m$ = Frequency of the median class (67-72) = 9</li>
+                                    <li>$w$ = Class width = 6</li>
+                                </ul>
+                            </span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Calculate the median:</span></li>
+                        </ol>
+                        <div class="equation">
+                            $$ \text{Median} = 66.5 + \left( \frac{20 - 14}{9} \right) 6 = 66.5 + \left( \frac{6}{9} \right) 6 = 66.5 + 4 = 70.5 \text{ kg} $$
+                        </div>
+                         <!-- Properties of Median in next chunk -->
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-3-part-1 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-part-5.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 3 (Part 1): Central Tendency</span>
+                    </div>
+                    <a href="chapter-3-part-2.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

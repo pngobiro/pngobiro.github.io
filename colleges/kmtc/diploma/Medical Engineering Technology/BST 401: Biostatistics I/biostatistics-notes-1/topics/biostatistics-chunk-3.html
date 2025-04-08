@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biostatistics Part 3: Sampling, Data Representation, Correlation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="biostatistics-chunk-2.html" class="nav-button"> <!-- Link to Previous -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;"></div> <!-- 5/5 -->
+                        </div>
+                        <span class="progress-text">Section 5 of 5</span>
+                    </div>
+                    <a href="#" class="nav-button disabled"> <!-- Disabled Next -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Biostatistics Part 3: Sampling, Data Representation, Correlation</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- EXACT CONTENT FROM ORIGINAL DOCUMENT -->
+
+                <!-- START: sampling-and-sample-size -->
+                <section id="sampling-and-sample-size" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">👥</span>
+                        <span class="heading-text">Sampling and sample size.</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Sampling refers to researcher's process of selecting the sample for a population in order to obtain information.</p>
+                        <p>Sample is a fraction or a part of a whole.</p>
+                        <p>Factors to consider when choosing a sample.</p>
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">•</span><span class="item-text">Variance or heterogeneity of the population.</span></li>
+                           <li class="list-item"><span class="item-icon">•</span><span class="item-text">Degree of acceptable error.</span></li>
+                        </ul>
+                        <p>Generally one needs to make a judgment on all facts.</p>
+
+                        <h3 class="subsection-heading">Fischer's etal formula</h3>
+                        <p>It's appropriate for population size <span class="math-inline">$\geq 10,000$</span>.</p>
+                        <div class="equation">$$ n = \frac{z^{2} p q}{d^{2}} $$</div>
+                        <p><span class="math-inline">$n=$</span> desired sample.</p>
+                        <p><span class="math-inline">$\mathrm{z}=$</span> standard normal deviate(1.96)</p>
+                        <p><span class="math-inline">$\mathrm{p}=$</span> portion of the population estimated to have a certain characteristic.(if there is no reasonable estimate, use <span class="math-inline">$50 \%$</span> which is 0.5 ).</p>
+                        <p><span class="math-inline">$\mathrm{q}=$</span> portion of population with no desired characteristic.</p>
+                        <p><span class="math-inline">$\mathrm{D}=$</span> degree of accuracy, usually 0.05 .</p>
+                        <p>For a sample size <span class="math-inline">$\leq 10,000$</span></p>
+                        <div class="equation">$$ nf = \frac{n}{1 + n/N} $$</div>
+                        <p><span class="math-inline">$nf=$</span> desired sample size</p>
+                        <p><span class="math-inline">$\mathrm{N}=$</span> estimated population <span class="math-inline">$<10,000$</span></p>
+                        <p><span class="math-inline">$\mathrm{n}=$</span> estimated sample when N is greater or equal to 10,000 .</p>
+                        <p>For population size of upto 30, use the able population.</p>
+                        <p>Calculation of demographic rates.</p>
+
+                        <h3 class="subsection-heading">a) Incidence rate.</h3>
+                        <p>The incidence rate of a disease is ad follows;</p>
+                        <div class="equation">$$ \frac{\text{Number of new cases over the period}}{\text{Population at risk}} $$</div>
+
+                        <h3 class="subsection-heading">b) Prevalence rate.</h3>
+                        <p>The prevalence rate of a disease at a time is;</p>
+                        <div class="equation">$$ \frac{\text{Total number of cases of the disease at the time}}{\text{Population at risk}} $$</div>
+
+                        <h3 class="subsection-heading">c) Mortality rate.</h3>
+                        <p>It's the;</p>
+                        <div class="equation">$$ \frac{\text{Number of deaths recorded}}{\text{Number of people in the population}} \times \text{the percentage } (100, 1000, 10000) $$</div>
+
+                        <h3 class="subsection-heading">d) Morbidity rate.</h3>
+                        <p>Number of deaths in a given time <span class="math-inline">$*$</span> the percentage <span class="math-inline">$(100,1000,10000)$</span></p>
+                        <p>Total population</p> <!-- Note: This seems incomplete in the source -->
+                    </div>
+                </section>
+                <!-- END: sampling-and-sample-size -->
+
+                <!-- START: data-representation -->
+                <section id="data-representation" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">DATA REPRESENTATION</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Graphical presentation</h3>
+                        <p>A graph enables the researcher to see the trend in the distribution easily than looking at numbers in a frequency distribution.</p>
+                        <p>A graph has two axes, the horizontal axis and the vertical axis. Its customary to present frequency along the vertical axis and scores along the horizontal axis.</p>
+                        <p>Avoid too steep or too flat graphs.</p>
+                        <p>The width of the graph should be <span class="math-inline">$1 / 3$</span> to <span class="math-inline">$2 / 3$</span> its height.</p>
+                        <p>A graph should be well labeled on both axes, should have a title.</p>
+                        <p>The three types of graphs include;</p>
+
+                        <h4 class="subsection-heading">(a) Histogram.</h4>
+                        <p>Comprises of a series of vertical bars. The y axis represent number of subjects obtaining a particular score.</p>
+                        <p>Exact limits are used to construct a histogram and therefore its used with continuous data.</p>
+                        <img src="../assets/images/image-08.jpg" alt="Example histogram showing frequency distribution" class="content-image">
+
+                        <h4 class="subsection-heading">(b) Bar chart.</h4>
+                        <p>Preferred with discrete or categorical data or when the scale is nominal; has no order.</p>
+                        <p>Spaces are left between the bars to signify the lack of continuity between the categories.</p>
+                        <img src="../assets/images/image-09.jpg" alt="Example bar chart showing categorical data" class="content-image">
+
+                        <h4 class="subsection-heading">(c) Frequency polygon.</h4>
+                        <p>A polygon is a many sided figure.</p>
+                        <img src="../assets/images/image-10.jpg" alt="Example frequency polygon showing distribution trend" class="content-image">
+                        <p>One must establish midpoint of class interval when plotting a frequency polygon.</p>
+                        <p>It's a closed figure and the end meets the x axis.</p>
+
+                        <h3 class="subsection-heading">Frequency distribution table.</h3>
+                        <p>It shows the distribution of scores in a sample for a specific variable. It gives a record of the number of times a score or response occurs.</p>
+
+                        <h4 class="subsection-heading">Ungrouped data</h4>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr><th>Score</th><th>Frequency</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>40</td><td>2</td></tr>
+                                    <tr><td>50</td><td>10</td></tr>
+                                    <tr><td>60</td><td>5</td></tr>
+                                    <tr><td>70</td><td>3</td></tr>
+                                    <tr><td>Total</td><td>20</td></tr> <!-- Added Total for clarity -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h4 class="subsection-heading">Grouped data</h4>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr><th>Score</th><th>Frequency</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>31-40</td><td>2</td></tr>
+                                    <tr><td>41-50</td><td>10</td></tr>
+                                    <tr><td>51-60</td><td>5</td></tr>
+                                    <tr><td>61-70</td><td>3</td></tr>
+                                    <tr><td>Total</td><td>20</td></tr> <!-- Added Total for clarity -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 class="subsection-heading">Percentage frequency</h3>
+                        <p>Its the portion of a subgroup to the total group or sample and it ranges from 0 to 100 .</p>
+                        <p>It's important especially when there is need to compare groups that differ in size.</p>
+                    </div>
+                </section>
+                <!-- END: data-representation -->
+
+                <!-- START: correlation-coefficients -->
+                <section id="correlation-coefficients" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔗</span>
+                        <span class="heading-text">Correlation coefficients</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A correlation used to analyze the degree of relationship between two variables.</p>
+                        <p>A correlation coefficient is a number that expresses the magnitude and direction of the association between two variables.</p>
+                        <p>In order to demonstrate that 2 variables are related, the researcher has to obtain values or measurements on both variables for the same event.</p>
+                        <p>Example; A researcher obtains weight and intake of calories by diabetic patients over a period of time then compares the relationship.</p>
+
+                        <h3 class="subsection-heading">Types of correlation coefficients.</h3>
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">•</span><span class="item-text">Phi <span class="math-inline">$\boldsymbol{\Phi}$</span> - Its when variables are measured in a nominal scale</span></li>
+                           <li class="list-item"><span class="item-icon">•</span><span class="item-text">Spearman's rank/ Rho <span class="math-inline">$\mathbf{P}$</span> - is when both variables are measured in ordinal scale.</span></li>
+                           <li class="list-item"><span class="item-icon">•</span><span class="item-text">Pearson's correlation coefficients <span class="math-inline">$\mathbf{r}$</span> - when both variables are measured in on an interval or ratio scale.</span></li>
+                        </ul>
+
+                        <p>To obtain a visual representation of the relationship between two variables, the researcher plots values on a scattergram.</p>
+                        <p>Scattergram is a graphic representation of the paired score for each subject on the two variables.</p>
+                        <p>Pairs of dots are plotted on the graph, placing them to indicate where x and y intersect.</p>
+                        <p>If the pattern of dots extend from lower left corner to upper right corner, positive correlation is indicated.</p>
+                        <p>If the dots are distributed from upper left corner to lower right corner, a negative correlation exists.</p>
+                        <p>When dots are scattered all over, no relation exists between the two variables.</p>
+                        <p>NB - A positive correlation means that two variables tend to increase and decrease together.</p>
+                        <p>- A negative correlation denotes inverse relations, when one increases, the other decreases.</p>
+                        <p>Values in a correlation coefficient range from +1 to -1 , where +1 implies a perfect positive correlation, 0 implies no correlation and -1 implies a perfect negative correlation.</p>
+                        <img src="../assets/images/image-11.jpg" alt="Scattergram showing positive correlation" class="content-image">
+                        <p>Positive correlation</p>
+                        <img src="../assets/images/image-12.jpg" alt="Scattergram showing negative correlation" class="content-image">
+                        <p>Negative correlation</p>
+                        <img src="../assets/images/image-13.jpg" alt="Scattergram showing no correlation" class="content-image">
+                        <p>No correlation</p>
+
+                        <h3 class="subsection-heading">Contingency table/ cross tabulation table.</h3>
+                        <p>Displays the relationship between sets of nominal data.</p>
+                        <p>Example; A researcher wants to determine whether or not there is a relationship between gender and smoking.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Gender vs Smoking</caption>
+                                <thead>
+                                    <tr><th>Gender</th><th>Smoke</th><th>Don't smoke</th><th>Total</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Male</td><td>30</td><td>20</td><td>50</td></tr>
+                                    <tr><td>Female</td><td>25</td><td>25</td><td>50</td></tr>
+                                    <tr><td>Total</td><td>55</td><td>45</td><td>100</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: correlation-coefficients -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="biostatistics-chunk-2.html" class="nav-button"> <!-- Link to Previous -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;"></div> <!-- 5/5 -->
+                        </div>
+                        <span class="progress-text">Section 5 of 5</span>
+                    </div>
+                    <a href="#" class="nav-button disabled"> <!-- Disabled Next -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

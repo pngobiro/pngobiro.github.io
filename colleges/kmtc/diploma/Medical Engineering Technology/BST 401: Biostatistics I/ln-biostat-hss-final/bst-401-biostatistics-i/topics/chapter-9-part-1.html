@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9 (Part 1): Correlation Analysis - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-4.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 9 (Part 1): Correlation</span>
+                    </div>
+                    <a href="chapter-9-part-2.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-9-part-1 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER NINE <br> Correlation and Regression</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-9-learning-objectives">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">9.1 Learning Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the end of this chapter, the student is expected to be able to:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Understand the concepts of correlation and regression</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Construct and interpret scatter plots</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Calculate and interpret Pearson's correlation coefficient (r)</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Perform hypothesis tests for the correlation coefficient</span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text">Understand the assumptions of linear regression</span></li>
+                            <li class="list-item"><span class="item-icon">6.</span><span class="item-text">Determine the equation of the least-squares regression line</span></li>
+                            <li class="list-item"><span class="item-icon">7.</span><span class="item-text">Interpret the slope and intercept of the regression line</span></li>
+                            <li class="list-item"><span class="item-icon">8.</span><span class="item-text">Calculate and interpret the coefficient of determination ($r^2$)</span></li>
+                            <li class="list-item"><span class="item-icon">9.</span><span class="item-text">Perform hypothesis tests for the slope of the regression line</span></li>
+                            <li class="list-item"><span class="item-icon">10.</span><span class="item-text">Understand the difference between correlation and causation</span></li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-9-introduction">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📖</span>
+                        <span class="heading-text">9.2 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In previous chapters, we focused on analyzing single variables (univariate analysis) or comparing groups based on a single variable.</p>
+                        <p>Correlation and regression analysis (bivariate analysis) are used to study the relationship between two quantitative variables measured on the same subjects.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Correlation Analysis:</strong> Measures the strength and direction of the linear association between two variables. It does not imply causation.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Regression Analysis:</strong> Describes the nature of the relationship between two variables (how one variable changes as the other changes) and allows for prediction. One variable is considered the independent (predictor) variable (X), and the other is the dependent (response) variable (Y).</span></li>
+                        </ul>
+                        <p>Example relationships:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Height and weight</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Age and blood pressure</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Dosage of a drug and reduction in symptoms</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Years of education and income</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-9-correlation-analysis">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔗</span>
+                        <span class="heading-text">9.3 Correlation analysis</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Correlation analysis aims to quantify the linear relationship between two quantitative variables, say X and Y.</p>
+
+                        <h3 class="subsection-heading">Scatter Plot (Scatter Diagram)</h3>
+                        <p>A scatter plot is a graphical representation of the relationship between two quantitative variables.</p>
+                        <p>Each pair of observations $(x_i, y_i)$ is plotted as a point on a graph with the X variable on the horizontal axis and the Y variable on the vertical axis.</p>
+                        <p>The pattern of points on the scatter plot reveals:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Form:</strong> Linear or non-linear relationship.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Direction:</strong> Positive (as X increases, Y tends to increase) or negative (as X increases, Y tends to decrease).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Strength:</strong> How closely the points follow a pattern (e.g., tightly clustered around a line indicates strong relationship; widely scattered indicates weak relationship).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Outliers:</strong> Points that deviate markedly from the general pattern.</span></li>
+                        </ul>
+                        <p><strong>Examples of Scatter Plots:</strong></p>
+                        <p><em>Figure 9.1: Strong Positive Linear Correlation</em></p>
+                        <img src="../assets/images/chapter-9-scatter-1.jpg" alt="Strong Positive Correlation Scatter Plot" class="content-image">
+                        <p><em>Figure 9.2: Moderate Negative Linear Correlation</em></p>
+                        <img src="../assets/images/chapter-9-scatter-2.jpg" alt="Moderate Negative Correlation Scatter Plot" class="content-image">
+                        <p><em>Figure 9.3: No Linear Correlation</em></p>
+                        <img src="../assets/images/chapter-9-scatter-3.jpg" alt="No Correlation Scatter Plot" class="content-image">
+                        <p><em>Figure 9.4: Non-linear (Curvilinear) Correlation</em></p>
+                        <img src="../assets/images/chapter-9-scatter-4.jpg" alt="Non-linear Correlation Scatter Plot" class="content-image">
+
+                        <h3 class="subsection-heading">Pearson's Correlation Coefficient (r)</h3>
+                        <p>Pearson's product-moment correlation coefficient, denoted by $r$ (for a sample) or $\rho$ (rho, for a population), measures the strength and direction of the *linear* relationship between two quantitative variables.</p>
+                        <p><strong>Properties of r:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Ranges from -1 to +1: $-1 \le r \le +1$.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$r = +1$: Perfect positive linear correlation.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$r = -1$: Perfect negative linear correlation.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$r = 0$: No linear correlation (but there could still be a non-linear relationship).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The closer $|r|$ is to 1, the stronger the linear relationship.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The sign of $r$ indicates the direction (positive or negative).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It is unitless.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Correlation between X and Y is the same as correlation between Y and X.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Sensitive to outliers.</span></li>
+                        </ul>
+                        <p><strong>Calculation Formula for Sample Correlation Coefficient (r):</strong></p>
+                        <p>Definitional formula (based on Z-scores):</p>
+                        <div class="equation">
+                            $$ r = \frac{1}{n-1} \sum_{i=1}^{n} \left( \frac{x_i - \bar{x}}{s_x} \right) \left( \frac{y_i - \bar{y}}{s_y} \right) = \frac{\sum z_x z_y}{n-1} $$
+                        </div>
+                        <p>Computational formula (easier for calculation):</p>
+                        <div class="equation">
+                            $$ r = \frac{S_{xy}}{\sqrt{S_{xx} S_{yy}}} $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$S_{xx} = \sum (x_i - \bar{x})^2 = \sum x_i^2 - \frac{(\sum x_i)^2}{n}$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$S_{yy} = \sum (y_i - \bar{y})^2 = \sum y_i^2 - \frac{(\sum y_i)^2}{n}$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$S_{xy} = \sum (x_i - \bar{x})(y_i - \bar{y}) = \sum x_i y_i - \frac{(\sum x_i)(\sum y_i)}{n}$</span></li>
+                        </ul>
+
+                        <p><strong>Example:</strong> Calculate the correlation coefficient for the height (X) and weight (Y) data from Table 2.9 (n=10).</p>
+                        <p>First, calculate necessary sums:</p>
+                        <p>$\sum x_i = 1716$</p>
+                        <p>$\sum y_i = 663$</p>
+                        <p>$\sum x_i^2 = 165^2 + ... + 185^2 = 295152$</p>
+                        <p>$\sum y_i^2 = 60^2 + ... + 80^2 = 44611$</p>
+                        <p>$\sum x_i y_i = (165)(60) + ... + (185)(80) = 114014$</p>
+                        <p>Now calculate $S_{xx}, S_{yy}, S_{xy}$:</p>
+                        <div class="equation">
+                            $$ S_{xx} = 295152 - \frac{(1716)^2}{10} = 295152 - 294465.6 = 686.4 $$
+                            $$ S_{yy} = 44611 - \frac{(663)^2}{10} = 44611 - 43956.9 = 654.1 $$
+                            $$ S_{xy} = 114014 - \frac{(1716)(663)}{10} = 114014 - 113760.8 = 253.2 $$
+                        </div>
+                        <p>Finally, calculate r:</p>
+                        <div class="equation">
+                            $$ r = \frac{253.2}{\sqrt{(686.4)(654.1)}} = \frac{253.2}{\sqrt{449003.04}} = \frac{253.2}{670.077} \approx 0.378 $$
+                        </div>
+                        <p>Interpretation: There is a moderate positive linear correlation between height and weight in this sample.</p>
+
+                        <h3 class="subsection-heading">Hypothesis Test for Correlation Coefficient ($\rho$)</h3>
+                        <p>Tests if the observed sample correlation ($r$) is significantly different from zero (or some other hypothesized value), suggesting a linear association in the population.</p>
+                        <p><strong>Hypotheses (testing for any linear correlation):</strong></p>
+                        <p>$H_0: \rho = 0$ (No linear correlation in the population)</p>
+                        <p>$H_1: \rho \ne 0$ (Linear correlation exists in the population)</p>
+                        <p><strong>Test Statistic (t-test):</strong></p>
+                        <div class="equation">
+                            $$ t_{calc} = \frac{r \sqrt{n-2}}{\sqrt{1-r^2}} $$
+                        </div>
+                        <p><strong>Degrees of Freedom:</strong> $df = n-2$.</p>
+                        <p><strong>Decision Rule:</strong> Compare $t_{calc}$ to the critical value $t_{\alpha/2, df}$ from the t-distribution table, or use the p-value approach.</p>
+
+                        <p><strong>Example:</strong> Test if the correlation $r=0.378$ calculated from the height/weight data (n=10) is significantly different from zero at $\alpha=0.05$.</p>
+                        <p>$H_0: \rho = 0$</p>
+                        <p>$H_1: \rho \ne 0$</p>
+                        <div class="equation">
+                            $$ t_{calc} = \frac{0.378 \sqrt{10-2}}{\sqrt{1-(0.378)^2}} = \frac{0.378 \sqrt{8}}{\sqrt{1-0.142884}} = \frac{0.378 \times 2.828}{\sqrt{0.857116}} = \frac{1.069}{0.926} \approx 1.155 $$
+                        </div>
+                        <p>$df = n-2 = 10-2 = 8$.</p>
+                        <p>Critical value $t_{\alpha/2, df} = t_{0.025, 8}$ from t-table is 2.306.</p>
+                        <p>Decision: Since $|t_{calc}| = 1.155 < 2.306$, do not reject $H_0$.</p>
+                        <p>Conclusion: There is not sufficient evidence at $\alpha=0.05$ to conclude that there is a significant linear correlation between height and weight in the population from which this sample was drawn.</p>
+                        <!-- Regression Analysis in next chunk -->
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-9-part-1 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-4.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 9 (Part 1): Correlation</span>
+                    </div>
+                    <a href="chapter-9-part-2.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
