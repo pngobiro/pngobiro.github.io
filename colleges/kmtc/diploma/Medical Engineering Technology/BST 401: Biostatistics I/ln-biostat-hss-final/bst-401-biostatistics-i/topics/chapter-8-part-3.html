@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8 (Part 3): Paired t-test, CI vs P-value, Chi-Square Intro - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-2.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 3): Paired t, Chi-Sq</span>
+                    </div>
+                    <a href="chapter-8-part-4.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-8-part-3 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER EIGHT <br> Hypothesis Testing (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-8-small-samples-means-cont">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔬</span>
+                        <span class="heading-text">8.7 Comparing the means of small samples (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+
+                        <h3 class="subsection-heading">Paired (Dependent) Samples t-test</h3>
+                        <p>Used when the two samples are related or matched (e.g., measurements on the same subject before and after an intervention, measurements on matched pairs like twins).</p>
+                        <p>The test focuses on the differences between the paired observations.</p>
+                        <p><strong>Steps:</strong></p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Calculate the difference ($d_i$) for each pair: $d_i = x_{1i} - x_{2i}$ (or $x_{after} - x_{before}$).</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Calculate the mean of the differences ($\bar{d}$).</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Calculate the standard deviation of the differences ($s_d$).</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Perform a one-sample t-test on the differences, testing if the mean difference ($\mu_d$) is significantly different from 0 (or some other hypothesized value).</span></li>
+                        </ol>
+                        <p><strong>Hypotheses:</strong></p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Two-tailed: $H_0: \mu_d = 0$ vs $H_1: \mu_d \ne 0$</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Left-tailed: $H_0: \mu_d \ge 0$ vs $H_1: \mu_d < 0$</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Right-tailed: $H_0: \mu_d \le 0$ vs $H_1: \mu_d > 0$</span></li>
+                        </ul>
+                        <p><strong>Test Statistic (Paired t-test):</strong></p>
+                        <div class="equation">
+                            $$ t_{calc} = \frac{\bar{d} - \mu_{d0}}{s_d / \sqrt{n}} $$
+                        </div>
+                        <p>Where $\mu_{d0}$ is the hypothesized mean difference (usually 0), $n$ is the number of pairs, and $s_d$ is the standard deviation of the differences.</p>
+                        <p><strong>Degrees of Freedom:</strong> $df = n-1$.</p>
+                        <p><strong>Decision Rule:</strong> Compare $t_{calc}$ to the critical value $t_{\alpha/2, df}$ or $t_{\alpha, df}$ from the t-distribution table, or use the p-value approach.</p>
+
+                        <p><strong>Example:</strong> Systolic blood pressure (SBP) was measured for 8 patients before and after taking a new medication. Test if the medication significantly reduces SBP at $\alpha=0.05$. Assume differences are normally distributed.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Table 8.1 SBP Before and After Medication (mmHg)</caption>
+                                <thead>
+                                    <tr><th>Patient</th><th>Before ($x_1$)</th><th>After ($x_2$)</th><th>Difference ($d_i = x_1 - x_2$)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>140</td><td>132</td><td>8</td></tr>
+                                    <tr><td>2</td><td>145</td><td>135</td><td>10</td></tr>
+                                    <tr><td>3</td><td>138</td><td>130</td><td>8</td></tr>
+                                    <tr><td>4</td><td>150</td><td>145</td><td>5</td></tr>
+                                    <tr><td>5</td><td>142</td><td>138</td><td>4</td></tr>
+                                    <tr><td>6</td><td>148</td><td>140</td><td>8</td></tr>
+                                    <tr><td>7</td><td>135</td><td>130</td><td>5</td></tr>
+                                    <tr><td>8</td><td>146</td><td>138</td><td>8</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Calculate mean and standard deviation of the differences ($d_i$):</p>
+                        <p>Differences: 8, 10, 8, 5, 4, 8, 5, 8</p>
+                        <p>$\sum d_i = 8+10+8+5+4+8+5+8 = 56$</p>
+                        <p>$\bar{d} = \sum d_i / n = 56 / 8 = 7$</p>
+                        <p>$\sum d_i^2 = 8^2+10^2+8^2+5^2+4^2+8^2+5^2+8^2 = 64+100+64+25+16+64+25+64 = 422$</p>
+                        <p>Variance of differences:</p>
+                        <div class="equation">
+                            $$ s_d^2 = \frac{\sum d_i^2 - \frac{(\sum d_i)^2}{n}}{n-1} = \frac{422 - \frac{(56)^2}{8}}{8-1} = \frac{422 - \frac{3136}{8}}{7} = \frac{422 - 392}{7} = \frac{30}{7} \approx 4.286 $$
+                        </div>
+                        <p>Standard deviation of differences: $s_d = \sqrt{4.286} \approx 2.070$.</p>
+                        <p><strong>Hypotheses:</strong> Test if medication reduces SBP (i.e., if mean difference Before-After is positive).</p>
+                        <p>$H_0: \mu_d \le 0$</p>
+                        <p>$H_1: \mu_d > 0$ (Right-tailed)</p>
+                        <p><strong>Test Statistic:</strong></p>
+                        <div class="equation">
+                            $$ t_{calc} = \frac{\bar{d} - 0}{s_d / \sqrt{n}} = \frac{7 - 0}{2.070 / \sqrt{8}} = \frac{7}{2.070 / 2.828} = \frac{7}{0.732} \approx 9.56 $$
+                        </div>
+                        <p><strong>Decision Rule:</strong> $df = n-1 = 8-1 = 7$. For a right-tailed test at $\alpha=0.05$, the critical value is $t_{\alpha, df} = t_{0.05, 7} = 1.895$. Reject $H_0$ if $t_{calc} > 1.895$.</p>
+                        <p><strong>Decision:</strong> Since $t_{calc} = 9.56 > 1.895$, reject $H_0$.</p>
+                        <p><strong>Conclusion:</strong> There is significant evidence at $\alpha=0.05$ that the medication reduces systolic blood pressure.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-8-ci-vs-pvalue">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🤔</span>
+                        <span class="heading-text">8.8 Confidence interval or P-value?</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Both confidence intervals (Chapter 7) and hypothesis tests (p-values) are methods of statistical inference, and they are closely related.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">A $(1-\alpha) \times 100\%$ confidence interval contains the range of plausible values for the population parameter. If the hypothesized value under $H_0$ (e.g., $\mu_0$ or $P_0$) falls *outside* this interval, it is equivalent to rejecting $H_0$ at the $\alpha$ level of significance in a two-tailed test. If the hypothesized value falls *inside* the interval, it is equivalent to not rejecting $H_0$.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The <strong>p-value</strong> provides the exact probability of observing the sample result (or more extreme) if $H_0$ were true. It gives a measure of the strength of evidence against $H_0$. Smaller p-values indicate stronger evidence against $H_0$.</span></li>
+                        </ul>
+                        <p><strong>Advantages of Confidence Intervals:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Provide a range of plausible values for the parameter, giving information about the magnitude and precision of the estimate.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Easier to interpret in terms of practical significance.</span></li>
+                        </ul>
+                        <p><strong>Advantages of P-values:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Provide the exact level of significance achieved by the data.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Allow readers to make their own conclusions based on their preferred $\alpha$ level.</span></li>
+                        </ul>
+                        <p>Often, it is best practice to report both the confidence interval and the p-value.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-8-chi-square-intro">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">8.9 Test of significance using the Chi-square and Fisher's exact tests</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The Chi-square ($\chi^2$) test is used for analyzing categorical data. It compares observed frequencies in categories with expected frequencies under a null hypothesis.</p>
+                        <p>The general formula for the Chi-square test statistic is:</p>
+                        <div class="equation">
+                            $$ \chi^2_{calc} = \sum \frac{(O - E)^2}{E} $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$O$ = Observed frequency in a category.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$E$ = Expected frequency in that category under $H_0$.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The sum is taken over all categories.</span></li>
+                        </ul>
+                        <p>The calculated $\chi^2$ value is compared to a critical value from the Chi-square distribution with appropriate degrees of freedom ($df$). The Chi-square distribution is skewed to the right and depends on $df$.</p>
+                        <p><strong>Common Applications:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Goodness-of-Fit Test:</strong> Tests if the observed frequencies of a single categorical variable match the expected frequencies from a hypothesized distribution.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Test of Independence:</strong> Tests if two categorical variables are associated or independent in a population, using data from a contingency table.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Test of Homogeneity:</strong> Tests if the proportion distribution for one categorical variable is the same across different populations (groups defined by a second categorical variable). Also uses contingency table data.</span></li>
+                        </ul>
+
+                        <h3 class="subsection-heading">Chi-Square Goodness-of-Fit Test</h3>
+                        <p>Tests how well the observed frequency distribution of a single categorical variable fits an expected distribution.</p>
+                        <p><strong>Hypotheses:</strong></p>
+                        <p>$H_0$: The observed frequencies follow the specified distribution.</p>
+                        <p>$H_1$: The observed frequencies do not follow the specified distribution.</p>
+                        <p><strong>Expected Frequencies (E):</strong> Calculated based on the hypothesized proportions ($P_i$) and the total sample size ($n$): $E_i = n \times P_i$.</p>
+                        <p><strong>Test Statistic:</strong> $\chi^2_{calc} = \sum \frac{(O_i - E_i)^2}{E_i}$</p>
+                        <p><strong>Degrees of Freedom:</strong> $df = k - 1$, where $k$ is the number of categories.</p>
+                        <p><strong>Decision Rule:</strong> Reject $H_0$ if $\chi^2_{calc} > \chi^2_{\alpha, df}$ (critical value from Chi-square table) or if p-value $\le \alpha$. (Chi-square tests are typically right-tailed).</p>
+                        <p><strong>Assumption:</strong> Expected frequency in each category should be at least 5 ($E_i \ge 5$). If not, categories may need to be combined.</p>
+
+                        <p><strong>Example:</strong> A standard die is rolled 120 times. The observed frequencies for each face are: 1 (18 times), 2 (22), 3 (15), 4 (25), 5 (19), 6 (21). Test if the die is fair at $\alpha=0.05$.</p>
+                        <p>$H_0$: The die is fair ($P_1=P_2=...=P_6 = 1/6$).</p>
+                        <p>$H_1$: The die is not fair.</p>
+                        <p>Expected frequency for each face: $E = n \times P = 120 \times (1/6) = 20$. (All $E_i \ge 5$).</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Chi-Square Goodness-of-Fit Calculation</caption>
+                                <thead><tr><th>Face</th><th>Observed (O)</th><th>Expected (E)</th><th>O - E</th><th>(O - E)²</th><th>(O - E)² / E</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>18</td><td>20</td><td>-2</td><td>4</td><td>4/20 = 0.20</td></tr>
+                                    <tr><td>2</td><td>22</td><td>20</td><td>2</td><td>4</td><td>4/20 = 0.20</td></tr>
+                                    <tr><td>3</td><td>15</td><td>20</td><td>-5</td><td>25</td><td>25/20 = 1.25</td></tr>
+                                    <tr><td>4</td><td>25</td><td>20</td><td>5</td><td>25</td><td>25/20 = 1.25</td></tr>
+                                    <tr><td>5</td><td>19</td><td>20</td><td>-1</td><td>1</td><td>1/20 = 0.05</td></tr>
+                                    <tr><td>6</td><td>21</td><td>20</td><td>1</td><td>1</td><td>1/20 = 0.05</td></tr>
+                                    <tr><td><strong>Total</strong></td><td><strong>120</strong></td><td><strong>120</strong></td><td></td><td></td><td><strong>$\chi^2_{calc} = 3.00$</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>$df = k - 1 = 6 - 1 = 5$.</p>
+                        <p>Critical value $\chi^2_{0.05, 5}$ from table is 11.070.</p>
+                        <p>Decision: Since $\chi^2_{calc} = 3.00 < 11.070$, do not reject $H_0$.</p>
+                        <p>Conclusion: There is not sufficient evidence at $\alpha=0.05$ to conclude that the die is unfair.</p>
+                        <!-- Tests of Independence/Homogeneity in next chunk -->
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-8-part-3 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-2.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 3): Paired t, Chi-Sq</span>
+                    </div>
+                    <a href="chapter-8-part-4.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
