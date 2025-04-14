@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Logic Gates and Boolean Algebra - Part 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-part-3.html" class="nav-button"> <!-- Link to previous chapter's last part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 3 Part 1 of 7</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-3-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 3: LOGIC GATES AND BOOLEAN ALGEBRA</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-3-intro-logic-math -->
+                <section id="chapter-3-intro-logic-math" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧠</span>
+                        <span class="heading-text">Introduction to Logic Mathematics</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Mathematical logic is a subfield of mathematics exploring the applications of formal logic to mathematics. It bears close connections to meta-mathematics, the foundations of mathematics, and theoretical computer science.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-3-intro-logic-math -->
+
+                <!-- START: chapter-3-set-theory-intro -->
+                <section id="chapter-3-set-theory-intro" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧩</span>
+                        <span class="heading-text">Set theory</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A set can be defined as a collection of things that are brought together because they obey a certain rule.</p>
+                        <p>These 'things' may be anything you like: numbers, people, shapes, cities, bits of text ..., literally anything.</p>
+                        <p>The key fact about the 'rule' they all obey is that it must be well-defined. In other words, it enables us to say for sure whether or not a given 'thing' belongs to the collection. If the 'things' we're talking about are English words, for example, a well-defined rule might be:</p>
+                        <p>'... has 5 or more letters'</p>
+                        <p>A rule which is not well-defined (and therefore couldn't be used to define a set) might be:</p>
+                        <p>'... is hard to spell'</p>
+                        <h3 class="subsection-heading">Requirement of a set</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">A set must be well defined i.e. it must not leave any room for ambiguities e.g sets of all students- which? Where? When?</span></li>
+                        </ol>
+                        <p>A set must be defined in terms of space and time</p>
+                        <ol class="enhanced-list" start="2">
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">The objective (elements or members) from a given set must be distinct i.e each object must appear once and only once, Must appear but not more than once</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">The order of the presentation of elements of a given set is immaterial</span></li>
+                        </ol>
+                        <p>e.g <span class="math-inline">$1,2,3=1,3,2=3,2,1$</span></p>
+                    </div>
+                </section>
+                <!-- END: chapter-3-set-theory-intro -->
+
+                <!-- START: chapter-3-set-types -->
+                <section id="chapter-3-set-types" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📚</span>
+                        <span class="heading-text">Types of Sets</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In set theory, there are different types of sets. All the operations in set theory could be based on sets. Set should be a group of individual terms in domain. The universal set has each and every element of domain. We are having different types of sets. We will see about the different types of sets.</p>
+                        <h3 class="subsection-heading">Different Types of Sets</h3>
+                        <p>There are different types of sets in set theory. They are listed below:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Universal Set</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Empty set</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Singleton set</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Finite and Infinite set</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Union of sets</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Intersection of sets</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Difference of sets</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Subset of a set</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Disjoint sets</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Equality of two sets</span></li>
+                        </ul>
+                        <h3 class="subsection-heading">Universal Set</h3>
+                        <p>The set of all the 'things' currently under discussion is called the universal set (or sometimes, simply the universe). It is denoted by <span class="math-inline">$\mathbf{U}$</span>.</p>
+                        <p>The universal set doesn't contain everything in the whole universe. On the contrary, it restricts us to just those things that are relevant at a particular time. For example, if in a given situation we're talking about numeric values - quantities, sizes, times, weights, or whatever - the universal set will be a suitable set of numbers (see below). In another context, the universal set may be {alphabetic characters} or {all living people\}, etc.</p>
+                        <h3 class="subsection-heading">Singleton Set:</h3>
+                        <p>A set which contains only one element is called a singleton set.</p>
+                        <p>For example:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><span class="math-inline">$A=\{x: x$</span> is neither prime nor composite<span class="math-inline">$\}$</span></span></li>
+                        </ul>
+                        <p>It is a singleton set containing one element, i.e., 1 .</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><span class="math-inline">$B=\{x: x$</span> is a whole number, <span class="math-inline">$x<1\}$</span></span></li>
+                        </ul>
+                        <p>This set contains only one element 0 and is a singleton set.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Let <span class="math-inline">$A=\left\{x: x \in N\right.$</span> and <span class="math-inline">$\left.x^{2}=4\right\}$</span></span></li>
+                        </ul>
+                        <p>Here A is a singleton set because there is only one element 2 whose square is 4 .</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Let <span class="math-inline">$B=\{x: x$</span> is a even prime number<span class="math-inline">$\}$</span></span></li>
+                        </ul>
+                        <p>Here B is a singleton set because there is only one prime number which is even, i.e., 2 .</p>
+                        <h3 class="subsection-heading">Finite Set:</h3>
+                        <p>A set which contains a definite number of elements is called a finite set. Empty set is also called a finite set.</p>
+                        <p>For example:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The set of all colors in the rainbow.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><span class="math-inline">$\mathrm{N}=\{\mathrm{x}: \mathrm{x} \in \mathrm{N}, \mathrm{x}<7\}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><span class="math-inline">$\cdot P=\{2,3,5,7,11,13,17, \ldots \ldots 97\}$</span></span></li>
+                        </ul>
+                        <h3 class="subsection-heading">Infinite Set:</h3>
+                        <p>The set whose elements cannot be listed, i.e., set containing never-ending elements is called an infinite set.</p>
+                        <p>For example:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Set of all points in a plane</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><span class="math-inline">$A=\{x: x \in N, x>1\}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Set of all prime numbers</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><span class="math-inline">$B=\{x: x \in W, x=2 n\}$</span></span></li>
+                        </ul>
+                        <p>Note:</p>
+                        <p>All infinite sets cannot be expressed in roster form.</p>
+                        <p>For example:</p>
+                        <p>The set of real numbers since the elements of this set do not follow any particular pattern.</p>
+                        <h3 class="subsection-heading">Cardinal Number of a Set:</h3>
+                        <p>The number of distinct elements in a given set A is called the cardinal number of A . It is denoted by <span class="math-inline">$\mathrm{n}(\mathrm{A})$</span>.</p>
+                        <p>For example:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><span class="math-inline">$A\{x: x \in N, x<5\} A=\{1,2,3,4\}$</span></span></li>
+                        </ul>
+                        <p>Therefore, <span class="math-inline">$n(A)=4$</span></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><span class="math-inline">$\mathrm{B}=$</span> set of letters in the word ALGEBRA</span></li>
+                        </ul>
+                        <p><span class="math-inline">$B=\{A, L, G, E, B, R\}$</span></p>
+                        <p>Therefore, <span class="math-inline">$n(B)=6$</span></p>
+                        <h3 class="subsection-heading">Equivalent Sets:</h3>
+                        <p>Two sets <span class="math-inline">$A$</span> and <span class="math-inline">$B$</span> are said to be equivalent if their cardinal number is same, i.e., <span class="math-inline">$n(A)=n(B)$</span>. The symbol for denoting an equivalent set is ' <span class="math-inline">$\leftrightarrow$</span> '.</p>
+                        <p>For example:</p>
+                        <p><span class="math-inline">$A=\{1,2,3\}$</span> Here <span class="math-inline">$n(A)=3$</span></p>
+                        <p><span class="math-inline">$B=\{p, q, r\}$</span> Here <span class="math-inline">$n(B)=3$</span></p>
+                        <p>Therefore, <span class="math-inline">$A \leftrightarrow B$</span></p>
+                        <h3 class="subsection-heading">Equal sets:</h3>
+                        <p>Two sets A and B are said to be equal if they contain the same elements. Every element of A is an element of <span class="math-inline">$B$</span> and every element of <span class="math-inline">$B$</span> is an element of <span class="math-inline">$A$</span>.</p>
+                        <p>For example:</p>
+                        <p><span class="math-inline">$A=\{p, q, r, s\}$</span></p>
+                        <p><span class="math-inline">$B=\{p, s, r, q\}$</span></p>
+                        <p>Therefore, <span class="math-inline">$\mathrm{A}=\mathrm{B}$</span></p>
+                        <p>The various types of sets and their definitions are explained above with the help of examples.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-3-set-types -->
+
+                <!-- START: chapter-3-empty-set -->
+                <section id="chapter-3-empty-set" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">∅</span>
+                        <span class="heading-text">Empty Set</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In mathematics, empty set is a set theory related topic. A set without any elements is said to be an empty set. This article helps you understand empty set by giving a clear idea about empty set with some example problems.</p>
+                        <h3 class="subsection-heading">Empty Set Definition</h3>
+                        <p>The other name of empty set is null set <span class="math-inline">$\phi$</span>. Consider two sets <span class="math-inline">$X=\{a, b, c, d\}$</span> and <span class="math-inline">$Y=\{1,2,3, 4,5,6\}$</span>. Consider another set <span class="math-inline">$Z$</span> which represents the intersection of <span class="math-inline">$X$</span> and <span class="math-inline">$Y$</span>. There is no common element for the set X and Y . So, intersection of X and Y is null.</p>
+                        <p><span class="math-inline">$\mathrm{Z}=\{ \}$</span> The representation of empty set is <span class="math-inline">$\}$</span>.</p> <!-- MMD formatting issue -->
+                        <h3 class="subsection-heading">Empty Set or Null Set:</h3>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">A set which does not contain any element is called an empty set, or the null set or the void set and it is denoted by <span class="math-inline">$\emptyset$</span> and is read as phi. In roster form, <span class="math-inline">$\varnothing$</span> is denoted by <span class="math-inline">$\{\}$</span>. An empty set is a finite set, since the number of elements in an empty set is finite, i.e., 0 .</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">For example: (a) The set of whole numbers less than 0 .</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">(b) Clearly there is no whole number less than 0 .</span></li>
+                        </ul>
+                        <p>Therefore, it is an empty set.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">(c) <span class="math-inline">$N=\{x: x \in N, 3<x<4\}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Let <span class="math-inline">$A=\{x: 2<x<3, x$</span> is a natural number<span class="math-inline">$\}$</span></span></li>
+                        </ul>
+                        <p>Here A is an empty set because there is no natural number between 2 and 3 .</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Let <span class="math-inline">$B=\{x: x$</span> is a composite number less than 4<span class="math-inline">$\}$</span>.</span></li>
+                        </ul>
+                        <p>Here B is an empty set because there is no composite number less than 4.</p>
+                        <p>Note:</p>
+                        <p><span class="math-inline">$\emptyset \neq\{0\} \therefore$</span> has no element.</p>
+                        <p><span class="math-inline">$\{0\}$</span> is a set which has one element 0 .</p>
+                        <p>The cardinal number of an empty set, i.e., <span class="math-inline">$n(\emptyset)=0$</span></p>
+                        <h3 class="subsection-heading">Cardinality of Empty Set:</h3>
+                        <p>Since we know that the cardinal number represents the number of elements that are present in the set and by the definition of an empty set, we know that there are no element in the empty set. Hence, the cardinal number or cardinality of an empty is zero.</p>
+                        <h3 class="subsection-heading">Properties of Preparation for Empty Set:</h3> <!-- "Preparation" seems like a typo -->
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Empty set is considered as subset of all sets. <span class="math-inline">$\phi \subset X$</span></span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Union of empty set <span class="math-inline">$\phi$</span> with a set X is X . <span class="math-inline">$A \cup \phi=A$</span></span></li>
+                        </ol>
+                        <p>Intersection of an empty set with a set X is an empty set.</p> <!-- Seems like property 3 -->
+                        <h3 class="subsection-heading">Solved Examples</h3>
+                        <p>Question 1: <span class="math-inline">$A$</span> is a set of alphabets and <span class="math-inline">$B$</span> is a set of numbers. What is the intersection of <span class="math-inline">$A$</span> and <span class="math-inline">$B$</span> ?</p>
+                        <p>Solution: <span class="math-inline">$\mathrm{A} \cap \mathrm{B}=\{ \}$</span></p>
+                        <p>Question 2: Write the set A which is a set of goats with 10 legs.</p>
+                        <p>Solution: A = \{ \}</p>
+                        <h3 class="subsection-heading">Power Set of the Empty Set</h3>
+                        <p>A set is called the power set of any set, if it contains all subsets of that set. We can use the notation <span class="math-inline">$\mathrm{P}(\mathrm{S})$</span> for representing any power set of the set. Now, from the definition of an empty set, it is clear that there is no element in it and hence, the power set of an empty set i.e.P <span class="math-inline">$(\phi)$</span> is the set which contain only one empty set, hence <span class="math-inline">$P(\phi)=\{\phi\}$</span></p>
+                        <h3 class="subsection-heading">Cartesian Product Empty Set</h3>
+                        <p>The Cartesian product of any two sets say A and B are denoted by A X B. There are some conditions for Cartesian product of empty sets as follows:</p>
+                        <p>If we have two sets A and B in such a way that both the sets are empty sets, then A <span class="math-inline">$\mathrm{XB}=\phi \times \phi=$</span> <span class="math-inline">$\phi$</span>. It is clear that, the cartesian product of two empty sets is again an empty set.</p>
+                        <p>If <span class="math-inline">$A$</span> is an empty set and <span class="math-inline">$B=\{1,2,3\}$</span>, then the cartesian product of <span class="math-inline">$A$</span> and <span class="math-inline">$B$</span> is as follows: <span class="math-inline">$\mathrm{AXB}=\{\phi\} .\{1,2,3\}=\{\phi \mathrm{X} 1, \phi \mathrm{X} 2, \phi \times 3\}=\{\phi, \phi, \phi\}=\{\phi\}$</span></p>
+                        <p>So, we say that if one of the set is an empty set from the given two sets, then again the Cartesian product of these two sets is an empty set.</p>
+                        <h3 class="subsection-heading">Examples of Empty Sets</h3>
+                        <p>Given below are some of the examples of empty sets.</p>
+                        <h4 class="subsection-heading">Solved Examples</h4>
+                        <p>Question 1: Which of the following represents the empty set?</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">A set of cats with 4 legs</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">A set of apples with red color</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">A set of positive numbers in which all are less than 1</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">A set of rectangles with 4 sides</span></li>
+                        </ol>
+                        <p>Solution:</p>
+                        <p>Option 1: A set of cats with 4 legs. This set is possible where cats are having 4 legs.</p>
+                        <p>Option 2: A set of apples with red color. This set is possible where apple is in red color.</p>
+                        <p>Option 3: A set of positive numbers in which all are less than 1.</p>
+                        <p>This set is not possible because the positive numbers must be greater than 1 . So, this set is considered as empty set.</p>
+                        <p>Answer: 3</p>
+                        <p>Question 2: A is a set of numbers from 1 to 10 B is a set of negative numbers. What is the intersection of A and B ?</p>
+                        <p>Solution:</p>
+                        <p>Given:</p>
+                        <p><span class="math-inline">$\mathrm{A}=$</span> set of number from 1 to <span class="math-inline">$10 .=\{1,2,3,4,5,6,7,8,9,10\}$</span></p>
+                        <p><span class="math-inline">$\mathrm{B}=$</span> set of negative numbers</p>
+                        <p><span class="math-inline">$=\{-1,-2,-3,-4, \ldots .\}$</span></p>
+                        <p>Intersection of <span class="math-inline">$\mathrm{A}$</span> and <span class="math-inline">$\mathrm{B}=\mathrm{A} \cap \mathrm{B}=\{ \}$</span></p>
+                        <p>Answer: The intersection of given sets is an empty set.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-3-empty-set -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-part-3.html" class="nav-button"> <!-- Link to previous chapter's last part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 3 Part 1 of 7</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-3-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

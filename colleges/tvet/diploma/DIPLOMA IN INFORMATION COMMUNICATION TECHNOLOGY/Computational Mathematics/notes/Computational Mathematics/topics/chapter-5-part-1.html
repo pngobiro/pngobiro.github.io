@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Probability - Part 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-4-part-3.html" class="nav-button"> <!-- Link to previous chapter's last part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 5 Part 1 of 2</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-5-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 5: PROBABILITY</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-5-intro-probability -->
+                <section id="chapter-5-intro-probability" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎲</span>
+                        <span class="heading-text">Introduction to probability</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Probability is the science of studying the outcomes of random phenomena.</p>
+                        <p>A phenomenon is called random if individual outcomes are uncertain but the long-term pattern of many outcomes is predictable.</p>
+                        <p>To determine the probability of a specific outcome of a probability experiment (random phenomenon) the experiment is repeated a large number of times and we look at the ratio of times that the outcome occurred.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Example: The outcome of the experiment of tossing a coin is a random phenomenon. The probability that the outcome is "Heads" can be found by tossing the coin a large number of times.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-5-intro-probability -->
+
+                <!-- START: chapter-5-probability-models -->
+                <section id="chapter-5-probability-models" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">Probability Models</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A probability model is a mathematical representation of a random phenomenon. It is defined by its sample space, events within the sample space, and probabilities associated with each event. The sample space <span class="math-inline">$S$</span> for a probability model is the set of all possible outcomes.</p>
+                        <h3 class="subsection-heading">Terminology:</h3>
+                        <p>For any probability experiment (or a random phenomenon)</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">✓</span><span class="item-text">The collection of all the possible outcomes of the experiment is called the Sample Space.</span></li>
+                            <li class="list-item"><span class="item-icon">✓</span><span class="item-text">An event is any sub-collection of outcomes in the sample space.</span></li>
+                            <li class="list-item"><span class="item-icon">✓</span><span class="item-text">A simple event is any single outcome.</span></li>
+                            <li class="list-item"><span class="item-icon">✓</span><span class="item-text">The complement of an event <span class="math-inline">$A$</span>, denoted <span class="math-inline">$\bar{A}$</span>, is the set of all outcomes not in <span class="math-inline">$A$</span>.</span></li>
+                            <li class="list-item"><span class="item-icon">✓</span><span class="item-text">A probability model (or a probability distribution) is a process of assigning to the outcomes and events in a sample space a value that represents the probability for that outcome to occur. If <span class="math-inline">$x$</span> is an outcome, the probability of <span class="math-inline">$x$</span> will be denoted by <span class="math-inline">$P(x)$</span>. If <span class="math-inline">$E$</span> is an event, the probability of <span class="math-inline">$E$</span> will be denoted by <span class="math-inline">$P(E)$</span>.</span></li>
+                            <li class="list-item"><span class="item-icon">✓</span><span class="item-text">The assignment in a probability model must satisfy the following rules:</span>
+                                <ul class="enhanced-list">
+                                    <li class="list-item"><span class="item-icon">•</span><span class="item-text">For any event or outcome, the probability is a number between 0 and 1.</span></li>
+                                    <li class="list-item"><span class="item-icon">•</span><span class="item-text">The probability of the sample space is 1.</span></li>
+                                    <li class="list-item"><span class="item-icon">•</span><span class="item-text">If two events A and B do are disjoint, i.e. have no outcome in common, then the probability <span class="math-inline">$\mathbf{P}(\mathbf{A}$ or $\mathbf{B})$</span> that one or the other occurs is the sum <span class="math-inline">$\boldsymbol{P}(\boldsymbol{A})+\boldsymbol{P}(\boldsymbol{B})$</span> of the individual probabilities of the events.</span></li>
+                                    <li class="list-item"><span class="item-icon">•</span><span class="item-text">The probability of an impossible (empty) event is 0 .</span></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p>For a finite (discrete) probability space, these rules guarantee that the probabilities of the individual events must add up to 1 .</p>
+                        <h3 class="subsection-heading">Example:</h3>
+                        <p>Suppose we have the following proportions for the marital status of a people in this country between the ages of 30 and 40 .</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead>
+                               <tr><th>marital status</th><th>Never married</th><th>Married</th><th>Widowed</th><th>Divorced</th></tr>
+                             </thead>
+                             <tbody>
+                               <tr><td>probability</td><td>.273</td><td>.603</td><td>.004</td><td>?</td></tr> <!-- Added ? for missing value -->
+                             </tbody>
+                           </table>
+                        </div>
+                        <p>A random experiment is drawing a person aged 30 to 40 at random. What is the sample space for this experiment?</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1)</span><span class="item-text">What is the event: "The person is not currently married"</span></li>
+                            <li class="list-item"><span class="item-icon">2)</span><span class="item-text">What is the complement of this event?</span></li>
+                            <li class="list-item"><span class="item-icon">3)</span><span class="item-text">If you draw a person aged 30 to 40 at random, what is the probability that:</span>
+                                <ol type="a">
+                                    <li>the person is divorced?</li>
+                                    <li>The person is not currently married?</li>
+                                    <li>The person has never married, or is widowed?</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-5-probability-models -->
+
+                <!-- START: chapter-5-equally-likely-outcomes -->
+                <section id="chapter-5-equally-likely-outcomes" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚖️</span>
+                        <span class="heading-text">Equally likely outcomes</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>If a probability experiment has N outcomes, and all are equally likely to occur, the probability of an individual outcome is <span class="math-inline">$1 / \mathrm{N}$</span>.</p>
+                        <p>The probability of an event A is</p>
+                        <p><span class="math-inline">$\mathrm{P}(\mathrm{A})=($</span> The number of outcomes that satisfy A<span class="math-inline">$)) / ($</span> Total number of outcomes <span class="math-inline">$)$</span></p>
+                        <h3 class="subsection-heading">Examples:</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1)</span><span class="item-text">The experiment of rolling a fair die has six equally likely outcomes (1, 2, 3, 4, 5, or 6).</span></li>
+                        </ol>
+                        <p>The probability of each of them to occur is <span class="math-inline">$1 / 6$</span>.</p>
+                        <ol type="a">
+                            <li>Let <span class="math-inline">$A$</span> be the event "The outcome is a multiple of 3 ". List the elements in <span class="math-inline">$A$</span>.</li>
+                            <li>List the elements in <span class="math-inline">$\bar{A}$</span>.</li>
+                            <li>What is <span class="math-inline">$P(A)$</span> ?</li>
+                        </ol>
+                        <ol class="enhanced-list" start="2">
+                            <li class="list-item"><span class="item-icon">2)</span><span class="item-text">Now consider the experiment of rolling two dice, and recording the number of dots on top, where the order is important.</span></li>
+                        </ol>
+                        <ol type="a">
+                            <li>How many outcomes are there? What is the sample space?</li>
+                        </ol>
+                        <img src="../assets/images/chapter-5-dice-outcomes.jpg" alt="Table showing all 36 possible outcomes of rolling two dice" class="content-image">
+                        <ol type="a" start="2">
+                            <li>What is the probability of rolling a six?</li>
+                            <li>In the board game MONOPOLY you need to "doubles" to get out of jail. What is the probability of getting out in a single roll?</li>
+                            <li>Let <span class="math-inline">$A$</span> be the event that the sum of the number is a multiple of 3 . What is <span class="math-inline">$A$</span> ?</li>
+                            <li>What is <span class="math-inline">$P(A)$</span> ?</li>
+                            <li>Let <span class="math-inline">$E$</span> be the event " The sum of the two dice is 4 ". What is <span class="math-inline">$P(E)$</span> ?</li>
+                            <li>What is <span class="math-inline">$\bar{E}$</span> ? What is <span class="math-inline">$P(\bar{E})$</span> ?</li>
+                        </ol>
+                        <p>The last two examples illustrate the following rule involving the complement of an event.</p>
+                        <blockquote>The Complement Rule</blockquote> <!-- Using blockquote for rule name -->
+                        <div class="equation">$$P(\bar{A})=1-P(A)$$</div>
+                        <h3 class="subsection-heading">Examples:</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1)</span><span class="item-text">A statistics student who takes the bus to school every day uses relative frequency to find the probabilities that the bus will arrive before a given time. The probability that the bus will come before <span class="math-inline">$8: 15$</span> is estimated to be .43 . What is the probability that the bus will not come before <span class="math-inline">$8: 15$</span> ?</span></li>
+                            <li class="list-item"><span class="item-icon">2)</span>
+                                <ol type="a">
+                                    <li>A computer assigns a you a PIN at random by assigning 4 symbols, the first is a letter of the alphabet, the other three are digits from 0-9 (with repetition allowed). Your favorite number is 6 . What is the probability of getting a pin with at least one 6 ?</li>
+                                    <li>What is the probability of getting a 6 if repeated digits are not allowed?</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-5-equally-likely-outcomes -->
+
+                <!-- START: chapter-5-sum-rule -->
+                <section id="chapter-5-sum-rule" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕</span>
+                        <span class="heading-text">The Sum Rule</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>If two events have no elements in common, they follow the rule: <span class="math-inline">$P(\operatorname{Aor} B)=P(A)+P(B)$</span></p>
+                        <p>Definition: If two events have no elements in common, they are called disjoint</p>
+                        <h3 class="subsection-heading">Example</h3>
+                        <p>In the example of rolling two die and recording the pair of numbers, let <span class="math-inline">$A$</span> be the event "the sum of the two numbers is a 3 ", and let <span class="math-inline">$B$</span> be the event "the sum of the two numbers is a 5 ". List the elements in <span class="math-inline">$A$</span>; list the elements in <span class="math-inline">$B$</span>; and list all the elements in the event " the sum of the two numbers is a 3 or a 5 ". Find <span class="math-inline">$P(A), P(B)$</span>, and the probability that the sum is a 3 or a 5 .</p>
+                        <p>But if the events have elements in common this doesn't work.</p>
+                        <h3 class="subsection-heading">Example:</h3>
+                        <p>In the example of rolling two die and recording the pair of numbers, let <span class="math-inline">$C$</span> be the event "one of the two numbers is a 3 ", and let <span class="math-inline">$B$</span> be the event "the sum of the two numbers is a 5 ". List the elements in <span class="math-inline">$C$</span>; list the elements in <span class="math-inline">$B$</span>; and list all the elements in the event " one of the two numbers is a 3 or the sum of the two numbers is a 5 ". Find <span class="math-inline">$P(C), P(B)$</span>, and the probability that one of the numbers is a 3 or the sum is a 5 .</p>
+                        <p>This illustrates the sum rule: <span class="math-inline">$P($ Aor $B)=P(A)+P(B)-P($ AandB $)$</span>, where <span class="math-inline">$P($ AandB $)$</span> is the probability that both A and B will happen.</p>
+                        <h3 class="subsection-heading">Examples</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1)</span><span class="item-text">A card is drawn at random from a standard deck of cards. What is the probability it will be a king or a heart?</span></li>
+                            <li class="list-item"><span class="item-icon">2)</span><span class="item-text">The data for a group of women from a survey is given below:</span></li>
+                        </ol>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead>
+                               <tr><th>Status</th><th>age 20-34</th><th>age 35-49</th><th>total</th></tr>
+                             </thead>
+                             <tbody>
+                               <tr><td>never married</td><td>152</td><td>51</td><td>203</td></tr>
+                               <tr><td>married</td><td>226</td><td>312</td><td>538</td></tr>
+                               <tr><td>widowed</td><td>18</td><td>69</td><td>87</td></tr>
+                               <tr><td>divorced</td><td>76</td><td>96</td><td>172</td></tr>
+                               <tr><td>Total</td><td>472</td><td>528</td><td>1000</td></tr>
+                             </tbody>
+                           </table>
+                        </div>
+                        <p>If you select a woman at random, what is the probability that she is either married, or over 35 ?</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-sum-rule -->
+
+                <!-- START: chapter-5-random-variables -->
+                <section id="chapter-5-random-variables" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">Random Variables</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A random variable gives a value to each outcome in a sample space. A probability model for a random variable assigns a probability value to each variable value.</p>
+                        <h3 class="subsection-heading">Examples:</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1)</span><span class="item-text">In the dice rolling experiment: If we are only interested in the sum of the die, the random variable would be the sum of the two numbers.</span></li>
+                            <li class="list-item"><span class="item-icon">2)</span><span class="item-text">In the experiment of rolling one die, the random variable could be the number of dots that lands on top.</span></li>
+                            <li class="list-item"><span class="item-icon">3)</span><span class="item-text">In an experiment of tossing a coin, a random variable could assign the number 1 to heads and 0 to tails.</span></li>
+                        </ol>
+                        <p>A probability model (or probability distribution) satisfies the rules:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">✓</span><span class="item-text">For any variable, the probability is a number between 0 and 1.</span></li>
+                            <li class="list-item"><span class="item-icon">✓</span><span class="item-text">The probability of the sum of all the variables is 1 .</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-5-random-variables -->
+
+                <!-- START: chapter-5-mean-expected-value -->
+                <section id="chapter-5-mean-expected-value" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">μ</span>
+                        <span class="heading-text">The Mean (Expected Value) of a Probability model</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Suppose that the possible values for the random variables are <span class="math-inline">$s_{1}, s_{2}, s_{3}, \ldots, s_{k}$</span>; and suppose that the probability of the variable <span class="math-inline">$s_{j}$</span> is <span class="math-inline">$p_{j}$</span>. Then the mean (also called expected value) <span class="math-inline">$\boldsymbol{F}$</span> of the probability distribution is</p>
+                        <div class="equation">$$F=s_{1} p_{1}+s_{2} p_{2}+\ldots+s_{k} p_{k}$$</div>
+                        <h3 class="subsection-heading">Example:</h3>
+                        <p>The following represents a table of grades given to a class for a term paper. An experiment consists of drawing a student at random and recording that student's grade. The random variable is the value of the grade. The probability distribution is given in the table.</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead>
+                               <tr><th>Grade</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th></tr>
+                             </thead>
+                             <tbody>
+                               <tr><td>Probability</td><td>0.10</td><td>0.15</td><td>0.30</td><td>0.30</td><td>0.15</td></tr>
+                             </tbody>
+                           </table>
+                        </div>
+                        <p>Find the mean of the distribution.</p>
+                        <h3 class="subsection-heading">Example:</h3>
+                        <p>In a gambling game, the player is paid <span class="math-inline">$\$ 3$</span> if s/he draws a queen, <span class="math-inline">$\$ 5$</span> if s/he draws a king, and <span class="math-inline">$\$ 10$</span> if <span class="math-inline">$\mathrm{s} / \mathrm{he}$</span> draws an ace. Otherwise, the player will pay the casino the bet amount of <span class="math-inline">$\$ 3.00$</span>.</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Find the probability model representing the amount of money the player wins (negative number for loss!)</span></li>
+                        </ol>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead><tr><th>x (Winnings)</th><th></th><th></th><th></th><th></th></tr></thead>
+                             <tbody><tr><td>P(x)</td><td></td><td></td><td></td><td></td></tr></tbody>
+                           </table>
+                        </div>
+                        <ol class="enhanced-list" start="2">
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Find the mean of this model. Does the game favor the casino or the player?</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">What should the amount of the bet be so that the game is fair?</span></li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-5-mean-expected-value -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-4-part-3.html" class="nav-button"> <!-- Link to previous chapter's last part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 5 Part 1 of 2</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-5-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
