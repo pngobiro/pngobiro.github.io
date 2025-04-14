@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Error Handling & Debugging (Part 1)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 6 (Part 1)</span>
+                    </div>
+                    <a href="chapter-6-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 6: Error Handling & Debugging</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-6-part-1 -->
+                <section id="chapter-6-intro" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🐛</span> <!-- Placeholder Icon -->
+                        <span class="heading-text">Introduction to Error Handling</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Error handling refers to the anticipation, detection, and resolution of programming, application, and communications errors. Specialized programs, called error handlers, are available for some applications.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-types" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❓</span> <!-- Placeholder Icon -->
+                        <span class="heading-text">Types of Program Errors</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A program with anything more than a trivial amount of code will almost inevitably contain errors (or "bugs") during its development. The types of errors commonly encountered can be categorised as follows:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Syntax errors</strong> - these occur when a command is mis-typed or an expected argument is omitted. Visual Basic detects such errors as they occur, and will not allow the program to be run until they are corrected.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Run-time errors</strong> - these are usually errors beyond the control of the programmer, such as the input of invalid data by the user or a missing data file. Error-trapping routines can be implemented to deal with such occurrences.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Logic errors</strong> - this type of error is the most difficult to find, as it will not be automatically detected by visual basic. The program will often run, but may produce unexpected results. The Visual Basic debugger can be used to track down errors in the program's logic.</span></li>
+                        </ul>
+                        <p>The incidence of errors can be reduced if care is taken with the design of the program. Time spent at the design stage may save considerably more time tracking down program errors later. Use of appropriate comments throughout the code will help you to remember what each section of code is doing, should you need to revisit the code to track down an error. The use of a consistent and meaningful naming convention for variables, controls and procedures will also aid clarity during the fault-finding process.</p>
+                        <p>Although the following sections describe a number of very useful debugging tools and techniques, always look for the obvious answer before setting up some elaborate debugging procedure. If you do not know exactly where the problem is, one approach is to set a breakpoint (see below) somewhere in the middle of your program. If the program breaks before the error manifests itself, you can be fairly certain its in the second half of the program code. Otherwise, its in the first half. You can continue to narrow down the search in this way until the error is found.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-techniques" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🛠️</span> <!-- Placeholder Icon -->
+                        <span class="heading-text">Error handling techniques</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This chapter describes various error handling techniques. First the technique is described, then its use is shown with an example function and a call to that function. We use the <span class="math-inline">$\sqrt{\phantom{x}}$</span> function which should report an error condition when called with a negative parameter.</p>
+
+                        <h3 class="subsection-heading">Return code</h3>
+                        <p>Example function definition:</p>
+                        <pre><code class="language-pseudocode">function sqrt(X : in Float) : Float
+begin
+    if (X < 0) :
+        return -1
+    else
+        calculate root from x
+    fi
+end</code></pre>
+                        <p>Example usage:</p>
+                        <pre><code class="language-pseudocode">C := sqrt(A^2 + B^2) // Assuming A^2+B^2 is represented by the MMD notation
+if C < 0 then
+    error handling
+else
+    normal processing
+fi</code></pre>
+                        <p>Our example makes use of the fact that all valid return values for <span class="math-inline">$\sqrt{\phantom{x}}$</span> are positive and therefore -1 can be used as an error indicator. However this technique won't work when all possible return values are valid and no return value is available as error indicator.</p>
+
+                        <h3 class="subsection-heading">Error (success) indicator parameter</h3>
+                        <p>An error condition is returned via additional out parameter. Traditionally the indicator is either a boolean with "true = success" or an enumeration with the first element being "Ok" and other elements indicating various error conditions.</p>
+                        <p>Example function definition:</p>
+                        <pre><code class="language-pseudocode">function sqrt (
+    X : in Float;
+    Success : out Boolean ) : Float
+begin
+    if (X < 0) :
+        Success := False
+    else
+        calculate root from x
+        Success := True
+    fi
+end</code></pre>
+                        <p>Example usage:</p>
+                        <pre><code class="language-pseudocode">C := sqrt(A^2 + B^2, Success) // Assuming A^2+B^2 is represented by the MMD notation
+if not Success then
+    error handling
+else
+    normal processing
+fi</code></pre>
+                        <p>This technique does not look very nice in mathematical calculations.</p>
+
+                        <h3 class="subsection-heading">Global variable</h3>
+                        <p>An error condition is stored inside a global variable. This variable is then read directly or indirectly via a function.</p>
+                         <p>Example function definition:</p>
+                        <pre><code class="language-pseudocode">function sqrt (X : in Float) : Float
+begin
+    if (X < 0) : // Corrected from MMD 'X < O'
+        Float_Error := true
+    else
+        calculate root from x
+    fi
+end</code></pre>
+                        <p>Example usage:</p>
+                        <pre><code class="language-pseudocode">Float_Error := false
+C := sqrt(A^2 + B^2) // Corrected OCR error '矜', assuming sqrt call intended. Assuming A^2+B^2 represented by MMD notation.
+if Float_Error then
+    error handling
+else
+    normal processing
+fi</code></pre>
+                        <p>As you can see from the source the problematic part of this technique is choosing the place at which the flag is reset. You could either have the callee or the caller do that.</p>
+                        <p>Also this technique is not suitable for multithreading.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-6-part-1 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 6 (Part 1)</span>
+                    </div>
+                    <a href="chapter-6-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
