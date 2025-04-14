@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Data Structures (Part 2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 2)</span>
+                    </div>
+                    <a href="chapter-8-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 8: Data Structures (Part 2)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-8-part-2 -->
+                <section id="chapter-8-dynamic-arrays" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">Dynamic Array</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>So far we have learned how to define the number of elements in an array during design time. This type of array is known as static array. However, the problem is sometimes we might not know how many data items we need to store during run time. In this case, we need to use dynamic array where the number of elements will be decided during run time. In VB6, the dynamic array can be resized when the program is executing. The first step in declaring a dynamic array is by using the Dim statement without specifying the dimension list, as follows:</p>
+                        <pre><code class="language-vb">Dim myArray()</code></pre>
+                        <p>Then at run time we can specify the actual array size using the ReDim statement, as follows:</p>
+                        <pre><code class="language-vb">ReDim myArray(1 to n) ' when n is decided during run time</code></pre>
+                        <p>You can also declare a two dimensional array using ReDim statement, as follows:</p>
+                        <pre><code class="language-vb">ReDim myArray(1 to n, 1 to m) ' when m and n are known during run time</code></pre>
+                        <h3>Example 16.7</h3>
+                        <p>In this example, we want to display the elements of an array in a list box. The size of the array will only be known during run time. It demonstrates the creation of a dynamic array using the ReDim keyword.</p>
+                        <pre><code class="language-vb">Private Sub cmd_display_Click()
+    Dim myArray() As Integer
+    Dim i, n As Integer
+    n = InputBox("Enter the upper bound of array")
+    List1.Clear
+    For i = 1 To n
+        ReDim myArray(i)
+        myArray(i) = i ^ 2
+        List1.AddItem myArray(i)
+    Next
+End Sub
+</code></pre>
+                        <p>Another problem related to ReDim is each time you ReDim an array, the values currently stored in the array are lost. In order to preserve the stored values, we can use the keywords ReDim Preserve, as follows:</p>
+                        <pre><code class="language-vb">ReDim Preserve MyArray(n) ' where n is the new upper bound of the array</code></pre>
+                    </div>
+                </section>
+
+                <section id="chapter-8-searching-sorting" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔍</span>
+                        <span class="heading-text">Searching and Sorting Arrays</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>Searching Arrays</h3>
+                        <p>One of the most common tasks associated with arrays is searching through them to find some desired element.</p>
+                        <h4>Linear Searches</h4>
+                        <p>Suppose we wish to write a method that takes in a one-dimensional array and some value x, and returns either the position (i.e., "index") of x in the array, or -1 if x does not appear in the array.</p>
+                        <p>One option would be to use a linear search. In a linear search, we compare x (which we call the "key") with each element in the array list, starting at one end and progressing to the other. Graphically, we can imagine the following comparisons being made:</p>
+                        <figure>
+                            <img src="../assets/images/chapter-8-linear-search.jpg" alt="Linear search diagram: comparisons in array" class="content-image">
+                        </figure>
+                        <p>Supposing that our array is an array of integers, we might use the following method to accomplish this linear search:</p>
+                        <p><strong>Linear Search Example</strong><br>Example in VB: An array of 10 exam marks is to be searched to find the one mark that was greater than 90...The mark is then displayed in a TextBox called txtResult</p>
+                        <figure>
+                            <img src="../assets/images/chapter-8-linear-search-vb.jpg" alt="VB code for linear search example" class="content-image">
+                        </figure>
+                        <p>First the array has to be declared and values assigned to each element of the array....</p>
+                        <p>Remember the maximum subscript is 9, which means there are 10 elements in the array.</p>
+                        <pre><code class="language-vb">Dim Mark(9) As Integer
+Mark(0) = 65
+Mark(1) = 48
+Mark(2) = 78
+Mark(3) = 60
+Mark(4) = 39
+Mark(5) = 71
+Mark(6) = 93
+Mark(7) = 55
+Mark(8) = 62
+Mark(9) = 51
+</code></pre>
+                        <p>There are two ways of carrying out a linear search...</p>
+                        <p><strong>Method 1:</strong> involves using an integer variable (n) that counts the element being checked. The value of this counter needs to be incremented after each check...</p>
+                        <pre><code class="language-vb">Dim n As Integer
+n = 0
+Do
+    If Mark(n) > 90 Then
+        txtResult.Text = Mark(n)
+    End If
+    n = n + 1
+Loop Until Mark(n - 1) > 90
+</code></pre>
+                        <p><strong>Method 2:</strong> Use a For...Next Loop...</p>
+                        <pre><code class="language-vb">Dim n As Integer
+For n = 0 To 9
+    If Mark(n) > 90 Then txtResult.Text = Mark(n)
+Next
+</code></pre>
+                        <p>n is the Control Variable for the loop. It must be declared as an integer... and basically counts from 0 to 9 for each time the loop is executed.</p>
+                        <h4>Binary Searches</h4>
+                        <p>Linear Searches work well, but when used on arrays with a large number of elements, they potentially have to check every element to find a match. This can take a while, especially if we are doing multiple such searches.</p>
+                        <p>There is a way to speed things up substantially, however -- provided that the elements in the array are ordered. (Let us assume for the sake of the discussion below that they are in ascending order).</p>
+                        <p>A binary search works on an ordered list, and first compares the key with the element in the middle of the array. (In the case of an even number of elements in our list, we will use the element that ends the first half of the list as our "middle element").</p>
+                        <ul>
+                            <li>If the key is less than the middle element, we only need to search the first half of the array, so we continue searching on this smaller list.</li>
+                            <li>If the key is greater than the middle element, we only need to search the second half of the array, so we continue searching on this smaller list.</li>
+                            <li>If the key equals the middle element, we have a match -- end the search</li>
+                        </ul>
+                        <figure>
+                            <img src="../assets/images/chapter-8-binary-search.jpg" alt="Binary search diagram: steps in ordered array" class="content-image">
+                        </figure>
+                        <p>Of course, we need to be keeping track of the indices of each of the elements, so we know what position to return, when we are all done.</p>
+                        <p>Here's an example of a binary search for 11 in the given list, that keeps track of index of the leftmost element (i.e., the "lowest index" to consider), the index of the right-most element (i.e., the "highest index" to consider), and the index of the element in the "middle" of these two positions:</p>
+                        <figure>
+                            <img src="../assets/images/chapter-8-binary-search-example.jpg" alt="Binary search example: finding key in array" class="content-image">
+                        </figure>
+                        <p>Here's another example, where we are searching for a key value of 54:</p>
+                        <figure>
+                            <img src="../assets/images/chapter-8-binary-search-steps.jpg" alt="Binary search steps for key 54" class="content-image">
+                        </figure>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tr>
+                                    <td>2</td><td>4</td><td>7</td><td>10</td><td>11</td><td>45</td><td>50</td><td>59</td><td>60</td><td>66</td><td>69</td><td>70</td>
+                                </tr>
+                            </table>
+                        </div>
+                        <figure>
+                            <img src="../assets/images/chapter-8-binary-search-final.jpg" alt="Binary search final step" class="content-image">
+                        </figure>
+                        <p>Notice when we check if list[7] equals the key in the last step, and discover that 54 < 59, we must conclude that the key value -- if present -- would be left of list[7], in an area of the main list that was already eliminated. This, of course can't be -- so we know that key is not present in the list.</p>
+                        <p>However, the position we found is still useful. We made an assumption with the binary search method that our list was in ascending order. For this to be true, one of two things must have happened -- either we sorted the list (which can be computationally expensive), or we never let our list get out of order in the first place. That is to say, every time we added a value to the list, we made sure we inserted it in just the right spot to preserve the order. Note, "just left" of list[7] is right where we would want to insert the key value of 54, Thus, we might have our search method not just return a negative value (like -1), to indicate the absence of the key value in the list, but also build into that negative value some useful information, like the index where the key value should be inserted.</p>
+                        <h4>BinarySearch - Fast search in a sorted array</h4>
+                        <pre><code class="language-vb">' Binary search in an array of any type
+' Returns the index of the matching item, or -1 if the search fails
+'
+' The arrays *must* be sorted, in ascending or descending
+' order (the routines finds out the sort direction).
+' LASTEL is the index of the last item to be searched, and is
+' useful if the array is only partially filled.
+
+Function BinarySearch(arr As Variant, search As Variant, _
+    Optional lastEl As Variant) As Long
+    Dim index As Long
+    Dim first As Long
+    Dim last As Long
+    Dim middle As Long
+    Dim inverseOrder As Boolean
+    ' account for optional arguments
+    If IsMissing(lastEl) Then lastEl = UBound(arr)
+    first = LBound(arr)
+    last = lastEl
+    ' deduct direction of sorting
+    inverseOrder = (arr(first) > arr(last))
+    ' assume searches failed
+    BinarySearch = first - 1
+    Do
+        middle = (first + last) \ 2
+        If arr(middle) = search Then
+            BinarySearch = middle
+            Exit Do
+        ElseIf ((arr(middle) < search) Xor inverseOrder) Then
+            first = middle + 1
+        Else
+            last = middle - 1
+        End If
+    Loop Until first > last
+End Function
+</code></pre>
+                    </div>
+                </section>
+                <!-- END: chapter-8-part-2 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 2)</span>
+                    </div>
+                    <a href="chapter-8-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
