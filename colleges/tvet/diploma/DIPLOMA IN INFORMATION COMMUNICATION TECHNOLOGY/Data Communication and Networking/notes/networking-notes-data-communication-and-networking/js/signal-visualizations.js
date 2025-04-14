@@ -161,6 +161,54 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Additional waveform functions
+    class SignalImpairments extends SignalVisualizer {
+        drawAttenuatedSignal(attenuation = 0.5) {
+            // Draw original signal
+            this.drawSineWave(1, 50, 0, { color: '#2ecc71' });
+            
+            // Draw attenuated signal
+            this.drawSineWave(1, 50 * attenuation, 0, { color: '#e74c3c' });
+        }
+
+        drawDistortedSignal() {
+            const path = document.createElementNS(SVG_NS, 'path');
+            let d = 'M 0 ' + (this.options.height / 2);
+            
+            // Add non-linear distortion to sine wave
+            for (let x = 0; x <= this.options.width; x++) {
+                const normalY = Math.sin(2 * Math.PI * (x / this.options.width));
+                const distortedY = normalY + 0.2 * Math.sin(6 * Math.PI * (x / this.options.width));
+                const y = (this.options.height / 2) + (50 * distortedY);
+                d += ` L ${x} ${y}`;
+            }
+
+            path.setAttribute('d', d);
+            path.setAttribute('stroke', '#e74c3c');
+            path.setAttribute('stroke-width', this.options.strokeWidth);
+            path.setAttribute('fill', 'none');
+            this.svg.appendChild(path);
+        }
+
+        drawNoisySignal(noiseAmplitude = 10) {
+            const path = document.createElementNS(SVG_NS, 'path');
+            let d = 'M 0 ' + (this.options.height / 2);
+            
+            // Add random noise to sine wave
+            for (let x = 0; x <= this.options.width; x++) {
+                const noise = (Math.random() - 0.5) * 2 * noiseAmplitude;
+                const y = (this.options.height / 2) +
+                    50 * Math.sin(2 * Math.PI * (x / this.options.width)) + noise;
+                d += ` L ${x} ${y}`;
+            }
+
+            path.setAttribute('d', d);
+            path.setAttribute('stroke', '#e74c3c');
+            path.setAttribute('stroke-width', this.options.strokeWidth);
+            path.setAttribute('fill', 'none');
+            this.svg.appendChild(path);
+        }
+    }
+
     class PeriodicSignals extends SignalVisualizer {
         drawCompositeWave() {
             // Draw fundamental frequency
@@ -236,6 +284,28 @@ document.addEventListener('DOMContentLoaded', function() {
                     break;
                 case 'triangle-wave':
                     visualizer.drawTriangleWave();
+                    break;
+            }
+        }
+    });
+
+    // Initialize impairment visualizations if containers exist
+    ['attenuation-demo', 'distortion-demo', 'noise-demo'].forEach(id => {
+        const container = document.getElementById(id);
+        if (container) {
+            const visualizer = new SignalImpairments(id);
+            visualizer.drawGrid();
+            visualizer.drawAxis();
+            
+            switch(id) {
+                case 'attenuation-demo':
+                    visualizer.drawAttenuatedSignal();
+                    break;
+                case 'distortion-demo':
+                    visualizer.drawDistortedSignal();
+                    break;
+                case 'noise-demo':
+                    visualizer.drawNoisySignal();
                     break;
             }
         }
