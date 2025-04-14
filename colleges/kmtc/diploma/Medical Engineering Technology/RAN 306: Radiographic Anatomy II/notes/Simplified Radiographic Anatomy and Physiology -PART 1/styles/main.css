@@ -1,0 +1,239 @@
+/* Base Variables and Setup */
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --border-color: #dcdde1;
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    --nav-toc-color: #2980b9;
+    --nav-prev-color: #e67e22;
+    --nav-next-color: #27ae60;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Navigation */
+.document-nav {
+    background: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    margin: 1rem 0;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.25rem;
+    text-decoration: none;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+/* Navigation button colors */
+.nav-button[href*="index.html"] {
+    color: var(--nav-toc-color);
+    border: 1px solid var(--nav-toc-color);
+}
+
+.nav-button[href*="index.html"]:hover {
+    background: #eef7fc;
+}
+
+.nav-links .nav-button:nth-child(2) {
+    color: var(--nav-prev-color);
+    border: 1px solid var(--nav-prev-color);
+}
+
+.nav-links .nav-button:nth-child(2):hover {
+    background: #fef5ec;
+}
+
+.nav-links .nav-button:last-child {
+    color: var(--nav-next-color);
+    border: 1px solid var(--nav-next-color);
+}
+
+.nav-links .nav-button:last-child:hover {
+    background: #eefaf3;
+}
+
+/* Content Sections */
+.content-section {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+    border-bottom: 3px solid var(--accent-color);
+    padding-bottom: 0.5rem;
+}
+
+.section-heading {
+    color: var(--secondary-color);
+    font-size: 1.8rem;
+    margin: 2rem 0 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+/* Lists */
+.enhanced-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.list-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.list-item::before {
+    content: "•";
+    color: var(--accent-color);
+    position: absolute;
+    left: 0;
+}
+
+/* Tables */
+.table-container {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+}
+
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+}
+
+.content-table th,
+.content-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.content-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+/* Images */
+.content-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 1.5rem 0;
+}
+
+figure {
+    margin: 2rem 0;
+}
+
+figcaption {
+    text-align: center;
+    color: var(--secondary-color);
+    font-style: italic;
+    margin-top: 0.5rem;
+}
+
+/* Mathematics */
+.equation {
+    margin: 2rem 0;
+    text-align: center;
+    overflow-x: auto;
+}
+
+.math-inline {
+    padding: 0 0.2em;
+}
+
+/* Progress Bar */
+.document-progress {
+    background: #f1f2f6;
+    border-radius: 4px;
+    padding: 0.5rem 1rem;
+    text-align: center;
+    color: var(--secondary-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-button {
+        justify-content: center;
+    }
+
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .section-heading {
+        font-size: 1.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .content-section {
+        padding: 1rem;
+    }
+
+    .section-title {
+        font-size: 1.75rem;
+    }
+
+    .section-heading {
+        font-size: 1.3rem;
+    }
+
+    .table-container {
+        margin: 1rem -1rem;
+        width: calc(100% + 2rem);
+    }
+}

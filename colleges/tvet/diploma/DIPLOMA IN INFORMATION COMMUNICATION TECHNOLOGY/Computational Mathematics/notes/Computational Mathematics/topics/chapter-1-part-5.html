@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introduction to Computational Mathematics - Part 5</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-1-part-4.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 Part 5 of 6</span>
+                    </div>
+                    <a href="chapter-1-part-6.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 1: INTRODUCTION TO COMPUTATIONAL MATHEMATICS (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-1-matrix-inverse-real-example -->
+                <section id="chapter-1-matrix-inverse-real-example" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🚌</span>
+                        <span class="heading-text">A Real Life Example (Matrix Inverse)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A group took a trip on a bus, at <span class="math-inline">$\$ 3$</span> per child and <span class="math-inline">$\$ 3.20$</span> per adult for a total of <span class="math-inline">$\$ 118.40$</span>.</p>
+                        <p>They took the train back at <span class="math-inline">$\$ 3.50$</span> per child and <span class="math-inline">$\$ 3.60$</span> per adult for a total of <span class="math-inline">$\$ 135.20$</span>.</p>
+                        <p>How many children, and how many adults?</p>
+                        <p>First, let us set up the matrices (be careful to get the rows and columns correct!):</p>
+                        <div class="equation">$$\begin{aligned} & \text { Child Adult Bus } \\ & {\left[\begin{array}{ll} x_{1} & x_{2} \end{array}\right]\left[\begin{array}{ll} 3 & 3.5 \\ 3.2 & 3.6 \end{array}\right]=\left[\begin{array}{cc} \text { Bus } & \text { Train } \\ 118.4 & 135.2 \end{array}\right]} \end{aligned}$$</div>
+                        <p>This is just like the example above:</p>
+                        <div class="equation">$$\mathrm{XA}=\mathrm{B}$$</div>
+                        <p>So to solve it we need the inverse of "A":</p>
+                        <div class="equation">$$\begin{aligned} {\left[\begin{array}{ll} 3 & 3.5 \\ 3.2 & 3.6 \end{array}\right]^{-1} } & =\frac{1}{3 \times 3.6-3.5 \times 3.2}\left[\begin{array}{cc} 3.6 & -3.5 \\ -3.2 & 3 \end{array}\right] \\ & =\left[\begin{array}{cc} -9 & 8.75 \\ 8 & -7.5 \end{array}\right] \end{aligned}$$</div>
+                        <p>Now we have the inverse we can solve using:</p>
+                        <div class="equation">$$\begin{aligned} & \mathrm{X}=\mathrm{BA}^{-1} \\ & {\left[\begin{array}{ll} x_{1} & x_{2} \end{array}\right] }=\left[\begin{array}{ll} 118.4 & 135.2 \end{array}\right]\left[\begin{array}{cc} -9 & 8.75 \\ 8 & -7.5 \end{array}\right] \\ &=\left[\begin{array}{ll} 118.4 \times-9+135.2 \times 8 & 118.4 \times 8.75+135.2 \times-7.5 \end{array}\right] \\ &=\left[\begin{array}{ll} 16 & 22 \end{array}\right] \end{aligned}$$</div>
+                        <p>There were 16 children and 22 adults!</p>
+                        <p>The answer almost appears like magic. But it is based on good mathematics.</p>
+                        <p>Calculations like that (but using much larger matrices) help Engineers design buildings, are used in video games and computer animations to make things look 3-dimensional, and many other places.</p>
+                        <p>It is also a way to solve Systems of Linear Equations.</p>
+                        <p>The calculations are done by computer, but the people must understand the formulas.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-inverse-real-example -->
+
+                <!-- START: chapter-1-matrix-inverse-order-important -->
+                <section id="chapter-1-matrix-inverse-order-important" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚠️</span>
+                        <span class="heading-text">Order is Important</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Say that you are trying to find " X " in this case:</p>
+                        <div class="equation">$$A X=B$$</div>
+                        <p>This is different to the example above! X is now after A .</p>
+                        <p>With Matrices the order of multiplication usually changes the answer. Do not assume that <span class="math-inline">$\mathrm{AB}=$ BA</span>, it is almost never true.</p>
+                        <p>So how do we solve this one? Using the same method, but put <span class="math-inline">$\mathrm{A}^{-1}$</span> in front:</p>
+                        <div class="equation">$$A^{-1} A X=A^{-1} B$$</div>
+                        <p>And we know that <span class="math-inline">$A^{-1} A=I$</span>, so:</p>
+                        <div class="equation">$$I X=A^{-1} B$$</div>
+                        <p>We can remove I:</p>
+                        <div class="equation">$$\mathrm{X}=\mathrm{A}^{-1} \mathrm{~B}$$</div>
+                        <p>And we have our answer (assuming we can calculate <span class="math-inline">$\mathrm{A}^{-1}$</span> )</p>
+                        <p>Why don't we try our example from above, but with the data set up this way around. (Yes, you can do this, just be careful how you set it up.)</p>
+                        <p>This is what it looks like as <span class="math-inline">$\mathrm{AX}=\mathrm{B}$</span> :</p>
+                        <!-- Image missing in MMD (line 1150) -->
+                        <p>It looks so neat! I think I prefer it like this.</p>
+                        <p>Also note how the rows and columns are swapped over ("Transposed") compared to the previous example.</p>
+                        <p>To solve it we need the inverse of " A ":</p>
+                        <!-- Image missing in MMD (line 1156) -->
+                        <p>It is like the Inverse we got before, but</p>
+                        <p>Transposed (rows and columns swapped over).</p>
+                        <p>Now we can solve using:</p>
+                        <div class="equation">$$\begin{gathered} \mathrm{X}=\mathrm{A}^{-1} \mathrm{~B} \\ {\left[\begin{array}{l} x_{1} \\ x_{2} \end{array}\right]=\left[\begin{array}{cc} -9 & 8 \\ 8.75 & -7.5 \end{array}\right]\left[\begin{array}{c} 118.4 \\ 135.2 \end{array}\right]=\left[\begin{array}{c} -9 \times 118.4+8 \times 135.2 \\ 8.75 \times 118.4-7.5 \times 135.2 \end{array}\right]=\left[\begin{array}{l} 16 \\ 22 \end{array}\right]} \end{gathered}$$</div>
+                        <p>Same answer: 16 children and 22 adults.</p>
+                        <p>So, Matrices are powerful things, but they do need to be set up correctly!</p>
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-inverse-order-important -->
+
+                <!-- START: chapter-1-matrix-inverse-non-existent -->
+                <section id="chapter-1-matrix-inverse-non-existent" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🚫</span>
+                        <span class="heading-text">The Inverse May Not Exist</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>First of all, to have an Inverse the Matrix must be "Square" (same number of rows and columns).</p>
+                        <p>But also the determinant cannot be zero (or you would end up dividing by zero). How about this:</p>
+                        <div class="equation">$$\begin{aligned} {\left[\begin{array}{ll} 3 & 4 \\ 6 & 8 \end{array}\right]^{-1} } & =\frac{1}{3 \times 8-4 \times 6}\left[\begin{array}{rr} 8 & -4 \\ -6 & 3 \end{array}\right] \\ & =\frac{1}{24-24}\left[\begin{array}{rr} 8 & -4 \\ -6 & 3 \end{array}\right] \end{aligned}$$</div>
+                        <p>24-24? That equals 0 , and <span class="math-inline">$\mathbf{1 / 0}$</span> is undefined.</p>
+                        <p>We cannot go any further! This Matrix has no Inverse.</p>
+                        <p>Such a Matrix is called "Singular", which only happens when the determinant is zero.</p>
+                        <p>And it makes sense <span class="math-inline">$\qquad$</span> look at the numbers: the second row is just double the first row, and does not add any new information.</p>
+                        <p>Imagine in our example above that the prices on the train were exactly, say, <span class="math-inline">$50 \%$</span> higher ... we wouldn't be any closer to figuring out how many adults and children ... we need something different.</p>
+                        <p>And the determinant neatly works this out.</p>
+                        <h3 class="subsection-heading">Conclusion</h3>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The Inverse of <span class="math-inline">$A$</span> is <span class="math-inline">$A^{-1}$</span> only when <span class="math-inline">$A \times A^{-1}=A^{-1} \times A=\mathbf{I}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">To find the Inverse of a <span class="math-inline">$2 \times 2$</span> Matrix: swap the positions of a and d, put negatives in front of b and c , and divide everything by the determinant (ad-bc).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Sometimes there is no Inverse at all</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-inverse-non-existent -->
+
+                <!-- START: chapter-1-matrix-algebraic-properties -->
+                <section id="chapter-1-matrix-algebraic-properties" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕➖✖️</span>
+                        <span class="heading-text">Algebraic Properties of Matrix Operations</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In this page, we give some general results about the three operations: addition, multiplication, and multiplication with numbers, called scalar multiplication.</p>
+                        <p>From now on, we will not write (mxn) but mxn.</p>
+                        <h3 class="subsection-heading">Properties involving Addition.</h3>
+                        <p>Let <span class="math-inline">$A, B$</span>, and <span class="math-inline">$C$</span> be mxn matrices. We have</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><span class="math-inline">$A+B=B+A$</span></span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><span class="math-inline">$(A+B)+C=A+(B+C)$</span></span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><span class="math-inline">$A+\mathcal{O}=A$</span></span></li>
+                        </ol>
+                        <p>Where <span class="math-inline">$\mathcal{O}$</span> is the mxn zero-matrix (all its entries are equal to 0 );</p>
+                        <ol class="enhanced-list" start="4">
+                           <li class="list-item"><span class="item-icon">4.</span><span class="item-text"><span class="math-inline">$A + (-A) = \mathcal{O}$</span></span></li> <!-- Corrected MMD rendering -->
+                        </ol>
+
+                        <h3 class="subsection-heading">Properties involving Multiplication.</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Let <span class="math-inline">$A, B$</span>, and <span class="math-inline">$C$</span> be three matrices. If you can perform the products <span class="math-inline">$A B,(A B) C, B C$</span>, and <span class="math-inline">$A(B C)$</span>, then we have</span></li>
+                        </ol>
+                        <div class="equation">$$(A B) C=A(B C)$$</div>
+                        <p>Note, for example, that if <span class="math-inline">$A$</span> is <span class="math-inline">$2 \times 3, B$</span> is <span class="math-inline">$3 \times 3$</span>, and <span class="math-inline">$C$</span> is <span class="math-inline">$3 \times 1$</span>, then the above products are possible (in this case, <span class="math-inline">$(A B) C$</span> is <span class="math-inline">$2 \times 1$</span> matrix).</p>
+                        <ol class="enhanced-list" start="2">
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">If <span class="math-inline">$\alpha$</span> and <span class="math-inline">$\beta$</span> are numbers, and <span class="math-inline">$A$</span> is a matrix, then we have</span></li>
+                        </ol>
+                        <div class="equation">$$\alpha(\beta A)=(\alpha \beta) A$$</div>
+                        <ol class="enhanced-list" start="3">
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">If <span class="math-inline">$\alpha$</span> is a number, and <span class="math-inline">$A$</span> and <span class="math-inline">$B$</span> are two matrices such that the product <span class="math-inline">$A \cdot B$</span> is possible, then we have</span></li>
+                        </ol>
+                        <div class="equation">$$\alpha(A B)=(\alpha A) B=A(\alpha B)$$</div>
+                        <ol class="enhanced-list" start="4">
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">If <span class="math-inline">$A$</span> is an nxm matrix and <span class="math-inline">$\mathcal{O}$</span> the mxk zero-matrix, then</span></li>
+                        </ol>
+                        <div class="equation">$$A \mathcal{O}=\mathcal{O}$$</div>
+                        <p>Note that <span class="math-inline">$A \mathcal{O}$</span> is the nxk zero-matrix. So if n is different from m , the two zero-matrices are different.</p>
+
+                        <h3 class="subsection-heading">Properties involving Addition and Multiplication.</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Let <span class="math-inline">$A, B$</span>, and <span class="math-inline">$C$</span> be three matrices. If you can perform the appropriate products, then we have</span></li>
+                        </ol>
+                        <div class="equation">$$(A+B) C=A C+B C \quad \text { and } \quad A(B+C)=A B+A C$$</div>
+                        <ol class="enhanced-list" start="2">
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">If <span class="math-inline">$\alpha$</span> and <span class="math-inline">$\beta$</span> are numbers, <span class="math-inline">$A$</span> and <span class="math-inline">$B$</span> are matrices, then we have</span></li> <!-- Corrected MMD rendering -->
+                        </ol>
+                        <div class="table-container">
+                           <table class="content-table">
+                              <tbody>
+                                 <tr><td><span class="math-inline">$\alpha(A+B)=\alpha A+\alpha B$</span></td><td>And</td><td><span class="math-inline">$(\alpha+\beta) A=\alpha A+\beta A$</span></td></tr>
+                              </tbody>
+                           </table>
+                        </div>
+                        <h4 class="subsection-heading">Example.</h4>
+                        <p>Consider the matrices</p>
+                        <div class="equation">$$A=\left(\begin{array}{cc} 0 & 1 \\ -1 & 0 \end{array}\right), B=\binom{2}{-1}, \text { and } C=\left(\begin{array}{lll} 0 & 1 & 5 \end{array}\right) .$$</div>
+                        <p>Evaluate <span class="math-inline">$(A B) C$</span> and <span class="math-inline">$A(B C)$</span>. Check that you get the same matrix.</p>
+                        <p>Answer. We have</p>
+                        <div class="equation">$$A B=\binom{-1}{-2}$$</div>
+                        <p>So</p>
+                        <div class="equation">$$(A B) C=\binom{-1}{-2}\left(\begin{array}{lll} 0 & 1 & 5 \end{array}\right)=\left(\begin{array}{ccc} 0 & -1 & -5 \\ 0 & -2 & -10 \end{array}\right) .$$</div>
+                        <p>On the other hand, we have</p>
+                        <div class="equation">$$B C=\left(\begin{array}{ccc} 0 & 2 & 10 \\ 0 & -1 & -5 \end{array}\right)$$</div>
+                        <p>so</p>
+                        <div class="equation">$$A(B C)=\left(\begin{array}{cc} 0 & 1 \\ -1 & 0 \end{array}\right)\left(\begin{array}{ccc} 0 & 2 & 10 \\ 0 & -1 & -5 \end{array}\right)=\left(\begin{array}{ccc} 0 & -1 & -5 \\ 0 & -2 & -10 \end{array}\right) .$$</div>
+                        <h4 class="subsection-heading">Example.</h4>
+                        <p>Consider the matrices</p>
+                        <div class="equation">$$X=\left(\begin{array}{l} a \\ b \\ c \end{array}\right), \text { and } Y=\left(\begin{array}{llll} \alpha & \beta & \nu & \gamma \end{array}\right)$$</div>
+                        <p>It is easy to check that</p>
+                        <div class="equation">$$X=a\left(\begin{array}{l} 1 \\ 0 \\ 0 \end{array}\right)+b\left(\begin{array}{l} 0 \\ 1 \\ 0 \end{array}\right)+c\left(\begin{array}{l} 0 \\ 0 \\ 1 \end{array}\right)$$</div>
+                        <p>and</p>
+                        <p><span class="math-inline">$Y=\alpha\left(\begin{array}{llll}1 & 0 & 0 & 0\end{array}\right)+\beta\left(\begin{array}{llll}0 & 1 & 0 & 0\end{array}\right)+\nu\left(\begin{array}{llll}0 & 0 & 1 & 0\end{array}\right)+\gamma\left(\begin{array}{llll}0 & 0 & 0 & 1\end{array}\right)$</span>.</p>
+                        <p>These two formulas are called linear combinations. More on linear combinations will be discussed on a different page.</p>
+                        <p>We have seen that matrix multiplication is different from normal multiplication (between numbers). Are there some similarities? For example, is there a matrix which plays a similar role as the number 1? The answer is yes. Indeed, consider the nxn matrix</p>
+                        <div class="equation">$$I_{n}=\left(\begin{array}{ccccc} 1 & 0 & 0 & \cdots & 0 \\ 0 & 1 & 0 & \cdots & 0 \\ 0 & 0 & 1 & \cdots & 0 \\ . & & & & . \\ . & & & & . \\ . & & & & . \\ 0 & 0 & 0 & \cdots & 1 \end{array}\right)$$</div>
+                        <p>In particular, we have</p>
+                        <div class="equation">$$I_{2}=\left(\begin{array}{ll} 1 & 0 \\ 0 & 1 \end{array}\right) \text { and } I_{3}=\left(\begin{array}{ccc} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{array}\right)$$</div>
+                        <p>The matrix <span class="math-inline">$I_{n}$</span> has similar behavior as the number 1 . Indeed, for any nxn matrix <span class="math-inline">$A$</span>, we have</p>
+                        <div class="equation">$$A I_{n}=I_{n} A=A$$</div>
+                        <p>The matrix <span class="math-inline">$I_{n}$</span> is called the Identity Matrix of order <span class="math-inline">$n$</span>.</p>
+                        <h4 class="subsection-heading">Example.</h4>
+                        <p>Consider the matrices</p>
+                        <div class="equation">$$A=\left(\begin{array}{cc} 1 & 2 \\ -1 & -1 \end{array}\right) \text { and } B=\left(\begin{array}{cc} -1 & -2 \\ 1 & 1 \end{array}\right) .$$</div>
+                        <p>Then it is easy to check that</p>
+                        <div class="equation">$$A B=I_{2} \text { and } B A=I_{2} .$$</div>
+                        <p>The identity matrix behaves like the number 1 not only among the matrices of the form nxn. Indeed, for any nxm matrix <span class="math-inline">$A$</span>, we have</p>
+                        <div class="equation">$$I_{n} A=A \text { and } A I_{m}=A .$$</div>
+                        <p>In particular, we have</p>
+                        <div class="equation">$$I_{4}\left(\begin{array}{l} a \\ b \\ c \\ d \end{array}\right)=\left(\begin{array}{llll} 1 & 0 & 0 & 0 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 1 & 0 \\ 0 & 0 & 0 & 1 \end{array}\right)\left(\begin{array}{l} a \\ b \\ c \\ d \end{array}\right)=\left(\begin{array}{c} a \\ b \\ c \\ d \end{array}\right) .$$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-algebraic-properties -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-1-part-4.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 1 Part 5 of 6</span>
+                    </div>
+                    <a href="chapter-1-part-6.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
