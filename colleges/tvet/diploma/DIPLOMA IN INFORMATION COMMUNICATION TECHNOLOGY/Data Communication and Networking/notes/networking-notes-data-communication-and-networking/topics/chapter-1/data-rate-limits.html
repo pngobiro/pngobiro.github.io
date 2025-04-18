@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Rate Limits - Networking Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <article class="document-content-wrapper">
+            <!-- Navigation (Top) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="signal-impairments.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Signal Impairments</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 10</span>
+                    </div>
+                    <a href="digital-to-analog.html" class="nav-button next-link-style"> <!-- Updated next link -->
+                        <span class="nav-text">Next: Digital-to-Analog Conversion</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+                <div class="breadcrumbs">
+                    <a href="../../index.html">Home</a> > Data Rate Limits
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="page-title">Data Rate Limits</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <section class="content-section" id="datarate-intro">
+                     <div class="content-card">
+                        <p>A very important consideration in data communications is how fast we can send data, in bits per second, over a channel. Data rate depends on three factors:</p>
+                        <ol class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">1️⃣</span>
+                                <span class="item-text">The bandwidth available</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">2️⃣</span>
+                                <span class="item-text">The level of the signals we use</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">3️⃣</span>
+                                <span class="item-text">The quality of the channel (the level of noise)</span>
+                            </li>
+                        </ol>
+                        <p>Two theoretical formulas were developed to calculate the data rate: one by Nyquist for a noiseless channel, another by Shannon for a noisy channel.</p>
+                    </div>
+                </section>
+
+                <!-- Noiseless Channel: Nyquist Bit Rate -->
+                <section class="content-section" id="nyquist">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🤫</span>
+                        <span class="heading-text">Noiseless Channel: Nyquist Bit Rate</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>For a noiseless channel, the Nyquist bit rate formula defines the theoretical maximum bit rate:</p>
+                        <div class="equation">
+                            BitRate = 2 × bandwidth × log<sub>2</sub> L
+                        </div>
+                        <p>In this formula, bandwidth is the bandwidth of the channel, L is the number of signal levels used to represent data, and BitRate is the bit rate in bits per second. According to the formula, we might think that, given a specific bandwidth, we can have any bit rate we want by increasing the number of signal levels. Although the idea is theoretically correct, practically there is a limit. When we increase the number of signal levels, we impose a burden on the receiver. If the number of levels in a signal is just 2, the receiver can easily distinguish between a 0 and a 1. If the level of a signal is 64, the receiver must be very sophisticated to distinguish between 64 different levels. In other words, increasing the levels of a signal reduces the reliability of the system.</p>
+                    </div>
+                </section>
+
+                <!-- Noisy Channel: Shannon Capacity -->
+                <section class="content-section" id="shannon">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔊</span>
+                        <span class="heading-text">Noisy Channel: Shannon Capacity</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In reality, we cannot have a noiseless channel; the channel is always noisy. In 1944, Claude Shannon introduced a formula, called the Shannon capacity, to determine the theoretical highest data rate for a noisy channel:</p>
+                        <div class="equation">
+                           Capacity = bandwidth × log<sub>2</sub> (1 + SNR)
+                        </div>
+                        <p>In this formula, bandwidth is the bandwidth of the channel, SNR is the signal-to-noise ratio, and capacity is the capacity of the channel in bits per second. Note that in the Shannon formula there is no indication of the signal level, which means that no matter how many levels we have, we cannot achieve a data rate higher than the capacity of the channel. In other words, the formula defines a characteristic of the channel, not the method of transmission.</p>
+                    </div>
+                </section>
+
+                 <!-- Bandwidth in Bits per Seconds -->
+                <section class="content-section" id="bandwidth-bps">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚡</span>
+                        <span class="heading-text">Bandwidth in Bits per Second</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The term bandwidth can also refer to the number of bits per second that a channel, a link, or even a network can transmit. For example, one can say the bandwidth of a Fast Ethernet network is a maximum of 100 Mbps. This means that this network can send 100 Mbps.</p>
+                    </div>
+                </section>
+
+                 <!-- Key Points Section -->
+                <section class="key-points-section">
+                    <div class="key-points-container">
+                        <div class="key-points-header">
+                            <span class="key-points-icon">📝</span>
+                            <h3 class="key-points-title">Key Points to Remember</h3>
+                        </div>
+                        <div class="key-points-content">
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Data rate depends on bandwidth, signal levels, and channel noise.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Nyquist formula (noiseless channel): BitRate = 2 × bandwidth × log<sub>2</sub> L.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Shannon capacity (noisy channel): Capacity = bandwidth × log<sub>2</sub> (1 + SNR).</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Increasing signal levels (L) increases theoretical bit rate but reduces reliability.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Shannon capacity defines the theoretical maximum data rate for a noisy channel, regardless of signal levels.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Bandwidth can also refer to the data rate in bits per second (e.g., 100 Mbps).</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Navigation (Bottom) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="signal-impairments.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Signal Impairments</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 10</span>
+                    </div>
+                    <a href="digital-to-analog.html" class="nav-button next-link-style"> <!-- Updated next link -->
+                        <span class="nav-text">Next: Digital-to-Analog Conversion</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+     <!-- Include MathJax if needed -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</body>
+</html>
