@@ -1163,7 +1163,7 @@ Options explained:
 grep -n "!\[\](" 2022n_ocr.mmd
 
 # Extract URLs only
-grep -o "https://cdn\.mathpix\.com/[^)]*" 2022n_ocr.mmd > image_urls.txt
+grep -o "https://cdn\.mathpix\.com/[^)]*" 2022n_ocr.mmd > 2022n_image_urls.txt
 
 # Download all images from the extracted URLs
 mkdir -p images
@@ -1171,7 +1171,7 @@ counter=1
 while read url; do
   curl -o "images/image${counter}.png" -s -S -f -L "$url"
   counter=$((counter+1))
-done < image_urls.txt
+done < 2022n_image_urls.txt
 ```
 
 ## 9. Reading MMD Content Example
