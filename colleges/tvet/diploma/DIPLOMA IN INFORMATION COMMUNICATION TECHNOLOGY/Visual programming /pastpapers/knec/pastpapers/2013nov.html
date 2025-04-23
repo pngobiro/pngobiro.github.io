@@ -1,0 +1,674 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visual Programming - November 2013 | KNEC Past Papers</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/sidebar-navigation.js" defer></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>Visual Programming</h1>
+            <h2>November 2013</h2>
+            <div class="exam-details">
+                <p>Paper Code: KNEC/TD/2920/205</p>
+                <p>Duration: 3 hours</p>
+                <p>Module: Programming</p>
+            </div>
+        </div>
+    </header>
+    <div class="container main-content">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>Past Papers</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <li><a href="2023j.html">July 2023</a></li>
+                    <li><a href="2022n.html">November 2022</a></li>
+                    <li><a href="2019july.html">July 2019</a></li>
+                    <li><a href="2018nov.html">November 2018</a></li>
+                    <li><a href="2018j.html">July 2018</a></li>
+                    <li><a href="2017nov.html">November 2017</a></li>
+                    <li><a href="2017july.html">July 2017</a></li>
+                    <li><a href="2016nov.html">November 2016</a></li>
+                    <li><a href="2016july.html">July 2016</a></li>
+                    <li><a href="2015nov.html">November 2015</a></li>
+                    <li><a href="2015july.html">July 2015</a></li>
+                    <li><a href="2014nov.html">November 2014</a></li>
+                    <li><a href="2014july.html">July 2014</a></li>
+                    <li><a href="2013novaa.html">November 2013AA</a></li>
+                    <li><a href="2013nova.html">November 2013A</a></li>
+                    <li><a href="2013nov.html" class="active">November 2013</a></li>
+                    <li><a href="2013j.html">July 2013</a></li>
+                    <li><a href="2011nov.html">November 2011</a></li>
+                    <li><a href="index.html">Home</a></li>
+                </ul>
+            </nav>
+        </div>
+        
+        <main>
+            <div class="paper-navigation top">
+                <a href="2013j.html" class="btn">Previous Paper</a>
+                <a href="index.html" class="btn">Home</a>
+                <a href="2023j.html" class="btn">Next Paper</a>
+            </div>
+
+            <section class="paper-intro">
+                <h3>Instructions to Candidates</h3>
+                <ul>
+                    <li>Answer any FIVE of the following EIGHT questions.</li>
+                </ul>
+            </section>
+
+            <section class="paper-content">
+                <!-- Question 1 -->
+                <div class="question" id="question-1">
+                    <h3>Question 1</h3>
+                    <div class="question-content">
+                        <p>(a) Explain two ways in which arrays could be used in programming.</p>
+                        <p>(b) Distinguish between a compiler and a linker as used in programming.</p>
+                        <p>(c) With the aid of a diagram in each case, describe the following Pascal control structures:</p>
+                        <ul>
+                            <li>(i) Repeat ...until;</li>
+                            <li>(ii) While...do.</li>
+                        </ul>
+                        <p>(d) Table 1 shows the Tax and NHIF computations used by Jazzy Company Ltd. Use it to answer the question that follow.</p>
+                        <figure class="question-figure">
+                            <img src="images/q4-table1-2013nov.png" alt="Table 1">
+                            <figcaption>Table 1</figcaption>
+                        </figure>
+                        <p>Write a Pascal program that would:</p>
+                        <ul>
+                            <li>(i) accept the basic pay of an employee;</li>
+                            <li>(ii) compute the income tax, NHIF and net pay;</li>
+                            <li>(iii) output the computed results to two decimal places.</li>
+                        </ul>
+                        <p>Hint : netpay = basicpay - (income tax + NHIF )</p>
+                    </div>
+                    <div class="answer-section">
+                        <h4>Answer</h4>
+                        <div class="answer-content" id="answer-1">
+                            <div class="answer-detail">
+                                <p>(a) Ways in which arrays could be used in programming:</p>
+                                <ul>
+                                    <li>Storing a collection of related data items of the same type.</li>
+                                    <li>Implementing data structures such as stacks, queues, and hash tables.</li>
+                                </ul>
+                                <p>(b) Compiler vs Linker:</p>
+                                <ul>
+                                    <li>Compiler: Translates source code into object code.</li>
+                                    <li>Linker: Combines object code with library routines to create an executable file.</li>
+                                </ul>
+                                <p>(c) Pascal control structures:</p>
+                                <ul>
+                                    <li>(i) Repeat ...until: Executes a block of code repeatedly until a condition becomes true.</li>
+                                    <li>(ii) While...do: Executes a block of code repeatedly as long as a condition is true.</li>
+                                </ul>
+                                <p>(d) Pascal program:</p>
+                                <pre><code class="language-pascal">
+program JazzyCompany;
+uses crt;
+var
+  basicpay, incometax, nhif, netpay: real;
+begin
+  clrscr;
+  write('Enter basic pay: ');
+  readln(basicpay);
+
+  if basicpay <= 1000 then
+    incometax := 0
+  else if basicpay <= 2000 then
+    incometax := basicpay * 0.01
+  else if basicpay <= 3000 then
+    incometax := basicpay * 0.02
+  else
+    incometax := basicpay * 0.04;
+
+  if basicpay <= 2500 then
+    nhif := basicpay * 0.024
+  else
+    nhif := basicpay * 0.03;
+
+  netpay := basicpay - (incometax + nhif);
+
+  writeln('Income Tax: ', incometax:0:2);
+  writeln('NHIF: ', nhif:0:2);
+  writeln('Net Pay: ', netpay:0:2);
+
+  readln;
+end.
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Question 2 -->
+                <div class="question" id="question-2">
+                    <h3>Question 2</h3>
+                    <div class="question-content">
+                        <p>(a) Outline four disadvantages of low level programming languages.</p>
+                        <p>(b) Explain the circumstances under which each of the following statements would be used in a program:</p>
+                        <ul>
+                            <li>(i) break;</li>
+                            <li>(ii) continue.</li>
+                        </ul>
+                        <p>(c) (i) With the aid of an example, describe null pointer as used in programming.</p>
+                        <p>(ii) Write a Pascal program that would copy information from a file named file_- $/$ to a file named file_2.</p>
+                        <p>(d) Distinguish between algorithm and pseudo code as used in programming.</p>
+                    </div>
+                    <div class="answer-section">
+                        <h4>Answer</h4>
+                        <div class="answer-content" id="answer-2">
+                            <div class="answer-detail">
+                                <p>(a) Disadvantages of low-level programming languages:</p>
+                                <ul>
+                                    <li>Difficult to learn and use.</li>
+                                    <li>Machine-dependent.</li>
+                                    <li>Time-consuming to write and debug.</li>
+                                    <li>Require a deep understanding of the hardware.</li>
+                                </ul>
+                                <p>(b) Circumstances for using statements:</p>
+                                <ul>
+                                    <li>(i) break: Used to terminate a loop or switch statement prematurely.</li>
+                                    <li>(ii) continue: Used to skip the rest of the current iteration of a loop and proceed to the next iteration.</li>
+                                </ul>
+                                <p>(c) (i) Null pointer:</p>
+                                <p>A null pointer is a pointer that does not point to any valid memory location. It is often used to indicate that a pointer is not currently pointing to anything.</p>
+                                <p>Example:</p>
+                                <pre><code class="language-pascal">
+var
+  ptr: ^Integer;
+begin
+  ptr := nil; // ptr is now a null pointer
+end.
+                                </code></pre>
+                                <p>(ii) Pascal program:</p>
+                                <pre><code class="language-pascal">
+program CopyFile;
+var
+  infile, outfile: text;
+  ch: char;
+begin
+  assign(infile, 'file_1');
+  reset(infile);
+  assign(outfile, 'file_2');
+  rewrite(outfile);
+
+  while not eof(infile) do
+  begin
+    read(infile, ch);
+    write(outfile, ch);
+  end;
+
+  close(infile);
+  close(outfile);
+end.
+                                </code></pre>
+                                <p>(d) Algorithm vs Pseudo code:</p>
+                                <ul>
+                                    <li>Algorithm: A step-by-step procedure for solving a problem.</li>
+                                    <li>Pseudo code: An informal, high-level description of an algorithm that uses natural language and programming constructs.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Question 3 -->
+                <div class="question" id="question-3">
+                    <h3>Question 3</h3>
+                    <div class="question-content">
+                        <p>(a) With the aid of an example in each case, explain the function of each of the following as used in Pascal;</p>
+                        <ul>
+                            <li>(i) \(\operatorname{strlen}()\)</li>
+                            <li>(ii) \(\operatorname{strcpy}()\)</li>
+                        </ul>
+                        <p>(b) (i) Outline two advantage of stepwise refinement as used in programming.</p>
+                        <p>(ii) Explain three disadvantages of using flow charts in designing programs.</p>
+                        <p>(c) Figure 1 shows an extract of a \(\mathrm{C}++\) program tools. Use it to answer the question that follows:</p>
+                        <figure class="question-figure">
+                            <img src="images/q3-fig1-2013nov.png" alt="Figure 1">
+                            <figcaption>Figure 1</figcaption>
+                        </figure>
+                        <p>Explain the function of each of the fcatures labelled (i) and (ii).</p>
+                        <p>(d) Write a Pascal program that would be used to rename a file named mylast as myfast.</p>
+                    </div>
+                    <div class="answer-section">
+                        <h4>Answer</h4>
+                        <div class="answer-content" id="answer-3">
+                            <div class="answer-detail">
+                                <p>(a) Pascal functions:</p>
+                                <ul>
+                                    <li>(i) \(\operatorname{strlen}()\): Returns the length of a string.</li>
+                                    <li>(ii) \(\operatorname{strcpy}()\): Copies one string to another.</li>
+                                </ul>
+                                <p>(b) (i) Advantages of stepwise refinement:</p>
+                                <ul>
+                                    <li>Simplifies complex problems by breaking them down into smaller, more manageable subproblems.</li>
+                                    <li>Improves code readability and maintainability.</li>
+                                </ul>
+                                <p>(ii) Disadvantages of using flow charts:</p>
+                                <ul>
+                                    <li>Time-consuming to create and maintain.</li>
+                                    <li>Difficult to represent complex logic.</li>
+                                    <li>Can be difficult to modify.</li>
+                                </ul>
+                                <p>(c) Features of C++ program tools:</p>
+                                <p>(Since I don't have the image, I can't provide the exact functions.)</p>
+                                <p>(d) Pascal program:</p>
+                                <pre><code class="language-pascal">
+program RenameFile;
+var
+  oldname, newname: string;
+begin
+  oldname := 'mylast';
+  newname := 'myfast';
+  rename(oldname, newname);
+end.
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Question 4 -->
+                <div class="question" id="question-4">
+                    <h3>Question 4</h3>
+                    <div class="question-content">
+                        <p>(a) Explain each of the following file extensions as used in Pascal:</p>
+                        <ul>
+                            <li>(i) .dat</li>
+                            <li>(ii). txt</li>
+                        </ul>
+                        <p>(b) (i) Write a C++ program that would delete a file named delo from the computer memory and output the appropriate message.</p>
+                        <p>(ii) Write a C++ program that would determine and output the sum of the cubcs of even numbers between 2 and 10 . Use a for loop structure.</p>
+                        <p>(c) Outline two reasons for involving users in program development.</p>
+                        <p>(d) The following is a \(\mathrm{C}++\) program segment. Identify four errors in the program.</p>
+                        <pre><code class="language-cpp">
+//rememb o-matic
+#nchude iostream
+#Hinchude <new>
+using namespace std:
+int man!
+    i
+    int linncton:
+    i,*p;
+        comi >>"How many numbers would you ike to twe?";
+        cin >> 1.
+        p= new (mothrow, int [i];
+            if (p)=0
+                cont << "Enor: memory could not be allocated";
+                    else
+                        !
+                for (n=0 ; n<1 ; n++)
+                    !
+                        cout << "Enter number:";
+                        cin > p[n];
+                        ;
+                        cout << "You hare entered: ";
+                for (n=0  n<l ; n++)
+                        cont << p[n] << " ";
+                        deleteff p;
+                1
+                rethmi 0 ;
+                ?
+                        </code></pre>
+                    </div>
+                    <div class="answer-section">
+                        <h4>Answer</h4>
+                        <div class="answer-content" id="answer-4">
+                            <div class="answer-detail">
+                                <p>(a) File extensions:</p>
+                                <ul>
+                                    <li>(i) .dat: A generic file extension used to store data.</li>
+                                    <li>(ii) .txt: A file extension used to store plain text.</li>
+                                </ul>
+                                <p>(b) (i) C++ program to delete a file:</p>
+                                <pre><code class="language-cpp">
+#include <iostream>
+#include <fstream>
+#include <stdio.h>
+
+int main() {
+    if (remove("delo") == 0) {
+        std::cout << "File deleted successfully" << std::endl;
+    } else {
+        std::cerr << "Error deleting file" << std::endl;
+    }
+    return 0;
+}
+                                </code></pre>
+                                <p>(ii) C++ program to determine and output the sum of the cubes of even numbers between 2 and 10:</p>
+                                <pre><code class="language-cpp">
+#include <iostream>
+
+int main() {
+    int sum = 0;
+    for (int i = 2; i <= 10; i += 2) {
+        sum += i * i * i;
+    }
+    std::cout << "Sum of cubes of even numbers between 2 and 10: " << sum << std::endl;
+    return 0;
+}
+                                </code></pre>
+                                <p>(c) Reasons for involving users in program development:</p>
+                                <ul>
+                                    <li>To ensure that the program meets the users' needs and requirements.</li>
+                                    <li>To get feedback on the program's design and usability.</li>
+                                </ul>
+                                <p>(d) Errors in the C++ program segment:</p>
+                                <ul>
+                                    <li>Missing header file: <code>#include <iostream></code> is misspelled as <code>#nchude iostream</code></li>
+                                    <li>Incorrect header inclusion: <code>Hinchude <new></code> should be <code>#include <new></code></li>
+                                    <li>Missing parenthesis in main function: <code>int man!</code> should be <code>int main()</code></li>
+                                    <li>Incorrect stream object: <code>comi</code> should be <code>std::cin</code> and <code>cont</code> should be <code>std::cout</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Question 5 -->
+                <div class="question" id="question-5">
+                    <h3>Question 5</h3>
+                    <div class="question-content">
+                        <p>(a) Outline two advantages of black box testing as used in programming.</p>
+                        <p>(b) With the aid of a diagram, describe a circular-linked-list as used in programming.</p>
+                        <p>(c) (i) Distinguish between Call-by-Value and Call-by-Reference as used in programming.</p>
+                        <p>(ii) Write a C++ program that accepts the scores of five students. The program should then determine and output the deviation of each student's score from the highest score.</p>
+                        <p>(d) Evaluate the following \(\mathrm{C}++\) statement.</p>
+                        <p>\(Y=((x+y) \% z+2) / k-x+z \% x\)</p>
+                        <p>Given that \(x=4, z=x / y, y=2\) and \(k=14\)</p>
+                    </div>
+                    <div class="answer-section">
+                        <h4>Answer</h4>
+                        <div class="answer-content" id="answer-5">
+                            <div class="answer-detail">
+                                <p>(a) Advantages of black box testing:</p>
+                                <ul>
+                                    <li>Can be performed by non-programmers.</li>
+                                    <li>Tests the functionality of the program from the user's perspective.</li>
+                                </ul>
+                                <p>(b) Circular-linked-list:</p>
+                                <p>(Since I can't draw a diagram, I will describe it. A circular linked list is a linked list in which the last node points back to the first node, forming a circle.)</p>
+                                <p>(c) (i) Call-by-Value vs Call-by-Reference:</p>
+                                <ul>
+                                    <li>Call-by-Value: The value of the argument is copied to the parameter. Changes made to the parameter do not affect the argument.</li>
+                                    <li>Call-by-Reference: The address of the argument is passed to the parameter. Changes made to the parameter do affect the argument.</li>
+                                </ul>
+                                <p>(ii) C++ program:</p>
+                                <pre><code class="language-cpp">
+#include <iostream>
+
+int main() {
+    int scores[5];
+    int highestScore = 0;
+
+    std::cout << "Enter the scores of five students:" << std::endl;
+    for (int i = 0; i < 5; i++) {
+        std::cin >> scores[i];
+        if (scores[i] > highestScore) {
+            highestScore = scores[i];
+        }
+    }
+
+    std::cout << "Deviations from the highest score:" << std::endl;
+    for (int i = 0; i < 5; i++) {
+        std::cout << "Student " << i + 1 << ": " << highestScore - scores[i] << std::endl;
+    }
+
+    return 0;
+}
+                                </code></pre>
+                                <p>(d) Evaluation of C++ statement:</p>
+                                <p>Given \(x=4, z=x / y, y=2\) and \(k=14\)</p>
+                                <p>\(z = 4 / 2 = 2\)</p>
+                                <p>\(Y=((x+y) \% z+2) / k-x+z \% x\)</p>
+                                <p>\(Y=((4+2) \% 2+2) / 14-4+2 \% 4\)</p>
+                                <p>\(Y=((6) \% 2+2) / 14-4+2 \% 4\)</p>
+                                <p>\(Y=(0+2) / 14-4+2\)</p>
+                                <p>\(Y=2 / 14-4+2\)</p>
+                                <p>\(Y=0.142857-4+2\)</p>
+                                <p>\(Y=-1.857143\)</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Question 6 -->
+                <div class="question" id="question-6">
+                    <h3>Question 6</h3>
+                    <div class="question-content">
+                        <p>(a) Explain each of the following terms as used in programming:</p>
+                        <ul>
+                            <li>(i) test development;</li>
+                            <li>(ii) test execution.</li>
+                        </ul>
+                        <p>(b) Outline two characteristics of stack data types as used in programming.</p>
+                        <p>(c) (i) Explain the most appropriate file access method that an online booking company would use justifying your answer.</p>
+                        <p>(ii) Josses prefer to use functions while developing his programs. Explain three reasons that could have led to his preference.</p>
+                        <p>(d) Distinguish between logical and run time errors as used in programming. (4 marks)</p>
+                    </div>
+                    <div class="answer-section">
+                        <h4>Answer</h4>
+                        <div class="answer-content" id="answer-6">
+                            <div class="answer-detail">
+                                <p>(a) Terms:</p>
+                                <ul>
+                                    <li>(i) Test development: The process of creating test cases, test data, and test procedures to verify that a software product meets its requirements.</li>
+                                    <li>(ii) Test execution: The process of running the test cases and comparing the actual results with the expected results.</li>
+                                </ul>
+                                <p>(b) Characteristics of stack data types:</p>
+                                <ul>
+                                    <li>LIFO (Last-In, First-Out): The last element added to the stack is the first element removed.</li>
+                                    <li>Limited access: Elements can only be added or removed from the top of the stack.</li>
+                                </ul>
+                                <p>(c) (i) File access method for an online booking company:</p>
+                                <p>Random access is the most appropriate file access method. This allows the company to quickly access and update specific records in the file, such as booking information, without having to read through the entire file.</p>
+                                <p>(ii) Reasons for preferring functions:</p>
+                                <ul>
+                                    <li>Modularity: Functions allow you to break down a program into smaller, more manageable units.</li>
+                                    <li>Reusability: Functions can be called from multiple parts of the program, reducing code duplication.</li>
+                                    <li>Readability: Functions improve code readability by encapsulating complex logic into reusable units.</li>
+                                </ul>
+                                <p>(d) Logical vs Run time errors:</p>
+                                <ul>
+                                    <li>Logical errors: Errors in the program's logic that cause it to produce incorrect results.</li>
+                                    <li>Run time errors: Errors that occur during the execution of the program, such as division by zero or accessing an invalid memory location.</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Question 7 -->
+                <div class="question" id="question-7">
+                    <h3>Question 7</h3>
+                    <div class="question-content">
+                        <p>(a) Define each of the following terms as used in programming:</p>
+                        <ul>
+                            <li>(i) alpha testing;</li>
+                            <li>(ii) beta testing.</li>
+                        </ul>
+                        <p>(b) Write a Pascal program that would generate the following output. Use while loop structure.</p>
+                        <p>34567</p>
+                        <p>3456</p>
+                        <p>345</p>
+                        <p>34</p>
+                        <p>3</p>
+                        <p>(c) Distinguish between normal and extreme data as used in testing.</p>
+                        <p>(d) Kinderu College applies the following conditions to calculate the end of semester final mark for each student:</p>
+                        <ul>
+                            <li>each of the students must take three Continuous Assessment Tests (CATs) and a final exam;</li>
+                            <li>the CATs are averaged and contributes to \(30 \%\) of the student's final score;</li>
+                            <li>the final examination which is marked out of \(100 \%\) contributes to \(70 \%\) of the student's final score.</li>
+                        </ul>
+                        <p>Write a C++ program that would accept the CATs and final examination marks for a student. The program should then calculate the total final score for the student through the use a function and output it.</p>
+                    </div>
+                    <div class="answer-section">
+                        <h4>Answer</h4>
+                        <div class="answer-content" id="answer-7">
+                            <div class="answer-detail">
+                                <p>(a) Terms:</p>
+                                <ul>
+                                    <li>(i) Alpha testing: Testing performed by internal testers within the organization.</li>
+                                    <li>(ii) Beta testing: Testing performed by external users or customers in a real-world environment.</li>
+                                </ul>
+                                <p>(b) Pascal program:</p>
+                                <pre><code class="language-pascal">
+program Pattern;
+var
+  i, j, k: integer;
+begin
+  k := 3;
+  while k <= 7 do
+  begin
+    for j := k to 7 do
+      write(j);
+    writeln;
+    k := k + 1;
+  end;
+end.
+                                </code></pre>
+                                <p>(c) Normal vs Extreme data:</p>
+                                <ul>
+                                    <li>Normal data: Data that is within the expected range of values.</li>
+                                    <li>Extreme data: Data that is at the boundaries of the expected range of values, or data that is invalid or unexpected.</li>
+                                </ul>
+                                <p>(d) C++ program:</p>
+                                <pre><code class="language-cpp">
+#include <iostream>
+
+float calculateFinalScore(float cat1, float cat2, float cat3, float finalExam) {
+    float catAverage = (cat1 + cat2 + cat3) / 3;
+    float finalScore = (0.3 * catAverage) + (0.7 * finalExam);
+    return finalScore;
+}
+
+int main() {
+    float cat1, cat2, cat3, finalExam;
+
+    std::cout << "Enter CAT 1 score: ";
+    std::cin >> cat1;
+    std::cout << "Enter CAT 2 score: ";
+    std::cin >> cat2;
+    std::cout << "Enter CAT 3 score: ";
+    std::cin >> cat3;
+    std::cout << "Enter final exam score: ";
+    std::cin >> finalExam;
+
+    float finalScore = calculateFinalScore(cat1, cat2, cat3, finalExam);
+
+    std::cout << "Final Score: " << finalScore << std::endl;
+
+    return 0;
+}
+                                </code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Question 8 -->
+                <div class="question" id="question-8">
+                    <h3>Question 8</h3>
+                    <div class="question-content">
+                        <p>(a) State the function of each of the following file commands as used in Pascal programs:</p>
+                        <ul>
+                            <li>(i) truncate;</li>
+                            <li>(ii) reset.</li>
+                        </ul>
+                        <p>(b) Explain each of the following terms as used in programming:</p>
+                        <ul>
+                            <li>(i) function declaration;</li>
+                            <li>(ii) function definition.</li>
+                            <li>(iii) type casting</li>
+                        </ul>
+                        <p>(c) Table 2 represents the data collected by an analyst from 10 respondents within Narvon area. Use it to answer the questions that follow:</p>
+                        <p>(i) Using the binary search technique, write a C++ program that would be used to scarch clement 56 from the list.</p>
+                        <p>(ii) Outline the steps that could be used to sort the data in the array in descending order using the bubble sorting algorithm.</p>
+                        <p>(d) Write \(\mathrm{C}++\) expressions that would be used to represent each of the following:</p>
+                        <ul>
+                            <li>(i) declare marks to hold 90.345.</li>
+                            <li>(ii) declare \(pi\) as a constant to hold 3.14.</li>
+                        </ul>
+                    </div>
+                    <div class="answer-section">
+                        <h4>Answer</h4>
+                        <div class="answer-content" id="answer-8">
+                            <div class="answer-detail">
+                                <p>(a) Pascal file commands:</p>
+                                <ul>
+                                    <li>(i) truncate: Deletes all data from a file, leaving it empty.</li>
+                                    <li>(ii) reset: Opens an existing file for reading, positioning the file pointer at the beginning of the file.</li>
+                                </ul>
+                                <p>(b) Terms:</p>
+                                <ul>
+                                    <li>(i) Function declaration: Declares the name, return type, and parameters of a function.</li>
+                                    <li>(ii) Function definition: Provides the actual code that implements the function.</li>
+                                    <li>(iii) Type casting: Converting a value from one data type to another.</li>
+                                </ul>
+                                <p>(c) (i) C++ program for binary search:</p>
+                                <pre><code class="language-cpp">
+#include <iostream>
+
+int main() {
+    int data[] = {12, 32, 7, 95, 56, 21, 12, 13, 13, 90};
+    int n = sizeof(data) / sizeof(data[0]);
+    int target = 56;
+    int left = 0, right = n - 1;
+    int mid;
+    bool found = false;
+
+    while (left <= right) {
+        mid = left + (right - left) / 2;
+        if (data[mid] == target) {
+            std::cout << "Element found at index " << mid << std::endl;
+            found = true;
+            break;
+        } else if (data[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+
+    if (!found) {
+        std::cout << "Element not found" << std::endl;
+    }
+
+    return 0;
+}
+                                </code></pre>
+                                <p>(ii) Steps for bubble sort in descending order:</p>
+                                <ul>
+                                    <li>Compare the first two elements of the array. If the first element is smaller than the second element, swap them.</li>
+                                    <li>Compare the second and third elements. If the second element is smaller than the third element, swap them.</li>
+                                    <li>Continue this process for all adjacent pairs of elements in the array.</li>
+                                    <li>Repeat steps 1-3 until no more swaps are needed.</li>
+                                </ul>
+                                <p>(d) C++ expressions:</p>
+                                <ul>
+                                    <li>(i) <code>float marks = 90.345;</code></li>
+                                    <li>(ii) <code>const float pi = 3.14;</code></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="paper-navigation bottom">
+                <a href="2011nov.html" class="btn">Previous Paper</a>
+                <a href="index.html" class="btn">Home</a>
+                <a href="2023j.html" class="btn">Next Paper</a>
+            </div>
+        </main>
+    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Visual Programming Past Papers Collection | Kenya National Examinations Council</p>
+        </div>
+    </footer>
+</body>
+</html>
