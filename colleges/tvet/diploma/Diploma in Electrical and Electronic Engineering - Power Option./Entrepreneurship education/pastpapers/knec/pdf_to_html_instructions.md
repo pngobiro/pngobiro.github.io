@@ -2541,18 +2541,28 @@ All images in the past papers must be properly downloaded and stored locally bef
    - Use curl to download all images to the local `images` directory
    - All images must be downloaded before beginning HTML processing
    - Follow consistent naming conventions
+   - IMPORTANT: Always read the OCR output to determine:
+     * Which question the image belongs to
+     * The figure number referenced in the question text
+     * The purpose of the image (e.g., "Figure 1 shows a diagram of a Local Area Network")
 
 3. **Example Process:**
-   ```
-   # 1. Extract all image URLs from MMD file
+   ```bash
+   # 1. Read the OCR output first to understand image context
+   # Example line from OCR: "3. (a) Figure 1 shows a diagram of a Local Area Network."
+   # This tells us: Question 3, Figure 1
+   
+   # 2. Extract image URLs from MMD file
    grep -o "https://cdn\.mathpix\.com/[^)]*" 2022n_ocr.mmd > image_urls.txt
    
-   # 2. Download all images to local directory
+   # 3. Download each image with correct naming based on context
    mkdir -p images
+   PAPER_ID="2022n"
    while read url; do
-     # Extract question number from context (important!)
-     # Use consistent naming pattern: paper-id_qX-figY.png
-     curl -o "images/2022n_q1-fig1.png" -s -L "$url"
+     # Use names based on question and figure numbers from OCR
+     curl -o "images/${PAPER_ID}_q3-fig1.png" -s -L "$url"
+     # Verify the image exists after download
+     ls -l "images/${PAPER_ID}_q3-fig1.png"
    done < image_urls.txt
    ```
 
@@ -2602,9 +2612,18 @@ Follow this strict naming convention that includes the past paper name to avoid 
 
 Before finalizing the HTML conversion, verify all images:
 
-1. **Completeness Check**
+1. **Context and Naming Check**
+   - Read the question text in the OCR output to identify:
+     * The correct question number for each image
+     * The figure number referenced in the text
+     * The purpose/description of the image
+   - Verify image filenames match the question and figure numbers
+   - Example: If text says "Figure 1 shows a diagram..." in Question 3, the image should be named "paperID_q3-fig1.png"
+
+2. **Completeness Check**
    - All images referenced in MMD are downloaded locally
    - No remote URLs remain in the HTML
+   - Each image mentioned in question text has a corresponding file
 
 2. **File Existence Verification**
    - All local image paths in HTML point to existing files
