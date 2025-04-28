@@ -674,8 +674,43 @@ input:checked + .dark-mode-slider:before {
   }
 }
 
+/* Tablet Optimization */
+@media (max-width: 992px) {
+  .main-content {
+    flex-direction: column;
+  }
+  
+  .sidebar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    max-height: auto;
+    z-index: 100;
+    background: var(--light-bg);
+  }
+
+  main {
+    max-width: 100%;
+  }
+
+  .container {
+    width: 95%;
+  }
+
+  .question-figure img {
+    max-width: 90%;
+  }
+}
+
 /* Mobile Optimization */
 @media (max-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+
+  body {
+    line-height: 1.4;
+  }
   header h1 {
     font-size: 1.8rem;
   }
@@ -796,6 +831,49 @@ input:checked + .dark-mode-slider:before {
 
 /* Small mobile devices */
 @media (max-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+
+  .container {
+    width: 100%;
+    padding: 0 12px;
+  }
+
+  /* Improved spacing for small screens */
+  .question,
+  .answer-section {
+    padding: 12px;
+    margin-bottom: 15px;
+  }
+
+  /* Better text readability */
+  p, li {
+    line-height: 1.5;
+  }
+
+  /* Optimized headings */
+  h1 { font-size: 1.5rem; }
+  h2 { font-size: 1.3rem; }
+  h3 { font-size: 1.1rem; }
+  h4 { font-size: 1rem; }
+
+  /* Improved equation display */
+  .MathJax_Display {
+    font-size: 90%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Better spacing for grid items */
+  .paper-grid {
+    gap: 12px;
+  }
+
+  /* Improved mobile form elements */
+  select {
+    width: 100%;
+  }
   header h1 {
     font-size: 1.5rem;
   }
@@ -833,9 +911,56 @@ input:checked + .dark-mode-slider:before {
     flex-direction: column;
   }
   
+  /* Improved table responsiveness */
+  .data-table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    max-width: 100%;
+  }
+
+  /* Better form element sizing */
+  input[type="text"],
+  input[type="email"],
+  input[type="number"],
+  select,
+  textarea {
+    font-size: 16px; /* Prevents iOS zoom on focus */
+    max-width: 100%;
+    margin: 5px 0;
+  }
+
+  /* Improved spacing for nested lists */
+  ul ul,
+  ol ol,
+  ul ol,
+  ol ul {
+    margin-left: 15px;
+  }
+
+  /* Touch-friendly spacing */
+  li {
+    margin-bottom: 10px;
+    padding: 5px 0;
+  }
+
+  /* Filter and search improvements */
   .filter-options {
     flex-direction: column;
-    gap: 10px;
+    gap: 12px;
+  }
+
+  .search-box input {
+    height: 44px; /* Better touch target */
+  }
+
+  /* Improved code block readability */
+  pre {
+    padding: 15px;
+    font-size: 14px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
   
   .stats-grid {
@@ -979,6 +1104,30 @@ input:checked + .dark-mode-slider:before {
 .explanation {
   flex: 0 0 60%;
   padding: 15px;
+}
+
+/* Header scroll behavior */
+@media (max-width: 768px) {
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        transition: transform 0.3s ease;
+    }
+
+    header.scroll-down {
+        transform: translate3d(0, -100%, 0);
+    }
+
+    header.scroll-up {
+        transform: none;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Navigation open state */
+body.nav-open {
+    overflow: hidden;
 }
 
 /* Utility Classes */
