@@ -17,12 +17,182 @@ Convert PDF documents into visually engaging, pedagogically effective HTML pages
 
 ## Content Chunking Strategy
 
-1. **Enforce strict chunking at logical section breaks**:
-   - Maximum 250 lines per HTML file (STRICT REQUIREMENT)
-   - Use natural boundaries (chapters, major headings) whenever possible
-   - NEVER exceed 300 lines per file under any circumstances
-   - Insert manual breaks if a section would exceed the limit
-   - Never split in the middle of a paragraph, table, or other logical unit
+1. **Logical Content Organization**:
+   - Break content at natural conceptual boundaries
+   - Keep related content together as complete learning units
+   - Ensure each chunk represents a self-contained topic
+   - Examples from CRO content organization:
+     * Basic principles and theory in one chunk
+     * Construction and components in another
+     * Controls and operation in a third
+     * Applications and measurements in a fourth
+
+2. **Content Cohesion Guidelines**:
+   - Keep together:
+     * Diagrams with their explanations
+     * Examples with their solutions
+     * Theories with their immediate applications
+     * Components with their functions
+     * Mathematical derivations with context
+   - Never split:
+     * Mid-paragraph or mid-section
+     * Between a figure and its caption
+     * Between a table and its explanation
+     * Between related mathematical steps
+
+3. **Reader-Centric Organization**:
+   - Structure content to support logical learning progression
+   - Present prerequisites before advanced concepts
+   - Group related techniques and methods
+   - Maintain context between related topics
+   - Example sequence from measurements topic:
+     1. Basic measurement principles
+     2. Instrument construction
+     3. Operating procedures
+     4. Applications and examples
+     5. Advanced techniques
+
+4. **Visual Content Management**:
+   - Keep figures with their relevant text explanations
+   - Group related diagrams together
+   - Maintain complete tables in one chunk
+   - Use cross-references for related content in other chunks
+   - Example from bridge measurements:
+     * All bridge circuit diagrams together
+     * Complete measurement procedure in one place
+     * Results analysis and applications together
+
+2. **Semantic File Naming**:
+   - Main chapter overview: `chapter-[number].html`
+   - Topic-based files: `chapter-[number]-[topic-name].html`
+   - Example from measurement instruments:
+     * `chapter-6.html` (Overview and TOC)
+     * `chapter-6-principles.html` (Basic principles)
+     * `chapter-6-construction.html` (Instrument construction)
+     * `chapter-6-operation.html` (Operating procedures)
+     * `chapter-6-applications.html` (Applications and examples)
+
+3. **Content Organization Implementation**:
+   - Create descriptive chapter overview pages
+   - Use semantic HTML structure reflecting content hierarchy
+   - Implement clear navigation between related topics
+   - Include proper content relationships:
+     * Prerequisites and foundations
+     * Main concepts and principles
+     * Applications and examples
+     * Advanced topics and special cases
+
+4. **Document Structure and Relationships**:
+   - Use semantic HTML5 elements
+   - Implement clear content hierarchy
+   - Add relationship metadata:
+     ```html
+     <head>
+         <meta name="prerequisites" content="chapter-6-principles.html">
+         <meta name="related-topics" content="chapter-6-applications.html">
+         <meta name="follows" content="chapter-6-construction.html">
+         <meta name="complexity-level" content="intermediate">
+     </head>
+     ```
+
+5. **Content Navigation Architecture**:
+   - Implement multi-level navigation:
+     ```html
+     <nav class="content-navigation">
+         <div class="nav-group">
+             <h3 class="nav-group-title">Current Topic: [Topic Name]</h3>
+             <!-- Standard navigation -->
+             <div class="nav-links">
+                 <a href="../index.html">Table of Contents</a>
+                 <a href="previous-topic.html">Previous Topic</a>
+                 <a href="next-topic.html">Next Topic</a>
+             </div>
+             
+             <!-- Related content navigation -->
+             <div class="related-content">
+                 <h4>Related Topics</h4>
+                 <ul class="related-links">
+                     <li>
+                         <span class="relation-type">Prerequisites:</span>
+                         <a href="prereq-topic.html">Required Concept</a>
+                     </li>
+                     <li>
+                         <span class="relation-type">Applications:</span>
+                         <a href="application-topic.html">Practical Usage</a>
+                     </li>
+                     <li>
+                         <span class="relation-type">Advanced:</span>
+                         <a href="advanced-topic.html">Further Study</a>
+                     </li>
+                 </ul>
+             </div>
+         </div>
+     </nav>
+     ```
+
+6. **Topic Relationship Map**:
+   Create a JSON file `topic-relationships.json` to map content connections:
+   ```json
+   {
+     "chapter-6-principles": {
+       "title": "Basic Measurement Principles",
+       "prerequisites": [],
+       "followedBy": ["chapter-6-construction"],
+       "relatedTopics": ["chapter-3-fundamentals"],
+       "applications": ["chapter-6-applications"]
+     },
+     "chapter-6-construction": {
+       "title": "Instrument Construction",
+       "prerequisites": ["chapter-6-principles"],
+       "followedBy": ["chapter-6-operation"],
+       "relatedTopics": ["chapter-4-components"],
+       "applications": ["chapter-6-applications"]
+     }
+   }
+   ```
+
+7. **Learning Path Guidance**:
+   ```html
+   <section class="learning-path">
+       <h3>Learning Path</h3>
+       <ol class="path-steps">
+           <li class="completed">
+               <span class="step-name">Basic Principles</span>
+               <span class="step-status">✓ Completed</span>
+           </li>
+           <li class="current">
+               <span class="step-name">Construction Details</span>
+               <span class="step-status">Currently Here</span>
+           </li>
+           <li class="upcoming">
+               <span class="step-name">Operation Guide</span>
+               <span class="step-status">Next Topic</span>
+           </li>
+       </ol>
+   </section>
+   ```
+     ```html
+     <!-- START: section-name -->
+     <section class="content-section" id="section-name">
+         <h2 class="section-heading">
+             <span class="heading-icon">[RELEVANT ICON]</span>
+             <span class="heading-text">[SECTION TITLE]</span>
+         </h2>
+         <div class="content-card">
+             <!-- Content here -->
+         </div>
+     </section>
+     <!-- END: section-name -->
+     ```
+
+4. **Inter-chunk Navigation**:
+   - Add part numbers and total parts to navigation:
+     ```html
+     <span class="progress-text">Part X of Y</span>
+     ```
+   - Include clear previous/next links between parts
+   - Maintain breadcrumb trail back to main chapter
+   - Link back to chapter overview page
 
 2. **Mandatory chunking implementation**:
    ```python
@@ -262,20 +432,69 @@ course_name/
 </html>
 ```
 
-### Content Sections
+### Content Organization Templates
+
+#### Chapter Overview Page
 ```html
-<!-- START: chapter-1-introduction -->
-<section id="chapter-1-introduction" class="content-section">
+<main class="section-content">
+    <div class="chapter-parts">
+        <div class="part-card">
+            <h2 class="part-title">Part 1: [Topic Area]</h2>
+            <ul class="part-topics">
+                <li>[Subtopic 1]</li>
+                <li>[Subtopic 2]</li>
+                <li>[Subtopic 3]</li>
+            </ul>
+            <a href="chapter-[X]-part-1.html" class="part-link">Read Part 1</a>
+        </div>
+        <!-- Additional part cards -->
+    </div>
+</main>
+```
+
+#### Content Sections
+```html
+<!-- START: section-name -->
+<section id="section-name" class="content-section">
     <h2 class="section-heading">
-        <span class="heading-icon">📊</span>
+        <span class="heading-icon">[RELEVANT ICON]</span>
         <span class="heading-text">[EXACT HEADING TEXT]</span>
     </h2>
     <div class="content-card">
+        <!-- Theory content -->
         <p>[EXACT PARAGRAPH TEXT]</p>
-        <!-- ... more content ... -->
+        
+        <!-- Mathematical content -->
+        <div class="equation">
+            $$[EXACT EQUATION]$$
+        </div>
+        
+        <!-- Lists -->
+        <ul class="enhanced-list">
+            <li class="list-item">
+                <span class="item-icon">•</span>
+                <span class="item-text">[EXACT LIST ITEM]</span>
+            </li>
+        </ul>
+        
+        <!-- Figures -->
+        <figure class="content-figure">
+            <img src="[IMAGE PATH]" alt="[DESCRIPTIVE TEXT]">
+            <figcaption>[EXACT CAPTION]</figcaption>
+        </figure>
+        
+        <!-- Examples -->
+        <h3 class="subsection-heading">Example</h3>
+        <p>[EXACT PROBLEM STATEMENT]</p>
+        <div class="solution-steps">
+            <p>Solution:</p>
+            <div class="equation">
+                $$[EXACT CALCULATIONS]$$
+            </div>
+        </div>
     </div>
 </section>
-<!-- END: chapter-1-introduction -->
+<!-- END: section-name -->
 ```
 
 ### Lists
@@ -420,6 +639,165 @@ Create a JSON file `conversion-status.json` to track progress:
     }
   ]
 }
+
+## Content Relationships and Navigation Styling
+```css
+/* Related content navigation */
+.content-navigation {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: #f8f9fa;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.nav-group-title {
+    font-size: 1.2rem;
+    color: #2c3e50;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #3498db;
+}
+
+.related-content {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e0e0e0;
+}
+
+.related-content h4 {
+    font-size: 1rem;
+    color: #7f8c8d;
+    margin-bottom: 0.75rem;
+}
+
+.related-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.related-links li {
+    margin-bottom: 0.75rem;
+    display: flex;
+    align-items: baseline;
+    gap: 0.5rem;
+}
+
+.relation-type {
+    font-size: 0.9rem;
+    color: #7f8c8d;
+    min-width: 100px;
+}
+
+/* Learning path visualization */
+.learning-path {
+    margin: 2rem 0;
+    padding: 1.5rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.path-steps {
+    list-style: none;
+    padding: 0;
+    margin: 1rem 0;
+    position: relative;
+}
+
+.path-steps::before {
+    content: '';
+    position: absolute;
+    left: 1rem;
+    top: 0;
+    bottom: 0;
+    width: 2px;
+    background: #e0e0e0;
+}
+
+.path-steps li {
+    position: relative;
+    padding: 1rem 1rem 1rem 3rem;
+    margin-bottom: 0.5rem;
+}
+
+.path-steps li::before {
+    content: '';
+    position: absolute;
+    left: 0.5rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1rem;
+    height: 1rem;
+    border-radius: 50%;
+    border: 2px solid #e0e0e0;
+    background: white;
+}
+
+.path-steps .completed::before {
+    border-color: #2ecc71;
+    background: #2ecc71;
+}
+
+.path-steps .current::before {
+    border-color: #3498db;
+    background: white;
+}
+
+.path-steps .upcoming::before {
+    border-color: #95a5a6;
+    background: white;
+}
+
+.step-name {
+    display: block;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.step-status {
+    display: block;
+    font-size: 0.9rem;
+    color: #7f8c8d;
+}
+
+/* Topic relationship metadata */
+.topic-metadata {
+    margin: 1rem 0;
+    padding: 1rem;
+    background: #f8f9fa;
+    border-radius: 4px;
+    font-size: 0.9rem;
+}
+
+.topic-metadata dl {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.5rem;
+    margin: 0;
+}
+
+.topic-metadata dt {
+    color: #7f8c8d;
+    font-weight: 500;
+}
+
+.topic-metadata dd {
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .learning-path {
+        margin: 1rem -1rem;
+        border-radius: 0;
+    }
+
+    .content-navigation {
+        margin: 1rem -1rem;
+        border-radius: 0;
+    }
+}
 ```
 
 ### Verification Checklist
@@ -498,10 +876,114 @@ Mathpix converts PDFs to Mathpix Markdown (MMD), which preserves:
 - Lists and other structural elements
 
 ### Working with MMD Output
+
 1. **Reviewing MMD**:
    - Open the `.mmd` file to check extraction quality
    - Pay special attention to equations, tables, and complex formatting
    - Note any extraction errors for manual correction
+
+2. **Handling Complex Technical Content**:
+   - Break down complex topics into logical progressions
+   - Create clear hierarchical relationships between concepts
+   - Maintain precise technical terminology
+   - Examples from CRO documentation:
+     * Basic principles before operational details
+     * Component descriptions before system interactions
+     * Theory before practical applications
+     * Simple measurements before complex analysis
+
+3. **Technical Content Organization**:
+   - Group related technical concepts together
+   - Present information in a logical sequence:
+     1. Basic principles and definitions
+     2. Component descriptions and functions
+     3. System operation and controls
+     4. Applications and measurements
+     5. Examples and practical usage
+   - Include diagrams with their relevant explanations
+   - Keep mathematical derivations with their context
+   - Present practical examples immediately after theory
+
+4. **Complex Diagrams and Figures**:
+   ```html
+   <section id="technical-diagram" class="content-section">
+       <h2 class="section-heading">
+           <span class="heading-icon">📊</span>
+           <span class="heading-text">[System Name/Component]</span>
+       </h2>
+       <div class="content-card">
+           <!-- Main diagram -->
+           <figure class="content-figure">
+               <img src="[PATH]" alt="[DESCRIPTIVE TEXT]">
+               <figcaption>[EXACT CAPTION]</figcaption>
+           </figure>
+
+           <!-- Component descriptions -->
+           <h3 class="subsection-heading">Components</h3>
+           <ul class="enhanced-list">
+               <li class="list-item">
+                   <span class="item-icon">•</span>
+                   <span class="item-text">
+                       <strong>[Component Name]:</strong> [EXACT DESCRIPTION]
+                   </span>
+               </li>
+           </ul>
+
+           <!-- Operation explanation -->
+           <h3 class="subsection-heading">Operation</h3>
+           <p>[EXACT OPERATIONAL DETAILS]</p>
+
+           <!-- Technical specifications -->
+           <h3 class="subsection-heading">Specifications</h3>
+           <div class="table-container">
+               <table class="content-table">
+                   <tr>
+                       <th>Parameter</th>
+                       <th>Value</th>
+                   </tr>
+                   <tr>
+                       <td>[EXACT PARAMETER]</td>
+                       <td>[EXACT VALUE]</td>
+                   </tr>
+               </table>
+           </div>
+       </div>
+   </section>
+   ```
+
+5. **Example Problems and Solutions**:
+   ```html
+   <section id="technical-example" class="content-section">
+       <h2 class="section-heading">
+           <span class="heading-icon">📝</span>
+           <span class="heading-text">Example: [TOPIC]</span>
+       </h2>
+       <div class="content-card">
+           <!-- Problem statement -->
+           <p class="problem-statement">[EXACT PROBLEM TEXT]</p>
+
+           <!-- Given information -->
+           <h3 class="subsection-heading">Given</h3>
+           <ul class="enhanced-list">
+               <li class="list-item">[EXACT VALUES/CONDITIONS]</li>
+           </ul>
+
+           <!-- Solution -->
+           <h3 class="subsection-heading">Solution</h3>
+           <div class="solution-steps">
+               <p>[STEP DESCRIPTION]</p>
+               <div class="equation">
+                   $$[EXACT EQUATIONS]$$
+               </div>
+           </div>
+
+           <!-- Final answer -->
+           <div class="answer-box">
+               <p><strong>Answer:</strong> [EXACT RESULT]</p>
+           </div>
+       </div>
+   </section>
+   ```
 
 2. **Handling Images**:
    - MMD contains image references as `![](image_url)`
@@ -1202,20 +1684,13 @@ img {
 
 ## Responsive Design
 ```css
+/* Enhanced component breakpoints */
 @media (max-width: 768px) {
     .container {
         padding: 1rem;
     }
 
-    .toc-container {
-        margin: 20px;
-        padding: 20px;
-    }
-
-    .toc-title {
-        font-size: 2em;
-    }
-
+    /* Navigation adjustments */
     .nav-links {
         flex-direction: column;
         align-items: stretch;
@@ -1223,6 +1698,37 @@ img {
 
     .nav-button {
         justify-content: center;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Chapter parts layout */
+    .chapter-parts {
+        grid-template-columns: 1fr;
+    }
+
+    .part-card {
+        margin-bottom: 1rem;
+    }
+
+    /* Content adjustments */
+    .content-section {
+        padding: 1rem;
+    }
+
+    .section-heading {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+
+    .content-card {
+        padding: 1rem;
+    }
+
+    /* Table adjustments */
+    .table-container {
+        margin: 1rem -1rem;
+        overflow-x: auto;
     }
 
     .content-table {
@@ -1233,9 +1739,27 @@ img {
     .content-table td {
         padding: 0.5rem;
     }
+
+    /* TOC adjustments */
+    .toc-container {
+        margin: 1rem;
+        padding: 1rem;
+    }
+
+    .toc-title {
+        font-size: 2em;
+    }
+
+    /* Solution and example components */
+    .solution-steps,
+    .answer-box {
+        padding: 1rem;
+        margin: 1rem -0.5rem;
+    }
 }
 
 @media (max-width: 480px) {
+    /* Typography scaling */
     .toc-title {
         font-size: 1.8em;
     }
@@ -1250,6 +1774,46 @@ img {
 
     .subsection-heading {
         font-size: 1.1rem;
+    }
+
+    .part-title {
+        font-size: 1.1rem;
+    }
+
+    /* Component adjustments */
+    .part-card {
+        padding: 1rem;
+    }
+
+    .content-card {
+        padding: 0.75rem;
+    }
+
+    .enhanced-list li {
+        padding-left: 1rem;
+    }
+
+    /* Math content */
+    .equation {
+        font-size: 0.9em;
+        padding: 0.5rem;
+        overflow-x: auto;
+    }
+}
+
+/* Print styles for documentation */
+@media print {
+    .nav-links,
+    .part-link {
+        display: none;
+    }
+
+    .content-card {
+        break-inside: avoid;
+    }
+
+    .equation {
+        break-inside: avoid;
     }
 }
 ```
