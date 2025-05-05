@@ -1,0 +1,605 @@
+/* Appendix B: CSS Styling Instructions */
+
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50; /* Changed from #333 to match variable */
+    --border-color: #dcdde1;
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif; /* Added system fonts as fallbacks */
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Added from topic page template */
+.document-section {
+    background-color: #ffffff; /* Added white background for article */
+    padding: 2rem; /* Added padding */
+    border-radius: 8px; /* Added border-radius */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Added shadow */
+    margin-bottom: 2rem; /* Added margin */
+}
+
+/* Added from topic page template */
+.section-header {
+    text-align: center; /* Center align header */
+    margin-bottom: 2rem; /* Space below header */
+    border-bottom: 2px solid var(--border-color); /* Underline effect */
+    padding-bottom: 1rem; /* Space for underline */
+}
+
+/* Added from topic page template */
+.section-title {
+    font-size: 2.2em; /* Title size */
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 0.5rem; /* Space below title */
+}
+
+/* Added from topic page template */
+.title-underline {
+    width: 100px; /* Underline width */
+    height: 4px; /* Underline thickness */
+    background-color: var(--accent-color); /* Underline color */
+    margin: 0 auto; /* Center underline */
+}
+
+/* Added from topic page template */
+.section-content {
+    margin-top: 2rem; /* Space above main content */
+}
+
+
+/* Navigation Styling */
+.document-nav {
+    margin: 2rem 0;
+    padding: 1rem 0; /* Added padding */
+    border-top: 1px solid var(--border-color); /* Separator line */
+    border-bottom: 1px solid var(--border-color); /* Separator line */
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap; /* Allow wrapping on smaller screens */
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap; /* Prevent text wrapping */
+    font-size: 0.9em; /* Slightly smaller font */
+}
+
+/* Table of Contents link specific color */
+.nav-button[href*="index.html"] {
+    color: #2980b9; /* Blue */
+    border-color: #2980b9;
+}
+
+.nav-button[href*="index.html"]:hover {
+    background: #eaf4fb; /* Lighter blue */
+}
+
+/* Previous Section link specific color (Using explicit selector for robustness) */
+.nav-button:nth-child(2):not([href*="index.html"]):not(:last-child) { /* Target the second button if it's 'Previous' */
+    color: #e67e22; /* Orange */
+    border-color: #e67e22;
+}
+.nav-button:nth-child(2):not([href*="index.html"]):not(:last-child):hover {
+    background: #fdf3e8; /* Lighter orange */
+}
+
+/* Next Section link specific color */
+.nav-button:last-child:not([href*="index.html"]) { /* Target the last button if it's 'Next' */
+    color: #27ae60; /* Green */
+    border-color: #27ae60;
+}
+
+.nav-button:last-child:not([href*="index.html"]):hover {
+    background: #eaf7f1; /* Lighter green */
+}
+
+/* Disabled states */
+.nav-button.disabled {
+    color: #bdc3c7; /* Grey color */
+    border-color: #bdc3c7;
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.nav-button.disabled:hover {
+    background: white; /* No background change on hover */
+}
+
+/* Progress indicator styling */
+.document-progress {
+    display: flex;
+    flex-direction: column; /* Stack bar and text */
+    align-items: center;
+    flex-grow: 1; /* Allow progress bar to take space */
+    min-width: 100px; /* Ensure minimum width */
+}
+
+.progress-bar {
+    width: 100%;
+    height: 8px; /* Thin progress bar */
+    background-color: #ecf0f1; /* Light grey background */
+    border-radius: 4px;
+    overflow: hidden; /* Clip the fill */
+    margin-bottom: 0.3rem; /* Space between bar and text */
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent-color); /* Use accent color for fill */
+    width: 0%; /* Default to 0, set inline */
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.8em;
+    color: var(--secondary-color);
+}
+
+
+/* Table of Contents Styling */
+.toc-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.toc-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+.toc-title {
+    font-size: 2.5em;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.toc-subtitle {
+    font-size: 1.2em;
+    color: #7f8c8d;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+}
+
+.toc-chapter {
+    margin-bottom: 25px;
+    border-left: 3px solid #3498db; /* Accent color border */
+    padding-left: 20px; /* Increased padding */
+}
+
+.toc-chapter-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: #3498db; /* Accent color */
+    margin-bottom: 15px; /* Increased space */
+}
+
+.toc-section-list {
+    list-style: none; /* Remove default list style */
+    padding-left: 10px; /* Indent section items */
+}
+
+.toc-section-item {
+    margin-bottom: 8px; /* Space between section links */
+}
+
+.toc-link {
+    text-decoration: none;
+    color: #2980b9; /* Specific blue for links */
+    font-size: 1.1em;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: block; /* Make link block-level */
+    padding: 5px 0;
+}
+
+.toc-link:hover {
+    color: #1abc9c; /* Teal hover color */
+    padding-left: 5px; /* Indent on hover */
+}
+
+.toc-link::before {
+    content: '➔ '; /* Arrow marker */
+    color: #bdc3c7; /* Light grey marker color */
+    margin-right: 8px;
+    font-size: 0.9em;
+}
+
+
+/* Content Styling */
+.content-section {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem; /* Increased padding */
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* Content card within section */
+.content-card {
+    padding: 1rem 0; /* Vertical padding, no horizontal padding needed if section has padding */
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem; /* Increased gap */
+    margin-bottom: 1.5rem; /* Increased margin */
+    padding-bottom: 0.5rem; /* Space for potential underline/border */
+    border-bottom: 1px solid #eee; /* Light separator */
+    color: var(--primary-color);
+    font-size: 1.8em; /* Larger heading */
+    font-weight: 600; /* Bolder */
+}
+
+.heading-icon {
+    font-size: 1.2em; /* Larger icon */
+}
+
+.heading-text {
+    flex-grow: 1; /* Allow text to take remaining space */
+}
+
+
+.subsection-heading {
+    color: var(--secondary-color);
+    font-size: 1.4em; /* Larger subsection heading */
+    font-weight: 600;
+    margin-top: 2rem; /* Increased top margin */
+    margin-bottom: 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px dashed #ccc; /* Dashed underline */
+}
+
+/* Added for H4 */
+.subsubsection-heading {
+    color: var(--secondary-color);
+    font-size: 1.2em;
+    font-weight: 500;
+    margin-top: 1.5rem;
+    margin-bottom: 0.8rem;
+}
+
+
+p {
+    margin-bottom: 1rem; /* Standard paragraph spacing */
+    color: var(--text-color);
+}
+
+/* Tables */
+.table-container {
+    margin: 1.5rem 0;
+    overflow-x: auto; /* Enable horizontal scrolling for large tables */
+    border: 1px solid var(--border-color); /* Add border around container */
+    border-radius: 8px; /* Match card radius */
+}
+
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    /* Removed margin, radius, shadow - handled by container */
+}
+
+.content-table th,
+.content-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top; /* Align content top */
+}
+
+.content-table th {
+    background-color: #f8f9fa; /* Light header background */
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.content-table caption {
+    caption-side: top; /* Position caption above table */
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: var(--primary-color);
+    text-align: left;
+    padding: 0.5rem 0;
+}
+
+/* Mathematical expressions */
+.math-inline {
+    /* font-family: 'Times New Roman', serif; */ /* Let MathJax handle fonts */
+    padding: 0 0.2em;
+    background-color: #f0f0f0; /* Subtle background */
+    border-radius: 3px;
+}
+
+.equation {
+    /* font-family: 'Times New Roman', serif; */ /* Let MathJax handle fonts */
+    margin: 1.5rem 0;
+    text-align: center;
+    overflow-x: auto; /* Allow scrolling for wide equations */
+    padding: 1rem; /* Add padding */
+    background-color: #f8f9fa; /* Light background for block equations */
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* MathJax might handle sup/sub better, these are basic fallbacks if needed */
+.math-inline sup,
+.equation sup {
+    font-size: 0.75em;
+    vertical-align: super; /* Use standard vertical alignment */
+    /* position: relative; */
+    /* top: -0.5em; */
+}
+
+.math-inline sub,
+.equation sub {
+    font-size: 0.75em;
+    vertical-align: sub; /* Use standard vertical alignment */
+    /* position: relative; */
+    /* bottom: -0.25em; */
+}
+
+/* Lists and Images */
+.enhanced-list {
+    list-style: none;
+    padding-left: 1.5rem; /* Indentation */
+    margin-bottom: 1rem;
+}
+
+.list-item {
+    display: flex;
+    /* align-items: baseline; */ /* Align top for better wrapping */
+    align-items: flex-start;
+    gap: 0.7rem; /* Increased gap */
+    margin-bottom: 0.7rem; /* Increased spacing */
+}
+
+.item-icon {
+    color: var(--accent-color);
+    font-weight: bold; /* Make icon bolder */
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    margin-top: 0.1em; /* Align icon slightly better with text */
+}
+
+.item-text {
+    flex-grow: 1; /* Allow text to take space */
+}
+
+/* Standard ordered list styling */
+ol {
+    padding-left: 2rem; /* Standard indentation */
+    margin-bottom: 1rem;
+}
+ol li {
+    margin-bottom: 0.5rem;
+}
+
+/* Images */
+.content-image { /* Renamed from img to be more specific */
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 1.5rem auto; /* Center images and add vertical margin */
+    display: block; /* Ensure block display for centering */
+    border: 1px solid var(--border-color); /* Subtle border */
+}
+
+/* Key Points Section (From Prompt) */
+.key-points-section {
+    margin-top: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+.key-points-container {
+    background-color: #eaf7fb; /* Light blue background */
+    border: 1px solid #aed6f1; /* Blue border */
+    border-radius: 8px;
+    padding: 1.5rem;
+}
+
+.key-points-header {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #aed6f1;
+}
+
+.key-points-icon {
+    font-size: 1.5em;
+}
+
+.key-points-title {
+    font-size: 1.3em;
+    color: var(--primary-color);
+    font-weight: 600;
+    margin: 0; /* Remove default margin */
+}
+
+.key-points-content {
+    margin-top: 1rem;
+}
+
+.key-points-list {
+    list-style: none;
+    padding: 0;
+}
+
+.key-point-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    margin-bottom: 0.8rem;
+}
+
+.point-marker {
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-top: 0.1em;
+}
+
+.key-point-item p {
+    margin: 0; /* Remove default paragraph margin inside list item */
+    flex-grow: 1;
+}
+
+
+/* Code Block Formatting (From Prompt) */
+.code-block {
+    background-color: #2d3436; /* Dark background */
+    color: #dfe6e9; /* Light text */
+    padding: 1rem;
+    border-radius: 5px;
+    overflow-x: auto; /* Allow horizontal scroll */
+    margin: 1.5rem 0;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font */
+    font-size: 0.95em;
+}
+
+.code-block code {
+    white-space: pre; /* Preserve whitespace and line breaks */
+}
+
+/* Add basic syntax highlighting colors if needed (requires JS library usually) */
+.language-python .token.keyword { color: #fab1a0; } /* Example */
+.language-python .token.string { color: #ffeaa7; } /* Example */
+.language-python .token.function { color: #55efc4; } /* Example */
+.language-python .token.comment { color: #b2bec3; } /* Example */
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+     /* Adjust article padding */
+    .document-section {
+        padding: 1.5rem;
+    }
+
+    .toc-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .toc-title {
+        font-size: 2em;
+    }
+    .section-title {
+        font-size: 1.8em;
+    }
+
+    .nav-links {
+        flex-direction: column; /* Stack nav items vertically */
+        align-items: stretch; /* Stretch items to full width */
+    }
+
+    .nav-button {
+        justify-content: center; /* Center text/icon inside button */
+    }
+
+    .document-progress {
+        order: -1; /* Move progress to the top */
+        margin-bottom: 1rem; /* Add space below progress */
+    }
+
+    .content-table {
+        font-size: 0.9em; /* Smaller font for tables */
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 0.5rem; /* Reduce table padding */
+    }
+
+    .section-heading {
+        font-size: 1.5em;
+    }
+    .subsection-heading {
+        font-size: 1.2em;
+    }
+     .subsubsection-heading {
+        font-size: 1.1em;
+    }
+}
+
+@media (max-width: 480px) {
+     .document-section {
+        padding: 1rem;
+    }
+
+    .toc-title {
+        font-size: 1.8em;
+    }
+     .section-title {
+        font-size: 1.6em;
+    }
+
+    .toc-chapter-title {
+        font-size: 1.3em; /* Smaller chapter title */
+    }
+     .toc-link {
+        font-size: 1em; /* Smaller section link */
+    }
+
+    .section-heading {
+        font-size: 1.4em; /* Adjust content headings */
+        gap: 0.5rem;
+    }
+
+    .subsection-heading {
+        font-size: 1.15em;
+    }
+     .subsubsection-heading {
+        font-size: 1.05em;
+    }
+
+    .nav-button {
+        padding: 0.4rem 0.8rem; /* Smaller buttons */
+        font-size: 0.85em;
+    }
+     .container {
+        padding: 0.5rem; /* Reduce container padding further */
+    }
+}

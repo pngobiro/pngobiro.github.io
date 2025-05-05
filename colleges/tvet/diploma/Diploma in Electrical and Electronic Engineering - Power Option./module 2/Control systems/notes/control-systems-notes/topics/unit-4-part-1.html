@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 4: Block Diagram & Signal Flow Graphs (Part 1)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-3.html" class="nav-button"> <!-- Link to Previous Unit -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 4 (Part 1) of 9</span>
+                    </div>
+                    <a href="unit-4-part-2.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Unit-4: Block Diagram & Signal Flow Graphs (SFG)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: unit-4-basic-elements -->
+                <section id="unit-4-basic-elements" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🧩</span>
+                        <span class="heading-text">Basic Elements of Block Diagram</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>The basic elements of a block diagram are a block, the summing point and the take-off point. Let us consider the block diagram of a closed loop control system as shown in the following figure to identify these elements.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-023-1.jpg" alt="Block diagram showing summing point, take-off point, forward block G(s), feedback block H(s), input R(s), output C(s)." class="content-image">
+                        <p>The above block diagram consists of two blocks having transfer functions $G(s)$ and $H(s)$. It is also having one summing point and one take-off point. Arrows indicate the direction of the flow of signals. Let us now discuss these elements one by one.</p>
+
+                        <h3 class="subsection-heading">Block</h3>
+                        <p>The transfer function of a component is represented by a block. Block has single input and single output.</p>
+                        <p>The following figure shows a block having input $X(s)$, output $Y(s)$ and the transfer function G(s).</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-023-2.jpg" alt="Single block with input X(s), transfer function G(s), and output Y(s)." class="content-image">
+                        <p>Transfer Function, $G(s)=Y(s)/X(s)$</p>
+                        <p>$\Rightarrow Y(s)=G(s)X(s)$</p>
+                        <p>Output of the block is obtained by multiplying transfer function of the block with input.</p>
+
+                        <h3 class="subsection-heading">Summing Point</h3>
+                        <p>The summing point is represented with a circle having cross (X) inside it. It has two or more inputs and single output. It produces the algebraic sum of the inputs. It also performs the summation or subtraction or combination of summation and subtraction of the inputs based on the polarity of the inputs. Let us see these three operations one by one.</p>
+                        <p>The following figure shows the summing point with two inputs (A, B) and one output (Y). Here, the inputs A and B have a positive sign. So, the summing point produces the output, Y as <strong>sum of A and B</strong>.</p>
+                        <p>i.e.,Y = A + B.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-024-1.jpg" alt="Summing point with inputs A and B (both positive signs) producing output Y=A+B." class="content-image">
+                        <p>The following figure shows the summing point with two inputs (A, B) and one output (Y). Here, the inputs A and B are having opposite signs, i.e., A is having positive sign and B is having negative sign. So, the summing point produces the output Y as the <strong>difference of A and B</strong>.</p>
+                        <p>Y = A + (-B) = A - B.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-024-2.jpg" alt="Summing point with input A (positive) and input B (negative) producing output Y=A-B." class="content-image">
+                         <p>The following figure shows the summing point with three inputs (A, B, C) and one output (Y). Here, the inputs A and B are having positive signs and C is having a negative sign. So, the summing point produces the output Y as</p>
+                        <p>Y = A + B + (−C) = A + B − C.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-025-1.jpg" alt="Summing point with inputs A, B (positive) and C (negative) producing output Y=A+B-C." class="content-image">
+
+                        <h3 class="subsection-heading">Take-off Point</h3>
+                        <p>The take-off point is a point from which the same input signal can be passed through more than one branch. That means with the help of take-off point, we can apply the same input to one or more blocks, summing points.</p>
+                        <p>In the following figure, the take-off point is used to connect the same input, $R(s)$ to two more blocks.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-025-2.jpg" alt="Take-off point splitting input R(s) to feed blocks Ga(s), Gb(s), and Gc(s)." class="content-image">
+                        <p>In the following figure, the take-off point is used to connect the output $C(s)$, as one of the inputs to the summing point.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-025-3.jpg" alt="Take-off point feeding output C(s) back to a summing point." class="content-image">
+                     </div>
+                </section>
+                <!-- END: unit-4-basic-elements -->
+
+                <!-- START: unit-4-canonical-form -->
+                <section id="unit-4-canonical-form" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">📜</span>
+                        <span class="heading-text">Canonical Form of Closed Loop Control System:</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>Let,</p>
+                        <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span> <span class="item-text">$X_i(s) \rightarrow$ Input signal</span></li>
+                             <li class="list-item"><span class="item-icon">•</span> <span class="item-text">$X_0(s) \rightarrow$ Output signal</span></li>
+                             <li class="list-item"><span class="item-icon">•</span> <span class="item-text">$G(s) \rightarrow$ Transfer function of the open-loop control system</span></li>
+                             <li class="list-item"><span class="item-icon">•</span> <span class="item-text">$H(s) \rightarrow$ Gain of the elements in the feedback path</span></li>
+                             <li class="list-item"><span class="item-icon">•</span> <span class="item-text">$B(s) \rightarrow$ The output of feedback elements</span></li>
+                             <li class="list-item"><span class="item-icon">•</span> <span class="item-text">$E(s) \rightarrow$ Error signal</span></li>
+                        </ul>
+                        <p>Then the closed-loop control system can be represented as shown below.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-026-1.jpg" alt="Canonical block diagram of a closed-loop system with input Xi(s), output Xo(s), forward gain G(s), feedback gain H(s), error E(s), and feedback signal B(s)." class="content-image">
+                        <p>From the above diagram</p>
+                        <p>$G(s) =X_0(s)/E(s)$</p>
+                        <p>$\Rightarrow E(s) =X_0(s)/G(s)$</p>
+                        <p>$E(s)$ can also be written as</p>
+                        <p>$E(s) =X_i(s)−B(s)$</p>
+                        <p>$\Rightarrow X_0(s)/G(s) =X_i(s)−B(s)$</p>
+                        <p>From the diagram,</p>
+                        <p>$H(s) =B(s)/X_0(s)$</p>
+                        <p>$\Rightarrow X_0(s)/G(s) =X_i(s) −H(s) X_0(s)$</p>
+                        <p>$\Rightarrow X_0(s) =G(s) X_i(s) −G(s) H(s) X_0(s)$</p>
+                        <p>$\Rightarrow X_0(s) [1+G(s) H(s)] =G(s) X_i(s)$</p>
+                        <div class="equation">$$ \Rightarrow \frac{X_0(s)}{X_i(s)} = \frac{G(s)}{1+G(s) H(s)} $$</div> <!-- Made equation block level -->
+                        <p>This is the standard form of representing the closed loop control system with negative feedback.</p>
+                     </div>
+                </section>
+                <!-- END: unit-4-canonical-form -->
+
+                 <!-- START: unit-4-reduction-rules -->
+                 <section id="unit-4-reduction-rules" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🔧</span>
+                        <span class="heading-text">Block diagram reduction rules:</span>
+                     </h2>
+                     <div class="content-card">
+                        <h3 class="subsection-heading">Rule No.1. Blocks in Cascade</h3>
+                        <p>When two or more blocks are connected in series, then the resultant block is the product of the individual blocks.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-027-1.jpg" alt="Block diagram reduction rule 1: G1(s) and G2(s) in series become G1(s)G2(s)." class="content-image">
+
+                        <h3 class="subsection-heading">Rule No.2 Blocks in parallel</h3>
+                        <p>When two or more blocks are connected in parallel, then the resultant block is the sum of the individual blocks.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-027-2.jpg" alt="Block diagram reduction rule 2: G1(s), G2(s), G3(s) in parallel become G1(s)+G2(s)+G3(s)." class="content-image">
+
+                        <h3 class="subsection-heading">Rule No.3 Moving a take-off point ahead of a block</h3>
+                        <p>When the take-off point is moved ahead of a block (before the block), then the same transfer function is introduced in the take-off point branch.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-027-3.jpg" alt="Block diagram reduction rule 3: Moving takeoff point before block G(s) adds G(s) to the takeoff branch." class="content-image">
+
+                        <h3 class="subsection-heading">Rule No.4 Moving the take-off point after the block</h3>
+                        <p>When the take-off point is moved after the block, then a block with reciprocal of a transfer function is introduced in the take-off point branch.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-027-4.jpg" alt="Block diagram reduction rule 4: Moving takeoff point after block G(s) adds 1/G(s) to the takeoff branch." class="content-image">
+
+                        <h3 class="subsection-heading">Rule No.5 Moving a summing point beyond the block</h3>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-028-1.jpg" alt="Block diagram reduction rule 5: Moving summing point after block G(s) adds 1/G(s) to the summed branch." class="content-image">
+
+                        <h3 class="subsection-heading">Rule No.6:Moving a summing point ahead of a block</h3>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-028-2.jpg" alt="Block diagram reduction rule 6: Moving summing point before block G(s) adds G(s) to the summed branch." class="content-image">
+
+                        <h3 class="subsection-heading">Rule No.7: Interchanging two summing points</h3>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-028-3.jpg" alt="Block diagram reduction rule 7: Interchanging two summing points maintains the same overall sum/difference." class="content-image">
+
+                        <h3 class="subsection-heading">Rule No.8:Moving a take-off point beyond a summing point</h3>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-028-4.jpg" alt="Block diagram reduction rule 8: Moving takeoff point after a summing point requires adding/subtracting the other input signal." class="content-image">
+
+                        <h3 class="subsection-heading">Rule No.9: Moving a take-off point ahead of a summing point</h3>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-028-5.jpg" alt="Block diagram reduction rule 9: Moving takeoff point before a summing point is straightforward." class="content-image">
+
+                        <h3 class="subsection-heading">Rule No.10: Eliminating a forward loop</h3>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-029-1.jpg" alt="Block diagram reduction rule 10: Eliminating a forward loop sums the transfer functions (G1+G2)." class="content-image">
+                     </div>
+                 </section>
+                 <!-- END: unit-4-reduction-rules -->
+
+                 <!-- START: unit-4-reduction-example -->
+                 <section id="unit-4-reduction-example" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✍️</span>
+                        <span class="heading-text">Example</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Find the transfer function of the following by block reduction technique.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-029-2.jpg" alt="Complex block diagram example for reduction with multiple loops." class="content-image">
+                        <h3 class="subsection-heading">Solution</h3>
+                        <p><strong>Step 1:</strong> There are two internal closed loops. Firstly, we will remove this loop.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-029-3.jpg" alt="Block diagram after reducing the two inner loops using feedback formula." class="content-image">
+                        <p><strong>Step 2:</strong> When the two blocks are in a cascade or series we will use rule no.1.</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-030-1.jpg" alt="Block diagram after combining the two cascade blocks from step 1." class="content-image">
+                        <p><strong>Step 3:</strong> Now we will solve this loop.</p>
+                        <!-- Using corrected image filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-030-2.jpg" alt="Block diagram after reducing the outer feedback loop." class="content-image">
+                        <p><strong>Step 4:</strong></p>
+                        <!-- Mathpix converted equation -->
+                        <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-030-3.jpg" alt="Final transfer function C(s)/R(s) = ..." class="content-image"> -->
+                        <div class="equation">$$ \frac{C(s)}{R(s)}=\frac{G_{1} G_{2}}{1+G_{1} H_{1}+G_{2} H_{2}+G_{1} G_{2} H_{3}+G_{1} G_{2} H_{1} H_{2}} $$</div>
+                        <p>Ans.</p> <!-- Preserving verbatim "Ans." -->
+                    </div>
+                 </section>
+                 <!-- END: unit-4-reduction-example -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-3.html" class="nav-button"> <!-- Link to Previous Unit -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 4 (Part 1) of 9</span>
+                    </div>
+                    <a href="unit-4-part-2.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
