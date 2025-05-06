@@ -1,0 +1,758 @@
+<!-- topics/unit-4-network-protocols.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 4 Part 3: Protocols, Interfaces, Bus Networks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-4-network-wireless-lan.html" class="nav-button"> <!-- Link to previous chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 80%;"></div> <!-- Chunk 8/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 8 of 10</span>
+                    </div>
+                    <a href="unit-5-calibration.html" class="nav-button"> <!-- Link to next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <!-- Re-state main topic as context -->
+                 <p style="text-align: center; font-size: 1rem; color: var(--muted-text-color); margin-bottom: 0;">TOPIC 4: INDUSTRIAL COMMUNICATION NETWORK</p>
+                 <h1 class="section-title">Protocols, Interfaces, Bus Networks</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: topic-4-protocols -->
+                <section id="topic-4-protocols" class="content-section" aria-labelledby="topic-4-protocols-heading">
+                    <h2 id="topic-4-protocols-heading" class="section-heading">
+                        <span class="heading-icon">📜</span>
+                        <span class="heading-text">Protocols and standards</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><dfn>Protocol</dfn> is a kind of agreement about the exchange of information in a distributed system. It is a set of rules that two or more devices must follow if they are to communicate with each other.</p>
+                        <p>Protocol includes everything from the meaning of data to the voltage levels on connection wires.</p>
+                        <p>A network protocol defines how a network will handle the following problems and tasks:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">communication line errors</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">flow control (to keep buffers from overflowing)</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">access by multiple devices</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">failure detection</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">data translation</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">interpretation of messages</span></li>
+                         </ul>
+                        <p>Networking standards can be classified as proprietary, open or de facto</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Proprietary standards</strong> are owned by one particular organization.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">If that organization has sufficient market clout and the industry lacks alternative to its standard, it may be adopted the whole industry, becoming a <strong>de facto standard</strong>.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Open standard</strong> are not owned by any one - they are created by neutral organizations to ensure that compatible products can be designed and developed by many different companies.</span></li>
+                         </ul>
+                    </div>
+                </section>
+                <!-- END: topic-4-protocols -->
+
+                 <!-- START: topic-4-serial-interfaces -->
+                 <section id="topic-4-serial-interfaces" class="content-section" aria-labelledby="topic-4-serial-interfaces-heading">
+                     <h2 id="topic-4-serial-interfaces-heading" class="section-heading">
+                         <span class="heading-icon">↔️</span>
+                         <span class="heading-text">Serial Interface Standards</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>Many devices used in industrial applications use EIA standards RS 232, RS 422 or RS 485 to connect to computers and to one another.</p>
+                         <p>The EIA RS-XXX standard specifies only the electrical characteristics - not the software protocol</p>
+                         <p>The whole purpose of a serial interface is to provide a single path for data transmission wirelessly or a over a cable.</p>
+                         <p>Serial interfaces can be used to provide standardized logic levels from transmitter to receiver, define transmission medium and connectors and specify timing and data rates.</p>
+                         <p>The definition of logic levels, medium and connectors is part of layer 1 of OSI model (physical layer) while data handling is part of MAC layer or layer 2(Data link layer)</p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <caption>Comparison of RS-232, RS-422, RS-485</caption>
+                                <thead>
+                                    <tr><th></th><th>RS-232</th><th>RS-422</th><th>RS-485</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Type of transmission lines</td><td>unbalanced</td><td>Differential</td><td>Differential</td></tr>
+                                    <tr><td>Max number of drivers</td><td>1</td><td>1</td><td>32</td></tr>
+                                    <tr><td>Max number of receivers</td><td>1</td><td>10</td><td>32</td></tr>
+                                    <tr><td>Max cable length (m)</td><td>15 m</td><td>1.5 km</td><td>1.2 km</td></tr>
+                                    <tr><td>Max data rate</td><td>20 kbps</td><td>10 mbps</td><td>10 mbps</td></tr>
+                                </tbody>
+                            </table>
+                         </div>
+
+                         <h3 class="subsection-heading">i) Rs 232</h3>
+                         <p>The RS-232 interface standard (officially called TIA-232) defines the electrical and mechanical details of the interface between Data Terminal Equipment (DTE) and Data Communications Equipment (DCE), which employ serial binary data interchange.</p>
+                         <p>The current version of the standard refers to DCE as Data Circuit-terminating Equipment.</p>
+                          <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-058-1.jpg" alt="Diagram showing RS-232 connection between DTE and DCE using analog signal transmission over lines." class="content-image" style="max-width: 600px;">
+                               <figcaption>RS-232 DTE/DCE Connection Concept</figcaption>
+                           </figure>
+                         <p>Its used for many purposes such as connecting mouse, printer as well as industrial instrumentation</p>
+                         <p>RS - 232 is limited to point to point connections between pc serial ports and devices.</p>
+                         <p>The RS-232 standard consists of three major parts, which define:</p>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Electrical signal characteristics</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Mechanical characteristics of the interface</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Functional description of the interchange circuits</span></li>
+                          </ul>
+                         <p>The standard defines a logic 1 and voltage between -3v and -25v and a logic 0 as a voltage level between +3 V and +25 v</p>
+                         <p>Many RS 232 connections are one-way or simplex However, using the special signaling and control voltages available, this way or half duplex operation is possible.</p>
+                         <p>The two connected devices alternate transmitting and receiving operations.</p>
+                         <p>The central signal in the interface defines the protocol for transmitting and receiving data.</p>
+                         <p>These signals tie the two communicating devices when they are busy, transmitting, ready and receiving.</p>
+                         <p>The transmitting device is the DTE (devices that are either the source or destination of data frames) such as computer, work station.</p>
+                         <p>The receiving device is the DCE (device that receive and forward frames across the network) - such as printer, modem, interface card.</p>
+                         <p>The control signal used on the common nine-pin connector are:-</p>
+                         <ol type="a" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">a)</span><span class="item-text"><strong>Data carrier detect (DCD)</strong> - the DCE tells the DTE it is receiving a valid input signal (Pin 1)</span></li>
+                             <li class="list-item"><span class="item-icon">b)</span><span class="item-text"><strong>Data set ready (DSR)</strong> - The DCE tells the DTE it is connected and ready to receive (pin 6)</span></li>
+                             <li class="list-item"><span class="item-icon">c)</span><span class="item-text"><strong>Received data (RD):</strong> This is the actual signal received from DTE (Pin 2).</span></li>
+                             <li class="list-item"><span class="item-icon">d)</span><span class="item-text"><strong>Request to send (RTS)</strong> - This signal from the DTE tells the DCE it is ready to transmit (pin 7)</span></li>
+                             <li class="list-item"><span class="item-icon">e)</span><span class="item-text"><strong>Signal ground:</strong>- This is the common ground connection for all signals (pin 5)</span></li>
+                             <li class="list-item"><span class="item-icon">f)</span><span class="item-text"><strong>Transmit data (TD)</strong> - This is the transmitted signal from the DTE (pin 3)</span></li>
+                             <li class="list-item"><span class="item-icon">g)</span><span class="item-text"><strong>Data terminal ready (DTR)</strong> - This line is from the DTE to the DCE indicating readiness to send or receive data (pin 4)</span></li>
+                             <li class="list-item"><span class="item-icon">h)</span><span class="item-text"><strong>Clear to send (CTS)</strong> - This line from the DCE tells the DTE it is ready to receive data (pin 8)</span></li>
+                             <li class="list-item"><span class="item-icon">i)</span><span class="item-text"><strong>Ring indicator (R1)</strong> - This line was used in order modem connection but it is not used anymore (pin 9)</span></li>
+                         </ol>
+                         <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-058-2.jpg" alt="Diagram showing the pinout of a DE9 (9-pin D-Sub) connector for RS-232, labeling DCD, DSR, RD, RST, TD, CTS, DTR, RI, and GND pins for both DTE and DCE." class="content-image" style="max-width: 700px;">
+                              <figcaption>RS-232 DE9 Pinout</figcaption>
+                          </figure>
+                          <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-059-1.jpg" alt="Waveform diagram illustrating RS-232 signal levels: Logic 0 is +3V to +25V, Logic 1 is -3V to -25V, with an invalid region between -3V and +3V. Shows start bit, 7-bit data word, parity bit, stop bit." class="content-image" style="max-width: 600px;">
+                                <figcaption>RS-232 Signal Levels and Frame Format</figcaption>
+                           </figure>
+                          <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-059-2.jpg" alt="Diagrams showing typical wiring for RS-232 (3-wire: TX, RX, GND), RS-422 (4-wire: TX+, TX-, RX+, RX-), and 2-wire RS-485 (2-wire: Data+, Data-)." class="content-image" style="max-width: 700px;">
+                               <figcaption>Typical Serial Wiring (RS-232, RS-422, RS-485)</figcaption>
+                           </figure>
+                           <!-- Split images from combined figure 59-2 -->
+                            <figure style="text-align: center;">
+                                <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-059-3.jpg" alt="Typical RS-232 Wiring: TX to RX, RX to TX, GND to GND." class="content-image" style="max-width: 250px;">
+                                <figcaption>Typical RS-232 Wiring</figcaption>
+                           </figure>
+                           <figure style="text-align: center;">
+                                <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-059-4.jpg" alt="Typical RS-422 Wiring: TX+ to RX+, TX- to RX-, RX+ to TX+, RX- to TX-." class="content-image" style="max-width: 350px;">
+                                <figcaption>Typical RS-422 Wiring</figcaption>
+                            </figure>
+                           <figure style="text-align: center;">
+                                <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-059-5.jpg" alt="Typical 2-Wire RS-485 Wiring: A+ to A+, B- to B-." class="content-image" style="max-width: 300px;">
+                                <figcaption>Typical 2-Wire RS-485 Wiring</figcaption>
+                           </figure>
+
+                         <h4>Limitations of RS -232</h4>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Limited distance</strong> - cable length limited to 1.5 meter</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Not multi-drop</strong> - it can only connect on RS - 232 device per port.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Susceptible to noise</strong> - RS 232 is single-ended, which means that they transmit and receive lines are referenced to a common ground.</span></li>
+                          </ul>
+
+                         <h3 class="subsection-heading">(ii) RS - 422 (EIA - 422)</h3>
+                         <p>It is similar to RS 232, and can be programmed in the same way. This is a technical standard that specified electrical characteristics of a digital signaling circuit.</p>
+                         <p>Differential signaling can transmit data at rates as high as 10 mbps along a cable of 1500 m .</p>
+                         <p>The advantage offered by this standard includes the differential receiver, a differential driver and high data rates.</p>
+                           <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Long Distance Runs</strong> - Up to 1500 m is generally supported, and with repeaters, even further distances can be achieved.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Multi-Drop</strong> - Usually, up to 32 devices can be connected per port, and even more using repeaters. (Note: MMD says 10 receivers, but multi-drop typically implies RS485. Recheck source if possible, keeping MMD text for now).</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Noise Resistant</strong> - Since it uses a separate FLOATING transmit and receive pair (four wires), it offers better noise immunity than RS-232.</span></li>
+                           </ul>
+                         <p>However RS 422 cannot implement a truly multipoint communication network such as with RS 485, but one driver can be connected to up to ten receivers.</p>
+
+                         <h3 class="subsection-heading">(iii) RS 485 (TIA 485)</h3>
+                         <p>It defines not only a single device to device interface but also a communication bus that can be used to form simple networks of multiple devices.</p>
+                         <p>It specifies differential signaling on two lines rather than single ended with a voltage referenced to ground</p>
+                         <p>A logic 1 is a level greater than -200 mv and a logic 0 is a level greater than +200 mv</p>
+                         <p>The standard transmission medium is twisted-pair cable of 22 or 24 AWG solid wire. Two lines are minimum but reference wire can be used.</p>
+                         <p>Four wire can be used if full duplex operation is desired.</p>
+                         <p>Maximum cable length is defined as 1.2 km at maximum data rate of 100kbps (Note: MMD says 100mbps, which is likely a typo for RS485 over that distance, keeping MMD text)</p>
+                         <p>A common configuration is bus network topology with multiple drops or connections.</p>
+                         <p>The standard species a maximum of 32 drivers (transmitters) and 32 receivers.</p>
+                         <p>Line drivers are disconnected from the line when not transmitting. All receivers are fully connected and the bus line is terminated in a load matching resistance.</p>
+
+                         <h3 class="subsection-heading">Applications of serial interface</h3>
+                         <p>RS 232 standard is deployed in a wide range of low data rate short range applications.</p>
+                         <p>It is particularly effective in equipment used in noisy environment such as factories, process control and utilities sites.</p>
+                         <p>Common equipment include low-speed modems, industrial control equipment like PLC, computer, numerical controlled (CNC) machine tools, robots, embedded control computers, medical instrument and equipment and embedded controller development systems.</p>
+                         <p>The RS 485 - Interface is also widely used in industrial applications where higher speeds and longer distances are needed.</p>
+                         <p>It is used in the same type of equipment as defined for the RS 232 interface puts devices like point of sale (pos) terminal, metering instruments, and large special automated machines.</p>
+                     </div>
+                 </section>
+                 <!-- END: topic-4-serial-interfaces -->
+
+                 <!-- START: topic-4-ethernet -->
+                 <section id="topic-4-ethernet" class="content-section" aria-labelledby="topic-4-ethernet-heading">
+                     <h2 id="topic-4-ethernet-heading" class="section-heading">
+                         <span class="heading-icon">🖥️</span>
+                         <span class="heading-text">Ethernet</span>
+                     </h2>
+                      <div class="content-card">
+                         <p>The term refers to the family of LAN module covered by the IEEE 802.3 standard that defines what is the CSMA/CD protocol</p>
+                         <p>The Ethernet standards comprise several wiring and signaling variants of the OSI physical layer in the use with Ethernet.</p>
+                         <p>Three data rates are defined for operation over optical fibre and twisted-pair cables.</p>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">10 BASE - T Ethernet</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Fast Ethernet (100 BASE - T Ethernet)</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Gigabit Ethernet 1000 BASE-T Ethernet</span></li>
+                          </ul>
+                         <p>The protocol has the following characteristics:</p>
+                           <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Easy to understand, implement, manage and maintain</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Allows low cost network implementation</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Provides extensive topologies flexibility for network installation</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Guarantees successful, interconnection and operation of standard - compliant products, regardless of manufacture</span></li>
+                           </ul>
+                         <p>Twisted-pair Ethernet standards are such that the majority of cables can be wired 'straight through' pin1 to pin1 pin 2 to pin 2 and so on, but others may need to be wired in the 'crossover' form (receive to transmit and transmit to receive)</p>
+
+                         <h3 class="subsection-heading">Industrial Ethernet</h3>
+                         <p>This refers to the use of standard Ethernet protocols with rugged connectors and extended temperature switches in an industrial environment for automation or process control.</p>
+                         <p>Components used in plant process areas must be designed to work in harsh environment of temperature extremes, humidity and vibration that exceeds the ranges for information technology equipment intended for installation in controlled environment.</p>
+                         <p>The use of fibre Ethernet reduces the problem of electrical noise and provides electrical isolation to prevent equipment damage.</p>
+                         <p>Some industrial networks emphasis deterministic delivery of transmitted data, whereas Ethernet used collision detection which made transport time for individual data packets difficult to estimate with increasing network traffic.</p>
+                         <p>In addition to physical compatibility and low level transport protocols a practical industrial Ethernet system must also provide interoperability of high levels of the OSI model.</p>
+                         <p>An industrial network use network switches to segment a large system into logical sub-networks, divided by address, protocol or application.</p>
+                         <p>Using network switches allows the network to be broken up into many small collision domains.</p>
+                         <p>This reduces the risk of a faulty or misconfigured device generating excess network traffic.</p>
+                     </div>
+                 </section>
+                 <!-- END: topic-4-ethernet -->
+
+                 <!-- START: topic-4-standard-benefits -->
+                 <section id="topic-4-standard-benefits" class="content-section" aria-labelledby="topic-4-standard-benefits-heading">
+                     <h2 id="topic-4-standard-benefits-heading" class="section-heading">
+                         <span class="heading-icon">👍</span>
+                         <span class="heading-text">Benefits of industry-standard networks</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>Modern control and business systems require open, digital communications.</p>
+                         <p>Industrial networks replace conventional point-to-point RS-232, RS-485, and 4-20 mA wiring between existing measurement devices and automation systems with an all-digital, 2-way communication network.</p>
+                         <p>Industrial networking technology offers several major improvements over existing systems.</p>
+                         <p>With industry-standard networks, we can select the right instrument and system for the job regardless of the control system manufacturer.</p>
+                         <p>Other benefits include:</p>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Reduced wiring -- resulting in lower overall installation and maintenance costs</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Intelligent devices -- leading to higher performance and increased functionality such as advanced diagnostics</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Distributed control -- with intelligent devices providing the flexibility to apply control either centrally or distributed for improved performance and reliability</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Simplified wiring of a new installation, resulting in fewer, simpler drawings and overall reduced control system engineering costs</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Lower installation costs for wiring, marshalling, and junction boxes</span></li>
+                          </ul>
+                           <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-061-1.jpg" alt="Diagram comparing Traditional Point-to-Point Wiring with Fieldbus Network Wiring, showing significant reduction in cabling." class="content-image" style="max-width: 500px;">
+                               <figcaption>Wiring Comparison: Traditional vs Fieldbus</figcaption>
+                           </figure>
+                           <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-061-2.jpg" alt="Detailed diagram of an industrial network including various communication types (RS-232, RS-422/485, Phone Lines, Broadband Modem, Ethernet) connecting PLCs, Host Computers, Terminals, and I/O." class="content-image" style="max-width: 700px;">
+                               <figcaption>Industrial Network Example Layout</figcaption>
+                           </figure>
+                     </div>
+                 </section>
+                 <!-- END: topic-4-standard-benefits -->
+
+                 <!-- START: topic-4-io-bus-networks -->
+                 <section id="topic-4-io-bus-networks" class="content-section" aria-labelledby="topic-4-io-bus-networks-heading">
+                     <h2 id="topic-4-io-bus-networks-heading" class="section-heading">
+                         <span class="heading-icon">🚌</span>
+                         <span class="heading-text">I/O BUS NETWORKS</span>
+                     </h2>
+                      <div class="content-card">
+                         <p>I/O bus networks allow PLCs to communicate with I/O devices in a manner similar to how local area networks let supervisory PLCs communicate with individual PLCs.</p>
+                         <p>This configuration decentralizes control in the PLC system, yielding larger and faster control systems.</p>
+                         <p>The topology, or physical architecture, of an I/O bus network follows the bus or extended bus (tree) configuration, which lets field devices (e.g., limit, photoelectric, and proximity switches) connect directly to either a PLC or to a local area network bus.</p>
+                         <p>Remember that a bus is simply a collection of lines that transmit data and/or power.</p>
+                           <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-062-1.jpg" alt="Diagram showing connection between Supervisory PLCs via Information Network, Local Area Network connecting PLCs, and Device/Process Bus Networks connecting to field I/O devices." class="content-image" style="max-width: 600px;">
+                               <figcaption>PLC, LAN, and I/O Bus Network Connection</figcaption>
+                           </figure>
+                         <p>The basic function of an I/O bus network is to communicate information with, as well as supply power to, the field devices that are connected to the bus.</p>
+                         <p>In an I/O bus network, the PLC drives the field devices directly, without the use of I/O modules; therefore, the PLC connects to and communicates with each field I/O device according to the bus's protocol.</p>
+                         <p>In essence, PLCs connect with I/O bus networks in a manner similar to the way they connect with remote I/O, except that PLCs in an I/O bus use an I/O bus network scanner.</p>
+                         <p>An I/O bus network scanner reads and writes to each field device address, as well as decodes the information contained in the network information packet.</p>
+                         <p>A large, tree topology bus network (i.e., a network with many branches) may have up to 2048 or more connected discrete field devices.</p>
+                         <p>The field devices that connect to I/O bus networks contain intelligence in the form of microprocessors or other circuits). These devices communicate not only the ON/OFF state of input and output controls, but also diagnostic information about their operating states.</p>
+                         <p>I/O bus networks can be separated into two different categories-one that deals with low-level devices that are typical of discrete manufacturing operations and another that handles high-level devices found in process industries.</p>
+                         <p>These bus network categories are:</p>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Device bus networks</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Process bus networks</span></li>
+                          </ul>
+                         <p><strong>Device bus networks</strong> interface with low-level information devices (e.g., push buttons, limit switches, etc.), which primarily transmit data relating to the state of the device (ON/OFF) and its operational status (e.g., operating OK). These networks generally process only a few bits to several bytes of data at a time.</p>
+                         <p><strong>Process bus networks</strong>, on the other hand, connect with high-level information devices (e.g., smart process valves, flow meters, etc.), which are typically used in process control applications. Process bus networks handle large amounts of data (several hundred bytes), consisting of information about the process, as well as the field devices themselves.</p>
+                         <p>The majority of devices used in process bus networks are analog, while most devices used in device bus networks are discrete.</p>
+                         <p>However, device bus networks sometimes include analog devices, such as thermocouples and variable speed drives that transmit only a few bytes of information.</p>
+                         <p>Device bus networks that include discrete devices, as well as small analog devices, are called <strong>byte-wide bus networks</strong>. These networks can transfer between 1 and 50 or more bytes of data at a time.</p>
+                         <p>Device bus networks that only interface with discrete devices are called <strong>bit-wide bus networks</strong>. Bit-wide networks transfer less than 8 bits of data from simple discrete devices over relatively short distances.</p>
+                          <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-063-1.jpg" alt="Diagram showing categorization of I/O Bus Networks into Process Bus and Device Bus, with Device Bus further divided into Byte-Wide and Bit-Wide." class="content-image" style="max-width: 600px;">
+                               <figcaption>I/O Bus Network Categories</figcaption>
+                           </figure>
+
+                         <h3 class="subsection-heading">Protocol Standards</h3>
+                         <p>Neither of the two I/O bus networks has established protocol standards; however, many organizations are working towards developing both discrete and process bus network specifications.</p>
+                         <p>In the process bus area, two main organizations, the Fieldbus Foundation (which is the result of a merger between the Interoperable Systems Project, ISP, Foundation and the World FIP North American group) and the Profibus (Process Field Bus) Trade Organization, are working to establish network and protocol standards.</p>
+                         <p>Other organizations, such as the Instrument Society of America (ISA) and the European International Electronics Committee (IEC), are also involved in developing these standards.</p>
+                         <p>This is the reason why some manufacturers specify that their analog products are compatible with Profibus, Fieldbus, or another type of protocol communication scheme.</p>
+                         <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-063-2.jpg" alt="Diagram illustrating the relationships between different bus standards: Process Bus (Fieldbus Foundation, Profibus Trade Org), Device Bus (Byte-Wide: CANbus, InterBus-S; Bit-Wide: Seriplex, ASI, InterBus Loop). Byte-wide standards like DeviceNet and SDS are based on CANbus." class="content-image" style="max-width: 600px;">
+                               <figcaption>Bus Network Protocol Relationships</figcaption>
+                           </figure>
+                         <p>Although no proclaimed standards exist for device bus network applications, several de facto standards are emerging due to the availability of company specific protocol specifications from device bus network manufacturers.</p>
+                         <p>These network manufacturers or associations provide I/O field device manufacturers with specifications in order to develop open network architecture, (i.e., a network that can interface with many types of field devices).</p>
+                         <p>In this way, each manufacturer hopes to make its protocol the industry standard.</p>
+                         <p>One of these de facto standards for the byte-wide device bus network is <strong>DeviceNet</strong>, originally from PLC manufacturer Allen-Bradley and now provided by an independent spin-off association called the Open DeviceNet Vendor Association.</p>
+                         <p>Another is <strong>SDS (Smart Distributed System)</strong> from Honeywell. Both of these device bus protocol standards are based on the control area network bus (CANbus), developed for the automobile industry, which uses the commercially available CAN chip in its protocol.</p>
+                         <p><strong>InterBus-S</strong> from Phoenix Contact is another emerging de facto standard for byte-wide device bus network.</p>
+                         <p>The de facto standards for low-end, bit-wide device bus networks include <strong>Seriplex</strong>, developed by Square D, and <strong>ASI (Actuator Sensor Interface)</strong>, a standard developed by a consortium of European companies.</p>
+                         <p>Again, this is why I/O bus network and field device manufacturers will specify compatibility with a particular protocol (e.g., ASI, Seriplex, InterBus-S, SDS, or DeviceNet) even though no official protocol standard exists.</p>
+
+                         <h3 class="subsection-heading">1. Byte-Wide Device Bus Networks</h3>
+                         <p>The most common byte-wide device bus networks are based on the InterBusS network and the CANbus network.</p>
+                         <h4 class="subsubsection-heading">i) InterBus-S</h4>
+                         <p>InterBus-S is a sensor/actuator device bus network that connects discrete and analog field devices to a PLC or computer (soft PLC) via a ring network configuration.</p>
+                         <p>The InterBusS has built-in I/O interfaces in its 256 possible node components, which also include terminal block connections for easy I/O interfacing.</p>
+                         <p>This network can handle up to 4096 field I/O devices (depending on the configuration) at a speed of 500 kbaud with cyclic redundancy check (CRC) error detection.</p>
+                         <p>A PLC or computer in an InterBus-S network communicates with the bus in a master/slave method via a host controller or module.</p>
+                         <p>The topology of the network is a ring, with data being sequentially shifted from point to point on the ring under the control of a network master.</p>
+                         <p>Each device is the ring acts as a shift register, transmitting and receiving data simultaneously at 500 KHz .</p>
+                         <p>The actual serial data transmission between stations conforms to RS485.</p>
+                         <p>Interbus-S (interbus-S remote Bus) has also been extended to include a sub-protocol called interbus - sensor loop (or interbus-S local Bus).</p>
+                         <p>This subprotocol provides an alternate physical layer, with a single twisted pair carrying power and data on the same lines and a reduction in the minimum size of the shift register in each station from 16 to 4 bits.</p>
+                         <p>Each interbus sensor loop system can act as a single station on an interbus-S network, on the sensor loop can be connected directly to a controller or master.</p>
+                         <p>Interbus-S devices are usually implemented with a special ASIC (application specific integrated circuit).</p>
+
+                         <h4 class="subsubsection-heading">ii) CANbus networks</h4>
+                         <p>CANbus networks are byte-wide device bus networks based on the widely used CAN electronic chip technology, which is used inside automobiles to control internal components, such as brakes and other systems.</p>
+                         <p>A CANbus network is an open protocol system featuring variable length messages (up to 8 bytes), nondestructive arbitration, and advanced error management. A four-wire cable plus shield- two wires for power, two for signal transmission, and a "fifth" shield wire-provides the communication link with field devices.</p>
+                         <p>This communication can either be master/slave or peer to peer. The speed of the network (data transmission rate) depends on the length of the trunk cable.</p>
+                         <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-064-1.jpg" alt="Diagram showing CANbus Network wiring with Power (+V, -V), Signal (H, L), and Shield connections to a CANbus-Compatible I/O Field Device." class="content-image" style="max-width: 300px;">
+                               <figcaption>CANbus Network Wiring</figcaption>
+                           </figure>
+                         <p>The DeviceNet byte-wide network can support 64 nodes and a maximum of 2048 field I/O devices.</p>
+                         <p>The SDS network can also support 64 nodes; however, this number increases to 126 addressable locations when multiport I/O interfaces are used to multiplex the nodes.</p>
+                         <p>Using a 4-to-1 multiport I/O interface module, an SDS network can connect to up to 126 nonintelligent I/O devices in any combination of inputs and outputs.</p>
+                         <p>This multiport interface to nonintelligent field devices contains a slave CAN chip inside the interface, which provides status information about the nodes connected to the interface.</p>
+                         <p>In a DeviceNet network, the PLC connects to the field devices in a trunkline configuration, with either single drops off the trunk or branched drops through multiport interfaces at the device locations.</p>
+                           <figure style="text-align: center;">
+                                <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-065-1.jpg" alt="Diagram illustrating SDS Host Controller Interface connected via CANbus to various nodes, including Smart Sensors, Smart Push Button Station, Smart Valve Manifold, Smart Servo Drive, and a High-Density I/O Concentrator for nonintelligent devices." class="content-image" style="max-width: 700px;">
+                                <figcaption>Example SDS/CANbus Network Layout</figcaption>
+                            </figure>
+                         <p>Because an SDS network can transmit many bytes of information in the form of variable length messages, it can also support many intelligent devices that can translate one, two, or more bytes of information from the network into 16 or 32 bits of ON/OFF information.</p>
+                         <p>An example of this type of intelligent device is a solenoid valve manifold.</p>
+                         <p>This kind of manifold can have up to 16 connections, thereby receiving 16 bits (two bytes) of data from the network and controlling the status of 16 valve outputs.</p>
+                         <p>However, this device uses only one address of the 126 possible addresses. Thus, in this configuration, the SDS network can actually connect to more than just 126 addressable devices.</p>
+                         <p>The CANbus device bus network uses three of the ISO layers and defines both the media access control method and the physical signaling of the network, while providing cyclic redundancy check (CRC) error detection.</p>
+                         <p>The media access control function determines when each device on the bus will be enabled.</p>
+
+                         <h3 class="subsection-heading">2. Bit-wide device bus networks</h3>
+                         <p>Bit-wide device bus networks are used for discrete applications with simple ON/OFF devices (e.g., sensors and actuators).</p>
+                         <p>These I/O bus networks can only transmit 4 bits (one nibble) of information at a time, which is sufficient to transmit data from these devices</p>
+                         <p>The smallest discrete sensors and actuators require only one bit of data to operate.</p>
+                         <p>By minimizing their data transmission capabilities, bit-wide device bus networks provide optimum performance at economical costs. The most common bit-wide device bus networks are ASI, InterBus Loop, and Seriplex</p>
+                         <h4 class="subsubsection-heading">i) ASI Bit-Wide Device Bus Network.</h4>
+                         <p>ASI (Actuator sensor interface) was developed for low-cost, flexible method for connecting sensor and actuators at the lowest levels of industrial control system.</p>
+                         <p>The ASI network protocol is used in simple, discrete network applications requiring no more than 124 I/O field devices.</p>
+                         <p>These 124 inputs and output devices can be connected to up to 31 nodes in either a tree, star, or ring topology. The I/O devices connect to the PLC or personal computer via the bus through a host controller interface.</p>
+                         <p>It provides a two-wire, non-twisted cable for interconnection of devices. Devices may draw current from the two wires for powering circuitry, and data communications are modulated on top of the nominal d.c level at a bit rate of 167 KHZ , under control of the master. One single parity bit per station is used for error detection.</p>
+                         <p>The maximum cable length is 100 meters ( 330 ft ) from the master controller.</p>
+                         <p>The ASI network protocol is based on the ASI protocol chip, thus the I/O devices connected to this type of network must contain this chip.</p>
+                         <p>Typical ASI-compatible devices include proximity switches, limit switches, photoelectric sensors, and standard off-the-shelf field devices.</p>
+                         <p>However, in an application using an off-the-shelf device, the ASI chip is located in the node (i.e., an intelligent node with a slave ASI chip), instead of in the device.</p>
+                         <p>Figure below illustrates an I/O bus network that uses both the ASI bitwide network and the byte-wide CANbus network. Note that the ASI network connects to the byte-wide CANbus network through a gateway.</p>
+                           <figure style="text-align: center;">
+                                <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-066-1.jpg" alt="Diagram showing an ASI network with Smart Nodes and I/O Devices connected to a Gateway, which in turn connects to a CANbus Network." class="content-image" style="max-width: 600px;">
+                                <figcaption>ASI Network connected to CANbus via Gateway</figcaption>
+                            </figure>
+
+                         <h4 class="subsubsection-heading">ii) InterBus Loop Bit-Wide Device Bus Network</h4>
+                         <p>The InterBus Loop from Phoenix Contact Inc. is another bit-wide device bus network used to interface a PLC with simple sensor and actuator devices.</p>
+                         <p>The InterBus Loop uses a power and communications technology called PowerCom to send the InterBus-S protocol signal through the power supply wires (i.e., the protocol is modulated onto the power supply lines).</p>
+                         <p>This reduces the number of cables required by the network to only two conductors, which carry both the power and communication signals to the field devices.</p>
+                         <p>Since the InterBus-S and InterBus Loop networks use the same protocol, they can communicate with each other via an InterBus Loop terminal module.</p>
+                         <p>The InterBus Loop connects to the bus terminal module, located in the InterBus-S network, which attaches to the field devices via two wires.</p>
+                         <p>An InterBus Loop network can also interface with non-intelligent, off -the-shelf devices by means of module interfaces containing an intelligent slave network chip.</p>
+
+                         <h4 class="subsubsection-heading">iii) Seriplex Bit-Wide Device Bus Network.</h4>
+                         <p>The Seriplex device bus network can connect up to 510 field devices to a PLC in either a master/slave or peer-to-peer configuration.</p>
+                         <p>The Seriplex network is based on the application specific integrated circuit, or ASIC chip, which must be present in all I/O field devices that connect to the network.</p>
+                         <p>I/O devices that do not have the ASIC chip embedded in their circuitry (i.e., off-the-shelf devices) can connect to the network via a Seriplex I/O module interface that contains a slave ASIC chip.</p>
+                         <p>The ASIC I/O interface contains 32 built-in Boolean logic function used to create logic that will provide the communication, addressability, and intelligence necessary to control the field devices connected to the network bus.</p>
+                         <p>A Seriplex network can span distances of up to 5,000 feet in a star, loop, tree, or multidrop configuration.</p>
+                         <p>This bit-wide bus network can also operate without a host controller. Unlike the ASI network, the Seriplex device bus network can interface with analog I/O devices; however, the digitized analog signal is read or written one bit at a time in each scan cycle</p>
+
+                         <h3 class="subsection-heading">Process Bus Network</h3>
+                         <p>A process bus network is a high-level, open, digital communication network used to connect analog field devices to a control system.</p>
+                         <p>It is used in process applications, where the analog input/output sensors and actuators respond slower than those in discrete bus applications (device bus networks).</p>
+                         <p>The size of the information packets delivered to and from these analog field devices is large, due to the nature of the information being collected at the process level.</p>
+                         <p>The two most commonly used process bus network protocols are <strong>Fieldbus</strong> and <strong>Profibus</strong>.</p>
+                         <p>Although these network protocols can transmit data at a speed of 1 to 2 megabits/sec, their response time is considered slow to medium because of the large amount of information that is transferred.</p>
+                         <p>Nevertheless, this speed is adequate for process applications, because analog processes do not respond instantaneously, as discrete controls do.</p>
+                         <p>Process bus networks can transmit enormous amounts bf information to a PLC system, thus greatly enhancing the operation of a plant or process.</p>
+                         <p>For example, a smart, process bus-compatible motor starter can provide information about the amount of current being pulled by the motor, so that, if current requirements increase or a locked-rotor current situation occurs, the system can alert the operator and avoid a potential motor failure in a critical production line.</p>
+                         <p>Implementation of this type of system without a process bus network would be too costly and cumbersome because of the amount of wire runs necessary to transmit this type of process data.</p>
+                         <p>Process bus networks will eventually replace the commonly used analog networks, which are based on the 4-20 mA standard for analog devices.</p>
+                         <p>This will provide greater accuracy and repeatability in process applications, as well as add bidirectional communication between the field devices and the controller (e.g., PLC). A PLC or computer communicates with a process bus network through a host controller interface module using either Fieldbus or Profibus protocol format.</p>
+                         <p>Block transfer instructions relay information between the PLC and the process bus processor. The process bus processor is generally inserted inside the rack enclosure of the PLC.</p>
+
+                         <h4 class="subsubsection-heading">i) Fieldbus Process Bus Network</h4>
+                         <p>The Fieldbus process bus network from the Fieldbus Foundation (FF) is a digital, serial, multiport, two-way communication system that connects field equipment, such as intelligent sensors and actuators, with controllers, such as PLCs.</p>
+                         <p>This process bus network offers the desirable features inherent in 4-20 mA analog systems, such as:</p>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">a standard physical wiring interface</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">bus-powered devices on a single pair of wires</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">intrinsic safety options</span></li>
+                          </ul>
+                         <p>However, the Fieldbus network technology offers the following additional advantages:</p>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">reduced wiring due to multidrop devices</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Compatibility among Fieldbus equipment</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">reduced control room space requirements</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Digital communication reliability</span></li>
+                          </ul>
+                         <h5>Fieldbus Protocol</h5>
+                         <p>The Fieldbus network protocol is based on three layers of the ISO's seven-layer model. These three layers are layer 1 (physical interface), layer 2 (data link), and layer 7 (application).</p>
+                         <p>It has optimized the OSI architecture for process control by removing the middle layers that are generally associated with non-time critical applications such as file transfer.</p>
+                         <p>The section comprising layers 2 and 7 of the model are referred to as the <strong>Fieldbus communication stack</strong>.</p>
+                         <p>In addition to the ISO's model, Fieldbus adds an extra layer on top of the application layer called the <strong>user layer</strong>.</p>
+                         <p>This user layer provides several key functions, which are function blocks, device description services, and system management.</p>
+                         <h5>Physical Layer (Layer 1)</h5>
+                         <p>The physical layer of the Fieldbus process bus network conforms with the ISA SP50 and IEC 1152-2 standards.</p>
+                         <p>These standards specify the type of wire that can be used in this type of network, as well as how fast data can move through the network.</p>
+                         <p>Moreover, these standards define the number of field devices that can be on the bus at different network speeds, with or without being powered from the bus with intrinsic safety (IS).</p>
+                         <p>Intrinsically safe equipment and wiring does not emit enough thermal or electrical energy to ignite materials in the surrounding atmosphere.</p>
+                         <p>Thus, intrinsically safe devices are suitable for use in hazardous environments(e.g., those containing hydrogen or acetylene).</p>
+                         <p>The Fieldbus has two speeds-a low speed of 31.25 kbaud, referred to as <strong>H1</strong>, and a high speed of 1 Mbaud or 2.5 Mbaud (depending on the mode-AC current or DC voltage mode), called <strong>H2</strong>.</p>
+                         <p>At a speed of 31.25 kbaud, the physical layer of the Fieldbus process network can support existing 4-20 mA wiring.</p>
+                         <p>This increases cost-effectiveness when upgrading a plant or process's network communication scheme. At this H1 speed, the Fieldbus network can also support intrinsically safe network segments with bus-powered devices.</p>
+                         <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-068-1.jpg" alt="Diagram showing the Fieldbus Communication Stack (Physical Layer 1, Data Link Layer 2, Application Layer 7) and the User Layer (Layer 8) containing Function Blocks, Device Description Services, and System Management." class="content-image" style="max-width: 500px;">
+                                <figcaption>Fieldbus Protocol Layers</figcaption>
+                            </figure>
+                         <h5>Communication Stack (Layers 2 and 7)</h5>
+                         <p>The communication stack portion of the Fieldbus process bus network consists of layer 2 (the data link layer) and layer 7 (the application layer).</p>
+                         <p>The data link layer controls the transmission of messages onto the Fieldbus through the physical layer.</p>
+                         <p>It manages access to the bus through a <strong>link active scheduler</strong>, which is a deterministic, centralized bus transmission regulator based on IEC and ISA standards.</p>
+                         <p>The application layer contains the <strong>Fieldbus messaging specification (FMS)</strong> standard, which encodes and decodes commands from the user layer, Fieldbus's additional 8th layer.</p>
+                         <p>The FMS is based on the Profibus process bus standard. Layer 7 also contains an object dictionary, which allows Fieldbus network data to be retrieved by either tag name or index record</p>
+                         <h5>User Layer (Layer 8)</h5>
+                         <p>The user layer implements the Fieldbus network's distributed control strategy.</p>
+                         <p>It contains three key elements, which are function blocks, device description services, and system management.</p>
+                         <p>The user layer, a vital segment of the Fieldbus network, also defines the software model for user interaction with the network system.</p>
+                         <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Function Blocks:</strong> are encapsulated control functions that allow the performance of input/output operations, such as analog inputs, analog outputs, PID control, discrete inputs/outputs, signal selectors, manual loaders, bias/gain stations, and ratio stations. The function block capabilities of Fieldbus networks allow Fieldbus-compatible devices to be programmed with blocks containing any of the instructions available in the system. Through these function blocks, users can configure control algorithms and implement them directly through field devices.</span></li>
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Device Description Services.</strong> Device descriptions (DD) are Fieldbus software mechanisms that let a host obtain message information, such as vendor name, available function blocks, and diagnostic capabilities, from field devices. Device descriptions can be thought of as "drivers" for field devices connected to the network, meaning that they allow the device to communicate with the host and the network. All devices connected to a Fieldbus process network must have a device description. When a new field device is added to the network, the host must be supplied with its device description.</span></li>
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>System Manager.</strong> The system management portion of the user layer schedules the execution of function blocks at precisely defined intervals. It also controls the communication of all the Fieldbus network parameters used by the function blocks. Moreover, the system manager automatically assigns field device addresses.</span></li>
+                         </ul>
+
+                         <h4 class="subsubsection-heading">Profibus Process Bus Network</h4>
+                         <p>Profibus (PROcess Fleld BUS) is a digital process bus network capable of communicating information between a master controller (or host) and an intelligent, slave process field device, as well as from one host to another.</p>
+                         <p>Profibus actually consists of three inter-compatible networks with different protocols designed to serve distinctive application requirements. The three types of Profibus networks are: Profibus-FMS, Profibus-DP and Profibus-PA</p>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Profibus-FMS network</strong> is the universal solution for communicating between the upper level, the cell level, and the field device level of the Profibus hierarchy.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Cell level control occurs at individual (or cell) areas, which exercise the actual control during production. The controllers at the cell level must communicate with other supervisory systems.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">The Profibus-FMS utilizes the Fieldbus message specification (FMS) to execute its extensive communication tasks between hierarchical levels.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">This communication is performed through cyclic or acyclic messages at medium transmission speeds.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Profibus-DP (Decentralized Peripherals) network</strong> is a performance-optimized version of the Profibus network. It is designed to handle time-critical communications between devices in factory automation systems.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">The Profibus-DP is a suitable replacement for 24-V parallel and 4-20 mA wiring interfaces.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Profibus-PA (Process Automation) network</strong> is the process automation version of the Profibus network. It provides bus-powered stations and intrinsic safety according to the transmission specifications of the IEC 1158-2 standard. The Profibus-PA network has device description and function block capabilities, along with field device interoperability.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Profibus-PA is designed for use in an explosion / hazardous areas. The physical layer (cable) allows power to be delivered over the bus to field instruments, while limiting current flows so that explosive conditions are not created, even if a malfunction occurs.</span></li>
+                          </ul>
+                         <p>Profibus networks support both peer-to-peer and multipeer communication in either broadcast or multicast configurations.</p>
+                         <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-069-1.jpg" alt="Diagram illustrating Profibus network architecture connecting Host Computer, Gateway, CNC, PCS, PLC, Node Controllers, Sensors, Field Devices (I/O, Drives, Transmitters) across different levels (Upper, Cell, Field) using Profibus-FMS, DP, and PA segments." class="content-image" style="max-width: 700px;">
+                               <figcaption>Profibus Network Architecture Example</figcaption>
+                           </figure>
+                         <p>In broadcast communication, an active station sends an unconfirmed message to all other stations.</p>
+                         <p>Any of these stations (including both masters and slaves) can take this information. In multicast communication, an active station sends an unconfirmed message to a particular group of master or slave stations.</p>
+                         <p>The physical layer or layer 1, of the ISO model defines the network's transmission medium and the physical bus interface.</p>
+                         <p>The Profibus network adheres to the EIA RS-485 standard, which uses a two-conductor, twisted-pair wire bus with optional shielding.</p>
+                         <p>The maximum number of stations or device nodes per segment is 32 without repeaters and 127 with repeaters.</p>
+                         <p>The network transmission speed is selectable from 9.6 kbaud to 12 Mbaud, depending on the distance and cable type. Without repeaters, the maximum bus length is 100 m at 12 Mbaud .</p>
+                         <p>The type of connector used is a 9-pin, D-sub connector.</p>
+
+                         <h3 class="subsection-heading">Modbus Network</h3>
+                         <p>It is a serial communication protocol published by Modicons for use with its PLCs.</p>
+                         <p>Simple and robust, it has since become a de facto standard communication protocol, and it is now commonly available means of connecting electronic devices.</p>
+                         <p>The main reasons for the use of Modbus in the industrial environment are:</p>
+                           <ul class="enhanced-list">
+                              <li class="list-item"><span class="item-icon">-</span><span class="item-text">Developed with industrial application in mind</span></li>
+                              <li class="list-item"><span class="item-icon">-</span><span class="item-text">Openly published and royalty free</span></li>
+                              <li class="list-item"><span class="item-icon">-</span><span class="item-text">Easy to deploy and maintain</span></li>
+                              <li class="list-item"><span class="item-icon">-</span><span class="item-text">Moves raw bits or words without placing many instructions.</span></li>
+                           </ul>
+                         <p>It allows for communication between many (approx 240) devices connected to the same network.</p>
+                         <p>It is used to connect a supervisory computer with a remote terminal unit (RTU) in SCADA systems.</p>
+                         <p>A Modbus command contains the Modbus address of the device it is intended for. All Modbus commands contain checking information, ensuring that a command arrives undamaged.</p>
+                         <p>The basic Modbus command can instruct an RTU to change a value in one of its registers, control or read an I/O port as well as command the device to send back one or more values contained in its registers.</p>
+                         <p>Modbus Messaging protocol is an Application layer (OSI layer 7) protocol that provides client/server communication between devices connected to different types of buses or networks.</p>
+                         <p>The Modbus Messaging protocol is only a protocol and does not imply any specific hardware implementation. Also note that the Modbus Messaging protocol used with Modbus Serial is the same one used with Modbus Plus and Modbus TCP.</p>
+                         <p>Modbus messaging is based on a client/server model and employs the following messages:</p>
+                           <ul class="enhanced-list">
+                              <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Modbus requests,</strong> i.e. the messages sent on the network by the clients to initiate transactions. These serve as indications of the requested services on the server side</span></li>
+                              <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Modbus responses,</strong> i.e. the response messages sent by the servers. These serve as confirmations on the client side.</span></li>
+                           </ul>
+                         <p>Modbus (or to be more exact; the Modbus Messaging protocol) is just a protocol, Modbus Plus is a complete system with a predefined medium and Physical layer (OSI layer 1) implementation.</p>
+
+                         <h3 class="subsection-heading">4 to 20 mA Current Loop</h3>
+                         <p>The 4 to 20 mA current loop is a widely used method for transferring information from one station (the transmitter) to another station (the receiver). Therefore, this system allows for only two stations.</p>
+                         <p>A typical current loop system assigns a sensing range (e.g., 0 to 100°C) to the current range between 4 and 20 mA .</p>
+                         <p>A loop exists (i.e., two wires) between the transmitter and receiver.</p>
+                         <p>The transmitter can impress a certain current in the loop (using a controlled current source) so that the receiver can measure the current in the loop (e.g., by placing a small resistor in series with the loop and measuring the voltage drop across the resistor).</p>
+                         <p>After measuring the current, the receiver can then determine the present level of the sensed signal within the defined sensing range.</p>
+                         <p>This method uses current signaling, instead of voltage signaling, and therefore is relatively unaffected by potential differences between the transmitter and the receiver.</p>
+                         <p>This is similar to the benefit of differential (voltage) signaling, which also requires two wires.</p>
+                         <p>Another characteristic of this method is that it is not primarily digital in nature, as many other sensor communication systems are.</p>
+                         <p>The measured value can vary continuously in the range of 4-20 mA, and therefore can easily represent an analog sensing range, rather than a set of digital signals. Also, the signal is continuously variable and available.</p>
+                         <p>Another characteristic of this method is that the integrity of the loop can be verified.</p>
+                         <p>As long as the loop is unbroken and the transmitter is in good working order, the current in the loop should never fall below 4 mA .</p>
+                         <p>If the current approaches 0 mA , then the receiver can determine that a fault exists - perhaps a broken cable.</p>
+                         <p>These systems are widely used in various process control industries (e.g., oil refining) for connecting sensors (transmitters) with control computers.</p>
+                         <p>Because one station is always the transmitter and one station is always the receiver, this is a unidirectional, half duplex communication system.</p>
+
+                         <h3 class="subsection-heading">HART (Highway Addressable Remote Transducer)</h3>
+                         <p>The HART system (and its associated protocol) was originally developed by Rosemount and is regarded as an open standard, available to all manufacturers.</p>
+                         <p>Its main advantage is that it enables the retention of the existing 4-20 mA instrumentation cabling whilst using, simultaneously, the same wires to carry digital information superimposed on the analog signal.</p>
+                         <p>HART is a hybrid analog and digital system, as opposed to most field bus systems, that are purely digital.</p>
+                         <p>HART products generally fall into one of three categories: field devices, host systems, and communication support hardware.</p>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Field devices</strong> include transmitters, valves, and controllers. There are HART transmitters for almost any standard process measurement including pressure, temperature, level, flow, and analytical (pH, ORP, density).</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Host systems</strong> range from small handheld communicators to PC based maintenance management software to large scale distributed control systems.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Communication support hardware</strong> includes simple single loop modems as well as an assortment of multiplexers that allow a host system to communicate with a large number of field devices.</span></li>
+                          </ul>
+                         <p>It uses a Frequency Shift Keying (FSK) technique based on the Bell 202 standard.</p>
+                         <p>HART can be used in either one of the two network configuration :</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Point-to-point mode</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Multi-drop mode</span></li>
+                         </ul>
+                         <p>The HART protocol has two formats for digital transmission of data:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Poll/response mode</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Burst (broadcast) mode</span></li>
+                         </ul>
+                         <p>HART follows the basic Open Systems Interconnection (OSI) reference model. The OSI model describes the structure and elements of a communication system. The HART protocol uses a reduced OSI model, implementing only layers 1, 2 and 7</p>
+                         <h4>Frequency Shift Keying (FSK)</h4>
+                         <p>The HART communication protocol is based on the Bell 202 telephone communication standard and operates using the frequency shift keying (FSK) principle.</p>
+                         <p>The digital signal is made up of two frequencies— 1,200 Hz and 2,200 Hz representing bits 1 and 0, respectively.</p>
+                         <p>Sine waves of these two frequencies are superimposed on the direct current (dc) analog signal cables to provide simultaneous analog and digital communications.</p>
+                         <p>Because the average value of the 1200/2400 Hz sine wave superimposed on the 4-20 mA signal (FSK signal) is always zero, hence, the 4-20 mA analog information is not affected.</p>
+                         <p>The HART FSK signaling enables two-way digital communication and makes it possible for additional information beyond just the normal process variable to be communicated to or from a smart field instrument.</p>
+                         <p>The HART protocol communicates at 1200 bits per second without interrupting the 4-20 mA signal and allows a host application (master) to get two or more digital updates per second from a field device.</p>
+                         <p>A minimum loop impedance of 230 $\Omega$ is required for communication.</p>
+                          <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-071-1.jpg" alt="Graph illustrating HART FSK signaling. A digital signal (1s and 0s) modulates a sine wave (1200Hz for 1, 2200Hz for 0) which is superimposed on a 4-20mA analog signal. The average value of the FSK signal is zero, not affecting the analog signal." class="content-image" style="max-width: 500px;">
+                              <figcaption>HART FSK Signaling on 4-20mA Loop</figcaption>
+                          </figure>
+
+                         <h4>HART Networks</h4>
+                         <p>HART devices can operate in one of two network configurations—point-to-point or multidrop.</p>
+                         <p>The connection can be in form of:</p>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">In conjunction with the 4-20mA current signal in point-to-point mode,</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">in conjunction with other field devices in multi-drop mode</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">in point-to-point mode with only one field device broadcasting in burst mode</span></li>
+                          </ul>
+                         <h5>i) Point-To-Point:</h5>
+                         <p>In point-to-point mode, the traditional 4-20 mA signal is used to communicate one process variable, while additional process variables, configuration parameters, and other device data are transferred digitally using the HART protocol.</p>
+                         <p>The 4-20 mA analog signal is not affected by the HART signal and can be used for control in the normal way.</p>
+                         <figure>
+                            <figcaption style="font-style: italic; text-align: center;">HART provides access to multiple variables and other data that can be used for operations, commissioning, maintenance, and diagnostic purposes</figcaption>
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-072-2.jpg" alt="Diagram showing HART Point-to-Point mode. A Control System or Host connects via I/O to a single Field Device. A Handheld Terminal can also connect in parallel." class="content-image" style="max-width: 500px;">
+                             <figcaption>HART Point-to-Point Configuration</figcaption>
+                         </figure>
+
+                         <h5>ii) Multidrop:</h5>
+                         <p>The multidrop mode of operation requires only a single pair of wires and, if applicable, safety barriers and an auxiliary power supply for up to 15 field devices.</p>
+                         <p>All process values are transmitted digitally. In multidrop mode, all field device polling addresses are >0, and the current through each device is fixed to a minimum value (typically 4 mA ).</p>
+                         <p>Thus, setting the smart device polling address to a number greater than zero implies a multi-drop loop.</p>
+                         <p>Obviously the 4-20mA concept only applies to a loop with a single transducer; hence for a multi-drop configuration the smart device sets its analog output to a constant 4 mA and communicates only digitally.</p>
+                          <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-072-3.jpg" alt="Diagram showing HART Multidrop mode. A Control System or Host connects via Multiplexer/Interface to multiple Field Devices connected in parallel on a single pair of wires. A Handheld Terminal can connect to the loop." class="content-image" style="max-width: 500px;">
+                               <figcaption>HART Multidrop Configuration</figcaption>
+                           </figure>
+
+                         <h4>Communication Modes</h4>
+                         <p>The HART protocol can be used in various modes for communicating information to/from smart field instruments and central control or monitoring equipment</p>
+                         <p>These protocols are: Poll/response mode and Burst (broadcast) mode.</p>
+                         <h5>i) Poll/Response Mode (Master/Slave Mode)</h5>
+                         <p>HART is a master-slave communication protocol, which means that during normal operation, each slave (field device) communication is initiated by a master communication device.</p>
+                         <p>The master polls each of the smart devices on the highway and requests the relevant information.</p>
+                         <p>Two masters can connect to each HART loop. The primary master is generally a distributed control system (DCS), programmable logic controller (PLC), or a personal computer (PC). The secondary master can be a handheld terminal or another PC.</p>
+                         <p>Slave devices include transmitters, actuators, and controllers that respond to commands from the primary or secondary master.</p>
+                         <p>This mode, allows digital information from the slave device to be updated twice per second in the master. The 4-20 mA analog signals are continuous and can still carry the primary variable for control.</p>
+                          <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-073-1.jpg" alt="Diagram showing Master/Slave Poll/Response mode. Master sends Request Message to Slave, Slave sends Replay Message back to Master. Analog signal is not interrupted." class="content-image" style="max-width: 600px;">
+                              <figcaption>HART Master/Slave (Poll/Response) Mode</figcaption>
+                          </figure>
+
+                         <h5>ii) Burst Mode (Broadcast mode)</h5>
+                         <p>This mode is an optional communication mode.</p>
+                         <p>In burst mode, the master instructs the slave device to continuously broadcast a standard HART reply message (e.g., the value of the process variable).</p>
+                         <p>The master receives the message at the higher rate until it instructs the slave to stop bursting.</p>
+                         <p>This mode frees the master from having to send repeated command requests to get updated process variable information</p>
+                         <p>Data update rates of 3-4 per second are typical with "burst" mode communication and will vary with the chosen command. Burst mode should be used only in single slave device networks.</p>
+                          <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-073-2.jpg" alt="Diagram showing Burst Mode. Master sends Burst Mode ON command. Slave continuously sends data back to Master until Master sends Burst Mode OFF command." class="content-image" style="max-width: 500px;">
+                               <figcaption>HART Burst (Broadcast) Mode</figcaption>
+                           </figure>
+
+                         <h4>HART Commands</h4>
+                         <p>The HART command set provides uniform and consistent communication for all field devices.</p>
+                         <p>Layer 7, the Application layer, consists of three classes of HART commands: Universal, Common Practice, and Device Specific</p>
+                         <p>Host applications may implement any of the necessary commands for a particular application.</p>
+                         <h5>i) Universal</h5>
+                         <p>All devices using the HART protocol must recognize and support the universal commands.</p>
+                         <p>Universal commands provide access to information useful in normal operations (e.g., read primary variable and units).</p>
+                         <h5>ii) Common Practice</h5>
+                         <p>Common practice commands provide functions implemented by many, but not necessarily all, HART communication devices.</p>
+                         <h5>iii) Device Specific</h5>
+                         <p>Device-specific commands represent functions that are unique to each field device.</p>
+                         <p>These commands access setup and calibration information, as well as information about the construction of the device. Information on device-specific commands is available from device manufacturers.</p>
+                           <div class="table-container">
+                               <table class="content-table">
+                                   <caption>HART Command Classes</caption>
+                                   <thead>
+                                       <tr><th>Universal Commands</th><th>Common Practice Commands</th><th>Device-Specific Commands</th></tr>
+                                   </thead>
+                                   <tbody>
+                                       <tr>
+                                           <td>
+                                                <ul class="enhanced-list">
+                                                    <li>Read manufacturer and device type</li>
+                                                    <li>Read primary variable (PV) and units</li>
+                                                    <li>Read current output and percent of range</li>
+                                                    <li>Read up to four predefined dynamic variables</li>
+                                                    <li>Read or write eight-character tag, 16-character descriptor, date</li>
+                                                    <li>Read or write 32-character message</li>
+                                                    <li>Read device range values, units, and damping time constant</li>
+                                                    <li>Read or write final assembly number</li>
+                                                    <li>Write polling address</li>
+                                                </ul>
+                                           </td>
+                                           <td>
+                                                <ul class="enhanced-list">
+                                                     <li>Read selection of up to four dynamic variables</li>
+                                                     <li>Write damping time constant</li>
+                                                     <li>Write device range values</li>
+                                                     <li>Calibrate (set zero, set span)</li>
+                                                     <li>Set fixed output current</li>
+                                                     <li>Perform self-test</li>
+                                                     <li>Perform master reset</li>
+                                                     <li>Trim PV zero</li>
+                                                     <li>Write PV unit</li>
+                                                     <li>Trim DAC zero and gain</li>
+                                                     <li>Write transfer function (square root/linear)</li>
+                                                     <li>Write sensor serial number</li>
+                                                     <li>Read or write dynamic variable assignments</li>
+                                                 </ul>
+                                            </td>
+                                           <td>
+                                                <ul class="enhanced-list">
+                                                    <li>Read or write low-flow cut-off</li>
+                                                    <li>Start, stop, or clear totalizer</li>
+                                                    <li>Read or write density calibration factor</li>
+                                                    <li>Choose PV (mass, flow, or density)</li>
+                                                    <li>Read or write materials or construction information</li>
+                                                    <li>Trim sensor calibration</li>
+                                                    <li>PID enable</li>
+                                                    <li>Write PID setpoint</li>
+                                                    <li>Valve characterization</li>
+                                                    <li>Valve setpoint</li>
+                                                    <li>Travel limits</li>
+                                                    <li>User units</li>
+                                                    <li>Local display information</li>
+                                                </ul>
+                                           </td>
+                                       </tr>
+                                   </tbody>
+                               </table>
+                           </div>
+
+                         <h4>Benefits of HART Communication</h4>
+                         <p>The HART protocol is a powerful communication technology used to exploit the full potential of digital field devices.</p>
+                         <p>Preserving the traditional 4-20 mA signal, the HART protocol extends system capabilities for two-way digital communication with smart field instruments.</p>
+                         <p>The HART protocol offers the best solution for smart field device communications and has the widest base of support of any field device protocol worldwide.</p>
+                         <p>More instruments are available with the HART protocol than any other digital communications technology.</p>
+                         <p>Almost any process application can be addressed by one of the products offered by HART instrument suppliers.</p>
+                         <p>Unlike other digital communication technologies, the HART protocol provides a unique communication solution that is backward compatible with the installed base of instrumentation in use today.</p>
+                         <p>This backward compatibility ensures that investments in existing cabling and current control strategies will remain secure well into the future.</p>
+                         <p>Other benefits include:</p>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Improved plant operations:</strong> HART-communicating devices provide accurate information that helps improve the efficiency of plant operations. During normal operation, device operational values can be easily monitored or modified remotely.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Operational flexibility:</strong> The HART protocol allows two masters (primary and secondary) to communicate with slave devices and provide additional operational flexibility. A permanently connected host system can be used simultaneously, while a handheld terminal or PC controller is communicating with a field device</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Instrumentation investment protection:.</strong> HART field instruments protect the investment (existing plants and processes e.g. wiring, analog controllers, smart instrumentation) by providing compatible products with enhanced digital capabilities. These enhanced capabilities can be used incrementally.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Digital communication:</strong> A digital device provides advantages such as improved accuracy and stability. The HART protocol enhances the capabilities of digital instruments by providing communication access and networking.</span></li>
+                          </ul>
+                     </div>
+                 </section>
+                 <!-- END: topic-4-io-bus-networks --> <!-- Renaming section to reflect overall content -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <!-- Repeat exact same links as top navigation -->
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-4-network-wireless-lan.html" class="nav-button"> <!-- Link to previous chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 80%;"></div> <!-- Chunk 8/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 8 of 10</span>
+                    </div>
+                    <a href="unit-5-calibration.html" class="nav-button"> <!-- Link to next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>
