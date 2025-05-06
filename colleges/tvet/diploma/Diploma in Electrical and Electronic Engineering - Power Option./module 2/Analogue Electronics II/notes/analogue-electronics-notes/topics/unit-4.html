@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Hybrid Parameters</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-3.html" class="nav-button"> <!-- Link to previous chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 66.7%;"></div> <!-- 4/6 -->
+                        </div>
+                        <span class="progress-text">Chapter 4 of 6</span>
+                    </div>
+                    <a href="unit-5.html" class="nav-button"> <!-- Link to next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 4: Hybrid Parameters</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: unit-4-intro -->
+                <section id="unit-4-intro" class="content-section" aria-labelledby="heading-unit-4-intro">
+                    <div class="content-card">
+                        <p>n order to predict the behaviour of a small-signal transistor amplifier, it is important to know its operating characteristics e.g ., input impedance, output impedance, voltage gain etc . In the text so far, these characteristics were determined by using <span class="math-inline">$\beta$</span> and circuit resistance values. This method of analysis has two principal advantages. Firstly, the values of circuit components are readily available and secondly the procedure followed is easily understood. However, the major drawback of this method is that accurate results cannot be obtained. It is because the input and output circuits of a transistor amplifier are not completely independent. For example, output current is affected by the value of load resistance rather than being constant at the value <span class="math-inline">$\beta I_{b}$</span> Similarly, output voltage has an effect on the input circuit so that changes in the output cause changes in the input.</p>
+                        <p>One of the methods that takes into account all the effects in a transistor amplifier is the hybrid parameter approach. In this method, four parameters (one measured in ohm, one in mho, two dimensionless) of a transistor are measured experimentally. These are called hybrid or h parameters of the transistor. Once these parameters for a transistor are known, formulas can be developed for input impedance, voltage gain etc in terms of h parameters. There are two main reasons for using h parameter method in describing the characteristics of a transistor. Firstly, it yields exact results because the inter-effects of input and output circuits are taken into account. Secondly, these parameters can be measured very easily. To begin with, we shall apply h parameter approach to general circuits and then extend it to transistor amplifiers.</p>
+                    </div>
+                </section>
+                <!-- END: unit-4-intro -->
+
+                <!-- START: unit-4-hybrid-params -->
+                <section id="unit-4-hybrid-params" class="content-section" aria-labelledby="heading-unit-4-hybrid-params">
+                    <h2 id="heading-unit-4-hybrid-params" class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">4.1 Hybrid Parameters</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Every linear circuit having input and output terminals can be analysed by four parameters (one measured in ohm, one in mho and two dimensionless) called hybrid or h Parameters. Hybrid means "mixed". Since these parameters have mixed dimensions, they are called hybrid parameters. Consider a linear circuit shown in Fig. 4.1.</p>
+                        <figure>
+                            <img src="../assets/images/2025_05_06_5efae30b5978304d80a5g-43-1.jpg" alt="Figure 4.1: Block diagram of a general linear two-port network (LINEAR CIRCUIT box) with input terminals (voltage v1, current i1) and output terminals (voltage v2, current i2)." class="content-image">
+                            <figcaption>Figure 4.1: Linear circuit.</figcaption>
+                        </figure>
+                        <p>This circuit has input voltage and current labelled v1 and i1. This circuit also has output voltage and current labelled v2 and i2 . Note that both input and output cur- rents (i1 and i2 ) are assumed to flow into the box ; input and output voltages ( v1 and v2 ) are assumed positive from the upper to the lower terminals. These are standard conventions and do not necessarily correspond to the actual directions and polarities. When we analyse circuits in which the voltages are of opposite polarity or where the currents flow out of the box, we simply treat these voltages and currents as negative quantities. It can be proved by advanced circuit theory that voltages and currents in Fig. 4.1 can be related by the following sets of equations :</p>
+                        <div class="equation">\begin{aligned} v_{1} & =h_{11} i_{1}+h_{12} v_{2} \\ i_{2} & =h_{21} i_{1}+h_{22} v_{2} \end{aligned}</div>
+                        <p>In these equations, the h's are fixed constants for a given circuit and are called h parameters, Once these parameters are known, we can use equations (i) and (ii ) to find the voltages and currents in the circuit. If we look at eq.(i), it is clear that h11 has the dimension of ohm and h12 is dimensionless. Similarly, from eq . (ii ), h21 is dimensionless and h22 has the dimension of mho.</p>
+                        <p>Since h11 is a ratio of voltage and current (i.e . v1 / i1 ), it is an impedance and is called "input impedance with output shorted". Similarly, h21 is the ratio of output and input current (i.e ., i2 / i1 ), it is dimensionless and is called "current gain with output shorted".</p>
+                        <div class="equation">\begin{aligned} h_{11}=\frac{v_{1}}{i_{1}} \quad \text { for } v_{2}=0 \text { i.e. output shorted} \\ h_{21}=\frac{i_{2}}{i_{1}} \quad \text { for } v_{2}=0 \text { i.e. output shorted} \\ h_{12}=\frac{v_{1}}{v_{2}} \quad \text { for } i_{1}=0 \text { i.e. input open} \\ h_{22}=\frac{i_{2}}{v_{2}} \quad \text { for } i_{1}=0 \text { i.e. input open} \end{aligned}</div>
+                        <p>Since h12 is a ratio of input and output voltages (i.e . v1 / v2 ), it is dimensionless and is called "voltage feedback ratio with input terminals open". Similarly, h22 is a ratio of output current and output voltage ( i.e . i2 / v2 ), it will be admittance and is called "output admittance with input terminals open".</p>
+
+                        <h4 class="subsubsection-heading">Example:</h4>
+                        <p>Find the h parameters of the circuit below:</p>
+                        <figure>
+                            <img src="../assets/images/2025_05_06_5efae30b5978304d80a5g-45-1.jpg" alt="Circuit diagram for h-parameter example: A T-network with a 10 ohm series resistor at the input, a 5 ohm shunt resistor, and another 5 ohm series resistor at the output." class="content-image">
+                            <!-- No figcaption in MMD -->
+                        </figure>
+                        <p>Solution:</p>
+                        <div class="equation">\begin{aligned} h_{11}=10 \Omega ; h_{21}=-1 \\ h_{12}=1 ; h_{22}=0.2 \mho \end{aligned}</div>
+                    </div>
+                </section>
+                <!-- END: unit-4-hybrid-params -->
+
+                <!-- START: unit-4-h-equiv-circuit -->
+                <section id="unit-4-h-equiv-circuit" class="content-section" aria-labelledby="heading-unit-4-h-equiv-circuit">
+                    <h2 id="heading-unit-4-h-equiv-circuit" class="section-heading">
+                        <span class="heading-icon">🔌</span>
+                        <span class="heading-text">4.2 h Parameter Equivalent Circuit</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Fig. 4.2 ( i ) shows a linear circuit. It is required to draw the h parameter equivalent circuit of Fig. 4.2 (i).</p>
+                        <figure>
+                            <img src="../assets/images/2025_05_06_5efae30b5978304d80a5g-46-1.jpg" alt="Figure 4.2: (i) Linear circuit block diagram. (ii) h-parameter equivalent circuit showing input side with resistor h11 in series with voltage source h12*v2, and output side with current source h21*i1 in parallel with admittance h22." class="content-image">
+                            <figcaption>Figure 4.2: h Parameter Equivalent Circuit.</figcaption>
+                        </figure>
+                        <p>Fig. 4.2 ( ii ) shows h parameter equivalent circuit of Fig. 4.2 (i) and is derived from equations (i) and (ii ). The input circuit appears as a resistance h11 in series with a voltage generator h12v2. The output circuit involves two components; a current generator h21i1 and shunt resistance h22.</p> <!-- Note: MMD says shunt resistance h22, but h22 is admittance. Keeping verbatim. -->
+                        <p>The different hybrid parameters are distinguished by different number subscripts. The notation shown in Fig. 4.2 (iǐ) is used in general circuit analysis. The first number designates the circuit in which the effect takes place and the second number designates the circuit from which the effect comes. For instance, h21 is the short-circuit forward current gain or the ratio of the current in the output ( circuit 2) to the current in the input (circuit 1).</p>
+                        <p>The equivalent circuit of Fig. 4.2 ( ii ) is extremely useful for two main reasons. First, it isolates the input and output circuits, their interaction being accounted for by the two controlled sources. Thus, the effect of output upon input is represented by the equivalent voltage generator h12v2 and its value depends upon output voltage. Similarly, the effect of input upon output is represented by current generator h21il and its value depends upon input current. Secondly, the two parts of the circuit are in a form which makes it simple to take into</p> <!-- MMD cuts off here -->
+                    </div>
+                </section>
+                <!-- END: unit-4-h-equiv-circuit -->
+
+                <!-- START: unit-4-performance -->
+                <section id="unit-4-performance" class="content-section" aria-labelledby="heading-unit-4-performance">
+                    <h2 id="heading-unit-4-performance" class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">4.3 Performance of a Linear Circuit in h Parameters</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>We have already seen that any linear circuit with input and output has a set of h parameters. We shall now develop formulas for input impedance, current gain, voltage gain etc.of a linear circuit in terms of <span class="math-inline">$h$</span> parameters.</p>
+
+                        <h3 id="heading-unit-4-input-impedance" class="subsection-heading">4.3.1 Input impedance.</h3>
+                        <p>Consider a linear circuit with a load resistance rL across its terminals as shown in Fig. 4.3.</p>
+                        <figure>
+                            <img src="../assets/images/2025_05_06_5efae30b5978304d80a5g-47-1.jpg" alt="Figure 4.3: Linear circuit block diagram with input v1, i1, input impedance Zin, and output connected to load resistance rL, with output voltage v2 and current i2 flowing into the load." class="content-image">
+                            <figcaption>Figure 4.3: Linear circuit.</figcaption>
+                        </figure>
+                        <p>The input impedance Zin of this circuit is the ratio of input voltage to input current i.e.</p>
+                        <div class="equation">Z_{i n}=\frac{v_{1}}{i_{1}}}</div>
+                        <p>Now <span class="math-inline">$v_{1}=h_{11} i_{1}+h_{12} v_{2}$</span> in terms of <span class="math-inline">$h$</span> parameters. Substituting the value of <span class="math-inline">$v_{1}$</span> in the above expression, we get,</p>
+                        <div class="equation">\begin{gathered} Z_{i n}=\frac{h_{11} i_{1}+h_{12} v_{2}}{i_{1}}=h_{11}+\frac{h_{12} v_{2}}{i_{1}} \\ i_{2}=h_{21} i_{1}+h_{22} v_{2} \end{gathered}</div>
+                        <div class="equation">\begin{array}{ll} \therefore & \frac{-v_{2}}{r_{L}}=h_{21} i_{1}+h_{22} v_{2} \quad\left[\because i_{2}=\frac{-v_{2}}{r_{L}}\right] \\ \text { or } & -h_{21} i_{1}=h_{22} v_{2}+\frac{v_{2}}{r_{L}}=v_{2}\left(h_{22}+\frac{1}{r_{L}}\right) \\ \therefore & \frac{v_{2}}{i_{1}}=\frac{-h_{21}}{h_{22}+\frac{1}{r_{L}}} \end{array}</div>
+                        <p>Substituting the value of <span class="math-inline">$v_{2} / i_{1}$</span> from exp. (ii) into exp. (i), we get,</p>
+                        <div class="equation">\mathrm{Z}_{\mathrm{in}}=h_{11}-\frac{h_{12} h_{21}}{h_{22}+\frac{1}{r_{L}}}}</div>
+                        <p>This is the expression for input impedance of a linear circuit in terms of <span class="math-inline">$h$</span> parameters and load connected to the output terminals. If either <span class="math-inline">$h_{12}$</span> or <span class="math-inline">$r_{L}$</span> is very small, the second term in exp. (iii) can be neglected and input impedance becomes :</p>
+                        <div class="equation">\mathrm{Z}_{\mathrm{in}} \simeq h_{11}}</div>
+
+                        <h3 id="heading-unit-4-current-gain" class="subsection-heading">4.3.2 Current gain.</h3>
+                        <div class="equation">\begin{array}{lrl}  & A_{i} & =\frac{i_{2}}{i_{1}} \\ \text { Now } & i_{2} & =h_{21} i_{1}+h_{22} v_{2} \\ \text { and } & v_{2} & =-i_{2} r_{L} \\ \therefore & i_{2} & =h_{21} i_{1}-h_{22} i_{2} r_{L} \\ \text { or } & i_{2}\left(1+h_{22} r_{L}\right) & =h_{21} i_{1} \\ \text { or } & \frac{i_{2}}{i_{1}} & =\frac{h_{21}}{1+h_{22} r_{L}} \end{array}</div>
+                        <p>But <span class="math-inline">$i_{2} / i_{1}=A_{i}$</span>, the current gain of the circuit.</p>
+                        <div class="equation">\therefore \quad \mathrm{A}_{\mathrm{i}}=\frac{h_{21}}{1+h_{22} r_{L}}}</div>
+                        <p>If <span class="math-inline">$h_{22} r_{L} \ll 1$</span>, then <span class="math-inline">$A_{i} \simeq h_{21}$</span>.</p>
+                        <p>The expression <span class="math-inline">$A_{i} \simeq h_{21}$</span> is often useful. To say that <span class="math-inline">$h_{22} r_{L} \ll 1$</span> is the same as saying that <span class="math-inline">$r_{L} \ll 1 / h_{22}$</span>. This occurs when <span class="math-inline">$r_{L}$</span> is much smaller than the output resistance ( <span class="math-inline">$1 / h_{22}$</span> ), shunting <span class="math-inline">$h_{21} i_{l}$</span> generator. Under such condition, most of the generator current bypasses the circuit output resistance in favour of <span class="math-inline">$r_{L}$</span>. This means that <span class="math-inline">$i_{2} \simeq h_{21} i_{1}$</span> or <span class="math-inline">$i_{2} / i_{1} \simeq h_{21}$</span>.</p>
+
+                        <h3 id="heading-unit-4-voltage-gain" class="subsection-heading">4.3.3 Voltage gain.</h3>
+                        <div class="equation">\begin{aligned} A_{v} & =\frac{v_{2}}{v_{1}} \\ & =\frac{v_{2}}{i_{1} Z_{i n}} \quad\left(\because v_{1}=i_{1} Z_{i n}\right) \end{aligned}</div>
+                        <p>While developing expression for input impedance, we found that :</p>
+                        <div class="equation">\frac{v_{2}}{i_{1}}=\frac{-h_{21}}{h_{22}+\frac{1}{r_{L}}}}</div>
+                        <p>Substituting the value of <span class="math-inline">$v_{2} / i_{1}$</span> in exp. (iv), we get,</p>
+                        <div class="equation">\mathrm{A}_{\mathrm{v}}=\frac{-h_{21}}{Z_{\text {in }}\left(h_{22}+\frac{1}{r_{L}}\right)}}</div>
+
+                        <h3 id="heading-unit-4-output-impedance" class="subsection-heading">4.3.4 Output impedance.</h3>
+                        <p>To find the output impedance, the input voltage source is reduced to zero and voltage <span class="math-inline">$v_{2}$</span> is applied at the output terminals. Then <span class="math-inline">$Z_{out} = v_2 / i_2$</span>.</p> <!-- Added description based on context -->
+                        <figure>
+                            <img src="../assets/images/2025_05_06_5efae30b5978304d80a5g-49-1.jpg" alt="h-parameter equivalent circuit configured for output impedance calculation. Input voltage source v1 is set to 0 (shorted). A voltage v2 is applied to the output terminals, and the resulting current i2 is measured. Zout = v2/i2." class="content-image">
+                            <!-- No figcaption in MMD -->
+                        </figure>
+                        <p>With <span class="math-inline">$v_{1}=0$</span> and applying Kirchhoff's voltage law to the input circuit, we have,</p>
+                        <div class="equation">\begin{array}{ll}  & 0=i_{1} h_{11}+h_{12} v_{2} \\ \therefore & i_{1}=-\frac{h_{12} v_{2}}{h_{11}} \\ \text { Now } & i_{2}=h_{21} i_{1}+h_{22} v_{2} \end{array}</div>
+                        <p>Putting the value of <span class="math-inline">$i_{1}\left(=-h_{12} v_{2} / h_{11}\right)$</span> in this equation, we get,</p>
+                        <div class="equation">\begin{aligned} i_{2} &=h_{21}\left(-\frac{h_{12} v_{2}}{h_{11}}\right)+h_{22} v_{2} \\ \text { or } \quad i_{2} &=-\frac{h_{21} h_{12} v_{2}}{h_{11}}+h_{22} v_{2} \end{aligned}</div>
+                        <p>Dividing throughout by <span class="math-inline">$v_{2}$</span>, we have,</p>
+                        <div class="equation">\begin{aligned} \frac{i_{2}}{v_{2}} & =\frac{-h_{21} h_{12}}{h_{11}}+h_{22} \\ \therefore \quad Z_{\text {out }} & =\frac{v_{2}}{i_{2}}=\frac{1}{h_{22}-\frac{h_{21} h_{12}}{h_{11}}} \end{aligned}</div>
+
+                        <h4 class="subsubsection-heading">Example:</h4>
+                        <p>Find the (i) input impedance and (ii) voltage gain for the circuit below.</p>
+                        <figure>
+                            <img src="../assets/images/2025_05_06_5efae30b5978304d80a5g-49-2.jpg" alt="Circuit for example calculation: T-network with 10 ohm input series resistor, 5 ohm shunt resistor, 5 ohm output series resistor, connected to a 5 ohm load resistor rL. Input impedance Zin is indicated." class="content-image">
+                            <!-- No figcaption in MMD -->
+                        </figure>
+                        <p>Solution:</p>
+                        <div class="equation">\begin{array}{lll} h_{11}=10 ; & & h_{21}=-1 \\ h_{12} & =1 \text { and } & h_{22}=0.2 \end{array}</div>
+                        <p>(i) Input impedance is given by:</p>
+                        <div class="equation">\begin{aligned} Z_{\text {in }} & =h_{11}-\frac{h_{12} h_{21}}{h_{22}+\frac{1}{r_{L}}}=10-\frac{1 \times-1}{0.2+\frac{1}{5}} \\ & =10+2.5=\mathbf{1 2 . 5} \Omega \end{aligned}</div>
+                        <p>By inspection, we can see that input impedance is equal to <span class="math-inline">$10 \Omega$</span> plus two <span class="math-inline">$5 \Omega$</span> resistances in parallel i.e.</p>
+                        <div class="equation">\begin{aligned} Z_{\text {in }} & =10+5 \| 5 \\ & =10+\frac{5 \times 5}{5+5}=12.5 \Omega \end{aligned}</div>
+                        <p>(ii)</p>
+                        <div class="equation">\text { Voltage gain, } \quad A_{v} =\frac{-h_{21}}{Z_{\text {in }}\left(h_{22}+\frac{1}{r_{L}}\right)}=\frac{1}{12.5\left(0.2+\frac{1}{5}\right)}=\frac{1}{5}</div>
+                    </div>
+                </section>
+                <!-- END: unit-4-performance -->
+
+                <!-- START: unit-4-h-params-transistor -->
+                <section id="unit-4-h-params-transistor" class="content-section" aria-labelledby="heading-unit-4-h-params-transistor">
+                    <h2 id="heading-unit-4-h-params-transistor" class="section-heading">
+                        <span class="heading-icon">🔌</span>
+                        <span class="heading-text">4.4 The h Parameters of a Transistor</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>It has been seen in the previous sections that every linear circuit is associated with h parameters. When this linear circuit is terminated by load rL, we can find input impedance, current gain, voltage gain, etc. in terms of h parameters. Fortunately, for small a.c. signals, the transistor behaves as a limear device because the output a.c. signal is directly proportional to the input a.c. signal. Under such circumstances, the a.c. operation of the transistor can be described in terms of <span class="math-inline">$h$</span> parameters. The expressions derived for input impedance, voltage gain etc . in the previous section shall hold good for transistor amplifier except that here rL is the a.c. load seen by the transistor.</p>
+                        <figure>
+                            <img src="../assets/images/2025_05_06_5efae30b5978304d80a5g-50-1.jpg" alt="Figure 4.4: Block diagram representing a transistor as a two-port network labeled 'TRANSISTOR'. Input voltage v1, current i1. Output voltage v2, current i2 flowing into load RL." class="content-image">
+                            <figcaption>Figure 4.4: Transistor amplifier circuit.</figcaption>
+                        </figure>
+                        <p>The following points are worth noting while considering the behaviour of transistor in terms of <span class="math-inline">$h$</span> parameters :</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">(i)</span><span class="item-text">For small a.c. signals, a transistor behaves as a linear circuit. Therefore, its a.c. operation can be described in terms of <span class="math-inline">$h$</span> parameters.</span></li>
+                            <li class="list-item"><span class="item-icon">(ii)</span><span class="item-text">The value of <span class="math-inline">$h$</span> parameters of a transistor will depend upon the transistor connection (i.e. CB, CE or CC ) used. For instance, a transistor used in CB arrangement may have h11 = 20 <span class="math-inline">$\Omega$</span>. If we use the same transistor in CE arrangement, h11 will have a different value. Same is the case with other <span class="math-inline">$h$</span> parameters.</span></li>
+                            <li class="list-item"><span class="item-icon">(iii)</span><span class="item-text">The expressions for input impedance, voltage gain etc. derived earlier are also applicable to transistor amplifier except that rL is the a.c. load seen by the transistor i.e . <span class="math-inline">$r_{L}=R_{C} \| R_{L}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">(iv)</span><span class="item-text">The values of <span class="math-inline">$h$</span> parameters depend upon the operating point. If the operating point is changed, parameter values are also changed.</span></li>
+                            <li class="list-item"><span class="item-icon">(v)</span><span class="item-text">The notations v1, i1, v2 and i2 are used for general circuit analysis. In a transistor amplifier, we use the notation depending upon the configuration in which transistor is used. Thus for CE arrangement, v1 = Vbe ; i1 = Ib ; v2 = Vce ; i2 = Ic</span></li>
+                        </ul>
+                        <p>Here Vbe, Ib, Vce and Ic are the R.M.S. values.</p>
+                    </div>
+                </section>
+                <!-- END: unit-4-h-params-transistor -->
+
+                <!-- START: unit-4-nomenclature -->
+                <section id="unit-4-nomenclature" class="content-section" aria-labelledby="heading-unit-4-nomenclature">
+                    <h2 id="heading-unit-4-nomenclature" class="section-heading">
+                        <span class="heading-icon">🏷️</span>
+                        <span class="heading-text">4.5 Nomenclature for Transistor h Parameters</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The numerical subscript notation for h parameters ( viz . h11, h21 , h12 and h22 ) is used in general circuit analysis. However, this nomenclature has been modified for a transistor to indicate the nature of parameter and the transistor configuration used. The h parameters of a transistor are represented by the following notation :</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">(i)</span><span class="item-text">The numerical subscripts are replaced by letter subscripts.</span></li>
+                            <li class="list-item"><span class="item-icon">(ii)</span><span class="item-text">The first letter in the double subscript notation indicates the nature of parameter.</span></li>
+                            <li class="list-item"><span class="item-icon">(iii)</span><span class="item-text">The second letter in the double subscript notation indicates the circuit arrangement (i.e. CB, CE or CC ) used.</span></li>
+                        </ul>
+                        <p>Table below shows the h parameter nomenclature of a transistor :</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Transistor h Parameter Nomenclature</caption>
+                                <thead>
+                                    <tr><th>S.No.</th><th><span class="math-inline">$h$</span> parameter</th><th>Notation in CB</th><th>Notation in CE</th><th>Notation in CC</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1.</td><td><span class="math-inline">$h_{11}$</span></td><td><span class="math-inline">$h_{i b}$</span></td><td><span class="math-inline">$h_{i e}$</span></td><td><span class="math-inline">$h_{i c}$</span></td></tr>
+                                    <tr><td>2.</td><td><span class="math-inline">$h_{12}$</span></td><td><span class="math-inline">$h_{r b}$</span></td><td><span class="math-inline">$h_{r e}$</span></td><td><span class="math-inline">$h_{r c}$</span></td></tr>
+                                    <tr><td>3.</td><td><span class="math-inline">$h_{21}$</span></td><td><span class="math-inline">$h_{f b}$</span></td><td><span class="math-inline">$h_{f e}$</span></td><td><span class="math-inline">$h_{f c}$</span></td></tr>
+                                    <tr><td>4.</td><td><span class="math-inline">$h_{22}$</span></td><td><span class="math-inline">$h_{o b}$</span></td><td><span class="math-inline">$h_{o e}$</span></td><td><span class="math-inline">$h_{o c}$</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Note that first letter i, r, f or o indicates the nature of parameter. Thus h11 indicates input impedance and this parameter is designated by the subscript i . Similarly, letters r, f and o respectively indicate reverse voltage feedback ratio, forward current transfer ratio and output admittance. The second letters b , e and c respectively indicate CB , CE and CC arrangement.</p>
+                    </div>
+                </section>
+                <!-- END: unit-4-nomenclature -->
+
+                <!-- START: unit-4-transistor-performance -->
+                <section id="unit-4-transistor-performance" class="content-section" aria-labelledby="heading-unit-4-transistor-performance">
+                    <h2 id="heading-unit-4-transistor-performance" class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">4.6 Transistor Circuit Performance in h Parameters</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The expressions for input impedance, voltage gain etc. in terms of h parameters derived earlier for general circuit analysis apply equally for transistor analysis. However, it is profitable to rewrite them in standard transistor h parameter nomenclature.</p>
+
+                        <h3 id="heading-unit-4-perf-zin" class="subsection-heading">4.6.1 Input impedance</h3>
+                        <p>The general expression for input impedance is:</p>
+                        <div class="equation">Z_{\text {in }}=h_{11}-\frac{h_{12} h_{21}}{h_{22}+\frac{1}{r_{L}}}}</div>
+                        <p>Using standard <span class="math-inline">$h$</span> parameter nomenclature for transistor, its value for <span class="math-inline">$C E$</span> arrangement will be :</p>
+                        <div class="equation">Z_{i n}=h_{i e}-\frac{h_{r e} h_{f e}}{h_{o e}+\frac{1}{r_{L}}}}</div>
+                        <p>Similarly, expressions for input impedance in CB and CC arrangements can be written. It may be noted that rL is the a.c. load seen by the transistor.</p>
+
+                        <h3 id="heading-unit-4-perf-ai" class="subsection-heading">4.6.2 Current gain.</h3>
+                        <p>The general expression for current gain is:</p>
+                        <div class="equation">A_{i}=\frac{h_{21}}{1+h_{22} r_{L}}}</div>
+                        <p>Using standard transistor h parameter nomenclature, its value for CE arrangement is:</p>
+                        <div class="equation">A_{i}=\frac{h_{f e}}{1+h_{o e} r_{L}}}</div>
+
+                        <h3 id="heading-unit-4-perf-av" class="subsection-heading">4.6.3 Voltage gain.</h3>
+                        <p>The general expression for voltage gain is:</p>
+                        <div class="equation">A_{v}=\frac{-h_{21}}{Z_{i n}\left(h_{22}+\frac{1}{r_{L}}\right)}}</div>
+                        <p>Using standard transistor h parameter nomenclature, its value for CE arrangement is:</p>
+                        <div class="equation">A_{v}=\frac{-h_{f e}}{Z_{i n}\left(h_{o e}+\frac{1}{r_{L}}\right)}}</div>
+
+                        <h3 id="heading-unit-4-perf-zout" class="subsection-heading">4.6.4 Output impedance.</h3>
+                        <p>The general expression for output impedance is:</p>
+                        <div class="equation">Z_{\text {out }}=\frac{1}{h_{22}-\frac{h_{21} h_{12}}{h_{11}}}}</div>
+                        <p>Using standard transistor h parameter nomenclature, its value for CE arrangement is:</p>
+                        <div class="equation">Z_{o u t}=\frac{1}{h_{o e}-\frac{h_{f e} h_{r e}}{h_{i e}}}}</div>
+
+                        <h4 class="subsubsection-heading">Example:</h4>
+                        <p>A transistor used in CE arrangement has the following set of h parameters when the d.c. operating point is VCE = 10 volts and IC = 1 mA</p>
+                        <p>hie = 2000 <span class="math-inline">$\Omega$</span> ; hoe = <span class="math-inline">$10^{-4}$</span> mho; hre = <span class="math-inline">$10^{-3}$</span> ; hfe = 50</p>
+                        <p>Determine (i) input impedance (ii) current gain and (iii) voltage gain. The a.c. load seen by the transistor is rL = 600 <span class="math-inline">$\Omega$</span>. What will be approximate values using reasonable approximations?</p>
+                        <p>Solution:</p>
+                        <p>(i)</p>
+                        <div class="equation">\begin{aligned} Z_{i n} & =h_{i e}-\frac{h_{r e} h_{f e}}{h_{o e}+\frac{1}{r_{L}}}=2000-\frac{10^{-3} \times 50}{10^{-4}+\frac{1}{600}} \\ & =2000-28=1972 \Omega \end{aligned}</div>
+                        <p>The second term in eq. <span class="math-inline">$(i)$</span> is quite small as compared to the first.</p>
+                        <div class="equation">\therefore \quad Z_{i n} \simeq h_{i e}=\mathbf{2 0 0 0 \Omega}}</div>
+                        <p>(ii)</p>
+                        <div class="equation">\text { Current gain, } A_{i}=\frac{h_{f e}}{1+h_{o e} \times r_{L}}=\frac{50}{1+\left(600 \times 10^{-4}\right)}=47</div>
+                        <p>If <span class="math-inline">$h_{o e} r_{L} \ll 1$</span>, then <span class="math-inline">$A_{i} \simeq h_{f e}=\mathbf{5 0}$</span></p>
+                        <p>(iii)</p>
+                        <div class="equation">\text { Voltage gain, } A_{v}=\frac{-h_{f e}}{Z_{i n}\left(h_{o e}+\frac{1}{r_{L}}\right)}=\frac{-50}{1972\left(10^{-4}+\frac{1}{600}\right)}=-14.4</div>
+                        <p>The negative sign indicates that there is 180 degrees phase shift between input and output.</p>
+                    </div>
+                </section>
+                <!-- END: unit-4-transistor-performance -->
+
+                <!-- START: unit-4-approx-formulas -->
+                <section id="unit-4-approx-formulas" class="content-section" aria-labelledby="heading-unit-4-approx-formulas">
+                    <h2 id="heading-unit-4-approx-formulas" class="section-heading">
+                        <span class="heading-icon">≈</span>
+                        <span class="heading-text">4.7 Approximate Hybrid Formulas for Transistor Amplifier</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The h-parameter formulas ( CE configuration) covered in the previous section can be approximated to a form that is easier to handle. While these approximate formulas will not give results that are as accurate as the original formulas, they can be used for many applications.</p>
+                        <p>(i) Inputimpedance</p>
+                        <div class="equation">\text { Input impedance, } Z_{i n}=h_{i e}-\frac{h_{r e} h_{f e}}{h_{o e}+\frac{1}{r_{L}}}}</div>
+                        <p>In actual practice, the second term in this expression is very small as compared to the first term.</p>
+                        <div class="equation">\therefore \quad Z_{i n}=h_{i e} \quad \text {... approximate formula}}</div>
+                        <p>(ii) Current gain</p>
+                        <div class="equation">\text { Current gain, } A_{i}=\frac{h_{f e}}{1+h_{o e} r_{L}}}</div>
+                        <p>In actual practice, <span class="math-inline">$h_{o e} r_{L}$</span> is very small as compared to 1 .</p>
+                        <div class="equation">\therefore \quad A_{i}=h_{f e} \quad \text {... approximate formula}}</div>
+                        <p>(iii) Voltage gain</p>
+                        <div class="equation">\text { Voltage gain, } \begin{aligned} A_{v} & =\frac{-h_{f e}}{Z_{i n}\left(h_{o e}+\frac{1}{r_{L}}\right)} \\ & =\frac{-h_{f e} r_{L}}{Z_{i n}\left(h_{o e} r_{L}+1\right)} \end{aligned}}</div>
+                        <p>Now approximate formula for <span class="math-inline">$Z_{i n}$</span> is <span class="math-inline">$h_{i e^{*}}$</span>. Also <span class="math-inline">$h_{o e} r_{L}$</span> is very small as compared to 1 .</p>
+                        <div class="equation">\therefore \quad A_{v}=-\frac{h_{f e} r_{L}}{h_{i e}} \quad \ldots \text { approximate formula}}</div>
+                        <p>(iv) Output impedance</p>
+                        <div class="equation">\text { Output impedance of transistor, } \quad Z_{o u t}=\frac{1}{h_{o e}-\frac{h_{f e} h_{r e}}{h_{i e}}}}</div>
+                        <p>The second term in the denominator is very small as compared to <span class="math-inline">$h_{o e}$</span>.</p>
+                        <div class="equation">\therefore \quad Z_{\text {out }}=\frac{1}{h_{o e}} \quad \ldots \text { approximate formula}}</div>
+                        <p>The output impedance of transistor amplifier</p>
+                        <div class="equation">=Z_{\text {out }} \| r_{L} \quad \text { where } * r_{L}=R_{C} \| R_{L}}</div>
+                    </div>
+                </section>
+                <!-- END: unit-4-approx-formulas -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <!-- Repeat exact same links as top navigation -->
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-3.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 66.7%;"></div>
+                        </div>
+                        <span class="progress-text">Chapter 4 of 6</span>
+                    </div>
+                    <a href="unit-5.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
