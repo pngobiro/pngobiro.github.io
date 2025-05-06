@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: OPERATIONAL AMPLIFIER CIRCUITS & FEEDBACK CONFIGURATIONS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-3-introduction-to-op-amp.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 57%;"></div> <!-- Approx 4/7 -->
+                        </div>
+                        <span class="progress-text">Chapter 4 of 7</span>
+                    </div>
+                    <a href="chapter-5-application-of-operational-amplifier-and-timer-circuits.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">CHAPTER-4 OPERATIONAL AMPLIFIER CIRCUITS & FEEDBACK CONFIGURATIONS.</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-4-section-4-1-datasheet-741 -->
+                <section id="chapter-4-section-4-1-datasheet-741" class="content-section" aria-labelledby="heading-chapter-4-section-4-1-datasheet-741">
+                    <h2 id="heading-chapter-4-section-4-1-datasheet-741" class="section-heading">
+                        <span class="heading-icon">📄</span>
+                        <span class="heading-text">4.1 Explain general information of data sheet of 741 .</span>
+                    </h2>
+                    <div class="content-card">
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-27-1.jpg" alt="Pin diagram of a 741 Op-Amp IC, showing pins: 1-Offset Null, 2-Inverting Input (-IN), 3-Non-inverting Input (+IN), 4-V-, 5-Unused, 6-Output, 7-V+, 8-Offset Null. A triangular op-amp symbol is superimposed." class="content-image">
+                        <p>The 741 integrated circuit looks like any other 'chip'. However, it is a general purpose OP-AMP. You need only to know basic information about its operation and use. The diagram opposite shows the pins of the 741 OP-AMP. The important pins are 2, 3 and 6 because these represent inverting, non-inverting and voltage out. Notice the triangular diagram that represents an Op-Amp integrated circuit.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-section-4-1-datasheet-741 -->
+
+                <!-- START: chapter-4-section-4-2-electrical-characteristics -->
+                <section id="chapter-4-section-4-2-electrical-characteristics" class="content-section" aria-labelledby="heading-chapter-4-section-4-2-electrical-characteristics">
+                    <h2 id="heading-chapter-4-section-4-2-electrical-characteristics" class="section-heading">
+                        <span class="heading-icon">⚡</span>
+                        <span class="heading-text">4.2 Define the following electrical characteristics input offset voltage, input offset current, CMMR, Large signal voltage gain, Slew rate .</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The input offset voltage ( <span class="math-inline">$V_{os}$</span> ) is a parameter defining the differential DC voltage required between the inputs of an amplifier, especially an operational amplifier (op-amp), to make the output zero (for voltage amplifiers, 0 volts with respect to ground or between differential outputs, depending on the output type)</p>
+                        <p>The common-mode rejection ratio (CMRR) of a differential amplifier (or other device) is the rejection by the device of unwanted input signals common to both input leads, relative to the wanted difference signal.</p>
+                        <p>Slew rate : Slew rate is defined as the maximum rate of change of output voltage per unit of time and is expressed as volt per second. Limitations in slew rate capability can give rise to non linear effects in electronic amplifiers.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-section-4-2-electrical-characteristics -->
+
+                <!-- START: chapter-4-section-4-3-ideal-op-amp -->
+                <section id="chapter-4-section-4-3-ideal-op-amp" class="content-section" aria-labelledby="heading-chapter-4-section-4-3-ideal-op-amp">
+                    <h2 id="heading-chapter-4-section-4-3-ideal-op-amp" class="section-heading">
+                        <span class="heading-icon">✨</span>
+                        <span class="heading-text">4.3 Define Ideal operational amplifier and its equivalent circuits.</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>An ideal op-amp is usually considered to have the following properties:</p>
+                        <h3 class="subsection-heading">Ideal op-amps</h3>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-28-1.jpg" alt="An equivalent circuit of an operational amplifier that models some resistive non-ideal parameters. Shows inputs V+ and V-, input resistance Rin, voltage source Gvin, output resistance Rout, and output Vout. Power supplies Vs+ and Vs- are also shown." class="content-image">
+                        <p>An ideal op-amp is usually considered to have the following properties:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Infinite open-loop gain <span class="math-inline">$G=v_{\text {out }} /$</span> '<span class="math-inline">$v_{\text {in }}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Infinite input impedance <span class="math-inline">$R_{in}$</span>, and so zero input current</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Zero input offset voltage</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Infinite voltage range available at the output</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Infinite bandwidth with zero phase shift and infinite slew rate</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Zero output impedance Rout</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Zero noise</span></li>
+                        </ul>
+                        <p>Infinite Common-mode rejection ratio (CMRR)</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-section-4-3-ideal-op-amp -->
+
+                <!-- START: chapter-4-section-4-4-open-loop-config -->
+                <section id="chapter-4-section-4-4-open-loop-config" class="content-section" aria-labelledby="heading-chapter-4-section-4-4-open-loop-config">
+                    <h2 id="heading-chapter-4-section-4-4-open-loop-config" class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">4.4 Draw and explain the Open Loop configuration (inverting, non-inverting Amplifier) Open loop amplifier</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The magnitude of <span class="math-inline">$A_{ol}$</span> is typically very large-100,000 or more for integrated circuit op-amps -and therefore even a quite small difference between <span class="math-inline">$V+$</span> and <span class="math-inline">$V-$</span> drives the amplifier output nearly to the supply voltage.</p>
+                        <h3 class="subsection-heading">Closed loop</h3>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-29-1.jpg" alt="An op-amp with negative feedback configured as a non-inverting amplifier. Input Vin is connected to the non-inverting input. A voltage divider (Rf and Rg) provides feedback from Vout to the inverting input." class="content-image">
+                        <p style="text-align:center;">An op-amp with negative feedback (a non-inverting amplifier)</p>
+                        <p>If predictable operation is desired, negative feedback is used, by applying a portion of the output voltage to the inverting input. The closed loop feedback greatly reduces the gain of the circuit. When negative feedback is used, the circuit's overall gain and response becomes determined mostly by the feedback network, rather than by the opamp characteristics. If the feedback network is made of components with values small relative to the op amp's input impedance, the value of the op-amp's open loop response Aol does not seriously affect the circuit's performance. The response of the op-amp circuit with its input, output, and feedback circuits to an input is characterized mathematically by a transfer function; designing an op-amp circuit to have a desired transfer function.</p>
+                        <h3 class="subsection-heading">Inverting amplifier</h3>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-29-2.jpg" alt="An op-amp connected in the inverting amplifier configuration. Input Vin is connected through Rin to the inverting input. Feedback resistor Rf connects Vout to the inverting input. Non-inverting input is grounded." class="content-image">
+                        <p style="text-align:center;">An op-amp connected in the inverting amplifier configuration</p>
+                        <p>In an inverting amplifier, the output voltage changes in an opposite direction to the input voltage.</p>
+                        <p>As with the non-inverting amplifier, we start with the gain equation of the op-amp:</p>
+                        <div class="equation">$$V_{\text {out }} A_{O L}\left(V_{+}-V_{-}\right)$$</div>
+                        <p>This time, <span class="math-inline">$V_{\text {- }}$</span> is a function of both <span class="math-inline">$V_{\text {out }}$</span> and <span class="math-inline">$V_{\text {in }}$</span> due to the voltage divider formed by <span class="math-inline">$R_{\mathrm{f}}$</span> and <span class="math-inline">$R_{\text {in }}$</span>. Again, the op-amp input does not apply an appreciable load, so:</p>
+                        <div class="equation">$$V_{-}=\frac{1}{R_{\mathrm{f}}+R_{\mathrm{in}}}\left(R_{\mathrm{f}} V_{\mathrm{in}}+R_{\text {in }} V_{\text {out }}\right)$$</div>
+                        <p>Substituting this into the gain equation and solving for <span class="math-inline">$V_{\text {out: }}$</span></p>
+                        <div class="equation">$$V_{\mathrm{out}}=-V_{\mathrm{in}} \cdot \frac{A_{O L} R_{\mathrm{f}}}{R_{\mathrm{f}}+R_{\mathrm{in}}+A_{O L} R_{\mathrm{in}}}$$</div>
+                        <p>If <span class="math-inline">$A_{O L \text { is very large, this simplifies to }}$</span></p>
+                        <div class="equation">$$V_{\text {out }} \approx-V_{\text {in }} \frac{R_{\mathrm{f}}}{R_{\text {in }}}$$</div>
+                        <p>A resistor is often inserted between the non-inverting input and ground (so both inputs "see" similar resistances), reducing the input offset voltage due to different voltage drops due to bias current, and may reduce distortion in some op-amps.</p>
+                        <p>A DC-blocking capacitor may be inserted in series with the input resistor when a frequency response down to DC is not needed and any DC voltage on the input is unwanted. That is, the capacitive component of the input impedance inserts a DC zero and a low-frequency pole that gives the circuit a bandpass or high-pass characteristic.</p>
+                        <p>The potentials at the operational amplifier inputs remain virtually constant (near ground) in the inverting configuration. The constant operating potential typically results in distortion levels that are lower than those attainable with the non-inverting topology.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-section-4-4-open-loop-config -->
+
+                <!-- START: chapter-4-section-4-5-feedback-configurations-blocks -->
+                <section id="chapter-4-section-4-5-feedback-configurations-blocks" class="content-section" aria-labelledby="heading-chapter-4-section-4-5-feedback-configurations-blocks">
+                    <h2 id="heading-chapter-4-section-4-5-feedback-configurations-blocks" class="section-heading">
+                        <span class="heading-icon">🧱</span>
+                        <span class="heading-text">4.5 Draw the block representation of four feedback configurations.</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">•</span><span class="item-text">Voltage - series feedback</span></li>
+                           <li class="list-item"><span class="item-icon">•</span><span class="item-text">Voltage - shunt feedback</span></li>
+                           <li class="list-item"><span class="item-icon">•</span><span class="item-text">Current - series feedback</span></li>
+                           <li class="list-item"><span class="item-icon">•</span><span class="item-text">Current - shunt feedback</span></li>
+                        </ul>
+                        <div style="display: flex; flex-wrap: wrap; justify-content: space-around;">
+                            <figure style="text-align: center; margin: 10px; max-width: 45%;">
+                                <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-31-1.jpg" alt="Block diagram of Voltage series feedback." class="content-image" style="max-width:100%;">
+                                <figcaption>Voltage series feedback</figcaption>
+                            </figure>
+                            <figure style="text-align: center; margin: 10px; max-width: 45%;">
+                                <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-31-3.jpg" alt="Block diagram of Voltage shunt feedback." class="content-image" style="max-width:100%;">
+                                <figcaption>Voltage shunt feedback</figcaption>
+                            </figure>
+                            <figure style="text-align: center; margin: 10px; max-width: 45%;">
+                                <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-31-2.jpg" alt="Block diagram of Current series feedback." class="content-image" style="max-width:100%;">
+                                <figcaption>Current series feedback</figcaption>
+                            </figure>
+                            <figure style="text-align: center; margin: 10px; max-width: 45%;">
+                                <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-31-4.jpg" alt="Block diagram of Current shunt feedback." class="content-image" style="max-width:100%;">
+                                <figcaption>Current shunt feedback</figcaption>
+                            </figure>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: chapter-4-section-4-5-feedback-configurations-blocks -->
+                
+                <!-- START: chapter-4-section-4-6-voltage-series-feedback -->
+                <section id="chapter-4-section-4-6-voltage-series-feedback" class="content-section" aria-labelledby="heading-chapter-4-section-4-6-voltage-series-feedback">
+                    <h2 id="heading-chapter-4-section-4-6-voltage-series-feedback" class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">4.6 Draw the circuit diagram of the voltage series feedback amplifier and derive the close loop Voltage gain, gain of feedback circuits input resistance, and output resistance, bandwidth and total output offset voltage with feedback</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Voltage series feedback:</h3>
+                        <p>It is also called non-inverting voltage feedback circuit. With this type of feedback, the input signal drives the noninverting input of an amplifier; a fraction of the output voltage is then fed back to the inverting input. The op-amp is represented by its symbol including its large signal voltage gain <span class="math-inline">$\mathrm{A}_{d}$</span> or A , and the feedback circuit is composed of two resistors <span class="math-inline">$R_{1}$</span> and <span class="math-inline">$R_{f}$</span> as shown in fig. 5</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-31-5.jpg" alt="Circuit diagram for voltage series feedback amplifier (non-inverting configuration) showing op-amp Ad, input Vin, output Vo, feedback resistors Rf and R1, and load RL. This is labeled fig. 5." class="content-image">
+                        <p>Open loop vattage gain <span class="math-inline">$A_{d}=\frac{v_{a}}{v_{d}}$</span></p>
+                        <p>Closed loop woltage gain ACL <span class="math-inline">$=\frac{v_{o}}{v_{i n}}$</span></p>
+                        <p>Feedtack circuit gain <span class="math-inline">$\mathrm{B}=\frac{\mathrm{y}_{f}}{\mathrm{v}_{a}}$</span></p>
+                        <p>The differential voltage input <span class="math-inline">$v_{d}=v_{i n}-v_{f}$</span></p>
+                        <p>The feedback voltage always opposes the input voltage, (or is out of phase by <span class="math-inline">$180^{\circ}$</span> with respect to input voltage), hence the feedback is said to be negative.</p>
+                        <p>The closed loop voltage gain is given by</p>
+                        <div class="equation">$$\begin{aligned}
+                        & A \operatorname{CL}_{\mathrm{CL}}=\frac{\mathrm{v}_{\mathrm{a}}}{\mathrm{v}_{\mathrm{in}}} \\
+                        & v_{0}=A\left(v_{1}-v_{z}\right)=A\left(v_{i n}-v_{f}\right) \\
+                        & =A\left(v_{i n}-E v_{\infty}\right) \\
+                        & v_{0}\left(1+A D D=A v_{i n}\right. \\
+                        & \frac{v_{a}}{v_{i n}}=\frac{A}{1+A E}
+                        \end{aligned}$$</div>
+                        <p>The product <span class="math-inline">$A$</span> and <span class="math-inline">$B$</span> is called loop gain. The gain loop gain is very large such that <span class="math-inline">$A B \gg 1$</span></p>
+                        <div class="equation">$$\begin{aligned} \therefore \frac{w_{n}}{w_{i}} & =\frac{\sigma_{1}}{\omega_{1}}=\frac{1}{E_{1}} \\ & =\frac{F_{1}}{F_{1}} \\ & =1+\frac{F_{T}}{F_{1}}\end{aligned}$$</div>
+                        <p>This shows that overall voltage gain of the circuit equals the reciprocal of <span class="math-inline">$B$</span>, the feedback gain. It means that closed loop gain is no longer dependent on the gain of the op-amp, but depends on the feedback of the voltage divider. The feedback gain B can be precisely controlled and it is independent of the amplifier.</p>
+                        <p>Physically, what is happening in the circuit? The gain is approximately constant, even though differential voltage gain may change. Suppose A increases for some reasons (temperature change). Then the output voltage will try to increase. This means that more voltage is fedback to the inverting input, causing <span class="math-inline">$v_{d}$</span> voltage to decrease. This almost completely offset the attempted increases in output voltage.</p>
+                        <p>Similarly, if A decreases, The output voltage decreases. It reduces the feedback voltage <span class="math-inline">$\mathrm{v}_{\mathrm{f}}$</span> and hence, <span class="math-inline">$\mathrm{v}_{\mathrm{d}}$</span> voltage increases. Thus the output voltage increases almost to same level.</p>
+                        
+                        <h3 class="subsection-heading">Different Input voltage is ideally zero.</h3>
+                        <p>Again considering the voltage equation,</p>
+                        <div class="equation">$$v_{o}=A_{d} v_{d}$$</div>
+                        <p>or <span class="math-inline">$\quad v_{d}=v_{o} / A_{d}$</span></p>
+                        <p>Since <span class="math-inline">$A_{d}$</span> is very large (ideally infinite)</p>
+                        <div class="equation">$$\backslash v_{d} » 0 .$$</div>
+                        <p>and <span class="math-inline">$\mathrm{v}_{1}=\mathrm{v}_{2}$</span> (ideal).</p>
+                        <p>This says, that the voltage at non-inverting input terminal of an op-amp is approximately equal to that at the inverting input terminal provided that <span class="math-inline">$A_{d}$</span> is very large. This concept is useful in the analysis of closed loop OPAMP circuits. For example, ideal closed loop voltage again can be obtained using the results</p>
+                        <div class="equation">$$\begin{aligned}
+                        & \quad v_{1}=v_{\text {in }} \\
+                        & v_{2}=v_{f}=\frac{R_{1}}{R_{1}+R_{f}} v_{0} \\
+                        & \therefore v_{1}=v_{2} \\
+                        & \therefore v_{\text {in }}=\frac{R_{1}}{R_{1}+R_{f}} v_{0} \\
+                        & v_{o}=\left(1+\frac{R_{1}}{R_{f}}\right) v_{\text {in }}
+                        \end{aligned}$$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-4-section-4-6-voltage-series-feedback -->
+
+                <!-- START: chapter-4-section-4-7-voltage-shunt-feedback -->
+                <section id="chapter-4-section-4-7-voltage-shunt-feedback" class="content-section" aria-labelledby="heading-chapter-4-section-4-7-voltage-shunt-feedback">
+                    <h2 id="heading-chapter-4-section-4-7-voltage-shunt-feedback" class="section-heading">
+                        <span class="heading-icon">📉</span>
+                        <span class="heading-text">4.7 Draw the circuit diagram of the voltage shunt feedback amplifier and derive the close loop Voltage gain, gain of feedback circuits, and input resistance, and output resistance, bandwidth and total output offset voltage with feedback</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Voltage shunt Feedback:</h3>
+                        <p>Fig. 1, shows the voltage shunt feedback amplifier using OPAMP.</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-34-1.jpg" alt="Circuit diagram of a voltage shunt feedback amplifier (inverting amplifier). Shows op-amp Ad, input Vin through R1, feedback resistor Rf, load RL. Also shows an equivalent circuit with input current source." class="content-image">
+                        <p style="text-align:center;">Fig. 1</p>
+                        <p>The input voltage drives the inverting terminal, and the amplified as well as inverted output signal is also applied to the inverting input via the feedback resistor <span class="math-inline">$\mathrm{R}_{\mathrm{f}}$</span>. This arrangement forms a negative feedback because any increase in the output signal results in a feedback signal into the inverting input signal causing a decrease in the output signal. The non-inverting terminal is grounded. Resistor <span class="math-inline">$\mathrm{R}_{1}$</span> is connected in series with the source.</p>
+                        <p>The closed loop voltage gain can be obtained by, writing Kirchoff's current equation at the input node <span class="math-inline">$\mathrm{V}_{2}$</span>.</p>
+                        <div class="equation">$$i_{1}=i_{f}+i_{B}$$</div>
+                        <p>The closed loop volt since <span class="math-inline">$R_{1}$</span> is very large, the input current <span class="math-inline">$i_{B}$</span> is negligibly small.</p>
+                        <div class="equation">$$\begin{aligned}
+                        \therefore i_{1} & =i_{f} \\
+                        \frac{v_{\text {in }}-v_{2}}{R_{1}} & =\frac{v_{2}-v_{0}}{R_{f}} \\
+                        \text { and }\left(v_{1}-v_{2}\right) & =\frac{v_{0}}{A} \\
+                        v_{2} & =-\frac{v_{0}}{A}\left(\text { because } v_{1}=0\right) \\
+                        \therefore \frac{v_{\text {in }}+v_{0} / A}{R_{1}} & =\frac{\left(v_{0} / A\right)-v_{0}}{R_{f}} \\
+                        A_{f}=\frac{v_{0}}{v_{\text {in }}} & =\frac{R_{f} A}{R_{1}+R_{f}+A R_{1}}
+                        \end{aligned}$$</div>
+                        <p>Since <span class="math-inline">$A$</span> is veryvery high therefore, <span class="math-inline">$A R_{1} \gg\left(R_{1}+R_{t}\right)$</span></p>
+                        <div class="equation">$$\begin{aligned}
+                        \therefore A_{f} & =-\frac{R_{f}}{R} \\
+                        & =-\frac{1}{B}
+                        \end{aligned}$$</div>
+                        <p>Since, <span class="math-inline">$B=\left(R_{1} / R_{f}\right)$</span></p>
+                        
+                        <h3 class="subsection-heading">Input Resistance with Feedback:</h3>
+                        <p>To find the input resistance Miller equivalent of the feedback resistor <span class="math-inline">$R_{f}$</span>, is obtained, i.e. <span class="math-inline">$R_{f}$</span> is splitted into its two Miller components as shown in fig. 2. Therefore, input resistance with feedback <span class="math-inline">$\mathrm{R}_{\text {if }}$</span> is then</p>
+                        <div class="equation">$$R_{\text {if }}=R_{1}+\left(\frac{R_{i f}}{1+A}\right)$$</div>
+                        <p>Since <span class="math-inline">$R$</span> and <span class="math-inline">$A$</span> are very large, Therefore,</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-35-1.jpg" alt="Miller equivalent circuit for calculating input resistance of voltage shunt feedback amplifier. Shows Rin, Rf/(1+A), and op-amp. This is labeled Fig. 2." class="content-image">
+                        <p style="text-align:center;">Fig. 2</p>
+                        <p><span class="math-inline">$\left(\frac{R_{f}}{1+A}\right) \| R_{i} \approx 00 \mathrm{hm}$</span></p>
+                        <p>Hence <span class="math-inline">$R_{i f}=R_{i}$</span></p>
+                        
+                        <h3 class="subsection-heading">Output Resistance with Feedback:</h3>
+                        <p>The output resistance with feedback <span class="math-inline">$\mathrm{Rof}_{\text {of }}$</span> is the resistance measured at the output terminal of the feedback amplifier. The output resistance can be obtained using Thevenin's equivalent circuit,shown in fig. 3.</p>
+                        <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">📝</span> Note</h4>
+                           <p>Figure 3, referenced in the MMD for deriving output resistance, was not provided in the MMD image links. The derivation below refers to this missing figure.</p>
+                         </aside>
+                        <div class="equation">$$i_{0}=i_{a}+i_{b}$$</div>
+                        <p>Since <span class="math-inline">$R_{0}$</span> is very small as compared to <span class="math-inline">$R_{f}+\left(R_{1}| | R_{2}\right)$</span></p>
+                        <p>Therefore, i.e. <span class="math-inline">$i_{0}=i_{a}$</span></p>
+                        <div class="equation">$$v_{o}=R_{o} i_{0}+A v_{d}.$$</div>
+                        <div class="equation">$$\mathrm{v}_{\mathrm{d}}=\mathrm{v}_{\mathrm{i}}-\mathrm{v}_{2}=0-\mathrm{B} \mathrm{v}_{\mathrm{o}}$$</div>
+                        <div class="equation">$$i_{0}=\frac{v_{0}-A v_{d}}{R_{0}}$$</div>
+                        <div class="equation">$$=\frac{v_{0}-A B v_{0}}{R_{0}}$$</div>
+                        <div class="equation">$$R_{0f}=\frac{\nu_{0}}{i_{0}}=\frac{R_{0}}{1+A B}$$</div>
+                        <p>where, <span class="math-inline">$B=R_{1} / R_{f}$</span></p>
+                        <p>Similarly, the bandwidth increases by (1+AB) and total output offset voltage reduces by (1+AB).</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-section-4-7-voltage-shunt-feedback -->
+
+            </main>
+
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-3-introduction-to-op-amp.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 57%;"></div>
+                        </div>
+                        <span class="progress-text">Chapter 4 of 7</span>
+                    </div>
+                    <a href="chapter-5-application-of-operational-amplifier-and-timer-circuits.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
