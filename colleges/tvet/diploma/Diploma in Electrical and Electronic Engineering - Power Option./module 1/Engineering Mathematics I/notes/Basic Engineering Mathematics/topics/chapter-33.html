@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 33 Probability</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-32.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-1-title-c33">
+                            <h4 id="problem-1-title-c33" class="callout-title"><span class="callout-icon">💡</span> Problem 1. Determine the probabilities of selecting at random (a) a man and (b) a woman from a crowd containing 20 men and 33 women</h4>
+                             <div class="callout-content">
+                                <ul class="enhanced-list">
+                                    <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">The probability of selecting at random a man, $p$, is given by the ratio $\frac{\text{number of men}}{\text{number in crowd}}$<br>i.e. $\quad p=\frac{20}{20+33}=\frac{\mathbf{20}}{\mathbf{53}}$ or $\mathbf{0.3774}$</span></li>
+                                    <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">The probability of selecting at random a woman, $q$, is given by the ratio $\frac{\text{number of women}}{\text{number in crowd}}$<br>i.e. $\quad q=\frac{33}{20+33}=\frac{\mathbf{33}}{\mathbf{53}}$ or $\mathbf{0.6226}$<br>(Check: the total probability should be equal to 1:<br>$p=\frac{20}{53}$ and $q=\frac{33}{53}$, thus the total probability, $p+q=\frac{20}{53}+\frac{33}{53}=1$<br>hence no obvious error has been made.)</span></li>
+                                </ul>
+                             </div>
+                         </aside>
+
+                        <h3 class="subsubsection-heading">33.1.2 Expectation</h3>
+                        <p>The expectation, $E$, of an event happening is defined in general terms as the product of the probability $p$ of an event happening and the number of attempts made, $n$; i.e., $\boldsymbol{E}=\boldsymbol{p n}$.</p>
+                        <p>Thus, since the probability of obtaining a 3 upwards when rolling a fair dice is $1/6$, the expectation of getting a 3 upwards on four throws of the dice is $\frac{1}{6} \times 4, \text{ i.e. } \frac{2}{3}$</p>
+                        <p>Thus expectation is the average occurrence of an event.</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-2-title-c33">
+                            <h4 id="problem-2-title-c33" class="callout-title"><span class="callout-icon">💡</span> Problem 2. Find the expectation of obtaining a 4 upwards with 3 throws of a fair dice</h4>
+                             <div class="callout-content">
+                                <p>Expectation is the average occurrence of an event and is defined as the probability times the number of attempts. The probability, $p$, of obtaining a 4 upwards for one throw of the dice is $1/6$.</p>
+                                <p>If 3 attempts are made, $n=3$ and the expectation, $E$, is $pn$, i.e.</p>
+                                <div class="equation">$$\boldsymbol{E}=\frac{1}{6} \times 3=\frac{1}{2} \quad \text{ or } \mathbf{0.50}$$</div>
+                             </div>
+                         </aside>
+
+                        <h3 class="subsubsection-heading">33.1.3 Dependent events</h3>
+                        <p>A dependent event is one in which the probability of an event happening affects the probability of another ever happening. Let 5 transistors be taken at random from a batch of 100 transistors for test purposes and the probability of there being a defective transistor, $p_{1}$, be determined. At some later time, let another 5 transistors be taken at random from the 95 remaining transistors in the batch and the probability of there being a defective transistor, $p_{2}$, be determined. The value of $p_{2}$ is different from $p_{1}$ since the batch size has effectively altered from 100 to 95; i.e., probability $p_{2}$ is dependent on probability $p_{1}$. Since transistors are drawn and then another 5 transistors are drawn without replacing the first 5, the second random selection is said to be without replacement.</p>
+
+                        <h3 class="subsubsection-heading">33.1.4 Independent events</h3>
+                        <p>An independent event is one in which the probability of an event happening does not affect the probability of another event happening. If 5 transistors are taken at random from a batch of transistors and the probability of a defective transistor, $p_{1}$, is determined and the process is repeated after the original 5 have been replaced in the batch to give $p_{2}$, then $p_{1}$ is equal<!-- Chunk 46 in content sequence, Total 55 content chunks -->
+                            <div class="progress-fill" style="width: calc((46 / 55) * 100%);"></div>
+                        </div>
+                         <span class="progress-text">Chunk 46 of 55</span>
+                        <span class="progress-text">Chapter 33 of 35</span>
+                    </div>
+                    <a href="revision-test-13.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Probability</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-33-introduction-probability -->
+                <section id="chapter-33-introduction-probability" class="content-section" aria-labelledby="chapter-33-introduction-probability-heading">
+                    <h2 id="chapter-33-introduction-probability-heading" class="section-heading">
+                        <span class="heading-icon">🎲</span>
+                        <span class="heading-text">33.1 Introduction to probability</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsubsection-heading">33.1.1 Probability</h3>
+                        <p>The probability of something happening is the likelihood or chance of it happening. Values of probability lie between 0 and 1, where 0 represents an absolute impossibility and 1 represents an absolute certainty. The probability of an event happening usually lies somewhere between these two extreme values and is expressed as either a proper or decimal fraction. Examples of probability are</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span> <span class="item-text">that a length of copper wire has zero resistance at $100^{\circ}\mathrm{C}$    0</span></li>
+                            <li class="list-item"><span class="item-icon">•</span> <span class="item-text">that a fair, six-sided dice will stop with a 3 upwards    $\frac{1}{6}$ or 0.1667</span></li>
+                            <li class="list-item"><span class="item-icon">•</span> <span class="item-text">that a fair coin will land with a head upwards    $\frac{1}{2}$ or 0.5</span></li>
+                            <li class="list-item"><span class="item-icon">•</span> <span class="item-text">that a length of copper wire has some resistance at $100^{\circ}\mathrm{C}$    1</span></li>
+                        </ul>
+                        <p>If $p$ is the probability of an event happening and $q$ is the probability of the same event not happening, then the total probability is $p+q$ and is equal to unity, since it is an absolute certainty that the event either will or will not occur; i.e., $\boldsymbol{p}+\boldsymbol{q}=\mathbf{1}$.</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-1-title-c33">
+                            <h4 id="problem-1-title-c33" class="callout-title"><span class="callout-icon">💡</span> Problem 1. Determine the probabilities of selecting at random (a) a man and (b) a woman from a crowd containing 20 men and 33 women</h4>
+                             <div class="callout-content">
+                                <ul class="enhanced-list">
+                                    <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">The probability of selecting at random a man, $p$, is given by the ratio $\frac{\text{number of men}}{\text{number in crowd}}$<br>i.e. $\quad p=\frac{20}{20+33}=\frac{\mathbf{20}}{\mathbf{53}}$ or $\mathbf{0.3774}$</span></li>
+                                    <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">The probability of selecting at random a woman, $q$, is given by the ratio $\frac{\text{number of women}}{\text{number in crowd}}$<br>i.e. $\quad q=\frac{33}{20+33}=\frac{\mathbf{33}}{\mathbf{53}}$ or $\mathbf{0.6226}$</span></li>
+                                </ul>
+                                <p>(Check: the total probability should be equal to 1: $p=\frac{20}{53}$ and $q=\frac{33}{53}$, thus the total probability, $p+q=\frac{20}{53}+\frac{33}{53}=1$ hence no obvious error has been made.)</p>
+                             </div>
+                         </aside>
+
+                        <h3 class="subsubsection-heading">33.1.2 Expectation</h3>
+                        <p>The expectation, $E$, of an event happening is defined in general terms as the product of the probability $p$ of an event happening and the number of attempts made, $n$; i.e., $\boldsymbol{E}=\boldsymbol{p n}$.</p>
+                        <p>Thus, since the probability of obtaining a 3 upwards when rolling a fair dice is 1/6, the expectation of getting a 3 upwards on four throws of the dice is $\frac{1}{6} \times 4, \text{ i.e. } \frac{2}{3}$</p>
+                        <p>Thus expectation is the average occurrence of an event.</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-2-title-c33">
+                            <h4 id="problem-2-title-c33" class="callout-title"><span class="callout-icon">💡</span> Problem 2. Find the expectation of obtaining a 4 upwards with 3 throws of a fair dice</h4>
+                             <div class="callout-content">
+                                <p>Expectation is the average occurrence of an event and is defined as the probability times the number of attempts. The probability, $p$, of obtaining a 4 upwards for one throw of the dice is 1/6.</p>
+                                <p>If 3 attempts are made, $n=3$ and the expectation, $E$, is $pn$, i.e. $\boldsymbol{E}=\frac{1}{6} \times 3=\frac{1}{2} \quad \text{ or } \mathbf{0.50}$</p>
+                             </div>
+                         </aside>
+
+                        <h3 class="subsubsection-heading">33.1.3 Dependent events</h3>
+                        <p>A dependent event is one in which the probability of an event happening affects the probability of another ever happening. Let 5 transistors be taken at random from a batch of 100 transistors for test purposes and the probability of there being a defective transistor, $p_{1}$, be determined. At some later time, let another 5 transistors be taken at random from the 95 remaining transistors in the batch and the probability of there being a defective transistor, $p_{2}$, be determined. The value of $p_{2}$ is different from $p_{1}$ since the batch size has effectively altered from 100 to 95; i.e., probability $p_{2}$ is dependent on probability $p_{1}$. Since transistors are drawn and then another 5 transistors are drawn without replacing the first 5, the second random selection is said to be without replacement.</p>
+
+                        <h3 class="subsubsection-heading">33.1.4 Independent events</h3>
+                        <p>An independent event is one in which the probability of an event happening does not affect the probability of another event happening. If 5 transistors are taken at random from a batch of transistors and the probability of a defective transistor, $p_{1}$, is determined and the process is repeated after the original 5 have been replaced in the batch to give $p_{2}$, then $p_{1}$ is equal to $p_{2}$. Since the 5 transistors are replaced between draws, the second selection is said to be with replacement.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-33-introduction-probability -->
+
+                 <!-- START: chapter-33-laws-of-probability -->
+                <section id="chapter-33-laws-of-probability" class="content-section" aria-labelledby="chapter-33-laws-of-probability-heading">
+                     <h2 id="chapter-33-laws-of-probability-heading" class="section-heading">
+                        <span class="heading-icon">📜</span>
+                        <span class="heading-text">33.2 Laws of probability</span>
+                    </h2>
+                     <div class="content-card">
+                        <h3 class="subsubsection-heading">33.2.1 The addition law of probability</h3>
+                        <p>The addition law of probability is recognized by the word 'or' joining the probabilities.</p>
+                        <p>If $p_{A}$ is the probability of event A happening and $p_{B}$ is the probability of event B happening, the probability of event <strong>A or event B</strong> happening is given by $p_{A}+p_{B}$.</p>
+                        <p>Similarly, the probability of events <strong>A or B or C or ... N</strong> happening is given by $p_{A}+p_{B}+p_{C}+\cdots+p_{N}$</p>
+
+                        <h3 class="subsubsection-heading">33.2.2 The multiplication law of probability</h3>
+                        <p>The multiplication law of probability is recognized by the word 'and' joining the probabilities.</p>
+                        <p>If $p_{A}$ is the probability of event A happening and $p_{B}$ is the probability of event B happening, the probability of event <strong>A and event B</strong> happening is given by $p_{A} \times p_{B}$. Similarly, the probability of events <strong>A and B and C and ... N</strong> happening is given by $p_{A} \times p_{B} \times p_{C} \times to $p_{2}$. Since the 5 transistors are replaced between draws, the second selection is said to be with replacement.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-33-introduction-to-probability -->
+
+                 <!-- START: chapter-33-laws-of-probability -->
+                <section id="chapter-33-laws-of-probability" class="content-section" aria-labelledby="chapter-33-laws-of-probability-heading">
+                     <h2 id="chapter-33-laws-of-probability-heading" class="section-heading">
+                        <span class="heading-icon">📜</span>
+                        <span class="heading-text">33.2 Laws of probability</span>
+                    </h2>
+                     <div class="content-card">
+                        <h3 class="subsubsection-heading">33.2.1 The addition law of probability</h3>
+                        <p>The addition law of probability is recognized by the word 'or' joining the probabilities.</p>
+                        <p>If $p_{A}$ is the probability of event A happening and $p_{B}$ is the probability of event B happening, the probability of event <strong>A or event B</strong> happening is given by $p_{A}+p_{B}$.</p>
+                        <p>Similarly, the probability of events <strong>A or B or C or ... N</strong> happening is given by</p>
+                        <div class="equation">$$p_{A}+p_{B}+p_{C}+\cdots+p_{N}$$</div>
+
+                        <h3 class="subsubsection-heading">33.2.2 The multiplication law of probability</h3>
+                        <p>The multiplication law of probability is recognized by the word 'and' joining the probabilities.</p>
+                        <p>If $p_{A}$ is the probability of event A happening and $p_{B}$ is the probability of event B happening, the probability of event <strong>A and event B</strong> happening is given by $p_{A} \times p_{B}$.</p>
+                        <p>Similarly, the probability of events <strong>A and B and C and ... N</strong> happening is given by</p>
+                        <div class="equation">$$p_{A} \times p_{B} \times p_{C} \times \ldots \times p_{N}$$</div>
+                        <p>Here are some worked problems to demonstrate probability.</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-3-title-c33-2">
+                            <h4 id="problem-3-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 3. Calculate the probabilities of selecting at random<br>(a) the winning horse in a race in which 10 horses are running and<br>(b) the winning horses in both the first and second races if there are 10 horses in each race</h4>
+                             <div class="callout-content">
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">Since only one of the ten horses can win, the probability of selecting at random the winning horse is $\frac{\text{number of winners}}{\text{number of horses}}$, i.e. $\frac{\mathbf{1}}{\mathbf{10}}$ or $\mathbf{0.10}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">The probability of selecting the winning horse in the first race is $\frac{1}{10}$<br>The probability of selecting the winning horse in the second race is $\frac{1}{10}$<br>The probability of selecting the winning horses in the first and second race is given by the multiplication law of probability; i.e., probability $=\frac{1}{10} \times \frac{1}{10}=\frac{\mathbf{1}}{\mathbf{100}} \quad \text{ or } \quad \mathbf{0.01}$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-4-title-c33-2">
+                            <h4 id="problem-4-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 4. The probability of a component failing in one year due to excessive temperature is $1/20$, that due to excessive vibration is $1/25$ and that due to excessive humidity is $1/50$. Determine the probabilities that during a one-year period a component<br>(a) fails due to excessive temperature and excessive vibration,<br>(b) fails due to excessive vibration or excessive humidity,<br>(c) will not fail because of both excessive temperature and excessive humidity</h4>
+                             <div class="callout-content">
+                                <p>Let $p_{A}$ be the probability of failure due to excessive temperature, then $p_{A}=\frac{1}{20} \quad$ and $\quad \overline{p_{A}}=\frac{19}{20}$ (where $\overline{p_{A}}$ is the probability of not failing)</p>
+                                <p>Let $p_{B}$ be the probability of failure due to excessive vibration, then $p_{B}=\frac{1}{25} \quad$ and $\quad \overline{p_{B}}=\frac{24}{25}$</p>
+                                <p>Let $p_{C}$ be the probability of failure due to excessive humidity, then $p_{C}=\frac{1}{50} \quad$ and $\quad \overline{p_{C}}=\frac{49}{50}$</p>
+                                <ul class="enhanced-list">
+                                    <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">The probability of a component failing due to excessive temperature and excessive vibration is given by $p_{A} \times p_{B}=\frac{1}{20} \times \frac{1}{25}=\frac{\mathbf{1}}{\mathbf{500}} \quad$ or $\quad \mathbf{0.002}$</span></li>
+                                    <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">The probability of a component failing due to excessive vibration or excessive humidity is $p_{B}+p_{C}=\frac{1}{25}+\frac{1}{50}=\frac{\mathbf{3}}{\mathbf{50}} \quad$ or $\quad \mathbf{0.06}$</span></li>
+                                    <li class="list-item"><span class="item-icon">(c)</span> <span class="item-text">The probability that a component will not fail due excessive temperature and will not fail due to excess humidity is $\overline{p_{A}} \times \overline{p_{C}}=\frac{19}{20} \times \frac{49}{50}=\frac{\mathbf{931}}{\mathbf{1000}} \quad \text{ or } \quad \mathbf{0.931}$</span></li>
+                                </ul>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-5-title-c33-2">
+                            <h4 id="problem-5-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 5. A batch of 100 capacitors contains 73 which are within the required tolerance values and 17 which are below the required tolerance values, the remainder being above the required tolerance values. Determine the probabilities that, when randomly selecting a capacitor and then a second capacitor,<br>(a) both are within the required tolerance values when selecting with replacement,<br>(b) the first one drawn is below and the second one drawn is above the required tolerance value, when selection is without replacement</h4>
+                             <div class="callout-content">
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">The probability of selecting a capacitor within the required tolerance values is $73/100$. The first capacitor drawn is now replaced and a second one is drawn from the batch of 100 . The probability of this capacitor being within the required tolerance values is also $73/100$. Thus, the probability of selecting a capacitor within the required tolerance values for both the first and the second draw is $\frac{73}{100} \times \frac{73}{100}=\frac{\mathbf{5329}}{\mathbf{10000}} \quad$ or $\quad \mathbf{0.5329}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">The probability of obtaining a capacitor below the required tolerance values on the first draw is $17/100$. There are now only 99 capacitors left in the batch, since the first capacitor is not replaced. The probability of drawing a capacitor above the required tolerance values on the second draw is $10/99$, since there are $(100-73-17)$, i.e. 10, capacitors above the required tolerance value. Thus, the probability of randomly selecting a capacitor below the required tolerance values and subsequently randomly selecting a capacitor above the tolerance values is $\frac{17}{100} \times \frac{10}{99}=\frac{170}{9900}=\frac{\mathbf{17}}{\mathbf{990}} \quad$ or $\quad \mathbf{0.0172}$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <div class="practice-exercise">
+                            <h3 class="subsection-heading">Now try the following Practice Exercise</h3>
+                             <aside class="callout note" role="note">
+                                <h4 class="callout-title">Practice Exercise 129 Laws of probability (answers on page 354)</h4>
+                                <div class="callout-content">
+                                     <ol class="enhanced-list">
+                                        <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">In a batch of 45 lamps 10 are faulty. If one lamp is drawn at random, find the probability of it being (a) faulty (b) satisfactory.</span></li>
+                                        <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">A box of fuses are all of the same shape and size and comprises 23 2 A fuses, 47 5 A fuses and 69 13 A fuses. Determine the probability of selecting at random (a) a 2 A fuse (b) a 5 A fuse (c) a 13 A fuse.</span></li>
+                                        <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">(a) Find the probability of having a 2 upwards when throwing a fair 6-sided dice.<br>(b) Find the probability of having a 5 upwards when throwing a fair 6-sided dice.<br>(c) Determine the probability of having a 2 and then a 5 on two successive throws of a fair 6-sided dice.</span></li>
+                                        <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">Determine the probability that the total score is 8 when two like dice are thrown.</span></li>
+                                        <li class="list-item"><span class="item-icon">5.</span> <span class="item-text">The probability of event A happening is $\frac{3}{5}$ and the probability of event B happening is $\frac{2}{3}$. Calculate the probabilities of<br>(a) both A and B happening.<br>(b) only event A happening, i.e. event A happening and event B not happening.<br>(c) only event B happening.<br>(d) either A, or B, or A and B happening.</span></li>
+                                        <li class="list-item"><span class="item-icon">6.</span> <span class="item-text">When testing 1000 soldered joints, 4 failed during a vibration test and 5 failed due to having a high resistance. Determine the probability of a joint failing due to<br>(a) vibration.<br>(b) high resistance.<br>(c) vibration or high resistance.<br>(d) vibration and high resistance.</span></li>
+                                     </ol>
+                                     <p>Here are some further worked problems on probability.</p>
+                                </div>
+                            </aside>
+                         </div>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-6-title-c33-3">
+                            <h4 id="problem-6-title-c33-3" class="callout-title"><span class="callout-icon">💡</span> Problem 6. A batch of 40 components contains 5 which are defective. A component is drawn at random from the batch and tested and then a second component is drawn. Determine the probability that neither of the components is defective when drawn (a) with replacement and (b) without replacement</h4>
+                             < \ldots \times p_{N}$</p>
+                        <p>Here are some worked problems to demonstrate probability.</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-3-title-c33-2">
+                            <h4 id="problem-3-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 3. Calculate the probabilities of selecting at random<br>(a) the winning horse in a race in which 10 horses are running and<br>(b) the winning horses in both the first and second races if there are 10 horses in each race</h4>
+                             <div class="callout-content">
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">Since only one of the ten horses can win, the probability of selecting at random the winning horse is $\frac{\text{number of winners}}{\text{number of horses}}$, i.e. $\frac{\mathbf{1}}{\mathbf{10}}$ or $\mathbf{0.10}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">The probability of selecting the winning horse in the first race is $\frac{1}{10}$<br>The probability of selecting the winning horse in the second race is $\frac{1}{10}$<br>The probability of selecting the winning horses in the first and second race is given by the multiplication law of probability; i.e., probability $=\frac{1}{10} \times \frac{1}{10}=\frac{\mathbf{1}}{\mathbf{100}} \quad$ or $\quad \mathbf{0.01}$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-4-title-c33-2">
+                            <h4 id="problem-4-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 4. The probability of a component failing in one year due to excessive temperature is $1/20$, that due to excessive vibration is $1/25$ and that due to excessive humidity is $1/50$. Determine the probabilities that during a one-year period a component<br>(a) fails due to excessive temperature and excessive vibration,<br>(b) fails due to excessive vibration or excessive humidity,<br>(c) will not fail because of both excessive temperature and excessive humidity</h4>
+                             <div class="callout-content">
+                                <p>Let $p_{A}$ be the probability of failure due to excessive temperature, then $p_{A}=\frac{1}{20} \quad$ and $\quad \overline{p_{A}}=\frac{19}{20}$ (where $\overline{p_{A}}$ is the probability of not failing)</p>
+                                <p>Let $p_{B}$ be the probability of failure due to excessive vibration, then $p_{B}=\frac{1}{25} \quad$ and $\quad \overline{p_{B}}=\frac{24}{25}$</p>
+                                <p>Let $p_{C}$ be the probability of failure due to excessive humidity, then $p_{C}=\frac{1}{50} \quad$ and $\quad \overline{p_{C}}=\frac{49}{50}$</p>
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">The probability of a component failing due to excessive temperature and excessive vibration is given by $p_{A} \times p_{B}=\frac{1}{20} \times \frac{1}{25}=\frac{\mathbf{1}}{\mathbf{500}} \quad$ or $\quad \mathbf{0.002}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">The probability of a component failing due to excessive vibration or excessive humidity is $p_{B}+p_{C}=\frac{1}{25}+\frac{1}{50}=\frac{\mathbf{3}}{\mathbf{50}} \quad$ or $\quad \mathbf{0.06}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(c)</span> <span class="item-text">The probability that a component will not fail due excessive temperature and will not fail due to excess humidity is $\overline{p_{A}} \times \overline{p_{C}}=\frac{19}{20} \times \frac{49}{50}=\frac{\mathbf{931}}{\mathbf{1000}} \quad$ or $\quad \mathbf{0.931}$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-5-title-c33-2">
+                            <h4 id="problem-5-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 5. A batch of 100 capacitors contains 73 which are within the required tolerance values and 17 which are below the required tolerance values, the remainder being above the required tolerance values. Determine the probabilities that, when randomly selecting a capacitor and then a second capacitor,<br>(a) both are within the required tolerance values when selecting with replacement,<br>(b) the first one drawn is below and the second one drawn is above the required tolerance value, when selection is without replacement</h4>
+                             <div class="callout-content">
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">The probability of selecting a capacitor within the required tolerance values is $73/100$. The first capacitor drawn is now replaced and a second one is drawn from the batch of 100. The probability of this capacitor being within the required tolerance values is also $73/100$. Thus, the probability of selecting a capacitor within the required tolerance values for both the first and the second draw is $\frac{73}{100} \times \frac{73}{100}=\frac{\mathbf{5329}}{\mathbf{10000}} \quad$ or $\quad \mathbf{0.5329}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">The probability of obtaining a capacitor below the required tolerance values on the first draw is $17/100$. There are now only 99 capacitors left in the batch, since the first capacitor is not replaced. The probability of drawing a capacitor above the required tolerance values on the second draw is $10/99$, since there are $(100-73-17)$, i.e. 10, capacitors above the required tolerance value. Thus, the probability of randomly selecting a capacitor below the required tolerance values and subsequently randomly selecting a capacitor above the tolerance values is $\frac{17}{100} \times \frac{10}{99}=\frac{170}{9900}=\frac{\mathbf{17}}{\mathbf{990}} \quad$ or $\quad \mathbf{0.0172}$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <div class="practice-exercise">
+                            <h3 class="subsection-heading">Now try the following Practice Exercise</h3>
+                            <aside class="callout note" role="note">
+                                <h4 class="callout-title">Practice Exercise 129 Laws of probability (answers on page 354)</h4>
+                                <div class="callout-content">
+                                     <ol class="enhanced-list">
+                                        <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">In a batch of 45 lamps 10 are faulty. If one lamp is drawn at random, find the probability of it being (a) faulty (b) satisfactory.</span></li>
+                                        <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">A box of fuses are all of the same shape and size and comprises 23 2A fuses, 47 5A fuses and 69 13A fuses. Determine the probability of selecting at random (a) a 2A fuse (b) a 5A fuse (c) a 13A fuse.</span></li>
+                                        <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">(a) Find the probability of having a 2 upwards when throwing a fair 6-sided dice.<br>(b) Find the probability of having a 5 upwards when throwing a fair 6-sided dice.<br>(c) Determine the probability of having a 2 and then a 5 on two successive throws of a fair 6-sided dice.</span></li>
+                                        <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">Determine the probability that the total score is 8 when two like dice are thrown.</span></li>
+                                        <li class="list-item"><span class="item-icon">5.</span> <span class="item-text">The probability of event A happening is $\frac{3}{5}$ and the probability of event B happening is $\frac{2}{3}$. Calculate the probabilities of<br>(a) both A and B happening.<br>(b) only event A happening, i.e. event A happening and event B not happening.<br>(c) only event B happening.<br>(d) either A, or B, or A and B happening.</span></li>
+                                        <li class="list-item"><span class="item-icon">6.</span> <span class="item-text">When testing 1000 soldered joints, 4 failed during a vibration test and 5 failed due to having a high resistance. Determine the probability of a joint failing due to<br>(a) vibration.<br>(b) high resistance.<br>(c) vibration or high resistance.<br>(d) vibration and high resistance.</span></li>
+                                     </ol>
+                                </div>
+                            </aside>
+                         </div>
+
+                        <p>Here are some further worked problems on probability.</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-6-title-c33-2">
+                            <h4 id="problem-6-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 6. A batch of 40 components contains 5 which are defective. A component is drawn at random from the batch and tested and then a second component is drawn. Determine the probability that neither of the components is defective when drawn (a) with replacement and (b) without replacement</h4>
+                             <div class="callout-content">
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text"><strong>With replacement</strong><br>The probability that the component selected on the first draw is satisfactory is $35/40$ i.e. $7/8$. The component is now replaced and a second draw is made. The probability that this component is also satisfactory is $7/8$. Hence, the probability that both the first component drawn and the second component drawn are satisfactory is<br>$$\frac{7}{8} \times \frac{7}{8}=\frac{\mathbf{49}}{\mathbf{64}} \quad \text{ or } \quad \mathbf{0 . 7 6 5 6}$$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text"><strong>Without replacement</strong><br>The probability that the first component drawn is satisfactory is $7/8$. There are now only 34 satisfactory components left in the batch and the batch number is 39. Hence, the probability of drawing a satisfactory component on the second draw is $34/39$. Thus, the probability that the first component drawn and the second component drawn are satisfactory i.e., neither is defective is<br>$$\frac{7}{8} \times \frac{34}{39}=\frac{\mathbf{238}}{\mathbf{312}} \quad \text{ or } \quad \mathbf{0 . 7 6 2 8}$$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-7-title-c33-2">
+                            <h4 id="problem-7-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 7. A batch of 40 components contains 5 which are defective. If a component is drawn at random from the batch and tested and then a second component is drawn at random, calculate the probability of having one defective component, both (a) with replacement and (b) without replacement</h4>
+                             <div class="callout-content">
+                                <p>The probability of having one defective component can be achieved in two ways. If $p$ is the probability of drawing a defective component and $q$ is the probability of drawing a satisfactory component, then the probability of having one defective component is given by drawing a satisfactory component and then a defective component or by drawing a defective component and then a satisfactory one; i.e., by $q \times p+p \times q$.</p>
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text"><strong>With replacement</strong><br>$p=\frac{5}{40}=\frac{1}{8} \quad$ and $\quad q=\frac{35}{40}=\frac{7}{8}$<br>Hence, the probability of having one defective component is<br>$$\frac{1}{8} \times \frac{7}{8}+\frac{7}{8} \times \frac{1}{8}$$<br>i.e. $\quad \frac{7}{64}+\frac{7}{64}=\frac{\mathbf{7}}{\mathbf{32}} \quad$ or $\quad \mathbf{0 . 2 1 8 8}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text"><strong>Without replacement</strong><br>$p_{1}=\frac{1}{8}$ and $q_{1}=\frac{7}{8}$ on the first of the two draws<br>The batch number is now 39 for the second draw, thus,<br>$$p_{2}=\frac{5}{39} \text{ and } q_{2}=\frac{35}{39}$$<br>$$\begin{aligned} p_{1}q_{2}+q_{1}p_{2} &= \frac{1}{8} \times \frac{35}{39}+\frac{7}{8} \times \frac{5}{39} \\ &= \frac{35+35}{312} \\ &= \frac{\mathbf{70}}{\mathbf{312}} \text{ or } \mathbf{0.2244}\end{aligned}$$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-8-title-c33-2">
+                            <h4 id="problem-8-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 8. A box contains 74 brass washers, 86 steel washers and 40 aluminium washers. Three washers are drawn at random from the box without replacement. Determine the probability that all three are steel washers</h4>
+                             <div class="callout-content">
+                                <p>Assume, for clarity of explanation, that a washer is drawn at random, then a second, then a third (although this assumption does not affect the results obtained). The total number of washers is $74+86+40, \quad$ i.e. $\quad 200$</p>
+                                <p>The probability of randomly selecting a steel washer on the first draw is $86/200$. There are now 85 steel washers in a batch of 199. The probability of randomly selecting a steel washer on the second draw is $85/199$. There are now 84 steel washers in a batch of 198. The probability of randomly selecting a steel washer on the third draw is $84/198$. Hence, the probability of selecting a steel washer on the first draw and the second draw and the third draw is</p>
+                                <div class="equation">$$\frac{86}{200} \times \frac{85}{199} \times \frac{84}{198}=\frac{614040}{7880400}=\mathbf{0 . 0 7 7 9}$$</div>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-9-title-c33-2">
+                            <h4 id="problem-9-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 9. For the box of washers given in Problem 8 above, determine the probability that there are no aluminium washers drawn when three washers are drawn at random from the box without replacement</h4>
+                             <div class="callout-content">
+                                <p>The probability of not drawing an aluminium washer on the first draw is $1-\left(\frac{40}{200}\right)$ i.e., $160/200$. There are now 199 washers in the batch of which 159 are not made of aluminium. Hence, the probability of not drawing an aluminium washer on the second draw is 159/199. Similarly, the probability of not drawing an aluminium washer on the third draw is $158/198$. Hence the probability of not drawing an aluminium washer on the first and second and third draws is</p>
+                                <div class="equation">$$\frac{160}{200} \times \frac{159}{199} \times \frac{158}{198}=\frac{4019520}{7880400}=\mathbf{0 . 5 1 0 1}$$</div>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-10-title-c33-2">
+                            <h4 id="problem-10-title-c33-2" class="callout-title"><span class="callout-icon">💡</span> Problem 10. For the box of washers in Problem 8 above, find the probability that there are two brass washers and either a steel or an aluminium washer when three are drawn at random, without replacement</h4>
+                             <div class="callout-content">
+                                <p>Two brass washers (A) and one steel washer (B) can be obtained in any of the following ways.</p>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead><tr><th>1st draw</th><th>2nd draw</th><th>3rd draw</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>A</td><td>A</td><td>B</td></tr>
+                                            <tr><td>A</td><td>B</td><td>A</td></tr>
+                                            <tr><td>B</td><td>A</td><td>A</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p>Two brass washers and one aluminium washer (C) can also be obtained in any of the following ways.</p>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead><tr><th>1st draw</th><th>2nd draw</th><th>3rd draw</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>A</td><td>A</td><td>C</td></tr>
+                                            <tr><td>A</td><td>C</td><td>A</td></tr>
+                                            <tr><td>C</td><td>A</td><td>A</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p>Thus, there are six possible ways of achieving the combinations specified. If A represents a brass washer, B a steel washer and C an aluminium washer, the combinations and their probabilities are as shown.</p>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead><tr><th>First</th><th>Second</th><th>Third</th><th>Probability</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>A</td><td>A</td><td>B</td><td>$\frac{74}{200} \times \frac{73}{199} \times \frac{86}{198}=0.0590$</td></tr>
+                                            <tr><td>A</td><td>B</td><td>A</td><td>$\frac{74}{200} \times \frac{86}{199} \times \frac{73}{198}=0.0590$</td></tr>
+                                            <tr><td>B</td><td>A</td><td>A</td><td>$\frac{86}{200} \times \frac{74}{199} \times \frac{73}{198}=0.0590$</td></tr>
+                                            <tr><td>A</td><td>A</td><td>C</td><td>$\frac{74}{200} \times \frac{73}{199} \times \frac{40}{198}=0.0274$</td></tr>
+                                            <tr><td>A</td><td>C</td><td>A</td><td>$\frac{74}{200} \times \frac{40}{199} \times \frac{73}{198}=0.0274$</td></tr>
+                                            <tr><td>C</td><td>A</td><td>A</td><td>$\frac{40}{200} \times \frac{74}{199} \times \frac{73}{198}=0.0274$</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p>The probability of having the first combination or the second or the third, and so on, is given by the sum of the probabilities; i.e., by $3 \times 0.0590+3 \times 0.0274$, i.e. <strong>0.2592</strong></p>
+                             </div>
+                         </aside>
+
+                         <div class="practice-exercise">
+                            <h3 class="subsection-heading">Now try the following Practice Exercise</h3>
+                            <aside class="callout note" role="note">
+                                <h4 class="callout-title">Practice Exercise 130 Laws of probability (answers on page 354)</h4>
+                                <div class="callout-content">
+                                     <ol class="enhanced-list">
+                                        <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">The probability that component A will operate satisfactorily for 5 years is 0.8 and that B will operate satisfactorily over that same period of time is 0.75 . Find the probabilities that in a 5 year period<br>(a) both components will operate satisfactorily.<br>(b) only component A will operate satisfactorily.<br>(c) only component B will operate satisfactorily.</span></li>
+                                        <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">In a particular street, 80% of the houses have landline telephones. If two houses selected at random are visited, calculate the probabilities that<br>(a) they both have a telephone.<br>(b) one has a telephone but the other does not.</span></li>
+                                        <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">Veroboard pins are packed in packets of 20 by a machine. In a thousand packets, 40 have less than 20 pins. Find the probability that if 2 packets are chosen at random, one will contain less than 20 pins and the other will contain 20 pins or more.</span></li>
+                                        <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">A batch of 1 kW fire elements contains 16 which are within a power tolerance and 4 which are not. If 3 elements are selected at random from the batch, calculate the probabilities that<br>(a) all three are within the power tolerance.<br>(b) two are within but one is not within the power tolerance.</span></li>
+                                        <li class="list-item"><span class="item-icon">5.</span> <div class="callout-content">
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">With replacement<br>The probability that the component selected on the first draw is satisfactory is $35/40$ i.e. $7/8$. The component is now replaced and a second draw is made. The probability that this component is also satisfactory is $7/8$. Hence, the probability that both the first component drawn and the second component drawn are satisfactory is<br>$$\frac{7}{8} \times \frac{7}{8}=\frac{\mathbf{49}}{\mathbf{64}} \quad \text{ or } \quad \mathbf{0.7656}$$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">Without replacement<br>The probability that the first component drawn is satisfactory is $7/8$. There are now only 34 satisfactory components left in the batch and the batch number is 39 . Hence, the probability of drawing a satisfactory component on the second draw is $34/39$. Thus, the probability that the first component drawn and the second component drawn are satisfactory i.e., neither is defective is<br>$$\frac{7}{8} \times \frac{34}{39}=\frac{\mathbf{238}}{\mathbf{312}} \quad \text{ or } \quad \mathbf{0.7628}$$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-7-title-c33-3">
+                            <h4 id="problem-7-title-c33-3" class="callout-title"><span class="callout-icon">💡</span> Problem 7. A batch of 40 components contains 5 which are defective. If a component is drawn at random from the batch and tested and then a second component is drawn at random, calculate the probability of having one defective component, both (a) with replacement and (b) without replacement</h4>
+                             <div class="callout-content">
+                                <p>The probability of having one defective component can be achieved in two ways. If p is the probability of drawing a defective component and q is the probability of drawing a satisfactory component, then the probability of having one defective component is given by drawing a satisfactory component and then a defective component or by drawing a defective component and then a satisfactory one; i.e., by $q \times p+p \times q$.</p>
+                                <ul class="enhanced-list">
+                                    <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">With replacement<br>$p=\frac{5}{40}=\frac{1}{8} \quad$ and $\quad q=\frac{35}{40}=\frac{7}{8}$<br>Hence, the probability of having one defective component is $\frac{1}{8} \times \frac{7}{8}+\frac{7}{8} \times \frac{1}{8}$<br>i.e. $\frac{7}{64}+\frac{7}{64}=\frac{\mathbf{7}}{\mathbf{32}} \quad$ or $\quad \mathbf{0.2188}$</span></li>
+                                    <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">Without replacement<br>$p_{1}=\frac{1}{8}$ and $q_{1}=\frac{7}{8}$ on the first of the two draws<br>The batch number is now 39 for the second draw, thus, $p_{2}=\frac{5}{39}$ and $q_{2} = \frac{35}{39}$<br>$$\begin{aligned} p_{1} q_{2}+q_{1} p_{2} &= \frac{1}{8} \times \frac{35}{39}+\frac{7}{8} \times \frac{5}{39} \\ &= \frac{35+35}{312} \\ &= \frac{\mathbf{70}}{\mathbf{312}} \text{ or } \mathbf{0.2244}\end{aligned}$$</span></li>
+                                </ul>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-8-title-c33-3">
+                            <h4 id="problem-8-title-c33-3" class="callout-title"><span class="callout-icon">💡</span> Problem 8. A box contains 74 brass washers, 86 steel washers and 40 aluminium washers. Three washers are drawn at random from the box without replacement. Determine the probability that all three are steel washers</h4>
+                             <div class="callout-content">
+                                <p>Assume, for clarity of explanation, that a washer is drawn at random, then a second, then a third (although this assumption does not affect the results obtained). The total number of washers is $74+86+40, \quad$ i.e. $\quad 200$</p>
+                                <p>The probability of randomly selecting a steel washer on the first draw is $86/200$. There are now 85 steel washers in a batch of 199 . The probability of randomly selecting a steel washer on the second draw is $85/199$. There are now 84 steel washers in a batch of 198 . The probability of randomly selecting a steel washer on the third draw is $84/198$. Hence, the probability of selecting a steel washer on the first draw and the second draw and the third draw is</p>
+                                <div class="equation">$$\frac{86}{200} \times \frac{85}{199} \times \frac{84}{198}=\frac{614040}{7880400}=\mathbf{0.0779}$$</div>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-9-title-c33-3">
+                            <h4 id="problem-9-title-c33-3" class="callout-title"><span class="callout-icon">💡</span> Problem 9. For the box of washers given in Problem 8 above, determine the probability that there are no aluminium washers drawn when three washers are drawn at random from the box without replacement</h4>
+                             <div class="callout-content">
+                                <p>The probability of not drawing an aluminium washer on the first draw is $1-\left(\frac{40}{200}\right)$ i.e., $160/200$. There are now 199 washers in the batch of which 159 are not made of aluminium. Hence, the probability of not drawing an aluminium washer on the second draw is 159/199. Similarly, the probability of not drawing an aluminium washer on the third draw is $158/198$. Hence the probability of not drawing an aluminium washer on the first and second and third draws is</p>
+                                <div class="equation">$$\frac{160}{200} \times \frac{159}{199} \times \frac{158}{198}=\frac{4019520}{7880400}=\mathbf{0.5101}$$</div>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-10-title-c33-3">
+                            <h4 id="problem-10-title-c33-3" class="callout-title"><span class="callout-icon">💡</span> Problem 10. For the box of washers in Problem 8 above, find the probability that there are two brass washers and either a steel or an aluminium washer when three are drawn at random, without replacement</h4>
+                             <div class="callout-content">
+                                <p>Two brass washers (A) and one steel washer (B) can be obtained in any of the following ways.</p>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead><tr><th>1st draw</th><th>2nd draw</th><th>3rd draw</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>A</td><td>A</td><td>B</td></tr>
+                                            <tr><td>A</td><td>B</td><td>A</td></tr>
+                                            <tr><td>B</td><td>A</td><td>A</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p>Two brass washers and one aluminium washer (C) can also be obtained in any of the following ways.</p>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead><tr><th>1st draw</th><th>2nd draw</th><th>3rd draw</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>A</td><td>A</td><td>C</td></tr>
+                                            <tr><td>A</td><td>C</td><td>A</td></tr>
+                                            <tr><td>C</td><td>A</td><td>A</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p>Thus, there are six possible ways of achieving the combinations specified. If A represents a brass washer, B a steel washer and C an aluminium washer, the combinations and their probabilities are as shown.</p>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead><tr><th>First</th><th>Second</th><th>Third</th><th>Probability</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>A</td><td>A</td><td>B</td><td>$\frac{74}{200} \times \frac{73}{199} \times \frac{86}{198}=0.0590$</td></tr>
+                                            <tr><td>A</td><td>B</td><td>A</td><td>$\frac{74}{200} \times \frac{86}{199} \times \frac{73}{198}=0.0590$</td></tr>
+                                            <tr><td>B</td><td>A</td><td>A</td><td>$\frac{86}{200} \times \frac{74}{199} \times \frac{73}{198}=0.0590$</td></tr>
+                                            <tr><td>A</td><td>A</td><td>C</td><td>$\frac{74}{200} \times \frac{73}{199} \times \frac{40}{198}=0.0274$</td></tr>
+                                            <tr><td>A</td><td>C</td><td>A</td><td>$\frac{74}{200} \times \frac{40}{199} \times \frac{73}{198}=0.0274$</td></tr>
+                                            <tr><td>C</td><td>A</td><td>A</td><td>$\frac{40}{200} \times \frac{74}{199} \times \frac{73}{198}=0.0274$</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p>The probability of having the first combination or the second or the third, and so on, is given by the sum of the probabilities; i.e., by $3 \times 0.0590+3 \times 0.0274$, i.e. <strong>0.2592</strong></p>
+                             </div>
+                         </aside>
+
+                         <div class="practice-exercise">
+                            <h3 class="subsection-heading">Now try the following Practice Exercise</h3>
+                            <aside class="callout note" role="note">
+                                <h4 class="callout-title">Practice Exercise 130 Laws of probability (answers on page 354)</h4>
+                                <div class="callout-content">
+                                     <ol class="enhanced-list">
+                                        <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">The probability that component A will operate satisfactorily for 5 years is 0.8 and that B will operate satisfactorily over that same period of time is 0.75 . Find the probabilities that in a 5 year period<br>(a) both components will operate satisfactorily.<br>(b) only component A will operate satisfactorily.<br>(c) only component B will operate satisfactorily.</span></li>
+                                        <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">In a particular street, $80\%$ of the houses have landline telephones. If two houses selected at random are visited, calculate the probabilities that<br>(a) they both have a telephone.<br>(b) one has a telephone but the other does not.</span></li>
+                                        <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">Veroboard pins are packed in packets of 20 by a machine. In a thousand packets, 40 have less than 20 pins. Find the probability that if 2 packets are chosen at random, one will contain less than 20 pins and the other will contain 20 pins or more.</span></li>
+                                        <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">A batch of 1 kW fire elements contains 16 which are within a power tolerance and 4 which are not. If 3 elements are selected at random from the batch, calculate the probabilities that<br>(a) all three are within the power tolerance.<br>(b) two are within but one is not within the power tolerance.</span></li>
+                                        <li class="list-item"><span class="item-icon">5.</span> <span class="item-text">An amplifier is made up of three transistors, A, B and C. The probabilities of A, B or C being defective are $1/20, 1/25$ and $1/50$, respectively. Calculate the percentage of amplifiers produced<br>(a) which work satisfactorily.<br>(b) which have just one defective transistor.</span></li>
+                                        <li class="list-item"><span class="item-icon">6.</span> <span class="item-text">A box contains 14 40 W lamps, 28 60 W lamps and 58 25 W lamps, all the lamps being of the same shape and size. Three lamps are drawn at random from the box, first one, then a second, then a third. Determine the probabilities of<br>(a) getting one 25 W , one 40 W and one 60 W lamp with replacement.<br>(b) getting one 25 W , one 40 W and one 60 W lamp without replacement.<br>(c) getting either one 25 W and two 40 W or one 60 W and two 40 W lamps with replacement.</span></li>
+                                     </ol>
+                                </div>
+                            </aside>
+                         </div>
+                    </div>
+                </section>
+                <!-- END: chapter-33-laws-of-probability -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-32.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                             <!-- Chunk 46 in content sequence, Total 55 content chunks -->
+                            <div class="progress-fill" style="width: calc((46 / 55) * 100%);"></div>
+                        </div>
+                        <span class="progress-text">Chunk 46 of 55</span>
+                        <span class="progress-text">Chapter 33 of 35</span>
+                    </div>
+                    <a href="revision-test-13.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
