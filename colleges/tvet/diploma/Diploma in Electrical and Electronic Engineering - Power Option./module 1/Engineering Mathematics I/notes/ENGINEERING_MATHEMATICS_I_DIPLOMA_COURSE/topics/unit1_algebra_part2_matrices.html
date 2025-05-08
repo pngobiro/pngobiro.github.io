@@ -1,0 +1,445 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1: Algebra - 1.2 Matrices - Engineering Mathematics I</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      svg: { fontCache: 'global' },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit1_algebra_part1_determinants.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section (1.1 Determinants)</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 15%;"></div> <!-- Example: Update as per total chunks -->
+                        </div>
+                        <span class="progress-text">Unit 1: Algebra - Part 2</span>
+                    </div>
+                    <a href="unit1_algebra_part3_binomial_theorem.html" class="nav-button"> <!-- Link to next logical chunk -->
+                        <span class="nav-text">Next Section (1.3 Binomial Theorem)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">UNIT - I: ALGEBRA (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: unit-1-matrices -->
+                <section id="unit-1-matrices" class="content-section" aria-labelledby="unit-1-matrices-heading">
+                    <h2 id="unit-1-matrices-heading" class="section-heading">
+                        <span class="heading-icon">🔢</span>1.2 MATRICES
+                    </h2>
+                    <div class="content-card">
+                        <h4 class="subsubsection-heading">Introduction:</h4>
+                        <p>The term matrix was first introduced by a French mathematician CAYLEY in the year 1857. The theory of matrices is one of the powerful tools of mathematics not only in the field of higher mathematics but also in other branches such as applied sciences, nuclear physics, statistics, economics and eletrical circuits.</p>
+
+                        <p><dfn>Definition:</dfn> A matrix is a rectangular array of numbers arranged in delete rows and columns enclosed by brackets.</p>
+                        <p>Example:<br>
+                        1) \(A=\left(\begin{array}{ll}1 & 2 \\ 3 & 4\end{array}\right)\);<br>
+                        2) \(B=\left(\begin{array}{ccc}2 & 1 & 0 \\ -5 & 6 & 7 \\ 1 & 0 & 8\end{array}\right)\)</p>
+
+                        <h4 class="subsubsection-heading">Order of a matrix:</h4>
+                        <p>If there are ' m ' rows and ' n ' columns in a matrix, then the order of the matrix is \(m \times n\) (read as m by n ).</p>
+                        <p>Example: \(A=\left(\begin{array}{lll}a_{1} & a_{2} & a_{3} \\ b_{1} & b_{2} & b_{3}\end{array}\right)\)<br>
+                        The above matrix A has two rows and three columns. We say that A is a matrix of order \(2 \times 3\).</p>
+
+                        <h4 class="subsubsection-heading">Types of matrices:</h4>
+                        <p><strong>(1) Row matrix:</strong><br>
+                        A matrix having only one row and any number of columns is called a row matrix.<br>
+                        Example: \(A=\left(\begin{array}{lll}1 & 2 & -3\end{array}\right)\)</p>
+
+                        <p><strong>(2) Column matrix:</strong><br>
+                        A matrix having only one column and any number of rows is called a column matrix.<br>
+                        Example: \(B=\left(\begin{array}{c}3 \\ -1 \\ 5\end{array}\right)\)</p>
+
+                        <p><strong>(3) Square matrix.</strong><br>
+                        A matrix which has equal number of rows and columns is called a square matrix.<br>
+                        Example: \(C=\left(\begin{array}{ccc}2 & -1 & 0 \\ 3 & 4 & -2 \\ 1 & 5 & 6\end{array}\right)\) is a square matrix of order 3.</p>
+
+                        <p><strong>(4) Null matrix (or) Zero matrix:</strong><br>
+                        If all the elements of a matrix are zero, the matrix is called zero or null matrix.<br>
+                        Example: \(O=\left(\begin{array}{lll}0 & 0 & 0 \\ 0 & 0 & 0 \\ 0 & 0 & 0\end{array}\right)\)</p>
+
+                        <p><strong>(5) Diagonal matrix:</strong><br>
+                        A square matrix with all the elements equal to zero except those in the leading diagonal is called a diagonal matrix.</p>
+                        <p>Example: \(D=\left(\begin{array}{ccc}-1 & 0 & 0 \\ 0 & 3 & 0 \\ 0 & 0 & 2\end{array}\right)\)</p>
+
+                        <p><strong>(6) Unit matrix:</strong><br>
+                        Unit matrix is a square matrix in which the diagonal elements are all ones and all the other elements are zeros.</p>
+                        <p>Example: \(I=\left(\begin{array}{lll}1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1\end{array}\right)\)</p>
+
+                        <p><strong>(7) Determinant of a matrix:</strong><br>
+                        Let ' A ' be a square matrix. The determinant formed by the elements of A is said to be the determinant of matrix A. This is denoted by \(|A|\).</p>
+
+                        <p><strong>(8) Singular and Non-Singular matrix:</strong><br>
+                        A square matrix ' A ' is called a singular matrix if \(|A|=0\). If \(|A| \neq 0\), then the matrix A is called a non-singular matrix.</p>
+
+                        <p><strong>(9) Transpose of a matrix:</strong><br>
+                        If the rows and columns of a matrix are interchanged, then the resultant matrix is called the transpose of the given matrix. It is denoted by \(A^T\).</p>
+                    </div>
+                </section>
+                <!-- END: unit-1-matrices-types -->
+
+                <!-- START: unit-1-algebra-of-matrices -->
+                <section id="unit-1-algebra-of-matrices" class="content-section" aria-labelledby="unit-1-algebra-of-matrices-heading">
+                    <h3 id="unit-1-algebra-of-matrices-heading" class="subsection-heading">Algebra of Matrices:</h3>
+                    <div class="content-card">
+                        <p><strong>(1) Addition and Subtraction of matrices:</strong><br>
+                        If A and B are any two matrices of the same order, then their sum or difference i.e \(A+B\) or \(A-B\) is of the same order, and is obtained by adding or subtracting the corresponding elements of A and B .</p>
+                        <p>Example:<br>
+                        If \(A =\left(\begin{array}{cc}4 & 3 \\ -1 & 0\end{array}\right) ; B=\left(\begin{array}{cc}2 & 1 \\ -3 & -4\end{array}\right)\) then <br>
+                        \(A+B =\left(\begin{array}{cc}4+2 & 3+1 \\ -1-3 & 0-4\end{array}\right)=\left(\begin{array}{cc}6 & 4 \\ -4 & -4\end{array}\right)\) and <br>
+                        \(A-B =A+(-B) \quad -B=\left(\begin{array}{cc}-2 & -1 \\ 3 & 4\end{array}\right)\) <br>
+                        \(=\left(\begin{array}{cc}4-2 & 3-1 \\ -1+3 & 0+4\end{array}\right)=\left(\begin{array}{cc}2 & 2 \\ 2 & 4\end{array}\right)\)</p>
+
+                        <p><strong>(2) Multiplication of matrices:</strong><br>
+                        Two matrices A and B are conformable for multiplication if and only if the number of columns in A is equal to the number of rows in B.</p>
+                        <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">💡</span>Note</h4>
+                           <p>If A is of order \(m \times n\) and B is of order \(n \times p\) matrices, then AB exists and is of order \(m \times p\).</p>
+                        </aside>
+                        <p>Example:<br>
+                        If \(A=\left(\begin{array}{lll}1 & 2 & 3 \\ 3 & 0 & 2\end{array}\right)\) and \(B=\left(\begin{array}{cc}-1 & 2 \\ 3 & 4 \\ 4 & -3\end{array}\right)\) then <br>
+                        \(AB=\left(\begin{array}{ccc}1 & 2 & 3 \\ 3 & 0 & 2\end{array}\right) \left(\begin{array}{cc}-1 & 2 \\ 3 & 4 \\ 4 & -3\end{array}\right)\) <br>
+                        \(=\left(\begin{array}{cc}-1+6+12 & 2+8-9 \\ -3+0+8 & 6+0-6\end{array}\right)\) <br>
+                        \(AB=\left(\begin{array}{cc}17 & 1 \\ 5 & 0\end{array}\right)\)
+                        <br>Generally \(AB \neq BA\)</p>
+                    </div>
+                </section>
+                <!-- END: unit-1-algebra-of-matrices -->
+
+                <!-- START: unit-1-matrix-cofactor-adj-inv-rank -->
+                <section id="unit-1-matrix-cofactor-adj-inv-rank" class="content-section" aria-labelledby="unit-1-matrix-cofactor-adj-inv-rank-heading">
+                    <h3 id="unit-1-matrix-cofactor-adj-inv-rank-heading" class="subsection-heading">Matrix Operations and Properties</h3>
+                    <div class="content-card">
+                        <h4 class="subsubsection-heading">Co-factor matrix:</h4>
+                        <p>In a matrix, if all the elements are replaced by the corresponding co-factors of the elements, then the matrix obtained is called the co-factor matrix.</p>
+                        <p>Example: If \(A=\left(\begin{array}{cc}1 & -4 \\ 8 & 3\end{array}\right)\) <br>
+                        Co-factor of 1 is +3 Co-factor of -4 is -8 <br>
+                        Co-factor of 8 is 4 Co-factor of 3 is 1 <br>
+                        \(\therefore\) Co-factor matrix is \(\left(\begin{array}{cc}3 & -8 \\ 4 & 1\end{array}\right)\)</p>
+
+                        <h4 class="subsubsection-heading">Adjoint (or) Adjugate matrix:</h4>
+                        <p>The transpose of the co-factor matrix is called the adjoint matrix or adjugate matrix. It is denoted by Adj.A</p>
+                        <p>Example: From the above matrix \(A=\left(\begin{array}{cc}1 & -4 \\ 8 & 3\end{array}\right)\) and the co-factor matrix of A is \(\left(\begin{array}{cc}3 & -8 \\ 4 & 1\end{array}\right)\), the adjoint of A is \(\left(\begin{array}{cc}3 & 4 \\ -8 & 1\end{array}\right)\).</p>
+
+                        <h4 class="subsubsection-heading">Inverse of a matrix:</h4>
+                        <p>Let A be a non-singular square matrix. If there exists a square matrix B, such that \(AB=BA=I\), where I is the unit matrix of the same order as that of A, then B is called the inverse of A and it is denoted by \(A^{-1}\). This can be determined by using the formula. <br>
+                        \(A^{-1}=\frac{1}{|A|}(\operatorname{adj} A)\)</p>
+                        <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">💡</span>Note</h4>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="item-icon">1.</span>If \(|A|=0\), then there is no inverse for the matrix A .</li>
+                                <li class="list-item"><span class="item-icon">2.</span>\(A^{-1}A=AA^{-1}=I\)</li>
+                                <li class="list-item"><span class="item-icon">3.</span>\((AB)^{-1}=B^{-1}A^{-1}\)</li>
+                                <li class="list-item"><span class="item-icon">4.</span>\((A^T)^{-1}=(A^{-1})^T\)</li>
+                            </ol>
+                        </aside>
+
+                        <h4 class="subsubsection-heading">Rank of a matrix:</h4>
+                        <p>Let ' A ' be any \(m \times n\) matrix. It has square sub-matrices of different orders. The order of the largest square submtrix of A whose determinant has a non-zero value is known as the rank of the matrix A.</p>
+                        <p>Generally the rank is denoted by \(\rho(A)\), \(\rho(A)\) is always minimum of m and n.</p>
+                        <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">💡</span>Note</h4>
+                            <p>The rank of a matrix is said to be r if</p>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="item-icon">1.</span>It has atleast one non zero minor of order r.</li>
+                                <li class="list-item"><span class="item-icon">2.</span>Every minor of A of order higher than r is zero.</li>
+                            </ol>
+                        </aside>
+
+                        <p>Example:</p>
+                        <p>1. Find the rank of the matrix \(\left|\begin{array}{ccc}1 & 5 & 6 \\ 2 & 3 & 4 \\ -1 & 2 & 2\end{array}\right|\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(A=\left|\begin{array}{ccc}1 & 5 & 6 \\ 2 & 3 & 4 \\ -1 & 2 & 2\end{array}\right|\) <br>
+                            \(|A| =1(6-8)-5(4+4)+6(4+3)\) <br>
+                            \(=1(-2)-5(8)+6(7)\) <br>
+                            \(=-2-40+42\) <br>
+                            \(|A|=0\)</p>
+                            <p>consider the determinant of the second order <br>
+                            \(\left|\begin{array}{ll}1 & 5 \\ 2 & 3\end{array}\right|=-7 \neq 0\) <br>
+                            Hence the rank of A is 2. <br>
+                            i.e \(\rho(A)=2\)</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: unit-1-matrix-cofactor-adj-inv-rank -->
+
+                <!-- START: unit-1-matrices-worked-examples -->
+                <section id="unit-1-matrices-worked-examples" class="content-section worked-example" aria-labelledby="unit-1-matrices-worked-examples-heading">
+                    <h3 id="unit-1-matrices-worked-examples-heading" class="subsection-heading">WORKED EXAMPLES</h3>
+                    <h4 class="part-title">PART - A</h4>
+                    <div class="content-card">
+                        <p>1. If \(A=\left(\begin{array}{lll}0 & 2 & 3 \\ 2 & 1 & 4\end{array}\right)\) ; \(B=\left(\begin{array}{lll}7 & 6 & 3 \\ 1 & 4 & 5\end{array}\right)\) find \(A+B\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(A+B =\left(\begin{array}{lll}0 & 2 & 3 \\ 2 & 1 & 4\end{array}\right)+\left(\begin{array}{lll}7 & 6 & 3 \\ 1 & 4 & 5\end{array}\right)\) <br>
+                            \(=\left(\begin{array}{lll}0+7 & 2+6 & 3+3 \\ 2+1 & 1+4 & 4+5\end{array}\right)\) <br>
+                            \(A+B =\left(\begin{array}{lll}7 & 8 & 6 \\ 3 & 5 & 9\end{array}\right)\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>2. If \(A=\left(\begin{array}{ll}1 & 3 \\ 3 & 4\end{array}\right)\) ; \(B=\left(\begin{array}{ll}1 & 2 \\ 4 & 3\end{array}\right)\) find \(A-B\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(A-B =\left(\begin{array}{ll}1 & 3 \\ 3 & 4\end{array}\right)-\left(\begin{array}{ll}1 & 2 \\ 4 & 3\end{array}\right)\) <br>
+                            \(=\left(\begin{array}{ll}1-1 & 3-2 \\ 3-4 & 4-3\end{array}\right)\) <br>
+                            \(A-B =\left(\begin{array}{cc}0 & 1 \\ -1 & 1\end{array}\right)\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>3. Prove that the matrix \(\left(\begin{array}{ll}2 & -1 \\ 4 & -2\end{array}\right)\) is singular.</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(A=\left(\begin{array}{ll}2 & -1 \\ 4 & -2\end{array}\right)\) <br>
+                            \(|A| =\left|\begin{array}{ll}2 & -1 \\ 4 & -2\end{array}\right|\) <br>
+                            \(=-4+4\) <br>
+                            \(|A| =0 \quad \therefore A\) is singular.</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>4. Find the rank of \(\left(\begin{array}{cc}3 & -4 \\ -6 & 8\end{array}\right)\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(A=\left(\begin{array}{cc}3 & -4 \\ -6 & 8\end{array}\right)\) <br>
+                            Now, \(|A|=\left|\begin{array}{cc}3 & -4 \\ -6 & 8\end{array}\right|=24-24=0 . \quad \therefore \rho(A) \neq 2\) <br>
+                            Since each element of A is non zero, <br>
+                            \(\rho(A)=1\).</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>5. Find the rank of \(\left(\begin{array}{lll}1 & 2 & 3 \\ 4 & 5 & 6\end{array}\right)\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(A=\left(\begin{array}{lll}1 & 2 & 3 \\ 4 & 5 & 6\end{array}\right)\) and let the sub matrix of \(A=B=\left|\begin{array}{ll}1 & 2 \\ 4 & 5\end{array}\right|\) <br>
+                            \(|B|=\left|\begin{array}{ll}1 & 2 \\ 4 & 5\end{array}\right|=5-8=-3 \neq 0\) <br>
+                            \(\therefore \rho(A)=2\)</p>
+                        </div>
+                    </div>
+
+                    <h4 class="part-title">PART - B</h4>
+                    <div class="content-card">
+                        <p>1. If \(A=\left(\begin{array}{ccc}2 & 3 & 0 \\ 5 & 2 & -1\end{array}\right) ; B=\left(\begin{array}{ccc}3 & -1 & 4 \\ 2 & 6 & 7\end{array}\right)\) find \(3A-2B\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(3A-2B =3\left(\begin{array}{ccc}2 & 3 & 0 \\ 5 & 2 & -1\end{array}\right)-2\left(\begin{array}{ccc}3 & -1 & 4 \\ 2 & 6 & 7\end{array}\right)\) <br>
+                            \(=\left(\begin{array}{ccc}6 & 9 & 0 \\ 15 & 6 & -3\end{array}\right)-\left(\begin{array}{ccc}6 & -2 & 8 \\ 4 & 12 & 14\end{array}\right)\) <br>
+                            \(=\left(\begin{array}{ccc}6-6 & 9+2 & 0-8 \\ 15-4 & 6-12 & -3-14\end{array}\right)\) <br>
+                            \(3A-2B =\left(\begin{array}{ccc}0 & 11 & -8 \\ 11 & -6 & -17\end{array}\right)\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>2. If \(f(x)=4x+2\) and \(A=\left(\begin{array}{cc}2 & -1 \\ 0 & 3\end{array}\right)\) find \(f(A)\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(f(A) =4A+2\) <br>
+                            \(=4A+2I\) <br>
+                            \(=4\left(\begin{array}{cc}2 & -1 \\ 0 & 3\end{array}\right)+2\left(\begin{array}{ll}1 & 0 \\ 0 & 1\end{array}\right)\) <br>
+                            \(=\left(\begin{array}{cc}8 & -4 \\ 0 & 12\end{array}\right)+\left(\begin{array}{ll}2 & 0 \\ 0 & 2\end{array}\right)\) <br>
+                            \(f(A) =\left(\begin{array}{cc}10 & -4 \\ 0 & 14\end{array}\right)\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>3. Find the value of 'a' so that the matrix \(\left(\begin{array}{ccc}1 & -2 & 0 \\ 2 & \mathrm{a} & 4 \\ 2 & 1 & 1\end{array}\right)\) is singular.</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(A=\left(\begin{array}{ccc}1 & -2 & 0 \\ 2 & \mathrm{a} & 4 \\ 2 & 1 & 1\end{array}\right)\). The matrix is singular, then \(|A|=0\). <br>
+                            i.e \(\left|\begin{array}{ccc}1 & -2 & 0 \\ 2 & \mathrm{a} & 4 \\ 2 & 1 & 1\end{array}\right|=0\) <br>
+                            expanding through first row <br>
+                            \(1(a-4)+2(2-8)+0=0\) <br>
+                            \(a-4+2(-6)=0\) <br>
+                            \(a-4-12=0\) <br>
+                            \(a-16=0\) <br>
+                            \(a=16\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>4. If \(A=\left(\begin{array}{ll}1 & 0 \\ 2 & 1\end{array}\right)\) and \(B=\left(\begin{array}{ll}0 & 3 \\ 2 & 4\end{array}\right)\) find \(AB\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(AB=\left(\begin{array}{ll}1 & 0 \\ 2 & 1\end{array}\right)\left(\begin{array}{ll}0 & 3 \\ 2 & 4\end{array}\right)\) <br>
+                            \(AB=\left(\begin{array}{ll}0+0 & 3+0 \\ 0+2 & 6+4\end{array}\right)=\left(\begin{array}{cc}0 & 3 \\ 2 & 10\end{array}\right)\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>5. Find the inverse of \(\left(\begin{array}{ll}2 & 3 \\ 4 & 5\end{array}\right)\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(A=\left(\begin{array}{ll}2 & 3 \\ 4 & 5\end{array}\right) \therefore |A|=\left|\begin{array}{ll}2 & 3 \\ 4 & 5\end{array}\right|=10-12=-2 \neq 0\) <br>
+                            Adj \(A=\left(\begin{array}{cc}5 & -3 \\ -4 & 2\end{array}\right)\) <br>
+                            \(A^{-1}=\frac{1}{|A|} \text{Adj} A=\frac{1}{-2}\left(\begin{array}{cc}5 & -3 \\ -4 & 2\end{array}\right)\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                         <p>6. Find the rank of \(\left(\begin{array}{cc}5 & -15 \\ -6 & 18 \\ 7 & -21\end{array}\right)\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(A=\left(\begin{array}{cc}5 & -15 \\ -6 & 18 \\ 7 & -21\end{array}\right)\) <br>
+                            \(\left|\begin{array}{cc}5 & -15 \\ -6 & 18\end{array}\right|=90-90=0\) <br>
+                            \(\left|\begin{array}{cc}-6 & 18 \\ 7 & -21\end{array}\right|= (-6)(-21) - (18)(7) = 126-126=0\) <br>
+                             \(\left|\begin{array}{cc}5 & -15 \\ 7 & -21\end{array}\right|= (5)(-21) - (-15)(7) = -105+105=0\) <br>
+                            \(\therefore \rho(A) \neq 2\) <br>
+                             Since there are non-zero elements, \(\rho(A)=1\).</p>
+                        </div>
+                    </div>
+                
+                    <h4 class="part-title">PART - C</h4>
+                    <div class="content-card">
+                        <p>1. If \(A=\left[\begin{array}{ccc}2 & -1 & 0 \\ 0 & -2 & 1 \\ 1 & 0 & 1\end{array}\right]\) and \(B=\left[\begin{array}{ccc}-2 & 1 & -1 \\ 1 & 2 & -2 \\ 2 & -1 & -4\end{array}\right]\) show that \(AB=BA\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(AB=\left[\begin{array}{ccc}2 & -1 & 0 \\ 0 & -2 & 1 \\ 1 & 0 & 1\end{array}\right]\left[\begin{array}{ccc}-2 & 1 & -1 \\ 1 & 2 & -2 \\ 2 & -1 & -4\end{array}\right]\) <br>
+                            \(=\left[\begin{array}{ccc}-4-1+0 & 2-2+0 & -2+2+0 \\ 0-2+2 & 0-4-1 & 0+4-4 \\ -2+0+2 & 1+0-1 & -1+0-4\end{array}\right]\) <br>
+                            \(=\left[\begin{array}{ccc}-5 & 0 & 0 \\ 0 & -5 & 0 \\ 0 & 0 & -5\end{array}\right]\)</p>
+                            <p>\(BA=\left[\begin{array}{ccc}-2 & 1 & -1 \\ 1 & 2 & -2 \\ 2 & -1 & -4\end{array}\right]\left[\begin{array}{ccc}2 & -1 & 0 \\ 0 & -2 & 1 \\ 1 & 0 & 1\end{array}\right]\) <br>
+                            \(=\left[\begin{array}{ccc}-4+0-1 & 2-2+0 & 0+1-1 \\ 2+0-2 & -1-4+0 & 0+2-2 \\ 4+0-4 & -2+2+0 & 0-1-4\end{array}\right]\) <br>
+                            \(BA=\left[\begin{array}{ccc}-5 & 0 & 0 \\ 0 & -5 & 0 \\ 0 & 0 & -5\end{array}\right]\) <br>
+                            \(\therefore AB=BA\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>2. Show that \(AB \neq BA\) if \(A=\left[\begin{array}{cc}1 & 2 \\ -1 & 4\end{array}\right]\) and \(B=\left[\begin{array}{cc}3 & 2 \\ 1 & -1\end{array}\right]\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(AB=\left[\begin{array}{cc}1 & 2 \\ -1 & 4\end{array}\right]\left[\begin{array}{cc}3 & 2 \\ 1 & -1\end{array}\right]\) <br>
+                            \(AB=\left[\begin{array}{cc}3+2 & 2-2 \\ -3+4 & -2-4\end{array}\right]=\left[\begin{array}{cc}5 & 0 \\ 1 & -6\end{array}\right]\)</p>
+                            <p>\(BA=\left[\begin{array}{cc}3 & 2 \\ 1 & -1\end{array}\right]\left[\begin{array}{cc}1 & 2 \\ -1 & 4\end{array}\right]=\left[\begin{array}{cc}3-2 & 6+8 \\ 1+1 & 2-4\end{array}\right]\) <br>
+                            \(BA=\left[\begin{array}{cc}1 & 14 \\ 2 & -2\end{array}\right]\) <br>
+                            \(\therefore AB \neq BA\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>3. If \(A=\left[\begin{array}{ll}1 & 2 \\ 3 & 1\end{array}\right]\) and if \(f(x)=3x^{2}-2x+4\) find \(f(A)\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>If \(f(x)=3x^{2}-2x+4\) <br>
+                            \(f(A)=3A^{2}-2A+4I\) <br>
+                            \(A^{2} =A \times A = \left[\begin{array}{ll}1 & 2 \\ 3 & 1\end{array}\right]\left[\begin{array}{ll}1 & 2 \\ 3 & 1\end{array}\right] = \left[\begin{array}{ll}1+6 & 2+2 \\ 3+3 & 6+1\end{array}\right] = \left[\begin{array}{ll}7 & 4 \\ 6 & 7\end{array}\right]\)</p>
+                            <p>\(\therefore f(A)=3A^{2}-2A+4I\) <br>
+                            \(=3\left[\begin{array}{ll}7 & 4 \\ 6 & 7\end{array}\right]-2\left[\begin{array}{ll}1 & 2 \\ 3 & 1\end{array}\right]+4\left[\begin{array}{ll}1 & 0 \\ 0 & 1\end{array}\right]\) <br>
+                            \(=\left[\begin{array}{ll}21 & 12 \\ 18 & 21\end{array}\right]+\left[\begin{array}{cc}-2 & -4 \\ -6 & -2\end{array}\right]+\left[\begin{array}{ll}4 & 0 \\ 0 & 4\end{array}\right]\) <br>
+                            \(f(A) =\left[\begin{array}{cc}21-2+4 & 12-4+0 \\ 18-6+0 & 21-2+4\end{array}\right]=\left[\begin{array}{cc}23 & 8 \\ 12 & 23\end{array}\right]\).</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>4. Find the inverse of the matrix \(\left[\begin{array}{ccc}1 & 1 & -1 \\ 2 & 1 & 0 \\ -1 & 2 & 3\end{array}\right]\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(A=\left[\begin{array}{ccc}1 & 1 & -1 \\ 2 & 1 & 0 \\ -1 & 2 & 3\end{array}\right]\) <br>
+                            \(|A|=\left|\begin{array}{ccc}1 & 1 & -1 \\ 2 & 1 & 0 \\ -1 & 2 & 3\end{array}\right| =1(3-0)-1(6-0)-1(4+1)=1(3)-1(6)-1(5) =3-6-5=-8 \neq 0\). \(A^{-1}\) exists.</p>
+                            <p>Co-factors<br>
+                            \(A_{11}=+\left|\begin{array}{ll}1 & 0 \\ 2 & 3\end{array}\right|=3-0=3\) <br>
+                            \(A_{12}=-\left|\begin{array}{cc}2 & 0 \\ -1 & 3\end{array}\right|=-(6-0)=-6\) <br>
+                            \(A_{13}=+\left|\begin{array}{cc}2 & 1 \\ -1 & 2\end{array}\right|=(4+1)=5\) <br>
+                            \(A_{21}=-\left|\begin{array}{cc}1 & -1 \\ 2 & 3\end{array}\right|=-(3+2)=-5\) <br>
+                            \(A_{22}=+\left|\begin{array}{cc}1 & -1 \\ -1 & 3\end{array}\right|=(3-1)=2\) <br>
+                            \(A_{23}=-\left|\begin{array}{cc}1 & 1 \\ -1 & 2\end{array}\right|=-(2+1)=-3\) <br>
+                            \(A_{31}=+\left|\begin{array}{cc}1 & -1 \\ 1 & 0\end{array}\right|=(0+1)=1\) <br>
+                            \(A_{32}=-\left|\begin{array}{cc}1 & -1 \\ 2 & 0\end{array}\right|=-(0+2)=-2\) <br>
+                            \(A_{33}=+\left|\begin{array}{cc}1 & 1 \\ 2 & 1\end{array}\right|=(1-2)=-1\)</p>
+                            <p>Co-factor matrix \(A=\left[\begin{array}{ccc}3 & -6 & 5 \\ -5 & 2 & -3 \\ 1 & -2 & -1\end{array}\right]\) <br>
+                            Adj. \(A=\left[\begin{array}{ccc}3 & -5 & 1 \\ -6 & 2 & -2 \\ 5 & -3 & -1\end{array}\right]\) <br>
+                            \(\therefore A^{-1}=\frac{\operatorname{Adj} A}{|A|}=\frac{-1}{8}\left[\begin{array}{ccc}3 & -5 & 1 \\ -6 & 2 & -2 \\ 5 & -3 & -1\end{array}\right]\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>5. If \(A=\left[\begin{array}{cc}2 & 3 \\ -1 & 0\end{array}\right] ; B=\left[\begin{array}{cc}-1 & 2 \\ 0 & 1\end{array}\right]\) show that \((AB)^{-1}=B^{-1}A^{-1}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(AB =\left[\begin{array}{cc}2 & 3 \\ -1 & 0\end{array}\right]\left[\begin{array}{cc}-1 & 2 \\ 0 & 1\end{array}\right] = \left[\begin{array}{cc}-2 & 7 \\ 1 & -2\end{array}\right]\) <br>
+                            \(|AB| =\left|\begin{array}{cc}-2 & 7 \\ 1 & -2\end{array}\right|= 4 - 7 = -3 \neq 0\). \((AB)^{-1}\) exists. <br>
+                            \(\operatorname{Adj}(AB) =\left(\begin{array}{ll}-2 & -7 \\ -1 & -2\end{array}\right)\) <br>
+                            \((AB)^{-1} =\frac{1}{-3}\left(\begin{array}{ll}-2 & -7 \\ -1 & -2\end{array}\right) = \frac{-1}{3}\left(\begin{array}{ll}-2 & -7 \\ -1 & -2\end{array}\right)\) .....(i)</p>
+                            <p>\(B=\left(\begin{array}{cc}-1 & 2 \\ 0 & 1\end{array}\right) \quad |B|=\left|\begin{array}{cc}-1 & 2 \\ 0 & 1\end{array}\right|=-1 \neq 0\) <br>
+                            \(\operatorname{Adj} B=\left(\begin{array}{cc}1 & -2 \\ 0 & -1\end{array}\right)\) <br>
+                            \(B^{-1} =\frac{1}{-1}\left(\begin{array}{cc}1 & -2 \\ 0 & -1\end{array}\right)\)</p>
+                            <p>\(A =\left[\begin{array}{cc}2 & 3 \\ -1 & 0\end{array}\right] \quad |A|=\left|\begin{array}{cc}2 & 3 \\ -1 & 0\end{array}\right|=3 \neq 0\) <br>
+                            Adj \(A =\left[\begin{array}{cc}0 & -3 \\ 1 & 2\end{array}\right]\) <br>
+                            \(A^{-1} =\frac{1}{3}\left[\begin{array}{ll}0 & -3 \\ 1 & 2\end{array}\right]\)</p>
+                            <p>\(B^{-1}A^{-1} =-\frac{1}{1}\left[\begin{array}{ll}1 & -2 \\ 0 & -1\end{array}\right] \times \frac{1}{3}\left[\begin{array}{cc}0 & -3 \\ 1 & 2\end{array}\right]\) <br>
+                            \(B^{-1}A^{-1} =-\frac{1}{3}\left[\begin{array}{cc}1 & -2 \\ 0 & -1\end{array}\right]\left[\begin{array}{cc}0 & -3 \\ 1 & 2\end{array}\right]\) <br>
+                            \(B^{-1}A^{-1} =-\frac{1}{3}\left[\begin{array}{cc}0-2 & -3-4 \\ 0-1 & 0-2\end{array}\right] = -\frac{1}{3}\left[\begin{array}{cc}-2 & -7 \\ -1 & -2\end{array}\right]\) .....(ii)</p>
+                            <p>From (i) and (ii) \((AB)^{-1}=B^{-1}A^{-1}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>6. Find the rank of the matrix \(\left[\begin{array}{cccc}2 & 3 & 4 & -1 \\ 5 & 2 & 0 & -1 \\ -4 & 5 & 12 & -1\end{array}\right]\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Here the rank of the matrix can not exceed 3, the minimum of 3 and 4. <br>
+                            The value of the each of the determinants. <br>
+                            \(\left|\begin{array}{ccc}2 & 3 & 4 \\ 5 & 2 & 0 \\ -4 & 5 & 12\end{array}\right|=2(24-0)-3(60-0)+4(25+8)=48-180+132=0\) <br>
+                            \(\left|\begin{array}{ccc}3 & 4 & -1 \\ 2 & 0 & -1 \\ 5 & 12 & -1\end{array}\right|= 3(0 - (-12)) - 4(-2 - (-5)) + (-1)(24-0) = 3(12) - 4(3) - 24 = 36 - 12 - 24 = 0\) <br>
+                            Similarly we can prove \(\left|\begin{array}{ccc}2 & 4 & -1 \\ 5 & 0 & -1 \\ -4 & 12 & -1\end{array}\right|=0\) and \(\left|\begin{array}{ccc}2 & 3 & -1 \\ 5 & 2 & -1 \\ -4 & 5 & -1\end{array}\right|=0\)</p>
+                            <p>While the second order determinant <br>
+                            \(\left|\begin{array}{ll}2 & 3 \\ 5 & 2\end{array}\right|=4-15=-11 \neq 0\) <br>
+                            Hence the rank of the matrix = 2</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: unit-1-matrices-worked-examples -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit1_algebra_part1_determinants.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section (1.1 Determinants)</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 15%;"></div>
+                        </div>
+                        <span class="progress-text">Unit 1: Algebra - Part 2</span>
+                    </div>
+                    <a href="unit1_algebra_part3_binomial_theorem.html" class="nav-button">
+                        <span class="nav-text">Next Section (1.3 Binomial Theorem)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
