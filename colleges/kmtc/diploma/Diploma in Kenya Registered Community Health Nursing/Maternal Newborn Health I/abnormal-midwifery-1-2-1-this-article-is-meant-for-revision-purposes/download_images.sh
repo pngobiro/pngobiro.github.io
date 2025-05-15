@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- Configuration ---
-MMD_FILE="mch-final-notes-maternal-and-child-health.mmd" # Input MMD file name
+MMD_FILE="abnormal-midwifery-1-2-1-this-article-is-meant-for-revision-purposes.mmd" # Input MMD file name
 OUTPUT_DIR="assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
