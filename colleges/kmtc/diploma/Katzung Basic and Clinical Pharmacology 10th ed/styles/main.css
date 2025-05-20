@@ -1,4 +1,3 @@
-
 :root {
     --primary-color: #2c3e50;        /* Dark blue-grey for headings, primary elements */
     --secondary-color: #34495e;      /* Slightly lighter blue-grey for subheadings */
@@ -49,8 +48,6 @@ body {
     margin-bottom: 2rem;
 }
 
-
-/* --- Typography --- */
 h1, h2, h3, h4, h5, h6 {
     color: var(--primary-color);
     margin-top: 1.5em;
@@ -94,6 +91,7 @@ h4.subsubsection-heading {
     margin-top: 1em;
     margin-bottom: 0.5em;
 }
+
 
 p {
     margin-top: 0;
@@ -139,16 +137,9 @@ dfn {
 
 /* Content card styling - can be applied to section/div/aside */
 .content-card {
-    background-color: var(--card-background-color); /* White background for cards */
-    border: 1px solid var(--border-color); /* Light grey border */
-    border-radius: 8px; /* Rounded corners */
-    padding: 1.5rem; /* Consistent padding */
-    margin-bottom: 1.5rem; /* Spacing between cards */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.08); /* Subtle shadow */
+    padding: 1rem 0; /* Add some padding if needed inside section */
 }
 
-
-/* --- Navigation Styling --- */
 /* Navigation container */
 .document-nav {
     margin: 2.5rem 0;
@@ -162,10 +153,7 @@ dfn {
     justify-content: space-between;
     align-items: center;
     gap: 1rem;
-    flex-wrap: wrap;  /* Allow wrapping on smaller screens */
-    list-style: none; /* Remove list styles */
-    padding: 0; /* Remove padding */
-    margin: 0; /* Remove margin */
+    flex-wrap: wrap;
 }
 
 /* Navigation buttons with distinct colors */
@@ -179,7 +167,7 @@ dfn {
     border: 1px solid var(--border-color);
     border-radius: 5px;
     transition: all 0.2s ease;
-    white-space: nowrap; /* Prevent text from wrapping */
+    white-space: nowrap;
     font-size: 0.9em;
     font-weight: 500;
 }
@@ -191,15 +179,13 @@ dfn {
     color: #2980b9; /* Blue */
     border-color: #2980b9;
 }
-
 .nav-button[href*="index.html"]:hover {
     background-color: #eaf4fb;
     border-color: var(--accent-hover-color);
 }
 
-
-
 /* Previous Section link */
+/* Targets the second child that is NOT index.html, NOT the last child, and NOT disabled */
 .nav-links > .nav-button:nth-child(2):not([href*="index.html"]):not(:last-child):not(.disabled) {
     color: #e67e22; /* Orange */
     border-color: #e67e22;
@@ -208,7 +194,9 @@ dfn {
     background-color: #fdf3e8;
 }
 
+
 /* Next Section link */
+/* Targets the last child that is NOT index.html and NOT disabled */
 .nav-links > .nav-button:last-child:not([href*="index.html"]):not(.disabled) {
     color: #27ae60; /* Green */
     border-color: #27ae60;
@@ -217,6 +205,7 @@ dfn {
     background-color: #eaf7f1;
 }
 
+
 /* Disabled states */
 .nav-button.disabled {
     color: var(--muted-text-color);
@@ -224,7 +213,6 @@ dfn {
     cursor: not-allowed;
     opacity: 0.6;
 }
-
 .nav-button.disabled:hover {
     background-color: var(--card-background-color); /* No hover effect */
 }
@@ -234,14 +222,14 @@ dfn {
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-grow: 1; /* Allows it to fill space between prev/next buttons */
+    flex-grow: 1;
     min-width: 120px;
     text-align: center;
 }
 
 .progress-bar {
     width: 100%;
-    max-width: 200px;
+    max-width: 200px; /* Limit width */
     height: 6px;
     background-color: #e9ecef;
     border-radius: 3px;
@@ -252,9 +240,9 @@ dfn {
 .progress-fill {
     height: 100%;
     background-color: var(--accent-color);
-    width: 0%; /* Default, JavaScript will update */
+    width: 0%; /* Default */
     transition: width 0.3s ease;
-    border-radius: 3px; /* Maintain rounded corners */
+    border-radius: 3px;
 }
 
 .progress-text {
@@ -262,12 +250,11 @@ dfn {
     color: var(--secondary-color);
 }
 
-/* --- Table of Contents (index.html) Styling --- */
-
+/* Table of Contents (index.html) Styling */
 .toc-container {
     max-width: 800px;
     margin: 40px auto;
-    padding: 30px 40px;
+    padding: 30px 40px; /* Adjusted padding */
     background-color: var(--card-background-color);
     border-radius: 8px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
@@ -299,7 +286,7 @@ dfn {
 
 .toc-chapter {
     margin-bottom: 25px;
-    border-left: 3px solid var(--accent-color); /* More prominent chapter marker */
+    border-left: 3px solid var(--accent-color);
     padding-left: 20px;
 }
 
@@ -312,8 +299,7 @@ dfn {
 
 .toc-section-list {
     list-style: none;
-    padding-left: 0px;  /* No extra indentation for section lists within chapters */
-    margin-bottom: 1rem; /* Add space below each section list */
+    padding-left: 10px;
 }
 
 .toc-section-item {
@@ -324,15 +310,14 @@ dfn {
     text-decoration: none;
     color: var(--accent-color);
     font-size: 1.1em;
-    transition: color 0.3s ease, padding-left 0.3s ease; /* Add padding transition */
-    display: block; /* Makes the whole list item clickable */
-    padding: 5px 0;  /* Top/bottom padding for list items */
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: block;
+    padding: 5px 0;
 }
-
 
 .toc-link:hover {
     color: var(--accent-hover-color);
-    padding-left: 5px; /* Indent on hover */
+    padding-left: 5px;
 }
 
 .toc-link::before {
@@ -340,31 +325,25 @@ dfn {
     color: #bdc3c7;
     margin-right: 8px;
     font-size: 0.9em;
-    display: inline-block; /* Better alignment with arrow */
-    transition: color 0.3s ease;
+    display: inline-block;
 }
 
-
-/* --- Content Element Styling --- */
-
+/* Section styling */
 .content-section {
-    padding: 1rem 0;   /* Adjust vertical padding as needed */
+    padding: 1rem 0; /* Adjust vertical padding */
     margin-bottom: 1.5rem; /* Space between sections */
 }
 
-
 /* Headings already styled above */
 .heading-icon {
-    font-size: 1.1em;
+    font-size: 1.1em; /* Adjust icon size */
     color: var(--accent-color);
 }
-
-
 
 /* Tables */
 .table-container {
     margin: 1.5rem 0;
-    overflow-x: auto; /* Horizontal scrolling for wide tables */
+    overflow-x: auto;
     border: 1px solid var(--border-color);
     border-radius: 8px;
 }
@@ -377,10 +356,10 @@ dfn {
 
 .content-table th,
 .content-table td {
-    padding: 0.8rem 1rem;
+    padding: 0.8rem 1rem; /* Slightly more padding */
     border: 1px solid var(--border-color);
-    text-align: left;  /* Default text alignment */
-    vertical-align: top; /* Align text to the top of the cell */
+    text-align: left;
+    vertical-align: top;
 }
 
 .content-table th {
@@ -388,291 +367,180 @@ dfn {
     font-weight: 600;
 }
 
-
-
 .content-table caption {
     caption-side: top;
     font-weight: 600;
     margin-bottom: 0.5rem;
     color: var(--primary-color);
-    text-align: left;  /* Left-align captions */
-    padding: 0.5rem 0; /* Top/bottom padding for captions */
-    font-size: 1.1em; /* Slightly larger font size */
+    text-align: left;
+    padding: 0.5rem 0;
+    font-size: 1.1em;
 }
-
 
 /* Mathematical expressions */
 .math-inline {
-    padding: 0.1em 0.3em;  /* Small padding */
+    padding: 0.1em 0.3em;
     background-color: #f1f3f5; /* Light grey background */
     border-radius: 3px;
     font-size: 0.95em; /* Slightly smaller */
-    font-family: var(--font-family-math); /* Fallback font for MathJax */
+    font-family: var(--font-family-math);
 }
 
 .equation {
-    margin: 1.8rem 0;
-    text-align: center; /* Center equations */
-    overflow-x: auto; /* Horizontal scrolling */
-    padding: 1rem 1.5rem; /* Add padding */
+    margin: 1.8rem 0; /* Increased margin */
+    text-align: center;
+    overflow-x: auto;
+    padding: 1rem 1.5rem; /* Increased padding */
     background-color: #f8f9fa;
     border: 1px solid var(--border-color);
     border-radius: 4px;
-    font-size: 1.1em; /* Slightly larger equation font size */
-    font-family: var(--font-family-math); /* Fallback font for MathJax */
+    font-size: 1.1em;
+    font-family: var(--font-family-math);
 }
 
-
-
-/* Enhanced Lists */
-ul.enhanced-list,
-ol.enhanced-list {
-    list-style: none; /* Remove default list styling */
+/* Enhanced lists */
+ul.enhanced-list, ol.enhanced-list {
+    list-style: none;
     padding-left: 1.5rem;
     margin-bottom: 1rem;
 }
 
-
-ul.enhanced-list .list-item,
-ol.enhanced-list .list-item {
+ul.enhanced-list .list-item, ol.enhanced-list .list-item {
     display: flex;
-    align-items: flex-start; /* Align to top of list item */
-    gap: 0.8rem;
+    align-items: flex-start;
+    gap: 0.8rem; /* Slightly more gap */
     margin-bottom: 0.8rem;
 }
 
-ul.enhanced-list .item-icon,
-ol.enhanced-list .item-icon {
+ul.enhanced-list .item-icon, ol.enhanced-list .item-icon {
     color: var(--accent-color);
     font-weight: bold;
-    flex-shrink: 0; /* Prevent icon from shrinking */
-    margin-top: 0.15em;
-    min-width: 1.2em; /* Ensures space for double-digit numbering */
+    flex-shrink: 0;
+    margin-top: 0.15em; /* Adjust alignment */
+    min-width: 1.2em; /* Ensure space for multi-digit numbers */
     text-align: right;
 }
 
-ul.enhanced-list .item-text,
-ol.enhanced-list .item-text {
-    flex-grow: 1; /* Allows text to wrap */
+ul.enhanced-list .item-text, ol.enhanced-list .item-text {
+    flex-grow: 1;
 }
 
-
-
-/* --- Images --- */
-img.content-image,
-.toc-container img { /* Target both index and topics images */
+/* Images */
+.content-image {
     max-width: 100%;
     height: auto;
-    display: block;  /* Prevents text wrapping issues */
-    margin: 1.5rem auto; /* Center images */
     border-radius: 4px;
-    border: 1px solid var(--border-color);  /* Subtle border */
-    box-shadow: 0 2px 4px rgba(0,0,0,0.05); /* Subtle shadow */
+    margin: 1.5rem auto;
+    display: block;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
 }
 
-
-
-
-
-/* --- Callout / Note Boxes --- */
-.callout {
-    padding: 1.5rem;
-    margin: 1.5rem 0; /* Consistent spacing around callouts */
-    border-left-width: 5px; /* Thicker left border */
-    border-left-style: solid; /* Solid border style */
-    border-radius: 5px;
-    background-color: #f9f9f9; /* General fallback if custom color not defined */
-}
-
-.callout.note {
-    background-color: var(--note-bg-color);
-    border-color: var(--note-border-color);
-}
-
-.callout.warning {
-    background-color: var(--warning-bg-color);
-    border-color: var(--warning-border-color);
-}
-
-.callout-title {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-size: 1.1em;
-    font-weight: 600;
-    display: flex;
-    align-items: center; /* Vertically center title and icon */
-    gap: 0.5rem;
-}
-
-.callout-icon { font-size: 1.2em; }
-
-.callout p:last-child { margin-bottom: 0; }  /* Remove bottom margin from last paragraph */
-
-
-/* --- Code Block Formatting --- */
-pre.code-block {
-    background-color: var(--code-background-color);
-    color: var(--code-text-color);
-    padding: 1rem 1.5rem;
-    border-radius: 5px;
-    overflow-x: auto; /* Horizontal scrolling for long lines */
-    margin: 1.5rem 0;  /* Spacing above and below code blocks */
-    font-family: var(--font-family-monospace);
-    font-size: 0.95em; /* Slightly smaller font-size */
-    line-height: 1.5;  /* Increased line height for readability */
-}
-
-pre.code-block code {
-    white-space: pre; /* Preserve whitespace and line breaks */
-    font-family: var(--font-family-monospace);  /* Ensure code tag also uses monospace font */
-}
-
-
-
-/* --- Key Points Section --- */
-
+/* Key Points Section */
 .key-points-section {
     margin-top: 2.5rem;
     margin-bottom: 2rem;
 }
 
 .key-points-container {
-    background-color: var(--note-bg-color);  /* Use note background color */
-    border: 1px solid var(--note-border-color); /* Use note border color */
+    background-color: var(--note-bg-color);
+    border: 1px solid var(--note-border-color);
     border-radius: 8px;
     padding: 1.5rem;
 }
 
 .key-points-header {
     display: flex;
-    align-items: center; /* Align icon and title vertically */
-    gap: 0.8rem;  /* Adjust spacing as needed */
+    align-items: center;
+    gap: 0.8rem;
     margin-bottom: 1rem;
     padding-bottom: 0.5rem;
     border-bottom: 1px solid var(--note-border-color);
 }
 
-
-
-.key-points-icon {
-    font-size: 1.5em;
-    color: var(--accent-color); /* Color the icon */
-}
-
-.key-points-title {
-    font-size: 1.3em;
-    color: var(--primary-color);
-    font-weight: 600;
-    margin: 0;  /* Remove default margin */
-}
-
+.key-points-icon { font-size: 1.5em; }
+.key-points-title { font-size: 1.3em; color: var(--primary-color); font-weight: 600; margin: 0; }
 .key-points-content { margin-top: 1rem; }
+.key-points-list { list-style: none; padding: 0; }
+.key-points-list .key-point-item { display: flex; align-items: flex-start; gap: 0.6rem; margin-bottom: 0.8rem; }
+.key-points-list .point-marker { color: var(--accent-color); font-weight: bold; margin-top: 0.1em; }
+.key-points-list .key-point-item p { margin: 0; flex-grow: 1; }
 
-
-.key-points-list {
-    list-style: none;
-    padding: 0;
+/* Callout / Note Boxes */
+.callout {
+    padding: 1.5rem;
+    margin: 1.5rem 0;
+    border-left-width: 5px;
+    border-left-style: solid;
+    border-radius: 5px;
+    background-color: #f9f9f9; /* General fallback */
 }
-
-.key-points-list .key-point-item {
-    display: flex;
-    align-items: flex-start; /* Align to top of item */
-    gap: 0.6rem;  /* Adjust spacing */
-    margin-bottom: 0.8rem;
+.callout.note {
+    background-color: var(--note-bg-color);
+    border-color: var(--note-border-color);
 }
-
-
-.key-points-list .point-marker {
-    color: var(--accent-color); /* Color the bullet point */
-    font-weight: bold;
-    margin-top: 0.1em;
+.callout.warning {
+    background-color: var(--warning-bg-color);
+    border-color: var(--warning-border-color);
 }
-
-.key-points-list .key-point-item p {
-    margin: 0; /* Remove default margin from paragraph */
-    flex-grow: 1; /* Allow text to wrap */
-}
-
-/* --- Contributors Section--- */
-.contributors-section {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); /* Responsive columns */
-    grid-gap: 20px; /* Spacing between contributor cards */
-}
-
-.contributor-card {
-    /* Styles for the card container (optional) */
-}
-
-
-.contributor {
-    /* Styling for individual contributor entry */
-    text-align: left; /* Left align text */
-
-}
-
-
-.contributor-name {
+.callout-title {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-size: 1.1em;
     font-weight: 600;
-    margin-top: 0.5rem; /* Space above name */
-    margin-bottom: 0.2rem; /* Space below name */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
+.callout-icon { font-size: 1.2em; }
+.callout p:last-child { margin-bottom: 0; }
 
-.contributor-title {
-    font-style: italic; /* Italicize title */
-    margin-bottom: 0.5rem; /* Space below title */
-    color: var(--secondary-color); /* Less prominent color */
+/* Code Block Formatting */
+pre.code-block {
+    background-color: var(--code-background-color);
+    color: var(--code-text-color);
+    padding: 1rem 1.5rem;
+    border-radius: 5px;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    font-family: var(--font-family-monospace);
+    font-size: 0.95em;
+    line-height: 1.5;
 }
-
-
-.contributor-affiliation {
-    color: var(--muted-text-color); /* Less prominent color */
+pre.code-block code {
+    white-space: pre;
+    font-family: var(--font-family-monospace); /* Ensure code tag also uses monospace */
 }
-
-
 
 /* --- Complex Layouts / Visual Grouping --- */
-
-/* Container for multi-column layout */
 .layout-columns {
     display: flex;
-    flex-wrap: wrap; /* Allow wrapping on smaller screens */
-    gap: 2rem;      /* Spacing between columns */
-    margin: 1.5rem 0;   /* Margin around columns */
+    flex-wrap: wrap; /* Allow columns to wrap on smaller screens */
+    gap: 2rem; /* Space between columns */
+    margin: 1.5rem 0; /* Add margin above/below the layout container */
 }
 
-
-
 .layout-columns > div {
-    /* Styles that apply to all columns */
-    flex: 1;        /* Columns expand to fill available space */
+    flex: 1; /* Allow columns to grow */
     min-width: 250px; /* Minimum width before wrapping */
 }
 
-/* Specific two-column layout class */
+/* Specific 2-column layout */
 .layout-2-column > div {
-    flex-basis: calc(50% - 1rem); /* Two equal width columns with gap */
+    flex-basis: calc(50% - 1rem); /* Two columns with gap */
 }
 
-
-/* Specific three-column layout class */
+/* Specific 3-column layout */
 .layout-3-column > div {
-    flex-basis: calc(33.33% - 1.33rem); /* Three equal width columns with gap */
+    flex-basis: calc(33.33% - 1.33rem); /* Three columns with gap */
 }
 
-
-
-/* Styling for content within columns - Example: remove top margin from first element */
+/* Styling for content within columns if needed (e.g., remove top margin from first element) */
 .layout-columns > div > :first-child {
     margin-top: 0;
 }
+/* --- End Complex Layouts --- */
 
-
-
-/* --- Responsive Adjustments --- */
-
-
-/* Medium screens and down */
 @media (max-width: 768px) {
     .container { padding: 1rem; }
     .document-section { padding: 1.5rem; }
@@ -680,84 +548,48 @@ pre.code-block code {
     h2.section-heading { font-size: 1.5em; }
     h3.subsection-heading { font-size: 1.2em; }
 
-
     .toc-container { margin: 20px; padding: 20px; }
     .toc-title { font-size: 2em; }
 
-    .nav-links { flex-direction: column; align-items: stretch; } /* Stack navigation vertically */
-    .nav-button { justify-content: center; }  /* Center button text and icon */
-
-    .document-progress { order: -1; margin-bottom: 1rem; width: 100%; }  /* Place progress above */
-
-    .progress-bar { max-width: none; /* Full width progress bar */ }
+    .nav-links { flex-direction: column; align-items: stretch; }
+    .nav-button { justify-content: center; }
+    .document-progress { order: -1; margin-bottom: 1rem; width: 100%; }
+    .progress-bar { max-width: none; }
 
 
-    /* Adjust table font size */
     .content-table { font-size: 0.9em; }
     .content-table th, .content-table td { padding: 0.5rem; }
 
-
-
-    /* Contributors - single column */
-    .contributors-section {
-        grid-template-columns: 1fr; /* Single column */
-    }
-
-
-    /* Complex Layouts / Visual Grouping adjustments */
+    /* Complex Layouts responsive adjustment */
     .layout-columns {
         flex-direction: column; /* Stack columns vertically */
-        gap: 1rem;           /* Reduce spacing */
+        gap: 1rem; /* Reduce gap when stacked */
     }
-
     .layout-columns > div {
-        flex-basis: auto;  /* Reset flex basis */
-        min-width: auto; /* Reset minimum width */
+        flex-basis: auto; /* Remove flex-basis when stacked */
+        min-width: auto;
     }
-
-
-    /* Reset flex-basis for specific column layouts */
     .layout-2-column > div,
     .layout-3-column > div {
-        flex-basis: auto; /* Stack on smaller screens */
+         flex-basis: auto;
     }
-
 }
-
-
-
-
-/* Small screens and down */
 
 @media (max-width: 480px) {
     body { font-size: 15px; }
     .container { padding: 0.5rem; }
     .document-section { padding: 1rem; }
-    h1.section-title { font-size: 1.6em; } /* Reduce title size further */
+
+    h1.section-title { font-size: 1.6em; }
     h2.section-heading { font-size: 1.3em; }
     h3.subsection-heading { font-size: 1.1em; }
     h4.subsubsection-heading { font-size: 1.05em; }
 
-    /* Table of Contents adjustments */
     .toc-title { font-size: 1.8em; }
     .toc-chapter-title { font-size: 1.3em; }
     .toc-link { font-size: 1em; }
 
     .nav-button { padding: 0.5rem 0.8rem; font-size: 0.85em; }
-    .equation { padding: 0.8rem; font-size: 1em; }
-    pre.code-block { padding: 0.8rem 1rem; font-size: 0.9em; } /* Smaller code */
-
-}
-
-
-/* Print Styles (Optional) */
-@media print {
-    /* Hide navigation elements */
-    .document-nav, .toc-container { display: none; }
-
-    /* Other print-specific styles */
-    body { background-color: #fff; color: #000; }
-    .container { max-width: none; padding: 0; }
-    .document-section { box-shadow: none; border: none; padding: 1in; }
-
+    .equation { padding: 0.8rem; font-size: 1em;}
+    pre.code-block { padding: 0.8rem 1rem; font-size: 0.9em;}
 }
