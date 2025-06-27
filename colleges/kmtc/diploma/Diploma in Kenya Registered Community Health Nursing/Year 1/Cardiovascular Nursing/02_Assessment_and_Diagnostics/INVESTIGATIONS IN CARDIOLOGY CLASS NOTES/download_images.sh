@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- Configuration ---
-MMD_FILE="COMM 111 (2).mmd" # Input MMD file name
+MMD_FILE="1. INVESTIGATIONS IN CARDIOLOGY CLASS NOTES.txt" # Input MMD file name
 OUTPUT_DIR="assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
