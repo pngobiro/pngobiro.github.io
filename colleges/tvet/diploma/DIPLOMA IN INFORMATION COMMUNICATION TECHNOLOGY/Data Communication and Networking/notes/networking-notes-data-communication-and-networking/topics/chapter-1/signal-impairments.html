@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transmission Impairment - Networking Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/main.css">
+     <style>
+        /* Add specific styles for signal visualizations if needed */
+        .signal-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+            text-align: center; /* Center SVG */
+        }
+        .signal-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        .signal-container svg {
+            display: block; /* Remove extra space below SVG */
+            margin: 0 auto; /* Center SVG */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <article class="document-content-wrapper">
+            <!-- Navigation (Top) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="signal-characteristics.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Signal Characteristics</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 9</span>
+                    </div>
+                    <a href="data-rate-limits.html" class="nav-button next-link-style">
+                        <span class="nav-text">Next: Data Rate Limits</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+                <div class="breadcrumbs">
+                    <a href="../../index.html">Home</a> > Transmission Impairment
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="page-title">Transmission Impairment</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <section class="content-section" id="impairment-intro">
+                     <div class="content-card">
+                        <p>Signals travel through transmission media, which are not perfect. The imperfection causes signal impairment. This means that the signal at the beginning of the medium is not the same as the signal at the end of the medium. What is sent is not what is received. Three causes of impairment are attenuation, distortion, and noise.</p>
+                    </div>
+                </section>
+
+                <!-- Attenuation -->
+                <section class="content-section" id="attenuation">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📉</span>
+                        <span class="heading-text">1. Attenuation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Attenuation means a loss of energy. When a signal, simple or composite, travels through a medium, it loses some of its energy in overcoming the resistance of the medium. That is why a wire carrying electric signals gets warm, if not hot, after a while. Some of the electrical energy in the signal is converted to heat. To compensate for this loss, amplifiers are used to amplify the signal. Attenuation is measured in terms of Decibels.</p>
+                        <p>The decibel (dB) measures the relative strengths of two signals or one signal at two different points. Note that the decibel is negative if a signal is attenuated and positive if a signal is amplified.</p>
+                        <div class="equation">
+                            <span class="math-inline">$dB = 10 \log_{10} (P_2 / P_1)$</span>
+                        </div>
+                        <p>Variables P1 and P2 are the powers of a signal at points 1 and 2, respectively.</p>
+                         <div class="signal-container">
+                            <div class="signal-title">Attenuation Example</div>
+                            <div id="attenuation-demo"></div> <!-- Placeholder for visualization -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Distortion -->
+                <section class="content-section" id="distortion">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">〰️</span>
+                        <span class="heading-text">2. Distortion</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Distortion means that the signal changes its form or shape. Distortion can occur in a composite signal made of different frequencies. Each signal component has its own propagation speed through a medium and, therefore, its own delay in arriving at the final destination. Differences in delay may create a difference in phase if the delay is not exactly the same as the period duration. In other words, signal components at the receiver have phases different from what they had at the sender. The shape of the composite signal is therefore not the same.</p>
+                        <p><i>(Figure showing the effect of distortion on a composite signal)</i></p> <!-- Placeholder for image description -->
+                         <div class="signal-container">
+                            <div class="signal-title">Distortion Example</div>
+                            <div id="distortion-demo"></div> <!-- Placeholder for visualization -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Noise -->
+                <section class="content-section" id="noise">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔊</span>
+                        <span class="heading-text">3. Noise</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Noise is another cause of impairment. Several types of noise, such as thermal noise, induced noise, crosstalk, and impulse noise, may corrupt the signal. Thermal noise is the random motion of electrons in a wire which creates an extra signal not originally sent by the transmitter. Induced noise comes from sources such as motors and appliances. These devices act as a sending antenna, and the transmission medium acts as the receiving antenna. Crosstalk is the effect of one wire on the other. One wire acts as a sending antenna and the other as the receiving antenna. Impulse noise is a spike (a signal with high energy in a very short time) that comes from power lines, lightning, and so on.</p>
+                         <div class="signal-container">
+                            <div class="signal-title">Noise Example</div>
+                            <div id="noise-demo"></div> <!-- Placeholder for visualization -->
+                        </div>
+                    </div>
+                </section>
+
+                 <!-- Signal-to-Noise Ratio (SNR) -->
+                <section class="content-section" id="snr">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">Signal-to-Noise Ratio (SNR)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The signal-to-noise ratio is defined as:</p>
+                        <div class="equation">
+                            SNR = Average Signal power / Average Noise Power
+                        </div>
+                        <p>SNR is actually the ratio of what is wanted (signal) to what is not wanted (noise). A high SNR means the signal is less corrupted by noise; a low SNR means the signal is more corrupted by noise. Because SNR is the ratio of two powers, it is often described in decibel units, SNR dB, defined as:</p>
+                         <div class="equation">
+                            <span class="math-inline">$SNR_{dB} = 10 \log_{10} (SNR)$</span>
+                        </div>
+                    </div>
+                </section>
+
+                 <!-- Key Points Section -->
+                <section class="key-points-section">
+                    <div class="key-points-container">
+                        <div class="key-points-header">
+                            <span class="key-points-icon">📝</span>
+                            <h3 class="key-points-title">Key Points to Remember</h3>
+                        </div>
+                        <div class="key-points-content">
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Transmission media are not perfect and cause signal impairment.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Attenuation is the loss of signal energy.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Distortion is the change in signal shape.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Noise (thermal, induced, crosstalk, impulse) corrupts the signal.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Signal-to-Noise Ratio (SNR) measures the ratio of signal power to noise power.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Navigation (Bottom) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="signal-characteristics.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Signal Characteristics</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 9</span>
+                    </div>
+                    <a href="data-rate-limits.html" class="nav-button next-link-style">
+                        <span class="nav-text">Next: Data Rate Limits</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+     <!-- Include MathJax if needed -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <!-- Include JS for visualizations -->
+    <script src="../../js/signal-visualizations.js"></script>
+</body>
+</html>

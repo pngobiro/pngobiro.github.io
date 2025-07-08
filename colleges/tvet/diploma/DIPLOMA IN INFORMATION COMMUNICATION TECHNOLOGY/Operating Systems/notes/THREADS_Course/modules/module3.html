@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CPU Scheduling - Operating Systems: Threads and Process Management</title>
+  <meta name="description" content="Scheduling criteria, algorithms, and real-world implementations">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="3">
+    <!-- Top Navigation -->
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module2.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 3 of 3</span>
+        </div>
+        <a href="#" class="nav-button disabled">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>CPU Scheduling</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Understand the concept of CPU scheduling and its importance in operating systems</li>
+          <li>Identify and compare different scheduling criteria</li>
+          <li>Analyze various CPU scheduling algorithms and their performance characteristics</li>
+          <li>Explore thread scheduling in modern operating systems</li>
+          <li>Examine multiple-processor and real-time scheduling approaches</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+      <section id="introduction">
+        <h2>2.3 CPU Scheduling</h2>
+        <div class="content-block">
+          <p>📚 CPU scheduling is a fundamental operating system function that determines which processes run on the CPU at any given time. The objective of scheduling is to maximize CPU utilization while providing reasonable response times to all processes.</p>
+          
+          <p>In a multiprogramming environment, the operating system keeps multiple processes in memory. When one process has to wait (for example, for an I/O operation to complete), the operating system takes the CPU away from that process and gives it to another process. This is the essence of CPU scheduling.</p>
+          
+          <h3>Maximum CPU Utilization with Multiprogramming</h3>
+          <p>Multiprogramming aims to have some process running at all times, to maximize CPU utilization. In a real system, CPU utilization ranges from 40% (for a lightly loaded system) to 90% (for a heavily used system).</p>
+          
+          <h3>CPU–I/O Burst Cycle</h3>
+          <p>Process execution consists of a cycle of CPU execution and I/O wait. Processes alternate between these two states:</p>
+          <ul>
+            <li><strong>CPU burst</strong>: Period of time during which a process is executing on the CPU</li>
+            <li><strong>I/O burst</strong>: Period of time during which a process is waiting for I/O to complete</li>
+          </ul>
+          
+          <figure>
+            <img src="../assets/images/module3-cpu-io-burst-cycle.png" alt="Diagram showing the alternating sequence of CPU and I/O bursts in process execution" width="600" height="300">
+            <figcaption>Alternating Sequence of CPU & I/O Bursts</figcaption>
+          </figure>
+          
+          <p>The duration of CPU bursts varies greatly from process to process and from computer to computer. But they tend to have a frequency curve that resembles an exponential or hyperexponential distribution, with a large number of short CPU bursts and a small number of long CPU bursts.</p>
+          
+          <figure>
+            <img src="../assets/images/module3-cpu-burst-distribution.png" alt="Graph showing the frequency distribution of CPU burst durations, with many short bursts and few long ones" width="600" height="300">
+            <figcaption>CPU Burst Distribution</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="cpu-scheduler">
+        <h2>CPU Scheduler</h2>
+        <div class="content-block">
+          <p>📚 The CPU scheduler selects from among the processes in memory that are ready to execute and allocates the CPU to one of them. The scheduler must make this decision in the following circumstances:</p>
+          <ol>
+            <li>When a process switches from the running state to the waiting state (for example, as a result of an I/O request or an invocation of wait())</li>
+            <li>When a process switches from the running state to the ready state (for example, when an interrupt occurs)</li>
+            <li>When a process switches from the waiting state to the ready state (for example, at completion of I/O)</li>
+            <li>When a process terminates</li>
+          </ol>
+          
+          <p>Scheduling under circumstances 1 and 4 is <strong>nonpreemptive</strong> (or cooperative). In this case, once a process is allocated the CPU, it keeps the CPU until it releases it either by terminating or by switching to the waiting state.</p>
+          
+          <p>Scheduling under circumstances 2 and 3 is <strong>preemptive</strong>. In this case, a running process can be interrupted and moved to the ready queue if a higher-priority process becomes ready.</p>
+          
+          <p>Preemptive scheduling can result in race conditions when data are shared among several processes. Consider the case of two processes that share data. While one process is updating the data, it is preempted so that the second process can run. The second process then tries to read the data, which are in an inconsistent state. This issue needs to be addressed through synchronization mechanisms, as discussed in the previous module.</p>
+        </div>
+      </section>
+
+      <section id="dispatcher">
+        <h2>Dispatcher</h2>
+        <div class="content-block">
+          <p>📚 The dispatcher is the module that gives control of the CPU to the process selected by the short-term scheduler. This function involves:</p>
+          <ul>
+            <li>Switching context from one process to another</li>
+            <li>Switching to user mode</li>
+            <li>Jumping to the proper location in the user program to restart that program</li>
+          </ul>
+          
+          <p>The dispatcher should be as fast as possible, since it is invoked during every process switch. The time it takes for the dispatcher to stop one process and start another running is known as the <strong>dispatch latency</strong>.</p>
+        </div>
+      </section>
+
+      <section id="scheduling-criteria">
+        <h2>2.3.1 Scheduling Criteria</h2>
+        <div class="content-block">
+          <p>📚 Different CPU scheduling algorithms have different properties and may favor one class of processes over another. In choosing which algorithm to use in a particular situation, we must consider the properties of the various algorithms.</p>
+          
+          <p>Many criteria have been suggested for comparing CPU scheduling algorithms. The criteria include the following:</p>
+          
+          <ul>
+            <li><strong>CPU utilization</strong>: We want to keep the CPU as busy as possible. Conceptually, CPU utilization can range from 0 to 100 percent. In a real system, it should range from 40 percent (for a lightly loaded system) to 90 percent (for a heavily used system).</li>
+            
+            <li><strong>Throughput</strong>: If the CPU is busy executing processes, then work is being done. One measure of work is the number of processes that are completed per time unit, called throughput.</li>
+            
+            <li><strong>Turnaround time</strong>: From the point of view of a particular process, the important criterion is how long it takes to execute that process. The interval from the time of submission of a process to the time of completion is the turnaround time.</li>
+            
+            <li><strong>Waiting time</strong>: The CPU scheduling algorithm does not affect the amount of time during which a process executes or does I/O; it affects only the amount of time that a process spends waiting in the ready queue. Waiting time is the sum of the periods spent waiting in the ready queue.</li>
+            
+            <li><strong>Response time</strong>: In an interactive system, turnaround time may not be the best criterion. Often, a process can produce some output fairly early and can continue computing new results while previous results are being output to the user. Thus, another measure is the time from the submission of a request until the first response is produced. This measure, called response time, is the time it takes to start responding, not the time it takes to output the response.</li>
+          </ul>
+          
+          <h3>Optimization Criteria</h3>
+          <p>In general, we want to optimize the following criteria:</p>
+          <ul>
+            <li>Maximize CPU utilization</li>
+            <li>Maximize throughput</li>
+            <li>Minimize turnaround time</li>
+            <li>Minimize waiting time</li>
+            <li>Minimize response time</li>
+          </ul>
+          
+          <p>However, optimizing one criterion may adversely affect other criteria. For example, to maximize CPU utilization, we might need to run long-running processes, which would increase the average turnaround time. Thus, the choice of a CPU scheduling algorithm often depends on the relative importance of these criteria in the system being designed.</p>
+        </div>
+      </section>
+
+      <section id="scheduling-algorithms">
+        <h2>2.3.2 Scheduling Algorithms</h2>
+        <div class="content-block">
+          <p>📚 There are various CPU scheduling algorithms, each with its own characteristics and suitable for different scenarios. Let's explore some of the most common ones:</p>
+          
+          <h3>First-Come, First-Served (FCFS) Scheduling</h3>
+          <p>The simplest CPU scheduling algorithm is the first-come, first-served (FCFS) scheduling algorithm. With this scheme, the process that requests the CPU first is allocated the CPU first.</p>
+          
+          <p>Consider the following example with three processes and their CPU burst times:</p>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Process</th>
+                <th>Burst Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>P1</td>
+                <td>24</td>
+              </tr>
+              <tr>
+                <td>P2</td>
+                <td>3</td>
+              </tr>
+              <tr>
+                <td>P3</td>
+                <td>3</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <p>If the processes arrive in the order P1, P2, P3, the Gantt chart for the schedule is:</p>
+          
+          <figure>
+            <img src="../assets/images/module3-fcfs-gantt1.png" alt="Gantt chart showing FCFS scheduling with processes arriving in order P1, P2, P3" width="600" height="100">
+            <figcaption>FCFS Scheduling (P1, P2, P3)</figcaption>
+          </figure>
+          
+          <p>The waiting time for P1 = 0, P2 = 24, P3 = 27. The average waiting time is (0 + 24 + 27)/3 = 17.</p>
+          
+          <p>Now, suppose that the processes arrive in the order P2, P3, P1. The Gantt chart for the schedule is:</p>
+          
+          <figure>
+            <img src="../assets/images/module3-fcfs-gantt2.png" alt="Gantt chart showing FCFS scheduling with processes arriving in order P2, P3, P1" width="600" height="100">
+            <figcaption>FCFS Scheduling (P2, P3, P1)</figcaption>
+          </figure>
+          
+          <p>The waiting time for P1 = 6, P2 = 0, P3 = 3. The average waiting time is (6 + 0 + 3)/3 = 3, which is much better than the previous case.</p>
+          
+          <p>The FCFS scheduling algorithm is nonpreemptive. Once the CPU is allocated to a process, that process keeps the CPU until it releases it, either by terminating or by requesting I/O.</p>
+          
+          <p>The main problem with FCFS is the <strong>convoy effect</strong>, where a single long-running process can cause many shorter processes to wait, leading to poor performance.</p>
+          
+          <h3>Shortest-Job-First (SJF) Scheduling</h3>
+          <p>The shortest-job-first (SJF) scheduling algorithm associates with each process the length of its next CPU burst. When the CPU is available, it is assigned to the process that has the smallest next CPU burst.</p>
+          
+          <p>There are two schemes for SJF:</p>
+          <ul>
+            <li><strong>Nonpreemptive</strong>: Once the CPU is allocated to a process, that process keeps the CPU until it completes its CPU burst, even if a new process with a shorter burst arrives.</li>
+            <li><strong>Preemptive</strong>: If a new process arrives with a CPU burst length less than the remaining time of the current executing process, the current process is preempted. This scheme is known as the shortest-remaining-time-first (SRTF).</li>
+          </ul>
+          
+          <p>Consider the following example:</p>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Process</th>
+                <th>Arrival Time</th>
+                <th>Burst Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>P1</td>
+                <td>0.0</td>
+                <td>7</td>
+              </tr>
+              <tr>
+                <td>P2</td>
+                <td>2.0</td>
+                <td>4</td>
+              </tr>
+              <tr>
+                <td>P3</td>
+                <td>4.0</td>
+                <td>1</td>
+              </tr>
+              <tr>
+                <td>P4</td>
+                <td>5.0</td>
+                <td>4</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <p>For nonpreemptive SJF, the Gantt chart is:</p>
+          
+          <figure>
+            <img src="../assets/images/module3-sjf-nonpreemptive.png" alt="Gantt chart showing nonpreemptive SJF scheduling" width="600" height="100">
+            <figcaption>Nonpreemptive SJF Scheduling</figcaption>
+          </figure>
+          
+          <p>The waiting time for P1 = 0, P2 = 6, P3 = 3, P4 = 7. The average waiting time is (0 + 6 + 3 + 7)/4 = 4.</p>
+          
+          <p>For preemptive SJF (SRTF), the Gantt chart is:</p>
+          
+          <figure>
+            <img src="../assets/images/module3-sjf-preemptive.png" alt="Gantt chart showing preemptive SJF (SRTF) scheduling" width="600" height="100">
+            <figcaption>Preemptive SJF (SRTF) Scheduling</figcaption>
+          </figure>
+          
+          <p>The waiting time for P1 = 9, P2 = 1, P3 = 0, P4 = 2. The average waiting time is (9 + 1 + 0 + 2)/4 = 3.</p>
+          
+          <p>The SJF algorithm is optimal—it gives the minimum average waiting time for a given set of processes. However, it requires knowledge of the length of the next CPU burst, which is not generally available. One approach is to use the length of the previous CPU burst as a predictor of the next CPU burst.</p>
+          
+          <h3>Priority Scheduling</h3>
+          <p>Priority scheduling associates a priority with each process, and the CPU is allocated to the process with the highest priority (smallest integer = highest priority). Equal-priority processes are scheduled in FCFS order.</p>
+          
+          <p>Priority scheduling can be either preemptive or nonpreemptive. A preemptive priority scheduling algorithm will preempt the CPU if the priority of the newly arrived process is higher than the priority of the currently running process. A nonpreemptive priority scheduling algorithm will simply put the new process at the head of the ready queue.</p>
+          
+          <p>A major problem with priority scheduling is <strong>starvation</strong>: low-priority processes may never execute because there are always some higher-priority processes. A solution to this problem is <strong>aging</strong>, which gradually increases the priority of processes that wait in the system for a long time.</p>
+          
+          <h3>Round Robin (RR)</h3>
+          <p>The round-robin (RR) scheduling algorithm is designed especially for time-sharing systems. It is similar to FCFS scheduling, but preemption is added to enable the system to switch between processes. A small unit of time, called a time quantum (or time slice), is defined. The ready queue is treated as a circular queue. The CPU scheduler goes around the ready queue, allocating the CPU to each process for a time interval of up to 1 time quantum.</p>
+          
+          <p>Consider the following example with a time quantum of 20:</p>
+          
+          <table>
+            <thead>
+              <tr>
+                <th>Process</th>
+                <th>Burst Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>P1</td>
+                <td>53</td>
+              </tr>
+              <tr>
+                <td>P2</td>
+                <td>17</td>
+              </tr>
+              <tr>
+                <td>P3</td>
+                <td>68</td>
+              </tr>
+              <tr>
+                <td>P4</td>
+                <td>24</td>
+              </tr>
+            </tbody>
+          </table>
+          
+          <p>The Gantt chart for the RR schedule is:</p>
+          
+          <figure>
+            <img src="../assets/images/module3-round-robin.png" alt="Gantt chart showing Round Robin scheduling with a time quantum of 20" width="600" height="100">
+            <figcaption>Round Robin Scheduling (Time Quantum = 20)</figcaption>
+          </figure>
+          
+          <p>The performance of the RR algorithm depends heavily on the size of the time quantum:</p>
+          <ul>
+            <li>If the time quantum is very large, the RR algorithm degenerates to the FCFS algorithm.</li>
+            <li>If the time quantum is very small, the RR approach is called processor sharing, and it creates the appearance that each of n processes has its own processor running at 1/n the speed of the real processor.</li>
+          </ul>
+          
+          <p>In practice, the time quantum should be large compared with the context-switch time; otherwise, the overhead of context switching will significantly degrade performance.</p>
+          
+          <h3>Multilevel Queue Scheduling</h3>
+          <p>In a multilevel queue scheduling algorithm, the ready queue is partitioned into several separate queues. Processes are permanently assigned to one queue, generally based on some property of the process, such as memory size, process priority, or process type.</p>
+          
+          <p>Each queue has its own scheduling algorithm. For example:</p>
+          <ul>
+            <li>Foreground (interactive) queue: Round Robin</li>
+            <li>Background (batch) queue: FCFS</li>
+          </ul>
+          
+          <p>In addition, there must be scheduling between the queues, which is commonly implemented as a fixed-priority preemptive scheduling. For example, the foreground queue may have absolute priority over the background queue.</p>
+          
+          <figure>
+            <img src="../assets/images/module3-multilevel-queue.png" alt="Diagram showing a multilevel queue scheduling system with different queues for different types of processes" width="600" height="300">
+            <figcaption>Multilevel Queue Scheduling</figcaption>
+          </figure>
+          
+          <h3>Multilevel Feedback Queue Scheduling</h3>
+          <p>The multilevel feedback queue scheduling algorithm allows a process to move between queues. The idea is to separate processes according to the characteristics of their CPU bursts. If a process uses too much CPU time, it will be moved to a lower-priority queue. This scheme leaves I/O-bound and interactive processes in the higher-priority queues. In addition, a process that waits too long in a lower-priority queue may be moved to a higher-priority queue. This form of aging prevents starvation.</p>
+          
+          <figure>
+            <img src="../assets/images/module3-multilevel-feedback-queue.png" alt="Diagram showing a multilevel feedback queue scheduling system with processes moving between queues" width="600" height="300">
+            <figcaption>Multilevel Feedback Queue Scheduling</figcaption>
+          </figure>
+          
+          <p>A multilevel feedback queue scheduler is defined by the following parameters:</p>
+          <ul>
+            <li>The number of queues</li>
+            <li>The scheduling algorithm for each queue</li>
+            <li>The method used to determine when to upgrade a process to a higher-priority queue</li>
+            <li>The method used to determine when to demote a process to a lower-priority queue</li>
+            <li>The method used to determine which queue a process will enter when that process needs service</li>
+          </ul>
+          
+          <p>The multilevel feedback queue scheduling algorithm is the most general CPU scheduling algorithm, but also the most complex to implement.</p>
+        </div>
+      </section>
+
+      <section id="thread-scheduling">
+        <h2>2.3.3 Thread Scheduling</h2>
+        <div class="content-block">
+          <p>📚 In operating systems that support threads, it is the threads—not the processes—that are scheduled for execution. Thread scheduling differs from process scheduling in several ways.</p>
+          
+          <p>There are two types of thread scheduling:</p>
+          <ul>
+            <li><strong>Local Scheduling</strong>: How the thread library decides which user-level thread to map onto an available lightweight process (LWP). This is done by the thread library in user space.</li>
+            <li><strong>Global Scheduling</strong>: How the kernel decides which kernel thread to run next. This is done by the kernel scheduler.</li>
+          </ul>
+          
+          <p>The distinction between user-level and kernel-level threads is important for scheduling. When threads are supported at the user level, the thread library schedules user-level threads to run on an available LWP. This is known as process-contention scope (PCS), since the competition for the CPU takes place among threads belonging to the same process.</p>
+          
+          <p>When threads are supported by the kernel, the kernel schedules kernel threads. This is known as system-contention scope (SCS), since the competition for the CPU takes place among all threads in the system.</p>
+          
+          <p>Most modern operating systems support kernel-level threads and thus use system-contention scope.</p>
+        </div>
+      </section>
+
+      <section id="multiple-processor-scheduling">
+        <h2>2.3.4 Multiple-Processor Scheduling</h2>
+        <div class="content-block">
+          <p>📚 CPU scheduling becomes more complex when multiple CPUs are available. In a multiple-processor system, the scheduling problem is not only deciding which process to run but also deciding on which processor to run it.</p>
+          
+          <p>There are several approaches to multiple-processor scheduling:</p>
+          
+          <h3>Asymmetric Multiprocessing</h3>
+          <p>In asymmetric multiprocessing, a master processor runs the operating system code and distributes processes to slave processors. This simplifies the scheduling and data sharing but can create a bottleneck at the master processor.</p>
+          
+          <h3>Symmetric Multiprocessing (SMP)</h3>
+          <p>In symmetric multiprocessing, each processor is self-scheduling. The scheduler for each processor examines the ready queue and selects a process to execute. There are two approaches to organizing the ready queue:</p>
+          <ul>
+            <li><strong>Common Ready Queue</strong>: All processors share a common ready queue of processes.</li>
+            <li><strong>Per-Processor Ready Queues</strong>: Each processor has its own private queue of ready processes.</li>
+          </ul>
+          
+          <h3>Processor Affinity</h3>
+          <p>When a process has been running on one processor, the cache for that processor is filled with the process's data. If the process is moved to another processor, the cache for the new processor must be filled with the process's data, which can be time-consuming. To avoid this, many SMP systems try to avoid migrating a process from one processor to another, a policy known as processor affinity.</p>
+          
+          <h3>Load Balancing</h3>
+          <p>Load balancing attempts to keep the workload evenly distributed across all processors in an SMP system. There are two approaches to load balancing:</p>
+          <ul>
+            <li><strong>Push Migration</strong>: A specific task periodically checks the load on each processor and evenly distributes the load by moving (pushing) processes from overloaded processors to underloaded processors.</li>
+            <li><strong>Pull Migration</strong>: An idle processor pulls a waiting task from a busy processor.</li>
+          </ul>
+          
+          <h3>Multicore Processors</h3>
+          <p>A multicore processor is a single chip with multiple processor cores. From a scheduling perspective, each core appears as a separate processor. However, the cores often share certain resources, such as cache or the memory bus, which can affect scheduling decisions.</p>
+        </div>
+      </section>
+
+      <section id="os-examples">
+        <h2>Operating System Examples</h2>
+        <div class="content-block">
+          <p>📚 Different operating systems implement CPU scheduling in various ways:</p>
+          
+          <h3>Windows XP Priorities</h3>
+          <p>Windows XP uses a priority-based preemptive scheduling algorithm with 32 priority levels. The highest-priority ready thread always runs. The priority levels are divided into two classes:</p>
+          <ul>
+            <li><strong>Real-time class</strong>: Priorities 16-31</li>
+            <li><strong>Variable class</strong>: Priorities 0-15</li>
+          </ul>
+          
+          <p>The dispatcher uses a 32-level priority scheme to determine the order of thread execution. Priorities are divided into two classes:</p>
+          <ul>
+            <li><strong>Variable class</strong>: Levels 0 through 15</li>
+            <li><strong>Real-time class</strong>: Levels 16 through 31</li>
+          </ul>
+          
+          <figure>
+            <img src="../assets/images/module3-windows-priorities.png" alt="Diagram showing the Windows XP priority scheme with 32 levels divided into variable and real-time classes" width="600" height="300">
+            <figcaption>Windows XP Priorities</figcaption>
+          </figure>
+          
+          <h3>Linux Scheduling</h3>
+          <p>Linux uses two scheduling algorithms:</p>
+          <ul>
+            <li><strong>Time-sharing</strong>: A prioritized, credit-based algorithm for fair CPU sharing</li>
+            <li><strong>Real-time</strong>: For time-critical tasks that need guaranteed response times</li>
+          </ul>
+          
+          <p>The time-sharing scheduler assigns each process a priority and a time slice. The priority is adjusted dynamically to reflect the resource requirements of the process. The time slice is the amount of time the process can run before it is preempted.</p>
+          
+          <p>The real-time scheduler implements two real-time scheduling policies:</p>
+          <ul>
+            <li><strong>FCFS</strong>: First-come, first-served</li>
+            <li><strong>RR</strong>: Round-robin</li>
+          </ul>
+          
+          <h3>Java Thread Scheduling</h3>
+          <p>The Java Virtual Machine (JVM) uses a preemptive, priority-based scheduling algorithm. If there are multiple threads with the same priority, the JVM uses a FIFO queue. The JVM schedules a thread to run when:</p>
+          <ol>
+            <li>The currently running thread exits the runnable state</li>
+            <li>A higher priority thread enters the runnable state</li>
+          </ol>
+          
+          <p>Note that the JVM does not specify whether threads are time-sliced or not. This is implementation-dependent and may vary across different JVM implementations.</p>
+        </div>
+      </section>
+
+      <section id="real-time-scheduling">
+        <h2>2.3.5 Real-Time CPU Scheduling</h2>
+        <div class="content-block">
+          <p>📚 Real-time systems are used when rigid time requirements are placed on the operation of a processor or the flow of data. Real-time systems are often categorized as:</p>
+          <ul>
+            <li><strong>Hard real-time systems</strong>: Secondary storage is limited or absent, and data are stored in short-term memory or read-only memory (ROM). These systems guarantee that critical tasks complete on time.</li>
+            <li><strong>Soft real-time systems</strong>: Less restrictive. Critical real-time processes receive priority over less fortunate ones, but they do not guarantee a deadline will be met.</li>
+          </ul>
+          
+          <h3>Real-Time Scheduling Algorithms</h3>
+          <p>Several scheduling algorithms are used in real-time systems:</p>
+          
+          <h4>Rate Monotonic Scheduling</h4>
+          <p>Rate monotonic scheduling assigns priorities to tasks based on their periods: the shorter the period, the higher the priority. This is a static priority scheme, meaning that priorities are assigned to tasks before execution and do not change.</p>
+          
+          <h4>Earliest Deadline First (EDF) Scheduling</h4>
+          <p>Earliest deadline first scheduling assigns priorities to tasks based on their deadlines: the earlier the deadline, the higher the priority. This is a dynamic priority scheme, meaning that priorities can change during execution.</p>
+          
+          <h4>Proportional Share Scheduling</h4>
+          <p>Proportional share scheduling allocates T shares among all applications. An application can receive N shares of time, thus ensuring that the application will have N/T of the total processor time.</p>
+        </div>
+      </section>
+
+      <section id="algorithm-evaluation">
+        <h2>2.3.6 Algorithm Evaluation</h2>
+        <div class="content-block">
+          <p>📚 How do we select a CPU scheduling algorithm for a particular system? There are many scheduling algorithms, each with its own parameters. As a result, selecting an algorithm can be difficult.</p>
+          
+          <p>There are several approaches to evaluating scheduling algorithms:</p>
+          
+          <h3>Deterministic Modeling</h3>
+          <p>One approach is to create a deterministic model where a specific workload is defined and the performance of each algorithm for that workload is computed. For example, we can define the workload as a set of processes with specific arrival times and CPU burst times, and then compute the average waiting time for each algorithm.</p>
+          
+          <h3>Queueing Models</h3>
+          <p>Another approach is to use queueing models. In this approach, the computer system is described as a network of servers, each with a queue of waiting processes. The CPU is one such server, with its ready queue. Assuming a particular distribution of service times and arrival rates, we can compute the average throughput, utilization, waiting time, and other metrics.</p>
+          
+          <h3>Simulations</h3>
+          <p>A third approach is to create a simulation of the system. The simulation uses a model of the system and a specific workload to generate data that can be analyzed. This approach is more flexible than deterministic modeling and can be used to model complex systems.</p>
+          
+          <h3>Implementation and Measurement</h3>
+          <p>The most accurate way to evaluate a scheduling algorithm is to implement it on a real system and measure its performance under real workloads. However, this approach is often impractical due to the cost and disruption involved in modifying the operating system of a production system.</p>
+          
+          <p>In practice, a combination of these approaches is often used to evaluate scheduling algorithms.</p>
+        </div>
+      </section>
+
+      <section id="summary">
+        <h2>📝 Module Summary</h2>
+        <div class="summary-block">
+          <ul>
+            <li>CPU scheduling is a fundamental operating system function that determines which processes run on the CPU at any given time.</li>
+            <li>The CPU scheduler selects from among the processes in memory that are ready to execute and allocates the CPU to one of them.</li>
+            <li>Scheduling criteria include CPU utilization, throughput, turnaround time, waiting time, and response time.</li>
+            <li>Common scheduling algorithms include First-Come, First-Served (FCFS), Shortest-Job-First (SJF), Priority Scheduling, and Round Robin (RR).</li>
+            <li>More complex scheduling algorithms include Multilevel Queue Scheduling and Multilevel Feedback Queue Scheduling.</li>
+            <li>Thread scheduling can be either local (user-level) or global (kernel-level).</li>
+            <li>Multiple-processor scheduling introduces additional complexities, such as processor affinity and load balancing.</li>
+            <li>Real-time scheduling algorithms, such as Rate Monotonic and Earliest Deadline First, are used in systems with time constraints.</li>
+            <li>Scheduling algorithms can be evaluated using deterministic modeling, queueing models, simulations, or implementation and measurement.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="assessment">
+        <h2>⚡ Knowledge Check</h2>
+        <div class="assessment-block">
+          <ol>
+            <li>
+              <p>Which scheduling algorithm is optimal in terms of minimizing average waiting time?</p>
+              <ol type="a">
+                <li>First-Come, First-Served (FCFS)</li>
+                <li>Shortest-Job-First (SJF)</li>
+                <li>Round Robin (RR)</li>
+                <li>Priority Scheduling</li>
+              </ol>
+            </li>
+            <li>
+              <p>What is the main problem with the First-Come, First-Served scheduling algorithm?</p>
+              <ol type="a">
+                <li>It requires knowledge of the CPU burst time</li>
+                <li>It can lead to starvation of processes</li>
+                <li>It has high context-switching overhead</li>
+                <li>It can lead to the convoy effect</li>
+              </ol>
+            </li>
+            <li>
+              <p>What is the main advantage of the Round Robin scheduling algorithm?</p>
+              <ol type="a">
+                <li>It minimizes average waiting time</li>
+                <li>It provides good response time for interactive processes</li>
+                <li>It is easy to implement</li>
+                <li>It prevents starvation</li>
+              </ol>
+            </li>
+            <li>
+              <p>What is the difference between preemptive and non-preemptive scheduling?</p>
+              <ol type="a">
+                <li>Preemptive scheduling allows a running process to be interrupted, while non-preemptive scheduling does not</li>
+                <li>Preemptive scheduling is used for real-time systems, while non-preemptive scheduling is used for batch systems</li>
+                <li>Preemptive scheduling requires hardware support, while non-preemptive scheduling does not</li>
+                <li>Preemptive scheduling is more efficient than non-preemptive scheduling</li>
+              </ol>
+            </li>
+            <li>
+              <p>What is processor affinity in multiple-processor scheduling?</p>
+              <ol type="a">
+                <li>The tendency of a processor to prefer certain types of processes</li>
+                <li>The policy of avoiding migrating a process from one processor to another</li>
+                <li>The relationship between a processor and its cache</li>
+                <li>The ability of a processor to execute multiple processes simultaneously</li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="module-footer">
+      <h2>Related Resources</h2>
+      <ul>
+        <li><a href="#">Advanced CPU Scheduling Techniques</a></li>
+        <li><a href="#">Real-Time Scheduling Algorithms</a></li>
+        <li><a href="#">Multiprocessor and Multicore Scheduling</a></li>
+      </ul>
+    </footer>
+
+    <!-- Bottom Navigation (identical to top) -->
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module2.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 3 of 3</span>
+        </div>
+        <a href="#" class="nav-button disabled">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</body>
+</html>

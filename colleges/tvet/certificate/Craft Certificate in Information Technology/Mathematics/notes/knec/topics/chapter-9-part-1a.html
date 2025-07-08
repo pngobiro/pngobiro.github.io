@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Matrices And Transformations (Part 1a) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 9 (Part 1a)</span>
+                    </div>
+                    <a href="chapter-9-part-1b.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 9: Matrices And Transformations</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-9-objectives -->
+                <section id="chapter-9-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you would have learnt:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to define a matrix and the types of matrix;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to understand the order of a matrix;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to perform simple algebra on matrix;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to relate shapes and their movements in space through matrices;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to understand the motion and transforms of 2 dimensional shapes;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">model shapes and operate on them by matrix arithmetic;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to perform a range of elementary 2 dimensional spatial operations.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-9-objectives -->
+
+                <!-- START: chapter-9-introduction -->
+                <section id="section-9-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💡</span>
+                        <span class="heading-text">9.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Here, we exploit the ability to emulate and to manipulate entities in spatial terms. Ultimately these basic ideas tend to controlling machine and its tools.</p>
+                        <p>Some of us may have seen this in computer applications such as DTP, CAD or CAM.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-9-introduction -->
+
+                <!-- START: chapter-9-definitions -->
+                <section id="section-9-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📚</span>
+                        <span class="heading-text">9.2 Definitions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A matrix is a rectangle array of m rows and n columns, where m and n are natural numbers. Such a matrix is said to be of order m x n.</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="equation">$$ \begin{pmatrix} 1 & 2 \\ 3 & 4 \\ 5 & 6 \end{pmatrix}, \begin{pmatrix} a & b & c \\ d & e & f \end{pmatrix} \text{ and } \begin{pmatrix} -9 & 0 \\ -1 & 2 \end{pmatrix} \text{ are matrices.} $$</div>
+                        <p>Their orders are 3x2, 2x3 and 2x2 respectively.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">An m x 1 matrix is known as a <strong>column vector</strong> or column matrix.</li>
+                            <li class="list-item">An n x n matrix is known as a <strong>square matrix</strong>.</li>
+                            <li class="list-item">A 1 x m matrix is known as a <strong>row matrix</strong>.</li>
+                        </ul>
+                        <p>The matrix <span class="math-inline">$\begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$</span> is called the <strong>unit matrix</strong> (or identity matrix). It is usually represented by the symbol I. When any matrix is multiplied by the unit matrix, the matrix remains unchanged. That is I.A = A.I = A where A is a matrix.</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="equation">$$ \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} \begin{pmatrix} a & b \\ c & d \end{pmatrix} = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} a & b \\ c & d \end{pmatrix} $$</div>
+                        <p>A matrix whose elements are all zeros is called a <strong>zero matrix</strong>.</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="equation">$$ \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix}, \begin{pmatrix} 0 & 0 & 0 \\ 0 & 0 & 0 \end{pmatrix} \text{ and } \begin{pmatrix} 0 \\ 0 \end{pmatrix} \text{ are all zero matrices.} $$</div>
+                        <p>When any matrix is multiplied by the zero matrix, the result is a zero matrix.</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="equation">$$ \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} \begin{pmatrix} a & b \\ c & d \end{pmatrix} = \begin{pmatrix} a & b \\ c & d \end{pmatrix} \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} $$</div>
+                        <p>The zero matrix is sometimes written simply as 0 so that if <span class="math-inline">$A = \begin{pmatrix} a & b \\ c & d \end{pmatrix}$</span> is multiplied by 0, we could write it as: 0 . A = A . 0 = 0</p>
+                    </div>
+                </section>
+                <!-- END: chapter-9-definitions -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-8-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 9 (Part 1a)</span>
+                    </div>
+                    <a href="chapter-9-part-1b.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

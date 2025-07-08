@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I/O Systems - Module 2</title>
+  <meta name="description" content="Detailed transcription of I/O Hardware section">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="2">
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module1.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 2 of 8</span>
+        </div>
+        <a href="module3.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="module-content">
+      <h1>5.1.2 I/O Hardware</h1>
+      
+      <p>I/O devices can be roughly categorized as storage communications user-interface and other</p>
+      
+      <p>Devices communicate with the computer via signals sent over wires or through the air.</p>
+      
+      <p>Devices connect with the computer via ports e.g. a serial or parallel port.</p>
+      
+      <p>A common set of wires connecting multiple devices is termed a bus.</p>
+      
+      <ul>
+        <li>Buses include rigid protocols for the types of messages that can be sent across the bus and the procedures for resolving contention issues.</li>
+        <li>Figure 13.1 below illustrates three of the four bus types commonly found in a modern PC:</li>
+      </ul>
+      
+      <figure>
+        <img src="../assets/images/module2-pci-bus-structure.jpg" alt="A Typical PCI Bus Structure showing the connections between CPU, memory, and various devices" width="600" height="450">
+        <figcaption>Fig: A Typical PCI Bus Structure</figcaption>
+      </figure>
+      
+      <ol>
+        <li>The PCI bus connects high-speed high-bandwidth devices to the memory subsystem (and the CPU.)</li>
+        <li>The expansion bus connects slower low-bandwidth devices which typically deliver data one character at a time (with buffering.)</li>
+        <li>The SCSI bus connects a number of SCSI devices to a common SCSI controller.</li>
+        <li>A daisy-chain bus (not shown) is when a string of devices is connected to each other like beads on a chain and only one of the devices is directly connected to the host.</li>
+      </ol>
+      
+      <p>One way of communicating with devices is through registers associated with each port. Registers may be one to four bytes in size and may typically include (a subset of) the following four:</p>
+      
+      <ol>
+        <li>The data-in register is read by the host to get input from the device.</li>
+        <li>The data-out register is written by the host to send output.</li>
+        <li>The status register has bits read by the host to ascertain the status of the device such as idle ready for input busy error transaction complete etc.</li>
+        <li>The control register has bits written by the host to issue commands or to change settings of the device such as parity checking word length or full- versus half-duplex operation.</li>
+      </ol>
+      
+      <p>Another technique for communicating with devices is memory-mapped I/O.</p>
+      
+      <ul>
+        <li>In this case a certain portion of the processor's address space is mapped to the device and communications occur by reading and writing directly to/from those memory areas.</li>
+        <li>Memory-mapped I/O is suitable for devices which must move large quantities of data quickly such as graphics cards.</li>
+        <li>Memory-mapped I/O can be used either instead of or more often in combination with traditional registers. For example graphics cards still use registers for control information such as setting the video mode.</li>
+        <li>A potential problem exists with memory-mapped I/O if a process is allowed to write directly to the address space used by a memory-mapped I/O device.</li>
+        <li>(Note: Memory-mapped I/O is not the same thing as direct memory access (DMA). See section 13.2.3 below.)</li>
+      </ul>
+    </main>
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module1.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 2 of 8</span>
+        </div>
+        <a href="module3.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</body>
+</html>

@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 6: Feedback Characteristics of Control Systems</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-5-part-2.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 6 of 9</span>
+                    </div>
+                    <a href="unit-7-part-1.html" class="nav-button"> <!-- Link to next unit part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Unit-6: Feedback Characteristics of Control Systems</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: unit-6-controllers-intro -->
+                <section id="unit-6-controllers-intro" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎛️</span>
+                        <span class="heading-text">Controllers</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>The various types of controllers are used to improve the performance of control systems. In this chapter, we will discuss the basic controllers such as the proportional, the derivative and the integral controllers.</p>
+                     </div>
+                </section>
+                <!-- END: unit-6-controllers-intro -->
+
+                <!-- START: unit-6-proportional -->
+                <section id="unit-6-proportional" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🅿️</span>
+                        <span class="heading-text">Proportional Controller</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>The proportional controller produces an output, which is proportional to error signal.</p>
+                        <!-- MMD used code block, interpreting as equations -->
+                        <div class="equation">$$ u(t) \propto e(t) $$</div>
+                        <div class="equation">$$ \Rightarrow u(t) = K_P e(t) $$</div>
+                        <p>Apply Laplace transform on both the sides -</p>
+                         <div class="equation">$$ U(s) = K_P E(s) $$</div>
+                         <div class="equation">$$ U(s)/E(s) = K_P $$</div>
+                        <p>Therefore, the transfer function of the proportional controller is $K_P$.</p>
+                        <p>Where,</p>
+                        <p>U(s) is the Laplace transform of the actuating signal u(t)</p>
+                        <p>E(s) is the Laplace transform of the error signal e(t)</p>
+                        <p>$K_P$ is the proportionality constant</p>
+                        <p>The block diagram of the unity negative feedback closed loop control system along with the proportional controller is shown in the following figure.</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-054-1.jpg" alt="Block diagram of a closed-loop system with a Proportional Controller (Kp) in the forward path." class="content-image">
+                        <p>The proportional controller is used to change the transient response as per the requirement.</p>
+                     </div>
+                </section>
+                <!-- END: unit-6-proportional -->
+
+                <!-- START: unit-6-derivative -->
+                 <section id="unit-6-derivative" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🇩</span>
+                        <span class="heading-text">Derivative Controller</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The derivative controller produces an output, which is derivative of the error signal.</p>
+                        <div class="equation">$$ u(t)=K_D \frac{de(t)}{dt} $$</div>
+                        <p>Apply Laplace transform on both sides.</p>
+                        <div class="equation">$$ U(s) = K_D sE(s) $$</div>
+                        <div class="equation">$$ U(s)/E(s)=K_D s $$</div>
+                        <p>Therefore, the transfer function of the derivative controller is $K_D s$.</p>
+                        <p>Where, $K_D$ is the derivative constant.</p>
+                        <!-- PDF repeats definition, preserving verbatim -->
+                        <p>Therefore, the transfer function of the derivative controller is $K_D s$.</p>
+                        <p>Where, $K_D$ is the derivative constant.</p>
+                        <p>The block diagram of the unity negative feedback closed loop control system along with the derivative controller is shown in the following figure.</p>
+                         <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-055-1.jpg" alt="Block diagram of a closed-loop system with a Derivative Controller (KDs) in the forward path." class="content-image">
+                        <p>The derivative controller is used to make the unstable control system into a stable one.</p>
+                    </div>
+                 </section>
+                 <!-- END: unit-6-derivative -->
+
+                 <!-- START: unit-6-integral -->
+                 <section id="unit-6-integral" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🇮</span>
+                        <span class="heading-text">Integral Controller</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The integral controller produces an output, which is integral of the error signal.</p>
+                         <div class="equation">$$ u(t)= K_I \int e(t) dt $$</div>
+                         <p>Apply Laplace transform on both the sides -</p>
+                         <div class="equation">$$ U(s) = [K_I E(s)]/s $$</div>
+                         <div class="equation">$$ U(s) / E(s)=[K_I]/s $$</div>
+                        <p>Therefore, the transfer function of the integral controller is $K_I/s$.</p>
+                        <p>Where, $K_I$ is the integral constant.</p>
+                        <p>The block diagram of the unity negative feedback closed loop control system along with the integral controller is shown in the following figure.</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-055-2.jpg" alt="Block diagram of a closed-loop system with an Integral Controller (KI/s) in the forward path." class="content-image">
+                        <p>The integral controller is used to decrease the steady state error.</p>
+                        <p>Let us now discuss about the combination of basic controllers.</p>
+                    </div>
+                 </section>
+                 <!-- END: unit-6-integral -->
+
+                 <!-- START: unit-6-pd -->
+                 <section id="unit-6-pd" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">PD</span>
+                        <span class="heading-text">Proportional Derivative (PD) Controller</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The proportional derivative controller produces an output, which is the combination of the outputs of proportional and derivative controllers.</p>
+                        <div class="equation">$$ u(t) = K_P e(t)+K_D \frac{de(t)}{dt} $$</div>
+                        <p>Apply Laplace transform on both sides -</p>
+                        <div class="equation">$$ U(s) =(K_P+K_D s)E(s) $$</div>
+                        <div class="equation">$$ U(s)/E(s)= K_P+K_D s $$</div>
+                        <p>Therefore, the transfer function of the proportional derivative controller is $K_P+K_D s$</p>
+                        <p>The block diagram of the unity negative feedback closed loop control system along with the proportional derivative controller is shown in the following figure.</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-056-1.jpg" alt="Block diagram of a closed-loop system with a Proportional-Derivative (PD) Controller (Kp + KDs) in the forward path." class="content-image">
+                        <p>The proportional derivative controller is used to improve the stability of control system without affecting the steady state error.</p>
+                    </div>
+                 </section>
+                 <!-- END: unit-6-pd -->
+
+                 <!-- START: unit-6-pi -->
+                 <section id="unit-6-pi" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">PI</span>
+                        <span class="heading-text">Proportional Integral (PI) Controller</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The proportional integral controller produces an output, which is the combination of outputs of the proportional and integral controllers.</p>
+                         <div class="equation">$$ u(t)=K_P e(t)+K_I \int e(t) dt $$</div>
+                         <p>Apply Laplace transform on both sides -</p>
+                         <div class="equation">$$ U(s) = (K_P + K_I/s) E(s) $$</div>
+                         <div class="equation">$$ U(s)/E(s) = K_P+ K_I/s $$</div>
+                        <p>Therefore, the transfer function of proportional integral controller is $K_P+ K_I/s$.</p>
+                        <p>The block diagram of the unity negative feedback closed loop control system along with the proportional integral controller is shown in the following figure.</p>
+                         <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-056-2.jpg" alt="Block diagram of a closed-loop system with a Proportional-Integral (PI) Controller (Kp + KI/s) in the forward path." class="content-image">
+                        <p>The proportional integral controller is used to decrease the steady state error without affecting the stability of the control system.</p>
+                    </div>
+                 </section>
+                 <!-- END: unit-6-pi -->
+
+                 <!-- START: unit-6-pid -->
+                 <section id="unit-6-pid" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">PID</span>
+                        <span class="heading-text">Proportional Integral Derivative (PID) Controller</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The proportional integral derivative controller produces an output, which is the combination of the outputs of proportional, integral and derivative controllers.</p>
+                        <div class="equation">$$ u(t)=K_P e(t)+K_I \int e(t)dt+K_D \frac{de(t)}{dt} $$</div>
+                        <p>Apply Laplace transform on both sides -</p>
+                        <div class="equation">$$ U(s) = (K_P+K_I/s+K_D s) E(s) $$</div>
+                        <div class="equation">$$ U(s)/E(s) = K_P+K_I/s+K_D s $$</div>
+                        <p>Therefore, the transfer function of the proportional integral derivative controller is $K_P+K_I/s+K_D s$</p>
+                        <p>The block diagram of the unity negative feedback closed loop control system along with the proportional integral derivative controller is shown in the following figure.</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-057-1.jpg" alt="Block diagram of a closed-loop system with a Proportional-Integral-Derivative (PID) Controller (Kp + KI/s + KDs) in the forward path." class="content-image">
+                        <p>The proportional integral derivative controller is used to improve the stability of the control system and to decrease steady state error.</p>
+                    </div>
+                 </section>
+                 <!-- END: unit-6-pid -->
+
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-5-part-2.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 6 of 9</span>
+                    </div>
+                    <a href="unit-7-part-1.html" class="nav-button"> <!-- Link to next unit part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

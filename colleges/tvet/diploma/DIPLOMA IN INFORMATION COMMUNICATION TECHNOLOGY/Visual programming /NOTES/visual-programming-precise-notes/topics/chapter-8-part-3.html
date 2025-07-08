@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Data Structures (Part 3)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 3)</span>
+                    </div>
+                    <a href="chapter-8-part-4.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 8: Data Structures (Part 3)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-8-part-3 -->
+                <section id="chapter-8-sorting" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔃</span>
+                        <span class="heading-text">Sorting Arrays</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The binary search method, in both of the implementations discussed above required the array be pre-sorted. What if that's not the case? How can we take an unsorted array and sort it?</p>
+                        <h3>Bubblesort</h3>
+                        <p>Bubblesort is a specialized algorithm designed for sorting items that are already mostly in sorted order. If only one or two items in your list are out of order, bubblesort is very fast. If the items in your list are initially arranged randomly, bubblesort is extremely slow. For this reason you should be careful when you use bubblesort.</p>
+                        <p>The idea behind the algorithm is to scan through the list looking for two adjacent items that are out of order. When you find two such items, you swap them and continue down the list. You repeat this process until all of the items are in order.</p>
+                        <p>Figure 1 shows a small list where the item 1 is out of order. During the first pass through the list, the algorithm will find that items 4 and 1 are out of order so it swaps them. During the next pass it finds that items 3 and 1 are out of order so it swaps them. During the third pass it swaps items 2 and 1 and the list is in its final order. The way in which the item 1 seems to bubble towards the top of the list is what gives bubblesort its name.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tr><td>2</td><td>2</td><td>2</td><td>1</td></tr>
+                                <tr><td>3</td><td>3</td><td>1</td><td>2</td></tr>
+                                <tr><td>4</td><td>1</td><td>3</td><td>3</td></tr>
+                                <tr><td>1</td><td>4</td><td>4</td><td>4</td></tr>
+                            </table>
+                        </div>
+                        <p>Figure 1. In a bubblesort, item 1 slowly "bubbles" to the top.</p>
+                        <p>You can improve the algorithm if you alternate upward and downward passes through the list. During downward passes an item that is too far down in the list, like the item 1 in the previous example, can move up only one position. An item that is too far up in the list might move many positions. If you add upward passes through the list, you will be able to move items many positions up through the list as well.</p>
+                        <p>During each pass through the list, at least one new item reaches its final position. If the items in your list begin mostly in sorted order, the algorithm will need only one or two passes through the list to finish the ordering. If you have a list of 1,000 items with only one out of order, the algorithm would require only 2,000 steps to put the list in its proper order.</p>
+                        <p>If the items begin arranged randomly, the algorithm may need one pass per item in the list. The algorithm would need up to 1 million steps to arrange a list of 1,000 items.</p>
+                        <h4>Listing 1. Bubblesort (VB code)</h4>
+                        <pre><code class="language-vb">' min and max are the minimum and maximum indexes
+' of the items that might still be out of order.
+Sub BubbleSort (List() As Long, ByVal min As Integer, ByVal max As Integer)
+    Dim last_swap As Integer
+    Dim i As Integer
+    Dim j As Integer
+    Dim tmp As Long
+    ' Repeat until we are done.
+    Do While min < max
+        ' Bubble up.
+        last_swap = min - 1
+        i = min + 1
+        Do While i <= max
+            ' Find a bubble.
+            If List(i - 1) > List(i) Then
+                ' See where to drop the bubble.
+                tmp = List(i - 1)
+                j = i
+                Do
+                    List(j - 1) = List(j)
+                    j = j + 1
+                    If j > max Then Exit Do
+                Loop While List(j) < tmp
+                List(j - 1) = tmp
+                last_swap = j - 1
+                i = j + 1
+            Else
+                i = i + 1
+            End If
+        Loop
+        ' Update max.
+        max = last_swap - 1
+        ' Bubble down.
+        last_swap = max + 1
+        i = max - 1
+        Do While i >= min
+            ' Find a bubble.
+            If List(i + 1) < List(i) Then
+                ' See where to drop the bubble.
+                tmp = List(i + 1)
+                j = i
+                Do
+                    List(j + 1) = List(j)
+                    j = j - 1
+                    If j < min Then Exit Do
+                Loop While List(j) > tmp
+                List(j + 1) = tmp
+                last_swap = j + 1
+                i = j - 1
+            Else
+                i = i - 1
+            End If
+        Loop
+        ' Update min.
+        min = last_swap + 1
+    Loop
+End Sub
+</code></pre>
+                        <h3>Selectionsort</h3>
+                        <p>Selectionsort is a very simple algorithm. First you search the list for the smallest item. Then you swap that item with the item at the top of the list. Next you find the second smallest item and swap it with the second item in the list. You continue finding the next smallest item and swapping it into its final position in the list until you have swapped all of the items to their final positions. The VB code for selectionsort is shown in Listing 2.</p>
+                        <h4>Listing 2. Selectionsort (VB code)</h4>
+                        <pre><code class="language-vb">Sub Selectionsort (List() As Long, min As Integer, _
+    max As Integer)
+    Dim i As Integer
+    Dim j As Integer
+    Dim best_value As Long
+    Dim best_j As Integer
+    For i = min To max - 1
+        best_value = List(i)
+        best_j = i
+        For j = i + 1 To max
+            If List(j) < best_value Then
+                best_value = List(j)
+                best_j = j
+            End If
+        Next j
+        List(best_j) = List(i)
+        List(i) = best_value
+    Next i
+End Sub
+</code></pre>
+                        <p>While looking for the Ith smallest item, you must examine each of the N - I items that you have not yet placed in their final positions. Then the total number of steps the algorithm needs is:</p>
+                        <pre><code class="language-vb">N + (N - 1) + (N - 2) + ... + 1 = N * (N + 1) / 2</code></pre>
+                        <p>This function is on the order of N^2. That means if you increase the number of items in the list by a factor of 2, the run time of the algorithm will increase by a factor of roughly 4. There are several other sorting algorithms that require only about N * log(N) steps (quicksort is one described below), so selectionsort is not a very fast algorithm for large lists.</p>
+                        <p>Selectionsort is fine for small lists, however. It is very simple so it is easy to program, debug, and maintain over time. In fact it is so simple that it is actually faster than the more complicated algorithms if the list you are sorting is very small. If your list contains only a dozen or so items, selectionsort will probably be your best choice.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-8-part-3 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 3)</span>
+                    </div>
+                    <a href="chapter-8-part-4.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

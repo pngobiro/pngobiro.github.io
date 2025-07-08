@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Boolean Algebra (I) (Part 2) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 5 (Part 2)</span>
+                    </div>
+                    <a href="chapter-6-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 5 : Boolean Algebra (I) (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-5-switching-diagrams-cont -->
+                <section id="section-5-7-cont" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔌</span>
+                        <span class="heading-text">5.7 Switching Diagrams (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">5.7.1 AND Function (or AND gate) (Continued)</h3>
+                        <p>Truth table for 3-input AND gate (D = A.B.C):</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>C</th><th>D</th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+                                    <tr><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 class="subsection-heading">5.7.2 OR Function (or OR gate)</h3>
+                        <p>The OR gate circuit symbol is as follows:</p>
+                        <img src="../assets/images/ch5-or-gate-symbol.jpg" alt="Standard OR gate symbol with inputs A, B and output C">
+                        <p>The analogy of an OR gate is as follows:</p>
+                        <img src="../assets/images/ch5-or-gate-analogy.jpg" alt="Circuit diagram showing two switches in parallel connected to a lamp, illustrating the OR function">
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Switch A</th><th>Switch B</th><th>Lamp C</th></tr></thead>
+                                <tbody>
+                                    <tr><td>OFF (0)</td><td>OFF (0)</td><td>OFF (0)</td></tr>
+                                    <tr><td>OFF (0)</td><td>ON (1)</td><td>ON (1)</td></tr>
+                                    <tr><td>ON (1)</td><td>OFF (0)</td><td>ON (1)</td></tr>
+                                    <tr><td>ON (1)</td><td>ON (1)</td><td>ON (1)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>It can also be represented by the following truth table:</p>
+                        <div class="table-container">
+                             <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>C = A+B</th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>That is, an OR gate output C=1 if either A=1 OR B=1. Otherwise C=0</p>
+                        <p>Mathematically, this can be expressed in a boolean equation as:</p>
+                        <div class="equation">$$ C = A + B \text{ (read as A OR B)} $$</div>
+                        <p>or</p>
+                        <div class="equation">$$ C = A \lor B $$</div> <!-- MMD typo: A U B -->
+
+                        <h3 class="subsection-heading">5.7.3 NOT Function (or NOT gate)</h3>
+                        <p>The NOT gate circuit symbol is as follows:</p>
+                        <img src="../assets/images/ch5-not-gate-symbol.jpg" alt="Standard NOT gate (inverter) symbol with input A and output B">
+                        <p>The action of a NOT gate is quite simple. It functions like an inverter. That is, the output is the inverted value of the input. For example, if A=0 then B=1, and if A=1 then B=0.</p>
+                        <p>The truth table is as follows:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>A</th><th>B = <span class="math-inline">$\overline{A}$</span></th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Mathematically, this can be expressed in a boolean equation as:</p>
+                        <div class="equation">$$ B = \overline{A} \text{ (read as complement A or bar A)} $$</div>
+                        <p>Note: <span class="math-inline">$\overline{A}$</span> can also be represented as A'.</p>
+
+                        <h3 class="subsection-heading">5.7.4 Other Logical Functions</h3>
+                        <p>AND, OR and NOT are known as the basic gates. There are other gates and logical functions used in computers which are built from the three basic gates.</p> <!-- MMD typo: filt -->
+                        <ul class="enhanced-list">
+                            <li class="list-item">NAND function (i.e. NOT-AND function)</li>
+                            <li class="list-item">NOR function (i.e. NOT-OR function)</li>
+                        </ul>
+                        <p>NAND and NOR gates are known as the universal building elements which are used to build more complex logical functions like the Adder (which we will cover later in the chapter).</p> <!-- MMD typo: logic:l -->
+
+                        <p><strong>NAND gate</strong></p>
+                        <p>The NAND gate circuit symbol is as follows:</p>
+                        <img src="../assets/images/ch5-nand-gate-symbol.jpg" alt="Standard NAND gate symbol">
+                        <p>Mathematically, this can be expressed in a boolean equation as:</p>
+                        <div class="equation">$$ C = \overline{A \cdot B} $$</div>
+                        <p>The truth table is as follows:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>A . B</th><th>C = <span class="math-inline">$\overline{A \cdot B}$</span></th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The 3-input NAND gate circuit symbol is as follows:</p>
+                        <img src="../assets/images/ch5-nand-gate-3input-symbol.jpg" alt="3-input NAND gate symbol">
+                        <p>The truth table is as follows:</p>
+                        <div class="table-container">
+                             <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>C</th><th>A.B.C</th><th>D = <span class="math-inline">$\overline{A.B.C}$</span></th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p><strong>NOR gate</strong></p>
+                        <p>The NOR gate circuit symbol is as follows:</p>
+                        <img src="../assets/images/ch5-nor-gate-symbol.jpg" alt="Standard NOR gate symbol">
+                        <p>Mathematically, this can be expressed in a boolean equation as:</p> <!-- MMD typo: boexpressed -->
+                        <div class="equation">$$ C = \overline{A+B} $$</div>
+                        <p>The truth table is as follows:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>A + B</th><th>C = <span class="math-inline">$\overline{A+B}$</span></th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td><td>0</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p><strong>NAND gate (Universal gate)</strong></p>
+                        <p>NAND gate can be modified to function as NOT gate, OR gate.</p> <!-- MMD typo: IUEOBWVIIC? -->
+                        <p>NOT function:</p>
+                        <img src="../assets/images/ch5-nand-as-not.jpg" alt="NAND gate configured as a NOT gate (inputs tied together)">
+                        <p>Note: B, C inputs follow from A.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>C</th><th>X = <span class="math-inline">$\overline{B \cdot C}$</span></th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>OR function:</p>
+                        <p><span class="math-inline">$X = A + B$</span></p>
+                        <p><span class="math-inline">$= \overline{\overline{A+B}}$</span> (Double negation)</p>
+                        <p><span class="math-inline">$= \overline{\overline{A} \cdot \overline{B}}$</span> (DeMorgan's Law)</p>
+                        <img src="../assets/images/ch5-nand-as-or.jpg" alt="OR function implemented using three NAND gates">
+                    </div>
+                </section>
+                <!-- END: chapter-5-switching-diagrams-cont -->
+
+                <!-- START: chapter-5-combining-gates -->
+                <section id="section-5-8" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔗</span>
+                        <span class="heading-text">5.8 Combining Logic Gates</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Many everyday digital logic problems use several logic gates. The most common pattern of gates is shown below. This pattern is called the AND-OR pattern. The outputs of the AND gates (1 and 2) are used as inputs to the OR gate (3). You will notice that this logic circuit has three inputs (A, B and C). The output of the entire circuit is labelled as Z.</p>
+                        <img src="../assets/images/ch5-combining-gates-and-or.jpg" alt="Logic circuit showing AND-OR pattern with inputs A, B, C and output Z = A.B + B.C">
+                        <p>Let us first determine the boolean expression that will describe this logic circuit. Begin the examination at gate (1). This is a 2-input AND gate. The output of this gate is A.B (A AND B). This expression is written at the output of gate(1) in figure (b) above.</p>
+                        <p>Gate(2) is also a 2-input AND gate. The output of this gate is B.C (B AND C). This expression is written at the output of gate(2). Next the output of gate(1) and (2) are OR-ed together by gate(3). Figure (c) shows A . B being OR-ed with B . C.</p>
+                        <p>The resulting boolean expression is <span class="math-inline">$Z = A \cdot B + B \cdot C$</span>. It is read as (A AND B) OR (B AND C). You will notice that the AND-ing is done first, followed by the OR-ing.</p>
+                        <p>Example: A logic circuit is given as follows:</p>
+                        <img src="../assets/images/ch5-combining-gates-example1.jpg" alt="Logic circuit example 1 with expression Z = (A-bar + B) . (C + D)">
+                        <p>The boolean expression is <span class="math-inline">$Z = (\overline{A} + B) \cdot (C + D)$</span></p>
+                        <p>Example: A logic circuit is given as follows:</p> <!-- MMD typo: follorvs -->
+                        <img src="../assets/images/ch5-combining-gates-example2.jpg" alt="Logic circuit example 2 with expression Z = A.B + A-bar.B-bar">
+                        <p>The boolean expression is <span class="math-inline">$Z = A \cdot B + \overline{A} \cdot \overline{B}$</span></p>
+
+                        <h3 class="subsection-heading">5.8.1 Analysing Circuits</h3>
+                        <img src="../assets/images/ch5-analysing-circuits-example1.jpg" alt="Complex logic circuit example for analysis">
+                        <div class="equation">$$ X = A \cdot B \cdot C + A \cdot \overline{B} \cdot C + \overline{A} \cdot B $$</div>
+                        <p>From the diagram, we see that each of the outputs from the 3 AND gates will be a '1' or a '0' and they serve as the inputs to the 'OR' gate which is represented by the '+' sign.</p>
+                        <p>Switching circuits are often over-complicated because they duplicate or even triplicate or quadruplicate functions. The results of rigorous simplification can, however, be quite startling.</p>
+                        <img src="../assets/images/ch5-analysing-circuits-example2.jpg" alt="Simplified version of the previous complex logic circuit">
+                        <div class="equation">$$ X = \overline{A} \cdot B + A \cdot C $$</div>
+                        <p>Simplified circuit</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-combining-gates -->
+
+                <!-- START: chapter-5-algebra-logic -->
+                <section id="section-5-9" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧮</span>
+                        <span class="heading-text">5.9 The Algebra of Logic</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>We shall now investigate how to achieve such results using Boolean Algebra. Note that in two-state logic, we have variables and two operators, '+' as in A + B for 'OR' and '.' as in A.B for 'AND'.</p> <!-- MMD typo: 4, 4 -->
+                        <p>Using these symbols, we have basic identities:</p> <!-- Added "basic identities" -->
+                        <p><span class="math-inline">$A + \overline{A} = 1$</span></p>
+                        <p><span class="math-inline">$A \cdot \overline{A} = 0$</span></p>
+                        <p><span class="math-inline">$A + 0 = A$</span></p>
+                        <p><span class="math-inline">$A \cdot 1 = A$</span></p>
+                        <p><span class="math-inline">$A \cdot 0 = 0$</span></p> <!-- MMD typo: ? -->
+                        <p><span class="math-inline">$A + 1 = 1$</span></p>
+                        <p>With reference to SETS, where <span class="math-inline">$\cup$</span> represents union and <span class="math-inline">$\cap$</span> represents intersection.</p> <!-- MMD typo: referere -->
+                        <p><span class="math-inline">$A + B = B + A \quad (A \lor B = A \cup B = B \cup A)$</span></p>
+                        <p><span class="math-inline">$A \cdot B = B \cdot A \quad (A \land B = A \cap B = B \cap A)$</span></p>
+                        <p><span class="math-inline">$\overline{A} \quad (\text{NOT } A = A')$</span></p>
+                        <p>Further examples are illustrated using Venn diagrams:</p>
+                        <img src="../assets/images/ch5-algebra-logic-venn1.jpg" alt="Venn Diagram showing A intersect B and its complement">
+                        <p>A.B and its complement or 'NOT' (shaded region)</p>
+                        <img src="../assets/images/ch5-algebra-logic-venn2.jpg" alt="Venn Diagram showing A union B union C and its complement">
+                        <p>A + B + C and its complement or 'NOT' (shaded region)</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-algebra-logic -->
+
+                <!-- START: chapter-5-points-remember -->
+                <section id="chapter-5-points-remember" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📌</span>
+                        <span class="heading-text">Points to Remember (Boolean Algebra I)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>Logic Operators / Gates / Set Notation</strong></p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Operator</th><th>Gate Symbol</th><th>Boolean</th><th>Set Notation</th></tr></thead>
+                                <tbody>
+                                    <tr><td>AND</td><td><span class="math-inline">$\land$</span></td><td>A . B</td><td><span class="math-inline">$A \cap B$</span></td></tr>
+                                    <tr><td>OR</td><td><span class="math-inline">$\lor$</span></td><td>A + B</td><td><span class="math-inline">$A \cup B$</span></td></tr>
+                                    <tr><td>NOT</td><td><span class="math-inline">$\sim$</span> or <span class="math-inline">$\neg$</span></td><td><span class="math-inline">$\overline{A}$</span> or A'</td><td>A'</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>AND operator returns true if all inputs are true.</p>
+                        <p>OR operator returns true if at least one input is true.</p> <!-- Corrected MMD -->
+                        <p>Truth Table is used to show all possible outputs with all possible combination of inputs.</p> <!-- MMD typo: no sible -->
+                        <p>n Inputs give rise to <span class="math-inline">$2^n$</span> combinations</p> <!-- Generalised MMD examples -->
+                        <ul class="enhanced-list">
+                            <li class="list-item">2 Inputs give rise to 4 (<span class="math-inline">$=2^2$</span>) combinations</li>
+                            <li class="list-item">3 Inputs give rise to 8 (<span class="math-inline">$=2^3$</span>) combinations</li>
+                            <li class="list-item">4 Inputs give rise to 16 (<span class="math-inline">$=2^4$</span>) combinations</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-5-points-remember -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-5-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 5 (Part 2)</span>
+                    </div>
+                    <a href="chapter-6-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

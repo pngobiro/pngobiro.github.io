@@ -1,0 +1,524 @@
+<!-- topics/unit-2-plc-basics.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 2 Part 1: PLC Basics, Hardware, Operation</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-1-intro-plc.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 20%;"></div> <!-- Chunk 2/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 2 of 10</span>
+                    </div>
+                    <a href="unit-2-plc-programming.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">TOPIC 2: PROGRAMMABLE LOGIC CONTROLLER (PLC)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: topic-2-intro -->
+                <section id="topic-2-intro" class="content-section" aria-labelledby="topic-2-intro-heading">
+                    <h2 id="topic-2-intro-heading" class="section-heading">
+                        <span class="heading-icon">💡</span>
+                        <span class="heading-text">Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>PLC</strong> is a unit of hardware used to control and automate industrial processes. It is a micro-computer based controller that uses stored instructions in programmable memory to implement logic, sequencing, timing, counting and arithmetic functions through digital or analog input/output modules, for controlling machines and processes.</p>
+                        <p>The term <strong>logic</strong> is used because programming is primarily concerned with implementing logic and switching operation.</p>
+                        <p>The PLC is designed as replacement for the hard-wired relay and timer logic to be found in traditional control panels, where PLC provides ease and flexibility of control based on programming and executing logic instructions.</p>
+                        <p>A PLC has three main aspects: the inputs and outputs and the control program. In figure below, PLC has eight inputs and four outputs.</p>
+                        <p>The <strong>input</strong> is anything that can sense the status of the environment and then convert that information in to a signal. Often the signal can simply be a voltage that is either on or off. For example, input devices can be proximity switches, photoelectric sensors, temperature sensors, push buttons, or pressure sensors.</p>
+                        <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-004-1.jpg" alt="Image of a Crouzet Millenium II+ PLC showing inputs and outputs." class="content-image" style="max-width: 300px;">
+                            <figcaption>Example PLC Unit (Crouzet Millenium II+)</figcaption>
+                        </figure>
+                        <p>The <strong>outputs</strong> are connected to the devices that need to be controlled like motors, indicator lights, fans, warning sirens or heating elements.</p>
+                        <p>Control processes need devices to monitor events or measure needed values. These devices are generically called <strong>inputs</strong> to the PLC.</p>
+                        <p>The <strong>program</strong> uses a set of logical instructions that drives the outputs based on the inputs.</p>
+                    </div>
+                </section>
+                <!-- END: topic-2-intro -->
+
+                <!-- START: topic-2-need -->
+                <section id="topic-2-need" class="content-section" aria-labelledby="topic-2-need-heading">
+                    <h2 id="topic-2-need-heading" class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">The Need for PLCs</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>Hardwired panels were very time consuming to wire, debug and change. The PLCs eliminates much of the hard wiring that was associated with conventional relay control circuits.</p>
+                        <p>PLCs have the great advantage that the same basic controller can be used with a wide range of control systems.</p>
+                        <p>PLCs require shorter installation and commissioning times than do hard-wired systems. To modify a control system and the rules that are to be used, all that is necessary is for an operator to key in a different set of instructions. There is no need to rewire.</p>
+                        <p>The result is a flexible, cost effective, system which can be used with control systems which vary quite widely in their nature and complexity.</p>
+                        <p>PLCs are similar to computers but whereas computers are optimized for calculation and display tasks, PLCs are optimized for control tasks and the industrial environment.</p>
+                        <p>Thus PLCs have specific features suited for industrial control :-</p>
+                        <ol class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Rugged and designed to withstand vibrations, temperature, humidity and noise</span></li>
+                           <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Modular plug-in construction, allowing easy replacement or addition of units (e.g. input/output);</span></li>
+                           <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Standard input/output connections and signal levels</span></li>
+                           <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Have interfacing for inputs and outputs already inside the controller.</span></li>
+                           <li class="list-item"><span class="item-icon">5.</span><span class="item-text">Easily understood programming language which is primarily concerned with logic and switching operations</span></li>
+                           <li class="list-item"><span class="item-icon">6.</span><span class="item-text">Ease of programming and reprogramming in-plant;</span></li>
+                           <li class="list-item"><span class="item-icon">7.</span><span class="item-text">Capable of communicating with other PLCs, computers and intelligent devices;</span></li>
+                           <li class="list-item"><span class="item-icon">8.</span><span class="item-text">Competitive in both cost and space occupied with relay and solid-state logic systems.</span></li>
+                        </ol>
+                        <p>These features make programmable controllers highly desirable in a wide variety of industrial-plant and process-control situations.</p>
+                     </div>
+                </section>
+                <!-- END: topic-2-need -->
+
+                 <!-- START: topic-2-advantages -->
+                 <section id="topic-2-advantages" class="content-section" aria-labelledby="topic-2-advantages-heading">
+                     <h2 id="topic-2-advantages-heading" class="section-heading">
+                         <span class="heading-icon">👍</span>
+                         <span class="heading-text">PLC Advantages</span>
+                     </h2>
+                     <div class="content-card">
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Flexibility:</strong> One single PLC can easily run many machines.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Correcting Errors:</strong> With PLC control, any change in circuit design or sequence is as simple as retyping the logic. Correcting errors in PLC is extremely short and cost effective.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Space Efficient:</strong> Today's PLC memory is getting bigger and bigger this means that we can generate more and more contacts, coils, timers, sequencers, counters and so on. It is possible to have thousands of contact timers and counters in a single PLC.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Low Cost:</strong> Prices of PLC vary from few hundreds to few thousands.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Testing:</strong> A PLC program can be tested and evaluated in a lab. The program can be tested, validated and corrected saving very valuable time.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Visual observation:</strong> When running a PLC program a visual operation can be seen on the screen. Hence troubleshooting a circuit is really quick, easy and simple.</span></li>
+                        </ul>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-advantages -->
+
+                <!-- START: topic-2-applications -->
+                <section id="topic-2-applications" class="content-section" aria-labelledby="topic-2-applications-heading">
+                    <h2 id="topic-2-applications-heading" class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Typical PLC Applications</span>
+                    </h2>
+                     <div class="content-card">
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">PLCs are used to operate greenhouse irrigations systems. It can be used to control how often and the amount of water distributed to certain areas. It can control a large amount of valves to certain areas and is flexible as the greenhouse's needs change.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">PLCs are used for sorting packages on a conveyor by operating a diverter. A sensor can detect a package type and a series of diverters can sort them at the end of the belt. But the PLC is flexible, can be reprogrammed if and when the sorting task changes or if enhanced operation is needed.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">PLCs are implemented in a variety of control operations from large to small. Carwashes are a popular use for PLCs because it involves intricate use of sensors and motors, but also has the need for relatively complex logic.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Lumber mills use PLCs to control the main saw and loading of wood while various sensors ensure safe operation so that people and equipment are not harmed</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">PLCs can withstand the harsh condition desert conditions while controlling an oil recovery process. Temperatures can get higher than 120 degrees Fahrenheit in the desert, yet a PLC can read sensors and control the motors necessary for oil extraction.</span></li>
+                        </ul>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-applications -->
+
+                <!-- START: topic-2-architecture -->
+                <section id="topic-2-architecture" class="content-section" aria-labelledby="topic-2-architecture-heading">
+                    <h2 id="topic-2-architecture-heading" class="section-heading">
+                        <span class="heading-icon">🏛️</span>
+                        <span class="heading-text">PLC Architecture</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>There are two types:</p>
+                        <ol class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Open architecture</strong> design allows the system to be connected easily to devices and programs made by other manufacturers.</span></li>
+                           <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Closed architecture</strong> or proprietary system is one whose design makes it more difficult to connect devices and programs made by other manufacturers.</span></li>
+                        </ol>
+                        <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">💡</span> Note</h4>
+                           <p>When working with PLC systems that are proprietary in nature you must be sure that any generic hardware or software you use is compatible with your particular PLC.</p>
+                         </aside>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-architecture -->
+
+                <!-- START: topic-2-hardware -->
+                <section id="topic-2-hardware" class="content-section" aria-labelledby="topic-2-hardware-heading">
+                    <h2 id="topic-2-hardware-heading" class="section-heading">
+                        <span class="heading-icon">🔩</span>
+                        <span class="heading-text">PLC Hardware</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The structure of a PLC can be divided several parts/components. The main parts are input/output modules, central processing unit, memory and programming terminal.</p>
+                        <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-005-1.jpg" alt="Block diagram of PLC Hardware showing Programming Terminal connected to CPU. CPU connected to Memory, Power Supply, Input Module, and Output Module. Input Module connects to Input Devices, Output Module connects to Output Devices. All components except Programming Terminal and Devices are within the PLC boundary." class="content-image" style="max-width: 500px;">
+                             <figcaption>PLC Hardware Components</figcaption>
+                         </figure>
+                        <ol type="a" class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">a)</span><span class="item-text"><strong>Processor unit or central processing unit (CPU)</strong> is the unit containing the microprocessor and this interprets the input signals and carries out the control actions, according to the program stored in its memory, communicating the decisions as action signals to the outputs.</span></li>
+                            <li class="list-item"><span class="item-icon">b)</span><span class="item-text"><strong>Memory unit</strong> is where the program is stored that is to be used for the control action to be exercised by the microprocessor and data stored from the input for processing and for the output for outputting.</span></li>
+                            <li class="list-item"><span class="item-icon">c)</span><span class="item-text"><strong>Input and output modules</strong> - are where the processor receives information from external devices and communicates information to external devices. The I/O unit provides the interface between the system and the outside world, allowing for connections to be made through I/O channels to input devices such as sensors and output devices such as motors and solenoids. It is also through the I/O unit that programs are entered from a program panel. Every I/O point has a unique address which can be used</span></li>
+                            <li class="list-item"><span class="item-icon">d)</span><span class="item-text"><strong>Input and output (I/O) devices</strong> - is collection of physical elements of the control system that either provide or use I/O data.</span></li>
+                            <li class="list-item"><span class="item-icon">e)</span><span class="item-text"><strong>Programming device / terminal</strong> are used to enter the required program into the memory of the processor. The program is developed in the device and then transferred to the memory unit of the PLC.</span></li>
+                            <li class="list-item"><span class="item-icon">f)</span><span class="item-text"><strong>Power supply unit</strong> is needed to convert the mains A.C voltage to low d.c. voltages necessary for the processor and the circuits in the input end output interface modules.</span></li>
+                            <li class="list-item"><span class="item-icon">g)</span><span class="item-text"><strong>Rack Assembly:</strong> Most medium to large PLC systems are assembled such that the individual components - CPU, I/O, power supply - are modules that are held together within a rack. In smaller PLC systems - all of these components may be contained in a single housing or "brick" - these smaller systems are sometimes referred to as "bricks" or "shoebox" PLCs.</span></li>
+                            <li class="list-item"><span class="item-icon">h)</span><span class="item-text"><strong>Communication interface</strong> is used to receive and transmit data on communication network from or to other remote PLC. It is concurred with such actions as device verification, data acquisition, synchronization between user applications and connection management.</span></li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: topic-2-hardware -->
+
+                <!-- START: topic-2-cpu-architecture -->
+                <section id="topic-2-cpu-architecture" class="content-section" aria-labelledby="topic-2-cpu-architecture-heading">
+                    <h2 id="topic-2-cpu-architecture-heading" class="section-heading">
+                        <span class="heading-icon">🧠</span>
+                        <span class="heading-text">PLC CPU architecture</span>
+                    </h2>
+                     <div class="content-card">
+                         <p>The CPU controls and supervises all operations within the PLC, carrying out programmed instructions stored in the memory.</p>
+                         <p>An internal communications highway, or bus system, carries information to end from the CPU, memory and I/O units, under control of the CPU.</p>
+                         <p>The CPU controls and processes all the operation within the PLC. It is supplied with a clock with a frequency of between 1 and 8 MHz . This frequency determines the operating speed of the PLC and provides the timing and synchronization for all elements in the systems.</p>
+                         <p>The information within the PLC is carried by means of digital signals.</p>
+                         <p>The internal paths along digital signal flow are called <strong>buses</strong>. A bus is just a number of conductors along which electrical signals can flow.</p>
+                         <p>The internal structure of the CPU depends on the microprocessor concerned</p>
+                         <p>The simplified model consist of five parts ALU, CU, Registers, Buses, and memory.</p>
+                          <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-006-1.jpg" alt="Block diagram showing the CPU architecture. Components include CPU, System ROM, Data RAM, User Program RAM, Optional EPROM, connected via Address Bus, Control Bus, and Data Bus. The System Bus connects to Input/Output Units, which interface with Input Devices and Output Devices. A Programming Terminal connects to the system." class="content-image" style="max-width: 600px;">
+                              <figcaption>PLC CPU Architecture Diagram</figcaption>
+                          </figure>
+                         <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Arithmetic and Logic Unit (ALU)</strong> Which is responsible for data manipulation and carrying out arithmetic operations of addition and subtraction and logic operations of AND, OR, NOT and EXCLUSIVE -OR(X-OR) it receives control signals from the control unit telling it to carry out these operations</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Control Unit</strong> - This controls the movement of instruction in and out of the processor and also controls the operation of ALU. It consists of a decoder, controls logic circuit and a clock to ensure everything happens at the correct time. It is also responsible for performing the instruction execution cycle.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Registers</strong> - located within the microprocessor and used to store information involved in program execution. It is a small amount of internal memory that is used for the quick storage and retrieval of data and instructions. All processors include some common registers used for specific functions, namely the program counter, instruction register, accumulator, memory address register and stack pointer.</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text"><strong>Bus</strong> - Buses are the paths used for communication within the PLC. The information is transmitted in binary form i.e. as a group of bits with a bit being a binary digit of 0 or 1.
+                                <ul style="margin-top: 0.5rem;">
+                                    <li><strong>System bus</strong> is used for communication between the I/O ports and I/O unit. It is a cable which carries data communication between the major components of the computer including the microprocessor.</li>
+                                    <li><strong>Control bus</strong> carries the signals relating to the control and coordination of the various activities across the computer which can be sent from the control unit within the CPU. It informs memory devices whether they are to receive data from an input or output data and to carry out timing signals used to synchronize actions.</li>
+                                    <li><strong>Data bus</strong> carries the data used in the process carried out by the CPU. It is used for the exchange of data between the processor, memory and peripherals, and is bidirectional. A micro processor termed as being 8-bit has an internal data bus which can handle 8-bit number.</li>
+                                    <li><strong>Address bus</strong> is used to carry the addresses of memory location. It contains the connection between the microprocessor and memory that carry the signals relating to the addresses which the CPU is processing at that time, such as the locations that the CPU is reading from or writing to. Every memory location is given a unique address.</li>
+                                </ul>
+                            </span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text"><strong>Memory:</strong> - There are several memory elements in a PLC system.
+                                <ul style="margin-top: 0.5rem;">
+                                    <li><strong>Executive memory</strong> or operating system memory which is read only memory (ROM) to give permanent storage for operating system and fixed data used by the CPU. It is the one that actually does the scanning in the PLC.</li>
+                                    <li><strong>System memory</strong> - in order for the operating system to function, a section of the memory is allotted for system administration. As the executive program performs its duties, it often requires a place to store intermediate results and information. A section of RAM (Random Access Memory) is installed for this purpose.</li>
+                                    <li><strong>Data memory</strong> - This is a RAM where information is stored on the status of input and output devices and the values of timers and counters and other internal devices. Data RAM is sometimes referred to as data table or register table.</li>
+                                    <li><strong>User program memory</strong> - The final area of memory in a PLC is allocated to the storage of the user program. It is this memory area that the executive program instructs the micro-processor to examine or 'scan' to find the user instructions.</li>
+                                    <li><strong>I/O status memory</strong> or I/O image table. A portion of RAM is allocated for the storage of current I/O status. Every single I/O module has been assigned to a particular location within the I/O image table. The location within the input and output image table/map are identified by addresses, each location has its own unique address.</li>
+                                </ul>
+                            </span></li>
+                         </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-cpu-architecture -->
+
+                 <!-- START: topic-2-memory-organization -->
+                 <section id="topic-2-memory-organization" class="content-section" aria-labelledby="topic-2-memory-organization-heading">
+                     <h2 id="topic-2-memory-organization-heading" class="section-heading">
+                         <span class="heading-icon">💾</span>
+                         <span class="heading-text">Memory organization</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>This refers to how certain areas of memory in a PLC are utilized. <dfn>Physical addressing</dfn> is the ability to read data from a specific module terminal or write information to a specific module terminal.</p>
+                         <p>During the execution of user program, the micro processor scans the user program and interprets the user command, when information is read from a contact or input, it is stored in memory. This portion of memory is the <dfn>input image table/map</dfn> which is designated to store this input information. Each input typically has at a minimum, a single bit designated to store its information</p>
+                         <p>Data resulting from logical analysis by the CPU i.e. various output device status generated during the execution of user program is stored in memory labeled as the <dfn>output image table/map</dfn></p>
+                         <p>From this point, the information is transferred to a designated output module and then to a particular field device.</p>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-memory-organization -->
+
+                <!-- START: topic-2-basic-operation -->
+                <section id="topic-2-basic-operation" class="content-section" aria-labelledby="topic-2-basic-operation-heading">
+                    <h2 id="topic-2-basic-operation-heading" class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">Basic PLC Operation</span>
+                    </h2>
+                     <div class="content-card">
+                         <p>A PLC works by continuously running a program that checks the inputs and then updates the outputs. The process of the PLC running throughout its program is called <strong>scanning</strong>. Scanning speed depends on the program size and execution time.</p>
+                         <p>The total time for a PLC to check the inputs, run the program and update the outputs is called the <strong>cycle time</strong>. Typical cycle times are 10 ms to 100 ms . Every cycle the inputs are check and saved to memory.</p>
+                         <p>Then the program is run using the status of the saved inputs. After the program is done the outputs are updated and the cycle starts again.</p>
+                         <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-007-1.jpg" alt="Flowchart showing PLC Scan Cycle: Check Input Status -> Execute Program -> Update Output Status, looping back to Check Input Status." class="content-image" style="max-width: 150px;">
+                             <figcaption>PLC Scan Cycle</figcaption>
+                         </figure>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-basic-operation -->
+
+                 <!-- START: topic-2-scanning-process -->
+                 <section id="topic-2-scanning-process" class="content-section" aria-labelledby="topic-2-scanning-process-heading">
+                     <h2 id="topic-2-scanning-process-heading" class="section-heading">
+                         <span class="heading-icon">🔍</span>
+                         <span class="heading-text">Scanning processes</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>The PLC's CPU monitors the status of all inputs. It takes these values and energizes or de-energizes the outputs according to the ladder diagram / user program. This is referred to as <strong>Scanning</strong>. The CPU of the PLC executes the user program over and over again when it is in the run mode.</p>
+                         <p>A scan does not consist of a PLC executing ladder diagram rung by rung, but instead the PLC performs an I/O and program scan. The I/O scans transfers data to and from the output and input modules respectively.</p>
+                         <p>The information is transferred in the form of bits and stored in <dfn>image tables</dfn> (image maps) are block of memory designated to store the input and output bit state)</p>
+                         <p>The input and output is the portion of the PLC that interfaces with the outside world. The actual bridge between the physical world and internal world of the PLC is the optical isolation circuitry.</p>
+                         <p>There are four basic steps in the operation of all PLCs; <strong>input scan</strong>, <strong>program scan</strong>, <strong>output scan</strong>, and <strong>house keeping</strong>. These steps continually take place in a repeating loop.</p>
+                         <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Input scan:</strong> During the input scan, the current status of every input module is stored in the input image (memory) table, bringing it up-to-date. Thus all the status of the input devices (which in turn is connected to the input module) is updated in the input memory table.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Program scan:</strong> Following the input scan, the CPU enters its user program execution, or program scan. The execution involves starting at the program's first instruction, then moving on to the second instruction and carrying out its execution sequence. This continues to the last program instruction. Throughout the user-program execution, the CPU continually keeps its output image (memory) table up-to-date.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Output scan:</strong> During program scan, the output modules themselves are not kept continually up to date. Instead, the entire output image table is transferred to the output modules during the output scan which comes after the program execution. Thus the output devices are activated accordingly during the output scan.</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text"><strong>Housekeeping</strong> - these steps includes communication with programming, internal diagnostic activities etc.</span></li>
+                         </ol>
+                         <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-008-1.jpg" alt="Diagram illustrating the PLC scan cycle with details. Step 1: Input Scan - check status from input devices, update I/O memory. Step 2: Program Scan - execute program, update result into I/O memory. Step 3: Output Scan - transfer status of I/O memory to output module. Arrows show data flow between Input Devices, Input Module, CPU, Memory, Output Module, and Output Device." class="content-image" style="max-width: 600px;">
+                              <figcaption>Detailed PLC Scan Cycle</figcaption>
+                          </figure>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-scanning-process -->
+
+                <!-- START: topic-2-io-devices -->
+                <section id="topic-2-io-devices" class="content-section" aria-labelledby="topic-2-io-devices-heading">
+                    <h2 id="topic-2-io-devices-heading" class="section-heading">
+                        <span class="heading-icon">🔌</span>
+                        <span class="heading-text">PLC input and output (I/O) devices</span>
+                    </h2>
+                     <div class="content-card">
+                         <p><strong>Input/output (I/O)</strong> is information representing the data that is received from senses elements / devices and the commands that are sent to actuating and indicating devices. The I/O system is collection of physical elements of the control system that either provide or use I/O data.</p>
+                         <p>The term <dfn>sensor</dfn> is used for an input device that provides a usable output in response to a specified physical input. For example, a thermocouple is a sensor which converts a temperature difference into an electrical output.</p>
+                         <p>The term <dfn>transducer</dfn> is generally used for a device that converts a signal from one form to a different physical form. Thus sensors are often transducers, but also other devices can be transducers, e.g. a motor which converts an electrical input into rotation.</p>
+                         <p>The number of I/O devices used within a control system is called its <dfn>point count</dfn>. Thus the total number of digital and analog point is used to give an indication of the size of a control system.</p>
+                         <p>PLC has input and output lines through which is connected to a system it directs. Any electrical signal processing always requires a voltage supply (an active part) and a load (passive part) or vice versa.</p>
+                         <p>I/O modules connect "real world" field devices to the controller. They convert the electrical signals used in the field devices into electronic signals that can be used by the control system, and translate real world values to IO table values.</p>
+                         <p>I/O modules communicate with PLC CPU in one of three ways:</p>
+                         <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Backplane</strong> - The I/O modules can be located in the same rack or station. Communications then takes place within the rack or across the backplane.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Backplane extension</strong> - backplane extension modules allow I/O modules to be located in racks or stations are separated from the controller.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Device network</strong> - modules can communicate with a controller over a network. Industrial networks are used to interconnect field level devices with controllers. Common IO networks are FieldBus, Profibus, and DeviceNet.</span></li>
+                         </ol>
+                         <p>There are major types of I/O</p>
+                         <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Analog</strong> - continuous devices that sense and respond to a range of values</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Digital</strong> - binary devices which must be in one of only two states on or off.</span></li>
+                         </ul>
+
+                         <h3 class="subsection-heading">1. Analog input and output devices</h3>
+                         <p>Analog input devices senses continuous parameters common analog inputs are pressure, temperature, speed transducers etc.</p>
+                         <p>An analog input card converts a voltage by current (e.g. signal that can be anywhere from 0 to 20 mA ) into digitally equivalent number that can be understood by the CPU.</p>
+                         <p>To input an analog voltage (into a PLC or any other computer) the continuous voltage value must be sampled and then converted to a numerical value by an A/D converter. The process of sampling the data is not instantaneous, so each sample has a start and stop time. The time required to acquire the sample is called the <strong>sampling time</strong>. A/D converters can only acquire a limited number of samples per second. The time between samples is called the <strong>sampling period T</strong>, and the inverse of the sampling period is the <strong>sampling frequency</strong> (also called sampling rate). The sampling time is often much smaller than the sampling period</p>
+                         <p>Analog output devices respond to a range of output values from the controller common analog output signals include motor speed, valve position, air pressure etc. An analog output card will convert a digital number sent by the CPU to its real world voltage or current. Analog device data requires significantly more manipulation and processing then digital device data.</p>
+
+                         <h3 class="subsection-heading">2. Digital input and output devices</h3>
+                         <p>Inputs come from sensors that translate physical phenomena into digital signal. Thus digital input devices may be either on or off, they may not hold any other value.</p>
+                         <p>Common digital field input devices include push buttons, unit switches and photo eyes.</p>
+                         <p>Digital output devices are devices which give either on or off. Common types are relays, motor starter, solenoid valves etc.</p>
+
+                     </div>
+                 </section>
+                 <!-- END: topic-2-io-devices -->
+
+                <!-- START: topic-2-io-examples -->
+                <section id="topic-2-io-examples" class="content-section" aria-labelledby="topic-2-io-examples-heading">
+                    <h2 id="topic-2-io-examples-heading" class="section-heading">
+                        <span class="heading-icon">➡️</span>
+                        <span class="heading-text">Examples of inputs and outputs</span>
+                    </h2>
+                     <div class="content-card">
+                         <p><strong>Inputs</strong> for a PLC come in a few basic varieties the simplest are AC and DC inputs. Examples of input devices are:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Proximity switches</strong> - use inductance, capacitance or light to detect an object logically</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Switches</strong> - mechanical mechanisms will open or close electrical contacts for a logical signal</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Potentiometer</strong> - measures angular position continuously using resistance.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>LVDT (Linear variable differential transformer)</strong> - measures linear displacement continuously using magnetic coupling.</span></li>
+                         </ul>
+                         <p><strong>Outputs</strong> to actuators allow a PLC to cause something to happen in a process. Outputs from PLC are often relays, but they can also be solid state electronics such as transistors for DC output or TRIACs for AC outputs. Continuous output requires special output cards with digital to analog converters.</p>
+                         <p>Examples are</p>
+                          <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Solenoid valves</strong> - logical output that can switch a hydraulic or pneumatic flow</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Lights</strong> - logical output that can often be powered directly from PLC output boards</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Motor starters</strong> - motors often draw a large amount of current when started, so they require motor starters which are basically large relays.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Servo motors</strong> - a continuous output from the PLC can command a variable speed or position.</span></li>
+                         </ul>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-io-examples -->
+
+                <!-- START: topic-2-active-passive-io -->
+                <section id="topic-2-active-passive-io" class="content-section" aria-labelledby="topic-2-active-passive-io-heading">
+                    <h2 id="topic-2-active-passive-io-heading" class="section-heading">
+                        <span class="heading-icon">⚡</span>
+                        <span class="heading-text">Active and passive inputs/outputs</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>Active I/O</strong> are those inputs or outputs which have the power source and are referred to as having a current source or voltage source (<dfn>sourcing</dfn>)</p>
+                        <p><strong>Passive I/O</strong> are those inputs or outputs which do not have power source and acts as the load or current sink (<dfn>sinking</dfn>)</p>
+                        <p>In order that an electrical circuit can function properly, current must flow in a circuit even when an instrument is usually known as a load, the current is not consumed by its rather it only flows from the current or voltage source through the load and back to the current source.</p>
+                        <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-010-1.jpg" alt="Diagram showing Active vs Passive components. Active (Current/Voltage Source) like battery/solar cell. Passive (Current Sink/Load) like resistor/lamp." class="content-image" style="max-width: 400px;">
+                             <figcaption>Active vs Passive Components</figcaption>
+                         </figure>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-active-passive-io -->
+
+                 <!-- START: topic-2-sourcing-sinking -->
+                 <section id="topic-2-sourcing-sinking" class="content-section" aria-labelledby="topic-2-sourcing-sinking-heading">
+                     <h2 id="topic-2-sourcing-sinking-heading" class="section-heading">
+                         <span class="heading-icon">↔️</span>
+                         <span class="heading-text">Sourcing and sinking</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>Sourcing and sinking are used to describe the way in which d.c devices are connected to a PLC and uses d.c currents and voltages.</p>
+                         <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Sourcing</strong> - When active, current flows from supply, through the use a single supply voltage. With sourcing, using the conventional current flow direction as from positive to negative, an input device receives current from the input module i.e. the input module is the source of the current (Fig a)
+                                <figure style="text-align: center;">
+                                    <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-010-2.jpg" alt="Diagram (a) Input Sourcing: Current flows from Input Module (+) to Input Device (-). Diagram (b) Output Sourcing: Current flows from Output Module (+) to Output Load (-)." class="content-image" style="max-width: 500px;">
+                                    <figcaption>Sourcing Connections</figcaption>
+                                </figure>
+                                <p>If the current flows from the output module to an output load then the output module is referred as to sourcing (fig b)</p>
+                            </span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Sinking</strong>- when active the output allows current to flow to a common ground. This is best selected when different voltages are supplies.
+                                <p>With sinking, using the conventional current flow direction from positive to negative, our input device supplies current to the input module i.e. the input module is the sink for the current (fig a)</p>
+                                <figure style="text-align: center;">
+                                     <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-010-3.jpg" alt="Diagram (a) Input Sinking: Current flows from Input Device (+) to Input Module (-). Diagram (b) Output Sinking: Current flows from Output Load (+) to Output Module (-)." class="content-image" style="max-width: 500px;">
+                                     <figcaption>Sinking Connections</figcaption>
+                                 </figure>
+                                <p>If the current flows to the output module from an output load then the output module is referred to as sinking (fig b)</p>
+                            </span></li>
+                         </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-sourcing-sinking -->
+
+                 <!-- START: topic-2-plc-connections -->
+                 <section id="topic-2-plc-connections" class="content-section" aria-labelledby="topic-2-plc-connections-heading">
+                     <h2 id="topic-2-plc-connections-heading" class="section-heading">
+                         <span class="heading-icon">🔗</span>
+                         <span class="heading-text">Typical Connections of PLC</span>
+                     </h2>
+                     <div class="content-card">
+                         <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-011-1.jpg" alt="Diagram showing a Sensor with Sourcing Output connected to a PLC sinking Input. Current flows from Sensor (+) to PLC Input (-)." class="content-image">
+                            <figcaption>Connecting sensors with a sourcing output to a PLC controller sinking input</figcaption>
+                        </figure>
+                        <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-011-2.jpg" alt="Diagram showing a Sensor with Sinking Output connected to a PLC sourcing Input. Current flows from PLC Input (+) to Sensor (-)." class="content-image">
+                            <figcaption>Connecting sensors with sinking output to a PLC controller sourcing input</figcaption>
+                        </figure>
+                        <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-011-3.jpg" alt="Diagram showing an Output Load Device connected to a Sourcing PLC Controller Output. Current flows from PLC Output (+) to Load (-)." class="content-image">
+                             <figcaption>Connecting output load device to a sourcing PLC controller output</figcaption>
+                        </figure>
+                         <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-011-4.jpg" alt="Diagram showing an Output Load Device connected to a Sinking PLC Controller Output. Current flows from Load (+) to PLC Output (-)." class="content-image">
+                              <figcaption>Connecting output load device to a sinking PLC controller output</figcaption>
+                         </figure>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-plc-connections -->
+
+                 <!-- START: topic-2-plc-types -->
+                 <section id="topic-2-plc-types" class="content-section" aria-labelledby="topic-2-plc-types-heading">
+                     <h2 id="topic-2-plc-types-heading" class="section-heading">
+                         <span class="heading-icon">📏</span>
+                         <span class="heading-text">Types of PLC system</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>The PLC sizes are given in terms of program memory size and the maximum number of I/O points the system can support.</p>
+                         <p>However to evaluate properly any PLC, consideration is taken for many additional features such as its processor, cycle time, language facilities, functions expansion capability etc.</p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <caption>PLC Size Definitions</caption>
+                                <thead>
+                                    <tr><th>PLC size defined</th><th>Max I/O point</th><th>User memory size (No. of instructors)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Small</td><td>40 / 40</td><td>1 k</td></tr>
+                                    <tr><td>Medium</td><td>128 / 128</td><td>4 k</td></tr>
+                                    <tr><td>Large</td><td>>128 / >128</td><td>>4 k</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                         <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Small PLC</strong> - small and mini PLCs are designed as robust, compact units which can be mounted on or beside the equipment to be controlled. They are mainly used to replace hard wired logic relays, timers, counters etc that control individual items of plant or machinery, but can also be used to co-ordinate several machines working in conjunction with each other. Programming is by way of logic instruction list (mnemonic) or relay ladder diagrams.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Medium-sized PLC:</strong> - In this range, modular construction predominates with plug-in modules on rack mounting system or Back plane system. This allows the simple upgrading or expansion of the system by fitting additional I/O cards into the racks</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Large PLC</strong> - where control is very large numbers of input and output points is necessary or complex control functions are required, a large PLC is selected. It is designed for use in large plants or machines requiring continuous control. They are also employed as supervisory controllers to monitor and control several other PLCs or intelligent machines e.g. CNC tools.</span></li>
+                         </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-plc-types -->
+
+                <!-- START: topic-2-plc-construction -->
+                <section id="topic-2-plc-construction" class="content-section" aria-labelledby="topic-2-plc-construction-heading">
+                    <h2 id="topic-2-plc-construction-heading" class="section-heading">
+                        <span class="heading-icon">🧱</span>
+                        <span class="heading-text">PLC styles of construction</span>
+                    </h2>
+                     <div class="content-card">
+                         <p>The main styles are unitary, modular and rack mounting.</p>
+                         <ol class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Unitary PLC</strong> - is the smallest and least expensive. It contains every feature of a basic system in one box and is attached to the machine being controlled. They are not expandable so the application is limited to on-board I/O.</span></li>
+                             <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Modular</strong> - These are a range of modules that slot together to build up a system. Basic modules are the power supply, the main module containing the CPU, the input module and the output module. Modular PLCs are used in applications where a higher I/O count is needed or when using specialty modules such as quadrature encoders. They may be designed to be fixed direct to a back panel. Usually they are arranged on a rack or rail and mounted inside a large cabinet for protection and security. The main advantage is that the number of input and output terminals can be expanded to cope with changes to the hardware system.</span></li>
+                             <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Rack mounting</strong> - are usually more expensive, expandable and powerful than modular PLC. The rack provides a power and communication backplane that greatly increases the communication rate between the processor and the modules as well as allowing some specialty modules to communicate with each other without the processor. The number of available I/O points is also much higher in the rack systems.</span></li>
+                         </ol>
+                          <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-012-1.jpg" alt="Diagram showing examples of Unitary, Modular, and Rack Mount PLC constructions." class="content-image" style="max-width: 600px;">
+                              <figcaption>PLC Construction Styles</figcaption>
+                         </figure>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-plc-construction -->
+
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <!-- Repeat exact same links as top navigation -->
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-1-intro-plc.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 20%;"></div> <!-- Chunk 2/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 2 of 10</span>
+                    </div>
+                    <a href="unit-2-plc-programming.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

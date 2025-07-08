@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 7: Subprograms, Arrays and Sorting - Structured Programming Notes</title>
+    <meta name="description" content="Subprograms, Arrays and Sorting Module">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <article class="learning-module" data-module="7">
+        <nav class="module-nav">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="module6.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module 7 of 8</span>
+                </div>
+                <a href="module8.html" class="nav-button">
+                    Next <span>→</span>
+                </a>
+            </div>
+        </nav>
+
+        <header class="module-header">
+            <h1>Module 7: Subprograms, Arrays and Sorting</h1>
+            <section class="module-objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Understand the concept and benefits of subprograms in C.</li>
+                    <li>Learn about library functions and user-defined functions.</li>
+                    <li>Understand how user-defined functions work and how to define them.</li>
+                    <li>Learn about function declarations, calling functions and function arguments.</li>
+                    <li>Understand the types of variables: local and global.</li>
+                    <li>Define and declare arrays in C.</li>
+                    <li>Learn how to initialize and access array elements.</li>
+                    <li>Explore different array sorting techniques: Bubble Sort, Exchange Sort, Selection Sort, Shell Sort, Quick Sort and Merge Sort.</li>
+                </ul>
+            </section>
+        </header>
+
+        <main class="module-content">
+
+            <section class="content-section">
+                <h2>📚 CHAPTER 5 SUBPROGRAMS IN C</h2>
+                <div class="content-block">
+                    <p>A <b>sub-program</b> is a series of C statements that perform a specific task in a program. A
+subprogram can be called within another procedure. Every C program has at least one
+function, which is <code>main()</code>. A C program can be divided up into separate functions.</p>
+                    <p>A <b>function declaration</b> tells the compiler about a function's name, return type, and
+parameters. A <b>function definition</b> provides the actual body of the function.</p>
+                    <p>The C standard library provides numerous built-in functions that your program can
+call. For example, function <code>strcat()</code> to concatenate two strings, function <code>memcpy()</code> to
+copy one memory location to another location and many more functions.</p>
+                    <p>A function is known with various names like a method or a sub-routine or a
+procedure, etc. However, a <b>function</b> returns a value while a <b>procedure</b> doesn't: it just
+executes commands.</p>
+                    <p><b>A Subprogram is:</b></p>
+                    <ul>
+                        <li>a part of a program that performs one or more related tasks</li>
+                        <li>has its own name</li>
+                        <li>written as an independent part of the program</li>
+                    </ul>
+                    <p><b>Benefits of using sub-procedures in programming are:</b></p>
+                    <ul>
+                        <li>Sub-programs help to break programs into several but logical sections. The
+smaller programs/routines make <b>programming</b>, <b>debugging</b> and subsequent
+<b>maintenance</b> easier.</li>
+                        <li>They also help in <b>coding repeated operations</b> such as frequently used
+calculations, text etc thus making programming less repetitive and faster.</li>
+                        <li>Procedures used in one program can act as building blocks for other programs
+with slight modifications i.e. <b>code re-use</b>.</li>
+                        <li>Programmers working on large projects can divide the workload by making
+different functions.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 TYPES OF FUNCTIONS</h2>
+                <div class="content-block">
+                    <p>Basically, there are two types of functions in C on basis of whether it is defined by
+user or not.</p>
+                    <ul>
+                        <li><b>Library function</b></li>
+                        <li><b>User defined function</b></li>
+                    </ul>
+                    <p><b>LIBRARY FUNCTION</b></p>
+                    <p>Library functions are the in-built function in C programming system. For example:</p>
+                    <pre><code>printf()
+- printf() is used for displaying output in C.
+
+scanf()
+- scanf() is used for taking input in C.
+</code></pre>
+                    <p><b>USER DEFINED FUNCTION</b></p>
+                    <p>C allows programmers to define their own function according to their requirements
+known as user defined functions.</p>
+                    <p><b>How user-defined function works in C Programming?</b></p>
+                     <pre><code>#include &lt;stdio.h&gt;
+void function_name() {
+}
+
+int main(){
+    function_name();
+}
+</code></pre>
+                    <p>As mentioned earlier, every C program begins from <code>main()</code> and program starts
+executing the codes inside <code>main ()</code> function. When the control of program reaches to
+<code>function_name()</code> inside <code>main ()</code> function. The control of program jumps to <code>void
+function_name()</code> and executes the codes inside it. When, all the codes inside that
+user-defined function are executed, control of the program jumps to the statement just
+after <code>function_name()</code> from where it is called. Analyze the figure below for
+understanding the concept of function in C programming.</p>
+                     <figure class="content-image">
+                        <img src="../assets/images/function_working.png"
+                             alt="Working of Functions"
+                             width="400" height="400">
+                        <figcaption>Fig: Working of Functions</figcaption>
+                    </figure>
+                    <p>Remember, the function name is an identifier and should be unique.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 DEFINING A FUNCTION</h2>
+                <div class="content-block">
+                    <p>The general form of a function definition in C programming language is as follows:</p>
+                     <pre><code>return_type function_name ( parameter list )
+{
+    body of the function
+}
+</code></pre>
+                    <p>A <b>function definition</b> in C programming language consists of a <b>function header</b> and a
+<b>function body</b>. Here are all the parts of a function:</p>
+                    <ol>
+                        <li><b>Return Type:</b> A function may return a value. The <b>return_type</b> is the data type of
+the value the function returns. Some functions perform the desired operations
+without returning a value. In this case, the <b>return_type</b> is the keyword <code>void</code>.</li>
+                        <li><b>Function Name:</b> This is the actual name of the function. The function name and
+the parameter list together constitute the <b>function signature</b>.</li>
+                        <li><b>Parameters:</b> A <b>parameter</b> is like a placeholder. When a function is invoked, you
+pass a value to the formal parameter. This value is referred to as <b>actual
+parameter</b> or <b>argument</b>. The <b>parameter list</b> refers to the type, order, and
+number of the parameters of a function. Parameters are optional; that is, a function
+may contain no parameters.</li>
+                        <li><b>Function Body:</b> The function body contains a collection of statements that define
+what the function does.</li>
+                    </ol>
+                    <p><b>Example</b></p>
+                    <p>Following is the source code for a function called <code>max()</code>. This function takes two
+parameters <code>num1</code> and <code>num2</code> and returns the maximum between the two:</p>
+                     <pre><code>/* function returning the max between two numbers */
+int max(int num1, int num2)
+{
+    /* local variable declaration */
+    int result;
+
+    if (num1 > num2)
+        result = num1;
+    else
+        result = num2;
+
+    return result;
+}
+</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 FUNCTION DECLARATIONS</h2>
+                <div class="content-block">
+                    <p>A <b>function declaration</b> tells the compiler about a function name and how to call the
+function. The actual <b>body of the function</b> can be defined separately.</p>
+                    <p>A function declaration has the following parts:</p>
+                     <pre><code>return_type function_name( parameter list );
+</code></pre>
+                    <p>For the above defined function <code>max()</code>, following is the function declaration:</p>
+                     <pre><code>int max(int num1, int num2);
+</code></pre>
+                    <p>Parameter names are not important in function declaration; only their type is required,
+so the following is also valid declaration:</p>
+                     <pre><code>int max(int, int);
+</code></pre>
+                    <p>Function declaration is required when you define a function in one source file and you
+call that function in another file. In such case you should declare the function at the
+top of the file calling the function.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 CALLING A FUNCTION</h2>
+                <div class="content-block">
+                    <p>While creating a C function, you give a definition of what the function has to do. To
+use a function, you will have to <b>call</b> that function to perform the defined task.</p>
+                    <p>When a program calls a function, program control is transferred to the called function.
+A called function performs defined task, and when its <code>return</code> statement is executed or
+when its function-ending closing brace is reached, it returns program control back to
+the main program. Therefore, the calling program is <b>suspended</b> during execution of
+the called subprogram.</p>
+                    <p>To call a function, you simply need to pass the required parameters along with
+function name, and if function returns a value, then you can store returned value. For
+example:</p>
+                     <pre><code>#include &lt;stdio.h&gt;
+
+/* function declaration */
+int max(int num1, int num2);
+
+int main ()
+{
+    /* local variable definition */
+    int a = 100;
+    int b = 200;
+    int ret;
+
+    /* calling a function to get max value */
+    ret = max(a, b);
+
+    printf( "Max value is : %d\\n", ret );
+
+    return 0;
+}
+
+/* function returning the max between two numbers */
+int max(int num1, int num2)
+{
+    /* local variable declaration */
+    int result;
+
+    if (num1 > num2)
+        result = numl;
+    else
+        result = num2;
+
+    return result;
+}
+</code></pre>
+                    <p>The <b>formal parameters</b> behave like other local variables inside the function and are
+created upon entry into the function and destroyed upon exit.</p>
+                    <p>While calling a function, there are two ways that arguments can be passed to a
+function:</p>
+                     <table>
+                        <thead>
+                            <tr>
+                                <th>Call Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Call by value</b></td>
+                                <td>This method copies the actual value of an argument into the
+formal parameter of the function. In this case, changes
+made to the parameter inside the function have no effect on
+the argument.</td>
+                            </tr>
+                            <tr>
+                                <td><b>Call by reference</b></td>
+                                <td>This method copies the address of an argument into the
+formal parameter. Inside the function, the address is used to
+access the actual argument used in the call. This means that
+changes made to the parameter affect the argument.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <p>By default, C uses <b>call by value</b> to pass arguments. In general, this means that code
+within a function cannot alter the arguments used to call the function and above
+mentioned example while calling <code>max()</code> function used the same method.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 FUNCTION ARGUMENTS</h2>
+                <div class="content-block">
+                    <p>If a function is to use arguments, it must declare variables that accept the values of the
+arguments. These variables are called the <b>formal parameters</b> of the function.</p>
+                    <p>The formal parameters behave like other local variables inside the function and are
+created upon entry into the function and destroyed upon exit.</p>
+                    <p>A formal parameter is a dummy variable listed in the subprogram header and used in
+the subprogram. An <b>actual parameter</b> represents a value used in the subprogram call
+statement.</p>
+                     <figure class="content-image">
+                        <img src="../assets/images/function_arguments.png"
+                             alt="Function Arguments"
+                             width="600" height="300">
+                        <figcaption>Function Arguments</figcaption>
+                    </figure>
+                    <p>When <code>max()</code> is called, we pass it the arguments which the function uses as the values
+of <code>ret</code>. This process is called <b>parameter passing</b>.</p>
+                    <p><b>Parameters</b> refers to the list of variables in a method declaration. <b>Arguments</b> are the
+actual values that are passed in when the method is invoked. When you invoke a
+method, the arguments used must match the declaration's parameters in type and
+order.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 TYPES OF VARIABLES</h2>
+                <div class="content-block">
+                    <p>The Programming language C has two main variable types :</p>
+                    <ul>
+                        <li><b>Local Variables</b></li>
+                        <li><b>Global Variables</b></li>
+                    </ul>
+                    <p><b>LOCAL VARIABLES</b></p>
+                    <p>A <b>local variable</b> is a variable that is declared inside a function.</p>
+                    <ul>
+                        <li>Local variables scope is confined within the block or function where it is
+defined. Local variables must always be defined at the top of a block.</li>
+                        <li>When execution of the block starts the variable is available, and when the
+block ends the variable 'dies'.</li>
+                    </ul>
+                    <p><b>GLOBAL VARIABLES</b></p>
+                    <p>Global variable is defined at the top of the program file and it can be visible and
+modified by any function that may reference it. Global variables are declared outside
+all functions.</p>
+                    <p><b>Sample Program.</b></p>
+                     <pre><code>#include &lt;stdio.h&gt;
+int area; //global variable
+
+int main ()
+{
+    int a, b; //local variable
+
+    /* actual initialization */
+    a = 10;
+    b = 20;
+
+    printf ("\\t Side a is %d cm and side b is %d cm long\\n", a, b);
+
+    area = a*b;
+    printf ("\\t The area of your rectangle is : %d \\n", area);
+    return 0;
+}
+</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 CHAPTER 6 DATA STRUCTURES - ARRAYS</h2>
+                <div class="content-block">
+                    <p>These refer to groups of data elements that are organized in a single unit so that
+they can be used more efficiently as compared to the simple data types such as
+integers and strings. An example of a data structure is the <b>array</b>. Ordinary variables
+store one value at a time while an array will store more than one value at a time in a
+single variable name.</p>
+                    <p>Data structures are important for grouping sets of similar data together and passing
+them as one. For example, if you have a method that prints a set of data but you don't
+know when writing the procedure how large that set is going to be, you could use an
+array to pass the data to that method and loop through it.</p>
+                    <p>Data structures can be classified using various criteria.</p>
+                    <ol type="a">
+                        <li><b>Linear</b>
+                            <p>In linear data structures, values are arranged in linear fashion. A linear data structure
+traverses the data elements sequentially. The elements in the structure are adjacent to
+one another other and every element has exactly two neighbour elements to which it is
+connected. Arrays, linked lists, stacks and queues are examples of linear data
+structures.</p>
+                        </li>
+                        <li><b>Non-Linear</b>
+                            <p>The data values in this structure are not arranged in order but every data item is
+attached to several other data items in a way that is specific for reflecting
+relationships. Tree, graph, table and sets are examples of non-linear data structures.</p>
+                        </li>
+                        <li><b>Homogenous</b>
+                            <p>In this type of data structures, values of the same types of data are stored, as in an
+array.</p>
+                        </li>
+                        <li><b>Non-homogenous</b>
+                            <p>In this type of data structures, data values of different types are grouped, as in
+structures and classes.</p>
+                        </li>
+                        <li><b>Dynamic</b>
+                            <p>In dynamic data structures such as references and pointers, size and memory locations
+can be changed during program execution. These data structures can grow and shrink
+during execution.</p>
+                        </li>
+                        <li><b>Static</b>
+                            <p>With a static data structure, the size of the structure is fixed. Static data structures
+such as arrays are very good for storing a well-defined number of data items.</p>
+                        </li>
+                    </ol>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 ARRAYS</h2>
+                <div class="content-block">
+                    <p>An <b>array</b> is a named list of elements, all with the same data type. It is better defined as
+a consecutive group of memory locations all of which have the same name and the
+same data type. Arrays store a fixed-size sequential collection of elements of the same
+type.</p>
+                    <p>Instead of declaring individual variables, such as <code>number0</code>, <code>number1</code>, ..., and
+<code>number99</code>, you declare one array variable such as <code>numbers</code> and use <code>numbers[0]</code>,
+<code>numbers[1]</code>, and ..., <code>numbers[99]</code> to represent individual variables. A specific element
+in an array is accessed by an <b>index</b>.</p>
+                    <p>All arrays consist of <b>contiguous memory locations</b>. The lowest address corresponds to
+the first element and the highest address to the last element.</p>
+                     <figure class="content-image">
+                        <img src="../assets/images/array_memory.png"
+                             alt="Array Memory Representation"
+                             width="600" height="200">
+                        <figcaption>Array Memory Structure</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 DECLARING ARRAYS</h2>
+                <div class="content-block">
+                    <p>To declare an <b>array</b> in C, a programmer specifies the type of the elements and the
+number of elements required by an array as follows:</p>
+                     <pre><code>type arrayName [ arraySize ];
+</code></pre>
+                    <p>This is called a <b>single-dimensional array</b>. The <b>arraySize</b> must be an integer constant
+greater than zero and <b>type</b> can be any valid C data type. For example, to declare a 10-
+element array called <code>balance</code> of type <code>double</code>, use this statement:</p>
+                     <pre><code>double balance[10];
+</code></pre>
+                    <p>Now <code>balance</code> is a variable array which is sufficient to hold up to 10 double numbers.</p>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 INITIALIZING ARRAYS</h2>
+                <div class="content-block">
+                    <p>You can <b>initialize</b> an array in C either one by one or using a single statement as
+follows:</p>
+                     <pre><code>double balance[5] = {1000.0, 2.0, 3.4, 17.0, 50.0};
+</code></pre>
+                    <p>The number of values between braces <code>{ }</code> can not be larger than the number of
+elements that we declare for the array between square brackets <code>[ ]</code>. Following is an
+example to assign a single element of the array:</p>
+                    <p>If you omit the <b>size of the array</b>, an array just big enough to hold the initialization is
+created. Therefore, if you write:</p>
+                     <pre><code>double balance[] = {1000.0, 2.0, 3.4, 17.0, 50.0};
+</code></pre>
+                    <p>You will create exactly the same array as you did in the previous example.</p>
+                     <pre><code>balance [4] = 50.0;
+</code></pre>
+                    <p>The above statement assigns element number 5th in the array a value of 50.0. Array
+with 4th index will be 5th ie. last element because all arrays have 0 as the index of
+their first element which is also called <b>base index</b>. Following is the pictorial
+representation of the same array we discussed above:</p>
+                     <figure class="content-image">
+                        <img src="../assets/images/array_initialization.png"
+                             alt="Array Initialization Example"
+                             width="600" height="200">
+                        <figcaption>Array Initialization Pictorial</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 ACCESSING ARRAY ELEMENTS</h2>
+                <div class="content-block">
+                    <p>An <b>element</b> is accessed by <b>indexing</b> the array name. This is done by placing the index
+of the element within square brackets after the name of the array. For example:</p>
+                     <pre><code>double salary = balance[9];
+</code></pre>
+                    <p>The above statement will take 10th element from the array and assign the value to
+<code>salary</code> variable. Following is an example which will use all the above mentioned three
+concepts viz. declaration, assignment and accessing arrays:</p>
+                     <pre><code>#include &lt;stdio.h&gt;
+int main ()
+{
+    int n[ 10 ]; /* n is an array of 10 integers */
+    int i,j;
+
+    /* initialize elements of array n to 0 */
+    for (i = 0; i < 10; i++ )
+    {
+        n[ i ] = i + 100; /* set element at location i to i
+                           + 100 */
+    }
+
+    /* output each array element's value */
+    for (j = 0; j < 10; j++ )
+    {
+        printf("Element[%d] = %d\\n", j, n[j] );
+    }
+    return 0;
+}
+</code></pre>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 SORT TECHNIQUES</h2>
+                <div class="content-block">
+                    <p><b>Bubble Sort</b></p>
+                    <p>In the <b>bubble sort</b>, as elements are sorted they gradually "bubble" (or rise) to their
+proper location in the array, like bubbles rising in a glass of soda. The bubble sort
+repeatedly compares <b>adjacent elements</b> of an array. The first and second elements
+are compared and swapped if out of order. Then the second and third elements are
+compared and swapped if out of order. This sorting process continues until the last
+two elements of the array are compared and swapped if out of order.</p>
+                     <figure class="content-image">
+                        <img src="../assets/images/bubble_sort_process.png"
+                             alt="Bubble Sort Process"
+                             width="600" height="200">
+                        <figcaption>Bubble Sort Visualization</figcaption>
+                    </figure>
+                    <p>When this first pass through the array is complete, the bubble sort returns to elements
+one and two and starts the process all over again.</p>
+                    <p>The table below follows an array of numbers before, during, and after a bubble sort</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="module-footer">
+            <section class="key-takeaways">
+                <h2>📝 Key Takeaways</h2>
+                <ul>
+                    <li>Subprograms (functions) are essential for modular and reusable code in C.</li>
+                    <li>C supports both library functions (built-in) and user-defined functions.</li>
+                    <li>Functions are defined with a header (return type, name, parameters) and a body (code block).</li>
+                    <li>Arrays are data structures that store collections of elements of the same type, accessed by index.</li>
+                    <li>Arrays must be declared and can be initialized during declaration or element by element.</li>
+                    <li>Sorting techniques like Bubble Sort, Exchange Sort, Selection Sort, Shell Sort and Merge Sort organize array elements in a specific order.</li>
+                </ul>
+            </section>
+
+            <section class="knowledge-check">
+                <h2>⚡ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <p><b>Question 1:</b> What are the benefits of using subprograms in programming?</p>
+                    <p><b>Question 2:</b> Explain the difference between library functions and user-defined functions.</p>
+                    <p><b>Question 3:</b> How do you declare and initialize an array in C?</p>
+                    <p><b>Question 4:</b> Briefly describe the Bubble Sort algorithm.</p>
+                </div>
+            </section>
+
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="module6.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module 7 of 8</span>
+                    </div>
+                    <a href="module8.html" class="nav-button">
+                        Next <span>→</span>
+                    </a>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</body>
+</html>

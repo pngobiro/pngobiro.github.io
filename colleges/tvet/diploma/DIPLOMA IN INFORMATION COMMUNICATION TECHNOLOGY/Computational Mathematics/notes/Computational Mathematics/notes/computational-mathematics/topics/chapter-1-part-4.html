@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Introduction to Computational Mathematics - Part 4</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-1-part-3.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 Part 4 of 6</span>
+                    </div>
+                    <a href="chapter-1-part-5.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 1: INTRODUCTION TO COMPUTATIONAL MATHEMATICS (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-1-matrix-multiplication-rules -->
+                <section id="chapter-1-matrix-multiplication-rules" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📏</span>
+                        <span class="heading-text">Rows and Columns (Matrix Multiplication)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>To show how many rows and columns a matrix has we often write rows <span class="math-inline">$\times$</span> columns. Example: This matrix is <span class="math-inline">$2 \times 3$</span> ( 2 rows by 3 columns):</p>
+                        <div class="equation">$$\left[\begin{array}{ccc} 6 & 4 & 24 \\ 1 & -9 & 8 \end{array}\right]$$</div>
+                        <p>When we do multiplication:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The number of columns of the 1st matrix must equal the number of rows of the 2nd matrix.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">And the result will have the same number of rows as the 1st matrix, and the same number of columns as the 2nd matrix.</span></li>
+                        </ul>
+                        <h3 class="subsection-heading">Example:</h3>
+                        <img src="../assets/images/chapter-1-matrix-multiplication-dimensions.jpg" alt="Diagram showing matrix dimensions compatibility for multiplication: 1x3 times 3x4 results in 1x4" class="content-image">
+                        <p>In that example we multiplied a <span class="math-inline">$1 \times 3$</span> matrix by a <span class="math-inline">$3 \times 4$</span> matrix (note the 3 s are the same), and the result was a <span class="math-inline">$1 \times 4$</span> matrix.</p>
+                        <h3 class="subsection-heading">In General:</h3>
+                        <p>To multiply an <span class="math-inline">$\mathbf{m} \times \mathbf{n}$</span> matrix by an <span class="math-inline">$\mathbf{n} \times \mathbf{p}$</span> matrix, the <span class="math-inline">$\mathbf{n s}$</span> must be the same, and the result is an <span class="math-inline">$\mathbf{m \times p}$</span> matrix.</p>
+                        <div class="equation">$$m \times n \times n \times p \Rightarrow m \times p$$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-multiplication-rules -->
+
+                <!-- START: chapter-1-matrix-multiplication-order -->
+                <section id="chapter-1-matrix-multiplication-order" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">↔️</span>
+                        <span class="heading-text">Order of Multiplication</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In arithmetic we are used to:</p>
+                        <div class="equation">$$3 \times 5=5 \times 3$$</div>
+                        <p>(The Commutative Law of Multiplication)</p>
+                        <p>But this is not generally true for matrices (matrix multiplication is not commutative):</p>
+                        <div class="equation">$$\mathrm{AB} \neq \mathrm{BA}$$</div>
+                        <p>When we change the order of multiplication, the answer is (usually) different.</p>
+                        <h3 class="subsection-heading">Example:</h3>
+                        <p>See how changing the order affects this multiplication:</p>
+                        <div class="equation">$$\begin{aligned} & {\left[\begin{array}{ll} 1 & 2 \\ 3 & 4 \end{array}\right] \times\left[\begin{array}{ll} 2 & 0 \\ 1 & 2 \end{array}\right]=\left[\begin{array}{cc} 4 & 4 \\ 10 & 8 \end{array}\right]} \\ & {\left[\begin{array}{ll} 2 & 0 \\ 1 & 2 \end{array}\right] \times\left[\begin{array}{ll} 1 & 2 \\ 3 & 4 \end{array}\right]=\left[\begin{array}{cc} 2 & 4 \\ 7 & 10 \end{array}\right]} \end{aligned}$$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-multiplication-order -->
+
+                <!-- START: chapter-1-identity-matrix -->
+                <section id="chapter-1-identity-matrix" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🆔</span>
+                        <span class="heading-text">Identity Matrix</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The "Identity Matrix" is the matrix equivalent of the number " 1 ":</p>
+                        <div class="equation">$$I=\left[\begin{array}{lll} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{array}\right]$$</div>
+                        <p>A 3x3 Identity Matrix</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It is "square" (has same number of rows as columns),</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It has <span class="math-inline">$\mathbf{1}$</span> s on the diagonal and <span class="math-inline">$\mathbf{0}$</span> s everywhere else.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Its symbol is the capital letter <span class="math-inline">$\mathbf{I}$</span>.</span></li>
+                        </ul>
+                        <p>It is a special matrix, because when we multiply by it, the original is unchanged:</p>
+                        <div class="equation">$$\begin{aligned} & \mathrm{A} \times \mathrm{I}=\mathrm{A} \\ & \mathrm{I} \times \mathrm{A}=\mathrm{A} \end{aligned}$$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-identity-matrix -->
+
+                <!-- START: chapter-1-matrix-determinant -->
+                <section id="chapter-1-matrix-determinant" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">Determinant of a Matrix</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The determinant of a matrix is a special number that can be calculated from a square matrix.</p>
+                        <p>A Matrix is an array of numbers:</p>
+                        <img src="../assets/images/chapter-1-determinant-matrix-example.jpg" alt="A 2x2 matrix with entries 3, 8, 4, 6" class="content-image">
+                        <p>A Matrix</p>
+                        <p>(This one has 2 Rows and 2 Columns)</p>
+                        <div class="equation">$$A \equiv\left[\begin{array}{ll} a & b \\ c & d \end{array}\right]$$</div>
+                        <p>The determinant of that matrix is (calculations are explained later):</p>
+                        <p><span class="math-inline">$3 \times 6-8 \times 4=18-32=-\mathbf{1 4}$</span></p>
+                        <h3 class="subsection-heading">What is it for?</h3>
+                        <p>The determinant tells us things about the matrix that are useful in systems of linear equations, helps us find the inverse of a matrix, is useful in calculus and more.</p>
+                        <h3 class="subsection-heading">Symbol</h3>
+                        <p>The symbol for determinant is two vertical lines either side.</p>
+                        <p>Example:</p>
+                        <p><span class="math-inline">$|\mathbf{A}|$</span> means the determinant of the matrix <span class="math-inline">$\mathbf{A}$</span></p>
+                        <p>(Exactly the same symbol as absolute value.)</p>
+                        <h3 class="subsection-heading">Calculating the Determinant</h3>
+                        <p>First of all the matrix must be square (i.e. have the same number of rows as columns). Then it is just basic arithmetic. Here is how:</p>
+                        <h4 class="subsection-heading">For a <span class="math-inline">$\mathbf{2 \times 2}$</span> Matrix</h4>
+                        <p>For a <span class="math-inline">$2 \times 2$</span> matrix ( 2 rows and 2 columns):</p>
+                        <p>The determinant is:</p>
+                        <div class="equation">$$|\mathrm{A}|=\mathrm{ad}-\mathrm{bc}$$</div>
+                        <p>"The determinant of A equals a times <span class="math-inline">$d$</span> minus <span class="math-inline">$b$</span> times <span class="math-inline">$c$</span> "</p>
+                        <p>It is easy to remember when you think of a cross:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Blue means positive (+ad),</span></li>
+                        </ul>
+                        <img src="../assets/images/chapter-1-determinant-2x2-positive.jpg" alt="Diagram showing the positive diagonal (ad) for a 2x2 determinant" class="content-image">
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">•</span><span class="item-text">Red means negative (-bc)</span></li>
+                        </ul>
+                        <!-- Assuming a corresponding image for the negative part existed -->
+                        <h4 class="subsection-heading">Example:</h4>
+                        <div class="equation">$$\begin{aligned} B & =\left[\begin{array}{ll} 4 & 6 \\ 3 & 8 \end{array}\right] \\ |B| & =4 \times 8-6 \times 3 \\ & =32-18 \\ & =14 \end{aligned}$$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-determinant -->
+
+                <!-- START: chapter-1-cramers-rule -->
+                <section id="chapter-1-cramers-rule" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📐</span>
+                        <span class="heading-text">Cramer's Rule</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Cramer's Rule, is used to solve systems with matrices. Cramer's Rule was named after the Swiss mathematician Gabriel Cramer, who also did a lot of other neat stuff with math.</p>
+                        <p>Cramer's rule is all about getting determinants of the square matrices that are used to solve systems.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-1-cramers-rule -->
+
+                <!-- START: chapter-1-matrix-inverse-intro -->
+                <section id="chapter-1-matrix-inverse-intro" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">Inverse of a Matrix</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">What is the Inverse of a Matrix?</h3>
+                        <p>This is the reciprocal of a Number:</p>
+                        <img src="../assets/images/chapter-1-reciprocal-number.jpg" alt="Equation 8 * (1/8) = 1" class="content-image">
+                        <p>Reciprocal of a Number</p>
+                        <p>The Inverse of a Matrix is the same idea but we write it <span class="math-inline">$\mathrm{A}^{-1}$</span></p>
+                        <img src="../assets/images/chapter-1-matrix-inverse-equation.jpg" alt="Equation A * A^-1 = I" class="content-image">
+                        <p>Why not <span class="math-inline">${ }^{1} /$ A</span> ? Because we don't divide by a Matrix! And anyway <span class="math-inline">$1 / 8$</span> can also be written <span class="math-inline">$8^{-1}$</span> And there are other similarities:</p>
+                        <p>When you multiply a number by its reciprocal you get <span class="math-inline">$\mathbf{1}$</span></p>
+                        <div class="equation">$$8 \times(1 / 8)=1$$</div>
+                        <p>When you multiply a Matrix by its Inverse you get the Identity Matrix (which is like "1" for Matrices):</p>
+                        <div class="equation">$$A \times A^{-1}=\mathbf{I}$$</div>
+                        <p>Same thing when the inverse comes first:</p>
+                        <div class="equation">$$\begin{aligned} & (1 / 8) \times 8=\mathbf{1} \\ & \mathrm{A}^{-1} \times \mathrm{A}=\mathbf{I} \end{aligned}$$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-inverse-intro -->
+
+                <!-- START: chapter-1-identity-matrix-recap -->
+                <section id="chapter-1-identity-matrix-recap" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🆔</span>
+                        <span class="heading-text">Identity Matrix (Recap)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>We just mentioned the "Identity Matrix". It is the matrix equivalent of the number " 1 ":</p>
+                        <div class="equation">$$I=\left[\begin{array}{lll} 1 & 0 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{array}\right]$$</div>
+                        <p>A 3x3 Identity Matrix</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It is "square" (has same number of rows as columns),</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It has <span class="math-inline">$\mathbf{1} \mathrm{s}$</span> on the diagonal and <span class="math-inline">$\mathbf{0}$</span> s everywhere else.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It's symbol is the capital letter I.</span></li>
+                        </ul>
+                        <p>The Identity Matrix can be <span class="math-inline">$2 \times 2$</span> in size, or <span class="math-inline">$3 \times 3, 4 \times 4$</span>, etc <span class="math-inline">$\ldots$</span></p>
+                    </div>
+                </section>
+                <!-- END: chapter-1-identity-matrix-recap -->
+
+                <!-- START: chapter-1-matrix-inverse-definition -->
+                <section id="chapter-1-matrix-inverse-definition" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📖</span>
+                        <span class="heading-text">Definition (Inverse Matrix)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Here is the definition:</p>
+                        <p>The Inverse of A is <span class="math-inline">$\mathrm{A}^{-1}$</span> only when:</p>
+                        <div class="equation">$$\mathrm{A} \times \mathrm{A}^{-1}=\mathrm{A}^{-1} \times \mathrm{A}=\mathbf{I}$$</div>
+                        <p>Sometimes there is no Inverse at all.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-inverse-definition -->
+
+                <!-- START: chapter-1-matrix-inverse-2x2 -->
+                <section id="chapter-1-matrix-inverse-2x2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">2x2 Matrix Inverse</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>OK, how do we calculate the Inverse?</p>
+                        <p>Well, for a <span class="math-inline">$2 \times 2$</span> Matrix the Inverse is:</p>
+                        <div class="equation">$$\left[\begin{array}{ll} a & b \\ c & d \end{array}\right]^{-1}=\underset{\text { determinant }}{\frac{1}{a d-b c}}\left[\begin{array}{cc} d & -b \\ -c & a \end{array}\right]$$</div>
+                        <p>In other words: swap the positions of <span class="math-inline">$a$</span> and <span class="math-inline">$d$</span>, put negatives in front of <span class="math-inline">$b$</span> and <span class="math-inline">$c$</span>, and divide everything by the determinant (ad-bc).</p>
+                        <p>Let us try an example:</p>
+                        <div class="equation">$$\begin{aligned} {\left[\begin{array}{ll} 4 & 7 \\ 2 & 6 \end{array}\right]^{-1} } & =\frac{1}{4 \times 6-7 \times 2}\left[\begin{array}{cc} 6 & -7 \\ -2 & 4 \end{array}\right] \\ & =\frac{1}{10}\left[\begin{array}{cc} 6 & -7 \\ -2 & 4 \end{array}\right] \\ & =\left[\begin{array}{cc} 0.6 & -0.7 \\ -0.2 & 0.4 \end{array}\right] \end{aligned}$$</div>
+                        <p>How do we know this is the right answer?</p>
+                        <p>Remember it must be true that: <span class="math-inline">$\mathrm{A} \times \mathrm{A}^{-1}=\mathbf{I}$</span></p>
+                        <p>So, let us check to see what happens when we multiply the matrix by its inverse:</p>
+                        <div class="equation">$$\begin{aligned} {\left[\begin{array}{ll} 4 & 7 \\ 2 & 6 \end{array}\right]\left[\begin{array}{cc} 0.6 & -0.7 \\ -0.2 & 0.4 \end{array}\right] } & =\left[\begin{array}{ll} 4 \times 0.6+7 \times-0.2 & 4 \times-0.7+7 \times 0.4 \\ 2 \times 0.6+6 \times-0.2 & 2 \times-0.7+6 \times 0.4 \end{array}\right] \\ & =\left[\begin{array}{ll} 2.4-1.4 & -2.8+2.8 \\ 1.2-1.2 & -1.4+2.4 \end{array}\right] \\ & =\left[\begin{array}{ll} 1 & 0 \\ 0 & 1 \end{array}\right] \end{aligned}$$</div>
+                        <p>And, hey!, we end up with the Identity Matrix! So it must be right.</p>
+                        <p>It should also be true that: <span class="math-inline">$\mathrm{A}^{-1} \times \mathrm{A}=\mathbf{I}$</span></p>
+                        <p>Why don't you have a go at multiplying these? See if you also get the Identity Matrix:</p>
+                        <div class="equation">$$\left[\begin{array}{cc} 0.6 & -0.7 \\ -0.2 & 0.4 \end{array}\right]\left[\begin{array}{ll} 4 & 7 \\ 2 & 6 \end{array}\right]=[ \quad ]$$</div> <!-- Placeholder for result -->
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-inverse-2x2 -->
+
+                <!-- START: chapter-1-matrix-inverse-purpose -->
+                <section id="chapter-1-matrix-inverse-purpose" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">Why Would We Want an Inverse?</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Because with Matrices we don't divide! Seriously, there is no concept of dividing by a Matrix.</p>
+                        <p>But we can multiply by an Inverse, which achieves the same thing.</p>
+                        <p>Imagine you couldn't divide by numbers, and someone asked "How do I share 10 apples with 2 people?"</p>
+                        <p>But you could take the reciprocal of 2 (which is 0.5 ), so you could answer:</p>
+                        <div class="equation">$$10 \times 0.5=5$$</div>
+                        <p>They get 5 apples each</p>
+                        <p>The same thing can be done with Matrices:</p>
+                        <p>Say that you know Matrix A and B, and want to find Matrix X:</p>
+                        <div class="equation">$$\mathrm{XA}=\mathrm{B}$$</div>
+                        <p>It would be nice to divide both sides by A (to get <span class="math-inline">$\mathrm{X}=\mathrm{B} / \mathrm{A}$</span> ), but remember we can't divide.</p>
+                        <p>But what if we multiply both sides by <span class="math-inline">$\mathrm{A}^{-1}$</span> ?</p>
+                        <div class="equation">$$\mathrm{XAA}^{-1}=\mathrm{BA}^{-1}$$</div>
+                        <p>And we know that <span class="math-inline">$\mathrm{AA}^{-1}=\mathrm{I}$</span>, so:</p>
+                        <div class="equation">$$\mathrm{XI}=\mathrm{BA}^{-1}$$</div>
+                        <p>We can remove I (for the same reason we could remove "1" from <span class="math-inline">$1 \mathrm{x}=\mathrm{ab}$</span> for numbers):</p>
+                        <div class="equation">$$\mathrm{X}=\mathrm{BA}^{-1}$$</div>
+                        <p>And we have our answer (assuming we can calculate <span class="math-inline">$\mathrm{A}^{-1}$</span> )</p>
+                        <p>In that example we were very careful to get the multiplications correct, because with Matrices the order of multiplication matters. AB is almost never equal to BA.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-1-matrix-inverse-purpose -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-1-part-3.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 1 Part 4 of 6</span>
+                    </div>
+                    <a href="chapter-1-part-5.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

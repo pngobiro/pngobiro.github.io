@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operating System Structure - [Course Name]</title>
+    <meta name="description" content="Module 2: Operating System Structure and Services">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <article class="learning-module" data-module="2">
+        <nav class="module-nav">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="module1.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module 2 of 3</span>
+                </div>
+                <a href="module3.html" class="nav-button">
+                    Next <span>→</span>
+                </a>
+            </div>
+        </nav>
+        <header class="module-header">
+            <h1>Module 2: Operating System Structure</h1>
+            <section class="module-objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Understand operating system services.</li>
+                    <li>Explore user and OS interfaces like CLI and GUI.</li>
+                    <li>Learn about system calls and system programs.</li>
+                    <li>Understand OS debugging and system boot process.</li>
+                </ul>
+            </section>
+        </header>
+        <main class="module-content">
+            <section id="section-1-2" class="module-section">
+                <h2>1.2 OPERATING SYSTEM STRUCTURE</h2>
+                <section id="section-1-2-1" class="module-section">
+                    <h3>1.2.1 Operating System Services</h3>
+                    <p>📚 Content: One set of operating-system services provides functions that are helpful to the user</p>
+                    <section id="section-communications-service" class="module-section">
+                        <h4>Communications</h4>
+                        <p>Processes may exchange information, on the same computer or between computers over a network.</p>
+                        <p>Communications may be via shared memory or through message passing (packets moved by the OS)</p>
+                    </section>
+                    <section id="section-error-detection-service" class="module-section">
+                        <h4>Error detection</h4>
+                        <p>OS needs to be constantly aware of possible errors may occur in the CPU and memory hardware, in I/O devices, in user program</p>
+                        <p>For each type of error, OS should take the appropriate action to ensure correct and consistent computing.</p>
+                        <p>Debugging facilities can greatly enhance the user’s and programmer’s abilities to efficiently use the system.</p>
+                    </section>
+                    <p>Another set of OS functions exists for ensuring the efficient operation of the system itself via resource sharing</p>
+                    <section id="section-resource-allocation-service" class="module-section">
+                        <h4>Resource allocation</h4>
+                        <p>When multiple users or multiple jobs running concurrently, resources must be allocated to each of them</p>
+                        <p>Many types of resources - Some (such as CPU cycles, main memory, and file storage) may have special allocation code, others (such as I/O devices) may have general request and release code</p>
+                    </section>
+                    <section id="section-accounting-service" class="module-section">
+                        <h4>Accounting</h4>
+                        <p>To keep track of which users use how much and what kinds of computer resources</p>
+                    </section>
+                    <section id="section-protection-security-service" class="module-section">
+                        <h4>Protection and security</h4>
+                        <p>The owners of information stored in a multiuser or networked computer system may want to control use of that information, concurrent processes should not interfere with each other.</p>
+                        <p>Protection involves ensuring that all access to system resources is controlled.</p>
+                        <p>Security of the system from outsiders requires user authentication, extends to defending external I/O devices from invalid access attempts.</p>
+                        <p>If a system is to be protected and secure, precautions must be instituted throughout it. A chain is only as strong as its weakest link.</p>
+                    </section>
+                </section>
+            </section>
+
+            <section id="section-1-2-2" class="module-section">
+                <h2>1.2.2 User and Operating System Interface - CLI</h2>
+                <section id="section-cli" class="module-section">
+                    <h3>CLI - Command Line Interface</h3>
+                    <p>Command Line Interface (CLI) or command interpreter allows direct command entry Sometimes implemented in kernel, sometimes by systems program</p>
+                    <ul>
+                        <li>Sometimes multiple flavors implemented – shells</li>
+                        <li>Primarily fetches a command from user and executes it</li>
+                    </ul>
+                    <p>Sometimes commands built-in, sometimes just names of programs If the latter, adding new features doesn’t require shell modification</p>
+                </section>
+                <section id="section-gui" class="module-section">
+                    <h3>User Operating System Interface - GUI</h3>
+                    <p>User-friendly desktop metaphor interface</p>
+                    <ul>
+                        <li>Usually mouse, keyboard, and monitor</li>
+                        <li>Icons represent files, programs, actions, etc</li>
+                        <li>Various mouse buttons over objects in the interface cause various actions (provide information, options, execute function, open directory (known as a folder)</li>
+                    </ul>
+                    <p>Invented at Xerox PARC</p>
+                    <p>Many systems now include both CLI and GUI interfaces</p>
+                    <ul>
+                        <li>Microsoft Windows is GUI with CLI “command” shell</li>
+                        <li>Apple Mac OS X as “Aqua” GUI interface with UNIX kernel underneath and shells available</li>
+                        <li>Solaris is CLI with optional GUI interfaces (Java Desktop, KDE)</li>
+                    </ul>
+                </section>
+                <section id="section-bourne-shell" class="module-section">
+                    <h3>Bourne Shell Command Interpreter</h3>
+                    <figure>
+                        <img src="../assets/images/module2-bourne-shell.png" alt="Screenshot of Bourne Shell Command Interpreter" width="450" height="300">
+                        <figcaption>Figure 1: Bourne Shell Command Interpreter</figcaption>
+                    </figure>
+                </section>
+                <section id="section-mac-gui" class="module-section">
+                    <h3>The Mac OS X GUI</h3>
+                    <figure>
+                        <img src="../assets/images/module2-mac-gui.png" alt="Screenshot of Mac OS X GUI" width="450" height="300">
+                        <figcaption>Figure 2: The Mac OS X GUI</figcaption>
+                    </figure>
+                </section>
+            </section>
+
+            <section id="section-1-2-3" class="module-section">
+                <h2>1.2.3 System Calls</h2>
+                <p>📚 Content: Programming interface to the services provided by the OS</p>
+                <p>Typically written in a high-level language (C or C++)</p>
+                <p>Mostly accessed by programs via a high-level Application Program Interface (API) rather than direct system call use Three most common APIs are Win32 API for Windows, POSIX API for POSIX-based systems (including virtually all versions of UNIX, Linux, and Mac OS X), and Java API for the Java virtual machine (JVM)</p>
+                <p>Why use APIs rather than system calls?(Note that the system-call names used throughout this text are generic)</p>
+                <section id="section-system-call-example" class="module-section">
+                    <h3>Example of System Calls</h3>
+                    <figure>
+                        <img src="../assets/images/module2-system-calls.png" alt="Diagram illustrating System Calls" width="500" height="350">
+                        <figcaption>Figure 3: Example of System Calls</figcaption>
+                    </figure>
+                </section>
+                <section id="section-system-call-implementation" class="module-section">
+                    <h3>System Call Implementation</h3>
+                    <ul>
+                        <li>Typically, a number associated with each system call</li>
+                        <li>System-call interface maintains a table indexed according to these numbers</li>
+                        <li>The system call interface invokes intended system call in OS kernel and returns status of the system call and any return values</li>
+                        <li>The caller need know nothing about how the system call is implemented</li>
+                        <li>Just needs to obey API and understand what OS will do as a result call</li>
+                        <li>Most details of OS interface hidden from programmer by API Managed by run-time support library (set of functions built into libraries included with compiler)</li>
+                    </ul>
+                </section>
+                <section id="section-api-system-call-relationship" class="module-section">
+                    <h3>API – System Call – OS Relationship</h3>
+                    <figure>
+                        <img src="../assets/images/module2-api-syscall-os.png" alt="Diagram of API, System Call, and OS Relationship" width="500" height="350">
+                        <img src="../assets/images/module2-api-syscall-os2.png" alt="Diagram of API, System Call, and OS Relationship" width="500" height="350">
+                        <figcaption>Figure 4: API – System Call – OS Relationship</figcaption>
+                    </figure>
+                </section>
+                <section id="section-system-call-parameter-passing" class="module-section">
+                    <h3>System Call Parameter Passing</h3>
+                    <p>Often, more information is required than simply identity of desired system call</p>
+                    <p>Exact type and amount of information vary according to OS and call</p>
+                    <p>Three general methods used to pass parameters to the OS</p>
+                    <ul>
+                        <li>Simplest: pass the parameters in registers
+                            <ul>
+                                <li>In some cases, may be more parameters than registers</li>
+                            </ul>
+                        </li>
+                        <li>Parameters stored in a block, or table, in memory, and address of block passed as a parameter in a register
+                            <p>This approach taken by Linux and Solaris</p>
+                        </li>
+                        <li>Parameters placed, or pushed, onto the stack by the program and popped off the stack by the operating system</li>
+                        <li>Block and stack methods do not limit the number or length of parameters being passed</li>
+                    </ul>
+                </section>
+                <section id="section-parameter-passing-table" class="module-section">
+                    <h3>Parameter Passing via Table</h3>
+                    <figure>
+                        <img src="../assets/images/module2-param-passing-table.png" alt="Diagram of Parameter Passing via Table" width="400" height="300">
+                        <figcaption>Figure 5: Parameter Passing via Table</figcaption>
+                    </figure>
+                </section>
+            </section>
+
+            <section id="section-1-2-4" class="module-section">
+                <h2>1.2.4 Types of System Calls</h2>
+                <ul>
+                    <li>Process control</li>
+                    <li>File management</li>
+                    <li>Device management</li>
+                    <li>Information maintenance</li>
+                    <li>Communications</li>
+                    <li>Protection</li>
+                </ul>
+                <section id="section-process-control-syscalls" class="module-section">
+                    <h3>Process Control</h3>
+                    <p>A running program needs to be able to halt its execution either normally (end) or abnormally (abort). If a system call is made to terminate the currently running program abnormally, or if the program runs into a problem and causes an error trap, a dump of memory is sometimes taken and an error message generated. The dump is written to disk and may be examined by a debugger—a system program designed to aid the programmer in finding and correcting bugs-—to determine the cause of the problem. Under either normal or abnormal circumstances, the operating system must transfer control to the invoking command interpreter. The command interpreter then reads the next command. In an interactive system, the command interpreter simply continues with the next command; it is assumed that the user will issue an appropriate command to respond to any error.</p>
+                </section>
+                <section id="section-file-management-syscalls" class="module-section">
+                    <h3>File Management</h3>
+                    <p>We first need to be able to create and delete files. Either system call requires the name of the file and perhaps some of the file's attributes. Once the file is created, we need to open it and to use it. We may also read, write, or reposition (rewinding or skipping to the end of the file, for example). Finally, we need to close the file, indicating that we are no longer using it. We may need these same sets of operations for directories if we have a directory structure for organizing files in the file system. In addition, for either files or directories, we need to be able to determine the values of various attributes and perhaps to reset them if necessary. File attributes include the file name, a file type, protection codes, accounting information, and so on.</p>
+                    <p>At least two system calls, get file attribute and set file attribute, are required for this function. Some operating systems provide many more calls, such as calls for file move and copy.</p>
+                </section>
+                <section id="section-device-management-syscalls" class="module-section">
+                    <h3>Device Management</h3>
+                    <p>A process may need several resources to execute—main memory, disk drives, access to files, and so on. If the resources are available, they can be granted, and control can be returned to the user process. Otherwise, the process will have to wait until sufficient resources are available. The various resources controlled by the operating system can be thought of as devices. Some of these devices are physical devices (for example, tapes), while others can be thought of as abstract or virtual devices (for example, files). If there are multiple users of the system, the system may require us to first request the device, to ensure exclusive use of it. After we are finished with the device, we release it. These functions are similar to the open and close system calls for files.</p>
+                </section>
+                <section id="section-information-maintenance-syscalls" class="module-section">
+                    <h3>Information Maintenance</h3>
+                    <p>Many system calls exist simply for the purpose of transferring information between the user program and the operating system. For example, most systems have a system call to return the current t I m e and date . Other system calls may return information about the system, such as the number of current users, the version number of the operating system, the amount of free memory or disk space, and so on.</p>
+                    <p>In addition, the operating system keeps information about all its processes, and system calls are used to access this information. Generally, calls are also used to reset the process information (get process attributes and set process attributes) .</p>
+                </section>
+                <section id="section-communication-syscalls" class="module-section">
+                    <h3>Communication</h3>
+                    <p>There are two common models of inter process communication: the message passing model and the shared-memory model. In the message-passing model, the communicating processes exchange messages with one another to transfer information. Messages can be exchanged between the processes either directly or indirectly through a common mailbox. Before communication can take place, a connection must be opened. The name of the other communicator must be known, be it another process on the same system or a process on another computer connected by a communications network. Each computer in a network has a host name by which it is commonly known. A host also has a network identifier, such as an IP address. Similarly, each process has a process name, and this name is translated into an identifier by which the operating system can refer to the process. The get host id and get processid system calls do this translation. The identifiers are then passed to the general purpose open and close calls provided by the file system or to specific open connection and close connection system calls, depending on the system's model of communication.</p>
+                    <p>In the shared-memory model, processes use shared memory creates and shared memory attaches system calls to create and gain access to regions of memory owned by other processes. Recall that, normally, the operating system tries to prevent one process from accessing another process's memory. Shared memory requires that two or more processes agree to remove this restriction.</p>
+                    <p>They can then exchange information by reading and writing data in the shared areas. The form of the data and the location are determined by the processes and are not under the operating system's control. The processes are also responsible for ensuring that they are not writing to the same location simultaneously.</p>
+                </section>
+            </section>
+
+            <section id="section-1-2-5" class="module-section">
+                <h2>1.2.5 System Programs</h2>
+                <p>📚 Content: At the lowest level is hardware. Next are the operating system, then the system programs, and finally the application programs. System programs provide a convenient environment for program development and execution. Some of them are simply user interfaces to system calls; others are considerably more complex.</p>
+                <p>They can be divided into these categories:</p>
+                <ul>
+                    <li>File management. These programs create, delete, copy, rename, print, dump, list, and generally manipulate files and directories.</li>
+                    <li>Status information. Some programs simply ask the system for the date, time, amount of available memory or disk space, number of users, or similar status information. Others are more complex, providing detailed performance, logging, and debugging information. Typically, these programs format and print the output to the terminal or other output devices or files or display it in a window of the GUI. Some systems also support a registry, which is used to store and retrieve configuration information.</li>
+                    <li>File modification. Several text editors may be available to create and modify the content of files stored on disk or other storage devices. There may also be special commands to search contents of files or perform transformations of the text.</li>
+                    <li>Programming-language support. Compilers, assemblers, debuggers and interpreters for common programming languages (such as C, C++, Java, Visual Basic, and PERL) are often provided to the user with the operating system.</li>
+                    <li>Program loading and execution. Once a program is assembled or compiled, it must be loaded into memory to be executed. The system may provide absolute loaders, relocatable loaders, linkage editors, and overlay loaders. Debugging systems for either higher-level languages or machine language are needed as well.</li>
+                    <li>Communications. These programs provide the mechanism for creating virtual connections among processes, users, and computer systems. They allow users to send messages to one another's screens, to browse web pages, to send electronic-mail messages, to log in remotely, or to transfer files from one machine to another.</li>
+                </ul>
+                <p>In addition to systems programs, most In addition to systems programs, most operating systems are supplied with programs that are useful in solving common problems or performing common operations. Such programs include web browsers, word processors and text formatters, spreadsheets, database systems, compilers, plotting and statistical-analysis packages, and games. These programs are known as system utilities or application programs.</p>
+            </section>
+
+            <section id="section-1-2-6" class="module-section">
+                <h2>1.2.6 Operating-System Structure</h2>
+                <p>Refer above pages</p> 
+            </section>
+
+            <section id="section-1-2-7" class="module-section">
+                <h2>1.2.7 Operating-System Debugging</h2>
+                <ul>
+                    <li>Debugging is finding and fixing errors, or bugs</li>
+                    <li>OS generate log files containing error information</li>
+                    <li>Failure of an application can generate core dump file capturing memory of the process</li>
+                    <li>Operating system failure can generate crash dump file containing kernel memory</li>
+                    <li>Beyond crashes, performance tuning can optimize system performance</li>
+                    <li>Kernighan’s Law: “Debugging is twice as hard as writing the code in the rst place. Therefore, if you write the code as cleverly as possible, you are, by definition, not smart enough to debug it.”</li>
+                    <li>DTrace tool in Solaris, FreeBSD, Mac OS X allows live instrumentation on production systems</li>
+                    <li>Probes fire when code is executed, capturing state data and sending it to consumers of those probes</li>
+                </ul>
+            </section>
+
+            <section id="section-1-2-8" class="module-section">
+                <h2>1.2.8 System Boot</h2>
+                <p>📚 Content: The procedure of starting a computer by loading the kernel is known as booting the system. On most computer systems, a small piece of code known as the bootstrap program or bootstrap loader locates the kernel, loads it into main memory, and starts its execution. Some computer systems, such as PCs, use a two-step process in which a simple bootstrap loader fetches a more complex boot program from disk, which in turn loads the kernel.</p>
+                <p>When a CPU receives a reset event—for instance, when it is powered up or rebooted—the instruction register is loaded with a predefined memory location, and execution starts there. At that location is the initial bootstrap program. This program is in the form of read-only memory (ROM), because the RAM is in an unknown state at system startup. ROM is convenient because it needs no initialization and cannot be infected by a computer virus.</p>
+                <p>The bootstrap program can perform a variety of tasks. Usually, one task is to run diagnostics to determine the state of the machine. If the diagnostics pass, the program can continue with the booting steps. It can also initialize all aspects of the system, from CPU registers to device controllers and the contents of main memory. Sooner or later, it starts the operating system.</p>
+                <p>Some systems—such as cellular phones, PDAs, and game consoles—store the entire operating system in ROM. Storing the operating system in ROM is suitable for small operating systems, simple supporting hardware, and rugged operation. A problem with this approach is that changing the bootstrap code requires changing the ROM hardware chips. Some systems resolve this problem by using erasable programmable read-only memory (EPROM), which is read only except when explicitly given a command to become writable. All forms of ROM are also known as firmware, since their characteristics fall somewhere between those of hardware and those of software. A problem with firmware in general is that executing code there is slower than executing code in RAM.</p>
+                <p>Some systems store the operating system in firmware and copy it to RAM for fast execution. A final issue with firmware is that it is relatively expensive, so usually only small amounts are available.</p>
+                <p>For large operating systems (including most general-purpose operating systems like Windows, Mac OS X, and UNIX) or for systems that change frequently, the bootstrap loader are stored in firmware, and the operating system is on disk. In this case, the bootstrap runs diagnostics and has a bit of code that can read a single block at a fixed location (say block zero) from disk into memory and execute the code from that boot block. The program stored in the boot block may be sophisticated enough to load the entire operating system into memory and begin its execution. More typically, it is simple code (as it fits in a single disk block) and only knows the address on disk and length of the remainder of the bootstrap program. All of the disk-bound bootstrap, and the operating system itself, can be easily changed by writing new versions to disk.</p>
+            </section>
+        </main>
+        <footer class="module-footer">
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="module1.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module 2 of 3</span>
+                    </div>
+                    <a href="module3.html" class="nav-button">
+                        Next <span>→</span>
+                    </a>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</body>
+</html>

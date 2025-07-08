@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical Calculations (Fuses, Voltage Drop, Wire Size)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="13-system-design-sizing.html" class="nav-button ">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 82.35%;"></div> <!-- Set percentage dynamically (14/17 * 100) -->
+                        </div>
+                        <span class="progress-text">Unit 14 of 17</span> <!-- Update text -->
+                    </div>
+                    <a href="15-accessories-wiring.html" class="nav-button ">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Electrical Calculations (Fuses, Voltage Drop, Wire Size)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: sizing-fuses-circuit-breakers -->
+                <section id="sizing-fuses-circuit-breakers" class="content-section" aria-labelledby="sizing-fuses-circuit-breakers-heading">
+                    <h2 id="sizing-fuses-circuit-breakers-heading" class="section-heading">
+                        <span class="heading-icon">⚡</span>
+                        <span class="heading-text">SIZING FUSES AND CIRCUIT BREAKERS</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>List the circuits that need to be protected</p>
+                        <p>Divide the power by system voltage to get current in amps. This is the maximum rated current in the circuit</p>
+                        <p>Increase this figure by 20 per cent of its value (i.e. multiply this figure by 1.2). This is the size of the fuse required.</p>
+                         <!-- START: fuse-sizing-example -->
+                         <section id="fuse-sizing-example" aria-labelledby="fuse-sizing-example-heading">
+                              <h3 id="fuse-sizing-example-heading" class="subsection-heading">EXAMPLE</h3>
+                              <p>A 12 V system circuit includes a 60 W television and three 10 W lamps:</p>
+                              <div class="equation">$$ 60 W+10 W+10 W+10 W=90 W $$</div>
+                              <p>Divide the power by the system voltage $(12 \mathrm{~V})$ :</p>
+                              <div class="equation">$$ 90 \mathrm{~W} / 12 \mathrm{~V}=7.5 \mathrm{~A} $$</div>
+                              <p>This is the maximum current coming from the battery to the charge controller. Increase this figure by 20 per cent:</p>
+                              <div class="equation">$$ 7.5 \mathrm{~A} \times 1.2=9 \mathrm{~A} $$</div>
+                              <p>In the above circuit example, a 9-amp fuse should be used. Since this size does not exist, select the next largest size, in this case a 10 -amp fuse. The current rating of the cable needs to be greater than 10 amps.</p>
+                         </section>
+                         <!-- END: fuse-sizing-example -->
+                    </div>
+                </section>
+                <!-- END: sizing-fuses-circuit-breakers -->
+
+                <!-- START: wire-size-voltage-drop -->
+                <section id="wire-size-voltage-drop" class="content-section" aria-labelledby="wire-size-voltage-drop-heading">
+                    <h2 id="wire-size-voltage-drop-heading" class="section-heading">
+                        <span class="heading-icon">📏</span>
+                        <span class="heading-text">WIRE SIZE, VOLTAGE DROP</span>
+                    </h2>
+                     <div class="content-card">
+                        <p><dfn>Voltage drop</dfn> is the loss of voltage (and hence power) due to resistance in long cable runs. If the wire's cross-section area is too small for a given current, an unacceptable voltage drop will occur over its length. Resistance in the cable converts electrical energy to heat and causes a consequent voltage drop. When the voltage drop is too large in, for example, the cables from the PV module or array, the battery or battery bank will not be charged properly; in distribution circuits it will affect performance of lamps and appliances, and may damage them. The voltage drop also wastes expensive energy from the PV array and battery.</p>
+                        <p>Voltage drop occurs in all wire runs. However, voltage drops of more than 5 per cent are always unacceptable. Correctly selected cable sizes will avoid unacceptable voltage drops.</p>
+                        <div class="equation">$$ \text{Voltage Drop (volts)} = \text{Current (I: amps)} \times \text{Resistance (R: ohms)} $$</div>
+                        <p>To calculate voltage drop, one must first know three values:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">the current flow through the wire in amps (I);</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">the distance of the cable run in meters (the length of both the positive and negative runs must be included in this calculation!); and</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">the resistance factor, K , of the intended cable in ohms per meter.</span>
+                            </li>
+                        </ul>
+
+                         <!-- START: voltage-drop-example-1 -->
+                         <section id="voltage-drop-example-1" aria-labelledby="voltage-drop-example-1-heading">
+                              <h3 id="voltage-drop-example-1-heading" class="subsection-heading">EXAMPLE 1</h3>
+                              <img src="../assets/images/2025_05_12_735dd22c22905b8a4f0ag-44-1.jpg" alt="Diagram illustrating a simple circuit with a voltage source, wire, and load, showing the concept of voltage drop." class="content-image">
+                         </section>
+                         <!-- END: voltage-drop-example-1 -->
+
+                         <!-- START: voltage-drop-example-2 -->
+                         <section id="voltage-drop-example-2" aria-labelledby="voltage-drop-example-2-heading">
+                              <h3 id="voltage-drop-example-2-heading" class="subsection-heading">EXAMPLE 2</h3>
+                              <img src="../assets/images/2025_05_12_735dd22c22905b8a4f0ag-44-2.jpg" alt="Diagram illustrating voltage drop in a circuit with multiple loads connected via wiring." class="content-image">
+                         </section>
+                         <!-- END: voltage-drop-example-2 -->
+
+                         <!-- START: voltage-drop-example-3 -->
+                         <section id="voltage-drop-example-3" aria-labelledby="voltage-drop-example-3-heading">
+                              <h3 id="voltage-drop-example-3-heading" class="subsection-heading">EXAMPLE 3</h3>
+                              <p>Suppose electricity is provided for a 24 W lamp in a kitchen 50 m ( 165 feet) from the power source using 2.5 mm 2 cable. Using Ohm's Law, it is possible to calculate the voltage drop for a 12 V DC and 24 V DC system.</p>
+                              <p>For a 12 -volt system the current is 2 amps and for a 24 -volt system it is 1 amp .</p>
+                              <ul class="enhanced-list">
+                                   <li class="list-item">
+                                       <span class="item-icon">1.</span>
+                                       <span class="item-text">The resistance factor of the 2.5 mm 2 cable, from Table 7.1 a , is $0.0074 \Omega /$ meter.</span>
+                                   </li>
+                                   <li class="list-item">
+                                       <span class="item-icon">2.</span>
+                                       <span class="item-text">The total resistance of the wire is calculated by multiplying the resistance factor by the length of the wire. Note that the number is equal for both the 12 and 24 V DC system because the wire is the same in each case. Use 100 m (i.e. $2 \times 50 \mathrm{~m}$ ) for the calculation because it is a two-way run. The total resistance over the wire run is $0.74 \Omega (0.0074 \Omega$ per meter $\times 100 \mathrm{~m}$ ).</span>
+                                   </li>
+                                   <li class="list-item">
+                                       <span class="item-icon">3.</span>
+                                       <span class="item-text">Next, as per Ohm's Law, the total resistance is multiplied by the current carried in the wire. This gives the voltage drop.</span>
+                                   </li>
+                               </ul>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <caption>Table 7.1a Copper cable size and resistance (metric sizes)</caption>
+                                        <thead>
+                                            <tr><th>Cable Size</th><th>Resistance in ohms per metre ($\Omega / \mathrm{m}$)</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>2.5 $\mathrm{mm}^{2}$</td><td>0.0074</td></tr>
+                                            <tr><td>4.0 $\mathrm{mm}^{2}$</td><td>0.0046</td></tr>
+                                            <tr><td>6.0 $\mathrm{mm}^{2}$</td><td>0.0031</td></tr>
+                                            <tr><td>10.0 $\mathrm{mm}^{2}$</td><td>0.0018</td></tr>
+                                            <tr><td>16.0 $\mathrm{mm}^{2}$</td><td>0.0012</td></tr>
+                                            <tr><td>25.0 $\mathrm{mm}^{2}$</td><td>0.00073</td></tr>
+                                            <tr><td>35.0 $\mathrm{mm}^{2}$</td><td>0.00049</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <caption>Table 7.624 V system maximum wire length in metres (1.2V max. voltage drop, or 5 per cent)</caption>
+                                        <thead>
+                                            <tr><th>\multirow{2}{*}{Wire Size ($\mathrm{mm}^{2}$)}</th><th colspan="9">Load current</th></tr>
+                                            <tr><th>1A</th><th>2A</th><th>3A</th><th>4A</th><th>5A</th><th>6A</th><th>8A</th><th>10A</th><th>14A</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>1.5</td><td>44</td><td>22</td><td>15</td><td>11</td><td>9</td><td>7</td><td>6</td><td>4</td><td>3</td></tr>
+                                            <tr><td>2.5</td><td>75</td><td>38</td><td>25</td><td>19</td><td>15</td><td>13</td><td>9</td><td>8</td><td>5</td></tr>
+                                            <tr><td>4.0</td><td>120</td><td>60</td><td>40</td><td>30</td><td>24</td><td>20</td><td>15</td><td>12</td><td>9</td></tr>
+                                            <tr><td>6.0</td><td>176</td><td>88</td><td>59</td><td>44</td><td>35</td><td>29</td><td>22</td><td>18</td><td>13</td></tr>
+                                            <tr><td>10.0</td><td>300</td><td>150</td><td>100</td><td>75</td><td>60</td><td>50</td><td>38</td><td>30</td><td>21</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                 <h3 class="subsection-heading">SOLUTION</h3>
+                                 <div class="table-container">
+                                    <table class="content-table">
+                                        <caption>Table 7.7 Example of calculation of voltage drop in 12 and 24V DC systems</caption>
+                                        <thead>
+                                            <tr><th>Voltage Drop in a $2.5 \mathrm{~mm}^{2}$ cable</th><th>12 V DC lamp</th><th>24 V DC lamp</th></tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Current (amps)</td><td>2.0A</td><td>1.0A</td></tr>
+                                            <tr><td>Length of Wire (m)</td><td>100 m</td><td>100 m</td></tr>
+                                            <tr><td>Resistance Factor, K ($2.5 \mathrm{~mm}^{2}$ cable)</td><td>$0.0074 \Omega / \mathrm{m}$</td><td>$0.0074 \Omega / \mathrm{m}$</td></tr>
+                                            <tr><td>Total Resistance ($\mathrm{K} \times 100 \mathrm{~m}$)</td><td>$0.74 \Omega$</td><td>$0.74 \Omega$</td></tr>
+                                            <tr><td>Voltage Drop (Total resistance $\times$ amps)</td><td>1.48 V</td><td>0.74 V</td></tr>
+                                            <tr><td>Voltage at Lamp</td><td>10.52 V</td><td>23.26 V</td></tr>
+                                            <tr><td>Per cent Voltage Drop</td><td>12.3%</td><td>3.1%</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <p>For the 12 V lamp, the voltage drop is 12.3 per cent. This drop is too high and a larger diameter wire size needs to be used. With a 24 V lamp, the voltage drop is only 3.1 per cent. This example demonstrates why 50 m ( 165 foot) cable runs in small solar electric systems are problematic.</p>
+                         </section>
+                         <!-- END: voltage-drop-example-3 -->
+                    </div>
+                 </section>
+                 <!-- END: wire-size-voltage-drop -->
+
+                <!-- START: wire-size-and-distance -->
+                 <section id="wire-size-and-distance" class="content-section" aria-labelledby="wire-size-and-distance-heading">
+                    <h2 id="wire-size-and-distance-heading" class="section-heading">
+                        <span class="heading-icon">📏</span>
+                        <span class="heading-text">WIRE SIZE AND DISTANCE</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>To avoid voltage, drop larger than $5 \%$ the following sizes of wire and distance to components should be used. The distance shown is the maximum distance allowed between components for each wire.</p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <caption>Table. 5-5 Maximum distance from C/C to load</caption>
+                                <thead>
+                                    <tr><th>\multicolumn{1}{|c|}{ Items }</th><th colspan="6">\multicolumn{5}{|c|}{ Maximum distance (one way) }</th><th>(*1)</th></tr>
+                                    <tr><th>Size of Load</th><th colspan="3">9 W light</th><th colspan="3">TV</th><th></th></tr>
+                                    <tr><th>Size of wire ($\mathrm{mm}^{2}$)</th><th>2.5</th><th>4.0</th><th>6.0</th><th>2.5</th><th>4.0</th><th>6.0</th><th></th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>C/C to Load (m)</td><td>40</td><td>65</td><td>95</td><td>28</td><td>45</td><td>67</td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <caption>Table. 5-4 Maximum distance from C/C to components</caption>
+                                <thead>
+                                    <tr><th>Items</th><th colspan="8">Maximum distance (one way)</th></tr>
+                                    <tr><th>Size of PV</th><th colspan="2">25 W</th><th colspan="2">55 W</th><th colspan="2">83 W</th><th colspan="2">110W</th></tr>
+                                    <tr><th>Size of wire ($\mathrm{mm}^{2}$)</th><th>4.0</th><th>6.0</th><th>4.0</th><th>6.0</th><th>4.0</th><th>6.0</th><th>4.0</th><th>6.0</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>C/C to Battery (m)</td><td>3.0</td><td>4.4</td><td>1.5</td><td>2.2</td><td>1.0</td><td>1.4</td><td>N/A</td><td>1.1</td></tr>
+                                    <tr><td>C/C to PV module (m)</td><td>15</td><td>22</td><td>8</td><td>11</td><td>5</td><td>7</td><td>4</td><td>6</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                         <!-- START: calculation-of-wire-distance -->
+                         <section id="calculation-of-wire-distance" aria-labelledby="calculation-of-wire-distance-heading">
+                              <h3 id="calculation-of-wire-distance-heading" class="subsection-heading">CALCULATION OF WIRE DISTANCE</h3>
+                              <img src="../assets/images/2025_05_12_735dd22c22905b8a4f0ag-47-1.jpg" alt="Diagram illustrating a house floor plan with locations of charge controller (C/C) and loads (TV, L1, L2, L3), showing distances." class="content-image">
+                               <h4 class="subsubsection-heading">Physical distance</h4>
+                               <div class="equation">
+                                    $$ \begin{aligned} & \mathrm{TV}=10+1.5+1.5=13 \mathrm{~m} \\ & \mathrm{~L} 1=30.5 \mathrm{~m} \\ & \mathrm{~L} 2=10+15+1.5=26.5 \mathrm{~m} \\ & \mathrm{~L} 3=10+3+3.5+1.5=18 \mathrm{~m} \end{aligned} $$
+                               </div>
+                                <h4 class="subsubsection-heading">Calculated distance to consider voltage drops</h4>
+                                <div class="equation">$$ \begin{aligned} \text { TV } & =13+10 \text { (common portion of } L 2)+10 \text { (common portion of } L 3)=33 \mathrm{~m} \\ \text { L1 } & =30.5 \mathrm{~m} \text { (no common portion) } \\ \text { L2 } & =26.5+10 \text { (common portion of TV) }+13 \text { (common portion of L3) }=49.5 \mathrm{~m} \\ \text { L3 } & =18+10 \text { (common portion of TV) }+13 \text { (common portion of L2) }=41 \mathrm{~m} \end{aligned} $$</div>
+                         </section>
+                         <!-- END: calculation-of-wire-distance -->
+                    </div>
+                 </section>
+                 <!-- END: wire-size-and-distance -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <!-- Repeat exact same links as top navigation -->
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="13-system-design-sizing.html" class="nav-button ">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 82.35%;"></div>
+                        </div>
+                        <span class="progress-text">Unit 14 of 17</span>
+                    </div>
+                    <a href="15-accessories-wiring.html" class="nav-button ">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

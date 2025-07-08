@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Linking to Databases (Part 4)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-3.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 9 (Part 4)</span>
+                    </div>
+                    <a href="chapter-10.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 9: Linking to Databases (Part 4)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-9-part-4 -->
+                <section id="chapter-9-db-reports" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📑</span>
+                        <span class="heading-text">Database Reports</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Once the Data Environment designer has been created, you can create a data report. Because not all of the fields in the data environment will be useful in a report, this series of topics creates a limited report that displays only a few fields.</p>
+                        <h3>To create a new data report</h3>
+                        <ol>
+                            <li>On the Project menu, click Add Data Report, and Visual Basic will add it to your project. If the designer is not on the Project menu, click Components. Click the Designers tab, and click Data Report to add the designer to the menu.</li>
+                            <li>Set the properties of the DataReport object according to the table below:</li>
+                        </ol>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tr><th>Property</th><th>Setting</th></tr>
+                                <tr><td>Name</td><td>rptNwind</td></tr>
+                                <tr><td>Caption</td><td>Northwind Data Report</td></tr>
+                            </table>
+                        </div>
+                        <ol start="3">
+                            <li>On the Properties window, click DataSource and then click deNwind. Then click DataMember and click Customers.</li>
+                            <li>Right-click the Data Report designer, and click Retrieve Structure.</li>
+                        </ol>
+                        <p>You have added a new group section to the designer. Each group section has a one-to-one correspondence to a Command object in the data environment; in this case, the new Group section corresponds to the Customers Command object. Notice also that the Group Header has a matching Group Footer section.</p>
+                        <p><strong>Note:</strong> The Data Environment allows you to create hierarchies of Command objects wherein a Command object has more than one child object - child Command objects parallel to each other. The Data Report designer, however, is not as flexible, and can't display more than one child object at a time. In such cases, when executing a Retrieve Structure command, the Data Report will display only the first of the child commands, and none below it. Thus you should avoid creating Command hierarchies with parallel children commands.</p>
+                        <ol start="5">
+                            <li>From the Data Environment designer, drag the CompanyName field (under the Customers command) onto the Group Header (Customers_Header) section.</li>
+                        </ol>
+                        <p>The Group Header section can contain any field from the Customers command, however, for demonstration purposes, only the Customer name is displayed at this time.</p>
+                        <ol start="6">
+                            <li>Delete the Label control (rptLabel) named Label1.</li>
+                        </ol>
+                        <p>If you do not want a Label control to be included with the TextBox control, you can uncheck the Drag and Drop Fields Caption option on the Field Mapping tab of the Data Environment designer's Options dialog box.</p>
+                        <ol start="7">
+                            <li>From the Data Environment designer, drag the OrderDate field (under the Orders command) onto the Details (Orders_Detail) section. Delete the Label control.</li>
+                        </ol>
+                        <p>The Details section represents the innermost "repeating" section, and thus corresponds to the lowest Command object in the Data Environment hierarchy: the Orders Command object.</p>
+                        <ol start="8">
+                            <li>Resize the Data Report designer's sections to resemble the figure below:</li>
+                        </ol>
+                        <figure>
+                            <img src="../assets/images/chapter-9-db-report.jpg" alt="Data Report Designer Example" class="content-image">
+                        </figure>
+                        <p>It's important to resize the height of the Details section to be as short as possible because the height will be multiplied for every OrderDate returned for the CompanyName. Any extra space below or above the OrderDate text box will result in unneeded space in the final report.</p>
+                        <ol start="9">
+                            <li>Save the project.</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="chapter-9-db-report-show" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">👁️</span>
+                        <span class="heading-text">Preview the Data Report Using the Show Method</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Now that the data environment and the data report objects have been created, you are almost ready to run the project. One step remains: to write code to show the data report.</p>
+                        <h3>To show the data report at run time</h3>
+                        <ol>
+                            <li>On the Project Explorer window, double-click the frmShowReport icon to display the Form designer.</li>
+                            <li>On Toolbox, click the General tab.</li>
+                            <li>Click the CommandButton icon and draw a CommandButton on the form.</li>
+                            <li>Set the properties of the Command1 control according to the table below:</li>
+                        </ol>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tr><th>Property</th><th>Setting</th></tr>
+                                <tr><td>Name</td><td>cmdShow</td></tr>
+                                <tr><td>Caption</td><td>Show Report</td></tr>
+                            </table>
+                        </div>
+                        <ol start="5">
+                            <li>In the button's Click event, paste the code below.</li>
+                        </ol>
+                        <pre><code class="language-vb">Private Sub cmdShow_Click()
+    rptNwind.Show
+End Sub
+</code></pre>
+                        <ol start="6">
+                            <li>Save and run the project.</li>
+                            <li>Click Show Report to display the report in print preview mode.</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="chapter-9-db-report-startup" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🚀</span>
+                        <span class="heading-text">Optional—Setting the Data Report as the Startup Object</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>You can also display the data report with no code at all.</p>
+                        <ol>
+                            <li>On the Project menu, click prjNwind Properties.</li>
+                            <li>In the Startup Object box, select rptNwind.</li>
+                            <li>Save and run the project.</li>
+                        </ol>
+                        <p><strong>Note:</strong> If you use this method, you can remove the Form object from your project.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-9-part-4 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-3.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 9 (Part 4)</span>
+                    </div>
+                    <a href="chapter-10.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

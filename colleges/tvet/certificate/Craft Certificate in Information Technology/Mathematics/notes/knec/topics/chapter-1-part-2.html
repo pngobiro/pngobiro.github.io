@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 1: Number Bases (Part 2) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-1-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 1 (Part 2)</span>
+                    </div>
+                    <a href="chapter-2-part-1.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 1 : Number Bases (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-1-octal-arithmetic -->
+                <section id="section-1-9" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕</span>
+                        <span class="heading-text">1.9 Octal Arithmetic</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>We only cover octal addition. The sum of two octal numbers can be reduced by the usual addition algorithm to the repeated addition of two digits (with possibly a carry of 1). The following table shows the addition of Octal number.</p>
+                        <div class="table-container math-table">
+                            <table class="content-table">
+                                <caption>Octal Addition Table</caption>
+                                <thead>
+                                    <tr><th>++</th><th>0</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th><th>6</th><th>7</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td></tr>
+                                    <tr><td>1</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>10</td></tr>
+                                    <tr><td>2</td><td>2</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>10</td><td>11</td></tr>
+                                    <tr><td>3</td><td>3</td><td>4</td><td>5</td><td>6</td><td>7</td><td>10</td><td>11</td><td>12</td></tr>
+                                    <tr><td>4</td><td>4</td><td>5</td><td>6</td><td>7</td><td>10</td><td>11</td><td>12</td><td>13</td></tr>
+                                    <tr><td>5</td><td>5</td><td>6</td><td>7</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td></tr>
+                                    <tr><td>6</td><td>6</td><td>7</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td></tr>
+                                    <tr><td>7</td><td>7</td><td>10</td><td>11</td><td>12</td><td>13</td><td>14</td><td>15</td><td>16</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The sum of two octal digits, or the sum of two octal digits plus 1, can be obtained by:</p>
+                        <ol>
+                            <li>Finding their decimal sum; and</li>
+                            <li>Modifying the decimal, if it exceeds 7, subtracting 8 and carrying 1 to the next column.</li> <!-- MMD typo: satracting -->
+                        </ol>
+                        <p>Example:</p>
+                        <img src="../assets/images/ch1-octal-addition-example.jpg" alt="Example of Octal Addition: 345 + 672 = 1237">
+                    </div>
+                </section>
+                <!-- END: chapter-1-octal-arithmetic -->
+
+                <!-- START: chapter-1-hex-arithmetic -->
+                <section id="section-1-10" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕</span>
+                        <span class="heading-text">1.10 Hexadecimal Arithmetic</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>As with the octal system, we cover only hexadecimal addition.</p>
+                        <p>The sum of two hexadecimal digits, or the sum of two hexadecimal digits plus 1, can be obtained by:</p>
+                        <ol>
+                            <li>Finding their decimal sum; and</li>
+                            <li>Modifying the decimal, if it exceeds 15, by subtracting 16 and carrying 1 to the next column.</li>
+                        </ol>
+                        <p>If the base exceeds ten, we need mentally to change each hexadecimal letter digit to its decimal form when finding the decimal sum, and each decimal difference greater than nine to its hexadecimal form when modifying the decimal sum.</p>
+                        <p>1. <span class="math-inline">$A=10 \quad B=11 \quad C=12 \quad D=13 \quad E=14 \quad F=15$</span></p>
+                        <p>Example:</p>
+                        <div class="equation">$$ \mathrm{A}_{16} + 9_{16} $$</div>
+                        <div class="table-container">
+                           <table class="content-table">
+                                <tr><td></td><td><span class="math-inline">$\mathrm{A}_{16}$</span></td></tr>
+                                <tr><td>+</td><td><span class="math-inline">$9_{16}$</span></td></tr>
+                                <tr><td colspan="2"><hr></td></tr>
+                                <tr><td>Decimal sum</td><td>19</td></tr>
+                                <tr><td>Modification</td><td>- 16 (carry 1)</td></tr>
+                                <tr><td colspan="2"><hr></td></tr>
+                                <tr><td>Hex sum</td><td><span class="math-inline">$13_{16}$</span></td></tr> <!-- MMD had Octal sum, corrected -->
+                           </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-hex-arithmetic -->
+
+                <!-- START: chapter-1-modular-arithmetic -->
+                <section id="section-1-11" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⏱️</span>
+                        <span class="heading-text">1.11 Modular Arithmetic</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In our daily life, there are many counting/measuring systems around us. We know that 100 cm is not the same as 100 inches. It's because the measuring units are different, however, we do not intend to cover the conversions of this kind.</p>
+                        <p>To demonstrate how modular arithmetic works is to give a test first:</p>
+                        <p>"If Peter starts work at 8 o'clock in the morning and works for 8 hours, at what time will Peter finish work?"</p>
+                        <p>4 o'clock in the afternoon, right? But how you worked that one out? Because the clock only has 12 hours, once the shorthand reaches 12, it will restart from 0. The numbers we see on the clock-face must be less than or equal to 12. This is a finite set or finite arithmetics.</p> <!-- MMD typos: worket trat, reache -->
+                        <p>To show it mathematically, we add 8 hours to 8 o'clock, and divide 16 by the modulus number 12, the remainder will be the answer we want.</p> <!-- MMD typo: modules, h111 -->
+                        <div class="table-container">
+                           <table class="content-table">
+                               <tr><td><span class="math-inline">$8+8$</span></td><td>16</td></tr>
+                               <tr><td><span class="math-inline">$(16)_{\bmod 12}$</span></td><td>4</td></tr>
+                           </table>
+                        </div>
+                        <p>Example:</p>
+                        <p><span class="math-inline">$(11+3+7+9)_{\bmod 12}$</span></p>
+                         <div class="table-container">
+                           <table class="content-table">
+                               <tr><td><span class="math-inline">$30 / 12$</span></td><td>=</td><td>2 remainder 6</td></tr>
+                               <tr><td><span class="math-inline">$30 \bmod_{12}$</span></td><td>=</td><td>6</td></tr>
+                           </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: chapter-1-modular-arithmetic -->
+
+                <!-- START: chapter-1-points-to-remember -->
+                <section id="chapter-1-points-to-remember" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📌</span>
+                        <span class="heading-text">Points to Remember</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The various sets of numbers include:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Natural numbers</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Integers</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Rational numbers</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Irrational numbers</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Real numbers</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Complex numbers</span></li>
+                        </ul>
+                        <p>The higher the precision required the longer the processing time in computer systems.</p>
+                        <p><strong>4 number systems</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Decimal (Denary)</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Binary</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Octal</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Hexadecimal</span></li>
+                        </ul>
+                        <p>Addition of Octal and Hexadecimal</p> <!-- MMD typo: Additional -->
+                        <p>Convert from other base to decimal integer</p>
+                        <ol>
+                            <li>Write down the weight of each digit;</li>
+                            <li>Multiply each weight and each digit;</li>
+                            <li>Take the sum of the product.</li>
+                        </ol>
+                        <p>Convert from decimal integer to other bases</p>
+                        <ol>
+                            <li>Divide the decimal integer by the desired base;</li>
+                            <li>Write down the remainder;</li>
+                            <li>Repeat dividing until a quotient 0;</li>
+                            <li>Read the remainders from bottom upwards.</li> <!-- MMD typo: bpritomupwards -->
+                        </ol>
+                        <p>Octal and hexadecimal numbers are used as a shorthand for binary numbers.</p>
+                        <p>Each octal digit can be expressed as 3 binary digits</p> <!-- MMD typo: 253 -->
+                        <p>Each hexadecimal digit can be expressed as 4 binary digits.</p>
+                        <p>Use modular arithmetic when the data is finite.</p> <!-- MMD typo: whor -->
+                    </div>
+                </section>
+                <!-- END: chapter-1-points-to-remember -->
+
+                <!-- START: chapter-1-past-questions -->
+                <section id="section-1-12" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">1.12 Past Year Questions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Express the number <span class="math-inline">$7.7_{8}$</span> in:</p>
+                        <ol type="a">
+                            <li>Binary</li>
+                            <li>Denary</li>
+                            <li>Hexadecimal</li>
+                        </ol>
+                        <p>Convert showing all working;</p>
+                        <ol type="a" start="4"> <!-- Start list numbering from 'd' -->
+                            <li>21.625 denary to binary [ 1]</li>
+                            <li>2AE hexadecimal to denary [1]</li>
+                            <li>16.62 octal to binary [ 1]</li>
+                            <li>567 octal to binary [ 1]</li>
+                            <li>684 denary to hexadecimal [ 1]</li>
+                        </ol>
+                        <p>Convert the following:</p>
+                        <ol type="a" start="9"> <!-- Start list numbering from 'i' -->
+                            <li>157 denary to binary</li>
+                            <li>1100110101 binary to octal ..... [1]</li>
+                            <li>ACD hexadecimal to denary ..... [1]</li>
+                            <li>2464 octal to hexadecimal ..... [1]</li>
+                        </ol>
+                        <p>Convert the following:</p>
+                         <ol type="a" start="13"> <!-- Start list numbering from 'm' -->
+                            <li>101101101 Binary to Octal ..... [1]</li>
+                            <li>DAB Hexadecimal to Denary ..... [1]</li>
+                            <li>2839 Denary to Hexadecimal ..... [1]</li>
+                            <li>7453 Octal to Hexadecimal ..... [1]</li>
+                        </ol>
+                        <p>Express the denary number 567:</p>
+                        <ol type="a" start="17"> <!-- Start list numbering from 'q' -->
+                            <li>in binary[1]</li>
+                            <li>in hexadecimal ..... [1]</li>
+                        </ol>
+                        <p>Express the number <span class="math-inline">$103_{8}$</span>:</p>
+                        <ol type="a" start="19"> <!-- Start list numbering from 's' -->
+                            <li>in binary</li>
+                            <li>hexadecimal</li>
+                        </ol>
+                        <p>Convert:</p>
+                        <ol type="a" start="21"> <!-- Start list numbering from 'u' -->
+                            <li>274 Octal to DENARY [ 1]</li>
+                            <li>DA3 Hexadecimal to OCTAL</li>
+                        </ol>
+                        <p>1. Convert:</p>
+                        <ol type="a" start="23"> <!-- Start list numbering from 'w' -->
+                            <li>ABC Hexadecimal to OCTAL</li> <!-- MMD typo: Hexaderimal -->
+                            <li>3974 Denary to HEXADECIMAL [ 1]</li> <!-- MMD typo: Deatry -->
+                        </ol>
+                        <p>2. Convert:</p>
+                        <ol type="a" start="25"> <!-- Start list numbering from 'y' -->
+                            <li>7456 Octal to HEXADECIMAL [ 1]</li>
+                            <li>9E7 Hexadecimal to DENARY [1]</li>
+                        </ol>
+                        <p>3. Convert:</p>
+                        <ol type="a" start="27"> <!-- Start list numbering from 'aa' -->
+                            <li>8543 Denary to OCTAL [ 1]</li>
+                            <li>9AD Hexadecimal to OCTAL</li>
+                        </ol>
+                        <p>4. Convert:</p>
+                        <ol type="a" start="29"> <!-- Start list numbering from 'cc' -->
+                            <li>A25 HEXADECIMAL to BINARY [ 1]</li>
+                            <li>549 DENARY to OCTAL [ 1]</li>
+                            <li>3527 OCTAL to HEXADECIMAL</li>
+                        </ol>
+                        <p>Convert:</p>
+                        <ol type="a" start="32"> <!-- Start list numbering from 'ff' -->
+                            <li>5391 Denary to HEXADECIMAL</li>
+                            <li>6A5 Hexadecimal to OCTAL</li>
+                        </ol>
+                        <p>Convert:</p>
+                        <ol type="a" start="34"> <!-- Start list numbering from 'hh' -->
+                            <li>5743 Denary to HEXADECIMAL</li>
+                            <li>ABC Hexadecimal to OCTAL</li>
+                        </ol>
+                        <p>Convert the following: (You MUST show all workings.)</p>
+                        <ol type="a" start="36"> <!-- Start list numbering from 'jj' -->
+                            <li><span class="math-inline">$11010010_{2}$</span> to Hexadecimal [ 2 ]</li>
+                            <li><span class="math-inline">$54A_{16}$</span> to Denary [2]</li>
+                            <li><span class="math-inline">$1017_{8}$</span> to Binary [2 ]</li> <!-- MMD typo: 10178 -->
+                            <li><span class="math-inline">$167_{10}$</span> to Binary</li>
+                        </ol>
+                        <p>Convert the following:</p>
+                        <ol type="a" start="40"> <!-- Start list numbering from 'nn' -->
+                            <li><span class="math-inline">$175264_{8}$</span> to base 16</li>
+                            <li><span class="math-inline">$1101_{10}$</span> to base 16</li>
+                            <li><span class="math-inline">$72_{8} \div 2_{8}$</span> to base 10 [2]</li>
+                            <li><span class="math-inline">$B00_{16} + 1F_{16}$</span> to base 2 [2]</li> <!-- MMD typo: BOO -->
+                        </ol>
+                        <ol type="a">
+                            <li>Express the number <span class="math-inline">$21_{10}$</span> in binary [1]</li> <!-- MMD typo: 2L0 -->
+                            <li>Express the number <span class="math-inline">$46_{10}$</span> in binary [1]</li> <!-- MMD typo: numbe: -->
+                            <li>Express the number <span class="math-inline">$92_{10}$</span> in binary [1]</li> <!-- MMD typo: nun, her -->
+                            <li>Express in binary the result of multiplying <span class="math-inline">$100110111_{2}$</span> by <span class="math-inline">$4_{10}$</span> [ 2 ]</li>
+                        </ol>
+                        <p>Convert the following:</p>
+                        <ol type="a" start="5"> <!-- Start list numbering from 'e' -->
+                            <li><span class="math-inline">$357_{8}$</span> to base 16 [ 2 ]</li> <!-- MMD typo: 35%8 -->
+                            <li><span class="math-inline">$1011_{10}$</span> to base 16 [ 2 ]</li>
+                            <li><span class="math-inline">$504_{8} \div 2_{8}$</span> to base 10 [ 2 ]</li>
+                            <li><span class="math-inline">$6A_{16} + D00_{16}$</span> to base 2 [2 ]</li>
+                        </ol>
+                        <p>What is the BASE of the number system where <span class="math-inline">$36 + 27 = 65$</span>?</p>
+                        <p>By converting to BINARY, evaluate the HEXADECIMAL expression: 7B + EA. Give your answer in HEXADECIMAL.</p>
+                        <ol type="a">
+                            <li>Evaluate <span class="math-inline">$(7 * 4 + 6 * 5)_{\bmod 11}$</span></li>
+                        </ol>
+                        <ol type="i"> <!-- Assuming 'i' starts a new list -->
+                             <li>Solve <span class="math-inline">$(3 * p = 8)_{\bmod 11}$</span></li>
+                        </ol>
+                         <ol type="a">
+                            <li>Evaluate <span class="math-inline">$(7 * 3 + 5 * 2 + 2 * 1) \bmod 11$</span></li>
+                        </ol>
+                        <ol type="a" start="10"> <!-- Start list numbering from 'j' -->
+                            <li>Evaluate <span class="math-inline">$(3 * p)_{\bmod 5}$</span> for p=0, 2 and 4</li>
+                        </ol>
+                         <ol type="a" start="11"> <!-- Start list numbering from 'k' -->
+                            <li>Solve <span class="math-inline">$(3p = 7) \bmod 11$</span> [2]</li>
+                        </ol>
+                        <p>Evaluate <span class="math-inline">$((4 * 6) + (35 \text{ DIV } 4)) \text{ MOD } 11$</span> [3]</p>
+                    </div>
+                </section>
+                <!-- END: chapter-1-past-questions -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-1-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 1 (Part 2)</span>
+                    </div>
+                    <a href="chapter-2-part-1.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

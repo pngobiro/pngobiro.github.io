@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 7 - Page Replacement</title>
+  <meta name="description" content="Page replacement algorithms: FIFO, OPT, and LRU.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="7">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module6.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 7 of 16</span>
+        </div>
+        <a href="module8.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Page Replacement</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Describe the concept of page replacement.</li>
+          <li>Explain the FIFO (First-In, First-Out) page replacement algorithm.</li>
+          <li>Understand Optimal Page Replacement</li>
+          <li>Understand LRU (Least Recently Used)</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 Page Replacement</h2>
+        <p>In order to make the most use of virtual memory, we load several processes into memory at the same time. Since we only load the pages that are actually needed by each process at any given time, there is room to load many more processes than if we had to load in the entire process.</p>
+        <p>However, memory is also needed for other purposes ( such as I/O buffering ), and what happens if some process suddenly decides it needs more pages and there aren't any free frames available? There are several possible solutions to consider:</p>
+          <ol>
+            <li>Adjust the memory used by I/O buffering, etc., to free up some frames for user processes. The decision of how to allocate memory for I/O versus user processes is a complex one, yielding different policies on different systems. ( Some allocate a fixed amount for I/O, and others let the I/O system contend for memory along with everything else. )</li>
+            <li>Put the process requesting more pages into a wait queue until some free frames become available.</li>
+            <li>Swap some process out of memory completely, freeing up its page frames.</li>
+            <li>Find some page in memory that isn't being used right now, and swap that page only out to disk, freeing up a frame that can be allocated to the process requesting it. This is known as page replacement, and is the most common solution. There are many different algorithms for page replacement, which is the subject of the remainder of this section.</li>
+          </ol>
+      </section>
+
+      <section>
+        <h2>📚 Basic Page Replacement</h2>
+        <p>The previously discussed page-fault processing assumed that there would be free frames available on the free-frame list. Now the page-fault handling must be modified to free up a frame if necessary, as follows:</p>
+          <ol>
+            <li>Find the location of the desired page on the disk, either in swap space or in the file system.</li>
+            <li>Find a free frame:
+            <ul>
+              <li>If there is a free frame, use it.</li>
+              <li>If there is no free frame, use a page-replacement algorithm to select an existing frame to be replaced, known as the victim frame.</li>
+              <li>Write the victim frame to disk. Change all related page tables to indicate that this page is no longer in memory.</li>
+            </ul>
+            </li>
+            <li>Read in the desired page and store it in the frame. Adjust all related page and frame tables to indicate the change.</li>
+            <li>Restart the process that was waiting for this page.</li>
+          </ol>
+        <p><img src="../assets/images/module7-page-replacement-diagram.png" alt="Page replacement diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 frame</li>
+            <li>🔍 valid-invalid bit</li>
+            <li>🔍 change to invalid</li>
+            <li>🔍 reset page table for new page</li>
+            <li>🔍 swap out victim page</li>
+            <li>🔍 swap desired page in</li>
+          </ul>
+        <p>Note that step 3c adds an extra disk write to the page-fault handling, effectively doubling the time required to process a page fault. This can be alleviated somewhat by assigning a modify bit, or dirty bit to each page, indicating whether or not it has been changed since it was last loaded in from disk. If the dirty bit has not been set, then the page is unchanged, and does not need to be written out to disk. Otherwise the page write is required. It should come as no surprise that many page replacement strategies specifically look for pages that do not have their dirty bit set, and preferentially select clean pages as victim pages. It should also be obvious that unmodifiable code pages never get their dirty bits set.</p>
+        <p>There are two major requirements to implement a successful demand paging system. We must develop a frame-allocation algorithm and a page-replacement algorithm. The former centers around how many frames are allocated to each process ( and to other needs ), and the latter deals with how to select a page for replacement when there are no free frames available.</p>
+        <p>The overall goal in selecting and tuning these algorithms is to generate the fewest number of overall page faults. Because disk access is so slow relative to memory access, even slight improvements to these algorithms can yield large improvements in overall system performance.</p>
+        <p>Algorithms are evaluated using a given string of memory accesses known as a reference string, which can be generated in one of ( at least ) three common ways:</p>
+          <ol>
+            <li>Randomly generated, either evenly distributed or with some distribution curve based on observed system behavior. This is the fastest and easiest approach, but may not reflect real performance well, as it ignores locality of reference.</li>
+            <li>Specifically designed sequences. These are useful for illustrating the properties of comparative algorithms in published papers and textbooks, ( and also for homework and exam problems. :-) )</li>
+            <li>Recorded memory references from a live system. This may be the best approach, but the amount of data collected can be enormous, on the order of a million addresses per second. The volume of collected data can be reduced by making two important observations:
+              <ol>
+                <li>Only the page number that was accessed is relevant. The offset within that page does not affect paging operations.</li>
+                <li>Successive accesses within the same page can be treated as a single page request, because all requests after the first are guaranteed to be page hits. ( Since there are no intervening requests for other pages that could remove this page from the page table.)</li>
+              </ol>
+              <p>Example: So for example, if pages were of size 100 bytes, then the sequence of address requests ( 0100, 0432, 0101, 0612, 0634, 0688, 0132, 0038, 0420) would reduce to page requests ( 1, 4, 1, 6, 1, 0, 4)</p>
+            </li>
+          </ol>
+        <p>As the number of available frames increases, the number of page faults should decrease, as shown in below Figure:</p>
+        <p><img src="../assets/images/module7-page-faults-frames-graph.png" alt="Graph of page faults versus number of frames" width="600" height="300"></p>
+      </section>
+
+      <section>
+        <h2>📚 FIFO Page Replacement</h2>
+          <ul>
+            <li>A simple and obvious page replacement strategy is FIFO, i.e. first-in-first-out.</li>
+            <li>As new pages are brought in, they are added to the tail of a queue, and the page at the head of the queue is the next victim. In the following example, 20 page requests result in 15 page faults:</li>
+          </ul>
+        <p><img src="../assets/images/module7-fifo-replacement-diagram.png" alt="FIFO page-replacement algorithm diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 reference string</li>
+            <li>🔍 page frames</li>
+          </ul>
+        <p>Although FIFO is simple and easy, it is not always optimal, or even efficient. An interesting effect that can occur with FIFO is Belady's anomaly, in which increasing the number of frames available can actually increase the number of page faults that occur! Consider, for example, the following chart based on the page sequence ( 1, 2, 3, 4, 1, 2, 5, 1, 2, 3, 4, 5 ) and a varying number of available frames. Obviously the maximum number of faults is 12 ( every request generates a fault ), and the minimum number is 5 ( each page loaded only once ), but in between there are some interesting results:</p>
+        <p><img src="../assets/images/module7-fifo-beladys-anomaly-graph.png" alt="Page-fault curve for FIFO replacement on a reference string" width="600" height="300"></p>
+      </section>
+
+      <section>
+        <h2>📚 Optimal Page Replacement</h2>
+          <ul>
+            <li>The discovery of Belady's anomaly lead to the search for an optimal page-replacement algorithm, which is simply that which yields the lowest of all possible page-faults, and which does not suffer from Belady's anomaly.</li>
+            <li>Such an algorithm does exist, and is called OPT or MIN. This algorithm is simply "Replace the page that will not be used for the longest time in the future."</li>
+            <li>For example, Figure 9.14 shows that by applying OPT to the same reference string used for the FIFO example, the minimum number of possible page faults is 9. Since 6 of the page-faults are unavoidable ( the first reference to each new page ), FIFO can be shown to require 3 times as many ( extra ) page faults as the optimal algorithm. ( Note: The book</li>
+          </ul>
+        <p><img src="../assets/images/module7-optimal-replacement-diagram.png" alt="Optimal page-replacement algorithm diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 reference string</li>
+            <li>🔍 page frames</li>
+          </ul>
+        <p>claims that only the first three page faults are required by all algorithms, indicating that FIFO is only twice as bad as OPT.) Unfortunately OPT cannot be implemented in practice, because it requires foretelling the future, but it makes a nice benchmark for the comparison and evaluation of real proposed new algorithms. In practice most page-replacement algorithms try to approximate OPT by predicting ( estimating ) in one fashion or another what page will not be used for the longest period of time. The basis of FIFO is the prediction that the page that was brought in the longest time ago is the one that will not be needed again for the longest future time, but as we shall see, there are many other prediction methods, all striving to match the performance of OPT.</p>
+      </section>
+
+      <section>
+        <h2>📚 LRU Page Replacement</h2>
+          <ul>
+            <li>The prediction behind LRU, the Least Recently Used, algorithm is that the page that has not been used in the longest time is the one that will not be used again in the near future. ( Note the distinction between FIFO and LRU: The former looks at the oldest load time, and the latter looks at the oldest use time. )</li>
+            <li>Some view LRU as analogous to OPT, except looking backwards in time instead of forwards. ( OPT has the interesting property that for any reference string S and its reverse R, OPT will generate the same number of page faults for S and for R. It turns out that LRU has this same property. )</li>
+            <li>Below figure illustrates LRU for our sample string, yielding 12 page faults, ( as compared to 15 for FIFO and 9 for OPT. )</li>
+          </ul>
+        <p><img src="../assets/images/module7-lru-replacement-diagram.png" alt="LRU page-replacement algorithm diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 reference string</li>
+            <li>🔍 page frames</li>
+          </ul>
+        <p>LRU is considered a good replacement policy, and is often used. The problem is how exactly to implement it. There are two simple approaches commonly used:</p>
+          <ol>
+            <li>Counters. Every memory access increments a counter, and the current value of this counter is stored in the page table entry for that page. Then finding the LRU page involves simple searching the table for the page with the smallest counter value. Note that overflowing of the counter must be considered.</li>
+            <li>Stack. Another approach is to use a stack, and whenever a page is accessed, pull that page from the middle of the stack and place it on the top. The LRU page will always be at the bottom of the stack. Because this requires removing objects from the middle of the stack, a doubly linked list is the recommended data structure.</li>
+          </ol>
+        <p>Note that both implementations of LRU require hardware support, either for incrementing the counter or for managing the stack, as these operations must be performed for every memory access.</p>
+        <p>Neither LRU or OPT exhibit Belady's anomaly. Both belong to a class of page-replacement algorithms called stack algorithms, which can never exhibit Belady's anomaly. A stack algorithm is one in which the pages kept in memory for a frame set of size N will always be a subset of the pages kept for a frame size of N + 1. In the case of LRU, ( and particularly the stack implementation thereof), the top N pages of the stack will be the same for all frame set sizes of N or anything larger.</p>
+        <p><img src="../assets/images/module7-lru-stack-diagram.png" alt="Use of a stack to record the most recent page references" width="600" height="300"></p>
+          <ul>
+            <li>🔍 reference string</li>
+            <li>🔍 stack before</li>
+            <li>🔍 stack after</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>📝 Summary</h2>
+        <p>This module focuses on page replacement algorithms which include FIFO, OPT, and LRU algorithms. The goal of this module was to discuss the different types of algorithms for page replacement.</p>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module6.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 7 of 16</span>
+          </div>
+          <a href="module8.html" class="nav-button">
+            Next <span>→</span>
+          </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>

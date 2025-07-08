@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 4: Inverse Trig & Diff Calc I - 4.2 Limits - Engineering Mathematics I</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      svg: { fontCache: 'global' },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit4_inv_trig_diff_calc1_part1_inv_trig.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section (4.1 Inverse Trig)</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div> <!-- Example: Update percentage -->
+                        </div>
+                        <span class="progress-text">Unit 4: Inv Trig & Diff Calc I - Part 2</span>
+                    </div>
+                    <a href="unit4_inv_trig_diff_calc1_part3_differentiation.html" class="nav-button"> <!-- Link to next logical chunk -->
+                        <span class="nav-text">Next Section (4.3 Differentiation)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+             <header class="section-header">
+                 <h1 class="section-title">UNIT - IV: INVERSE TRIGONOMETRIC RATIOS AND DIFFERENTIAL CALCULUS-I (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: unit-4-section-4.2-limits -->
+                <section id="unit-4-section-4.2-limits" class="content-section" aria-labelledby="unit-4-section-4.2-heading">
+                    <h2 id="unit-4-section-4.2-heading" class="section-heading">
+                        <span class="heading-icon">📈</span>4.2 LIMITS
+                    </h2>
+                    <div class="content-card">
+                        <p>Mathematical quantities can be divided into two (i) constants and (ii) Variables</p>
+                        <p>The quantitity which does not change in its value is called constant.</p>
+                        <p>Constants can be divided (i) Absolute constants and (ii) Arbitrary constants</p>
+                        <p>Absolute constants are those which retain in values at any time and at any place.</p>
+                        <p>Examples:</p>
+                        <p>Numbers \(5,-7,3, \frac{-11}{27}, \pi, e, \sqrt{2}, \sqrt{3}, \ldots \ldots\) etc. are absolute constants.</p>
+                        <p>Arbitrary constants are those which are constants in a particular problem but changes from problem to problem. They are represented as \(a, b, c, f, g, h, \ldots \ldots\) etc.</p>
+                        <p>Examples:</p>
+                        <p>(i) \(ax+by+c=0\) - a, b, c</p>
+                        <p>(ii) \(x^{2}+y^{2}+2 g x+2 f y+c=0\) - f, g, c. <!-- Corrected variable --> ...ex.</p>
+                        <p>Variables are those which vary in their values. They are represented as \(u, v, w, x, y, \theta, \ldots \ldots\)</p>
+                        <p>Variables can be divided into two (i) Independent variable and (ii) Dependent varaible.</p>
+                        <p>In the equation \(y=x^{2}\), x is the independent variable and y is the dependent variable depending on x.</p>
+                        <p>For example, if x takes the value 2, y takes the value 4. If x takes -3, y takes 9 ... etc.</p>
+                        <p>The relation or equation or connection between two variables is called a function and is denoted as \(f(x)\).</p>
+                        <p>Example: \(y=f(x)=x^{2}\) or \(\sin x\).</p>
+                        <p>The value of \(f(x)\) at \(x=a\) is \(f(a)\) and is called the functional value of \(f(x)\) at \(x=a\).</p>
+                        <p>If for every function, if the functional value at every point of its domain exists, there is no need to study Limit chapter and from that the famous CALCULUS.</p>
+                        <p>For example, \(f(x)=\frac{x^{2}-4}{x-2}\) at \(x=2\) i.e, \(f(2)\) does not exist, since \(f(2)=\frac{0}{0}\), the indeterminant quantity. Similarly there are two more indeterminant quantities \(\frac{\infty}{\infty}\) and \(\infty-\infty\).</p>
+                        <p>But, as x approaches 2, \(f(x)=\frac{x^{2}-4}{x-2}\) will approach 4.</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                                <thead><tr><th>x</th><th>1</th><th>1.5</th><th>1.9</th><th>1.99</th><th>1.999</th><th>1.9999</th><th>......</th><th>→ 2</th></tr></thead>
+                                <tbody><tr><td>\(y=\frac{x^{2}-4}{x-2}\)</td><td>3</td><td>3.5</td><td>3.9</td><td>3.99</td><td>3.999</td><td>3.9999</td><td>......</td><td>→ 4</td></tr></tbody>
+                            </table>
+                        </div>
+                        <p>Hence the approachment value 4 of the function \(\frac{x^{2}-4}{x-2}\) as x approaches 2 is called the limit value of the function.</p>
+
+                        <h4 class="subsubsection-heading">Definition of Limit:</h4>
+                        <p>When the variable x approaches a constant a and if the function \(f(x)\) approaches a constant \(l\), then \(l\) is called the limit value of \(f(x)\) as x approaches a and is denotd as</p>
+                        <div class="equation"> \(\operatorname{Lt}_{x \rightarrow \mathrm{a}} \mathrm{f}(\mathrm{x})=l\) </div>
+
+                        <h4 class="subsubsection-heading">Results:</h4>
+                        <ol class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">1)</span> \(\underset{x \rightarrow a}{\operatorname{Lt}}[f(x) \pm g(x)]=\underset{x \rightarrow a}{\operatorname{Lt}} f(x) \pm \underset{x \rightarrow a}{\operatorname{Lt}} g(x)\)</li>
+                           <li class="list-item"><span class="item-icon">2)</span> \(\underset{x \rightarrow a}{\operatorname{Lt}}[k f(x)]=k \underset{x \rightarrow a}{\operatorname{Lt}} f(x)\), where k is a constant</li>
+                           <li class="list-item"><span class="item-icon">3)</span> \(\underset{x \rightarrow a}{\operatorname{Lt}}[f(x) \cdot g(x)]=\underset{x \rightarrow a}{\operatorname{Lt}} f(x) \cdot \underset{x \rightarrow a}{\operatorname{Lt}} g(x)\)</li>
+                           <li class="list-item"><span class="item-icon">4)</span> \(\underset{x \rightarrow a}{\operatorname{Lt}}\left[\frac{f(x)}{g(x)}\right]=\frac{\underset{x \rightarrow a}{\operatorname{Lt}} f(x)}{\underset{x \rightarrow a}{\operatorname{Lt}} g(x)}\), provided \(\underset{x \rightarrow a}{\operatorname{Lt}} g(x) \neq 0\)</li>
+                        </ol>
+
+                        <h4 class="subsubsection-heading">Formulae:</h4>
+                        <ol class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">1)</span> \(\underset{x \rightarrow a}{\operatorname{Lt}} \frac{x^{n}-a^{n}}{x-a}=n a^{n-1}\), for all values of n.</li> <!-- Corrected index to n -->
+                           <li class="list-item"><span class="item-icon">2)</span> \(\underset{\theta \rightarrow 0}{\operatorname{Lt}} \frac{\sin \theta}{\theta}=1\)</li> <!-- Corrected variable -->
+                           <li class="list-item"><span class="item-icon">3)</span> \(\underset{\theta \rightarrow 0}{\operatorname{Lt}} \frac{\tan \theta}{\theta}=1\), \(\theta\) in radians</li> <!-- Corrected variable -->
+                        </ol>
+
+                        <p>Now, <br>
+                        \(\underset{\theta \rightarrow 0}{\operatorname{Lt}} \frac{\sin n \theta}{\theta} =\underset{\theta \rightarrow 0}{\operatorname{Lt}}\left[\frac{\sin n \theta}{n \theta} \cdot n\right]\) <br>
+                        \(=n \operatorname{Lt}_{\theta \rightarrow 0}\left(\frac{\sin n \theta}{n \theta}\right) \quad\) [By Result 2] <br>
+                        \(=n . 1 \quad\) [By Formula 2] <br>
+                        \(=n\)</p>
+                        <p>Similarly, \(\underset{\theta \rightarrow 0}{\operatorname{Lt}} \frac{\tan n \theta}{\theta}=n\)</p>
+                    </div>
+                </section>
+                <!-- END: unit-4-section-4.2-limits -->
+
+                <!-- START: unit-4-limits-worked-examples -->
+                <section id="unit-4-limits-worked-examples" class="content-section worked-example" aria-labelledby="unit-4-limits-worked-examples-heading">
+                    <h3 id="unit-4-limits-worked-examples-heading" class="subsection-heading">WORKED EXAMPLES</h3>
+                    <h4 class="part-title">PART - A</h4>
+                    <div class="content-card">
+                        <p>1. Evaluate \(\underset{x \rightarrow 0}{\operatorname{Lt}} \frac{3 \mathrm{x}^{2}+2 \mathrm{x}+1}{5 \mathrm{x}^{2}+6 \mathrm{x}+7}\).</p> <!-- Corrected variable -->
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\underset{x \rightarrow 0}{\operatorname{Lt}} \frac{3 x^{2}+2 x+1}{5 x^{2}+6 x+7} =\frac{3(0)^{2}+2(0)+1}{5(0)^{2}+6(0)+7}\) <br>
+                            \(=\frac{1}{7}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>2. Evaluate \(\underset{x \rightarrow 0}{\operatorname{Lt}} \frac{3 x^{2}+4 x}{5 x-7 x^{2}}\)</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\operatorname{Lt}_{x \rightarrow 0} \frac{3 x^{2}+4 x}{5 x-7 x^{2}} =\underset{x \rightarrow 0}{\operatorname{Lt}} \frac{x(3 x+4)}{x(5-7 x)}\) <br> <!-- Corrected factorization -->
+                            \(=\underset{x \rightarrow 0}{\operatorname{Lt}} \frac{3x+4}{5-7x}\) <br> <!-- Added simplified step -->
+                            \(=\frac{3(0)+4}{5-7(0)}\) <br>
+                            \(=\frac{4}{5}\)</p> <!-- Corrected result -->
+                        </div>
+                    </div>
+                    <div class="content-card">
+                         <p>3. Evaluate: \(\underset{\theta \rightarrow 0}{\operatorname{Lt}} \frac{\sin 7 \theta}{\theta}\)</p> <!-- Corrected variable -->
+                         <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\underset{\theta \rightarrow 0}{\operatorname{Lt}} \frac{\sin 7 \theta}{\theta}=\underset{\theta \rightarrow 0}{\operatorname{Lt}}\left[\frac{\sin 7 \theta}{7 \theta} \cdot 7\right]\) <br>
+                            \(=7 \operatorname{Lt}_{\theta \rightarrow 0} \frac{\sin 7 \theta}{7 \theta}\)<br>
+                            \(= 7 \times 1\)<br>
+                            \( = 7\)</p>
+                         </div>
+                     </div>
+
+                    <h4 class="part-title">PART - B</h4>
+                    <div class="content-card">
+                        <p>1. Evaluate: \(\operatorname{Lt}_{x \rightarrow 1} \frac{x^{2}+x-2}{x^{2}-4 x+3}\)</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\operatorname{Lt}_{x \rightarrow 1} \frac{x^{2}+x-2}{x^{2}-4 x+3}=\frac{1+1-2}{1-4(1)+3}=\frac{2-2}{4-4}=\frac{0}{0}\) Indeterminent</p>
+                            <p>\(\operatorname{Lt}_{x \rightarrow 1} \frac{x^{2}+x-2}{x^{2}-4 x+3} =\underset{x \rightarrow 1}{\operatorname{Lt}} \frac{(x+2)(x-1)}{(x-1)(x-3)}\) <br>
+                            \(=\underset{x \rightarrow 1}{\operatorname{Lt}} \frac{x+2}{x-3}\) <br>
+                            \(=\frac{1+2}{1-3}=\frac{3}{-2}=-\frac{3}{2}\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>2. Evaluate \(\underset{x \rightarrow 2}{\operatorname{Lt}} \frac{x^{10}-2^{10}}{x-2}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\operatorname{Lt}_{x \rightarrow 2} \frac{x^{10}-2^{10}}{x-2} =10 \cdot 2^{10-1} \quad \left[\text { By F1 } \underset{\mathrm{x} \rightarrow \mathrm{a}}{\mathrm{Lt}} \frac{\mathrm{x}^{\mathrm{n}}-\mathrm{a}^{\mathrm{n}}}{\mathrm{x}-\mathrm{a}}=\mathrm{na}^{\mathrm{n}-1}\right]\) <br>
+                            \(=10 \cdot 2^{9}\) <br>
+                            \(=10 \times 512\) <br>
+                            \(=5120\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>3. Evaluate \(\operatorname{Lt}_{x \rightarrow a} \frac{\sqrt{x}-\sqrt{a}}{x-a}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\operatorname{Lt}_{x \rightarrow a} \frac{\sqrt{x}-\sqrt{a}}{x-a} =\underset{x \rightarrow a}{\operatorname{Lt}} \frac{x^{1 / 2}-a^{1 / 2}}{x-a}\) <br>
+                            \(=\frac{1}{2} \cdot a^{1 / 2^{-1}}\) <br>
+                            \(=\frac{1}{2} a^{-1 / 2}\) <br>
+                            \(=\frac{1}{2} \cdot \frac{1}{a^{1 / 2}}=\frac{1}{2 \sqrt{a}}\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>4. Evaluate \(\underset{x \rightarrow 0}{\operatorname{Lt}} \frac{\sin 5 x}{4 x}\)</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\operatorname{Lt}_{x \rightarrow 0} \frac{\sin 5 x}{4 x}=\frac{1}{4} \underset{x \rightarrow 0}{\operatorname{Lt}} \frac{\sin 5 x}{x}=\frac{1}{4} \underset{x \rightarrow 0}{\operatorname{Lt}}\left[\frac{\sin 5 x}{5 x} \times 5\right]\) <br>
+                            \(=\frac{1}{4} \times 5 \underset{x \rightarrow 0}{\operatorname{Lt}} \frac{\sin 5 x}{5 x} \quad \left[\begin{array}{l}\text { By } \mathrm{F}_{2} \\ \operatorname{Lt}_{\theta \rightarrow 0} \frac{\sin \theta}{\theta}=1\end{array}\right]\) <br>
+                            \(=\frac{5}{4} \cdot 1=\frac{5}{4}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>5. Evaluate \(\underset{x \rightarrow 0}{\operatorname{Lt}} \frac{\tan ^{2} 5 x}{x^{2}}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\underset{x \rightarrow 0}{\operatorname{Lt}} \frac{\tan ^{2} 5 x}{x^{2}} =\underset{x \rightarrow 0}{\operatorname{Lt}}\left(\frac{\tan 5 x}{x}\right)^{2}\) <br>
+                            \(=\underset{x \rightarrow 0}{\operatorname{Lt}}\left[\frac{\tan 5 x}{5 x} \cdot 5\right]^{2}\) <br>
+                            \(=\left(\underset{x \rightarrow 0}{\operatorname{Lt}} \frac{\tan 5 x}{5 x}\right)^{2} \times 5^2 \quad \left[\begin{array}{l}\text { By } \mathrm{F}_{3} \\ \operatorname{Lt}_{\theta \rightarrow 0} \frac{\tan \theta}{\theta}=1\end{array}\right]\) <br> <!-- Corrected factoring -->
+                            \(=(1)^2 \times 25\)<br>
+                            \(=25\)</p>
+                        </div>
+                    </div>
+
+                     <h4 class="part-title">PART - C</h4>
+                     <div class="content-card">
+                        <p>1. Evaluate \(\underset{x \rightarrow 3}{\operatorname{Lt}} \frac{x^{5}-243}{x^{2}-9}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\operatorname{Lt}_{x \rightarrow 3} \frac{x^{5}-243}{x^{2}-9} =\underset{x \rightarrow 3}{\operatorname{Lt}} \frac{x^{5}-3^{5}}{x^{2}-3^{2}}\) <br>
+                            \(=\underset{x \rightarrow 3}{\operatorname{Lt}}\left[\frac{x^{5}-3^{5}}{x-3} \times \frac{x-3}{x^{2}-3^{2}}\right]\) <br>
+                            \(=\underset{x \rightarrow 3}{\operatorname{Lt}}\left[\frac{x^{5}-3^{5}}{x-3} / \frac{x^{2}-3^{2}}{x-3}\right]\) <br>
+                            \(=\frac{\operatorname{Lt}_{x \rightarrow 3} \frac{x^{5}-3^{5}}{x-3}}{\operatorname{Lt}_{x \rightarrow 3} \frac{x^{2}-3^{2}}{x-3}} \quad\) [By Result 4 & Formula 1] <br>
+                            \(=\frac{5 \cdot 3^{5-1}}{2 \cdot 3^{2-1}}=\frac{5 \cdot 3^{4}}{2 \cdot 3^{1}}\) <br>
+                            \(=\frac{5}{2} \times 3^{3}=\frac{5}{2} \times 27=\frac{135}{2}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                         <p>2. Evaluate : \(\underset{x \rightarrow 4}{\operatorname{Lt}} \frac{x^{7 / 3}-4^{7 / 3}}{x^{2 / 3}-4^{2 / 3}}\)</p>
+                         <div class="solution">
+                             <p>Solution:</p>
+                             <p>\(\operatorname{Lt}_{x \rightarrow 4} \frac{x^{7 / 3}-4^{7 / 3}}{x^{2 / 3}-4^{2 / 3}} =\underset{x \rightarrow 4}{\operatorname{Lt}}\left[\frac{x^{7 / 3}-4^{7 / 3}}{x-4} \times \frac{x-4}{x^{2 / 3}-4^{2 / 3}}\right]\) <br>
+                             \(=\underset{x \rightarrow 4}{\operatorname{Lt}}\left[\frac{x^{7 / 3}-4^{7 / 3}}{x-4} / \frac{x^{2 / 3}-4^{2 / 3}}{x-4}\right]\) <br>
+                             \(=\frac{\operatorname{Lt}_{x \rightarrow 4} \frac{x^{7 / 3}-4^{7 / 3}}{x-4}}{\operatorname{Lt}_{x \rightarrow 4} \frac{x^{2 / 3}-4^{2 / 3}}{x-4}}\)<br>
+                             \(=\frac{\frac{7}{3} \cdot 4^{\frac{7}{3}-1}}{\frac{2}{3} \cdot 4^{\frac{2}{3}-1}}=\frac{\frac{7}{3} \cdot 4^{4 / 3}}{\frac{2}{3} \cdot 4^{-1 / 3}}\) <br>
+                             \(=\frac{7}{3} \times \frac{3}{2} \times 4^{4 / 3-(-1 / 3)}=\frac{7}{2} \times 4^{5 / 3}\)</p>
+                         </div>
+                    </div>
+                    <div class="content-card">
+                        <p>3. Evaluate \(\underset{\theta \rightarrow 0}{\mathrm{Lt} \frac{\sin 8 \theta}{\tan 3 \theta}}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\underset{\theta \rightarrow 0}{\mathrm{Lt}} \frac{\sin 8 \theta}{\tan 3 \theta} =\underset{\theta \rightarrow 0}{\mathrm{Lt}} \left[ \frac{\sin 8\theta}{\theta} \times \frac{\theta}{\tan 3\theta} \right]\) <br> <!-- Rewrite -->
+                             \(=\underset{\theta \rightarrow 0}{\mathrm{Lt}} \left[ \frac{\sin 8 \theta}{8\theta} \times 8 \times \frac{3\theta}{\tan 3\theta} \times \frac{1}{3} \right]\) <br> <!-- Introduce factors -->
+                             \( = \left( \underset{\theta \rightarrow 0}{\mathrm{Lt}} \frac{\sin 8 \theta}{8\theta} \right) \times \left( \underset{\theta \rightarrow 0}{\mathrm{Lt}} \frac{3\theta}{\tan 3\theta} \right) \times \frac{8}{3} \) <br> <!-- Split limits -->
+                             \( = (1) \times (1) \times \frac{8}{3} = \frac{8}{3} \)</p>
+                        </div>
+                    </div>
+                </section>
+                 <!-- END: unit-4-limits-worked-examples -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit4_inv_trig_diff_calc1_part1_inv_trig.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section (4.1 Inverse Trig)</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">Unit 4: Inv Trig & Diff Calc I - Part 2</span>
+                    </div>
+                    <a href="unit4_inv_trig_diff_calc1_part3_differentiation.html" class="nav-button"> <!-- Link to next logical chunk -->
+                        <span class="nav-text">Next Section (4.3 Differentiation)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

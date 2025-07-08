@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: Program Structure Part 2 - Structured Programming Notes</title>
+    <meta name="description" content="Program Structure Part 2 Module">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <article class="learning-module" data-module="4">
+        <nav class="module-nav">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="module3.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module 4 of 8</span>
+                </div>
+                <a href="module5.html" class="nav-button">
+                    Next <span>→</span>
+                </a>
+            </div>
+        </nav>
+
+        <header class="module-header">
+            <h1>Module 4: Program Structure - Part 2</h1>
+            <section class="module-objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Understand C data types and their modifiers.</li>
+                    <li>Learn about integer and floating-point types in C.</li>
+                    <li>Understand the void type.</li>
+                    <li>Distinguish between variables and constants in C.</li>
+                    <li>Learn about variable declaration and definition.</li>
+                    <li>Understand how to input numbers using scanf().</li>
+                    <li>Explore type casting in C.</li>
+                     <li>Introduction to C Programming Operators.</li>
+                </ul>
+            </section>
+        </header>
+
+        <main class="module-content">
+            <section class="content-section">
+                <h2>📚 Object Code, Executable Code and Libraries</h2>
+                <div class="content-block">
+                    <p>An <b>executable file</b> is a file containing ready to run machine code. C accomplishes this in two
+steps.</p>
+                    <ul>
+                        <li><b>Compiling</b>-The compiler converts the source code to produce the intermediate <b>object code</b>.</li>
+                        <li>The <b>linker</b> combines the intermediate code with other code to produce the executable file.
+You can compile individual modules and then combine modules later.</li>
+                    </ul>
+                    <p><b>Linking</b> is the process where the object code, the start up code and the code for library routines
+used in the program (all in machine language) are combined into a single file- the executable file.</p>
+                    <aside class="learning-tip">
+                        <h3>💡 Pro Tip</h3>
+                        <p>Understand the compilation process: Source code -> Object code -> Executable code, to appreciate how C programs are built.</p>
+                    </aside>
+                    <p><b>NB/ An interpreter</b> unlike a compiler is a computer program that directly executes,
+i.e. performs, instructions written in a programming, without previously compiling
+them into a machine language program.</p>
+                    <p>If the compiled program can run on a computer whose CPU or operating system is
+different from the one on which the compiler runs, the compiler is known as a <b>cross-
+compiler</b>.</p>
+                    <p>A program that translates from a low level language to a higher level one is a
+<b>decompiler</b>.</p>
+                    <p>A program that translates between high-level languages is usually called a <b>source-
+to-source compiler</b> or <b>transpiler</b>.</p>
+                </div>
+            </section>
+
+             <section class="content-section">
+                <h2>📚 Library Functions</h2>
+                <div class="content-block">
+                    <p>There is a minimal set of library functions that should be supplied by all C compilers, which your
+program may use. This collection of functions is called the <b>C standard library</b>. The standard library
+contains functions to perform disk I/O (input/ output), string manipulations, mathematics and much
+more. When your program is compiled, the code for library functions is automatically added to your
+program. One of the most common library functions is called <code>printf()</code> which is a general purpose
+output function. The quoted string between the parenthesis of the <code>printf()</code> function is called an
+argument.</p>
+                    <pre><code>Printf(“This is a C program\\n”)
+</code></pre>
+                    <p>The <code>\n</code> at the end of the text is an <b>escape sequence</b> tells the program to print a new line as part of
+the output.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 C DATA TYPES</h2>
+                <div class="content-block">
+                    <p>In the C programming language, data types refer to a system used for declaring variables or
+functions of different types. A <b>data type is</b>, therefore, a <b>data storage format</b> that can contain a
+specific type or range of values. The type of a variable determines how much space it occupies in
+storage and how the bit pattern stored is interpreted.</p>
+                    <p>The basic data types in C are as follows:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><b>Char</b></td>
+                                <td>Character data and is used to hold a single character. A character can be a letter,
+number, space, punctuation mark, or symbol - 1 byte long</td>
+                            </tr>
+                            <tr>
+                                <td><b>Int</b></td>
+                                <td>A signed whole number in the range -32,768 to 32,767 - 2 bytes long</td>
+                            </tr>
+                            <tr>
+                                <td><b>Float</b></td>
+                                <td>A real number (that is, a number that can contain a fractional part) – 4 bytes</td>
+                            </tr>
+                            <tr>
+                                <td><b>Double</b></td>
+                                <td>A double-precision floating point value. Has more digits to the right of the
+decimal point than a float – 8 bytes</td>
+                            </tr>
+                            <tr>
+                                <td><b>Void</b></td>
+                                <td>Represents the absence of type. i.e. represents “no data”</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 USING C'S DATA TYPE MODIFIERS</h2>
+                <div class="content-block">
+                    <p>The five basic types (int, float, char,double and void) can be modified to your specific need using
+the following specifiers.</p>
+                    <ul>
+                        <li><b>Signed</b>
+                            <p>Signed Data Modifier implies that the data type variable can store positive values as well as
+negative values.</p>
+                            <p>The use of the modifier with integers is redundant because the default integer declaration
+assumes a signed number. The signed modifier is used with char to create a small signed
+integer. Specified as signed, a char can hold numbers in the range -128 to 127.</p>
+                        </li>
+                        <li><b>Unsigned</b>
+                            <p>If we need to change the data type so that it can only store positive values, "unsigned" data
+modifier is used.</p>
+                            <p>This can be applied to char and int. When char is unsigned, it can hold positive numbers in
+the range 0 to 255.</p>
+                        </li>
+                        <li><b>Long</b>
+                            <p>Sometimes while coding a program, we need to increase the Storage Capacity of a variable
+so that it can store values higher than its maximum limit which is there as default.</p>
+                            <p>This can be applied to both int and double. When applied to int, it doubles its length, in
+bits, of the base type that it modifies. For example, an integer is usually 16 bits long.
+Therefore a <b>long int</b> is 32 bits in length. When long is applied to a double, it roughly
+doubles the precision.</p>
+                        </li>
+                        <li><b>Short</b>
+                            <p>A "short" type modifier does just the opposite of “long”. If one is not expecting to see high
+range values in a program.</p>
+                            <p>For example, if we need to store the "age" of a student in a variable, we will make use of
+this type qualifier as we are aware that this value is not going to be very high</p>
+                        </li>
+                    </ul>
+                    <p>The type modifier precedes the type name. For example this declares a <b>long integer</b>.</p>
+                    <pre><code>long int age;
+</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 Integer Types</h2>
+                <div class="content-block">
+                    <p>Following table gives you details about standard integer types with its storage sizes and value
+ranges:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Storage size</th>
+                                <th>Value range</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Char</td>
+                                <td>1 byte</td>
+                                <td>-128 to 127 or 0 to 255</td>
+                            </tr>
+                            <tr>
+                                <td>unsigned char</td>
+                                <td>1 byte</td>
+                                <td>0 to 255</td>
+                            </tr>
+                            <tr>
+                                <td>signed char</td>
+                                <td>1 byte</td>
+                                <td>-128 to 127</td>
+                            </tr>
+                            <tr>
+                                <td>Int</td>
+                                <td>2 or 4 bytes</td>
+                                <td>-32,768 to 32,767 or -2,147,483,648 to 2,147,483,647</td>
+                            </tr>
+                             <tr>
+                                <td>unsigned int</td>
+                                <td>2 or 4 bytes</td>
+                                <td>0 to 65,535 or 0 to 4,294,967,295</td>
+                            </tr>
+                            <tr>
+                                <td>Short</td>
+                                <td>2 bytes</td>
+                                <td>-32,768 to 32,767</td>
+                            </tr>
+                            <tr>
+                                <td>unsigned short</td>
+                                <td>2 bytes</td>
+                                <td>0 to 65,535</td>
+                            </tr>
+                            <tr>
+                                <td>Long</td>
+                                <td>4 bytes</td>
+                                <td>-2,147,483,648 to 2,147,483,647</td>
+                            </tr>
+                             <tr>
+                                <td>unsigned long</td>
+                                <td>4 bytes</td>
+                                <td>0 to 4,294,967,295</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 Floating-Point Types</h2>
+                <div class="content-block">
+                    <p>Following table gives you details about standard floating-point types with storage sizes and value
+ranges and their precision:</p>
+                     <table>
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Storage size</th>
+                                <th>Value range</th>
+                                <th>Precision</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>float</td>
+                                <td>4 byte</td>
+                                <td>1.2E-38 to 3.4E+38</td>
+                                <td>6 decimal places</td>
+                            </tr>
+                            <tr>
+                                <td>double</td>
+                                <td>8 byte</td>
+                                <td>2.3E-308 to 1.7E+308</td>
+                                <td>15 decimal places</td>
+                            </tr>
+                            <tr>
+                                <td>long double</td>
+                                <td>10 byte</td>
+                                <td>3.4E-4932 to 1.1E+4932</td>
+                                <td>19 decimal places</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 The void Type</h2>
+                <div class="content-block">
+                    <p>The <b>void type</b> specifies that no value is available. It is used in three kinds of situations:</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Types and Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>1</td>
+                                <td><b>Function returns as void</b>. There are various functions in C which do not return
+value or you can say they return void. A function with no return value has the
+return type as void. For example, <code>void exit (int status);</code></td>
+                            </tr>
+                            <tr>
+                                <td>2</td>
+                                <td><b>Function arguments as void</b>. There are various functions in C which do not
+accept any parameter. A function with no parameter can accept as a void. For
+example, <code>int rand(void);</code></td>
+                            </tr>
+                            <tr>
+                                <td>3</td>
+                                <td><b>Pointers to void</b> A pointer of type void * represents the address of an object,
+but not its type. For example, a memory allocation function <code>void *malloc(size_t size );</code> returns a pointer to void which can be casted to any data type.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 VARIABLES</h2>
+                <div class="content-block">
+                    <p>A <b>variable</b> is a memory location whose value can change during program execution. In C a variable
+must be declared before it can be used.</p>
+                    <p><b>Variable Declaration</b></p>
+                    <p>Declaring a variable tells the compiler to reserve space in memory for that particular variable. A
+<b>variable definition</b> specifies a data type and the variable name and contains a list of one or more
+variables of that type .Variables can be declared at the start of any block of code. A declaration
+begins with the <b>type</b>, followed by the name of one or more variables. For example,</p>
+                    <pre><code>Int high, low;
+int  i, j, k;
+char c, ch;
+float f, salary;
+</code></pre>
+                    <p>Variables can be initialized when they are declared. This is done by adding an equals sign and the
+required value after the declaration.</p>
+                    <pre><code>Int high = 250;    /*Maximum Temperature*/
+Int low = -40;     /*Minimum Temperature*/
+Int results[20];    /* series of temperature readings*/
+</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 TYPES OF VARIABLES</h2>
+                <div class="content-block">
+                    <p>The Programming language C has two main variable types :</p>
+                    <ul>
+                        <li><b>Local Variables</b></li>
+                        <li><b>Global Variables</b></li>
+                    </ul>
+                    <p><b>Local Variables</b></p>
+                    <p>A local variable is a variable that is declared inside a function.</p>
+                    <ul>
+                        <li>Local variables scope is confined within the block or function where it is defined. Local
+variables must always be defined at the top of a block.</li>
+                        <li>When execution of the block starts the variable is available, and when the block ends the
+variable 'dies'.</li>
+                    </ul>
+                     <p><b>Global Variables</b></p>
+                    <p>Global variable is defined at the top of the program file and it can be visible and modified by any
+function that may reference it. Global variables are declared outside <b>all</b> functions.</p>
+
+                    <p><b>Sample Program.</b></p>
+                    <pre><code>#include &lt;stdio.h&gt;
+int area; //global variable
+int main ()
+{
+    int a, b; //local variable
+
+    /* actual initialization */
+    a = 10;
+    b = 20;
+
+    printf("\\t Side a is %d cm and side b is %d cm long\\n",a,b);
+
+    area = a*b;
+    printf("\\t The area of your rectangle is : %d \\n", area);
+    return 0;
+}
+</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 Variable Names</h2>
+                <div class="content-block">
+                    <p>Every variable has a name and a value. The name identifies the variable and the value stores data.
+Every variable name in C must start with a letter; the rest of the name can consist of letters,
+numbers and underscore characters. C is case sensitive i.e. it recognizes upper and lower case
+characters as being different. You cannot use any of C's keywords like main, while, switch etc as
+variable names,</p>
+                    <p>Examples of legal variable names:</p>
+                    <pre><code>X    result    outfile    x1    out_file    etc
+</code></pre>
+                    <p>It is conventional in C not to use capital letters in variable names. These are used for names of
+constants.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 Declaration vs Definition</h2>
+                <div class="content-block">
+                    <p>A <b>declaration</b> provides basic attributes of a symbol: its type and its name. A <b>definition</b> provides all
+of the details of that symbol—if it's a function, what it does; if it's a class, what fields and methods it
+has; if it's a variable, where that variable is stored. Often, the compiler only needs to have a
+declaration for something in order to compile a file into an object file, expecting that the linker can
+find the definition from another file. If no source file ever defines a symbol, but it is declared, you
+will get errors at link time complaining about undefined symbols. In the following short code, the
+definition of variable x means that the storage for the variable is that it is a global variable.</p>
+                    <pre><code>int x;
+int main()
+{
+    X = 3;
+}
+</code></pre>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 Inputting Numbers From The Keyboard Using Scanf()</h2>
+                <div class="content-block">
+                    <p>Variables can also be initialized during program execution (run time). The <code>scanf()</code> function is used
+to read values from the keyboard. For example, to read an integer value use the following general
+form:</p>
+                    <pre><code>scanf("%d", &var_name)
+</code></pre>
+                    <p>As in</p>
+                    <pre><code>scanf("%d", &num)
+</code></pre>
+                    <p>The <code>%d</code> is a <b>format specifier</b> which tells the compiler that the second argument will be receiving an
+integer value.</p>
+                    <p>The <code>&</code> preceding the variable name means “<b>address of</b>”. The function allows the function to place a
+value into one of its arguments.</p>
+                    <p>The table below shows format specifiers or codes used in the <code>scanf()</code> function and their meaning.</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Specifier</th>
+                                <th>Meaning</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>%c</code></td>
+                                <td>Read a single character</td>
+                            </tr>
+                            <tr>
+                                <td><code>%d</code></td>
+                                <td>Read an integer</td>
+                            </tr>
+                            <tr>
+                                <td><code>%f</code></td>
+                                <td>Read a floating point number</td>
+                            </tr>
+                            <tr>
+                                <td><code>%lf</code></td>
+                                <td>Read a double</td>
+                            </tr>
+                             <tr>
+                                <td><code>%s</code></td>
+                                <td>Read a string</td>
+                            </tr>
+                            <tr>
+                                <td><code>%u</code></td>
+                                <td>Read a an unsigned integer</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                     <aside class="learning-tip">
+                        <h3>💡 Pro Tip</h3>
+                        <p>Remember to use '&' before variable names in scanf() to provide the memory address where the input value should be stored.</p>
+                    </aside>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 TYPE CASTING</h2>
+                <div class="content-block">
+                    <p><b>Type casting</b> is a way to convert a variable from one data type to another. For example, if you want
+to store a long value into a simple integer then you can type cast long to int. You can convert values
+from one type to another explicitly using the <b>cast operator</b> as follows:</p>
+                    <pre><code>(type_name) expression
+</code></pre>
+                    <p>Consider the following example where the cast operator causes the division of one integer variable
+by another to be performed as a floating-point operation:</p>
+                    <pre><code>#include &lt;stdio.h&gt;
+main()
+{
+    int sum = 17, count = 5;
+    double mean;
+
+    mean =  (double) sum / count;
+    printf("Value of mean is %d \\n", mean );
+}
+</code></pre>
+                    <p>When the above code is compiled and executed, it produces the following result:</p>
+                    <pre><code>Value of mean : 3.400000
+</code></pre>
+                    <p>It should be noted here that the cast operator has precedence over division, so the value of <code>sum</code> is
+first converted to type <code>double</code> and finally it gets divided by <code>count</code> yielding a double value.</p>
+                    <p>Type conversions can be <b>implicit</b> which is performed by the compiler automatically, or it can be
+specified <b>explicitly</b> through the use of the <b>cast operator</b>. It is considered good programming
+practice to use the cast operator whenever type conversions are necessary.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 C PROGRAMMING OPERATORS</h2>
+                <div class="content-block">
+                    <p><b>Operator</b> is the symbol which operates on a value or a variable (operand). For example: + is an
+operator to perform addition.</p>
+                    <p>C programming language has a wide range of operators to perform various operations. For better
+understanding of operators, these operators can be classified as:</p>
+                    <p><b>OPERATORS IN C PROGRAMMING</b></p>
+                    <ol>
+                        <li>Arithmetic Operators</li>
+                        <li>Increment and Decrement Operators</li>
+                        <li>Assignment Operators</li>
+                        <li>Relational Operators</li>
+                        <li>Logical Operators</li>
+                        <li>Conditional Operators</li>
+                        <li>Bitwise Operators</li>
+                        <li>Special Operators</li>
+                    </ol>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 ARITHMETIC OPERATORS</h2>
+                <div class="content-block">
+                    <p>Assume variable <b>A</b> holds 10 and variable <b>B</b> holds 20 then</p>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operator</th>
+                                <th>Description</th>
+                                <th>Example</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><code>+</code></td>
+                                <td>Adds two operands</td>
+                                <td>A + B will give 30</td>
+                            </tr>
+                            <tr>
+                                <td><code>-</code></td>
+                                <td>Subtracts second operand from the first</td>
+                                <td>A - B will give -10</td>
+                            </tr>
+                            <tr>
+                                <td><code>*</code></td>
+                                <td>Multiplies both operands</td>
+                                <td>A * B will give 200</td>
+                            </tr>
+                            <tr>
+                                <td><code>/</code></td>
+                                <td>Divides numerator by de-numerator</td>
+                                <td>B / A will give 2</td>
+                            </tr>
+                            <tr>
+                                <td><code>%</code></td>
+                                <td>Modulus Operator - remainder of after an integer division</td>
+                                <td>B % A will give 0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                     <aside class="learning-tip">
+                        <h3>💡 Pro Tip</h3>
+                        <p>The modulus operator (%) is particularly useful for tasks like determining if a number is even or odd.</p>
+                    </aside>
+                    <p><b>Note:</b> <code>%</code> operator can only be used with integers.</p>
+                </div>
+            </section>
+        </main>
+
+        <footer class="module-footer">
+            <section class="key-takeaways">
+                <h2>📝 Key Takeaways</h2>
+                <ul>
+                    <li>C data types define the format and storage of data, including char, int, float, double, and void.</li>
+                    <li>Modifiers like signed, unsigned, long, and short adjust the range and precision of basic data types.</li>
+                    <li>Variables are named memory locations that store data, and must be declared before use, while constants hold fixed values.</li>
+                    <li>scanf() is used for reading formatted input from the keyboard.</li>
+                    <li>Type casting allows explicit conversion of variables from one data type to another.</li>
+                     <li>C operators are symbols that perform operations on operands, categorized into arithmetic, increment/decrement, assignment and others.</li>
+                </ul>
+            </section>
+
+            <section class="knowledge-check">
+                <h2>⚡ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <p><b>Question 1:</b> What is the difference between 'float' and 'double' data types in C?</p>
+                    <p><b>Question 2:</b> Explain the use of 'void' data type in C.</p>
+                    <p><b>Question 3:</b> What is type casting and why is it important?</p>
+                    <p><b>Question 4:</b> List and briefly describe the five arithmetic operators in C.</p>
+                </div>
+            </section>
+
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="module3.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module 4 of 8</span>
+                    </div>
+                    <a href="module5.html" class="nav-button">
+                        Next <span>→</span>
+                    </a>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</body>
+</html>

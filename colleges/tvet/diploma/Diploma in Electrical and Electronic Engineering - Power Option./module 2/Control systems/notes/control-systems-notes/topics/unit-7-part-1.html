@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 7: Stability Concept & Root Locus (Part 1)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Add AMS tag numbering if needed later
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-6.html" class="nav-button"> <!-- Link to previous unit -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 7 (Part 1) of 9</span>
+                    </div>
+                    <a href="unit-7-part-2.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Unit-7: Stability Concept & Root Locus Method</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: unit-7-stability-intro -->
+                <section id="unit-7-stability-intro" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">⚖️</span>
+                        <span class="heading-text">Stability</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>Stability is an important concept. In this chapter, let us discuss the stability of system and types of systems based on stability.</p>
+                        <h3 class="subsection-heading">What is Stability?</h3>
+                        <p>A system is said to be stable, if its output is under control. Otherwise, it is said to be unstable. A stable system produces a bounded output for a given bounded input.</p>
+                        <p>The following figure shows the response of a stable system.</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-058-1.jpg" alt="Graph showing the response c(t) of a stable first-order system to a unit step input, rising asymptotically from 0 to 1." class="content-image">
+                        <p>This is the response of first order control system for unit step input. This response has the values between 0 and 1. So, it is bounded output. We know that the unit step signal has the value of one for all positive values of t including zero. So, it is bounded input. Therefore, the first order control system is stable since both the input and the output are bounded.</p>
+                        <h3 class="subsection-heading">Types of Systems based on Stability</h3>
+                        <p>We can classify the systems based on stability as follows.</p>
+                        <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span> <span class="item-text">Absolutely stable system</span></li>
+                             <li class="list-item"><span class="item-icon">•</span> <span class="item-text">Conditionally stable system</span></li>
+                             <li class="list-item"><span class="item-icon">•</span> <span class="item-text">Marginally stable system</span></li>
+                         </ul>
+                     </div>
+                </section>
+                <!-- END: unit-7-stability-intro -->
+
+                <!-- START: unit-7-routh-hurwitz-intro -->
+                <section id="unit-7-routh-hurwitz-intro" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">Routh- Hurwitz Criterion</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>Before discussing the Routh-Hurwitz Criterion, firstly we will study the stable, unstable and marginally stable system.</p>
+                        <ol class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">1.</span> <span class="item-text"><strong>Stable System:</strong> If all the roots of the characteristic equation lie on the left half of the 'S' plane then the system is said to be a stable system.</span></li>
+                             <li class="list-item"><span class="item-icon">2.</span> <span class="item-text"><strong>Marginally Stable System:</strong> If all the roots of the system lie on the imaginary axis of the 'S' plane then the system is said to be marginally stable.</span></li>
+                             <li class="list-item"><span class="item-icon">3.</span> <span class="item-text"><strong>Unstable System:</strong> If all the roots of the system lie on the right half of the 'S' plane then the system is said to be an unstable system.</span></li>
+                        </ol>
+
+                        <h3 class="subsection-heading">Statement of Routh-Hurwitz Criterion</h3>
+                        <p>Routh Hurwitz criterion states that any system can be stable if and only if all the roots of the first column have the same sign and if it does not has the same sign or there is a sign change then the number of sign changes in the first column is equal to the number of roots of the characteristic equation in the right half of the s-plane i.e. equals to the number of roots with positive real parts.</p>
+
+                        <h3 class="subsection-heading">Necessary but not sufficient conditions for Stability</h3>
+                        <p>We have to follow some conditions to make any system stable, or we can say that there are some necessary conditions to make the system stable.</p>
+                        <p>Consider a system with characteristic equation:</p>
+                        <div class="equation">$$ a_{0} s^{m}+a_{1} s^{m-1}+\ldots \ldots \ldots \ldots+a_{m}=0 $$</div>
+                        <ol class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">All the coefficients of the equation should have the same sign.</span></li>
+                             <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">There should be no missing term.</span></li>
+                        </ol>
+                        <p>If all the coefficients have the same sign and there are no missing terms, we have no guarantee that the system will be stable. For this, we use Routh Hurwitz Criterion to check the stability of the system. If the above-given conditions are not satisfied, then the system is said to be unstable. This criterion is given by A. Hurwitz and E.J. Routh.</p>
+                     </div>
+                </section>
+                <!-- END: unit-7-routh-hurwitz-intro -->
+
+                <!-- START: unit-7-routh-hurwitz-adv-lim -->
+                <section id="unit-7-routh-hurwitz-adv-lim" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">➕➖</span>
+                        <span class="heading-text">Advantages and Limitations of Routh- Hurwitz Criterion</span>
+                     </h2>
+                     <div class="content-card">
+                        <h3 class="subsection-heading">Advantages of Routh- Hurwitz Criterion</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">We can find the stability of the system without solving the equation.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">We can easily determine the relative stability of the system.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">By this method, we can determine the range of K for stability.</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">By this method, we can also determine the point of intersection for root locus with an imaginary axis.</span></li>
+                        </ol>
+                        <h3 class="subsection-heading">Limitations of Routh- Hurwitz Criterion</h3>
+                         <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">This criterion is applicable only for a linear system.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">It does not provide the exact location of poles on the right and left half of the S plane.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">In case of the characteristic equation, it is valid only for real coefficients.</span></li>
+                         </ol>
+                     </div>
+                </section>
+                <!-- END: unit-7-routh-hurwitz-adv-lim -->
+
+                 <!-- START: unit-7-routh-hurwitz-criterion -->
+                <section id="unit-7-routh-hurwitz-criterion" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">The Routh- Hurwitz Criterion</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>Consider the following characteristic Polynomial</p>
+                        <div class="equation">$$ a_{0} s^{n}+a_{1} s^{n-1}+\ldots \ldots \ldots \ldots+a_{n}=0 $$</div>
+                        <p>When the coefficients $a_0, a_1 ...a_n$ are all of the same sign, and none is zero.</p>
+
+                        <p><strong>Step 1:</strong> Arrange all the coefficients of the above equation in two rows:</p>
+                        <!-- Using MathJax array for better formatting -->
+                        <div class="equation">$$
+                        \begin{array}{c|ccc}
+                        s^n & a_0 & a_2 & a_4 & \dots \\
+                        s^{n-1} & a_1 & a_3 & a_5 & \dots \\
+                        \end{array}
+                        $$</div>
+
+                        <p><strong>Step 2:</strong> From these two rows we will form the third row:</p>
+                         <div class="equation">$$
+                        \begin{array}{c|ccc}
+                        s^n & a_0 & a_2 & a_4 & \dots \\
+                        s^{n-1} & a_1 & a_3 & a_5 & \dots \\
+                        s^{n-2} & b_1 & b_3 & b_5 & \dots \\
+                        \end{array}
+                        $$</div>
+                        <p>Where,</p>
+                        <!-- Mathpix converted equations -->
+                         <div class="equation">$$ b_{1}=-\frac{1}{a_{1}}\left|\begin{array}{ll} a_{0} & a_{2} \\ a_{1} & a_{3} \end{array}\right| = \frac{a_{1} a_{2} - a_{0} a_{3}}{a_{1}} $$</div> <!-- Corrected determinant expansion sign -->
+                         <div class="equation">$$ b_{3}=-\frac{1}{a_{1}}\left|\begin{array}{ll} a_{0} & a_{4} \\ a_{1} & a_{5} \end{array}\right| = \frac{a_{1} a_{4} - a_{0} a_{5}}{a_{1}} $$</div> <!-- Corrected determinant expansion sign -->
+                         <p> (And so on for $b_5, b_7, \dots$) </p>
+
+                        <p><strong>Step 3:</strong> Now, we shall form fourth row by using second and third row:</p>
+                        <div class="equation">$$
+                        \begin{array}{c|ccc}
+                        s^n & a_0 & a_2 & a_4 & \dots \\
+                        s^{n-1} & a_1 & a_3 & a_5 & \dots \\
+                        s^{n-2} & b_1 & b_3 & b_5 & \dots \\
+                        s^{n-3} & c_1 & c_3 & c_5 & \dots \\
+                        \end{array}
+                        $$</div>
+                         <p>Where,</p>
+                        <!-- Mathpix converted equations -->
+                        <div class="equation">$$ c_{1}=-\frac{1}{b_{1}}\left|\begin{array}{ll} a_{1} & a_{3} \\ b_{1} & b_{3} \end{array}\right| = \frac{b_{1} a_{3} - a_{1} b_{3}}{b_{1}} $$</div> <!-- Corrected determinant expansion sign -->
+                        <div class="equation">$$ c_{3}=-\frac{1}{b_{1}}\left|\begin{array}{ll} a_{1} & a_{5} \\ b_{1} & b_{5} \end{array}\right| = \frac{b_{1} a_{5} - a_{1} b_{5}}{b_{1}} $$</div> <!-- Corrected determinant expansion sign -->
+                         <p> (And so on for $c_5, c_7, \dots$) </p>
+
+                        <p><strong>Step 4:</strong> We shall continue this procedure of forming a new rows until the $s^0$ row is reached.</p>
+
+                        <h3 class="subsection-heading">Example</h3>
+                        <p>Check the stability of the system whose characteristic equation is given by</p>
+                        <div class="equation">$$ s^4 + 2 s^3 + 6 s^2 + 4 s + 1 = 0 $$</div>
+                        <p><strong>Solution</strong></p>
+                        <p>Obtain the arrow of coefficients as follows</p> <!-- MMD text: arrow -> array -->
+                        <!-- Constructing the Routh Array -->
+                        <div class="equation">$$
+                        \begin{array}{c|ccc}
+                        s^4 & 1 & 6 & 1 \\
+                        s^3 & 2 & 4 & 0 \\
+                        s^2 & b_1 & b_2 & b_3 \\
+                        s^1 & c_1 & c_2 & c_3 \\
+                        s^0 & d_1 & d_2 & d_3 \\
+                        \end{array}
+                        $$</div>
+                         <!-- Calculating elements -->
+                        <p>Calculating $b_1, b_2, b_3$:</p>
+                         <div class="equation">$$ b_{1} = \frac{(2)(6) - (1)(4)}{2} = \frac{12 - 4}{2} = 4 $$</div>
+                         <div class="equation">$$ b_{2} = \frac{(2)(1) - (1)(0)}{2} = \frac{2 - 0}{2} = 1 $$</div>
+                         <div class="equation">$$ b_{3} = \frac{(2)(0) - (1)(0)}{2} = 0 $$</div>
+
+                         <p>Calculating $c_1, c_2, c_3$:</p>
+                        <div class="equation">$$ c_{1} = \frac{(4)(4) - (2)(1)}{4} = \frac{16 - 2}{4} = \frac{14}{4} = 3.5 $$</div>
+                        <div class="equation">$$ c_{2} = \frac{(4)(0) - (2)(0)}{4} = 0 $$</div>
+                        <div class="equation">$$ c_{3} = \frac{(4)(0) - (2)(0)}{4} = 0 $$</div>
+
+                        <p>Calculating $d_1, d_2, d_3$:</p>
+                        <div class="equation">$$ d_{1} = \frac{(3.5)(1) - (4)(0)}{3.5} = \frac{3.5}{3.5} = 1 $$</div>
+                         <div class="equation">$$ d_{2} = \frac{(3.5)(0) - (4)(0)}{3.5} = 0 $$</div>
+                         <div class="equation">$$ d_{3} = \frac{(3.5)(0) - (4)(0)}{3.5} = 0 $$</div>
+
+                         <p>The completed Routh Array:</p>
+                        <div class="equation">$$
+                        \begin{array}{c|ccc}
+                        s^4 & 1 & 6 & 1 \\
+                        s^3 & 2 & 4 & 0 \\
+                        s^2 & 4 & 1 & 0 \\
+                        s^1 & 3.5 & 0 & 0 \\
+                        s^0 & 1 & 0 & 0 \\
+                        \end{array}
+                        $$</div>
+                        <p>Since all the coefficients in the first column (1, 2, 4, 3.5, 1) are of the same sign, i.e., positive, the given equation has no roots with positive real parts; therefore, the system is said to be stable.</p>
+                     </div>
+                 </section>
+                 <!-- END: unit-7-routh-hurwitz-criterion -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-6.html" class="nav-button"> <!-- Link to previous unit -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 7 (Part 1) of 9</span>
+                    </div>
+                    <a href="unit-7-part-2.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
