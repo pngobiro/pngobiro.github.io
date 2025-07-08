@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Basic Formulas and Operations - MS Excel Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="content-container">
+        <header class="content-header">
+            <h1 class="content-title">Chapter 5: Basic Formulas and Operations</h1>
+            <p class="content-subtitle">Understanding Basic Mathematical Operations in Excel</p>
+        </header>
+
+        <div class="content">
+            <section id="basic-arithmetic">
+                <h2>Basic Arithmetic Operations</h2>
+
+                <h3>Adding Numbers</h3>
+                <div class="example">
+                    <h4>Method 1: Direct Addition</h4>
+                    <p>Type numbers directly into a cell:</p>
+                    <div class="math">
+                        =D5+E5+F5
+                        -OR-
+                        =5+15+20
+                    </div>
+
+                    <h4>Adding Numbers in a Contiguous Range</h4>
+                    <p>Use the AutoSum (Σ) button on the Standard toolbar:</p>
+                    <ol>
+                        <li>Click a cell below the column of numbers or to the right of the row of numbers</li>
+                        <li>Click AutoSum on the Standard toolbar</li>
+                        <li>Excel suggests a formula</li>
+                        <li>Press ENTER to accept or modify the range as needed</li>
+                    </ol>
+
+                    <h4>Using the SUM Function</h4>
+                    <p>For adding numbers not in a contiguous row or column:</p>
+                    <div class="math">
+                        Syntax: SUM(number1,number2,...)
+                    </div>
+                    <p>Examples:</p>
+                    <ul>
+                        <li>=SUM(A2:A4) - adds values in range A2 to A4</li>
+                        <li>=SUM(A2:A4, 15) - adds range plus additional value</li>
+                        <li>=SUM(A2, A4, 2) - adds specific cells and value</li>
+                    </ul>
+                </div>
+
+                <h3>Subtracting Numbers</h3>
+                <div class="example">
+                    <p>Basic subtraction formula:</p>
+                    <div class="math">
+                        =10-5
+                    </div>
+                    <p>Example with cell references:</p>
+                    <div class="math">
+                        =A2-A3
+                    </div>
+
+                    <h4>Calculating Running Balance</h4>
+                    <p>For banking transactions:</p>
+                    <div class="math">
+                        =SUM(F6,D7,-E7)
+                    </div>
+                    <p>Where:</p>
+                    <ul>
+                        <li>F6 contains previous balance</li>
+                        <li>D7 contains deposit amount</li>
+                        <li>E7 contains withdrawal amount</li>
+                    </ul>
+                </div>
+
+                <h3>Working with Percentages</h3>
+                <div class="example">
+                    <h4>To Increase a Number by Percentage</h4>
+                    <div class="math">
+                        =F5*(1+5%)
+                    </div>
+                    <p>Using cell reference for percentage:</p>
+                    <div class="math">
+                        =F5*(1+$F$2)
+                    </div>
+                    <div class="tip">
+                        <p><strong>Note:</strong> The reference to F2 uses absolute cell reference ($F$2) so the formula can be copied without changing the reference.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="multiplication-division">
+                <h2>Multiplication and Division</h2>
+
+                <h3>Multiplying Numbers</h3>
+                <p>Use the asterisk (*) operator or the PRODUCT function.</p>
+                <div class="example">
+                    <p>Syntax for PRODUCT:</p>
+                    <div class="math">
+                        PRODUCT(number1,number2,...)
+                    </div>
+                    <p>Examples:</p>
+                    <ul>
+                        <li>=5*10</li>
+                        <li>=A2*B2</li>
+                        <li>=(5+2)*3</li>
+                    </ul>
+
+                    <h4>Practical Example: Calculating Cost</h4>
+                    <p>To calculate cost of items:</p>
+                    <div class="math">
+                        =B2*C2 (where B2 is Quantity and C2 is Price)
+                    </div>
+                    <div class="warning">
+                        <p><strong>Important:</strong> Don't forget the '=' symbol at the start of the formula, or Excel will treat it as text.</p>
+                    </div>
+                </div>
+
+                <h3>Dividing Numbers</h3>
+                <div class="example">
+                    <p>Basic division formula:</p>
+                    <div class="math">
+                        =10/5
+                    </div>
+                    <p>Using cell references:</p>
+                    <div class="math">
+                        =A2/A3
+                    </div>
+                </div>
+            </section>
+
+            <section id="special-functions">
+                <h2>Special Mathematical Functions</h2>
+
+                <h3>Square Root (SQRT)</h3>
+                <div class="example">
+                    <p>Syntax:</p>
+                    <div class="math">
+                        SQRT(number)
+                    </div>
+                    <p>Examples:</p>
+                    <ul>
+                        <li>=SQRT(16) results in 4</li>
+                        <li>=SQRT(B2) calculates square root of value in B2</li>
+                    </ul>
+                    <div class="warning">
+                        <p><strong>Note:</strong> SQRT returns #NUM! error for negative numbers.</p>
+                    </div>
+                </div>
+
+                <h3>Power Function</h3>
+                <div class="example">
+                    <p>Syntax:</p>
+                    <div class="math">
+                        POWER(number,power)
+                    </div>
+                    <p>Examples:</p>
+                    <ul>
+                        <li>=5^2 or =POWER(5,2) for 5 squared</li>
+                        <li>=5^3 or =POWER(5,3) for 5 cubed</li>
+                        <li>=POWER(4,5/4) for fractional powers</li>
+                    </ul>
+                </div>
+            </section>
+        </div>
+
+        <nav class="navigation">
+            <a href="chapter-4-data-types.html" class="nav-link">Previous: Data Types</a>
+            <a href="chapter-6-formulas-2.html" class="nav-link">Next: Advanced Functions</a>
+        </nav>
+    </div>
+</body>
+</html>

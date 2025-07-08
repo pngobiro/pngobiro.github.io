@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TCP/IP Protocol Suite - Networking Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <article class="document-content-wrapper">
+            <!-- Navigation (Top) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="osi-model-part2.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: OSI Model (Part 2)</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 18</span> <!-- Adjusted section number -->
+                    </div>
+                    <a href="connecting-devices.html" class="nav-button next-link-style"> <!-- Updated next link -->
+                        <span class="nav-text">Next: Connecting Devices</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+                <div class="breadcrumbs">
+                    <a href="../../index.html">Home</a> > TCP/IP Protocol Suite
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="page-title">TCP/IP Protocol Suite</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <section class="content-section" id="tcpip-intro">
+                     <div class="content-card">
+                        <p>The TCP/IP protocol suite was developed prior to the OSI model. Therefore, the layers in the TCP/IP protocol suite do not exactly match those in the OSI model. The original TCP/IP protocol suite was defined as having four layers: host-to-network, internet, transport, and application. However, when TCP/IP is compared to OSI, we can say that the host-to-network layer is equivalent to the combination of the physical and data link layers. The internet layer is equivalent to the network layer, and the application layer is roughly doing the job of the session, presentation, and application layers with the transport layer in TCP/IP taking care of part of the duties of the session layer.</p>
+                        <p>TCP/IP is a hierarchical protocol made up of interactive modules, each of which provides a specific functionality; however, the modules are not necessarily interdependent. Whereas the OSI model specifies which functions belong to each of its layers, the layers of the TCP/IP protocol suite contain relatively independent protocols that can be mixed and matched depending on the needs of the system. The term hierarchical means that each upper-level protocol is supported by one or more lower-level protocols.</p>
+                        <p>At the transport layer, TCP/IP defines three protocols: Transmission Control Protocol (TCP), User Datagram Protocol (UDP), and Stream Control Transmission Protocol (SCTP). At the network layer, the main protocol defined by TCP/IP is the Internetworking Protocol (IP); there are also some other protocols that support data movement in this layer.</p>
+                        <p><i>(Figure showing TCP/IP layers compared to OSI layers)</i></p> <!-- Placeholder for image description -->
+                    </div>
+                </section>
+
+                <!-- TCP/IP Layers -->
+                <section class="content-section" id="tcpip-layers">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧱</span>
+                        <span class="heading-text">TCP/IP Layers</span>
+                    </h2>
+
+                    <!-- Host-to-Network Layer -->
+                    <h3 class="subsection-heading">1. Host-to-Network Layer</h3>
+                    <div class="content-card">
+                        <p>The TCP/IP reference model does not really say much about what happens here, except to point out that the host has to connect to the network using some protocol so it can send IP packets to it. This protocol is not defined and varies from host to host and network to network.</p>
+                    </div>
+
+                    <!-- Internet Layer -->
+                    <h3 class="subsection-heading">2. Internet Layer</h3>
+                    <div class="content-card">
+                        <p>Its job is to permit hosts to inject packets into any network and have them travel independently to the destination (potentially on a different network). They may even arrive in a different order than they were sent, in which case it is the job of higher layers to rearrange them, if in-order delivery is desired.</p>
+                        <p>The internet layer defines an official packet format and protocol called IP (Internet Protocol). The job of the internet layer is to deliver IP packets where they are supposed to go. Packet routing is clearly the major issue here, as is avoiding congestion.</p>
+                    </div>
+
+                    <!-- Transport Layer -->
+                    <h3 class="subsection-heading">3. The Transport Layer</h3>
+                    <div class="content-card">
+                        <p>The layer above the internet layer in the TCP/IP model is now usually called the transport layer. It is designed to allow peer entities on the source and destination hosts to carry on a conversation, just as in the OSI transport layer. Two end-to-end transport protocols have been defined here.</p>
+                         <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">➡️</span>
+                                <span class="item-text"><b>TCP (Transmission Control Protocol):</b> is a reliable connection-oriented protocol that allows a byte stream originating on one machine to be delivered without error on any other machine in the internet. It fragments the incoming byte stream into discrete messages and passes each one on to the internet layer. At the destination, the receiving TCP process reassembles the received messages into the output stream. TCP also handles flow control to make sure a fast sender cannot swamp a slow receiver with more messages than it can handle.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">➡️</span>
+                                <span class="item-text"><b>UDP (User Datagram Protocol):</b> is an unreliable, connectionless protocol for applications that do not want TCP's sequencing or flow control and wish to provide their own. It is also widely used for one-shot, client-server-type request-reply queries and applications in which prompt delivery is more important than accurate delivery, such as transmitting speech or video.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">➡️</span>
+                                <span class="item-text"><b>SCTP (Stream Control Transmission Protocol):</b> (Mentioned earlier but not detailed in this section of the source PDF).</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Application Layer -->
+                    <h3 class="subsection-heading">4. The Application Layer</h3>
+                    <div class="content-card">
+                        <p>The TCP/IP model does not have session or presentation layers. On top of the transport layer is the application layer. It contains all the higher-level protocols. The early ones included virtual terminal (TELNET), file transfer (FTP), and electronic mail (SMTP). The virtual terminal protocol allows a user on one machine to log onto a distant machine and work there. The file transfer protocol provides a way to move data efficiently from one machine to another. Electronic mail was originally just a kind of file transfer, but later a specialized protocol (SMTP) was developed for it. Many other protocols have been added to these over the years: the Domain Name System (DNS) for mapping host names onto their network addresses, NNTP, the protocol for moving USENET news articles around, and HTTP, the protocol for fetching pages on the World Wide Web, and many others.</p>
+                    </div>
+                </section>
+
+                 <!-- Comparison -->
+                <section class="content-section" id="osi-tcpip-comparison">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚖️</span>
+                        <span class="heading-text">Comparison of the OSI and TCP/IP Reference Models</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The OSI and TCP/IP reference models have much in common. Both are based on the concept of a stack of independent protocols. Also, the functionality of the layers is roughly similar. For example, in both models the layers up through and including the transport layer are there to provide an end-to-end, network-independent transport service to processes wishing to communicate. These layers form the transport provider. Again in both models, the layers above transport are application-oriented users of the transport service.</p>
+                        <p>Despite these fundamental similarities, the two models also have many differences. Three concepts are central to the OSI model:</p>
+                        <ol>
+                            <li>Services.</li>
+                            <li>Interfaces.</li>
+                            <li>Protocols.</li>
+                        </ol>
+                        <p>Probably the biggest contribution of the OSI model is to make the distinction between these three concepts explicit. Each layer performs some services for the layer above it. The service definition tells what the layer does, not how entities above it access it or how the layer works. It defines the layer's semantics.</p>
+                        <p>A layer's interface tells the processes above it how to access it. It specifies what the parameters are and what results to expect. It, too, says nothing about how the layer works inside.</p>
+                        <p>Finally, the peer protocols used in a layer are the layer's own business. It can use any protocols it wants to, as long as it gets the job done (i.e., provides the offered services). It can also change them at will without affecting software in higher layers.</p>
+                        <p>The TCP/IP model did not originally clearly distinguish between service, interface, and protocol, although people have tried to retrofit it after the fact to make it more OSI-like. For example, the only real services offered by the internet layer are SEND IP PACKET and RECEIVE IP PACKET.</p>
+                        <p>As a consequence, the protocols in the OSI model are better hidden than in the TCP/IP model and can be replaced relatively easily as the technology changes. Being able to make such changes is one of the main purposes of having layered protocols in the first place. The OSI reference model was devised before the corresponding protocols were invented. This ordering means that the model was not biased toward one particular set of protocols, a fact that made it quite general. The downside of this ordering is that the designers did not have much experience with the subject and did not have a good idea of which functionality to put in which layer.</p>
+                        <p>Another difference is in the area of connectionless versus connection-oriented communication. The OSI model supports both connectionless and connection-oriented communication in the network layer, but only connection-oriented communication in the transport layer, where it counts (because the transport service is visible to the users). The TCP/IP model has only one mode in the network layer (connectionless) but supports both modes in the transport layer, giving the users a choice. This choice is especially important for simple request-response protocols.</p>
+                    </div>
+                </section>
+
+                 <!-- Key Points Section -->
+                <section class="key-points-section">
+                    <div class="key-points-container">
+                        <div class="key-points-header">
+                            <span class="key-points-icon">📝</span>
+                            <h3 class="key-points-title">Key Points to Remember (TCP/IP Suite)</h3>
+                        </div>
+                        <div class="key-points-content">
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>TCP/IP suite predates OSI, has 4 layers (Host-to-Network, Internet, Transport, Application).</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Layers roughly map to OSI: Host-to-Network (OSI 1-2), Internet (OSI 3), Transport (OSI 4), Application (OSI 5-7).</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Internet Layer uses IP for packet delivery and routing.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Transport Layer provides end-to-end communication using TCP (reliable, connection-oriented) or UDP (unreliable, connectionless).</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Application Layer contains higher-level protocols (HTTP, SMTP, FTP, DNS, etc.).</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>OSI clearly distinguishes services, interfaces, and protocols; TCP/IP less so.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>TCP/IP supports connectionless (IP) and connection-oriented (TCP) at different layers than OSI.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Navigation (Bottom) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="osi-model-part2.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: OSI Model (Part 2)</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 18</span> <!-- Adjusted section number -->
+                    </div>
+                    <a href="connecting-devices.html" class="nav-button next-link-style"> <!-- Updated next link -->
+                        <span class="nav-text">Next: Connecting Devices</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+</body>
+</html>

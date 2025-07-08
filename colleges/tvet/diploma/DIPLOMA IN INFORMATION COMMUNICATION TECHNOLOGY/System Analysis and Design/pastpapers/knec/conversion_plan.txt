@@ -1,0 +1,127 @@
+# PDF to HTML Conversion Plan
+
+## 1. File Organization
+
+Current structure:
+```
+/knec/
+├── PDFs/            # Original PDF files
+├── components/      # Reusable HTML components
+├── js/             # JavaScript files
+├── examples/       # Example templates and guides
+└── styles.css      # Global styles
+```
+
+## 2. Files to Convert
+
+Priority order based on year (newest to oldest):
+
+1. Completed:
+   - 2023j.html (July 2023)
+
+2. Next batch:
+   - 2022n.html (November 2022)
+   - 2022j.html (July 2022)
+   - 2021n.html (November 2021)
+   - 2019july.html (July 2019)
+
+3. Following batch:
+   - 2018nov.html (November 2018)
+   - 2018j.html (July 2018)
+   - 2017nov.html (November 2017)
+   - 2017july.html (July 2017)
+
+4. Final batch:
+   - [List remaining papers chronologically]
+
+## 3. Conversion Process Per File
+
+1. OCR Step:
+```bash
+cd /home/ngobiro/Documents/Cline/MCP/pdf-converter-server && \
+node build/index.js "[pdf_path]" "[year]_ocr.txt" && \
+sleep 5 && \
+cp "[year]_ocr.txt" "/current/working/directory"
+```
+
+2. HTML Creation:
+   - Copy 2023j.html as template
+   - Update metadata
+   - Update navigation links
+   - Format content using examples/example_*.html patterns
+
+3. Content Elements:
+   - Questions section (8 questions)
+   - Answer sections
+   - Tables using example_table.html
+   - Equations using MathJax
+   - Code snippets using Prism.js
+   - Diagrams using example_diagram.html
+
+4. Navigation:
+   - Update prev/next links
+   - Update sidebar active state
+
+## 4. Quality Control Checklist
+
+- [ ] Proper HTML structure
+- [ ] All questions present
+- [ ] All answers formatted
+- [ ] Navigation links working
+- [ ] MathJax rendering correctly
+- [ ] Tables formatted properly
+- [ ] Mobile responsive
+- [ ] Print styling working
+
+## 5. Timeline
+
+Week 1 (March 25-31):
+- Convert 2022 papers
+- Update index.html
+
+Week 2 (April 1-7):
+- Convert 2021-2019 papers
+- Quality check first batch
+
+Week 3 (April 8-14):
+- Convert 2018-2017 papers
+- Update navigation
+
+Week 4 (April 15-21):
+- Convert remaining papers
+- Final testing and fixes
+
+## 6. Required Tools
+
+1. PDF Converter:
+   - Location: /home/ngobiro/Documents/Cline/MCP/pdf-converter-server
+   - Command pattern provided in Step 3.1
+
+2. HTML Templates:
+   - examples/example-pastpaper.html
+   - examples/example_*.html for specific elements
+
+3. Validation Tools:
+   - Browser testing
+   - HTML validator
+   - Mobile device testing
+
+## 7. Documentation Updates
+
+1. Update README.md with:
+   - Conversion process
+   - File structure
+   - Quality guidelines
+
+2. Create conversion log:
+   - Track completed files
+   - Note special cases
+   - Document issues/solutions
+
+## Next Steps
+
+1. Initialize index.html
+2. Start with 2022n.html conversion
+3. Implement step-by-step validation
+4. Update navigation structure
+5. Document progress

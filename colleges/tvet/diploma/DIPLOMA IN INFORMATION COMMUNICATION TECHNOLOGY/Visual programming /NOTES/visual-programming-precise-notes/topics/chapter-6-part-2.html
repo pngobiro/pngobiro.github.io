@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Error Handling & Debugging (Part 2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-6-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 6 (Part 2)</span>
+                    </div>
+                    <a href="chapter-6-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 6: Error Handling & Debugging (Part 2)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-6-part-2 -->
+                <section id="chapter-6-exceptions" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚡</span>
+                        <span class="heading-text">Exceptions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The programming language supports some form of error handling. This ranges from the classic <code>on ERROR GOTO . . .</code> from early Basic dialects to the <code>try . . . catch</code> exceptions handling from modern object oriented languages.</p>
+                        <p>The idea is always the same: you register some part of your program as error handler to be called whenever an error happens. Modern designs allow you to define more than one handler to handle different types of errors separately.</p>
+                        <p>Once an error occurs the execution jumps to the error handler and continues there.</p>
+                        <pre><code class="language-pseudocode">function sqrt (X : in Float) : Float
+begin
+    if (X < 0) :
+        raise Float_Error
+    else
+        calculate root from x
+    fi
+end
+
+try:
+    C := sqrt(A^2 + B^2)
+    normal processing
+when Float_Error:
+    error handling
+end try
+</code></pre>
+                        <p>The great strength of exceptions handling is that it can block several operations within one exception handler. This eases up the burden of error handling since not every function or procedure call needs to be checked independently for successful execution.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-statements" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📜</span>
+                        <span class="heading-text">Error handling statements</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Some useful error handling statements are there in Visual Basic 6 which help you ignore, bypass or handle errors in your program. Three such statements are helpful. They are as follows:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>On Error Resume Next</strong> statement: If any error occurs, it is ignored, and the control goes to the next statement.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>On Error Goto label</strong>: If any error occurs, the control jumps to a label.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>On Error Goto 0</strong>: This statement cancels the effect of 'On Error Resume Next' and 'On Error Goto label' statements.</span></li>
+                        </ul>
+                        <h3 class="subsection-heading">On Error Resume Next</h3>
+                        <pre><code class="language-vb">On Error Resume Next
+a = 6 / 0
+Print "hello"</code></pre>
+                        <h3 class="subsection-heading">On Error Goto label</h3>
+                        <pre><code class="language-vb">On Error GoTo A
+A = 6 / 0
+
+A:
+Print "hello"
+Print "Welcome"</code></pre>
+                        <h3 class="subsection-heading">On Error Goto 0</h3>
+                        <p>On Error Goto 0 statement tells Visual Basic to cancel any effect of 'On Error Resume Next' and 'On Error Goto label' statements. So this statement cancels the effect of error handling in your program.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-err-func" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">The Err function</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The Err function can help you handle the error using the error code. For example, you can display a warning message to the end-user. The following example clarifies this.</p>
+                        <pre><code class="language-vb">On Error Resume Next
+b = 88 / 0
+If Err = 11 Then
+    MsgBox "Error: Division by zero!"
+End If</code></pre>
+                        <pre><code class="language-vb">On Error GoTo Label5
+b = 88 / 0
+Label5:
+If Err = 11 Then
+    MsgBox "Error: Division by zero!"
+End If</code></pre>
+                    </div>
+                </section>
+
+                <section id="chapter-6-dbc" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📜</span>
+                        <span class="heading-text">Design by Contract</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In Design by Contract (DbC) functions must be called with the correct parameters. This is the caller's part of the contract. If the types of actual arguments match the types of formal arguments, and if the actual arguments have values that make the function's preconditions True, then the subprogram gets a chance to fulfill its postcondition. Otherwise an error condition occurs. Now you might wonder how that is going to work. Let's look at the example first:</p>
+                        <pre><code class="language-pseudocode">function sqrt(X : in Float) : Float
+    pre-condition (X >= 0)
+    post-condition (return >= 0)
+begin
+    calculate root from x
+end
+C := sqrt(A^2 + B^2)
+</code></pre>
+                        <p>As you see the function demands a precondition of <span class="math-inline">$x \geq 0$</span> - that is the function can only be called when <span class="math-inline">$X \geq 0$</span>. In return the function promises as postcondition that the return value is also <span class="math-inline">$\geq 0$</span>.</p>
+                        <p>In a full DbC approach, the postcondition will state a relation that fully describes the value that results when running the function, something like result <span class="math-inline">$\geq 0$</span> and <span class="math-inline">$X = \text{result} * \text{result}$</span>. This postcondition is <span class="math-inline">$\sqrt{\phantom{x}}$</span>'s part of the contract. The use of assertions, annotations, or a language's type system for expressing the precondition <span class="math-inline">$x \geq 0$</span> exhibits two important aspects of Design by Contract:</p>
+                        <ol>
+                            <li>There can be ways for the compiler, or analysis tool, to help check the contracts. (Here for example, this is the case when <span class="math-inline">$x \geq 0$</span> follows from X's type, and <span class="math-inline">$\sqrt{\phantom{x}}$</span>'s argument when called is of the same type, hence also <span class="math-inline">$\geq 0$</span>.)</li>
+                            <li>The precondition can be mechanically checked before the function is called.</li>
+                        </ol>
+                        <p>The first aspect adds to safety: No programmer is perfect. Each part of the contract that needs to be checked by the programmers themselves has a high probability for mistakes.</p>
+                        <p>The second aspect is important for optimization - when the contract can be checked at compile time, no runtime check is needed. You might not have noticed but if you think about it: is never negative, provided the exponentiation operator and the addition operator work in the usual way.</p>
+                        <p>We have made 5 nice error handling examples for a piece of code which never fails. And this is the great opportunity for controlling some runtime aspects of DbC: You can now safely turn checks off, and the code optimizer can omit the actual range checks.</p>
+                        <p>DbC languages distinguish themselves on how they act in the face of a contract breach:</p>
+                        <ol>
+                            <li>True DbC programming languages combine DbC with exception handling — raising an exception when a contract breach is detected at runtime, and providing the means to restart the failing routine or block in a known good state.</li>
+                            <li>Static analysis tools check all contracts at analysis time and demand that the code written in such a way that no contract can ever be breached at runtime.</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-6-part-2 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-6-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 6 (Part 2)</span>
+                    </div>
+                    <a href="chapter-6-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

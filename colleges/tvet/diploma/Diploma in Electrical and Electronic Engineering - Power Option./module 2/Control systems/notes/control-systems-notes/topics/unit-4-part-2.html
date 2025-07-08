@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 4: Block Diagram & Signal Flow Graphs (Part 2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-4-part-1.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 4 (Part 2) of 9</span>
+                    </div>
+                    <a href="unit-5-part-1.html" class="nav-button"> <!-- Link to next unit part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+             <header class="section-header">
+                <!-- Reusing title from part 1 for context -->
+                <h1 class="section-title">Unit-4: Block Diagram & Signal Flow Graphs (SFG)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: unit-4-sfg-intro -->
+                <section id="unit-4-sfg-intro" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">↔️</span> <!-- Changed icon -->
+                        <span class="heading-text">Signal Flow Graph (SFG):</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Introduction:</h3>
+                        <p>Block diagram reduction is the excellent method for determining the transfer function of the control system. However, in a complicated system, it is very difficult and time-consuming process that is why an alternate method, i.e., SFG was developed by S.J Mason which relates the input and output system variables graphically. In the signal flow graph, the transfer function is referred to as transmittance.</p>
+
+                        <h3 class="subsection-heading">Characteristics of SFG:</h3>
+                        <p>SFG is a graphical representation of the relationship between the variables of a set of linear algebraic equations. It doesn't require any reduction technique or process.</p>
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">o</span> <span class="item-text">It represents a network in which nodes are used for the representation of system variable which is connected by direct branches.</span></li>
+                           <li class="list-item"><span class="item-icon">o</span> <span class="item-text">SFG is a diagram which represents a set of equations. It consists of nodes and branches such that each branch of SFG having an arrow which represents the flow of the signal.</span></li>
+                           <li class="list-item"><span class="item-icon">o</span> <span class="item-text">It is only applicable to the linear system.</span></li>
+                        </ul>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-031-1.jpg" alt="Example Signal Flow Graph with nodes X1 to X6 and various directed branches labeled a_ij." class="content-image">
+                     </div>
+                </section>
+                <!-- END: unit-4-sfg-intro -->
+
+                <!-- START: unit-4-sfg-terms -->
+                <section id="unit-4-sfg-terms" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔖</span>
+                        <span class="heading-text">Terms used in SFG</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>Node:</strong> It represents the system variable which equals to the sum of all signals. Outgoing signal from the node does not affect the value of node variables.</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-031-2.jpg" alt="Signal Flow Graph node example showing input node, output node, and intermediate nodes with branches A, H, B, G." class="content-image">
+
+                        <p><strong>Branch:</strong> Branch is defined as a path from one node to another node, in the direction indicated by the branch arrow.</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-031-3.jpg" alt="Signal Flow Graph branch example showing multiple branches entering and leaving a summing point node." class="content-image">
+
+                        <p><strong>Node as a summing point:</strong></p>
+                        <p>$x_{1}$ = Summing point</p>
+                        <p>$x_{1}=x_{2}+x_{3}+x_{4}$</p>
+
+                        <p><strong>Node as a transmitting (outgoing) point:</strong></p>
+                        <p>$x_{1}=x_{5}+x_{6}$</p> <!-- Preserving verbatim MMD interpretation -->
+
+                        <p><strong>Input node or source:</strong> It is the node which have only outgoing branches.</p>
+                        <p><strong>Output node or sink:</strong> It is a node which has only incoming branches.</p>
+                        <p><strong>Forward Path:</strong> It is a path from an input node to an output node in the direction of branch arrow.</p>
+                        <p><strong>Loop:</strong> It is a path that starts and ends at the same node.</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-032-1.jpg" alt="Signal Flow Graph loop examples: a simple loop A->B->A and a self-loop at node C." class="content-image">
+
+                        <p><strong>Non-touching loop:</strong> Loop is said to be non-touching if they do not have any common node.</p>
+                         <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-032-2.jpg" alt="Example of two non-touching loops in a Signal Flow Graph." class="content-image">
+
+                        <p><strong>Forward path gain:</strong> A product of all branches gain along the forward path is called Forward path gain.</p>
+                         <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-032-3.jpg" alt="Example of a forward path with gain G1*G2*G3." class="content-image">
+
+                        <p><strong>Loop Gain:</strong> Loop gain is the product of branch gain which travels in the loop.</p>
+                         <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-033-1.jpg" alt="Example of a loop with gain G1*G2." class="content-image">
+                        <!-- Removed duplicated loop gain text from MMD -->
+                    </div>
+                </section>
+                <!-- END: unit-4-sfg-terms -->
+
+                <!-- START: unit-4-sfg-construction -->
+                <section id="unit-4-sfg-construction" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🏗️</span>
+                        <span class="heading-text">Construction of SFG and Mason Gain Formula:</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>The SFG of a system is constructed by the following equations -</p>
+                        <h3 class="subsection-heading">Example</h3>
+                        <p>Consider a system described by following sets of equations</p>
+                        <div class="equation">$$ x_{2}=a_{12} x_{1}+a_{32} x_{3}+a_{42} x_{4}+a_{52} x_{5} $$</div>
+                        <div class="equation">$$ x_{3}=a_{23} x_{2} $$</div>
+                        <div class="equation">$$ x_{4}=a_{34} x_{3}+a_{44} x_{4} $$</div> <!-- Corrected x1 to x4 based on diagram context for loop -->
+                        <div class="equation">$$ x_{5}=a_{35} x_{3}+a_{45} x_{4} $$</div>
+                        <p>Where x1 is input and $x_5$ is output.</p>
+                        <p><strong>Step1</strong> - First step is to draw all the nodes.</p>
+                        <!-- Using corrected Mathpix filename - Assuming single image for nodes -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-033-2.jpg" alt="Nodes X1, X2, X3, X4, X5 laid out horizontally." class="content-image">
+                        <p><strong>Step2</strong> - Draw the SFG for equation (1)</p>
+                        <!-- Using corrected Mathpix filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-033-3.jpg" alt="SFG showing branches corresponding to equation 1 for X2." class="content-image">
+                        <p><strong>Step3</strong> - Draw the SFG for equation (2)</p>
+                        <!-- Using corrected Mathpix filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-034-1.jpg" alt="SFG showing branch a23 from X2 to X3." class="content-image">
+                        <p><strong>Step4</strong> - Draw the SFG for equation (3)</p>
+                        <!-- Using corrected Mathpix filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-034-2.jpg" alt="SFG showing branches corresponding to equation 3 for X4, including loop a44." class="content-image">
+                        <p><strong>Step5</strong> - Draw the SFG for equation (4)</p>
+                        <!-- Using corrected Mathpix filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-034-3.jpg" alt="SFG showing branches corresponding to equation 4 for X5." class="content-image">
+                        <p><strong>Step6</strong> - Now draw the complete signal flow graph with the help of the above graph.</p>
+                        <!-- Using corrected Mathpix filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-034-4.jpg" alt="Complete Signal Flow Graph combining all previous steps." class="content-image">
+                     </div>
+                </section>
+                <!-- END: unit-4-sfg-construction -->
+
+                <!-- START: unit-4-mason-gain -->
+                <section id="unit-4-mason-gain" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🧮</span>
+                        <span class="heading-text">MASON'S GAIN FORMULA</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>The relation between an input variable and an output variable of a signal flow graph is given by Mason's Gain Formula.</p>
+                        <p>For determination of the overall system, the gain is given by:</p>
+                        <div class="equation">$$ T=\frac{\sum_{K=1}^{n} P_{K} \Delta_{K}}{\Delta}=\frac{P_{1} \Delta_{1}+P_{2} \Delta_{2}}{\Delta} $$</div>
+                        <p>Where,</p>
+                        <p>$P_k$ = forward path gain of the $K^{th}$ forward path.</p>
+                        <p>$\Delta = 1$ - [Sum of the loop gain of all individual loops] + [Sum of gain products of all possible of two non-touching loops] + [Sum of gain products of all possible three non-touching loops] + .......</p>
+                        <p>$\Delta_k =$ The value of $\Delta$ for the part of the graph that is not touching the $K^{th}$ forward path.</p>
+                        <!-- Using corrected filename, reusing complete SFG image -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-035-1.jpg" alt="Complete Signal Flow Graph for Mason's Gain Formula example." class="content-image">
+
+                        <h3 class="subsection-heading">Forward Path</h3>
+                        <p>From the above SFG, there are two forward paths with their path gain as -</p>
+                        <div class="equation">$$ P_{1}=a_{12} a_{23} a_{34} a_{45} $$</div>
+                        <div class="equation">$$ P_{2}=a_{12} a_{23} a_{35} $$</div> <!-- Corrected case of p2 -->
+
+                        <h3 class="subsection-heading">Loop</h3>
+                        <p>There are 5 individual loops in the above SFG with their loop gain as -</p>
+                        <div class="equation">$$ L_{1}=a_{23} a_{32} $$</div>
+                        <div class="equation">$$ L_{2}=a_{23} a_{34} a_{42} $$</div>
+                        <div class="equation">$$ L_{3}=a_{44} $$</div>
+                        <div class="equation">$$ L_{4}=a_{23} a_{34} a_{45} a_{52} $$</div>
+                        <div class="equation">$$ L_{5}=a_{23} a_{35} a_{52} $$</div>
+
+                        <h3 class="subsection-heading">Non-Touching Loops</h3>
+                        <p>There are two possible combinations of the non-touching loop with loop gain product as -</p>
+                        <div class="equation">$$ L_{1} \cdot L_{3}=a_{23} a_{32} a_{44} $$</div>
+                        <div class="equation">$$ L_{3} \cdot L_{5}=a_{44} a_{23} a_{35} a_{52} $$</div> <!-- Corrected based on diagram -->
+
+                        <p>In above SFG, there are no combinations of three non-touching loops, 4 non-touching loops and so on.</p>
+                        <p>Where,</p>
+                        <div class="equation">$$ \Delta=1-\left[L_{1}+L_{2}+L_{3}+L_{4}+L_{5}\right]+\left[L_{1} \cdot L_{3}+L_{3} \cdot L_{5}\right] $$</div>
+                        <div class="equation">$$ \Delta=1-\left[a_{23} a_{32}+a_{23} a_{34} a_{42}+a_{44}+a_{23} a_{34} a_{45} a_{52}+a_{23} a_{35} a_{52}\right]+\left[a_{23} a_{32} a_{44}+a_{44} a_{23} a_{35} a_{52}\right] $$</div>
+                        <p>$P_{1}=a_{12} a_{23} a_{34} a_{45}$</p>
+                        <p>$P_{2}=a_{12} a_{23} a_{35}$</p>
+                        <p>$\Delta_{1}=1$ (Path P1 touches all loops)</p>
+                        <p>$\Delta_{2}=1 - L_3 = 1-a_{44}$ (Path P2 does not touch loop L3)</p>
+                        <div class="equation">$$ T=\frac{P_{1} \Delta_{1}+P_{2} \Delta_{2}}{\Delta} $$</div>
+                        <div class="equation">$$ T=\frac{a_{12} a_{23} a_{34} a_{45}(1) + a_{12} a_{23} a_{35}(1-a_{44})}{1-\left[a_{23} a_{32}+a_{23} a_{34} a_{42}+a_{44}+a_{23} a_{34} a_{45} a_{52}+a_{23} a_{35} a_{52}\right]+\left[a_{23} a_{32} a_{44}+a_{44} a_{23} a_{35} a_{52}\right]} $$</div>
+                     </div>
+                </section>
+                <!-- END: unit-4-mason-gain -->
+
+                <!-- START: unit-4-sfg-example -->
+                <section id="unit-4-sfg-example" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">✍️</span>
+                        <span class="heading-text">Example</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>Draw the Signal Flow Diagram and determine C/R for the block diagram shown in the figure.</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-037-1.jpg" alt="Block diagram example for conversion to SFG." class="content-image">
+                        <p>The signal flow graph of the above diagram is drawn below</p>
+                         <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-037-2.jpg" alt="Signal Flow Graph derived from the block diagram example." class="content-image">
+
+                        <h3 class="subsection-heading">The gain of the forward paths</h3>
+                        <p>$P_1 = G_1G_2G_3 \quad \Delta_1 = 1$</p>
+                        <p>$P_2 = -G_1G_4 \quad \Delta_2 = 1$</p>
+
+                        <h3 class="subsection-heading">Individual loops</h3>
+                        <p>$L_1 = - G_1G_2H_1$</p>
+                        <p>$L_2 = -G_2G_3H_2$</p>
+                        <p>$L_3 = -G_1G_2G_3$</p>
+                        <p>$L_4 = G_1G_4$</p>
+                        <p>$L_5 = G_4H_2$</p> <!-- MMD text says G4H2, diagram seems to confirm -->
+
+                        <p>Non touching Loops = 0</p>
+                        <div class="equation">$$ T=\frac{C}{R}=\frac{P_{1} \Delta_{1} + P_{2} \Delta_{2}}{\Delta} $$</div> <!-- Corrected formula again -->
+                        <p>Where $\Delta = 1 - (L_1 + L_2 + L_3 + L_4 + L_5)$</p>
+                        <!-- Final Equation Based on Formula and Loops Identified -->
+                        <div class="equation">$$ \frac{C}{R}=\frac{G_{1} G_{2} G_{3} - G_{1} G_{4}}{1 - (-G_{1} G_{2} H_{1} -G_{2} G_{3} H_{2} -G_{1} G_{2} G_{3} + G_{1} G_{4} + G_{4} H_{2})} $$</div>
+                        <div class="equation">$$ \frac{C}{R}=\frac{G_{1} G_{2} G_{3} - G_{1} G_{4}}{1+G_{1} G_{2} H_{1}+G_{2} G_{3} H_{2}+G_{1} G_{2} G_{3}-G_{1} G_{4}-G_{4} H_{2}} $$</div>
+                    </div>
+                </section>
+                <!-- END: unit-4-sfg-example -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-4-part-1.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 4 (Part 2) of 9</span>
+                    </div>
+                    <a href="unit-5-part-1.html" class="nav-button"> <!-- Link to next unit part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

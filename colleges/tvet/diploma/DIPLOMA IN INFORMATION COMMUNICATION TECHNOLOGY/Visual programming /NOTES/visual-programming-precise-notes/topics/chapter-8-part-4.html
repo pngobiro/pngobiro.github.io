@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Data Structures (Part 4)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-3.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 4)</span>
+                    </div>
+                    <a href="chapter-9-part-1.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 8: Data Structures (Part 4)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-8-part-4 -->
+                <section id="chapter-8-quicksort" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚡</span>
+                        <span class="heading-text">Quicksort</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Quicksort is a recursive algorithm that uses a divide-and-conquer technique. While the list of items to be sorted contains at least two items, quicksort divides it into two sublists and recursively calls itself to sort the sublists.</p>
+                        <p>The quicksort routine first checks to see if the list it is sorting contains fewer than two items. If so, it simply returns.</p>
+                        <p>Otherwise the subroutine picks an item from the list to use as a dividing point. It then places all of the items that belong before this dividing point in the left part of the list. It places all of the other items in right part of the list. The subroutine then recursively calls itself to sort two smaller sublists.</p>
+                        <p>There are several ways in which the quicksort routine might pick the dividing item. One of the easiest is to simply use the first item in the sublist being sorted. If the list is initially arranged randomly, that item will be a reasonable choice. Chances are good that the item will belong somewhere in the middle of the list and the two sublists the algorithm creates will be reasonably equal in size.</p>
+                        <p>If the numbers are initially sorted or almost sorted, or if they are initially sorted in reverse order, then this method fails miserably. In that case the first item in the list will divide the list into one sublist that contains almost every item and another that will contain almost no items. Since the larger sublist does not shrink much, the algorithm makes little headway. In this case the algorithm will require on the order of N^2 steps. This is the same order of performance given by selectionsort, only this algorithm is much more complicated.</p>
+                        <p>A better method for selecting the dividing item is to choose one randomly. Then no matter how the items in the list are arranged, chances are the item you select will belong near the middle of the list and the sublists will be fairly evenly sized.</p>
+                        <p>As long as the sublists are fairly equal in size, the algorithm will require on the order of <span class="math-inline">$N \cdot \log N$</span> steps. It can be proven that this is the fastest time possible for a sorting algorithm that sorts using comparisons. By using a little randomness, this algorithm avoids the possibility of its worst case N^2 behavior and gives an expected case performance of <span class="math-inline">$N \cdot \log N$</span>. Quicksort is very fast in practice as well as theory, so it is the favorite sorting algorithm of many programmers.</p>
+                        <h4>Listing 3. Quicksort (VB code)</h4>
+                        <pre><code class="language-vb">Sub Quicksort (List() As Long, min As Integer, max As Integer)
+    Dim med_value As Long
+    Dim hi As Integer
+    Dim lo As Integer
+    Dim i As Integer
+    ' If the list has no more than 1 element, it's sorted.
+    If min >= max Then Exit Sub
+    ' Pick a dividing item.
+    i = Int((max - min + 1) * Rnd + min)
+    med_value = List(i)
+    ' Swap it to the front so we can find it easily.
+    List(i) = List(min)
+    ' Move the items smaller than this into the left
+    ' half of the list. Move the others into the right.
+    lo = min
+    hi = max
+    Do
+        ' Look down from hi for a value < med value.
+        Do While List(hi) >= med_value
+            hi = hi - 1
+            If hi <= lo Then Exit Do
+        Loop
+        If hi <= lo Then
+            List(lo) = med_value
+            Exit Do
+        End If
+        ' Swap the lo and hi values.
+        List(lo) = List(hi)
+        ' Look up from lo for a value >= med_value.
+        lo = lo + 1
+        Do While List(lo) < med_value
+            lo = lo + 1
+            If lo >= hi Then Exit Do
+        Loop
+        If lo >= hi Then
+            lo = hi
+            List(hi) = med_value
+            Exit Do
+        End If
+        ' Swap the lo and hi values.
+        List(hi) = List(lo)
+    Loop
+    ' Sort the two sublists
+    Quicksort List(), min, lo - 1
+    Quicksort List(), lo + 1, max
+End Sub
+</code></pre>
+                    </div>
+                </section>
+
+                <section id="chapter-8-countingsort" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">Countingsort</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The discussion of quicksort above mentions that the fastest possible sorting algorithms that use comparisons use on the order of <span class="math-inline">$N \cdot \log N$</span> steps. Countingsort does not use comparisons so it is not bound by that result. In fact countingsort is so fast it seems to sort using magic rather than comparisons.</p>
+                        <p>On the other hand, countingsort only works under special circumstances. First, the items you are sorting must be integers. You cannot use countingsort to sort strings. Second, the range of values the items have must be fairly limited. If your items range from 1 to 1,000, countingsort will work extremely well. If the items range from 1 to 30,000, countingsort will not work as well. If the items range from 1 to 10 billion, you should go back to quicksort.</p>
+                        <p>The algorithm starts by allocating a temporary array of integers with bounds that cover the range of your items. If your items range from min_item to max_item, the algorithm creates an array like this:</p>
+                        <pre><code class="language-vb">Dim Counts() As Integer
+ReDim Counts(min_item To max_item)
+</code></pre>
+                        <p>Next the algorithm looks through each of the items in the list and increments the Counts entry corresponding to that item. When this stage is finished, Counts(I) holds a count of the number of items that have value I. Keep in mind that the ReDim statement initializes each of these entries to 0 so you do not need to do this yourself.</p>
+                        <pre><code class="language-vb">For I = min To Max
+    Counts(List(I)) = Counts(List(I)) + 1
+Next I
+</code></pre>
+                        <p>The program then runs through the Counts array converting the counts into offsets in the sorted list. For example, suppose the items in the list have values between 1 and 1,000. There might be 15 items with value 1, 7 with value 2, 11 with value 3, and so forth. The items with value 1 will begin at position 1 in the sorted list. Since there are 15 of them, the items with value 2 will start at position 16. There are 7 of those so the items with value 3 will start at position 23, etc.</p>
+                        <pre><code class="language-vb">next_spot = 1
+For i = min_value To max_value
+    this_count = counts(i)
+    counts(i) = next_spot
+    next_spot = next_spot + this_count
+Next i
+</code></pre>
+                        <p>When this stage is complete, the entry Counts(I) indicates the position in the sorted list where the first item with value I belongs.</p>
+                        <p>Now the algorithm reads through the list again, placing each item in the correct position in the sorted array. As the algorithm places each item, it updates the corresponding Counts entry so the next item with the same value goes into the next position in the array.</p>
+                        <p>If you are sorting data records rather than just numbers, you will need to use a temporary array. Since you place each item directly in its final location in the sorted array, you cannot store the sorted list in the same array as the original list. If you did, you would overwrite another item in the list that might not yet have been moved to its correct location. If your program needs the items in the original array, you will have to copy them back out of the temporary array when you have finished sorting them.</p>
+                        <p>To sort N numbers that have a range that spans M values, countingsort executes roughly <span class="math-inline">$2N + M$</span> steps. First it reads the N items to fill in the Counts array. Then it runs through the M values in the Counts array converting them from counts into offsets. Finally it moves the N items to their correct sorted positions.</p>
+                        <p>If N is large and M is relatively small, <span class="math-inline">$2N + M$</span> is much faster than the <span class="math-inline">$N \cdot \log N$</span> performance given by quicksort. To sort 30,000 numbers that ranged from 1 to 10,000, for example, quicksort might execute more than 400,000 steps. Countingsort would execute only about 70,000 steps and take less than a fifth as long.</p>
+                        <h4>Listing 4. Countingsort (VB code)</h4>
+                        <pre><code class="language-vb">Sub Countingsort (List() As Long, sorted_list() As Long, _
+    min As Integer, max As Integer, min_value As Long, _
+    max_value As Long)
+    Dim counts() As Integer
+    Dim i As Integer
+    Dim this_count As Integer
+    Dim next_offset As Integer
+    ' Create the Counts array.
+    ReDim counts(min_value To max_value)
+    ' Count the items.
+    For i = min To max
+        counts(List(i)) = counts(List(i)) + 1
+    Next i
+    ' Convert the counts into offsets.
+    next_offset = min
+    For i = min_value To max_value
+        this_count = counts(i)
+        counts(i) = next_offset
+        next_offset = next_offset + this_count
+    Next i
+    ' Place the items in the sorted array.
+    For i = min To max
+        sorted_list(counts(List(i))) = List(i)
+        counts(List(i)) = counts(List(i)) + 1
+    Next i
+End Sub
+</code></pre>
+                    </div>
+                </section>
+
+                <section id="chapter-8-sorting-summary" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">Sorting Algorithms Summary</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Table 1 summarizes the strengths and weaknesses of the algorithms presented here. As you can see, each performs well under some circumstances and badly under others. Here are some guidelines to help you select the right algorithm for your situation.</p>
+                        <ul>
+                            <li>If your list is more than 99% sorted already, use bubblesort.</li>
+                            <li>If you have a very small list (under 100 items or so), use selectionsort.</li>
+                            <li>If the items in your list are integers ranging over a small number of values (up to several thousand), use countingsort.</li>
+                            <li>Otherwise use quicksort.</li>
+                        </ul>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th>Algorithm</th>
+                                        <th>Advantages</th>
+                                        <th>Disadvantages</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Bubblesort</td>
+                                        <td>Very fast for lists that are almost sorted</td>
+                                        <td>Very slow sorting all other lists</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Very simple</td>
+                                        <td>Slow for large lists</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Selectionsort</td>
+                                        <td>Easy to understand</td>
+                                        <td trouble if there are lots of duplicate data values></td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Very fast for small lists</td>
+                                        <td>Slower when data range is large</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Quicksort</td>
+                                        <td>Very fast for large lists</td>
+                                        <td>Requires extra memory</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Countingsort</td>
+                                        <td>Extremely fast when the data is distributed over a small range (e.g. all values are between 1 and 1,000)</td>
+                                        <td>Only works with integer data</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Program SORT allows you to run each of these algorithms. You can enter the number of items to sort and the maximum value the items should have. When you press the Go button, the program builds a list of random numbers between 1 and the maximum you specified. The program then sorts the numbers and displays the amount of time it took.</p>
+                        <p>If you check the Start Sorted check box, the program will begin by sorting the list using Quicksort. If you also fill in a value in the # Unsorted field, the program will then switch some items around so the list contains the indicated number of unsorted items. The program will then sort the partially sorted list using the algorithm you have selected. This allows you to test bubblesort on lists that are mostly sorted.</p>
+                        <p>Finally, you can fill in a value in the Repetitions field to make the program sort the list many repeatedly. You will need to sort small lists many times to see that selectionsort is faster than quicksort and countingsort for very small lists.</p>
+                        <p>Using the program you can verify that:</p>
+                        <ul>
+                            <li>Selectionsort is fastest for small lists (use many repetitions).</li>
+                            <li>Quicksort is faster for larger lists.</li>
+                            <li>Countingsort is faster still if the number of items is larger than the largest item.</li>
+                            <li>Quicksort is faster than countingsort if the largest item is large (like 30,000) compared to the number of items (like 1,000).</li>
+                            <li>Bubblesort is fastest if the list starts mostly sorted.</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-8-part-4 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-3.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 4)</span>
+                    </div>
+                    <a href="chapter-9-part-1.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Discrete Counting - Part 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-4-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 4 Part 3 of 3</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-5-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 4: DISCRETE COUNTING (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-4-binomial-coefficients -->
+                <section id="chapter-4-binomial-coefficients" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">Coefficients (Binomial Theorem)</span>
+                    </h2>
+                    <div class="content-card">
+                        <div class="equation">$$\begin{array}{cl} \text { So far we have: } & a^{3}+a^{2} b+a b^{2}+b^{3} \\ \text { But we really need: } & a^{3}+3 a^{2} b+3 a b^{2}+b^{3} \end{array}$$</div>
+                        <p>We are missing the numbers (which are called coefficients).</p>
+                        <p>Let's look at all the results we got before, from <span class="math-inline">$(a+b)^{0}$</span> up to <span class="math-inline">$(a+b)^{3}$</span> :</p>
+                        <div class="equation">$$\begin{gathered} 1 \\ a+b \\ a^{2}+2 a b+b^{2} \\ a^{3}+3 a^{2} b+3 a b^{2}+b^{3} \end{gathered}$$</div>
+                        <p>And now look at just the coefficients (with a "1" where a coefficient wasn't shown):</p>
+                        <img src="../assets/images/chapter-4-pascal-coefficients.jpg" alt="Pascal's triangle showing coefficients for binomial expansions up to n=3" class="content-image">
+                        <p>They actually make Pascal's Triangle!</p>
+                        <p>Each number is just the two numbers above it added together (except for the edges, which are all "1")</p>
+                        <p>(Here I have highlighted that <span class="math-inline">$\mathbf{1 + 3}=\mathbf{4}$</span> )</p>
+                        <img src="../assets/images/chapter-4-pascal-highlight.jpg" alt="Pascal's triangle highlighting the sum 1+3=4" class="content-image">
+                        <p>Armed with this information let us try something new ... an exponent of 4:</p>
+                        <img src="../assets/images/chapter-4-binomial-n4.jpg" alt="Expansion of (a+b)^4 using Pascal's triangle coefficients" class="content-image">
+                        <p>And that is the correct answer (compare to the top of the page).</p>
+                        <p>We have success!</p>
+                        <p>We can now use that pattern for exponents of <span class="math-inline">$5,6,7, \ldots 50, \ldots 112, \ldots$</span> you name it!</p>
+                        <p>That pattern is the essence of the Binomial Theorem.</p>
+                        <p>Now you can take a break.</p>
+                        <p>When you come back see if you can work out <span class="math-inline">$(\mathbf{a}+\mathbf{b})^{5}$</span> yourself.</p>
+                        <p>Answer (hover over): <span class="math-inline">$a^{5}+5 a^{4} b+10 a^{3} b^{2}+10 a^{2} b^{3}+5 a b^{4}+b^{5}$</span></p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-binomial-coefficients -->
+
+                <!-- START: chapter-4-binomial-formula -->
+                <section id="chapter-4-binomial-formula" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">∑</span>
+                        <span class="heading-text">Formula (Binomial Theorem)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Our last step is to write it all as a formula.</p>
+                        <p>But hang on, how do we write a formula for "find the coefficient from Pascal's Triangle" ... ?</p>
+                        <p>Well, there is such a formula:</p>
+                        <div class="equation">$$\binom{n}{k}=\frac{n!}{k!(n-k)!}$$</div>
+                        <p>It is commonly called " n choose k " because it is how many ways to choose k elements from a set of n.</p>
+                        <p>The "!" means "factorial", for example <span class="math-inline">$4!=4 \times 3 \times 2 \times 1=24$</span></p>
+                        <p>And it matches to Pascal's Triangle like this:</p>
+                        <!-- MMD formatting is messy, representing structure -->
+                        <pre class="code-block"><code>      (n=0)       (0 0)
+      (n=1)     (1 0) (1 1)
+      (n=2)   (2 0) (2 1) (2 2)
+      (n=3) (3 0) (3 1) (3 2) (3 3)
+      (n=4)(4 0) (4 1) (4 2) (4 3) (4 4)</code></pre>
+                        <p>(Note how the top row is row zero and also the leftmost column is zero!)</p>
+                        <p>Example: Row 4, term 2 in Pascal's Triangle is "6".</p>
+                        <p>Let's see if the formula works:</p>
+                        <div class="equation">$$\binom{4}{2}=\frac{4!}{2!(4-2)!}=\frac{4!}{2!2!}=\frac{4 \cdot 3 \cdot 2 \cdot 1}{2 \cdot 1 \cdot 2 \cdot 1}=6$$</div>
+                        <p>Yes, it works! Try another value for yourself.</p>
+                        <h3 class="subsection-heading">Putting It All Together</h3>
+                        <p>The last step is to put all the terms together into one formula.</p>
+                        <p>But we are adding lots of terms together ... can that be done using one formula?</p>
+                        <p>Yes! The handy Sigma Notation allows us to sum up as many terms as we want:</p>
+                        <img src="../assets/images/chapter-4-sigma-notation.jpg" alt="Explanation of Sigma notation for summation" class="content-image">
+                        <p>Sigma Notation</p>
+                        <p>Now it can all go into one formula:</p>
+                        <div class="equation">$$(a+b)^{n}=\sum_{k=0}^{n}\binom{n}{k} a^{n-k} b^{k}$$</div>
+                        <p>The Binomial Theorem</p>
+                        <h3 class="subsection-heading">Use It</h3>
+                        <p>OK ... it won't make much sense without an example.</p>
+                        <p>So let's try using it for <span class="math-inline">$n=3$</span> :</p>
+                        <div class="equation">$$\begin{aligned} (a+b)^{3} & =\sum_{k=0}^{3}\binom{3}{k} a^{3-k} b^{k} \\ & =\binom{3}{0} a^{3-0} b^{0}+\binom{3}{1} a^{3-1} b^{1}+\binom{3}{2} a^{3-2} b^{2}+\binom{3}{3} a^{3-3} b^{3} \\ & =1 \cdot a^{3} b^{0}+3 \cdot a^{2} b^{1}+3 \cdot a^{1} b^{2}+1 \cdot a^{0} b^{3} \\ & =a^{3}+3 a^{2} b+3 a b^{2}+b^{3} \end{aligned}$$</div>
+                        <p>BUT ... it is usually much easier just to remember the patterns:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The first term's exponents start at <span class="math-inline">$\mathbf{n}$</span> and go down</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The second term's exponents start at <span class="math-inline">$\mathbf{0}$</span> and go up</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Coefficients are from Pascal's Triangle, or by calculation using <span class="math-inline">$n!/(k!(n-k)!)$</span></span></li>
+                        </ul>
+                        <p>Like this:</p>
+                        <p>Example: What is <span class="math-inline">$(y+5)^{4}$</span></p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <tbody>
+                               <tr><td>Start with exponents:</td><td><span class="math-inline">$y^{4} 5^{0}$</span></td><td><span class="math-inline">$y^{3} 5^{1}$</span></td><td><span class="math-inline">$y^{2} 5^{2}$</span></td><td><span class="math-inline">$y^{1} 5^{3}$</span></td><td><span class="math-inline">$y^{0} 5^{4}$</span></td></tr>
+                               <tr><td>Include Coefficients:</td><td><span class="math-inline">$\mathbf{1y} \mathbf{y}^{4} 5^{0}$</span></td><td><span class="math-inline">$\mathbf{4y} \mathbf{y}^{3} 5^{1}$</span></td><td><span class="math-inline">$\mathbf{6y} \mathbf{y}^{2} 5^{2}$</span></td><td><span class="math-inline">$\mathbf{4y} \mathbf{y}^{1} 5^{3}$</span></td><td><span class="math-inline">$\mathbf{1y}{ }^{0} 5^{4}$</span></td></tr>
+                             </tbody>
+                           </table>
+                        </div>
+                        <p>Then write down the answer (including all calculations, such as <span class="math-inline">$4 \times 5, 6 \times 5^{2}$</span>, etc):</p>
+                        <div class="equation">$$(y+5)^{4}=y^{4}+20 y^{3}+150 y^{2}+500 y+625$$</div>
+                        <p>We may also want to calculate just one term:</p>
+                        <p>Example: What is the coefficient for <span class="math-inline">$x^{3}$</span> in <span class="math-inline">$(2 x+4)^{8}$</span></p>
+                        <p>The general term is <span class="math-inline">$\binom{n}{k} a^{n-k} b^{k}$</span></p> <!-- Added general term -->
+                        <p>Here <span class="math-inline">$n=8, a=2x, b=4$</span>. We want the term where the power of <span class="math-inline">$x$</span> is 3. This means <span class="math-inline">$(2x)^{n-k}$</span> must have <span class="math-inline">$x^3$</span>, so <span class="math-inline">$n-k=3$</span>.</p>
+                        <p>Since <span class="math-inline">$n=8$</span>, we have <span class="math-inline">$8-k=3$</span>, which means <span class="math-inline">$k=5$</span>.</p>
+                        <p>The term is <span class="math-inline">$\binom{8}{5} (2x)^{8-5} (4)^{5}$</span></p>
+                        <p>The coefficient is <span class="math-inline">$\binom{8}{5}$</span>. We can use Pascal's Triangle, or calculate directly:</p>
+                        <div class="equation">$$\frac{n!}{k!(n-k)!}=\frac{8!}{5!(8-5)!}=\frac{8!}{5!3!}=\frac{8 \times 7 \times 6}{3 \times 2 \times 1}=56$$</div>
+                        <p>And we get:</p>
+                        <div class="equation">$$56(2 x)^{3} 4^{5}$$</div>
+                        <p>Which simplifies to:</p>
+                        <p><span class="math-inline">$56 \times (8x^3) \times 1024 = 56 \times 8 \times 1024 \times x^3 = 458752 x^{3}$</span></p>
+                        <p>A large coefficient, isn't it?</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-binomial-formula -->
+
+                <!-- START: chapter-4-binomial-geometry -->
+                <section id="chapter-4-binomial-geometry" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📐</span>
+                        <span class="heading-text">Geometry (Binomial Theorem)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Want to see the Binomial Theorem using Geometry?</p>
+                        <p>In 2 dimensions, <span class="math-inline">$(\mathbf{a}+\mathbf{b})^{\mathbf{2}}=\mathbf{a}^{\mathbf{2}}+\mathbf{2 a b}+\mathbf{b}^{\mathbf{2}}$</span></p>
+                        <img src="../assets/images/chapter-4-binomial-geo-2d.jpg" alt="Geometric representation of (a+b)^2 as areas of squares and rectangles" class="content-image">
+                        <p>In 3 dimensions, <span class="math-inline">$(\mathbf{a}+\mathbf{b})^{\mathbf{3}}=\mathbf{a}^{\mathbf{3}}+\mathbf{3} \mathbf{a}^{\mathbf{2}} \mathbf{b}+\mathbf{3} \mathbf{a b}^{\mathbf{2}}+\mathbf{b}^{\mathbf{3}}$</span></p>
+                        <img src="../assets/images/chapter-4-binomial-geo-3d.jpg" alt="Geometric representation of (a+b)^3 as volumes of cubes and cuboids" class="content-image">
+                        <div class="equation">$$(a+b)^{3}=a^{3}+3 a^{2} b+3 a b^{2}+b^{3}$$</div>
+                        <p>In 4 dimensions, <span class="math-inline">$(\mathbf{a}+\mathbf{b})^{4}=\mathbf{a}^{\mathbf{4}}+\mathbf{4} \mathbf{a}^{\mathbf{3}} \mathbf{b}+\mathbf{6a}^{\mathbf{2}} \mathbf{b}^{\mathbf{2}}+\mathbf{4 a b} \mathbf{b}^{\mathbf{3}}+\mathbf{b}^{4}$</span></p>
+                        <p>(Sorry, I am not good at drawing in 4 dimensions!)</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-binomial-geometry -->
+
+                <!-- START: chapter-4-binomial-advanced-example -->
+                <section id="chapter-4-binomial-advanced-example" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✨</span>
+                        <span class="heading-text">Advanced Example (Binomial Theorem)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>And one last, most amazing example:</p>
+                        <h3 class="subsection-heading">Example: A formula for e (Euler's Number)</h3>
+                        <p>We can use the Binomial Theorem to calculate e (Euler's number).</p>
+                        <p><span class="math-inline">$\mathrm{e}=\mathbf{2 . 7 1 8 2 8 1 8 2 8 4 5 9 0 4 5} \ldots$</span> (the digits go on forever without repeating)</p>
+                        <p>It can be calculated using:</p>
+                        <div class="equation">$$(1+1 / n)^{n}$$</div>
+                        <p>(It gets more accurate the higher the value of <span class="math-inline">$\mathbf{n}$</span> )</p>
+                        <p>That formula is a binomial, right? So let's use the Binomial Theorem:</p>
+                        <div class="equation">$$\left(1+\frac{1}{n}\right)^{n}=\sum_{k=0}^{n}\binom{n}{k} 1^{n-k}\left(\frac{1}{n}\right)^{k}$$</div>
+                        <p>First, we can drop <span class="math-inline">$1^{\mathrm{n}-\mathrm{k}}$</span> as it is always equal to 1 :</p>
+                        <div class="equation">$$=\sum_{k=0}^{n}\binom{n}{k}\left(\frac{1}{n}\right)^{k}$$</div>
+                        <p>And, quite magically, most of what is left goes to <span class="math-inline">$\mathbf{1}$</span> as n goes to infinity:</p>
+                        <img src="../assets/images/chapter-4-binomial-e-formula.jpg" alt="Derivation showing the limit of the binomial expansion for (1+1/n)^n approaches the series for e" class="content-image">
+                        <p>Which just leaves:</p>
+                        <div class="equation">$$\begin{aligned} \sum_{k=0}^{\infty} \frac{1}{k!} & =\frac{1}{0!}+\frac{1}{1!}+\frac{1}{2!}+\frac{1}{3!}+\frac{1}{4!}+\ldots \\ & =1+1+\frac{1}{2}+\frac{1}{6}+\frac{1}{24}+\ldots \end{aligned}$$</div>
+                        <p>With just those first few terms we get <span class="math-inline">$\mathrm{e} \approx 2.7083$...</span></p>
+                        <p>Try calculating more terms for a better approximation!</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-binomial-advanced-example -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-4-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 4 Part 2 of 3</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-4-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

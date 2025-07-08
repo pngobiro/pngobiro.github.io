@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Error Handling & Debugging (Part 3)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-6-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 6 (Part 3)</span>
+                    </div>
+                    <a href="chapter-7-part-1.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 6: Error Handling & Debugging (Part 3)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-6-part-3 -->
+                <section id="chapter-6-debugging-tools" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔍</span>
+                        <span class="heading-text">Debugging & Debugging tools</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Errors in a program's logic often do not prevent it from running, but may cause unexpected results. Visual Basic provides debugging tools to help the programmer track down such errors. The programmer's interface to the debugging tools is via three debug windows:</p>
+                        <ol>
+                            <li>the Immediate Window</li>
+                            <li>the Locals Window</li>
+                            <li>the Watch Window</li>
+                        </ol>
+                        <p>These windows can be accessed from the View menu or using the Debug Toolbar (accessed using the Toolbars option in the View menu). Debugging is carried out when the application is in break mode. Break mode is entered by setting breakpoints, pressing Ctrl+Break, or when the program encounters an untrapped error or a Stop statement. In this mode, the debug windows and other tools can be used to:</p>
+                        <ol>
+                            <li>determine the value of variables</li>
+                            <li>set breakpoints</li>
+                            <li>set watch variables and expressions</li>
+                            <li>manually control the application</li>
+                            <li>determine which procedures have been called</li>
+                            <li>change the values of variables and properties</li>
+                        </ol>
+                        <p>The debugging tools available in Visual Basic include breakpoints, watch points, calls, step into, step over, and step out.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-debug-example" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧑‍💻</span>
+                        <span class="heading-text">Debugging Example</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This example is simply a form with a single command button that will be used to demonstrate the use of the debugging tools. The code attached to the button's Click event is a simple loop that repeatedly calls a function.</p>
+                        <figure>
+                            <img src="../assets/images/chapter-6-debug-example.jpg" alt="Screenshot of Visual Basic form with debugging example" class="content-image">
+                            <figcaption>Debugging Example Form</figcaption>
+                        </figure>
+                        <p>Enter the following code in the form's code window:</p>
+                        <pre><code class="language-vb">Private Sub cmdClickMe_Click()
+    Dim X As Integer, Y As Integer
+    X = 0
+    Do
+        Y = Fcn(X)
+        X = X + 1
+    Loop While X <= 20
+End Sub
+Function Fcn(X As Integer) As Integer
+    Fcn = CInt(0.1 * X ^ 2)
+End Function
+</code></pre>
+                        <p>This program passes <span class="math-inline">$X$</span>, which has an initial value of 0, to the function <code>Fcn</code>, which then computes a value for Y. Each iteration of the loop increases X by 1 until the value of X exceeds 20. Although the program does not actually do a lot, it is useful for demonstrating the debugging facilities in Visual Basic.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-debug-print" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🖨️</span>
+                        <span class="heading-text">Using Debug.Print</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The simplest debugging method is to use a Debug.Print statement to print the value of a procedure's variables to the immediate window while an application is running. To demonstrate the use of this technique, amend the code for the cmdClickMe_Click() procedure as shown below, and run the application.</p>
+                        <pre><code class="language-vb">Private Sub cmdClickMe_Click()
+    Dim X As Integer, Y As Integer
+    X = 0
+    Do
+        Y = Fcn(X)
+        Debug.Print X; Y
+        X = X + 1
+    Loop While X <= 20
+End Sub
+</code></pre>
+                        <p>An examination of the immediate window will reveal that value of X and Y has been printed for each iteration of the loop. This information can be used to ensure that the values of these variables are correct. Once you have seen the Debug.Print statement in action, remove it from the code.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-breakpoints" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⛔</span>
+                        <span class="heading-text">Using a Breakpoint</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The above example allowed the procedure to run to completion before displaying the value of variables in the immediate window. Sometimes it is useful to be able to stop a procedure during execution, examine the value of the procedure variables, and then resume execution. This can be done with breakpoints. A breakpoint is a line in the code that causes a break in program execution.</p>
+                        <p>To set a breakpoint, position the cursor in the line of code where you want the program to break, and either press the F9 key, or click the Breakpoint button on the Debug toolbar or select Toggle Breakpoint from the Debug menu. The selected line will be highlighted. When the program runs, execution will halt on lines with breakpoints to allow you to check the value of variables and expressions in the immediate window. Program execution can be resumed by pressing the F5 key, or clicking on the Run button on the toolbar. All breakpoints can be cleared by selecting Clear All Breakpoints from the Debug menu. Individual breakpoints can be toggled using Toggle Breakpoint.</p>
+                        <p>To demonstrate the use of breakpoints, set a breakpoint on the <code>X = X + 1</code> line in the program, and run it. When the program stops, display the immediate window and type the following line of code:</p>
+                        <pre><code class="language-vb">Print X; Y</code></pre>
+                        <p>The values of these variables will appear in the debug window. Now restart the application, and print the new variable values.</p>
+                        <p>The locals window shows the value of the variables used by the current procedure. As execution moves from one procedure to another, the contents of the locals window will change accordingly. Repeat the breakpoint example, and this time note that the values of X and Y also appear in the locals window.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-watch-expressions" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">👀</span>
+                        <span class="heading-text">Using Watch Expressions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The Add Watch option in the Debug menu lets you set up watch expressions for your program. The watch expressions can be the values of variables, or logical expressions. The values of watch expressions are displayed in the watch window. Watch expressions can be edited using the Edit Watch option in the Debug menu.</p>
+                        <p>To demonstrate the use of a watch expression, set a breakpoint on the <code>X = X + 1</code> line in the program, set a watch expression for the variable X, and run the program. You will see that X appears in the watch window, and will have a new value each time the program is restarted.</p>
+                        <p>Now, clear the breakpoint, add a watch on the expression <code>X = Y</code>, and set the Watch Type to Break When Value Is True. Now run the application, and note that it goes into break mode and displays the watch window whenever <code>X = Y</code>.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-call-stack" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📚</span>
+                        <span class="heading-text">Using Call Stack</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Selecting the Call Stack button from the toolbar (or from the View menu) will display all currently active procedures. Call stack can be useful when dealing with situations involving nested procedures, and can give you an indication of where you are in the program.</p>
+                        <p>To demonstrate the use of Call Stack, set a breakpoint on the <code>Fcn = CInt(0.1 * X ^ 2)</code> line and run the application, which will break at this line. Press the Call Stack button. It will tell you that you are currently in the Fcn procedure, which was called from the cmdClickMe_Click() procedure.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-step-into" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">👣</span>
+                        <span class="heading-text">Using Step Into</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>When the program is at a breakpoint you can continue program execution one line at a time by pressing F8 or by selecting Step Into from the Debug menu. This will allow you to watch how variables change (in the locals window), or how the form changes as you step through the program. You can also execute several lines at a time by clicking on a line below the current line and pressing Ctrl+F8, or by selecting Run To Cursor from the Debug menu.</p>
+                        <p>To demonstrate this technique, set a breakpoint on the Do line in the program code and run the application. When the program breaks, use the F8 key to single step through the program. You can also try using the Run To Cursor option described above.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-6-step-over-out" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⏩</span>
+                        <span class="heading-text">Using Step Over and Step Out</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>When stepping through a program, you probably won't want to step through procedures that you already know function properly. The Step Over facility executes all the steps in a procedure together, rather than one step at a time. To step over a procedure in this manner, select Step Over from the Debug menu, or press Shift+F8.</p>
+                        <p>To demonstrate the use of Step Over, single step through the program once and note what happens. Then single step through the program again until you are on the line that calls the Fcn function, and press Shift+F8. Note that the program did not single step through the function as it did the first time round.</p>
+                        <p>If you are currently stepping through a procedure and wish to execute the remainder of the procedure immediately, select Step Out from the Debug menu, or press Ctrl+Shift+F8.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-6-part-3 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-6-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 6 (Part 3)</span>
+                    </div>
+                    <a href="chapter-7-part-1.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

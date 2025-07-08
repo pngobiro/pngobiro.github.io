@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Logic Gates and Boolean Algebra - Part 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-3-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 3 Part 2 of 7</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-3-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 3: LOGIC GATES AND BOOLEAN ALGEBRA (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-3-subset -->
+                <section id="chapter-3-subset" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⊆</span>
+                        <span class="heading-text">Subset</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Consider the sets, <span class="math-inline">$\mathrm{X}=$</span> set of all students in your school and <span class="math-inline">$\mathrm{Y}=$</span> set of all students in your class. It is obvious that set of all students in your class will be in your school. So, every element of Y is also an element of X . We say that Y is a subset of X . The fact that Y is a subset of X is expressed in symbol as <span class="math-inline">$Y \subset X$</span>. The symbol <span class="math-inline">$\subset$</span> stands for "is a subset of" or "is contained in".If Y is a subset of X, then X is known to be a superset of Y . The subset of a set will have elements equal to or less than the elements in the given set.</p>
+                        <h3 class="subsection-heading">Subset Definition</h3>
+                        <p>A set A is said to be a subset of a set B, if every element of A is also an element of B. In other words, <span class="math-inline">$A \subset B$</span> if whenever <span class="math-inline">$a \in A$</span>, then <span class="math-inline">$a \in B$</span>. It is often convenient to use the symbol <span class="math-inline">$\Rightarrow$</span> which means "implies". Suppose, for two sets <span class="math-inline">$\dot{A}$</span> and <span class="math-inline">$B, A=\{1,2,3\}$</span> and <span class="math-inline">$B=\{1\}$</span> then <span class="math-inline">$B$</span> is the subset of A.</p> <!-- Typo in MMD: \dot{A} -->
+                        <h3 class="subsection-heading">Subset Symbol:</h3>
+                        <p>Using the symbol <span class="math-inline">$\Rightarrow$</span>, we can write the definition of subset as follows:</p>
+                        <!-- Definition missing in MMD -->
+                        <p>We read it as " <span class="math-inline">$A$</span> is a subset of <span class="math-inline">$B$</span> if <span class="math-inline">$a$</span> is an element of <span class="math-inline">$A$</span>, which implies that a is also an element of <span class="math-inline">$B$</span> ". If <span class="math-inline">$A$</span> is not a subset of <span class="math-inline">$B$</span>, we write <span class="math-inline">$A \not\subset B$</span>. If <span class="math-inline">$A=\{1,2,3,4,5,6\}$</span> and <span class="math-inline">$B=\{4,5,6\}$</span>, then we can draw a Venn diagram for this as follows:</p> <!-- Corrected symbol -->
+                        <img src="../assets/images/chapter-3-subset-venn.jpg" alt="Venn diagram showing set B as a subset of set A" class="content-image">
+                        <p><span class="math-inline">$B$</span> is subset of <span class="math-inline">$A$</span></p>
+                    </div>
+                </section>
+                <!-- END: chapter-3-subset -->
+
+                <!-- START: chapter-3-set-operations -->
+                <section id="chapter-3-set-operations" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚙️</span>
+                        <span class="heading-text">Operation of a Set</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Union of Sets</h3>
+                        <p>Set is an important part of the mathematics. It is applied in almost many branch of mathematics. Set is the relation of some givenn data. There are many functions of set like union, intersection. Here, we will discuss about union of sets.</p>
+                        <p>We denote the union of <span class="math-inline">$A$</span> and <span class="math-inline">$B$</span> by <span class="math-inline">$A \cup B$</span>. Thus, <span class="math-inline">$A \cup B = \{x \mid x \in A \text{ or } x \in B \text{ or } x \in A \text{ and } B\}$</span>. We write <span class="math-inline">$A \cup B = \{x \mid x \in A \text{ or } x \in B\}$</span> where, it is unnderstood that the word 'or' is used in the inclusive sense. That is, <span class="math-inline">$x \in A$</span> or <span class="math-inline">$x \in B$</span> stands for <span class="math-inline">$x \in A$</span> or <span class="math-inline">$x \in B$</span> or <span class="math-inline">$x \in A$</span> and <span class="math-inline">$B$</span>.</p>
+                        <img src="../assets/images/chapter-3-union-symbol.jpg" alt="Venn diagram illustrating the union of sets A and B" class="content-image">
+                        <h4 class="subsection-heading">Union of Two Sets</h4>
+                        <p>Let we have two sets A and B, thhen the union of these two sets is the set of all elements of each sets i.e. the set of those elements which are in either sets.</p>
+                        <p>If <span class="math-inline">$\mathrm{A}=\{1,2,3,4\}$</span> and <span class="math-inline">$\mathrm{B}=\{3,4,5,6,7\}$</span> then <span class="math-inline">$A \cup B=\{1,2,3,4,5,6,7\}$</span>.</p> <!-- Corrected typo 66 -->
+                        <p>With the help of Venn diagram, we can prove it.</p>
+                        <img src="../assets/images/chapter-3-union-two-sets-venn.jpg" alt="Venn diagram showing the union of sets A={1,2,3,4} and B={3,4,5,6,7}" class="content-image">
+                        <h4 class="subsection-heading">Union of Countable Sets</h4>
+                        <p>A set of natural numbers which is a subset of a set with the same number of elements is called the countable set. The union of two countable sets is again a countable set. Let X and Y be two countable sets then <span class="math-inline">$\mathrm{X} \cup \mathrm{Y}$</span> is countable. Clearly, if <span class="math-inline">$\mathrm{X} \cup \mathrm{Y}$</span> is countable, then X and Y are each countable, as they are subsets of a countable set.</p>
+                        <p>Conversely, let us suppose that we have two countable sets X and Y . And, we can define two surjection functions <span class="math-inline">$f: N \rightarrow X$</span> and <span class="math-inline">$g: N \rightarrow Y$</span>. Let <span class="math-inline">$Z=X \cup Y$</span>. Then, we can define <span class="math-inline">$h: N \rightarrow Z$</span> in a way that <span class="math-inline">$\mathrm{h}(2 \mathrm{n}+1)=\mathrm{f}(\mathrm{n})$</span> for <span class="math-inline">$n=0,1, \ldots$</span> and <span class="math-inline">$\mathrm{h}(2 \mathrm{n})=\mathrm{g}(\mathrm{n}), \mathrm{n}=1,2, \ldots$</span> Then, h is well defined function for every value of <span class="math-inline">$i \in N$</span> is either odd or even, so <span class="math-inline">$h(i)$</span> is defined. Since <span class="math-inline">$h$</span> is onto function for any <span class="math-inline">$z \in Z$</span>, then <span class="math-inline">$z \in X$</span> or <span class="math-inline">$z \in Y$</span>. If <span class="math-inline">$z \in X$</span>, then <span class="math-inline">$h(2 q+1)=z$</span> for some value of <span class="math-inline">$q$</span> and if <span class="math-inline">$\mathrm{z} \in \mathrm{Y}$</span> then <span class="math-inline">$\mathrm{h}(2 \mathrm{p})=\mathrm{z}$</span> for some value of <span class="math-inline">$p$</span> . Hence, Z is countable. So, we can say that the union of two countable sets is again a countable set.</p>
+                        <h4 class="subsection-heading">Union of Three Sets</h4>
+                        <p>If we have three sets say <span class="math-inline">$A, B$</span> and <span class="math-inline">$C$</span>, then the union of these three sets is the set that contains all the elements or all contains that belongs to either A or B or C or to all three sets.</p>
+                        <p><span class="math-inline">$\mathrm{A}=\{1,2,3,4\}, \mathrm{B}=\{2,3,5,6\}$</span> and <span class="math-inline">$\mathrm{C}=\{2,4,5,7\}$</span>. Then, <span class="math-inline">$A \cup B \cup C=\{1,2,3,4,5,6,7\}$</span></p>
+                        <p>We can show it in the Venn diagram as follows:</p>
+                        <img src="../assets/images/chapter-3-union-three-sets-venn.jpg" alt="Venn diagram showing the union of three sets A, B, and C" class="content-image">
+                        <h4 class="subsection-heading">Union of Sets Examples</h4>
+                        <p>Given below are some of the examples on union of sets.</p>
+                        <h5 class="subsection-heading">Solved Examples</h5> <!-- Using h5 for examples within examples -->
+                        <p>Question 1: Find the union of each of the following two sets:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><span class="math-inline">$\mathrm{X}=\{1,3,6\} \mathrm{Y}=\{1,2,6\}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><span class="math-inline">$X=\{a, e, i, o, u\} Y=\{a, e, c\}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><span class="math-inline">$\mathrm{X}=\{3,4,5\} \mathrm{B}=\varphi$</span></span></li>
+                        </ol>
+                        <p>Solution:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><span class="math-inline">$X \cup Y=\{1,2,3,6\}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><span class="math-inline">$X \cup Y=\{\mathrm{a}, \mathrm{c}, \mathrm{e}, \mathrm{i}, \mathrm{o}, \mathrm{u}\}$</span></span></li> <!-- Corrected typo 'p' -->
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><span class="math-inline">$X \cup Y=\{3,4,5\}$</span></span></li> <!-- Assuming Y=B -->
+                        </ol>
+                        <p>Question 2:</p>
+                        <p>If <span class="math-inline">$\mathrm{X}=\{1,2,5,6\}, \mathrm{Y}=\{3,4,6,9\}, \mathrm{Z}=\{3,5,6,9\}$</span> and <span class="math-inline">$\mathrm{W}=\{3,6,9,11\}$</span>. Find</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><span class="math-inline">$X \cup Y$</span></span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><span class="math-inline">$X \cup Z$</span></span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><span class="math-inline">$Y \cup Z$</span></span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text"><span class="math-inline">$Y \cup W$</span></span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text"><span class="math-inline">$X \cup Y \cup Z$</span></span></li>
+                            <li class="list-item"><span class="item-icon">6.</span><span class="item-text"><span class="math-inline">$X \cup Y \cup W$</span></span></li>
+                            <li class="list-item"><span class="item-icon">7.</span><span class="item-text"><span class="math-inline">$Y \cup Z \cup W$</span></span></li>
+                        </ol>
+                        <p>Solution:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><span class="math-inline">$X \cup Y=\{1,2,3,4,5,6,9\}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><span class="math-inline">$X \cup Z=\{1,2,3,5,6,9\}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><span class="math-inline">$Y \cup Z=\{3,4,5,6,9\}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text"><span class="math-inline">$Y \cup W=\{3,4,6,9,11\}$</span></span></li> <!-- Corrected result -->
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text"><span class="math-inline">$X \cup Y \cup Z=\{1,2,3,4,5,6,9\}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">6.</span><span class="item-text"><span class="math-inline">$X \cup Y \cup W=\{1,2,3,4,5,6,9,11\}$</span></span></li> <!-- Corrected result -->
+                            <li class="list-item"><span class="item-icon">7.</span><span class="item-text"><span class="math-inline">$Y \cup Z \cup W=\{3,4,5,6,9,11\}$</span></span></li>
+                        </ol>
+                        <h4 class="subsection-heading">Find the Union of the Sets</h4>
+                        <p>Here, we will learn how to find the union of the sets with the help of the following examples.</p>
+                        <h5 class="subsection-heading">Solved Examples</h5>
+                        <p>Question 1:</p>
+                        <p>Two sets are given.</p>
+                        <p><span class="math-inline">$A=\{5,12,13,16,19\}$</span></p>
+                        <p><span class="math-inline">$B=\{5,10,13,16,19\}$</span></p>
+                        <p>Find <span class="math-inline">$A \cup B$</span></p>
+                        <p>Solution:</p>
+                        <p>Given sets are:</p>
+                        <p><span class="math-inline">$A=\{5,12,13,16,19\}$</span></p>
+                        <p><span class="math-inline">$B=\{5,10,13,16,19\}$</span></p>
+                        <p><span class="math-inline">$A \cup B=\{5,10,12,13,16,19\}$</span></p>
+                        <p>Here, common elements in A, B are 5,13,16,19</p>
+                        <p>So, it is taken only one times.</p>
+                        <p>Question 2:</p>
+                        <p>Find <span class="math-inline">$X \cup Y$</span> for the following set.</p>
+                        <p><span class="math-inline">$X=\{4,6,8,9,11\}$</span></p>
+                        <p><span class="math-inline">$\mathrm{Y}=\{3,5,6,8,11\}$</span></p>
+                        <p>Solution:</p>
+                        <p>Given sets are</p>
+                        <p><span class="math-inline">$X=\{4,6,8,9,11\}$</span></p>
+                        <p><span class="math-inline">$\mathrm{Y}=\{3,5,6,8,11\}$</span></p>
+                        <p>So, <span class="math-inline">$X \cup Y=\{3,4,5,6,8,9,11\}$</span></p>
+                        <p>Here, common element is taken only one time.</p>
+
+                        <h3 class="subsection-heading">Intersection of Sets</h3>
+                        <p>Intersection is an operation on sets. It is just opposite to union. It is a very useful and important concept in set theory. Before we learn about intersection, we need to understand some basic concept like what is set.</p>
+                        <p>A set is a well-defined collection of data. It's data is known as it's members or elements. We represent the set by capital letters A, B, C, X, Y, Z, etc. We use the concept of set in daily life. For example, a team has five members. So, this is a set.</p>
+                        <h4 class="subsection-heading">Find the Intersection of the Sets</h4>
+                        <p>For finding the intersection of two sets, we usually select those elements which are common in both the sets. If there are three sets, then we select those elements which are common in all three sets. Hence, if there are n number of sets, then we select only those elements which are common in all the n sets. In this way, we find the intersection of sets</p>
+                        <p>Intersecting Set: Two sets A and B are said to be intersecting if A <span class="math-inline">$\cap$</span> B <span class="math-inline">$\neq \phi$</span></p> <!-- Corrected symbols -->
+                        <p>Disjoint set: Two sets A and B are said to be disjoint if A <span class="math-inline">$\cap$</span> B = <span class="math-inline">$\phi$</span></p> <!-- Corrected symbols -->
+                        <h5 class="subsection-heading">Solved Examples</h5>
+                        <p>Question 1:</p>
+                        <p>If <span class="math-inline">$A=\{1,3,4,6,9\}$</span> and <span class="math-inline">$B=\{2,4,6,8\}$</span>, find <span class="math-inline">$A \cap B$</span>. What do you conclude?</p>
+                        <p>Solution:</p>
+                        <p>We have given that <span class="math-inline">$\mathrm{A}=\{1,3,4,6,9\}$</span> and <span class="math-inline">$\mathrm{B}=\{2,4,6,8\}$</span></p>
+                        <p>We have to find the intersection of A and B.</p>
+                        <p>So, <span class="math-inline">$\mathrm{A} \cap \mathrm{B}=\{1,3,4,6,9\} \cap\{2,4,6,8\}$</span></p>
+                        <p><span class="math-inline">$A \cap B=\{4,6\}$</span></p>
+                        <p>Question 2:</p>
+                        <p>If <span class="math-inline">$A=\{1,3,5,7,9\}$</span> and <span class="math-inline">$B=\{2,4,6,8\}$</span>, find <span class="math-inline">$A \cap B$</span>. What do you conclude?</p>
+                        <p>Solution:</p>
+                        <p>We have <span class="math-inline">$\mathrm{A} \cap \mathrm{B}=\{1,3,5,7,9\} \cap \{2,4,6,8\}=\phi$</span></p> <!-- Corrected symbol -->
+                        <p>If no data match in both the sets, both the sets are known as disjoint sets. Thus, A and B are disjoint sets.</p>
+                        <p>Question 3:</p>
+                        <p>If <span class="math-inline">$\mathrm{A}=\{1,2,3,4,5,6,7\}, \mathrm{B}=\{2,4,6,8,10\}$</span> and <span class="math-inline">$\mathrm{C}=\{4,6,7,8,9,10,11\}$</span>, then find <span class="math-inline">$\mathrm{A} \cap B$</span> and <span class="math-inline">$A \cap B \cap C$</span>.</p>
+                        <p>Solution:</p>
+                        <p>Given sets are</p>
+                        <p><span class="math-inline">$\mathrm{A}=\{1,2,3,4,5,6,7\}$</span></p>
+                        <p><span class="math-inline">$B=\{2,4,6,8,10\}$</span></p>
+                        <p><span class="math-inline">$C=\{4,6,7,8,9,10,11\}$</span></p>
+                        <p>First, we have to find <span class="math-inline">$A \cap B$</span>. Then, we have to treat <span class="math-inline">$A \cap B$</span> as a single set. For <span class="math-inline">$\mathrm{A} \cap \mathrm{B}$</span>, we select those elements which are common in sets A and B. So, <span class="math-inline">$\mathrm{A} \cap \mathrm{B}=\{2,4,6\}$</span></p>
+                        <p>For <span class="math-inline">$(A \cap B) \cap C$</span>, we select those elements which are common in sets <span class="math-inline">$A \cap B$</span> and <span class="math-inline">$C$</span>.</p>
+                        <p>So, <span class="math-inline">$(A \cap B) \cap C=\{4,6\}$</span></p>
+                        <p>So, <span class="math-inline">$A \cap B \cap C=\{4,6\}$</span></p>
+                        <p>Question 4:</p>
+                        <p>If <span class="math-inline">$A=\{1,3,5,7,9\}, B=\{2,4,6,8\}$</span> and <span class="math-inline">$C=\{2,3,5,7,11\}$</span>, find <span class="math-inline">$(A \cap B)$</span> and <span class="math-inline">$(A \cap C)$</span> What do you conclude?</p>
+                        <p>Solution:</p>
+                        <p>We have given that</p>
+                        <p><span class="math-inline">$\mathrm{A}=\{1,3,5,7,9\}$</span></p>
+                        <p><span class="math-inline">$B=\{2,4,6,8\}$</span></p>
+                        <p><span class="math-inline">$C=\{2,3,5,7,11\}$</span></p>
+                        <p><span class="math-inline">$\mathrm{A} \cap \mathrm{B}=\{1,3,5,7,9\} \cap\{2,4,6,8\}=\phi$</span></p> <!-- Corrected symbol -->
+                        <p>Thus, A and B are disjoint sets</p>
+                        <p><span class="math-inline">$\mathrm{A} \cap \mathrm{C}=\{1,3,5,7,9\} \cap\{2,3,5,7,11\}=\{3,5,7\}$</span></p>
+                        <p>Thus, A and B are disjoint sets while A and C are intersecting sets.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-3-set-operations -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-3-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 3 Part 2 of 7</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-3-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

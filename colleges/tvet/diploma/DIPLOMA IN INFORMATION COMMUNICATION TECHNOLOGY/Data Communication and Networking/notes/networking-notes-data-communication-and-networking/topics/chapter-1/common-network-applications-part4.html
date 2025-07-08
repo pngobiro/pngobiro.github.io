@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Network Applications (Part 4: Web Mail, FTP, HTTP) - Networking Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <article class="document-content-wrapper">
+            <!-- Navigation (Top) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="common-network-applications-part3.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Applications (Part 3)</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 16 (Part 4)</span>
+                    </div>
+                    <!-- No next link as this is the last part of the chapter/section -->
+                     <span class="nav-button disabled">Next →</span>
+                </div>
+                <div class="breadcrumbs">
+                    <a href="../../index.html">Home</a> > Common Network Applications (Part 4)
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="page-title">Common Network Applications (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- Web-Based Mail -->
+                <section class="content-section" id="web-mail">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🌐</span>
+                        <span class="heading-text">6. Web-Based Mail</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>E-mail is such a common application that some websites today provide this service to anyone who accesses the site. Two common sites are Hotmail and Yahoo. The idea is very simple. Mail transfer from Alice's browser to her mail server is done through HTTP. The transfer of the message from the sending mail server to the receiving mail server is still through SMTP. Finally, the message from the receiving server (the Web server) to Bob's browser is done through HTTP.</p>
+                        <p>The last phase is very interesting. Instead of POP3 or IMAP4, HTTP is normally used. When Bob needs to retrieve his e-mails, he sends a message to the website (Hotmail, for example). The website sends a form to be filled in by Bob, which includes the log-in name and the password. If the log-in name and password match, the e-mail is transferred from the Web server to Bob's browser in HTML format.</p>
+                    </div>
+                </section>
+
+                <!-- FTP -->
+                <section class="content-section" id="ftp">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📁</span>
+                        <span class="heading-text">7. FTP (File Transfer Protocol)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>File Transfer Protocol (FTP) is the standard mechanism provided by TCP/IP for copying a file from one host to another. Although transferring files from one system to another seems simple and straightforward, some problems must be dealt with first. For example, two systems may use different file name conventions. Two systems may have different ways to represent text and data. Two systems may have different directory structures. All these problems have been solved by FTP in a very simple and elegant approach.</p>
+                        <p>FTP differs from other client/server applications in that it establishes two connections between the hosts. One connection is used for data transfer, the other for control information (commands and responses). Separation of commands and data transfer makes FTP more efficient. The control connection uses very simple rules of communication. We need to transfer only a line of command or a line of response at a time. The data connection, on the other hand, needs more complex rules due to the variety of data types transferred. However, the difference in complexity is at the FTP level, not TCP. For TCP, both connections are treated the same. FTP uses two well-known TCP ports: Port 21 is used for the control connection, and port 20 is used for the data connection.</p>
+                        <p><i>(Figure 26.21 shows the basic model of FTP.)</i> The client has three components: user interface, client control process, and the client data transfer process. The server has two components: the server control process and the server data transfer process. The control connection is made between the control processes. The data connection is made between the data transfer processes.</p>
+                        <p><i>(Figure 26.21 showing FTP model)</i></p> <!-- Placeholder for image description -->
+                        <p>The control connection remains connected during the entire interactive FTP session. The data connection is opened and then closed for each file transferred. It opens each time commands that involve transferring files are used, and it closes when the file is transferred. In other words, when a user starts an FTP session, the control connection opens. While the control connection is open, the data connection can be opened and closed multiple times if several files are transferred.</p>
+                        <h3 class="subsection-heading">Transmission Mode</h3>
+                        <p>FTP can transfer a file across the data connection by using one of the following three transmission modes: stream mode, block mode, and compressed mode.</p>
+                         <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">➡️</span>
+                                <span class="item-text"><b>Stream mode:</b> The default mode. Data are delivered from FTP to TCP as a continuous stream of bytes. TCP is responsible for chopping data into segments of appropriate size. If the data are simply a stream of bytes (file structure), no end-of-file is needed. End-of-file in this case is the closing of the data connection by the sender. If the data are divided into records (record structure), each record will have a 1-byte end-of-record (EOR) character and the end of the file will have a 1-byte end-of-file (EOF) character.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">➡️</span>
+                                <span class="item-text"><b>Block mode:</b> Data can be delivered from FTP to TCP in blocks. In this case, each block is preceded by a 3-byte header. The first byte is called the block descriptor; the next 2 bytes define the size of the block in bytes.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">➡️</span>
+                                <span class="item-text"><b>Compressed mode:</b> If the file is big, the data can be compressed. The compression method normally used is run-length encoding. In this method, consecutive appearances of a data unit are replaced by one occurrence and the number of repetitions. In a text file, this is usually spaces (blanks). In a binary file, null characters are usually compressed.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- HTTP -->
+                <section class="content-section" id="http">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🌐</span>
+                        <span class="heading-text">8. HTTP (Hypertext Transfer Protocol)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The Hypertext Transfer Protocol (HTTP) is a protocol used mainly to access data on the World Wide Web. HTTP functions as a combination of FTP and SMTP. It is similar to FTP because it transfers files and uses the services of TCP. However, it is much simpler than FTP because it uses only one TCP connection. There is no separate control connection; only data are transferred between the client and the server. HTTP is like SMTP because the data transferred between the client and the server look like SMTP messages. In addition, the format of the messages is controlled by MIME-like headers. Unlike SMTP, the HTTP messages are not destined to be read by humans; they are read and interpreted by the HTTP server and HTTP client (browser). SMTP messages are stored and forwarded, but HTTP messages are delivered immediately. The commands from the client to the server are embedded in a request message. The contents of the requested file or other information are embedded in a response message. HTTP uses the services of TCP on well-known port 80.</p>
+                        <h3 class="subsection-heading">HTTP Transaction</h3>
+                        <p><i>(Figure 27.12 illustrates the HTTP transaction between the client and server.)</i> Although HTTP uses the services of TCP, HTTP itself is a stateless protocol. The client initializes the transaction by sending a request message. The server replies by sending a response.</p>
+                        <p><i>(Figure 27.12 showing HTTP transaction)</i></p> <!-- Placeholder for image description -->
+                        <h3 class="subsection-heading">Messages</h3>
+                        <p>The formats of the request and response messages are similar; both are shown in Figure 27.13. A request message consists of a request line, a header, and sometimes a body. A response message consists of a status line, a header, and sometimes a body.</p>
+                        <p><i>(Figure 27.13 showing HTTP message formats)</i></p> <!-- Placeholder for image description -->
+                        <h4>Request and Status Lines</h4>
+                        <p>The first line in a request message is called a request line; the first line in the response message is called the status line. There is one common field, as shown in Figure 27.14.</p>
+                        <p><i>(Figure 27.14 showing request/status line format)</i></p> <!-- Placeholder for image description -->
+                        <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">a.</span>
+                                <span class="item-text"><b>Request type:</b> This field is used in the request message. In version 1.1 of HTTP, several request types are defined. The request type is categorized into methods as defined in Table 27.1.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">b.</span>
+                                <span class="item-text"><b>URL:</b> URL means Uniform Resource Locator</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">c.</span>
+                                <span class="item-text"><b>Version:</b> The current version of HTTP</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">d.</span>
+                                <span class="item-text"><b>Status code:</b> This field is used in the response message. The status code field is similar to those in the FTP and the SMTP protocols. It consists of three digits. Whereas the codes in the 100 range are only informational, the codes in the 200 range indicate a successful request. The codes in the 300 range redirect the client to another URL, and the codes in the 400 range indicate an error at the client site. Finally, the codes in the 500 range indicate an error at the server site. We list the most common codes in Table 27.2.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">e.</span>
+                                <span class="item-text"><b>Status phrase:</b> This field is used in the response message. It explains the status code in text form. Table 27.2 also gives the status phrase.</span>
+                            </li>
+                        </ul>
+                         <p><i>(Table 27.1 showing HTTP methods)</i></p> <!-- Placeholder for table description -->
+                         <p><i>(Table 27.2 showing HTTP status codes)</i></p> <!-- Placeholder for table description -->
+                    </div>
+                </section>
+
+                 <!-- Key Points Section -->
+                <section class="key-points-section">
+                    <div class="key-points-container">
+                        <div class="key-points-header">
+                            <span class="key-points-icon">📝</span>
+                            <h3 class="key-points-title">Key Points to Remember (Web Mail, FTP, HTTP)</h3>
+                        </div>
+                        <div class="key-points-content">
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Web-Based Mail uses HTTP for user interaction and SMTP for server-to-server transfer.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>FTP uses two TCP connections: control (port 21) and data (port 20).</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>FTP transmission modes: stream (default), block, compressed.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>HTTP is used for accessing World Wide Web data, using TCP port 80.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>HTTP uses a single connection and is stateless.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>HTTP messages include request/status lines, headers, and an optional body.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Navigation (Bottom) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="common-network-applications-part3.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Applications (Part 3)</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 16 (Part 4)</span>
+                    </div>
+                     <!-- No next link as this is the last part of the chapter/section -->
+                     <span class="nav-button disabled">Next →</span>
+                </div>
+            </nav>
+        </article>
+    </div>
+</body>
+</html>

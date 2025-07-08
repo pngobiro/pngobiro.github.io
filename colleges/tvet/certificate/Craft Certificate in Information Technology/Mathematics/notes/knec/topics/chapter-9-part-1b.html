@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Matrices And Transformations (Part 1b) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-1a.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 9 (Part 1b)</span>
+                    </div>
+                    <a href="chapter-9-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 9: Matrices And Transformations (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-9-rules-algebra -->
+                <section id="section-9-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕➖✖️</span>
+                        <span class="heading-text">9.3 Rules/Matrix Algebra</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>Addition:</strong> Two matrices can be added only if they are of the same order. The rule for addition is shown by the following example.</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="equation">$$ \begin{pmatrix} a & c \\ b & d \end{pmatrix} + \begin{pmatrix} e & f \\ g & h \end{pmatrix} = \begin{pmatrix} a+e & c+f \\ b+g & d+h \end{pmatrix} $$</div>
+                        <p><strong>Example:</strong></p>
+                        <div class="equation">$$ \begin{pmatrix} 4 & 9 \\ 3 & 5 \end{pmatrix} + \begin{pmatrix} 7 & 8 \\ 1 & 9 \end{pmatrix} = \begin{pmatrix} 4+7 & 9+8 \\ 3+1 & 5+9 \end{pmatrix} = \begin{pmatrix} 11 & 17 \\ 4 & 14 \end{pmatrix} $$</div>
+
+                        <p><strong>Subtraction:</strong> Two matrices can be subtracted only if they are of the same order. The rule for subtraction is shown by the following example.</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="equation">$$ \begin{pmatrix} a & c \\ b & d \end{pmatrix} - \begin{pmatrix} e & f \\ g & h \end{pmatrix} = \begin{pmatrix} a & c \\ b & d \end{pmatrix} + \begin{pmatrix} -e & -f \\ -g & -h \end{pmatrix} = \begin{pmatrix} a-e & c-f \\ b-g & d-h \end{pmatrix} $$</div>
+                        <p><strong>Example:</strong></p>
+                        <div class="equation">$$ \begin{pmatrix} 4 & 9 \\ 3 & 5 \end{pmatrix} - \begin{pmatrix} 7 & 8 \\ 1 & 9 \end{pmatrix} = \begin{pmatrix} 4-7 & 9-8 \\ 3-1 & 5-9 \end{pmatrix} = \begin{pmatrix} -3 & 1 \\ 2 & -4 \end{pmatrix} $$</div>
+
+                        <p><strong>Multiplication:</strong> The rule for multiplying matrices is:</p>
+                        <div class="equation">$$ \begin{pmatrix} a & c \\ b & d \end{pmatrix} \begin{pmatrix} e & f \\ g & h \end{pmatrix} = \begin{pmatrix} ae+cg & af+ch \\ be+dg & bf+dh \end{pmatrix} $$</div>
+                        <p>Multiplying other matrices is done in the same manner but the number of columns of the first matrix must be the same as the number of rows of the second matrix.</p>
+                        <p><strong>Example:</strong></p>
+                        <div class="equation">$$ \begin{pmatrix} a & c \\ b & d \end{pmatrix} \begin{pmatrix} e \\ f \end{pmatrix} = \begin{pmatrix} ae+cf \\ be+df \end{pmatrix} $$</div>
+                        <p>Example (Incompatible):</p>
+                        <div class="equation">$$ \begin{pmatrix} a & b \\ c & d \\ e & f \end{pmatrix} \begin{pmatrix} g & h \\ i & j \\ k & l \end{pmatrix} $$</div>
+                        <p>This multiplication is not possible as the number of columns in the first matrix (2) is not equal to the number of rows in the second matrix (3).</p>
+
+                        <p><strong>Example:</strong></p>
+                        <p>Multiply <span class="math-inline">$\begin{pmatrix} 4 & 9 \\ 3 & 5 \end{pmatrix} \begin{pmatrix} 6 \\ 2 \end{pmatrix}$</span></p>
+                        <p>Solution:</p>
+                        <div class="equation">$$ \begin{pmatrix} 4 & 9 \\ 3 & 5 \end{pmatrix} \begin{pmatrix} 6 \\ 2 \end{pmatrix} = \begin{pmatrix} 4 \times 6 + 9 \times 2 \\ 3 \times 6 + 5 \times 2 \end{pmatrix} = \begin{pmatrix} 24+18 \\ 18+10 \end{pmatrix} = \begin{pmatrix} 42 \\ 28 \end{pmatrix} $$</div>
+
+                        <p><strong>Example:</strong></p>
+                        <p>Multiply <span class="math-inline">$\begin{pmatrix} 4 & 9 \\ 3 & 5 \end{pmatrix} \begin{pmatrix} 2 & 4 \\ 1 & 3 \end{pmatrix}$</span></p>
+                        <p>Solution:</p>
+                        <div class="equation">$$ \begin{pmatrix} 4 & 9 \\ 3 & 5 \end{pmatrix} \begin{pmatrix} 2 & 4 \\ 1 & 3 \end{pmatrix} = \begin{pmatrix} 4 \times 2 + 9 \times 1 & 4 \times 4 + 9 \times 3 \\ 3 \times 2 + 5 \times 1 & 3 \times 4 + 5 \times 3 \end{pmatrix} = \begin{pmatrix} 8+9 & 16+27 \\ 6+5 & 12+15 \end{pmatrix} = \begin{pmatrix} 17 & 43 \\ 11 & 27 \end{pmatrix} $$</div>
+                        <p>If A and B represent two matrices, then in general <span class="math-inline">$A \cdot B \neq B \cdot A$</span> (Matrix multiplication is not commutative).</p>
+                        <p>Two matrices are equal if and only if their corresponding elements are equal.</p> <!-- MMD typo: onty -->
+                        <p>Thus, if <span class="math-inline">$\begin{pmatrix} a & c \\ b & d \end{pmatrix} = \begin{pmatrix} e & g \\ f & h \end{pmatrix}$</span></p> <!-- Corrected second matrix elements -->
+                        <p>then it follows that a=e, b=f, c=g and d=h.</p> <!-- MMD typo: trata -->
+                        <p>If <span class="math-inline">$\begin{pmatrix} x \\ y \end{pmatrix} = \begin{pmatrix} 2 \\ 3 \end{pmatrix}$</span> then it follows that x=2 and y=3.</p>
+                        <p>When a matrix is multiplied by a constant, every element in the matrix is enlarged by the constant.</p>
+                        <p>Thus, <span class="math-inline">$c \begin{pmatrix} p & q \\ r & s \end{pmatrix} = \begin{pmatrix} cp & cq \\ cr & cs \end{pmatrix}$</span></p>
+                        <p>If A and B are any two matrices, <span class="math-inline">$A B = 0$</span> does not necessarily imply that either A=0 or B=0.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>If <span class="math-inline">$A = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$</span> and <span class="math-inline">$B = \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix}$</span></p>
+                        <div class="equation">$$ A B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} \begin{pmatrix} 0 & 0 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 0 & 0 \\ 0 & 0 \end{pmatrix} $$</div>
+                        <p>Unlike ordinary algebra, the fact that AB = AC does not necessarily imply that B = C.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>If <span class="math-inline">$A = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$</span> and <span class="math-inline">$B = \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix}$</span> and <span class="math-inline">$C = \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix}$</span></p>
+                        <p>then <span class="math-inline">$AB = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 0 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$</span></p>
+                        <p>and <span class="math-inline">$AC = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix} \begin{pmatrix} 1 & 0 \\ 0 & 1 \end{pmatrix} = \begin{pmatrix} 1 & 0 \\ 1 & 0 \end{pmatrix}$</span></p>
+                        <p>So AB = AC.</p>
+                        <p>But <span class="math-inline">$B \neq C$</span> and <span class="math-inline">$A \neq 0$</span></p>
+                        <p><strong>Example:</strong></p>
+                        <p>Given <span class="math-inline">$A = \begin{pmatrix} 1 & 3 \\ 2 & -1 \end{pmatrix}$</span> and <span class="math-inline">$B = \begin{pmatrix} 2 & 0 & -4 \\ 3 & -2 & 6 \end{pmatrix}$</span></p> <!-- Corrected A matrix from MMD -->
+                        <p>Solution.</p>
+                        <p>Since A is 2x2 and B is 2x3, the product matrix AB is defined and is a 2x3 matrix. To obtain the elements in the first row of the product matrix AB, multiply the first row (1 3) of A by the columns <span class="math-inline">$\begin{pmatrix} 2 \\ 3 \end{pmatrix}, \begin{pmatrix} 0 \\ -2 \end{pmatrix}$</span> and <span class="math-inline">$\begin{pmatrix} -4 \\ 6 \end{pmatrix}$</span> of B respectively.</p>
+                        <p>Step 1 (Row 1):</p>
+                        <p><span class="math-inline">$(1 \times 2 + 3 \times 3 \quad 1 \times 0 + 3 \times (-2) \quad 1 \times (-4) + 3 \times 6) = (2+9 \quad 0-6 \quad -4+18) = (11 \quad -6 \quad 14)$</span></p> <!-- Corrected calculation -->
+                        <p>To obtain the elements in the second row of the product matrix AB, multiply the second row (2 -1) of A by the columns of B respectively.</p>
+                        <p>Step 2 (Row 2):</p>
+                        <p><span class="math-inline">$(2 \times 2 + (-1) \times 3 \quad 2 \times 0 + (-1) \times (-2) \quad 2 \times (-4) + (-1) \times 6) = (4-3 \quad 0+2 \quad -8-6) = (1 \quad 2 \quad -14)$</span></p>
+                        <p>Result:</p>
+                        <div class="equation">$$ AB = \begin{pmatrix} 11 & -6 & 14 \\ 1 & 2 & -14 \end{pmatrix} $$</div>
+                        <p>Matrix multiplication does not obey the commutative law, i.e. the products AB and BA of matrices need not be equal.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-9-rules-algebra -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-9-part-1a.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 9 (Part 1b)</span>
+                    </div>
+                    <a href="chapter-9-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

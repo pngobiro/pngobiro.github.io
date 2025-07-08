@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 29 Vectors</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="revision-test-11.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <!-- Chunk 41 in content sequence, Total 55 content chunks -->
+                            <div class="progress-fill" style="width: calc((41 / 55) * 100%);"></div>
+                        </div>
+                         <span class="progress-text">Chunk 41 of 55</span>
+                        <span class="progress-text">Chapter 29 of 35</span>
+                    </div>
+                    <a href="chapter-30.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Vectors</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-29-introduction -->
+                <section id="chapter-29-introduction" class="content-section" aria-labelledby="chapter-29-introduction-heading">
+                    <h2 id="chapter-29-introduction-heading" class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">29.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This chapter initially explains the difference between scalar and vector quantities and shows how a vector is drawn and represented.</p>
+                        <p>Any object that is acted upon by an external force will respond to that force by moving in the line of the force. However, if two or more forces act simultaneously, the result is more difficult to predict; the ability to add two or more vectors then becomes important.</p>
+                        <p>This chapter thus shows how vectors are added and subtracted, both by drawing and by calculation, and how finding the resultant of two or more vectors has many uses in engineering. (Resultant means the single vector which would have the same effect as the individual vectors.) Relative velocities and vector $\boldsymbol{i}, \boldsymbol{j}, \boldsymbol{k}$ notation are also briefly explained.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-29-introduction -->
+
+                 <!-- START: chapter-29-scalars-vectors -->
+                <section id="chapter-29-scalars-vectors" class="content-section" aria-labelledby="chapter-29-scalars-vectors-heading">
+                     <h2 id="chapter-29-scalars-vectors-heading" class="section-heading">
+                        <span class="heading-icon">➡️</span>
+                        <span class="heading-text">29.2 Scalars and vectors</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>The time taken to fill a water tank may be measured as, say, 50 s . Similarly, the temperature in a room may be measured as, say, $16^{\circ}\mathrm{C}$ or the mass of a bearing may be measured as, say, 3 kg . Quantities such as time, temperature and mass are entirely defined by a numerical value and are called scalars or scalar quantities.</p>
+                        <p>Not all quantities are like this. Some are defined by more than just size; some also have direction. For example, the velocity of a car may be $90 \mathrm{~km}/\mathrm{h}$ due west, a force of 20 N may act vertically downwards, or an acceleration of $10 \mathrm{~m}/\mathrm{s}^{2}$ may act at $50^{\circ}$ to the horizontal.</p>
+                        <p>Quantities such as velocity, force and acceleration, which have both a magnitude and a direction, are called vectors.</p>
+
+                         <div class="practice-exercise">
+                            <h3 class="subsection-heading">Now try the following Practice Exercise</h3>
+                            <aside class="callout note" role="note">
+                                <h4 class="callout-title">Practice Exercise 113 Scalar and vector quantities (answers on page 352)</h4>
+                                <div class="callout-content">
+                                     <ol class="enhanced-list">
+                                        <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">State the difference between scalar and vector quantities.</span></li>
+                                     </ol>
+                                    <p>In problems 2 to 9, state whether the quantities given are scalar or vector.</p>
+                                     <ol class="enhanced-list" start="2">
+                                        <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">A temperature of $70^{\circ}\mathrm{C}$</span></li>
+                                        <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">5 $\mathrm{~m}^{3}$ volume</span></li>
+                                        <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">A downward force of 20 N</span></li>
+                                        <li class="list-item"><span class="item-icon">5.</span> <span class="item-text">500 J of work</span></li>
+                                        <li class="list-item"><span class="item-icon">6.</span> <span class="item-text">30 $\mathrm{~cm}^{2}$ area</span></li>
+                                        <li class="list-item"><span class="item-icon">7.</span> <span class="item-text">A south-westerly wind of 10 knots</span></li>
+                                        <li class="list-item"><span class="item-icon">8.</span> <span class="item-text">50 m distance</span></li>
+                                        <li class="list-item"><span class="item-icon">9.</span> <span class="item-text">An acceleration of $15 \mathrm{~m}/\mathrm{s}^{2}$ at $60^{\circ}$ to the horizontal</span></li>
+                                     </ol>
+                                </div>
+                            </aside>
+                         </div>
+                    </div>
+                </section>
+                <!-- END: chapter-29-scalars-vectors -->
+
+                <!-- START: chapter-29-drawing-vector -->
+                <section id="chapter-29-drawing-vector" class="content-section" aria-labelledby="chapter-29-drawing-vector-heading">
+                    <h2 id="chapter-29-drawing-vector-heading" class="section-heading">
+                        <span class="heading-icon">✏️</span>
+                        <span class="heading-text">29.3 Drawing a vector</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A vector quantity can be represented graphically by a line, drawn so that</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">the length of the line denotes the magnitude of the quantity, and</span></li>
+                            <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">the direction of the line denotes the direction in which the vector quantity acts.</span></li>
+                        </ul>
+                        <p>An arrow is used to denote the sense, or direction, of the vector.</p>
+                        <p>The arrow end of a vector is called the 'nose' and the other end the 'tail'. For example, a force of 9 N acting at $45^{\circ}$ to the horizontal is shown in Figure 29.1. Note that an angle of <strong>+45$^{\circ}$</strong> is drawn from the horizontal and moves anticlockwise.</p>
+                        <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-280.jpg" alt="Force vector of 9N at 45 degrees" class="content-image">
+                        <p>Figure 29.1</p>
+                        <p>A velocity of $20 \mathrm{~m}/\mathrm{s}$ at $-60^{\circ}$ is shown in Figure 29.2. Note that an angle of <strong>-60$^{\circ}$</strong> is drawn from the horizontal and moves clockwise.</p>
+                        <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-280.jpg" alt="Velocity vector of 20m/s at -60 degrees" class="content-image">
+                        <p>Figure 29.2</p>
+
+                        <h3 class="subsubsection-heading">29.3.1 Representing a vector</h3>
+                        <p>There are a number of ways of representing vector quantities. These include</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">Using bold print.</span></li>
+                            <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">$\overrightarrow{A B}$ where an arrow above two capital letters denotes the sense of direction, where A is the starting point and B the end point of the vector.</span></li>
+                            <li class="list-item"><span class="item-icon">(c)</span> <span class="item-text">$\overline{A B}$ or $\bar{a}$; i.e., a line over the top of letter.</span></li>
+                            <li class="list-item"><span class="item-icon">(d)</span> <span class="item-text">$\underline{a}$; i.e., underlined letter.</span></li>
+                        </ul>
+                        <p>The force of 9 N at $45^{\circ}$ shown in Figure 29.1 may be represented as</p>
+                        <div class="equation">$$\mathbf{0} \boldsymbol{a} \text{ or } \overline{0} \vec{a} \text{ or } \overline{0a}$$</div>
+                        <p>The magnitude of the force is $0a$.</p>
+                        <p>Similarly, the velocity of $20 \mathrm{~m}/\mathrm{s}$ at $-60^{\circ}$ shown in Figure 29.2 may be represented as</p>
+                        <div class="equation">$$\mathbf{0} \boldsymbol{b} \text{ or } \overline{0} \vec{b} \text{ or } \overline{0b}$$</div>
+                        <p>The magnitude of the velocity is $0b$.</p>
+                        <p>In this chapter a vector quantity is denoted by bold print.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-29-drawing-vector -->
+
+                 <!-- START: chapter-29-addition-vectors-drawing -->
+                <section id="chapter-29-addition-vectors-drawing" class="content-section" aria-labelledby="chapter-29-addition-vectors-drawing-heading">
+                     <h2 id="chapter-29-addition-vectors-drawing-heading" class="section-heading">
+                        <span class="heading-icon">➕</span>
+                        <span class="heading-text">29.4 Addition of vectors by drawing</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>Adding two or more vectors by drawing assumes that a ruler, pencil and protractor are available. Results obtained by drawing are naturally not as accurate as those obtained by calculation.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">Nose-to-tail method<br>Two force vectors, $F_{1}$ and $F_{2}$, are shown in Figure 29.3. When an object is subjected to more than one force, the resultant of the forces is found by the addition of vectors.<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-280.jpg" alt="Two force vectors F1 and F2" class="content-image">Figure 29.3<br>To add forces $F_{1}$ and $F_{2}$,<br><ol class="enhanced-list"><li>Force $F_{1}$ is drawn to scale horizontally, shown as $\mathbf{0}\boldsymbol{a}$ in Figure 29.4.</li><li>From the nose of $F_{1}$, force $F_{2}$ is drawn at angle $\theta$ to the horizontal, shown as $\boldsymbol{ab}$.</li><li>The resultant force is given by length $\mathbf{0b}$, which may be measured.</li></ol><br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-280.jpg" alt="Nose-to-tail vector addition" class="content-image">Figure 29.4<br>This procedure is called the 'nose-to-tail' or 'triangle' method.</span></li>
+                            <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">Parallelogram method<br>To add the two force vectors, $F_{1}$ and $F_{2}$ of Figure 29.3,<br><ol class="enhanced-list"><li>A line $cb$ is constructed which is parallel to and equal in length to $\mathbf{0}\boldsymbol{a}$ (see Figure 29.5).</li><li>A line $ab$ is constructed which is parallel to and equal in length to $\mathbf{0c}$.</li><li>The resultant force is given by the diagonal of the parallelogram; i.e., length $\mathbf{0b}$.</li></ol><br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-281.jpg" alt="Parallelogram method of vector addition" class="content-image">Figure 29.5<br>This procedure is called the 'parallelogram' method.</span></li>
+                        </ul>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-1-title-c29-2">
+                            <h4 id="problem-1-title-c29-2" class="callout-title"><span class="callout-icon">💡</span> Problem 1. A force of 5 N is inclined at an angle of $45^{\circ}$ to a second force of 8 N , both forces acting at a point. Find the magnitude of the resultant of these two forces and the direction of the resultant with respect to the 8 N force by (a) the nose-to-tail method and (b) the parallelogram method</h4>
+                             <div class="callout-content">
+                                <p>The two forces are shown in Figure 29.6. (Although the 8 N force is shown horizontal, it could have been drawn in any direction.)</p>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-281.jpg" alt="Two forces, 8N horizontal, 5N at 45 degrees" class="content-image">
+                                <p>Figure 29.6</p>
+                                <ul class="enhanced-list">
+                                    <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">Nose-to-tail method<ol class="enhanced-list"><li>The 8 N force is drawn horizontally 8 units long, shown as $\mathbf{0}\boldsymbol{a}$ in Figure 29.7.</li><li>From the nose of the 8 N force, the 5 N force is drawn 5 units long at an angle of $45^{\circ}$ to the horizontal, shown as $\boldsymbol{ab}$.</li><li>The resultant force is given by length $0b$ and is measured as $\mathbf{12} \mathbf{~ N}$ and angle $\theta$ is measured as $\mathbf{17}^{\circ}$.</li></ol><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-281.jpg" alt="Nose-to-tail addition for Problem 1" class="content-image">Figure 29.7</span></li>
+                                    <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">Parallelogram method<ol class="enhanced-list"><li>In Figure 29.8, a line is constructed which is parallel to and equal in length to the 8 N force.</li><li>A line is constructed which is parallel to and equal in length to the 5 N force.</li><li>The resultant force is given by the diagonal of the parallelogram, i.e. length $0b$, and is measured as $\mathbf{12} \mathbf{~ N}$ and angle $\theta$ is measured as $\mathbf{17}^{\circ}$.</li></ol><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-281.jpg" alt="Parallelogram method for Problem 1" class="content-image">Figure 29.8</span></li>
+                                </ul>
+                                <p>Thus, the resultant of the two force vectors in Figure 29.6 is $\mathbf{12} \mathbf{~ N}$ at $\mathbf{17}^{\circ}$ to the 8 N force.</p>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-2-title-c29-2">
+                            <h4 id="problem-2-title-c29-2" class="callout-title"><span class="callout-icon">💡</span> Problem 2. Forces of 15 and 10 N are at an angle of $90^{\circ}$ to each other as shown in Figure 29.9. Find, by drawing, the magnitude of the resultant of these two forces and the direction of the resultant with respect to the 15 N force<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-281.jpg" alt="Two forces at 90 degrees" class="content-image">Figure 29.9</h4>
+                             <div class="callout-content">
+                                <p>Using the nose-to-tail method,</p>
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(i)</span> <span class="item-text">The 15 N force is drawn horizontally 15 units long, as shown in Figure 29.10.</span></li>
+                                     <li class="list-item"><span class="item-icon">(ii)</span> <span class="item-text">From the nose of the 15 N force, the 10 N force is drawn 10 units long at an angle of $90^{\circ}$ to the horizontal as shown.</span></li>
+                                     <li class="list-item"><span class="item-icon">(iii)</span> <span class="item-text">The resultant force is shown as R and is measured as $\mathbf{18} \mathbf{~ N}$ and angle $\theta$ is measured as $\mathbf{34}^{\circ}$.</span></li>
+                                </ul>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-281.jpg" alt="Nose-to-tail addition for Problem 2" class="content-image">
+                                <p>Figure 29.10</p>
+                                <p>Thus, the resultant of the two force vectors is $\mathbf{18} \mathbf{~ N}$ at $\mathbf{34}^{\circ}$ to the 15 N force.</p>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-3-title-c29-2">
+                            <h4 id="problem-3-title-c29-2" class="callout-title"><span class="callout-icon">💡</span> Problem 3. Velocities of $10 \mathrm{~m}/\mathrm{s}, 20 \mathrm{~m}/\mathrm{s}$ and $15 \mathrm{~m}/\mathrm{s}$ act as shown in Figure 29.11. Determine, by drawing, the magnitude of the resultant velocity and its direction relative to the horizontal<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-282.jpg" alt="Three velocity vectors" class="content-image">Figure 29.11</h4>
+                             <div class="callout-content">
+                                <p>When more than 2 vectors are being added the nose-to-tail method is used. The order in which the vectors are added does not matter. In this case the order taken is $v_{1}$, then $v_{2}$, then $v_{3}$. However, if a different order is taken the same result will occur.</p>
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(i)</span> <span class="item-text">$v_{1}$ is drawn 10 units long at an angle of $30^{\circ}$ to the horizontal, shown as $\mathbf{0}\boldsymbol{a}$ in Figure 29.12.</span></li>
+                                     <li class="list-item"><span class="item-icon">(ii)</span> <span class="item-text">From the nose of $v_{1}, v_{2}$ is drawn 20 units long at an angle of $90^{\circ}$ to the horizontal, shown as $\boldsymbol{ab}$.</span></li>
+                                     <li class="list-item"><span class="item-icon">(iii)</span> <span class="item-text">From the nose of $v_{2}, v_{3}$ is drawn 15 units long at an angle of $195^{\circ}$ to the horizontal, shown as $\boldsymbol{br}$.</span></li>
+                                     <li class="list-item"><span class="item-icon">(iv)</span> <span class="item-text">The resultant velocity is given by length $\mathbf{0r}$ and is measured as $\mathbf{22} \mathbf{~ m}/\mathbf{s}$ and the angle measured to the horizontal is $\mathbf{105}^{\circ}$.</span></li>
+                                </ul>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-282.jpg" alt="Addition of three velocity vectors by nose-to-tail method" class="content-image">
+                                <p>Figure 29.12</p>
+                                <p>Thus, the resultant of the three velocities is $\mathbf{22} \mathbf{~ m}/\mathbf{s}$ at $\mathbf{105}^{\circ}$ to the horizontal.</p>
+                                <p>Worked Examples 1 to 3 have demonstrated how vectors are added to determine their resultant and their direction. However, drawing to scale is time-consuming and not highly accurate. The following sections demonstrate how to determine resultant vectors by calculation using horizontal and vertical components and, where possible, by Pythagoras' theorem.</p>
+                             </div>
+                         </aside>
+                    </div>
+                </section>
+                <!-- END: chapter-29-addition-vectors-drawing -->
+
+                 <!-- START: chapter-29-resolving-vectors -->
+                <section id="chapter-29-resolving-vectors" class="content-section" aria-labelledby="chapter-29-resolving-vectors-heading">
+                     <h2 id="chapter-29-resolving-vectors-heading" class="section-heading">
+                        <span class="heading-icon">↗️</span>
+                        <span class="heading-text">29.5 Resolving vectors into horizontal and vertical components</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>A force vector $\boldsymbol{F}$ is shown in Figure 29.13 at angle $\theta$ to the horizontal. Such a vector can be resolved into two components such that the vector addition of the components is equal to the original vector.</p>
+                        <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-282.jpg" alt="Force vector F at angle theta" class="content-image">
+                        <p>Figure 29.13</p>
+                        <p>The two components usually taken are a horizontal component and a vertical component. If a right-angled triangle is constructed as shown in Figure 29.14, 0a is called the horizontal component of F and ab is called the vertical component of F.</p>
+                        <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-282.jpg" alt="Resolving vector F into horizontal and vertical components" class="content-image">
+                        <p>Figure 29.14</p>
+                        <p>From trigonometry (see Chapter 21 and remember SOH CAH TOA),</p>
+                        <p>$\cos \theta=\frac{0a}{0b}$, from which $0a=0b \cos \theta=F \cos \theta$</p>
+                        <p>i.e. the horizontal component of $\boldsymbol{F}=\boldsymbol{F} \cos \boldsymbol{\theta}$, and</p>
+                        <p>$\sin \theta=\frac{ab}{0b}$ from which, $ab=0b \sin \theta=F \sin \theta$</p>
+                        <p>i.e. the vertical component of $\boldsymbol{F}=\boldsymbol{F} \sin \boldsymbol{\theta}$.</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-4-title-c29-3">
+                            <h4 id="problem-4-title-c29-3" class="callout-title"><span class="callout-icon">💡</span> Problem 4. Resolve the force vector of 50 N at an angle of $35^{\circ}$ to the horizontal into its horizontal and vertical components</h4>
+                             <div class="callout-content">
+                                <p>The horizontal component of the 50 N force, $0a=50 \cos 35^{\circ}=\mathbf{40.96} \mathbf{~ N}$.</p>
+                                <p>The vertical component of the 50 N force, $ab=50 \sin 35^{\circ}=\mathbf{28.68} \mathbf{~ N}$.</p>
+                                <p>The horizontal and vertical components are shown in Figure 29.15.</p>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-283.jpg" alt="Horizontal and vertical components of a 50N force at 35 degrees" class="content-image">
+                                <p>Figure 29.15</p>
+                                <p>(To check: by Pythagoras, $0b=\sqrt{40.96^{2}+28.68^{2}}=50 \mathrm{~N}$ and $\theta=\tan^{-1}\left(\frac{28.68}{40.96}\right)=35^{\circ}$</p>
+                                <p>Thus, the vector addition of components 40.96 N and 28.68 N is 50 N at $35^{\circ}$.)</p>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-5-title-c29-3">
+                            <h4 id="problem-5-title-c29-3" class="callout-title"><span class="callout-icon">💡</span> Problem 5. Resolve the velocity vector of $20 \mathrm{~m}/\mathrm{s}$ at an angle of $-30^{\circ}$ to the horizontal into horizontal and vertical components</h4>
+                             <div class="callout-content">
+                                <p>The horizontal component of the $20 \mathrm{~m}/\mathrm{s}$ velocity, $0a=20 \cos (-30^{\circ})=\mathbf{17.32} \mathbf{~ m}/\mathbf{s}$.</p>
+                                <p>The vertical component of the $20 \mathrm{~m}/\mathrm{s}$ velocity, $ab=20 \sin (-30^{\circ})=\mathbf{-10m}/\mathbf{s}$.</p>
+                                <p>The horizontal and vertical components are shown in Figure 29.16.</p>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-283.jpg" alt="Horizontal and vertical components of a 20m/s velocity at -30 degrees" class="content-image">
+                                <p>Figure 29.16</p>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-6-title-c29-3">
+                            <h4 id="problem-6-title-c29-3" class="callout-title"><span class="callout-icon">💡</span> Problem 6. Resolve the displacement vector of 40 m at an angle of $120^{\circ}$ into horizontal and vertical components</h4>
+                             <div class="callout-content">
+                                <p>The horizontal component of the 40 m displacement, $0a=40 \cos 120^{\circ}=\mathbf{-20.0} \mathbf{~ m}$.</p>
+                                <p>The vertical component of the 40 m displacement, $ab=40 \sin 120^{\circ}=\mathbf{34.64} \mathbf{~ m}$.</p>
+                                <p>The horizontal and vertical components are shown in Figure 29.17.</p>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-283.jpg" alt="Horizontal and vertical components of a 40m displacement at 120 degrees" class="content-image">
+                                <p>Figure 29.17</p>
+                             </div>
+                         </aside>
+                    </div>
+                </section>
+                <!-- END: chapter-29-resolving-vectors -->
+
+                <!-- START: chapter-29-addition-vectors-calculation -->
+                <section id="chapter-29-addition-vectors-calculation" class="content-section" aria-labelledby="chapter-29-addition-vectors-calculation-heading">
+                    <h2 id="chapter-29-addition-vectors-calculation-heading" class="section-heading">
+                        <span class="heading-icon">➕</span>
+                        <span class="heading-text">29.6 Addition of vectors by calculation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Two force vectors, $F_{1}$ and $F_{2}$, are shown in Figure 29.18, $F_{1}$ being at an angle of $\theta_{1}$ and $F_{2}$ at an angle of $\theta_{2}$.</p>
+                        <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-283.jpg" alt="Two force vectors F1 and F2 at angles theta1 and theta2" class="content-image">
+                        <p>Figure 29.18</p>
+                        <p>A method of adding two vectors together is to use horizontal and vertical components.</p>
+                        <p>The horizontal component of force $F_{1}$ is $F_{1} \cos \theta_{1}$ and the horizontal component of force $F_{2}$ is $F_{2} \cos \theta_{2}$. The total horizontal component of the two forces, $H=F_{1} \cos \theta_{1}+F_{2} \cos \theta_{2}$</p>
+                        <p>The vertical component of force $F_{1}$ is $F_{1} \sin \theta_{1}$ and the vertical component of force $F_{2}$ is $F_{2} \sin \theta_{2}$. The total vertical component of the two forces, $V=F_{1} \sin \theta_{1}+F_{2} \sin \theta_{2}$</p>
+                        <p>Since we have $H$ and $V$, the resultant of $F_{1}$ and $F_{2}$ is obtained by using the theorem of Pythagoras. From Figure 29.19,</p>
+                        <div class="equation">$$0b^{2}=H^{2}+V^{2}$$</div>
+                        <p>i.e. $\quad \text{resultant} = \sqrt{\boldsymbol{H}^{2}+\boldsymbol{V}^{2}}$ at an angle given by $\boldsymbol{\theta}=\tan^{-1}\left(\frac{\boldsymbol{V}}{\boldsymbol{H}}\right)$</p>
+                        <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-284.jpg" alt="Resultant vector from H and V components" class="content-image">
+                        <p>Figure 29.19</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-7-title-c29-4">
+                            <h4 id="problem-7-title-c29-4" class="callout-title"><span class="callout-icon">💡</span> Problem 7. A force of 5 N is inclined at an angle of $45^{\circ}$ to a second force of 8 N , both forces acting at a point. Calculate the magnitude of the resultant of these two forces and the direction of the resultant with respect to the 8 N force</h4>
+                             <div class="callout-content">
+                                <p>The two forces are shown in Figure 29.20.</p>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-284.jpg" alt="Two forces, 8N and 5N at 45 degrees" class="content-image">
+                                <p>Figure 29.20</p>
+                                <p>The horizontal component of the 8 N force is $8 \cos 0^{\circ}$ and the horizontal component of the 5 N force is $5 \cos 45^{\circ}$. The total horizontal component of the two forces, $\boldsymbol{H}=8 \cos 0^{\circ}+5 \cos 45^{\circ}=8+3.5355=\mathbf{11.5355}$</p>
+                                <p>The vertical component of the 8 N force is $8 \sin 0^{\circ}$ and the vertical component of the 5 N force is $5 \sin 45^{\circ}$. The total vertical component of the two forces, $\boldsymbol{V}=8 \sin 0^{\circ}+5 \sin 45^{\circ}=0+3.5355=\mathbf{3.5355}$</p>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-284.jpg" alt="Resultant vector for Problem 7" class="content-image">
+                                <p>Figure 29.21</p>
+                                <p>From Figure 29.21, magnitude of resultant vector $=\sqrt{H^{2}+V^{2}} = \sqrt{11.5355^{2}+3.5355^{2}}=\mathbf{12.07} \mathbf{~ N}$</p>
+                                 <p>The direction of the resultant vector, $\theta=\tan^{-1}\left(\frac{V}{H}\right) = \tan^{-1}\left(\frac{3.5355}{11.5355}\right) = \tan^{-1} 0.30648866 \ldots=\mathbf{17.04}^{\circ}$</p>
+                                 <p>Thus, the resultant of the two forces is a single vector of 12.07 N at $17.04^{\circ}$ to the 8 N vector.</p>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-8-title-c29-4">
+                            <h4 id="problem-8-title-c29-4" class="callout-title"><span class="callout-icon">💡</span> Problem 8. Forces of 15 N and 10 N are at an angle of $90^{\circ}$ to each other as shown in Figure 29.22. Calculate the magnitude of the resultant of these two forces and its direction with respect to the 15 N force<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-284.jpg" alt="Two forces, 15N and 10N at 90 degrees" class="content-image">Figure 29.22</h4>
+                             <div class="callout-content">
+                                <p>The horizontal component of the 15 N force is $15 \cos 0^{\circ}$ and the horizontal component of the 10 N force is $10 \cos 90^{\circ}$. The total horizontal component of the two velocities, $\boldsymbol{H}=15 \cos 0^{\circ}+10 \cos 90^{\circ}=15+0=\mathbf{15}$</p>
+                                <p>The vertical component of the 15 N force is $15 \sin 0^{\circ}$ and the vertical component of the 10 N force is $10 \sin 90^{\circ}$. The total vertical component of the two velocities, $\boldsymbol{V}=15 \sin 0^{\circ}+10 \sin 90^{\circ}=0+10=\mathbf{10}$</p>
+                                <p>Magnitude of resultant vector $=\sqrt{H^{2}+V^{2}}=\sqrt{15^{2}+10^{2}}=\mathbf{18.03} \mathbf{~ N}$</p>
+                                <p>The direction of the resultant vector, $\theta=\tan^{-1}\left(\frac{V}{H}\right)=\tan^{-1}\left(\frac{10}{15}\right)=\mathbf{33.69^{\circ}}$</p>
+                                <p>Thus, the resultant of the two forces is a single vector of 18.03 N at $33.69^{\circ}$ to the 15 N vector.</p>
+                                <p>There is an alternative method of calculating the resultant vector in this case. If we used the triangle method, the diagram would be as shown in Figure 29.23.</p>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-285.jpg" alt="Triangle method for Problem 8" class="content-image">
+                                <p>Figure 29.23</p>
+                                <p>Since a right-angled triangle results, we could use Pythagoras' theorem without needing to go through the procedure for horizontal and vertical components. In fact, the horizontal and vertical components are 15 N and 10 N respectively.</p>
+                                <p>This is, of course, a special case. Pythagoras can only be used when there is an angle of $90^{\circ}$ between vectors. This is demonstrated in worked Problem 9.</p>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-9-title-c29-4">
+                            <h4 id="problem-9-title-c29-4" class="callout-title"><span class="callout-icon">💡</span> Problem 9. Calculate the magnitude and direction of the resultant of the two acceleration vectors shown in Figure 29.24.<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-285.jpg" alt="Two acceleration vectors" class="content-image">Figure 29.24</h4>
+                             <div class="callout-content">
+                                <p>The $15 \mathrm{~m}/\mathrm{s}^{2}$ acceleration is drawn horizontally, shown as $\mathbf{0}\boldsymbol{a}$ in Figure 29.25.</p>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-285.jpg" alt="Vector diagram for Problem 9" class="content-image">
+                                <p>Figure 29.25</p>
+                                <p>From the nose of the $15 \mathrm{~m}/\mathrm{s}^{2}$ acceleration, the $28 \mathrm{~m}/\mathrm{s}^{2}$ acceleration is drawn at an angle of $90^{\circ}$ to the horizontal, shown as $\boldsymbol{a}\boldsymbol{b}$.</p>
+                                <p>The resultant acceleration, R, is given by length $\mathbf{0b}$.</p>
+                                <p>Since a right-angled triangle results, the theorem of Pythagoras may be used.</p>
+                                <div class="equation">$$0b=\sqrt{15^{2}+28^{2}}=\mathbf{31.76m}/\mathbf{s}^{2}$$</div>
+                                <p>and $\alpha=\tan^{-1}\left(\frac{28}{15}\right)=\mathbf{61.82}^{\circ}$</p>
+                                <p>Measuring from the horizontal, $\boldsymbol{\theta}=180^{\circ}-61.82^{\circ}=\mathbf{118.18}^{\circ}$</p>
+                                <p>Thus, the resultant of the two accelerations is a single vector of $\mathbf{31.76} \mathbf{~ m}/\mathbf{s}^{\mathbf{2}}$ at $\mathbf{118.18}^{\circ}$ to the horizontal.</p>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-10-title-c29-4">
+                            <h4 id="problem-10-title-c29-4" class="callout-title"><span class="callout-icon">💡</span> Problem 10. Velocities of $10 \mathrm{~m}/\mathrm{s}, 20 \mathrm{~m}/\mathrm{s}$ and $15 \mathrm{~m}/\mathrm{s}$ act as shown in Figure 29.26. Calculate the magnitude of the resultant velocity and its direction relative to the horizontal<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-285.jpg" alt="Three velocity vectors" class="content-image">Figure 29.26</h4>
+                             <div class="callout-content">
+                                <p>The horizontal component of the $10 \mathrm{~m}/\mathrm{s}$ velocity $=10 \cos 30^{\circ}=8.660 \mathrm{~m}/\mathrm{s}$,</p>
+                                <p>the horizontal component of the $20 \mathrm{~m}/\mathrm{s}$ velocity is $20 \cos 90^{\circ}=0 \mathrm{~m}/\mathrm{s}$</p>
+                                <p>and the horizontal component of the $15 \mathrm{~m}/\mathrm{s}$ velocity is $15 \cos 195^{\circ}=-14.489 \mathrm{~m}/\mathrm{s}$.</p>
+                                <p>The total horizontal component of the three velocities, $\boldsymbol{H}=8.660+0-14.489=\mathbf{-5.829} \mathbf{~ m}/\mathbf{s}$</p>
+                                <p>The vertical component of the $10 \mathrm{~m}/\mathrm{s}$ velocity $=10 \sin 30^{\circ}=5 \mathrm{~m}/\mathrm{s}$,</p>
+                                <p>the vertical component of the $20 \mathrm{~m}/\mathrm{s}$ velocity is $20 \sin 90^{\circ}=20 \mathrm{~m}/\mathrm{s}$</p>
+                                <p>and the vertical component of the $15 \mathrm{~m}/\mathrm{s}$ velocity is $15 \sin 195^{\circ}=-3.882 \mathrm{~m}/\mathrm{s}$.</p>
+                                <p>The total vertical component of the three forces, $\boldsymbol{V}=5+20-3.882=\mathbf{21.118} \mathbf{~ m}/\mathbf{s}$</p>
+                                <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-286.jpg" alt="Resultant velocity vector diagram for Problem 10" class="content-image">
+                                <p>Figure 29.27</p>
+                                <p>From Figure 29.27, magnitude of resultant vector, $R=\sqrt{H^{2}+V^{2}}=\sqrt{5.829^{2}+21.118^{2}}=\mathbf{21.91 \mathbf{~ m}}/\mathbf{s}$</p>
+                                <p>The direction of the resultant vector, $\alpha=\tan^{-1}\left(\frac{V}{H}\right)=\tan^{-1}\left(\frac{21.118}{5.829}\right)=\mathbf{74.57}^{\circ}$</p>
+                                <p>Measuring from the horizontal, $\boldsymbol{\theta}=180^{\circ}-74.57^{\circ}=\mathbf{105.43}^{\circ}$.</p>
+                                <p>Thus, the resultant of the three velocities is a single vector of $\mathbf{21.91} \mathbf{~ m}/\mathbf{s}$ at $\mathbf{105.43}^{\circ}$ to the horizontal.</p>
+                             </div>
+                         </aside>
+
+                         <div class="practice-exercise">
+                            <h3 class="subsection-heading">Now try the following Practice Exercise</h3>
+                             <aside class="callout note" role="note">
+                                <h4 class="callout-title">Practice Exercise 114 Addition of vectors by calculation (answers on page 352)</h4>
+                                <div class="callout-content">
+                                     <ol class="enhanced-list">
+                                        <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">A force of 7 N is inclined at an angle of $50^{\circ}$ to a second force of 12 N , both forces acting at a point. Calculate the magnitude of the resultant of the two forces and the direction of the resultant with respect to the 12 N force.</span></li>
+                                        <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">Velocities of $5 \mathrm{~m}/\mathrm{s}$ and $12 \mathrm{~m}/\mathrm{s}$ act at a point at $90^{\circ}$ to each other. Calculate the resultant velocity and its direction relative to the $12 \mathrm{~m}/\mathrm{s}$ velocity.</span></li>
+                                        <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">Calculate the magnitude and direction of the resultant of the two force vectors shown in Figure 29.28.<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-286.jpg" alt="Two force vectors" class="content-image">Figure 29.28</span></li>
+                                        <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">Calculate the magnitude and direction of the resultant of the two force vectors shown in Figure 29.29.<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-286.jpg" alt="Two force vectors at an angle" class="content-image">Figure 29.29</span></li>
+                                        <li class="list-item"><span class="item-icon">5.</span> <span class="item-text">A displacement vector $\boldsymbol{s}_{\mathbf{1}}$ is 30 m at $0^{\circ}$. A second displacement vector $\boldsymbol{s}_{2}$ is 12 m at $90^{\circ}$. Calculate the magnitude and direction of the resultant vector $\boldsymbol{s}_{\mathbf{1}}+\boldsymbol{s}_{\mathbf{2}}$</span></li>
+                                        <li class="list-item"><span class="item-icon">6.</span> <span class="item-text">Three forces of 5 N, 8 N and 13 N act as shown in Figure 29.30. Calculate the magnitude and direction of the resultant force.<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-286.jpg" alt="Three force vectors acting at a point" class="content-image">Figure 29.30</span></li>
+                                        <li class="list-item"><span class="item-icon">7.</span> <span class="item-text">If velocity $\boldsymbol{v}_{\mathbf{1}}=25 \mathrm{~m}/\mathrm{s}$ at $60^{\circ}$ and $\boldsymbol{v}_{\mathbf{2}}=15 \mathrm{~m}/\mathrm{s}$ at $-30^{\circ}$, calculate the magnitude and direction of $\boldsymbol{v}_{\mathbf{1}}+\boldsymbol{v}_{\mathbf{2}}$.</span></li>
+                                        <li class="list-item"><span class="item-icon">8.</span> <span class="item-text">Calculate the magnitude and direction of the resultant vector of the force system shown in Figure 29.31.<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-287.jpg" alt="Force system with multiple vectors" class="content-image">Figure 29.31</span></li>
+                                        <li class="list-item"><span class="item-icon">9.</span> <span class="item-text">Calculate the magnitude and direction of the resultant vector of the system shown in Figure 29.32.<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-287.jpg" alt="Vector system with multiple vectors" class="content-image">Figure 29.32</span></li>
+                                        <li class="list-item"><span class="item-icon">10.</span> <span class="item-text">An object is acted upon by two forces of magnitude 10 N and 8 N at an angle of $60^{\circ}$ to each other. Determine the resultant force on the object.</span></li>
+                                        <li class="list-item"><span class="item-icon">11.</span> <span class="item-text">A ship heads in a direction of E $20^{\circ}$ S at a speed of 20 knots while the current is 4 knots in a direction of N $30^{\circ}$ E. Determine the speed and actual direction of the ship.</span></li>
+                                     </ol>
+                                </div>
+                            </aside>
+                         </div>
+                    </div>
+                </section>
+                <!-- END: chapter-29-addition-vectors-calculation -->
+
+                <!-- START: chapter-29-vector-subtraction -->
+                <section id="chapter-29-vector-subtraction" class="content-section" aria-labelledby="chapter-29-vector-subtraction-heading">
+                    <h2 id="chapter-29-vector-subtraction-heading" class="section-heading">
+                        <span class="heading-icon">➖</span>
+                        <span class="heading-text">29.7 Vector subtraction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In Figure 29.33, a force vector $\boldsymbol{F}$ is represented by $\boldsymbol{o a}$. The vector $(-\boldsymbol{o a})$ can be obtained by drawing a vector from $o$ in the opposite sense to oa but having the same magnitude, shown as $\boldsymbol{o b}$ in Figure 29.33; i.e., $ob=(-oa)$.</p>
+                        <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-287.jpg" alt="Vector oa and its negative -oa (ob)" class="content-image">
+                        <p>Figure 29.33</p>
+                        <p>For two vectors acting at a point, as shown in Figure 29.34(a), the resultant of vector addition is $\boldsymbol{os}=\boldsymbol{oa}+\boldsymbol{ob}$</p>
+                        <p>Figure 29.33(b) shows vectors $\boldsymbol{ob}+(-\boldsymbol{oa})$ that is, $\boldsymbol{ob}-\boldsymbol{oa}$ and the vector equation is $\boldsymbol{ob}-\boldsymbol{oa}=\boldsymbol{od}$. Comparing $\boldsymbol{od}$ in Figure 29.34(b) with the broken line $ab$ in Figure 29.34(a) shows that the second diagonal of the parallelogram method of vector addition gives the magnitude and direction of vector subtraction of $\boldsymbol{o a}$ from $ob$.</p>
+                        <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-287.jpg" alt="Vector addition and subtraction using parallelogram method" class="content-image">
+                        <p>Figure 29.34</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-11-title-c29-5">
+                            <h4 id="problem-11-title-c29-5" class="callout-title"><span class="callout-icon">💡</span> Problem 11. Accelerations of $a_{1}=1.5 \mathrm{~m}/\mathrm{s}^{2}$ at $90^{\circ}$ and $a_{2}=2.6 \mathrm{~m}/\mathrm{s}^{2}$ at $145^{\circ}$ act at a point. Find $\boldsymbol{a}_{1}+\boldsymbol{a}_{\mathbf{2}}$ and $\boldsymbol{a}_{1}-\boldsymbol{a}_{\mathbf{2}}$ by (a) drawing a scale vector diagram and (b) calculation</h4>
+                             <div class="callout-content">
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">The scale vector diagram is shown in Figure 29.35. By measurement,<br>$\boldsymbol{a_{1}+a_{2}=3.7 \mathrm{~m}/\mathrm{s}^{2} \text{ at } 126^{\circ}}$<br>$\boldsymbol{a_{1}-a_{2}=2.1 \mathrm{~m}/\mathrm{s}^{2} \text{ at } 0^{\circ}}$<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-288.jpg" alt="Scale vector diagram for Problem 11" class="content-image">Figure 29.35</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">Resolving horizontally and vertically gives<br>Horizontal component of $a_{1}+a_{2}$, $\boldsymbol{H}=1.5 \cos 90^{\circ}+2.6 \cos 145^{\circ}=\mathbf{-2.13}$<br>Vertical component of $\boldsymbol{a}_{\mathbf{1}}+\boldsymbol{a}_{\mathbf{2}}$, $\boldsymbol{V}=1.5 \sin 90^{\circ}+2.6 \sin 145^{\circ}=\mathbf{2.99}$<br>From Figure 29.36, the magnitude of $a_{1}+a_{2}$, $\boldsymbol{R}=\sqrt{(-2.13)^{2}+2.99^{2}}=\mathbf{3.67m}/\mathbf{s}^{\mathbf{2}}$<br>In Figure 29.36, $\alpha=\tan^{-1}\left(\frac{2.99}{2.13}\right)=54.53^{\circ}$ and $\theta=180^{\circ}-54.53^{\circ}=125.47^{\circ}$<br>Thus, $\boldsymbol{a_{1}+a_{2}=3.67 \mathrm{~m}/\mathrm{s}^{2} \text{ at } 125.47^{\circ}}$<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-288.jpg" alt="Resultant vector for a1+a2" class="content-image">Figure 29.36<br>Horizontal component of $\boldsymbol{a}_{\mathbf{1}}\boldsymbol{-}\boldsymbol{a}_{\mathbf{2}} = 1.5 \cos 90^{\circ}-2.6 \cos 145^{\circ}=\mathbf{2.13}$<br>Vertical component of $\boldsymbol{a}_{\mathbf{1}}-\boldsymbol{a}_{\mathbf{2}} = 1.5 \sin 90^{\circ}-2.6 \sin 145^{\circ}=\mathbf{0}$<br>Magnitude of $\boldsymbol{a}_{\mathbf{1}}-\boldsymbol{a}_{\mathbf{2}}=\sqrt{2.13^{2}+0^{2}} = \mathbf{2.13 \mathrm{~m}/\mathrm{s}^{2}}$<br>Direction of $\boldsymbol{a}_{\mathbf{1}}-\boldsymbol{a}_{\mathbf{2}}=\tan^{-1}\left(\frac{0}{2.13}\right)=\mathbf{0}^{\circ}$<br>Thus, $\boldsymbol{a_{1}-a_{2}=2.13 \mathrm{~m}/\mathrm{s}^{2} \text{ at } 0^{\circ}}$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-12-title-c29-5">
+                            <h4 id="problem-12-title-c29-5" class="callout-title"><span class="callout-icon">💡</span> Problem 12. Calculate the resultant of (a) $v_{1}-v_{2}+v_{3}$ and (b) $v_{2}-v_{1}-v_{3}$ when $\boldsymbol{v}_{\mathbf{1}}=22$ units at $140^{\circ}, \boldsymbol{v}_{\mathbf{2}}=40$ units at $190^{\circ}$ and $\boldsymbol{v}_{\mathbf{3}}=15$ units at $290^{\circ}$</h4>
+                             <div class="callout-content">
+                                 <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">The vectors are shown in Figure 29.37.<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-288.jpg" alt="Vector diagram for three vectors" class="content-image">Figure 29.37<br>The horizontal component of $\boldsymbol{v}_{\mathbf{1}}-\boldsymbol{v}_{\mathbf{2}}+\boldsymbol{v}_{\mathbf{3}}$<br>$=(22 \cos 140^{\circ})-(40 \cos 190^{\circ})+(15 \cos 290^{\circ})$<br>$=(-16.85)-(-39.39)+(5.13)=\mathbf{27.67}$ units<br>The vertical component of $\boldsymbol{v}_{\mathbf{1}}\boldsymbol{-}\boldsymbol{v}_{\mathbf{2}}+\boldsymbol{v}_{\mathbf{3}}$<br>$=(22 \sin 140^{\circ})-(40 \sin 190^{\circ})+(15 \sin 290^{\circ})$<br>$=(14.14)-(-6.95)+(-14.10)=\mathbf{6.99}$ units<br>The magnitude of the resultant, $\boldsymbol{R}=\sqrt{27.67^{2}+6.99^{2}}=\mathbf{28.54}$ units<br>The direction of the resultant $R=\tan^{-1}\left(\frac{6.99}{27.67}\right)=\mathbf{14.18}^{\circ}$<br>Thus, $\boldsymbol{v_{1}-v_{2}+v_{3}=28.54 \text{ units at } 14.18^{\circ}}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">The horizontal component of $v_{2}-v_{1}-v_{3}$<br>$=(40 \cos 190^{\circ})-(22 \cos 140^{\circ})-(15 \cos 290^{\circ})$<br>$=(-39.39)-(-16.85)-(5.13)=\mathbf{-27.67}$ units<br>The vertical component of $\boldsymbol{v}_{\mathbf{2}}-\boldsymbol{v}_{\mathbf{1}}-\boldsymbol{v}_{\mathbf{3}}$<br>$=(40 \sin 190^{\circ})-(22 \sin 140^{\circ})-(15 \sin 290^{\circ})$<br>$=(-6.95)-(14.14)-(-14.10)=\mathbf{-6.99}$ units<br>From Figure 29.38, the magnitude of the resultant, $\boldsymbol{R}=\sqrt{(-27.67)^{2}+(-6.99)^{2}}=\mathbf{28.54}$ units and $\alpha=\tan^{-1}\left(\frac{6.99}{27.67}\right)=14.18^{\circ}$, from which, $\theta=180^{\circ}+14.18^{\circ}=194.18^{\circ}$<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-289.jpg" alt="Resultant vector for v2-v1-v3" class="content-image">Figure 29.38<br>Thus, $\boldsymbol{v_{2}-v_{1}-v_{3}=\mathbf{28.54} \text{ units at } \mathbf{194.18}^{\circ}}$<br>This result is as expected, since $\boldsymbol{v}_{\mathbf{2}}-\boldsymbol{v}_{\mathbf{1}}-\boldsymbol{v}_{\mathbf{3}} = -(\boldsymbol{v_{1}-v_{2}+v_{3}})$ and the vector 28.54 units at $194.18^{\circ}$ is minus times (i.e. is $180^{\circ}$ out of phase with) the vector 28.54 units at $14.18^{\circ}$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <div class="practice-exercise">
+                            <h3 class="subsection-heading">Now try the following Practice Exercise</h3>
+                            <aside class="callout note" role="note">
+                                <h4 class="callout-title">Practice Exercise 115 Vector subtraction (answers on page 352)</h4>
+                                <div class="callout-content">
+                                     <ol class="enhanced-list">
+                                        <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">Forces of $F_{1}=40 \mathrm{~N}$ at $45^{\circ}$ and $F_{2}=30 \mathrm{~N}$ at $125^{\circ}$ act at a point. Determine by drawing and by calculation (a) $\boldsymbol{F}_{\mathbf{1}}+\boldsymbol{F}_{\mathbf{2}}$ (b) $\boldsymbol{F}_{\mathbf{1}}-\boldsymbol{F}_{\mathbf{2}}$</span></li>
+                                        <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">Calculate the resultant of (a) $\boldsymbol{v}_{\mathbf{1}}+\boldsymbol{v}_{\mathbf{2}}-\boldsymbol{v}_{\mathbf{3}}$ (b) $\boldsymbol{v}_{\mathbf{3}}-\boldsymbol{v}_{\mathbf{2}}+\boldsymbol{v}_{\mathbf{1}}$ when $\boldsymbol{v}_{\mathbf{1}}=15 \mathrm{~m}/\mathrm{s}$ at $85^{\circ}$, $\boldsymbol{v}_{\mathbf{2}}=25 \mathrm{~m}/\mathrm{s}$ at $175^{\circ}$ and $\boldsymbol{v}_{\mathbf{3}}=12 \mathrm{~m}/\mathrm{s}$ at $235^{\circ}$.</span></li>
+                                     </ol>
+                                </div>
+                            </aside>
+                         </div>
+                    </div>
+                </section>
+                <!-- END: chapter-29-vector-subtraction -->
+
+                <!-- START: chapter-29-relative-velocity -->
+                <section id="chapter-29-relative-velocity" class="content-section" aria-labelledby="chapter-29-relative-velocity-heading">
+                    <h2 id="chapter-29-relative-velocity-heading" class="section-heading">
+                        <span class="heading-icon">💨</span>
+                        <span class="heading-text">29.8 Relative velocity</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>For relative velocity problems, some fixed datum point needs to be selected. This is often a fixed point on the earth's surface. In any vector equation, only the start and finish points affect the resultant vector of a system. Two different systems are shown in Figure 29.39, but, in each of the systems, the resultant vector is $\boldsymbol{ad}$.</p>
+                        <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-289.jpg" alt="Vector diagrams showing resultant vector ad" class="content-image">
+                        <p>Figure 29.39</p>
+                        <p>The vector equation of the system shown in Figure 29.39(a) is $\boldsymbol{ad}=\boldsymbol{ab}+\boldsymbol{bd}$</p>
+                        <p>and that for the system shown in Figure 29.39(b) is $\boldsymbol{ad}=\boldsymbol{ab}+\boldsymbol{bc}+\boldsymbol{cd}$</p>
+                        <p>Thus, in vector equations of this form, only the first and last letters, a and d, respectively, fix the magnitude and direction of the resultant vector. This principle is used in relative velocity problems.</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-13-title-c29-6">
+                            <h4 id="problem-13-title-c29-6" class="callout-title"><span class="callout-icon">💡</span> Problem 13. Two cars, $P$ and $Q$, are travelling towards the junction of two roads which are at right angles to one another. Car $P$ has a velocity of $45 \mathrm{~km}/\mathrm{h}$ due east and car $Q$ a velocity of $55 \mathrm{~km}/\mathrm{h}$ due south. Calculate (a) the velocity of car $P$ relative to car $Q$ and (b) the velocity of car $Q$ relative to car $P$</h4>
+                             <div class="callout-content">
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">The directions of the cars are shown in Figure 29.40(a), which is called a space diagram. The velocity diagram is shown in Figure 29.40(b), in which $\boldsymbol{p e}$ is taken as the velocity of car P relative to point e on the earth's surface. The velocity of P relative to Q is vector $\boldsymbol{p q}$ and the vector equation is $\boldsymbol{p q}=\boldsymbol{p e} \boldsymbol{+} \boldsymbol{e q}$. Hence, the vector directions are as shown, $\boldsymbol{e q}$ being in the opposite direction to $\boldsymbol{qe}$.<br><img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-289.jpg" alt="Space and velocity diagrams for relative velocity of two cars" class="content-image">Figure 29.40<br>From the geometry of the vector triangle, the magnitude of pq $=\sqrt{45^{2}+55^{2}}=71.06 \mathrm{~km}/\mathrm{h}$ and the direction of pq $=\tan^{-1}\left(\frac{55}{45}\right)=50.71^{\circ}$<br>That is, the velocity of car P relative to car Q is $\mathbf{71.06} \mathbf{~ k m}/\mathbf{h}$ at $\mathbf{50.71}^{\circ}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">The velocity of car Q relative to car P is given by the vector equation $\boldsymbol{q} \boldsymbol{p}=\boldsymbol{q} \boldsymbol{e}+\boldsymbol{e} \boldsymbol{p}$ and the vector diagram is as shown in Figure 29.40(c), having $\boldsymbol{e p}$ opposite in direction to $\boldsymbol{p e}$.<br>From the geometry of this vector triangle, the magnitude of $\boldsymbol{q} \boldsymbol{p}=\sqrt{45^{2}+55^{2}}=71.06 \mathrm{~m}/\mathrm{s}$ and the direction of $\boldsymbol{q} \boldsymbol{p}=\tan^{-1}\left(\frac{55}{45}\right)=50.71^{\circ}$ but must lie in the third quadrant; i.e., the required angle is $180^{\circ}+50.71^{\circ}=230.71^{\circ}$<br>That is, the velocity of car Q relative to car P is $\mathbf{71.06} \mathbf{~ m}/\mathbf{s}$ at $\mathbf{230.71}^{\circ}$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <div class="practice-exercise">
+                            <h3 class="subsection-heading">Now try the following Practice Exercise</h3>
+                            <aside class="callout note" role="note">
+                                <h4 class="callout-title">Practice Exercise 116 Relative velocity (answers on page 352)</h4>
+                                <div class="callout-content">
+                                     <ol class="enhanced-list">
+                                        <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">A car is moving along a straight horizontal road at $79.2 \mathrm{~km}/\mathrm{h}$ and rain is falling vertically downwards at $26.4 \mathrm{~km}/\mathrm{h}$. Find the velocity of the rain relative to the driver of the car.</span></li>
+                                        <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">Calculate the time needed to swim across a river 142 m wide when the swimmer can swim at $2 \mathrm{~km}/\mathrm{h}$ in still water and the river is flowing at $1 \mathrm{~km}/\mathrm{h}$. At what angle to the bank should the swimmer swim?</span></li>
+                                        <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">A ship is heading in a direction N $60^{\circ}$ E at a speed which in still water would be $20 \mathrm{~km}/\mathrm{h}$. It is carried off course by a current of $8 \mathrm{~km}/\mathrm{h}$ in a direction of E $50^{\circ}$ S. Calculate the ship's actual speed and direction.</span></li>
+                                     </ol>
+                                </div>
+                            </aside>
+                         </div>
+                    </div>
+                </section>
+                <!-- END: chapter-29-relative-velocity -->
+
+                <!-- START: chapter-29-ijk-notation -->
+                <section id="chapter-29-ijk-notation" class="content-section" aria-labelledby="chapter-29-ijk-notation-heading">
+                    <h2 id="chapter-29-ijk-notation-heading" class="section-heading">
+                        <span class="heading-icon">⛛</span>
+                        <span class="heading-text">29.9 $i, j$ and $k$ notation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A method of completely specifying the direction of a vector in space relative to some reference point is to use three unit vectors, $\boldsymbol{i}, \boldsymbol{j}$ and $\boldsymbol{k}$, mutually at right angles to each other, as shown in Figure 29.41.</p>
+                        <img src="../assets/images/2025_05_06_6087c43bc92deffd8bd0g-290.jpg" alt="i, j, k unit vectors in 3D space" class="content-image">
+                        <p>Figure 29.41</p>
+                        <p>Calculations involving vectors given in $\boldsymbol{i}, \boldsymbol{j}, \boldsymbol{k}$ notation are carried out in exactly the same way as standard algebraic calculations, as shown in the worked examples below.</p>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-14-title-c29-7">
+                            <h4 id="problem-14-title-c29-7" class="callout-title"><span class="callout-icon">💡</span> Problem 14. Determine $(3\boldsymbol{i}+2\boldsymbol{j}+2\boldsymbol{k})-(4\boldsymbol{i}-3\boldsymbol{j}+2\boldsymbol{k})$</h4>
+                             <div class="callout-content">
+                                 <div class="equation">
+                                     $$\begin{aligned} (3\boldsymbol{i}+2\boldsymbol{j}+2\boldsymbol{k})-(4\boldsymbol{i}-3\boldsymbol{j}+2\boldsymbol{k}) &= 3\boldsymbol{i}+2\boldsymbol{j}+2\boldsymbol{k}-4\boldsymbol{i}+3\boldsymbol{j}-2\boldsymbol{k} \\ &= \mathbf{-i+5j} \end{aligned}$$
+                                 </div>
+                             </div>
+                         </aside>
+
+                         <aside class="callout note" role="note" aria-labelledby="problem-15-title-c29-7">
+                            <h4 id="problem-15-title-c29-7" class="callout-title"><span class="callout-icon">💡</span> Problem 15. Given $\boldsymbol{p}=3\boldsymbol{i}+2\boldsymbol{k}, \boldsymbol{q}=4\boldsymbol{i}-2\boldsymbol{j}+3\boldsymbol{k}$ and $\boldsymbol{r}=-3\boldsymbol{i}+5\boldsymbol{j}-4\boldsymbol{k}$, determine<br>(a) $-\boldsymbol{r}$ (b) $3\boldsymbol{p}$ (c) $2\boldsymbol{p}+3\boldsymbol{q}$ (d) $-\boldsymbol{p}+2\boldsymbol{r}$ (e) $0.2\boldsymbol{p}+0.6\boldsymbol{q}-3.2\boldsymbol{r}$</h4>
+                             <div class="callout-content">
+                                <ul class="enhanced-list">
+                                     <li class="list-item"><span class="item-icon">(a)</span> <span class="item-text">$-\boldsymbol{r}=-(-3\boldsymbol{i}+5\boldsymbol{j}-4\boldsymbol{k})=\mathbf{+3i-5j+4k}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(b)</span> <span class="item-text">$3\boldsymbol{p}=3(3\boldsymbol{i}+2\boldsymbol{k})=\mathbf{9i+6k}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(c)</span> <span class="item-text">$2\boldsymbol{p}+3\boldsymbol{q}=2(3\boldsymbol{i}+2\boldsymbol{k})+3(4\boldsymbol{i}-2\boldsymbol{j}+3\boldsymbol{k}) = 6\boldsymbol{i}+4\boldsymbol{k}+12\boldsymbol{i}-6\boldsymbol{j}+9\boldsymbol{k} = \mathbf{18i-6j+13k}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(d)</span> <span class="item-text">$- \boldsymbol{p}+2\boldsymbol{r} = -(3\boldsymbol{i}+2\boldsymbol{k})+2(-3\boldsymbol{i}+5\boldsymbol{j}-4\boldsymbol{k}) = -3\boldsymbol{i}-2\boldsymbol{k}+(-6\boldsymbol{i}+10\boldsymbol{j}-8\boldsymbol{k}) = -3\boldsymbol{i}-2\boldsymbol{k}-6\boldsymbol{i}+10\boldsymbol{j}-8\boldsymbol{k} = \mathbf{-9i+10j-10k}$</span></li>
+                                     <li class="list-item"><span class="item-icon">(e)</span> <span class="item-text">$0.2\boldsymbol{p}+0.6\boldsymbol{q}-3.2\boldsymbol{r} = 0.2(3\boldsymbol{i}+2\boldsymbol{k})+0.6(4\boldsymbol{i}-2\boldsymbol{j}+3\boldsymbol{k}) -3.2(-3\boldsymbol{i}+5\boldsymbol{j}-4\boldsymbol{k}) = 0.6\boldsymbol{i}+0.4\boldsymbol{k}+2.4\boldsymbol{i}-1.2\boldsymbol{j}+1.8\boldsymbol{k} +9.6\boldsymbol{i}-16\boldsymbol{j}+12.8\boldsymbol{k} = \mathbf{12.6i-17.2j+15k}$</span></li>
+                                 </ul>
+                             </div>
+                         </aside>
+
+                         <div class="practice-exercise">
+                            <h3 class="subsection-heading">Now try the following Practice Exercise</h3>
+                            <aside class="callout note" role="note">
+                                <h4 class="callout-title">Practice Exercise 117 $i, j, k$ notation (answers on page 352)</h4>
+                                <div class="callout-content">
+                                     <p>Given that $\boldsymbol{p}=2\boldsymbol{i}+0.5\boldsymbol{j}-3\boldsymbol{k}, \boldsymbol{q}=-\boldsymbol{i}+\boldsymbol{j}+4\boldsymbol{k}$ and $\boldsymbol{r}=6\boldsymbol{j}-5\boldsymbol{k}$, evaluate and simplify the following vectors in $i, j, k$ form.</p>
+                                     <ol class="enhanced-list">
+                                        <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">$-\boldsymbol{q}$</span></li>
+                                        <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">$2\boldsymbol{p}$</span></li>
+                                        <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">$\boldsymbol{q}+\boldsymbol{r}$</span></li>
+                                        <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">$-\boldsymbol{q}+2\boldsymbol{p}$</span></li>
+                                        <li class="list-item"><span class="item-icon">5.</span> <span class="item-text">$3\boldsymbol{q}+4\boldsymbol{r}$</span></li>
+                                        <li class="list-item"><span class="item-icon">6.</span> <span class="item-text">$\boldsymbol{q}-2\boldsymbol{p}$</span></li>
+                                        <li class="list-item"><span class="item-icon">7.</span> <span class="item-text">$\boldsymbol{p}+\boldsymbol{q}+\boldsymbol{r}$</span></li>
+                                        <li class="list-item"><span class="item-icon">8.</span> <span class="item-text">$\boldsymbol{p}+2\boldsymbol{q}+3\boldsymbol{r}$</span></li>
+                                        <li class="list-item"><span class="item-icon">9.</span> <span class="item-text">$2\boldsymbol{p}+0.4\boldsymbol{q}+0.5\boldsymbol{r}$</span></li>
+                                        <li class="list-item"><span class="item-icon">10.</span> <span class="item-text">$7\boldsymbol{r}-2\boldsymbol{q}$</span></li>
+                                     </ol>
+                                </div>
+                            </aside>
+                         </div>
+                    </div>
+                </section>
+                <!-- END: chapter-29-ijk-notation -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="revision-test-11.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                             <!-- Chunk 41 in content sequence, Total 55 content chunks -->
+                            <div class="progress-fill" style="width: calc((41 / 55) * 100%);"></div>
+                        </div>
+                        <span class="progress-text">Chunk 41 of 55</span>
+                        <span class="progress-text">Chapter 29 of 35</span>
+                    </div>
+                    <a href="chapter-30.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

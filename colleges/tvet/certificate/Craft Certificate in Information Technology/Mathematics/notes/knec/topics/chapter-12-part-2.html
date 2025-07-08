@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12: Statistics (Part 2) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-12-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 12 (Part 2)</span>
+                    </div>
+                    <a href="chapter-12-part-3.html" class="nav-button"> <!-- Link to final part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 12 : Statistics (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-12-central-tendency-cont -->
+                <section id="section-12-5-cont" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">12.5 Three Statistical Quantities of Central Tendency (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">12.5.3 The Mode (Continued)</h3>
+                        <p>The <strong>mode</strong> of a set of number is that value which occurs with the greatest frequency, i.e. it is the most common value. The mode may not exist, and even if it does exist, it may not be unique.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>The set 2, 2, 5, 7, 9, 9, <strong>9</strong>, 10, 10, 11, 12, 18 has a mode = 9.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>The set 3, 5, 8, 10, 12, 15, 16 has no mode.</p>
+                        <p>A distribution having only one mode is called <strong>uni-modal</strong>.</p>
+                        <p>In the case of a grouped data where a frequency curve has been constructed to fit the data, the mode will be the value (values) of X with the highest frequency.</p>
+                        <p>From a frequency distribution or histogram the mode can be obtained using the following formula.</p>
+                        <div class="equation">$$ \text{Mode} = L_1 + \left( \frac{\Delta_1}{\Delta_1 + \Delta_2} \right) \times c $$</div> <!-- Corrected formula -->
+                        <p>where</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="math-inline">$L_1$</span> = Lower class boundary of modal class (i.e. class containing the mode)</li> <!-- MMD typo: ewer -->
+                            <li class="list-item"><span class="math-inline">$\Delta_1$</span> = Excess of modal frequency over frequency of previous lower class.</li>
+                            <li class="list-item"><span class="math-inline">$\Delta_2$</span> = Excess of modal frequency over frequency of next higher class.</li>
+                            <li class="list-item"><span class="math-inline">$c$</span> = Size of modal class interval.</li>
+                        </ul>
+                        <p>Mode of grouped data may also be estimated from Histogram as shown in Figure 12-1.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>Estimate the mode of the following distribution of salaries of employees in a computer company:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Salary ($)</th><th>No. of people</th></tr></thead>
+                                <tbody>
+                                    <tr><td>4000 - 4999</td><td>2</td></tr> <!-- Assuming ranges -->
+                                    <tr><td>5000 - 5999</td><td>12</td></tr>
+                                    <tr><td>6000 - 6999</td><td>19</td></tr>
+                                    <tr><td>7000 - 7999</td><td>25</td></tr>
+                                    <tr><td><strong>8000 - 8999</strong></td><td><strong>36</strong></td></tr> <!-- Modal Class -->
+                                    <tr><td>9000 - 9999</td><td>17</td></tr>
+                                    <tr><td>10000 - 10999</td><td>9</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ol type="a">
+                            <li>By graphical means; and</li>
+                            <li>By calculation means.</li>
+                        </ol>
+                        <p><strong>Solution:</strong></p>
+                        <img src="../assets/images/ch12-salary-histogram.jpg" alt="Histogram showing salary distribution">
+                        <p>Figure 12-2 : Histogram</p>
+                        <p>The category 8000-8999 has the highest frequency (36), it is called the modal class. The estimated mode is in this category (or class). It can be estimated graphically as shown in Figure 12-2.</p>
+                        <p>b. Mode can be estimated using the formula.</p>
+                        <p><span class="math-inline">$L_1 = 7999.5$</span> (Lower boundary of modal class)</p>
+                        <p><span class="math-inline">$\Delta_1 = 36 - 25 = 11$</span> (Difference with previous class frequency)</p>
+                        <p><span class="math-inline">$\Delta_2 = 36 - 17 = 19$</span> (Difference with next class frequency)</p>
+                        <p><span class="math-inline">$c = 1000$</span> (Class interval size)</p>
+                        <div class="equation">$$ \text{Mode} = 7999.5 + \left( \frac{11}{11 + 19} \right) \times 1000 = 7999.5 + \left( \frac{11}{30} \right) \times 1000 \approx 7999.5 + 366.67 \approx 8366.17 $$</div> <!-- Corrected L1 and calculation -->
+                    </div>
+                </section>
+                <!-- END: chapter-12-central-tendency-cont -->
+
+                <!-- START: chapter-12-dispersion -->
+                <section id="section-12-6" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">↔️</span>
+                        <span class="heading-text">12.6 Dispersion and Variation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The degree to which numerical data tend to spread about an average value is called the <strong>variation</strong> or <strong>dispersion</strong> of the data. Various measures of dispersion or variation are available.</p> <!-- MMD typo: adout, Yarious -->
+
+                        <h3 class="subsection-heading">12.6.1 Mean Deviation</h3>
+                        <p>The mean deviation or average deviation of a set of N numbers <span class="math-inline">$X_1, X_2, \ldots, X_N$</span> is defined by:</p>
+                        <div class="equation">$$ \text{Mean Deviation} = \frac{\sum_{j=1}^{N} |X_j - \bar{X}|}{N} $$</div>
+                        <p><strong>Example:</strong></p>
+                        <p>Find the mean deviation of the set of numbers 2, 3, 6, 8, 11.</p>
+                        <p><strong>Solution:</strong></p>
+                        <p>Arithmetic Mean <span class="math-inline">$\bar{X} = \frac{2+3+6+8+11}{5} = 6$</span></p>
+                        <div class="equation">$$ \text{Mean Deviation (MD)} = \frac{|2-6|+|3-6|+|6-6|+|8-6|+|11-6|}{5} = \frac{|-4|+|-3|+|0|+|2|+|5|}{5} = \frac{4+3+0+2+5}{5} = 2.8 $$</div>
+                        <p>If <span class="math-inline">$X_1, X_2, \ldots, X_K$</span> occur with frequencies <span class="math-inline">$f_1, f_2, f_3, \ldots, f_k$</span> respectively, the mean deviation can be written as :</p>
+                        <div class="equation">$$ \text{Mean Deviation} = \frac{\sum_{j=1}^{K} f_j |X_j - \bar{X}|}{N} $$</div>
+                        <p>where <span class="math-inline">$N = \sum_{j=1}^{K} f_j = \sum f_j$</span></p>
+                        <p>This form is useful for grouped data where the <span class="math-inline">$X_j$</span>'s represent class marks and the <span class="math-inline">$f_j$</span>'s are the corresponding frequencies.</p>
+
+                        <h3 class="subsection-heading">12.6.2 The Standard Deviation</h3>
+                        <p>The <strong>standard deviation</strong> of a set of N numbers <span class="math-inline">$X_1, X_2, \ldots, X_N$</span> is denoted by SD (or s or σ) and is defined by</p> <!-- Corrected MMD typo -->
+                        <div class="equation">$$ SD = \sqrt{\frac{\sum_{j=1}^{N} (X_j - \bar{X})^2}{N}} = \sqrt{\frac{\sum (X - \bar{X})^2}{N}} = \sqrt{\frac{\sum X^2}{N} - \bar{X}^2} $$</div>
+                        <p>If <span class="math-inline">$X_1, X_2, \ldots, X_K$</span> occur with frequencies <span class="math-inline">$f_1, f_2, \ldots, f_K$</span> respectively, the standard deviation can be written as:</p> <!-- MMD typo: ith irequencies -->
+                        <div class="equation">$$ SD = \sqrt{\frac{\sum_{j=1}^{K} f_j (X_j - \bar{X})^2}{N}} = \sqrt{\frac{\sum f(X - \bar{X})^2}{N}} = \sqrt{\frac{\sum fX^2}{N} - \bar{X}^2} $$</div> <!-- Corrected formula -->
+                        <p>where <span class="math-inline">$N = \sum_{j=1}^{K} f_j = \sum f$</span></p>
+                        <p>This form is useful for grouped data.</p>
+
+                        <h3 class="subsection-heading">12.6.3 The Variance</h3>
+                        <p>The <strong>variance</strong> of a set N numbers <span class="math-inline">$X_1, X_2, \ldots, X_N$</span> is defined as the square of the standard deviation and is thus given by</p> <!-- Corrected MMD typo -->
+                        <div class="equation">$$ \text{Var} = (SD)^2 = \frac{\sum_{j=1}^{N} (X_j - \bar{X})^2}{N} = \frac{\sum (X - \bar{X})^2}{N} = \frac{\sum X^2}{N} - \bar{X}^2 $$</div>
+                        <p>If <span class="math-inline">$X_1, X_2, \ldots, X_K$</span> occurs with frequencies <span class="math-inline">$f_1, f_2, \ldots, f_K$</span> respectively, the variance can be written as:</p>
+                        <div class="equation">$$ \text{Var} = (SD)^2 = \frac{\sum_{j=1}^{K} f_j (X_j - \bar{X})^2}{N} = \frac{\sum f(X - \bar{X})^2}{N} = \frac{\sum fX^2}{N} - \bar{X}^2 $$</div> <!-- Corrected formula -->
+                        <p>where <span class="math-inline">$N = \sum_{j=1}^{K} f_j = \sum f$</span></p>
+                        <p>This form is useful for grouped data.</p>
+
+                        <p><strong>Example:</strong></p>
+                        <p>Find the standard deviation and variance of the following set of numbers: 12, 6, 7, 3, 15, 10, 18, 5</p>
+                        <p>Arithmetic mean <span class="math-inline">$\bar{X} = \frac{\sum X}{N} = \frac{12+6+7+3+15+10+18+5}{8} = \frac{76}{8} = 9.5$</span></p>
+                        <div class="equation">$$ SD = \sqrt{\frac{\sum (X - \bar{X})^2}{N}} = \sqrt{\frac{(12-9.5)^2+(6-9.5)^2+(7-9.5)^2+(3-9.5)^2+(15-9.5)^2+(10-9.5)^2+(18-9.5)^2+(5-9.5)^2}{8}} $$</div>
+                        <div class="equation">$$ SD = \sqrt{\frac{(2.5)^2+(-3.5)^2+(-2.5)^2+(-6.5)^2+(5.5)^2+(0.5)^2+(8.5)^2+(-4.5)^2}{8}} $$</div>
+                        <div class="equation">$$ SD = \sqrt{\frac{6.25 + 12.25 + 6.25 + 42.25 + 30.25 + 0.25 + 72.25 + 20.25}{8}} = \sqrt{\frac{190}{8}} = \sqrt{23.75} \approx 4.87 $$</div>
+                        <p>Variance = (SD)<sup>2</sup> = 23.75</p>
+
+                        <p><strong>Example:</strong></p>
+                        <p>Find the standard deviation of the weights of the 100 male students at Informatics Computer School as shown in the table below.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Mass (Kg)</th><th>Class Mark (X)</th><th>Frequency (f)</th><th>fX</th><th>fX<sup>2</sup></th></tr></thead>
+                                <tbody>
+                                    <tr><td>60-62</td><td>61</td><td>5</td><td>305</td><td>18605</td></tr>
+                                    <tr><td>63-65</td><td>64</td><td>18</td><td>1152</td><td>73728</td></tr>
+                                    <tr><td>66-68</td><td>67</td><td>42</td><td>2814</td><td>188538</td></tr>
+                                    <tr><td>69-71</td><td>70</td><td>27</td><td>1890</td><td>132300</td></tr>
+                                    <tr><td>72-74</td><td>73</td><td>8</td><td>584</td><td>42632</td></tr>
+                                    <tr><td></td><td></td><td>N = Σf = 100</td><td>ΣfX = 6745</td><td>ΣfX<sup>2</sup> = 455803</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Mean <span class="math-inline">$\bar{X} = \frac{\sum fX}{N} = \frac{6745}{100} = 67.45$</span> kg</p>
+                        <div class="equation">$$ SD = \sqrt{\frac{\sum fX^2}{N} - \bar{X}^2} = \sqrt{\frac{455803}{100} - (67.45)^2} = \sqrt{4558.03 - 4549.5025} = \sqrt{8.5275} \approx 2.92 \text{ kg} $$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-12-dispersion -->
+
+                <!-- START: chapter-12-points-remember -->
+                <section id="chapter-12-points-remember" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📌</span>
+                        <span class="heading-text">Points to Remember (Statistics)</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul class="enhanced-list">
+                            <li class="list-item">To use some guidelines to organise data into frequency distribution table (grouped data).</li>
+                            <li class="list-item">Use line graph, bar chart, pictograph, pie chart, histogram and cumulative frequency diagram to display data in graphical form.</li> <!-- MMD typo: piotogram -->
+                            <li class="list-item">Calculate mean, median and mode as measures of central tendency.</li>
+                        </ul>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Measure</th><th>Raw Data</th><th>Grouped Data</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Mean</td><td><span class="math-inline">$\frac{\sum X}{N}$</span></td><td><span class="math-inline">$\frac{\sum fX}{\sum f}$</span></td></tr>
+                                    <tr><td>Median</td><td>Take the middle data from a sorted list.</td><td>1. Use cumulative frequency diagram.<br>2. Use formula: <span class="math-inline">$L_1 + \left( \frac{N/2 - (\sum f)_1}{f_{\text{median}}} \right) \times c$</span></td></tr>
+                                    <tr><td>Mode</td><td>Take the data that appear most frequently.</td><td>1. Use histogram.<br>2. Use formula: <span class="math-inline">$L_1 + \left( \frac{\Delta_1}{\Delta_1 + \Delta_2} \right) \times c$</span></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Calculate standard deviation and variance as measures of spread or dispersion.</li>
+                        </ul>
+                        <div class="table-container">
+                             <table class="content-table">
+                                <thead><tr><th>Measure</th><th>Raw Data</th><th>Grouped Data</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Standard Deviation</td><td><span class="math-inline">$\sqrt{\frac{\sum X^2}{N} - \left(\frac{\sum X}{N}\right)^2}$</span></td><td><span class="math-inline">$\sqrt{\frac{\sum fX^2}{\sum f} - \left(\frac{\sum fX}{\sum f}\right)^2}$</span></td></tr>
+                                    <tr><td>Variance</td><td>(Standard Deviation)<sup>2</sup></td><td>(Standard Deviation)<sup>2</sup></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Use time series graph to observe the trend of a variable over time.</li>
+                            <li class="list-item">Use scatter diagram to observe the correlation between two variables.</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-12-points-remember -->
+
+                <!-- START: chapter-12-past-questions -->
+                <section id="section-12-7" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">12.7 Past Years Questions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Given the following collection of numbers 2, 4, 5, 5, 6, 7.</p>
+                        <ol type="a">
+                            <li>Calculate the mean (round to 1 decimal place).</li> <!-- MMD typo: lll -->
+                            <li>Calculate the mode.</li> <!-- MMD typo: mmm -->
+                            <li>Calculate the median.</li> <!-- MMD typo: nnn -->
+                        </ol>
+                        <p>a. What is mean?</p>
+                        <p>b. What is mode?</p> <!-- MMD typo: ooo -->
+                        <p>A grade of 1 to 5 could be obtained in an examination and the actual scores were distributed as follows:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Grade</th><th>1</th><th>2</th><th>3</th><th>4</th><th>5</th></tr></thead> <!-- Added missing grade 3 -->
+                                <tbody><tr><td>No. of Candidates</td><td>4</td><td>3</td><td>9</td><td>2</td><td>2</td></tr></tbody>
+                            </table>
+                        </div>
+                        <p>Find:</p>
+                        <ol type="a" start="3">
+                            <li>the mean;</li> <!-- MMD typo: ppp -->
+                            <li>the median;</li> <!-- MMD typo: qqq -->
+                            <li>the mode.</li> <!-- MMD typo: rrr -->
+                        </ol>
+                        <p>Given a series of numbers: 0, 6, 8, 12, 25, and the mean of these numbers is 15:</p>
+                        <ol type="a" start="6">
+                            <li>Find C.</li> <!-- MMD typo: sss -->
+                            <li>Find the median.</li> <!-- MMD typo: ttt -->
+                        </ol>
+                        <p>Given the following collection of integers, where X is unknown:</p>
+                        <p>3, 2, 7, 2, 2, 4, 5, 2, 4, 6, X</p>
+                        <ol type="a" start="8">
+                            <li>What can be said about the median?</li> <!-- MMD typo: uuu -->
+                            <li>What can be said about the mode? [2]</li> <!-- MMD typo: vvv -->
+                            <li>What can be said about the mean? [2]</li> <!-- MMD typo: www -->
+                            <li>If the mean was given as 4, what would be the value of X?</li> <!-- MMD typo: xxx -->
+                        </ol>
+                        <p>Ten students have taken an examination and been given their marks. Student X will not say what his mark is, but the other students have marks of 2, 4, 6, 6, 7, 7, 7, 8 and 10. The teacher has told everyone that the mean mark was 6.</p>
+                        <ol type="a" start="12">
+                            <li>What mark did student X obtain?</li> <!-- MMD typo: yyy -->
+                            <li>What mark is the median?</li> <!-- MMD typo: zzz -->
+                            <li>What mark is the mode?</li> <!-- MMD typo: aaaa -->
+                        </ol>
+                        <p>The heights of a group of students from a secondary school are distributed as follows:</p>
+                        <div class="table-container">
+                             <table class="content-table">
+                                <thead><tr><th>Height(m)</th><th>Frequency</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1.4 <= ht <= 1.5</td><td>5</td></tr>
+                                    <tr><td>1.5 <= ht <= 1.6</td><td>30</td></tr>
+                                    <tr><td>1.6 <= ht <= 1.7</td><td>36</td></tr>
+                                    <tr><td>1.7 <= ht <= 1.8</td><td>40</td></tr>
+                                    <tr><td>1.8 <= ht <= 1.9</td><td>8</td></tr>
+                                    <tr><td>1.9 <= ht <= 2.0</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ol type="a" start="15"> <!-- MMD typo: bbbb -->
+                            <li>Draw a histogram of this data on graph paper.</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-12-past-questions -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-12-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 12 (Part 2)</span>
+                    </div>
+                    <a href="chapter-12-part-3.html" class="nav-button"> <!-- Link to final part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8: Data Structures (II) (Part 1) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 8 (Part 1)</span>
+                    </div>
+                    <a href="chapter-8-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 8 : Data Structures (II)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-8-objectives -->
+                <section id="chapter-8-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you would have learnt:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">how to acquire the ability to manipulate or to use the different types if data structures;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">how to construct and traverse a binary tree;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">comparison of data structures.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-8-objectives -->
+
+                <!-- START: chapter-8-introduction -->
+                <section id="section-8-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💡</span>
+                        <span class="heading-text">8.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>So far, we have been studying mainly linear types of data structures: strings, arrays, lists, stacks and queues. This section defines a non-linear data structure called a tree. This structure is mainly used to represent data containing a hierarchical relationship between elements. E.g. records, family trees and tables of contents.</p> <!-- MMD typos: ct, defire, use(1), E.z. -->
+                        <p>First we investigate a special kind of tree, called a binary tree, which can be easily maintained in the computer. Although such a tree may seem to be very restrictive, we will see later in the section that more general trees may be viewed as binary trees.</p> <!-- MMD typos: f tee, compure, flthough, seen -->
+                    </div>
+                </section>
+                <!-- END: chapter-8-introduction -->
+
+                <!-- START: chapter-8-tree -->
+                <section id="section-8-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🌳</span>
+                        <span class="heading-text">8.2 Tree</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>Natural Tree</strong></p>
+                        <p>What has a natural tree got to do with a computer?</p>
+                        <p>Try a pseudo-code to get the apples and return to the ground.</p>
+                        <img src="../assets/images/ch8-natural-tree.jpg" alt="Diagram of a natural tree with apples">
+                        <p>A natural tree</p>
+
+                        <p><strong>Computer tree</strong></p>
+                        <p>A simplified model of a real tree. Where each node has at most two others below it. This is a binary tree.</p>
+                        <img src="../assets/images/ch8-computer-tree.jpg" alt="Diagram of a computer science tree structure (inverted tree)">
+                        <p>The family tree model</p> <!-- MMD typo: free -->
+                        <p>The countries Malaysia, Namibia, Mauritius, Bahrain, Hong Kong, Pakistan, Sri Lanka, Botswana, Singapore and India are to be placed in an alphabetical order using pointers.</p> <!-- MMD typo: place? -->
+                        <p>The diagram below is a complete, 'linkages' of all the countries.</p>
+                        <img src="../assets/images/ch8-tree-countries.jpg" alt="Binary search tree diagram with countries ordered alphabetically">
+                        <p>The tree diagram completed</p>
+
+                        <p><strong>Further Example of Tree Diagram</strong></p>
+                        <p>The text "TREE DIAGRAMS ARE QUITE EASY WHEN YOU KNOW HOW." is to be represented in the form of a tree.</p>
+                        <!-- Image ch8-tree-text.jpg failed to download -->
+                        <p>[Image: ch8-tree-text.jpg - Download Failed]</p>
+                        <p>Question: Can you understand the logic of the binary tree?</p>
+                    </div>
+                </section>
+                <!-- END: chapter-8-tree -->
+
+                <!-- START: chapter-8-tables -->
+                <section id="section-8-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📋</span>
+                        <span class="heading-text">8.3 Tables</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In tables, there are basically 4 types of pointers:</p>
+                        <ol type="i">
+                            <li>Left Pointer;</li>
+                            <li>Right Pointer;</li>
+                            <li>Back Pointer/Parent Pointer;</li>
+                            <li>Trace Pointer.</li>
+                        </ol>
+                        <p>The Pointers point to the left, right of the tree trace where they come from or to the next node of the tree. This to preserve the structure of the tree.</p>
+                        <p>The node number takes positive integers and '-1' has special meaning (usually indicating null/no pointer).</p> <!-- Added explanation for -1 -->
+                        <p>Table representation of the Countries tree:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>NODE</th><th>DATUM</th><th>LP</th><th>RP</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>Malaysia</td><td>4</td><td>2</td></tr>
+                                    <tr><td>2</td><td>Namibia</td><td>3</td><td>6</td></tr>
+                                    <tr><td>3</td><td>Mauritius</td><td>-1</td><td>-1</td></tr>
+                                    <tr><td>4</td><td>Bahrain</td><td>-1</td><td>5</td></tr>
+                                    <tr><td>5</td><td>Hong Kong</td><td>8</td><td>10</td></tr>
+                                    <tr><td>6</td><td>Pakistan</td><td>-1</td><td>7</td></tr>
+                                    <tr><td>7</td><td>Sri Lanka</td><td>9</td><td>-1</td></tr> <!-- MMD typo: Lark -->
+                                    <tr><td>8</td><td>Botswana</td><td>-1</td><td>-1</td></tr>
+                                    <tr><td>9</td><td>Singapore</td><td>-1</td><td>-1</td></tr> <!-- MMD typo: Sirdapore -->
+                                    <tr><td>10</td><td>India</td><td>-1</td><td>-1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The above tree is mapped into arrays to give the following:</p>
+                        <p>Data Array:</p>
+                        <pre><code>[Malaysia, Namibia, Mauritius, Bahrain, Hong Kong, Pakistan, Sri Lanka, Botswana, Singapore, India]</code></pre>
+                        <p>Pointer Array (LP, RP):</p>
+                        <div class="equation">$$ \begin{bmatrix} 4 & 2 \\ 3 & 6 \\ -1 & -1 \\ -1 & 5 \\ 8 & 10 \\ -1 & 7 \\ 9 & -1 \\ -1 & -1 \\ -1 & -1 \\ -1 & -1 \end{bmatrix} $$</div>
+                        <p>Using the full set of pointers (LP, RP, Back, Trace - Note: Back/Trace not explicitly shown in diagram/table):</p>
+                        <p>Pointer Array (LP, RP, BP, TP):</p>
+                         <div class="equation">$$ \begin{bmatrix} 4 & 2 & -1 & 3 \\ 3 & 6 & 1 & 6 \\ -1 & -1 & 2 & 2 \\ -1 & 5 & 1 & 8 \\ 8 & 10 & 4 & 10 \\ -1 & 7 & 2 & 9 \\ 9 & -1 & 6 & -1 \\ -1 & -1 & 5 & 5 \\ -1 & -1 & 7 & 7 \\ -1 & -1 & 5 & 1 \end{bmatrix} $$</div>
+
+                        <p><strong>The Back / Trace Pointer</strong></p>
+                        <!-- Image ch8-back-trace-pointer.jpg failed to download -->
+                        <p>[Image: ch8-back-trace-pointer.jpg - Download Failed]</p>
+                        <p>The Pointers</p>
+                    </div>
+                </section>
+                <!-- END: chapter-8-tables -->
+
+                <!-- START: chapter-8-binary-trees -->
+                <section id="section-8-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🌲</span>
+                        <span class="heading-text">8.4 Binary Trees</span> <!-- MMD typo: Tries -->
+                    </h2>
+                    <div class="content-card">
+                        <p>A binary tree T is defined as finite set of elements, called nodes such that:</p>
+                        <ol type="a">
+                            <li>T is empty (called the null tree or empty tree), or</li>
+                            <li>T contains a distinguished node R, called the root of T, and the remaining nodes of T form an ordered pair of disjoint binary trees T<sub>1</sub> and T<sub>2</sub>.</li>
+                        </ol>
+                        <p>If T does contain a root R, then the two trees T<sub>1</sub> and T<sub>2</sub> are called, respectively, the left and right subtrees of R. If T<sub>1</sub> is non-empty, then its root is called the left successor of R; similarly, if T<sub>2</sub> is non-empty, then its root is called the right successor of R.</p>
+                        <p><strong>Example: Software Tree</strong></p>
+                        <!-- Image ch8-binary-tree-software.jpg failed to download -->
+                        <p>[Image: ch8-binary-tree-software.jpg - Download Failed]</p>
+                        <p>A binary tree T is frequently presented by means of a diagram. Specifically, the diagram above represents a binary tree T as follows.</p>
+                        <p>T consists of 8 nodes, represented by the letters s through e.</p>
+                        <p>The root of T is the node s at the top of the diagram.</p>
+                        <p>A left-downward slanted line from a node s indicate a left successor of s and a right-downward slanted line from s indicates a right successor of s.</p> <!-- MMD typos: sindicate, ieft, ight -->
+                        <p>Observe that:</p>
+                        <ul class="enhanced-list">
+                            <li>o is a left successor and t is a right successor of the node s.</li>
+                            <li>The left subtree of the root s consists of the nodes o, f, t, w, a and e, and the right subtree of s consists of the nodes t and w.</li> <!-- MMD typo: subtle -->
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-8-binary-trees -->
+
+                <!-- START: chapter-8-traversing -->
+                <section id="section-8-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🚶</span>
+                        <span class="heading-text">8.5 Traversing of Binary Trees</span> <!-- MMD typo: Bina-y Erees -->
+                    </h2>
+                    <div class="content-card">
+                        <p>There are three standard ways of traversing a binary tree T with root R. These three algorithms, called preorder, inorder and postorder, are as follows:</p> <!-- MMD typos: stà aed, raliled -->
+                        <p><strong>Preorder:</strong></p>
+                        <ol>
+                            <li>Process the root R.</li>
+                            <li>Traverse the left subtree of R in preorder.</li>
+                            <li>Traverse the right subtree of R in preorder.</li>
+                        </ol>
+                        <p><strong>Inorder:</strong></p>
+                        <ol>
+                            <li>Traverse the left subtree of R in inorder.</li>
+                            <li>Process the root R.</li>
+                            <li>Traverse the right subtree of R in inorder.</li>
+                        </ol>
+                        <p><strong>Postorder:</strong></p>
+                        <ol>
+                            <li>Traverse the left subtree of R in postorder.</li>
+                            <li>Traverse the right subtree of R in postorder.</li>
+                            <li>Process the root R.</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-8-traversing -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-7-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 8 (Part 1)</span>
+                    </div>
+                    <a href="chapter-8-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

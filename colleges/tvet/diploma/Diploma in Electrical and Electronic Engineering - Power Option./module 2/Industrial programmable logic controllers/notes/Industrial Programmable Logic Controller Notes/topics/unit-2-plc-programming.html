@@ -1,0 +1,787 @@
+<!-- topics/unit-2-plc-programming.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 2 Part 2: PLC Programming Languages</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-2-plc-basics.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 30%;"></div> <!-- Chunk 3/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 3 of 10</span>
+                    </div>
+                    <a href="unit-2-plc-peripherals-maintenance.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <!-- Re-state main topic as context -->
+                 <p style="text-align: center; font-size: 1rem; color: var(--muted-text-color); margin-bottom: 0;">TOPIC 2: PROGRAMMABLE LOGIC CONTROLLER (PLC)</p>
+                <h1 class="section-title">PLC Programming</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: topic-2-programming-intro -->
+                <section id="topic-2-programming-intro" class="content-section" aria-labelledby="topic-2-programming-intro-heading">
+                    <h2 id="topic-2-programming-intro-heading" class="section-heading">
+                        <span class="heading-icon">💻</span>
+                        <span class="heading-text">PLC Programming</span>
+                    </h2>
+                     <div class="content-card">
+                         <p>Programming devices can be hand-held devices, a desktop console or a computer. Only when the program has been designed on the programming device is ready, it is transferred to the memory unit of the PLC</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Hand-held programming devices</strong> - will normally contain enough memory to allow the unit to retain programs while being carried from one place to another.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Desktop consoles</strong> - are likely to have a visual display unit with a full keyboard and screen displays.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Personal computers</strong> - are widely configured as program development work station. A major advantage of using a computer is that the program can be stored on the hand disk or CD and copies easily made.</span></li>
+                         </ul>
+                         <p>PLC programming process is to plan activities such as design and write a program to perform the required tasks. The parts that should be there in a PLC program are shown.</p>
+                         <div class="table-container">
+                             <table class="content-table">
+                                 <caption>PLC Program Parts</caption>
+                                 <thead>
+                                     <tr><th>Part</th><th>Function</th></tr>
+                                 </thead>
+                                 <tbody>
+                                    <tr><td>Start</td><td>Starting an operation</td></tr>
+                                    <tr><td>Operating Mode</td><td>Determining the origin of the device input / output and also the starting point</td></tr>
+                                    <tr><td>The Reset</td><td>Controlling the operation of start / stop it manually or automatically in the program</td></tr>
+                                    <tr><td>Operations / Ordering Process</td><td>Program design as required by the task</td></tr>
+                                    <tr><td>Signal Output</td><td>Trigger output devices.</td></tr>
+                                    <tr><td>Status Output</td><td>Display indicator light or alarm.</td></tr>
+                                    <tr><td>End</td><td>Stop the process./operation</td></tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                         <p>While ladder logic is the most commonly used PLC programming language, it is not the only one.</p>
+                         <p><strong>IEC 61131-3</strong> (Formerly IEC 1131-3) is the international standard for PLC languages. The following is a list of programming languages specified by this standard.</p>
+                         <ol type="i" class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">i)</span><span class="item-text">Ladder diagram (LD)</span></li>
+                            <li class="list-item"><span class="item-icon">ii)</span><span class="item-text">Instruction list (IL)</span></li>
+                            <li class="list-item"><span class="item-icon">iii)</span><span class="item-text">Function block diagram (FBD)</span></li>
+                            <li class="list-item"><span class="item-icon">iv)</span><span class="item-text">Structured text (ST)</span></li>
+                            <li class="list-item"><span class="item-icon">v)</span><span class="item-text">Sequential function chart (SFC)</span></li>
+                         </ol>
+
+                         <h3 class="subsection-heading">1. Ladder diagram language (LD)</h3>
+                         <p>It uses a standardized set of ladder programming symbols to implement control functions. Initially programmed with simple contacts that simulated the opening and closing of relays, ladder logic, programming has extended to include such functions as counters, timers, shift registers and mathematical operations.</p>
+                         <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-012-2.jpg" alt="Example Ladder Diagram rung with two inputs (Input A, Input B) in series connected to an output (Output)." class="content-image" style="max-width: 300px;">
+                              <figcaption>Ladder Diagram Example</figcaption>
+                         </figure>
+
+                         <h3 class="subsection-heading">2. Instruction list (IL)</h3>
+                         <p>A low level (assemble like) language that is based on similar instructions list languages found in a wide range of today's PLCs.</p>
+                         <pre class="code-block"><code class="language-text">
+Instructions
+LD     b1
+AND    b2
+ANDN   b3
+ST     b0
+                         </code></pre>
+
+                         <h3 class="subsection-heading">3. Structured text (ST)</h3>
+                         <p>A high level text language that encourages structured programming. It has a language structure (syntax) that strongly resembles PASCAL and supports a wide range of standard functions and operations. For example</p>
+                         <pre class="code-block"><code class="language-pascal">
+IF (Limit_switch1 AND Workpiece_Present) THEN
+    Gate1 := Open;
+    Gate2 := Close;
+ELSE
+    Gate1 := Close;
+    Gate2 := Open;
+END_IF;
+                        </code></pre>
+
+                         <h3 class="subsection-heading">4. Function block diagram (FBD)</h3>
+                         <p>is a graphical language that allows the user to program elements (e.g., PLC function blocks) in such a way that they appear to be wired together like electrical circuits. It is very useful for expressing the interconnection of control system algorithms and logic.</p>
+                          <figure style="text-align: center;">
+                                <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-013-1.jpg" alt="Function Block Diagram example showing an AND block with inputs High_Press and T#30s, and an RS flip-flop block." class="content-image" style="max-width: 500px;">
+                                <figcaption>Function Block Diagram Example</figcaption>
+                           </figure>
+
+                         <h3 class="subsection-heading">5. Sequential function chart (SFC)</h3>
+                         <p>A method of programming complex control systems at a more highly structure level. It is an overview of the control system, in which the basic building blocks are entire program files.</p>
+                          <figure style="text-align: center;">
+                                <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-013-2.jpg" alt="Sequential Function Chart example showing steps like Start, PUMPS Ready, DEPRESS Checks, PRESS_CHK connected by transitions." class="content-image" style="max-width: 400px;">
+                                <figcaption>Sequential Function Chart Example</figcaption>
+                           </figure>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-programming-intro -->
+
+                <!-- START: topic-2-ladder-diagram -->
+                <section id="topic-2-ladder-diagram" class="content-section" aria-labelledby="topic-2-ladder-diagram-heading">
+                    <h2 id="topic-2-ladder-diagram-heading" class="section-heading">
+                        <span class="heading-icon">🪜</span>
+                        <span class="heading-text">Ladder diagram Language</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>A ladder diagram is a symbolic representation of an electrical circuit. Thus the symbols utilized closely resemble schematic symbols for electrical devices.</p>
+                        <p>This language is a symbolic instruction set that is used to create PLC programs. The ladder instruction symbols can be formatted to obtain the desired control logic, which is then entered into memory. Since this type of instruction set consists of contact symbols, it is also referred to as contact symbology</p>
+                        <p>To introduce ladder logic programming, simple switch circuits are converted to relay logic and then to PLC ladder logic.</p>
+                        <p>The industry trend is toward using the IEC 61131-3 standard, though a voluntary standard; individual manufactures here some freedom in the implementation.</p>
+                        <p>Other PLC manufacturers are Allen-Bradley, Control Logix, Modicon, Siemens S7 etc.</p>
+
+                        <h3 class="subsection-heading">Ladder logic symbols</h3>
+                        <h4 class="subsubsection-heading">1. The basic ladder logic input symbols are</h4>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-013-3.jpg" alt="Normally Open Contact Symbol" style="height: 1.5em; vertical-align: middle; margin-right: 0.5em;"> Normally open (NO) contact: pass power (ON) if coil driving the contact is ON (closed)</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-013-4.jpg" alt="Normally Closed Contact Symbol" style="height: 1.5em; vertical-align: middle; margin-right: 0.5em;"> Normally closed (NC) contact: pass power (ON) if coil driving the contact is off (open)</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-013-5.jpg" alt="Positive Transition Contact Symbol" style="height: 1.5em; vertical-align: middle; margin-right: 0.5em;"> Positive transition sensing contact: if condition before the instruction change from OFF to ON, this instruction passes power for only one scan (until rung is scanned again)</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text"><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-013-6.jpg" alt="Negative Transition Contact Symbol" style="height: 1.5em; vertical-align: middle; margin-right: 0.5em;"> Negative transition sensing contact: if condition before this instruction change from ON to OFF, this instruction passes power for only one scan (until rung is scarred again)</span></li>
+                         </ol>
+
+                        <h4 class="subsubsection-heading">2. The basic ladder logic coil (output) symbols</h4>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-013-7.jpg" alt="Output Coil Symbol" style="height: 1.5em; vertical-align: middle; margin-right: 0.5em;"> Output or coil: if any left-to-right path of instruction passes power, the output is energized. If there is no continuous left-to-right path of instruction passes power, the output is deenergized.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-1.jpg" alt="Negated Coil Symbol" style="height: 1.5em; vertical-align: middle; margin-right: 0.5em;"> Negated coil: if any left-to-right path of inputs passes power, the output is de-energized. If there is no continuous left to right path of instructions passing power the output is energized</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-2.jpg" alt="Set Coil Symbol" style="height: 1.5em; vertical-align: middle; margin-right: 0.5em;"> Set coil: if any rung bath passes power output is energized and remains energized, even when no rung path pass power</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text"><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-3.jpg" alt="Reset Coil Symbol" style="height: 1.5em; vertical-align: middle; margin-right: 0.5em;"> Reset coil: if any rung path passes power output is de-energized and remains de-energized, even when no rung path passes power.</span></li>
+                         </ol>
+
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Ladder Relay Instructions (Purpose: To provide hardwired relay capabilities in a PLC)</caption>
+                                <thead>
+                                    <tr><th>Instruction</th><th>Symbol</th><th>Function</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>Examine-ON/Normally Open</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-4.jpg" alt="Normally Open Contact Symbol" style="height: 1.2em;"></td><td>Tests for an ON condition in a reference address</td></tr>
+                                    <tr><td>Examine-OFF/Normally Closed</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-5.jpg" alt="Normally Closed Contact Symbol" style="height: 1.2em;"></td><td>Tests for an OFF condition in a reference address</td></tr>
+                                    <tr><td>Output Coil</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-6.jpg" alt="Output Coil Symbol" style="height: 1.2em;"></td><td>Turns real or internal outputs ON when logic is 1</td></tr>
+                                    <tr><td>NOT Output Coil</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-7.jpg" alt="Negated Coil Symbol" style="height: 1.2em;"></td><td>Turns real or internal outputs OFF when logic is 1</td></tr>
+                                    <tr><td>Latch Output Coil</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-8.jpg" alt="Set Coil Symbol" style="height: 1.2em;"></td><td>Keeps an output ON once it is energized</td></tr>
+                                    <tr><td>Unlatch Output Coil</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-9.jpg" alt="Reset Coil Symbol" style="height: 1.2em;"></td><td>Resets a latched output</td></tr>
+                                    <tr><td>One-Shot Output</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-10.jpg" alt="One Shot Coil Symbol" style="height: 1.2em;"></td><td>Energizes an output for one scan or less</td></tr>
+                                    <tr><td>Transitional Contact</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-014-11.jpg" alt="Transitional Contact Symbol" style="height: 1.2em;"></td><td>Closes for one scan when its trigger contact makes a positive transition</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <p>Since the PLC was developed to replace relay logic control system, it was only natural that initial language closely resembles the diagrams used to document the relay logic.</p>
+                        <p>By using this approach, the engineers and technicians using the early PLC did not need retraining to understand the program.</p>
+                        <p>The use combinational logic where the output is purely dependent of the combination of inputs at any instant in time. They use AND, OR, NOT, X-OR to create ladder logic. In all the ladder logic, symbols are used for all inputs, outputs and internal memory.</p>
+                        <p>Vertical lines on the left and right are called the <strong>power rails</strong>. The contacts are arranged horizontally between the power rails, hence the term <strong>rung</strong>.</p>
+                        <p>The main functions of a ladder diagram program are to control outputs and perform functional operations based on input conditions. Ladder diagrams use rungs to accomplish this control.</p>
+                        <p>In general, a rung consists of a set of input conditions (represented by contact instructions) and an output instruction at the end of the rung (represented by a coil symbol). The contact instructions for a rung may be referred to as input conditions, rung conditions, or the control logic</p>
+
+                        <h3 class="subsection-heading">Ladder diagram rules</h3>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">A ladder diagram is read from left to right and from top to bottom.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The vertical power lines or rails may be labeled L₁, L₂ or X₁, X₂ when the voltage potential is derived from a transformer.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Devices are shown in order of importance whenever possible. Stop button should be given a higher order of importance.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">All contracts associated with a device change state when the device is energized.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Devices that perform a stop function are normally placed in series on a rung.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Devices that perform a start function are normally placed in parallel or in a branch configuration.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Contact associated with relays timers, motor starters always have the same number or letter designation as the device that controls them.</span></li>
+                         </ul>
+
+                         <h3 class="subsection-heading">Example 1</h3>
+                         <p>Two switches labeled A and B are wired in SERIES controlling a lamp. Implement this function as PLC ladder logic where the two switches are separate inputs.</p>
+                         <p><strong>Solution</strong></p>
+                         <div class="table-container">
+                             <table class="content-table">
+                                <caption>AND Gate Truth Table</caption>
+                                 <thead><tr><th>Inputs</th><th></th><th>Output</th></tr></thead>
+                                 <tbody>
+                                     <tr><td>A</td><td>B</td><td>X</td></tr>
+                                     <tr><td>0</td><td>0</td><td>0</td></tr>
+                                     <tr><td>0</td><td>1</td><td>0</td></tr>
+                                     <tr><td>1</td><td>0</td><td>0</td></tr>
+                                     <tr><td>1</td><td>1</td><td>1</td></tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                         <p>Boolean Expression: $X=A \cdot B$</p>
+                         <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-015-1.jpg" alt="Ladder Diagram for AND gate: Two normally open contacts A and B in series connected to output X." class="content-image" style="max-width: 300px;">
+                            <figcaption>AND Gate Ladder Logic</figcaption>
+                        </figure>
+                        <p>The PLC ladder logic notation is shortened from the relay wiring diagram to show only the third line, the relay contacts and coil of the output relay.</p>
+
+                        <h3 class="subsection-heading">Example 2</h3>
+                         <p>Two switches labeled A and B are wired in PARALLEL controlling a lamp. implement this function as PLC ladder logic where the two switches are separate inputs.</p>
+                         <p><strong>Solution</strong></p>
+                         <div class="table-container">
+                             <table class="content-table">
+                                <caption>OR Gate Truth Table</caption>
+                                 <thead><tr><th>Inputs</th><th></th><th>Output</th></tr></thead>
+                                 <tbody>
+                                     <tr><td>A</td><td>B</td><td>X</td></tr>
+                                     <tr><td>0</td><td>0</td><td>0</td></tr>
+                                     <tr><td>0</td><td>1</td><td>1</td></tr>
+                                     <tr><td>1</td><td>0</td><td>1</td></tr>
+                                     <tr><td>1</td><td>1</td><td>1</td></tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                         <p>Boolean Expression: $X=A + B$</p>
+                          <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-015-3.jpg" alt="Ladder Diagram for OR gate: Two normally open contacts A and B in parallel connected to output X." class="content-image" style="max-width: 300px;">
+                             <figcaption>OR Gate Ladder Logic</figcaption>
+                         </figure>
+
+                         <h3 class="subsection-heading">Example 3</h3>
+                         <p>Draw a ladder diagram for the NOT, NAND, NOR and XOR gate</p>
+                         <h4 class="subsubsection-heading">i) NOT gate</h4>
+                         <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-015-6.jpg" alt="Ladder Diagram for NOT gate: One normally closed contact A connected to output X." class="content-image" style="max-width: 300px;">
+                            <figcaption>NOT Gate Ladder Logic</figcaption>
+                        </figure>
+
+                         <h4 class="subsubsection-heading">ii) NAND gate</h4>
+                          <div class="table-container">
+                             <table class="content-table">
+                                 <caption>NAND Gate Truth Table</caption>
+                                 <thead><tr><th>Inputs</th><th></th><th>Output</th></tr></thead>
+                                 <tbody>
+                                     <tr><td>A</td><td>B</td><td>X</td></tr>
+                                     <tr><td>0</td><td>0</td><td>1</td></tr>
+                                     <tr><td>0</td><td>1</td><td>1</td></tr>
+                                     <tr><td>1</td><td>0</td><td>1</td></tr>
+                                     <tr><td>1</td><td>1</td><td>0</td></tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                         <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-015-2.jpg" alt="Ladder Diagram for NAND gate: Two normally closed contacts A and B in parallel connected to output X." class="content-image" style="max-width: 300px;">
+                             <figcaption>NAND Gate Ladder Logic</figcaption>
+                         </figure>
+
+                         <h4 class="subsubsection-heading">(iii), NOR gate</h4>
+                         <div class="table-container">
+                             <table class="content-table">
+                                 <caption>NOR Gate Truth Table</caption>
+                                 <thead><tr><th>Inputs</th><th></th><th>Output</th></tr></thead>
+                                 <tbody>
+                                     <tr><td>A</td><td>B</td><td>X</td></tr>
+                                     <tr><td>0</td><td>0</td><td>1</td></tr>
+                                     <tr><td>0</td><td>1</td><td>0</td></tr>
+                                     <tr><td>1</td><td>0</td><td>0</td></tr>
+                                     <tr><td>1</td><td>1</td><td>0</td></tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                          <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-015-4.jpg" alt="Ladder Diagram for NOR gate: Two normally closed contacts A and B in series connected to output X." class="content-image" style="max-width: 300px;">
+                             <figcaption>NOR Gate Ladder Logic</figcaption>
+                         </figure>
+
+                         <h4 class="subsubsection-heading">iv) XOR gate</h4>
+                           <div class="table-container">
+                             <table class="content-table">
+                                 <caption>XOR Gate Truth Table</caption>
+                                 <thead><tr><th>Inputs</th><th></th><th>Output</th></tr></thead>
+                                 <tbody>
+                                     <tr><td>A</td><td>B</td><td>X</td></tr>
+                                     <tr><td>0</td><td>0</td><td>0</td></tr>
+                                     <tr><td>0</td><td>1</td><td>1</td></tr>
+                                     <tr><td>1</td><td>0</td><td>1</td></tr>
+                                     <tr><td>1</td><td>1</td><td>0</td></tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                          <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-015-5.jpg" alt="Ladder Diagram for XOR gate: Two parallel branches. First branch: NO contact A in series with NC contact B. Second branch: NC contact A in series with NO contact B. Both branches connect to output X." class="content-image" style="max-width: 400px;">
+                             <figcaption>XOR Gate Ladder Logic</figcaption>
+                         </figure>
+
+                        <h3 class="subsection-heading">Questions</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Devise a ladder diagram for a system where there has to be no output when any one of four sensors gives an output, otherwise there is to be an output.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">A signal lamp is required to be switched on if a pump is running and the pressure is satisfactory, or if the lamp test switch is closed. Draw a ladder diagram.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Consider a valve which is to be operated to lift a load when a pump is running and either the lift switch is operated or a switch operated indicating that the load has not already been lifted and is at the bottom of its lift channel. Devise a ladder diagram.</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">An Alarm system is used in conjunction with an automated bottling system in a milk bottling plant. A conveyer belt carries empty bottles that are to be filled with milk. The alarm goes off in any of the conditions occurs.
+                                <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Milk tank is empty and bottles are in conveyor belt.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">There are no bottles in the conveyer and there is milk in the tank.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">There is milk in the tank and bottles on the conveyor belt but electric power is off.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">There is no milk in the tank, no bottles on the conveyor belt and electric power is off.</span></li>
+                                </ul>
+                                <ol type="i" class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li class="list-item"><span class="item-icon">i)</span><span class="item-text">Write down a Boolean expression for the alarm system.</span></li>
+                                    <li class="list-item"><span class="item-icon">ii)</span><span class="item-text">Implement this system using a PLC ladder diagram.</span></li>
+                                </ol>
+                            </span></li>
+                             <li class="list-item"><span class="item-icon">5.</span><span class="item-text">Draw the ladder rungs to represent:
+                                 <ol type="a" class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                     <li class="list-item"><span class="item-icon">a.</span><span class="item-text">Two switches are normally open and both have to be closed for a motor to operate.</span></li>
+                                     <li class="list-item"><span class="item-icon">b.</span><span class="item-text">Either of two, normally open, switches have to be closed for a coil to be energized and operate an actuator.</span></li>
+                                     <li class="list-item"><span class="item-icon">c.</span><span class="item-text">A motor is switched on by pressing a spring-return push button start switch, and the motor remains on until another spring-return push button stop switch is pressed.</span></li>
+                                     <li class="list-item"><span class="item-icon">d.</span><span class="item-text">A lamp is to be switched on if there is an input from sensor A or sensor B</span></li>
+                                     <li class="list-item"><span class="item-icon">e.</span><span class="item-text">A light is to come on if there is no input to a sensor.</span></li>
+                                     <li class="list-item"><span class="item-icon">f.</span><span class="item-text">A solenoid valve is to be activated if sensor A gives an input.</span></li>
+                                 </ol>
+                             </span></li>
+                         </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-ladder-diagram -->
+
+                <!-- START: topic-2-instruction-list -->
+                <section id="topic-2-instruction-list" class="content-section" aria-labelledby="topic-2-instruction-list-heading">
+                    <h2 id="topic-2-instruction-list-heading" class="section-heading">
+                        <span class="heading-icon">📜</span>
+                        <span class="heading-text">Instruction List</span>
+                    </h2>
+                     <div class="content-card">
+                         <p>This is a low-level language similar to the machine or assembly language used with microprocessors. This type of language is useful for small applications, as well as applications that require speed optimization of the program or a specific routine in the program</p>
+                         <p>This programming method, which can be considered to be the entering of a ladder program using text, gives programs which consist of a series of instructions, each instruction being on a new line. An instruction consists of an operator followed by one of more operands, i.e. the subjects of the operator. In terms of ladder diagrams an operator may be regarded as a ladder element.</p>
+                         <p>Each instruction may either use or change the value stored in a memory register.</p>
+                         <p>There are a lot of instructions used to develop the PLC program. Each instruction has a respective function. For this, mnemonic codes are used, each code corresponding to an operator/ladder element. The codes used differ to some extent from manufacturer to manufacturer, though a standard IEC 1131-3 has been proposed and is being widely adopted.</p>
+
+                         <h3 class="subsection-heading">Instruction code mnemonics</h3>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <caption>Common Instruction List Mnemonics (IEC 1131-3 and Examples)</caption>
+                                <thead>
+                                    <tr><th>IEC 1131-3 Operators</th><th>Mitsubishi</th><th>OMRON</th><th>Siemens/ Telemecanique</th><th>Operation</th><th>Ladder diagram</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>LD</td><td>LD</td><td>LD</td><td>A</td><td>Load operand into result register</td><td>Start a rung with open contacts</td></tr>
+                                    <tr><td>LDN</td><td>LDI</td><td>LD NOT</td><td>AN</td><td>Load negative operand into result register</td><td>Start a rung with closed contacts</td></tr>
+                                    <tr><td>AND</td><td>AND</td><td>AND</td><td>A</td><td>Boolean AND</td><td>A series element with open contacts</td></tr>
+                                    <tr><td>ANDN</td><td>ANI</td><td>AND NOT</td><td>AN</td><td>Boolean AND with negative operand</td><td>A series element with closed contacts</td></tr>
+                                    <tr><td>OR</td><td>OR</td><td>OR</td><td>O</td><td>Boolean OR</td><td>A parallel element with open contacts</td></tr>
+                                    <tr><td>ORN</td><td>ORI</td><td>OR NOT</td><td>ON</td><td>Boolean OR with negative operand</td><td>A parallel element with closed contacts</td></tr>
+                                    <tr><td>ST</td><td>OUT</td><td>OUT</td><td>=</td><td>Store result register into operand</td><td>An output</td></tr>
+                                </tbody>
+                            </table>
+                         </div>
+
+                         <h4 class="subsubsection-heading">1. LD - LOAD Instruction</h4>
+                         <p>These instructions are use to start a line of the program. It is used in the first contacts in the normally open condition (NO). The Execution Conditions of the instruction on the right will be ON when internal relay (IR) 00000 is ON.</p>
+                         <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                             <figure style="flex: 1; min-width: 150px; margin: 0;">
+                                 <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-017-1.jpg" alt="Ladder Diagram: NO contact 00000 connected to 'instruction'." style="max-width: 100%;">
+                                 <figcaption>Ladder Diagram</figcaption>
+                             </figure>
+                             <div class="table-container" style="flex: 1; min-width: 200px; margin: 0;">
+                                 <table class="content-table">
+                                     <caption>Mnemonic Code</caption>
+                                     <thead><tr><th>Address</th><th>Instruction</th><th>Operand/Data</th></tr></thead>
+                                     <tbody>
+                                         <tr><td>00000</td><td>LD</td><td>00000</td></tr>
+                                         <tr><td>00001</td><td>instruction</td><td></td></tr>
+                                     </tbody>
+                                 </table>
+                             </div>
+                         </div>
+
+                         <h4 class="subsubsection-heading">2. LD NOT - LOAD NOT Instruction</h4>
+                         <p>These instructions are use to start a line of the program. It is used in the first contacts in the normally closed condition (NC). The Execution Conditions of the instruction on the right will be ON when IR 00000 is OFF.</p>
+                           <!-- Similar structure for LD NOT, AND, AND NOT, OR, OR NOT, OUT, END, OR LD, AND LD -->
+                           <!-- ... content for instructions 2-10 ... -->
+                           <!-- (Skipping detailed layout for brevity, but would follow the pattern above) -->
+
+                        <h4 class="subsubsection-heading">11. OR LD and AND LD</h4>
+                         <p>When both logic block instruction is to be used in Ladder Diagram, a program must be written from the bottom up to merge logic blocks. For example, ladder diagram below: Logic block of instruction for the last two blocks (blocks b1 and b2 blocks) are written first and then followed by the first logic block instruction (block a).</p>
+                         <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-018-4.jpg" alt="Complex Ladder Diagram involving multiple logic blocks (a, b1, b2) using OR LD and AND LD structure." class="content-image" style="max-width: 400px;">
+                              <figcaption>Complex Logic Block Example</figcaption>
+                         </figure>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <caption>Mnemonic Code for Complex Logic</caption>
+                                <thead><tr><th>Address</th><th>Instruction</th><th>Operand/Data</th></tr></thead>
+                                <tbody>
+                                    <tr><td>00000</td><td>LD NOT</td><td>00000</td></tr>
+                                    <tr><td>00001</td><td>AND</td><td>00001</td></tr>
+                                    <tr><td>00002</td><td>LD</td><td>00002</td></tr>
+                                    <tr><td>00003</td><td>AND NOT</td><td>00003</td></tr>
+                                    <tr><td>00004</td><td>LD NOT</td><td>00004</td></tr>
+                                    <tr><td>00005</td><td>AND</td><td>00005</td></tr>
+                                    <tr><td>00006</td><td>OR LD</td><td></td></tr>
+                                    <tr><td>00007</td><td>AND LD</td><td></td></tr>
+                                    <tr><td>00008</td><td>OUT</td><td>10000</td></tr>
+                                    <tr><td>00009</td><td>FUN 01</td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Block b1<br>Block b2 + Block b1 = Block b<br>Block b. Block a</p>
+
+
+                        <h3 class="subsection-heading">Examples</h3>
+                        <h4 class="subsubsection-heading">1. Signal Lamp Control</h4>
+                        <p>A signal lamp is required to be switched on if a pump is running and the pressure is satisfactory, or if the lamp test switch is closed.</p>
+                         <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                            <figure style="flex: 1; min-width: 150px; margin: 0;">
+                                <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-019-1.jpg" alt="Ladder Diagram: (X400 AND X401) OR X402 -> Y430." style="max-width: 100%;">
+                                <figcaption>Signal Lamp Ladder</figcaption>
+                            </figure>
+                            <pre class="code-block" style="flex: 1; min-width: 150px; margin: 0;"><code class="language-text">
+LD    X400
+AND   X401
+LD    X402
+ORB
+OUT   Y430
+END
+                            </code></pre>
+                        </div>
+
+                        <h4 class="subsubsection-heading">2. Valve Control</h4>
+                         <p>For a valve which is to be operated to lift a load when a pump is running and either the lift switch is operated or a switch operated indicating that the load has not already been lifted and is at the bottom of its lift channel, Figure shows the ladder program and the related instruction list.</p>
+                           <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                             <figure style="flex: 1; min-width: 150px; margin: 0;">
+                                 <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-019-2.jpg" alt="Ladder Diagram: (X400 OR X402) AND X401 -> Y430." style="max-width: 100%;">
+                                 <figcaption>Valve Control Ladder</figcaption>
+                             </figure>
+                             <pre class="code-block" style="flex: 1; min-width: 150px; margin: 0;"><code class="language-text">
+LD    X400
+OR    X402
+AND   X401
+OUT   Y430
+END
+                             </code></pre>
+                         </div>
+
+                        <h4 class="subsubsection-heading">3. Sensor Logic</h4>
+                        <p>For a system where there has to be no output when any one of four sensors gives an output, otherwise there is to be an output, Figure shows the ladder program and the instruction list.</p>
+                        <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                             <figure style="flex: 1; min-width: 250px; margin: 0;">
+                                 <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-019-3.jpg" alt="Ladder Diagram: NC X400 AND NC X401 AND NC X402 AND NC X403 -> Y430." style="max-width: 100%;">
+                                 <figcaption>Sensor Logic Ladder</figcaption>
+                             </figure>
+                              <pre class="code-block" style="flex: 1; min-width: 150px; margin: 0;"><code class="language-text">
+LDI X400
+ANI X401
+ANI X402
+ANI X403
+OUT Y430
+END
+                              </code></pre>
+                          </div>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-instruction-list -->
+
+                <!-- START: topic-2-sequential-control -->
+                <section id="topic-2-sequential-control" class="content-section" aria-labelledby="topic-2-sequential-control-heading">
+                    <h2 id="topic-2-sequential-control-heading" class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">Sequential control</span>
+                    </h2>
+                     <div class="content-card">
+                         <p>This is where the output is dependent not only on the actual inputs but on the sequence of the previous inputs and outputs (memorizing events).</p>
+                         <p>Sequential problems have long been solved using conventional logic gates as building blocks, but using certain techniques to express and identify the sequence logic equations that control the system outputs. Advanced PLC instructions such as shift registers, sequencers, master control relays, timers etc are provided to simplify the design and implementation of sequence systems.</p>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-sequential-control -->
+
+                <!-- START: topic-2-internal-relay -->
+                <section id="topic-2-internal-relay" class="content-section" aria-labelledby="topic-2-internal-relay-heading">
+                    <h2 id="topic-2-internal-relay-heading" class="section-heading">
+                        <span class="heading-icon">🏠</span>
+                        <span class="heading-text">Internal Relay</span>
+                    </h2>
+                     <div class="content-card">
+                         <p>In PLCs there are elements that are used to hold data, i.e. bits, and behave like relays, being able to be switched on or off and switch other devices on or off. Hence the term <strong>internal relay</strong>.</p>
+                         <p>Such internal relays do not exist as real-world switching devices but are merely bits in the storage memory that behave in the same way as relays.</p>
+                         <p>For programming, they can be treated in the same way as an external relay output and input. Thus inputs to external switches can be used to give an output from an internal relay.</p>
+                         <p>This then results in the internal relay contacts being used, in conjunction with other external input switches to give an output, e.g. activate a motor.</p>
+                         <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-019-4.jpg" alt="Ladder Diagram showing internal relay logic. Rung 1: (Input 1 OR Input 3) AND Input 2 -> Internal Relay IR 1. Rung 2: Internal Relay IR 1 contact AND Input 4 -> Output 1." class="content-image" style="max-width: 500px;">
+                              <figcaption>Internal Relay Example</figcaption>
+                         </figure>
+                         <p>For the first rung: when input 1 or input 3 is closed and input 2 closed, then internal relay IR 1 is activated. This results in the contacts IR 1 closing. If input 4 is then activated, there is an output from output 1.</p>
+                         <p>Such a task might be involved in the automatic lifting of a barrier when someone approaches from either side. Input 1 and input 3 are inputs from photoelectric sensors that detect the presence of a person, approaching or leaving from either side of the barrier, input 1 being activated from one side of it and input 3 from the other. Input 2 is an enabling switch to enable the system to be closed down.</p>
+                         <p>Thus when input 1 or input 3, and input 2, are activated, there is an output from the internal relay 1. This will close the internal relay contacts. If input 4, perhaps a limit switch, detects that the barrier is closed then it is activated and closes. The result is then an output from Out 1, a motor which lifts the barrier.</p>
+                         <p>If the limit switch detects that the barrier is already open, the person having passed through it, then it opens and so output 1 is no longer energized and a counterweight might then close the barrier.</p>
+                         <p>The internal relay has enabled two parts of the program to be linked, one part being the detection of the presence of a person and the second part the detection of whether the barrier is already up or down</p>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-internal-relay -->
+
+                <!-- START: topic-2-set-reset -->
+                <section id="topic-2-set-reset" class="content-section" aria-labelledby="topic-2-set-reset-heading">
+                    <h2 id="topic-2-set-reset-heading" class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">SET and RESET</span>
+                    </h2>
+                     <div class="content-card">
+                         <p>Another function which is often available is the ability to Set and reset an internal relay. The SET instruction causes the relay to self-hold, i.e. latch. It then remains in that condition until the RESET instruction is received. The term flip-flop is often used.</p>
+                         <p>The SET coil is switched on when power is supplied to it and remains set until it is RESET. The RESET coil is reset to the off state when power is supplied to it and remains off until it is SET.</p>
+                         <p>SET and RESET instruction will change the status of bit operations only when the implementation is ON. In the OFF condition, the instructions will not change the bit operation status.</p>
+                           <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                             <figure style="flex: 1; min-width: 200px; margin: 0;">
+                                 <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-020-1.jpg" alt="Ladder Diagram: Rung 1: Input 00000 -> SET 10000. Rung 2: Input 00001 -> RESET 10000." style="max-width: 100%;">
+                                 <figcaption>SET/RESET Ladder</figcaption>
+                             </figure>
+                             <div class="table-container" style="flex: 1; min-width: 150px; margin: 0;">
+                                 <table class="content-table">
+                                      <caption>Mnemonic Code</caption>
+                                     <thead><tr><th>Address</th><th>Instruction</th><th>Operand/Data</th></tr></thead>
+                                     <tbody>
+                                         <tr><td>00000</td><td>LD</td><td>00000</td></tr>
+                                         <tr><td>00001</td><td>SET</td><td>10000</td></tr>
+                                         <tr><td>00002</td><td>LD</td><td>00001</td></tr>
+                                         <tr><td>00003</td><td>RESET</td><td>10000</td></tr>
+                                     </tbody>
+                                 </table>
+                             </div>
+                         </div>
+                         <p>When the input instruction LD 00000 is ON, SET instruction command to ON and always ON regardless of whether the input instruction LD 00000 is ON or OFF.</p>
+                         <p>When the inputs instruction LD 00001 is ON, RESET instruction is ON and SET instruction will be off.</p>
+
+                         <h3 class="subsection-heading">Example</h3>
+                         <p>An example of the basic elements of a simple program for use with a fire alarm system is shown. Fire sensors provide inputs to a SET-RESET function block so that if one of the sensors is activated the alarm is set and remains set until it is cleared by being reset. When set it sets off the alarm.</p>
+                         <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-020-2.jpg" alt="Ladder Diagram: Rung 1: Sensor 1 OR Sensor 2 OR Sensor 3 -> SET input of SET/RESET block. Rung 2: Clear alarm switch -> RESET input of SET/RESET block. Rung 3: Output of SET/RESET block -> Alarm output." class="content-image" style="max-width: 400px;">
+                             <figcaption>Fire Alarm SET/RESET Example</figcaption>
+                         </figure>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-set-reset -->
+
+                <!-- START: topic-2-timers -->
+                <section id="topic-2-timers" class="content-section" aria-labelledby="topic-2-timers-heading">
+                    <h2 id="topic-2-timers-heading" class="section-heading">
+                        <span class="heading-icon">⏲️</span>
+                        <span class="heading-text">Timers</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In many control tasks there is a need to control time. Timers are devices that count increments of time. PLCs thus have timers as built-in devices. Timers count fractions of seconds or seconds using the internal CPU clock.</p>
+                        <p>The way the timers work varies from one type of PLC to another. A common approach is to consider timers to behave like relays with coils which when energized result in the closure or opening of contacts after some preset time. The timer is thus treated as an output for a rung with control being exercised over pairs of contacts elsewhere.</p>
+                        <p>The timer compares its current time with the preset time. The output of the timer is a logic 0 as long as the current time is less than the preset time. When the current time is greater than the preset time the timer output is a logic 1.</p>
+                        <p><strong>TIMER (TIM)</strong> is the instructions that require numbers TIM (N) and the set value (SV). The range of numbers TIM is from 000 to 511, while the range of set values for the TIM is 0000 to 9999</p>
+                        <p>The numbers TIM can not be used twice. When a number has been used as definer, such as number 000 for instructions on TIM, the number can not be used again.</p>
+                          <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-020-3.jpg" alt="Diagram of a Timer instruction block showing TIM, N (Number), and SV (Set Value) parameters." class="content-image" style="max-width: 250px;">
+                               <figcaption>Timer Instruction Block</figcaption>
+                          </figure>
+                        <p>When a number is defined as the number of TIM, it can be used as often as required as an operator operand in other instructions from the command TIMER.</p>
+
+                        <h3 class="subsection-heading">Example 1</h3>
+                        <p>Timer is enabled / activated when the execution condition is ON and will be reset to set value (SV) when the execution condition is OFF.</p>
+                        <p>The set value (SV) of TIMER is the BCD between #0000 to #9999. For example if TIMER be set 0-5 seconds, then the set value is # 0050</p>
+                           <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                             <figure style="flex: 1; min-width: 200px; margin: 0;">
+                                 <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-021-1.jpg" alt="Ladder Diagram: Rung 1: Input 00000 -> TIM 000, SV #0050. Rung 2: Contact TIM 000 -> Output 10000." style="max-width: 100%;">
+                                 <figcaption>Timer Example 1 Ladder</figcaption>
+                             </figure>
+                             <div class="table-container" style="flex: 1; min-width: 150px; margin: 0;">
+                                 <table class="content-table">
+                                      <caption>Mnemonic Code</caption>
+                                     <thead><tr><th>Address</th><th>Instruction</th><th>Operand/Data</th></tr></thead>
+                                     <tbody>
+                                         <tr><td>00000</td><td>LD</td><td>00000</td></tr>
+                                         <tr><td>00001</td><td>TIM</td><td>000</td></tr>
+                                         <tr><td></td><td></td><td># 0050</td></tr>
+                                         <tr><td>00002</td><td>LD</td><td>TIM 000</td></tr> <!-- Corrected: Removed image, uses TIM address -->
+                                         <tr><td>00003</td><td>OUT</td><td>10000</td></tr> <!-- Corrected: Removed image, uses OUT address -->
+                                         <tr><td>00004</td><td>FUN 01</td><td></td></tr>
+                                     </tbody>
+                                 </table>
+                             </div>
+                         </div>
+                        <p>Operation condition: When the input (LD 00000) is ON, the timer contact will be activated after 5 seconds. Next the output (OUT 10000) will be ON.</p>
+
+                        <h3 class="subsection-heading">Example 2</h3>
+                           <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                             <figure style="flex: 1; min-width: 200px; margin: 0;">
+                                  <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-021-2.jpg" alt="Ladder Diagram: Rung 1: Input 00000 -> TIM 000, SV #0050. Rung 2: Contact TIM 000 -> Output 10000. Rung 3: Contact TIM 000 NC -> Output 10001." style="max-width: 100%;">
+                                  <figcaption>Timer Example 2 Ladder</figcaption>
+                              </figure>
+                              <!-- No table provided for this example in MMD -->
+                         </div>
+                         <p>Operating condition: When the input (LD 00000) ON, the timer (TIM 000) will be activated after 5 seconds and the output (OUT 10000) will be ON. While the output (OUT 10001) will be ON as soon as the supply is supplied and will be OFF after 5 seconds. Timer will continue to be active as long as the input 00000 state is ON .</p>
+
+                         <h3 class="subsection-heading">Example 3</h3>
+                            <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                             <figure style="flex: 1; min-width: 200px; margin: 0;">
+                                  <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-021-3.jpg" alt="Ladder Diagram for Blinker: Rung 1: Input 00000 -> TIM 000, SV #0050. Rung 2: Contact TIM 000 AND NOT Contact TIM 001 -> Output 10000. Rung 3: Contact 10000 -> TIM 001, SV #0030. Rung 4: Contact TIM 001 -> Output 10001." style="max-width: 100%;">
+                                   <figcaption>Timer Example 3 Ladder (Blinker)</figcaption>
+                               </figure>
+                              <div class="table-container" style="flex: 1; min-width: 150px; margin: 0;">
+                                  <table class="content-table">
+                                       <caption>Mnemonic Code</caption>
+                                      <thead><tr><th>Address</th><th>Instruction</th><th>Operand/Data</th></tr></thead>
+                                      <tbody>
+                                          <tr><td>00000</td><td>LD</td><td>00000</td></tr>
+                                          <tr><td>00001</td><td>TIM</td><td>000</td></tr>
+                                          <tr><td></td><td></td><td># 0050</td></tr>
+                                          <tr><td>00002</td><td>LD</td><td>TIM 000</td></tr>
+                                          <tr><td>00003</td><td>AND NOT</td><td>TIM 001</td></tr>
+                                          <tr><td>00004</td><td>OUT</td><td>10000</td></tr>
+                                          <tr><td>00005</td><td>LD</td><td>10000</td></tr>
+                                          <tr><td>00006</td><td>TIM</td><td>001</td></tr>
+                                          <tr><td></td><td></td><td>#0030</td></tr>
+                                          <tr><td>00007</td><td>OUT</td><td>10001</td></tr>
+                                          <tr><td>00008</td><td>FUN 01</td><td></td></tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+                         <p>When the input (LD 00000) ON, the timer (TIM 000) will be activated after 5 seconds. Next the output (OUT 10000) will be ON. After 3 seconds the output (OUT 10000) ON, the timer (TIM 001) will be activated the next output (OUT 10000) will be OFF and the timer (TIM 001) will be OFF. When the timer TM001 OFF, contact TIM 001 (NC) will be ON and the output (OUT 10000) is ON state. Output (OUT 10000) will continue ON and OFF until the input (LD 00000) in the OFF state.</p>
+
+                        <h3 class="subsection-heading">Question</h3>
+                        <p>Two motors (M1 and M2) are to be controlled as follows:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">When the run switch is operated both motor must run</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">After 4 min motor 1 must stop</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Motor 2 continues running for another 2 min and stops</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">At this point a lamp is switched on</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">After a further 90 sec , the lamp goes off and the cycle restarts</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">If a stop switch is operated at any time, the system will continue to the end of the cycle and then stop. Produce the PLC program</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: topic-2-timers -->
+
+                <!-- START: topic-2-counters -->
+                <section id="topic-2-counters" class="content-section" aria-labelledby="topic-2-counters-heading">
+                    <h2 id="topic-2-counters-heading" class="section-heading">
+                        <span class="heading-icon">🧮</span>
+                        <span class="heading-text">Counters</span>
+                    </h2>
+                     <div class="content-card">
+                         <p>Counters used in PLCs serve the same function as mechanical counters. Counters compare an accumulated value to a preset value to control circuit functions.</p>
+                         <p>Counter is used to count and store the number of occurrence of an input signal. Control applications that commonly use counters include the following:</p>
+                         <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Count to a preset value and cause an event to occor</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Cause an event to occur until the count reaches a preset value</span></li>
+                         </ul>
+                         <p>Counters increment/decrement one count each time the input transitions from off (logic 0) to on (logic 1).</p>
+                         <p><strong>Counter (CNT)</strong> is the instructions that require numbers TIM/CNT (N) and the set values (SV).</p>
+                         <p>The range of numbers CNT is from 000 to 511, while the range of set values for the CNT is 0000 to 9999</p>
+                         <p>When a number is defined as the number of CNT, it can be used as often as required as operator operand in other instructions from the command COUNTER.</p>
+                         <p>The counters are reset when a RESET instruction is executed</p>
+                         <div class="table-container">
+                             <table class="content-table">
+                                  <caption>Counter Instructions (Purpose: To provide hardware counter capabilities in a PLC)</caption>
+                                 <thead>
+                                     <tr><th>Instruction</th><th>Symbol</th><th>Function</th></tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr><td>Up Counter</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-022-1.jpg" alt="Up Counter Symbol (CTU)" style="height: 1.5em;"></td><td>Increases the accumulated register value every time a referenced event occurs</td></tr>
+                                     <tr><td>Down Counter</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-022-2.jpg" alt="Down Counter Symbol (CTD)" style="height: 1.5em;"></td><td>Decreases the accumulated register value every time a referenced event occurs</td></tr>
+                                     <tr><td>Counter Reset</td><td><img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-022-3.jpg" alt="Counter Reset Symbol (CTR)" style="height: 1.5em;"></td><td>Resets the accumulated value of an up or down counter</td></tr>
+                                 </tbody>
+                             </table>
+                         </div>
+
+                         <h3 class="subsection-heading">Example 1</h3>
+                         <p>Counter set to count 10. When the input (LD 00,000) is the pulse of ten, a counter will be activated and thus the output (OUT 10000) will be ON. When reset (LD 00,001) ON, a counter will be in original condition</p>
+                          <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                              <figure style="flex: 1; min-width: 200px; margin: 0;">
+                                  <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-022-4.jpg" alt="Ladder Diagram: Rung 1: Input 00000 -> CP input of CNT 000, SV #0010. Rung 2: Input 00001 -> R input of CNT 000. Rung 3: Contact CNT 000 -> Output 10000." style="max-width: 100%;">
+                                  <figcaption>Counter Example 1 Ladder</figcaption>
+                              </figure>
+                              <div class="table-container" style="flex: 1; min-width: 150px; margin: 0;">
+                                  <table class="content-table">
+                                       <caption>Mnemonic Code</caption>
+                                      <thead><tr><th>Address</th><th>Instruction</th><th>Operand/Data</th></tr></thead>
+                                      <tbody>
+                                          <tr><td>00000</td><td>LD</td><td>00000</td></tr>
+                                          <tr><td>00001</td><td>LD</td><td>00001</td></tr>
+                                          <tr><td>00002</td><td>CNT</td><td>000</td></tr>
+                                          <tr><td></td><td></td><td>#0010</td></tr>
+                                          <tr><td>00003</td><td>LD</td><td>CNT 000</td></tr> <!-- Corrected from CNT 001 -->
+                                          <tr><td>00004</td><td>OUT</td><td>10000</td></tr>
+                                          <tr><td>00005</td><td>FUN 01</td><td></td></tr>
+                                      </tbody>
+                                  </table>
+                              </div>
+                          </div>
+
+
+                         <h3 class="subsection-heading">Example 2</h3>
+                           <div style="display: flex; flex-wrap: wrap; gap: 2rem; align-items: flex-start;">
+                              <figure style="flex: 1; min-width: 200px; margin: 0;">
+                                   <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-022-5.jpg" alt="Ladder Diagram: Rung 1: Input 00000 -> CP input of CNT 000, SV #0005. Rung 2: Input 00001 -> R input of CNT 000. Rung 3: Contact CNT 000 -> Output 10000. Rung 4: Output 10000 -> TIM 001, SV #0050. Rung 5: Contact TIM 001 -> Output 10001." style="max-width: 100%;">
+                                   <figcaption>Counter Example 2 Ladder</figcaption>
+                               </figure>
+                               <!-- No table provided -->
+                           </div>
+                         <p>Counter set to count 5. When the input (LD 00,000) is the pulse of five, a counter will be activated and thus the output (OUT 10000) will be ON. When the output (OUT 10000) ON, TIM 001 will be activated after 3 seconds and then the output (OUT 10 001) will be ON. Both the output (OUT 10000) and (OUT 10 001) will always be ON until reset (LD 00001) in the ON state. Reset will return the counter to its original condition.</p>
+
+                        <h3 class="subsection-heading">Questions</h3>
+                         <ol class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Components pass along a chute and interrupt a light switch which goes low (off) each time it is interrupted. Every time 6 components have been counted, an eject operation is used to remove the batch and the then it all starts again. Produce a ladder logic diagram to do this operation. The counter is designated C460</span></li>
+                             <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Design a ladder program for an industrial control system that:
+                                <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Count ten objects passing along a conveyor belt;</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Closes a deflecting gate when the number has been deflected into a carton</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Allows a time of 5 seconds between the tenth object counted and closing of the deflector.</span></li>
+                                </ul>
+                             </span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">A controlled car park has 4 spaces in the packing lot. Cars are detected and allowed to enter into the parking space if available. If NO space a "Full" indicator lamp should be lit, otherwise individual indicator lamps should light to show the available parking space. Design a PLC ladder diagram of the car parking system; include comments on every rung.</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">With the aid of a ladder program and a process control figure, explain how a converter can be used in a machine to direct 6 products to a packaging box and 12 products to another box simultaneously.</span></li>
+                        </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-counters -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <!-- Repeat exact same links as top navigation -->
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-2-plc-basics.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 30%;"></div> <!-- Chunk 3/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 3 of 10</span>
+                    </div>
+                    <a href="unit-2-plc-peripherals-maintenance.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

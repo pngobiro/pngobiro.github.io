@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Matrices And Transformations (Part 3c) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-3b.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 9 (Part 3c)</span>
+                    </div>
+                    <a href="chapter-10-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 9: Matrices And Transformations (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-9-past-questions -->
+                <section id="section-9-past-questions" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">Past Years Questions (Matrices & Transformations)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Given <span class="math-inline">$A = \begin{bmatrix} 3 \\ -5 \\ 2 \end{bmatrix}$</span>, <span class="math-inline">$B = \begin{bmatrix} -4 & 1 \end{bmatrix}$</span> and <span class="math-inline">$C = \begin{bmatrix} 7 \\ 6 \\ -6 \end{bmatrix}$</span> evaluate</p>
+                        <ol type="a">
+                            <li>A + C [3]</li>
+                            <li>A * B [2]</li>
+                        </ol>
+                        <p>Given:</p>
+                        <div class="equation">$$ D = \begin{bmatrix} 4 \\ 5 \\ 6 \end{bmatrix} \quad Z = \begin{bmatrix} 2 & 1 & 3 \end{bmatrix} \quad C = \begin{bmatrix} -2 \\ -1 \\ 2 \end{bmatrix} $$</div>
+                        <p>Calculate, showing all working.</p>
+                        <ol type="a" start="3">
+                            <li>Z * D [2]</li>
+                            <li>Z * C [1]</li>
+                            <li>D - C [1]</li>
+                        </ol>
+                        <p>Let <span class="math-inline">$A = \begin{bmatrix} 2 & 3 \\ 1 & -1 \end{bmatrix}$</span> and <span class="math-inline">$B = \begin{bmatrix} 1 & 0 \\ -1 & 1 \end{bmatrix}$</span></p>
+                        <ol type="a" start="6">
+                            <li>Evaluate A * B [2]</li>
+                            <li>Evaluate B * A [2]</li>
+                            <li>Comment on the results from a. and b.</li>
+                        </ol>
+                        <p>Given <span class="math-inline">$A = \begin{bmatrix} -1 & 5 \\ 0 & 3 \\ 6 & 8 \end{bmatrix}$</span> and <span class="math-inline">$B = \begin{bmatrix} -4 & 2 & 0 \\ 0 & 3 & 4 \end{bmatrix}$</span></p>
+                        <ol type="a" start="9">
+                             <li>Evaluate AB</li>
+                             <li>Evaluate BA</li>
+                        </ol>
+                        <p>Given <span class="math-inline">$C = \begin{bmatrix} -5 & 12 & -6 \\ 1 & 3 & -1 \end{bmatrix}$</span></p>
+                        <p>Calculate X = 2AB, given <span class="math-inline">$A = \begin{bmatrix} 2 & -2 \\ 0 & 5 \end{bmatrix}$</span> and <span class="math-inline">$B = \begin{bmatrix} -5 & 2 \\ 1 & 3 \end{bmatrix}$</span></p>
+                        <p>Given <span class="math-inline">$A = \begin{bmatrix} -1 & 0 & 2 \\ 0 & 5 & 4 \\ 1 & 8 & -2 \end{bmatrix}$</span> and <span class="math-inline">$B = \begin{bmatrix} 0 & -1 & -1 \\ 2 & 1 & 3 \\ 1 & -2 & 0 \end{bmatrix}$</span></p>
+                        <p>Prove that AB ≠ BA.</p>
+                        <p>Indicate whether each of the following statements concerning matrices is True or False:</p>
+                        <ol type="a">
+                            <li>If A + B = C, then B + A = C</li>
+                            <li>If A * B = B * A, then A = B</li>
+                            <li>It is always possible to add together matrices which can be multiplied together.</li>
+                            <li>For square matrices, it is often possible to show that A * B ≠ B * A.</li>
+                        </ol>
+                        <p>Which the following is not a valid matrix equation?</p>
+                        <ol type="i">
+                            <li>A / B = C</li>
+                            <li>A - B = 2(B - A)</li>
+                            <li>A * B = B * A + C</li>
+                        </ol>
+                        <p>8. a. i. Use matrices <span class="math-inline">$A = \begin{bmatrix} 2 & 1 \\ 0 & 3 \end{bmatrix}$</span> and <span class="math-inline">$B = \begin{bmatrix} 1 & 2 \\ 4 & 3 \end{bmatrix}$</span> to calculate 2A * B.</p>
+                        <p>ii. Calculate A - B</p>
+                        <p>iii. Given matrix C = [4 8], calculate C * 2A</p>
+                        <p>b. i. Three types of personal computer A, B and C sell at $3,000, $4,000 and $5,000 respectively. Express this information as 3x1 matrix and label it X.</p>
+                        <p>ii. Customer 1 wishes to buy 3 type A, 4 type B and 3 type C. Customer 2 wishes to buy 1 type A, 2 type B and 5 type C. Express this information as a 2x3 matrix and label it Y. [3]</p>
+                        <p>iii. Calculate YX and interpret the answer.</p>
+                        <p>a. The following reductions were made, after moderation, from the existing scores 75%, 85%, 60% and 43%:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tbody>
+                                    <tr><td>Maths</td><td>10%</td></tr>
+                                    <tr><td>English</td><td>-3%</td></tr>
+                                    <tr><td>French</td><td>5%</td></tr>
+                                    <tr><td>Science</td><td>3%</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ol type="i">
+                            <li>Arrange the new scores in a column array and label it as Y.</li>
+                            <li>Find the new total obtained by the student.</li>
+                            <li>What is the difference in percentage between the new and old total marks.</li>
+                        </ol>
+                        <p>Using matrices <span class="math-inline">$A = \begin{bmatrix} -1 & 5 & 0 \\ 0 & -2 & 3 \end{bmatrix}$</span>, and <span class="math-inline">$B = \begin{bmatrix} -8 & 1 \\ 2 & 4 \\ -4 & 1 \end{bmatrix}$</span></p>
+                        <p>Calculate AB.</p>
+                        <p>a. There are three types of printer: S for serial printers, L for line printers, and P for page printers. They cost $250, $500 and $1500 respectively.</p>
+                        <ol type="i">
+                            <li>Express the information above as a row matrix and label it as X.</li>
+                            <li>Customer A wishes to buy 10 of S, 5 of L and 2 of P while customer B buys 20 of S, 3 of L and 4 of P. Express the following information as a matrix of dimension 3x2. Label it as Y. [2]</li>
+                            <li>Determine an appropriate matrix R derived from the calculation of X and Y to represent the total cost to each customer.</li>
+                            <li>Special discounts are given, 5% to customer A and 10% to customer B. Express this information as a column matrix. [2]</li>
+                            <li>Using matrix calculation only, determine the total of the actual costs paid by both customers.</li>
+                        </ol>
+                        <p>A company receives bills for rental, heating and lighting twice a year. If i=1,2 represents the first and the second half of the year and j=1,2,3 represents the Rental, Heating and Lighting, then the matrix P whose entries are identified as P<sub>i,j</sub> is used to represent the half-yearly bills.</p>
+                        <p>Explain in words, the meaning of P<sub>2,1</sub> = $1050</p>
+                    </div>
+                </section>
+                <!-- END: chapter-9-past-questions -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-9-part-3b.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 9 (Part 3c)</span>
+                    </div>
+                    <a href="chapter-10-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

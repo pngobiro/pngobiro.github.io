@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Linking to Databases (Part 2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 9 (Part 2)</span>
+                    </div>
+                    <a href="chapter-9-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 9: Linking to Databases (Part 2)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-9-part-2 -->
+                <section id="chapter-9-ado-connection" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔌</span>
+                        <span class="heading-text">Active Data Object (ADO) Connection</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Since data control is not a very flexible tool as it only works with limited kinds of data and must work strictly in the Visual Basic environment.</p>
+                        <p>To overcome these limitations, we can use a much more powerful data control in Visual Basic, known as ADO control. ADO stands for ActiveX data objects. As ADO is ActiveX-based, it can work in different platforms (different computer systems) and different programming languages. Besides, it can access many different kinds of data such as data displayed in the Internet browsers, email text and even graphics other than the usual relational and non-relational database information.</p>
+                        <p>To be able to use ADO data control, you need to insert it into the toolbox. To do this, simply press Ctrl+T to open the components dialog box and select Microsoft ActiveX Data Control 6. After this, you can proceed to build your ADO-based VB database applications.</p>
+                        <p>The following example will illustrate how to build a relatively powerful database application using ADO data control. First of all, name the new form as frmBookTitle and change its caption to Book Titles- ADO Application. Secondly, insert the ADO data control and name it as adoBooks and change its caption to book. Next, insert the necessary labels, text boxes and command buttons. The runtime interface of this program is shown in the diagram below, it allows adding and deletion as well as updating and browsing of data.</p>
+                        <figure>
+                            <img src="../assets/images/chapter-9-ado-form.jpg" alt="ADO Data Control Form Example" class="content-image">
+                        </figure>
+                        <h3>Property settings of all the controls:</h3>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tr><th>Control Property</th><th>Setting</th></tr>
+                                <tr><td>Form Name</td><td>frmBookTitle</td></tr>
+                                <tr><td>Form Caption</td><td>Book Titles - ADOApplication</td></tr>
+                                <tr><td>ADO Name</td><td>adoBooks</td></tr>
+                                <tr><td>Label1 Name</td><td>IblApp</td></tr>
+                                <tr><td>Label1 Caption</td><td>Book Titles</td></tr>
+                                <tr><td>Label2 Name</td><td>IblTitle</td></tr>
+                                <tr><td>Label2 Caption</td><td>Title :</td></tr>
+                                <tr><td>Label3 Name</td><td>IblYear</td></tr>
+                                <tr><td>Label3 Caption</td><td>Year Published:</td></tr>
+                                <tr><td>Label4 Name</td><td>IbIISBN</td></tr>
+                                <tr><td>Label4 Caption</td><td>ISBN:</td></tr>
+                                <tr><td>Label5 Name</td><td>IbIPubID</td></tr>
+                                <tr><td>Label5 Caption</td><td>Publisher's ID:</td></tr>
+                                <tr><td>Label6 Name</td><td>IbISubject</td></tr>
+                                <tr><td>Label6 Caption</td><td>Subject :</td></tr>
+                                <tr><td>TextBox1 Name</td><td>txtitle</td></tr>
+                                <tr><td>TextBox1 DataField</td><td>Title</td></tr>
+                                <tr><td>TextBox1 DataSource</td><td>adoBooks</td></tr>
+                                <tr><td>TextBox2 Name</td><td>txtPub</td></tr>
+                                <tr><td>TextBox2 DataField</td><td>Year Published</td></tr>
+                                <tr><td>TextBox2 DataSource</td><td>adoBooks</td></tr>
+                                <tr><td>TextBox3 Name</td><td>txtISBN</td></tr>
+                                <tr><td>TextBox3 DataField</td><td>ISBN</td></tr>
+                                <tr><td>TextBox3 DataSource</td><td>adoBooks</td></tr>
+                                <tr><td>TextBox4 Name</td><td>txtPubID</td></tr>
+                                <tr><td>TextBox4 DataField</td><td>PubID</td></tr>
+                                <tr><td>TextBox4 DataSource</td><td>adoBooks</td></tr>
+                                <tr><td>TextBox5 Name</td><td>txtSubject</td></tr>
+                                <tr><td>TextBox5 DataField</td><td>Subject</td></tr>
+                                <tr><td>TextBox5 DataSource</td><td>adoBooks</td></tr>
+                                <tr><td>Command Button1 Name</td><td>cmdSave</td></tr>
+                                <tr><td>Command Button1 Caption</td><td>&amp;Save</td></tr>
+                                <tr><td>Command Button2 Name</td><td>cmdAdd</td></tr>
+                                <tr><td>Command Button2 Caption</td><td>&amp;Add</td></tr>
+                                <tr><td>Command Button3 Name</td><td>cmdDelete</td></tr>
+                                <tr><td>Command Button3 Caption</td><td>&amp;Delete</td></tr>
+                                <tr><td>Command Button4 Name</td><td>cmdCancel</td></tr>
+                                <tr><td>Command Button4 Caption</td><td>&amp;Cancel</td></tr>
+                                <tr><td>Command Button5 Name</td><td>cmdPrev</td></tr>
+                                <tr><td>Command Button5 Caption</td><td>&amp;<</td></tr>
+                                <tr><td>Command Button6 Name</td><td>cmdNext</td></tr>
+                                <tr><td>Command Button6 Caption</td><td>&amp;></td></tr>
+                                <tr><td>Command Button7 Name</td><td>cmdExit</td></tr>
+                                <tr><td>Command Button7 Caption</td><td>E&amp;xit</td></tr>
+                            </table>
+                        </div>
+                        <p>To be able to access and manage a database, you need to connect the ADO data control to a database file. We are going to use BIBLIO.MDB that comes with VB6. To connect ADO to this database file, follow the steps below:</p>
+                        <ol>
+                            <li>Click on the ADO control on the form and open up the properties window.</li>
+                            <li>Click on the ConnectionString property, the following dialog box will appear.</li>
+                        </ol>
+                        <figure>
+                            <img src="../assets/images/chapter-9-ado-connection-dialog.jpg" alt="ADO Connection Dialog" class="content-image">
+                        </figure>
+                        <p>When the dialog box appear, select the Use Connection String's Option. Next, click build and at the Data Link dialog box, double-Click the option labeled Microsoft Jet 3.51 OLE DB provider.</p>
+                        <figure>
+                            <img src="../assets/images/chapter-9-ado-provider.jpg" alt="ADO Provider Selection" class="content-image">
+                        </figure>
+                        <p>After that, click the Next button to select the file BIBLO.MDB. You can click on Test Connection to ensure proper connection of the database file. Click OK to finish the connection.</p>
+                        <p>Finally, click on the RecordSource property and set the command type to adCmd Table and Table name to Titles. Now you are ready to use the database file.</p>
+                        <figure>
+                            <img src="../assets/images/chapter-9-ado-recordsource.jpg" alt="ADO RecordSource Property" class="content-image">
+                        </figure>
+                        <p>Now, you need to write code for all the command buttons. After which, you can make the ADO control invisible.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-9-part-2 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 9 (Part 2)</span>
+                    </div>
+                    <a href="chapter-9-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

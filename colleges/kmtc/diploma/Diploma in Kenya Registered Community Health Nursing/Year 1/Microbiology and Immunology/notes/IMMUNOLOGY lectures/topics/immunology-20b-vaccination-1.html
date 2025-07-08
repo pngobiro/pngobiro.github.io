@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>20B. Vaccination I</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            tags: 'ams' // Use AMS numbering of equations
+        },
+        svg: { fontCache: 'global' },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="immunology-20a-vaccinology-concepts.html" class="nav-button"> 
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 61.54%;"></div> <!-- (24/39)*100 -->
+                        </div>
+                       <span class="progress-text">Lecture 24 of 39</span> 
+                    </div>
+                    <a href="immunology-20c-vaccinology-2.html" class="nav-button"> 
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon"></span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Vaccination 1</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: section-objectives -->
+                <section id="section-objectives" class="content-section" aria-labelledby="section-heading-objectives">
+                    <h2 id="section-heading-objectives" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>define vaccines and their importance</li>
+                            <li>discuss current vaccines, their mechanism(s) of protection, and the proof</li>
+                            <li>review of B cell biology</li>
+                            <li>discuss issues of timing and location of protection, herd immunity, vaccine delivery, and vaccines for babies and elderly</li>
+                            <li>review the types of vaccines (whole vs. subunit), and their pros and cons</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-objectives -->
+
+                <!-- START: section-vaccination-intro -->
+                <section id="section-vaccination-intro" class="content-section" aria-labelledby="section-heading-vaccination-intro">
+                    <h2 id="section-heading-vaccination-intro" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Vaccination</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>"world's most cost-effective medical procedure for preventing morbidity and mortality caused by infectious disease.."</li>
+                            <li>represents one of the most important advances in the history of public health</li>
+                            <li>currently about 20 vaccines licensed for use.</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-vaccination-intro -->
+
+                <!-- START: section-successful-vaccines -->
+                <section id="section-successful-vaccines" class="content-section" aria-labelledby="section-heading-successful-vaccines">
+                    <h2 id="section-heading-successful-vaccines" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Successful vaccines</span>
+                    </h2>
+                    <div class="content-card">
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Impact of Successful Vaccines on Disease Incidence</caption>
+                                <thead>
+                                    <tr>
+                                        <th>Disease</th>
+                                        <th>Max. cases (year)</th>
+                                        <th>Cases in 2004</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Small pox</td>
+                                        <td>over 300m</td>
+                                        <td>eradicated 1979</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Diptheria</td>
+                                        <td>206,939 (1921)</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Measles</td>
+                                        <td>894,134 (1941)</td>
+                                        <td>37</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Mumps</td>
+                                        <td>152,209 (1968)</td>
+                                        <td>236</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Pertussis</td>
+                                        <td>265,269 (1934)</td>
+                                        <td>18,957</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Polio (paralytic)</td>
+                                        <td>21,269 (1952)</td>
+                                        <td>0</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Rubella</td>
+                                        <td>57,686 (1969)</td>
+                                        <td>12</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tetanus</td>
+                                        <td>1,560 (1923)</td>
+                                        <td>26</td>
+                                    </tr>
+                                    <tr>
+                                        <td>H. influenza B</td>
+                                        <td>~20,000 (1984)</td>
+                                        <td>16</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Hepatitis B</td>
+                                        <td>26,611 (1985)</td>
+                                        <td>6,632</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: section-successful-vaccines -->
+
+                <!-- START: section-vaccine-definition -->
+                <section id="section-vaccine-definition" class="content-section" aria-labelledby="section-heading-vaccine-definition">
+                    <h2 id="section-heading-vaccine-definition" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">A vaccine..</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>"....is a preparation of microbial antigen, often in combination with adjuvants, that is administered to individuals to induce protective immunity against infection"</li>
+                            <li>Passive vs. Active vaccination
+                                <ul>
+                                    <li><strong>passive:</strong> antibodies are given directly</li>
+                                    <li><strong>active:</strong> immune response is induced by the host</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-vaccine-definition -->
+
+                <!-- START: section-adjuvant-definition -->
+                <section id="section-adjuvant-definition" class="content-section" aria-labelledby="section-heading-adjuvant-definition">
+                    <h2 id="section-heading-adjuvant-definition" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">An adjuvant..</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>"...is a non-antigenic substance that enhances T cell activation by promoting the accumulation of antigen presenting cells at the site of antigen exposure..."</li>
+                            <li>increases expression of co-stimulatory molecules, cytokines, and HLA-peptide complexes on APCs</li>
+                            <li>whole vaccines contain "natural" adjuvants</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-adjuvant-definition -->
+
+                <!-- START: section-goal-vaccination -->
+                <section id="section-goal-vaccination" class="content-section" aria-labelledby="section-heading-goal-vaccination">
+                    <h2 id="section-heading-goal-vaccination" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Goal of vaccination</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>...is to mimick infection and induce protective immunity by introducing pathogen components without causing disease</li>
+                            <li>induces memory, which leads to better and faster responses after exposure to pathogen</li>
+                            <li>Vaccine design can be either empirical or rationale
+                                <ul>
+                                    <li><strong>Rationale:</strong> based on an understanding of protective immunity</li>
+                                    <li><strong>Empirical:</strong> trial and error</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-goal-vaccination -->
+
+                <!-- START: section-current-vaccines -->
+                <section id="section-current-vaccines" class="content-section" aria-labelledby="section-heading-current-vaccines">
+                    <h2 id="section-heading-current-vaccines" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Current vaccines</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>most current vaccines:</p>
+                        <ul>
+                            <li>have been designed empirically</li>
+                            <li>are against extracellular pathogens and viruses that cause acute infection</li>
+                            <li>lead to "sterilizing" immunity</li>
+                            <li>elicit neutralising antibody responses</li>
+                            <li>BCG is the only exception => Th1 responses</li>
+                            <li>best correlate of protection in most -> certain attributes of the ab response</li>
+                            <li>less is known about the contribution of T cell responses</li>
+                        </ul>
+                        <figure>
+                            <img src="../assets/images/2025_06_15_3120951a626b01f91f5cg-09-1.jpg" alt="Diagram illustrating the adaptive immune response to vaccination. Shows antigen uptake by APC, presentation to T helper cells, T cell help to B cells, B cell differentiation into plasma cells (antibody production) and memory B cells, and formation of memory T cells. Highlights germinal center reactions for affinity maturation and isotype switching." class="content-image">
+                        </figure>
+                    </div>
+                </section>
+                <!-- END: section-current-vaccines -->
+
+                <!-- START: section-important-points-bcell-response -->
+                <section id="section-important-points-bcell-response" class="content-section" aria-labelledby="section-heading-important-points-bcell-response">
+                    <h2 id="section-heading-important-points-bcell-response" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Important points (B cell response)</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>antigen-presenting cells capture the vaccine antigen(s)</li>
+                            <li>whole vaccines and/or adjuvants
+                                <ul><li>analogous to natural infection</li></ul>
+                            </li>
+                            <li>induction of both T and B cell responses</li>
+                            <li>naïve B cells are optimally induced in germinal centers of lymph nodes by follicular dendritic and CD4+ helper T cells
+                                <ul>
+                                    <li>undergo clonal expansion</li>
+                                    <li>differentiate into plasma cells and memory B cells</li>
+                                    <li>isotype switch -> IgG</li>
+                                    <li>produce higher affinity antibodies</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-important-points-bcell-response -->
+
+                <!-- START: section-affinity-maturation-boosting -->
+                <section id="section-affinity-maturation-boosting" class="content-section" aria-labelledby="section-heading-affinity-maturation-boosting">
+                    <h2 id="section-heading-affinity-maturation-boosting" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Affinity maturation => boosting</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li><strong>affinity:</strong> strength of antibody-antigen binding</li>
+                            <li>antibody genes can undergo random genetic rearrangements leading to selection of the antibodies that can bind with higher affinity to antigen and provide better immunity</li>
+                            <li>first vaccine dose tends to generate weaker antibodies, while boosting or antigen persistence increases the strength of antibody binding</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-affinity-maturation-boosting -->
+
+                <!-- START: section-important-points-memory -->
+                <section id="section-important-points-memory" class="content-section" aria-labelledby="section-heading-important-points-memory">
+                    <h2 id="section-heading-important-points-memory" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Important points (Memory)</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>memory B cells survive for many years through polyclonal activation
+                                <ul><li>regenerate plasma cells</li></ul>
+                            </li>
+                            <li>duration of protection is linked to B cell memory</li>
+                            <li>need an appropriate time between first dose and boost
+                                <ul><li>allows affinity maturation</li></ul>
+                            </li>
+                            <li>can potentially be sped up by adjuvants</li>
+                            <li>dose of antigen is critical
+                                <ul>
+                                    <li>higher dose gives better short term responses,</li>
+                                    <li>lower dose better long term memory</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-important-points-memory -->
+
+                <!-- START: section-proof-antibodies-protect -->
+                <section id="section-proof-antibodies-protect" class="content-section" aria-labelledby="section-heading-proof-antibodies-protect">
+                    <h2 id="section-heading-proof-antibodies-protect" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Proof that antibodies protect</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>difficult to prove what is protective</li>
+                            <li>evidence from human and animal studies</li>
+                            <li>passive transfer of measles antibodies was found to be protective (1945)</li>
+                            <li>similar findings for other pathogens</li>
+                            <li>often the titer and/or affinity of antibodies predicts protection
+                                <ul><li><strong>Titer:</strong> concentration of antibodies in serum</li></ul>
+                            </li>
+                            <li>H. influenza B => 0.15 ug/ml of high affinity ab protects</li>
+                        </ul>
+                        <figure>
+                            <img src="../assets/images/2025_06_15_3120951a626b01f91f5cg-14-1.jpg" alt="Graph showing antibody titers after Yellow Fever vaccination and subsequent protection upon challenge." class="content-image">
+                            <figcaption>Outcome after vaccination and challenge - Yellow Fever Vaccine</figcaption>
+                        </figure>
+                        <figure>
+                            <img src="../assets/images/2025_06_15_3120951a626b01f91f5cg-14-2.jpg" alt="Graph showing antibody titers after Measles vaccination and subsequent protection upon challenge." class="content-image">
+                            <figcaption>Outcome after vaccination and challenge - Measles Vaccine</figcaption>
+                        </figure>
+                    </div>
+                </section>
+                <!-- END: section-proof-antibodies-protect -->
+
+                <!-- START: section-evidence-protective-tcells -->
+                <section id="section-evidence-protective-tcells" class="content-section" aria-labelledby="section-heading-evidence-protective-tcells">
+                    <h2 id="section-heading-evidence-protective-tcells" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Evidence for protective T cells</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>BCG
+                                <ul><li>very little antibody response, mostly CD4+ T cell dependent</li></ul>
+                            </li>
+                            <li>Pertussis
+                                <ul><li>vaccine can still protect after ab levels decline</li></ul>
+                            </li>
+                            <li>Measles
+                                <ul><li>disease severity is reducted in absence of abs</li></ul>
+                            </li>
+                            <li>Influenza
+                                <ul><li>T cells are important for cross-reactive protection</li><li>recognition of less variable viral regions</li></ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-evidence-protective-tcells -->
+
+                <!-- START: section-herd-immunity -->
+                <section id="section-herd-immunity" class="content-section" aria-labelledby="section-heading-herd-immunity">
+                    <h2 id="section-heading-herd-immunity" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Herd immunity</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>proportion of the population that needs to be immunized to break transmission chains and provide protection to unvaccinated individuals</p>
+                    </div>
+                </section>
+                <!-- END: section-herd-immunity -->
+
+                <!-- START: section-vaccine-delivery -->
+                <section id="section-vaccine-delivery" class="content-section" aria-labelledby="section-heading-vaccine-delivery">
+                    <h2 id="section-heading-vaccine-delivery" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Vaccine delivery</span>
+                    </h2>
+                    <div class="content-card">
+                        <figure>
+                            <img src="../assets/images/2025_06_15_3120951a626b01f91f5cg-17-1.jpg" alt="Image of a gene gun device used for vaccine delivery." class="content-image">
+                            <figcaption>The Gene Gun</figcaption>
+                        </figure>
+                        <ul>
+                            <li>most are injected intramuscularly</li>
+                            <li>can be mucosal (oral, nasal)</li>
+                            <li>some new ideas</li>
+                        </ul>
+                        <figure>
+                            <img src="../assets/images/2025_06_15_3120951a626b01f91f5cg-17-2.jpg" alt="Image of an oral polio vaccine (OPV) being administered." class="content-image">
+                            <figcaption>OPV vaccine</figcaption>
+                        </figure>
+                    </div>
+                </section>
+                <!-- END: section-vaccine-delivery -->
+
+                <!-- START: section-timing-location-protection -->
+                <section id="section-timing-location-protection" class="content-section" aria-labelledby="section-heading-timing-location-protection">
+                    <h2 id="section-heading-timing-location-protection" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Timing and location of protection</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>responses need to be made rapidly and where the infection challenge occurs</li>
+                            <li>mucosal pathogens ideally need mucosal responses
+                                <ul><li>ie, influenza, respiratory pathogens</li></ul>
+                            </li>
+                            <li>tetanus
+                                <ul><li>need pre-existing antibodies as toxins enter cells rapidly</li></ul>
+                            </li>
+                            <li>hepatitis B
+                                <ul><li>antibody response needs to occur before virus becomes established in the liver -> goes intracellular</li></ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-timing-location-protection -->
+
+                <!-- START: section-vaccines-babies -->
+                <section id="section-vaccines-babies" class="content-section" aria-labelledby="section-heading-vaccines-babies">
+                    <h2 id="section-heading-vaccines-babies" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Babies</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>most susceptible to many diseases, but have an immature immune system
+                                <ul><li>especially in the first year of life</li></ul>
+                            </li>
+                            <li>vaccine responses increase in a step-wise manner with age
+                                <ul>
+                                    <li>make poor IgG responses, don't form germinal centers, etc.</li>
+                                    <li>poor duration of immunity</li>
+                                    <li>but still enough so that boosting works</li>
+                                </ul>
+                            </li>
+                            <li>maternal antibodies can inhibit or assist vaccine responses in babies
+                                <ul>
+                                    <li>competition with baby's B cells, neutralize the vaccine</li>
+                                    <li>can still get T cell responses, sometimes better</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-vaccines-babies -->
+
+                <!-- START: section-vaccines-elderly -->
+                <section id="section-vaccines-elderly" class="content-section" aria-labelledby="section-heading-vaccines-elderly">
+                    <h2 id="section-heading-vaccines-elderly" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">The elderly</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>ageing is associated with waning antibodies and a reduced T cell repetoire</li>
+                            <li>can affect vaccine responses for some vaccines</li>
+                            <li>may need to alter vaccine regimens for the elderly
+                                <ul><li>more or higher doses</li></ul>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-vaccines-elderly -->
+
+                <!-- START: section-types-of-vaccines -->
+                <section id="section-types-of-vaccines" class="content-section" aria-labelledby="section-heading-types-of-vaccines">
+                    <h2 id="section-heading-types-of-vaccines" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Types of vaccines</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>attenuated/inactivated
+                                <ul><li>BCG, cholera, polio, rabies</li></ul>
+                            </li>
+                            <li>purified antigen
+                                <ul><li>tetanus, diptheria</li></ul>
+                            </li>
+                            <li>synthetic antigen
+                                <ul><li>hepatitis B</li></ul>
+                            </li>
+                            <li>conjugate vaccines "subunit" vaccines
+                                <ul><li>H. influenza B, S. pneumo</li></ul>
+                            </li>
+                            <li>viral vector*</li>
+                            <li>DNA vaccine*</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-types-of-vaccines -->
+
+                <!-- START: section-attenuated-vs-inactivated -->
+                <section id="section-attenuated-vs-inactivated" class="content-section" aria-labelledby="section-heading-attenuated-vs-inactivated">
+                    <h2 id="section-heading-attenuated-vs-inactivated" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Attenuated vs Inactivated</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>render the organism unable to cause disease while retaining immunogenecity</li>
+                            <li>repeated passage in cell culture, deletion mutants, etc.</li>
+                            <li>has all components of the original pathogen</li>
+                            <li>can get both CMI and antibody reponses, plus innate</li>
+                            <li>Louis Pasteur => attenuation in bacteria</li>
+                            <li>attenuated viral vaccines most effective
+                                <ul><li>often induce life-long immunity</li></ul>
+                            </li>
+                            <li>can be associated with disease, esp. if host is immunocompromised</li>
+                        </ul>
+                        <p><strong>Polio</strong></p>
+                        <ul>
+                            <li>oral (live) vs injected (inactive) elicit similar ab responses</li>
+                            <li>the oral vaccine is mucosal (same as route of infection), decreases intestinal secretion and therefore transmission</li>
+                            <li>inactive vaccine is safer (oral can cause paralysis)</li>
+                        </ul>
+                        <p><strong>Measles</strong></p>
+                        <ul>
+                            <li>live is very effective but causes fever in 20-40%</li>
+                            <li>inactive protection not as good, shorter, poorer T cell responses</li>
+                        </ul>
+                        <p><strong>Influenza</strong></p>
+                        <ul>
+                            <li>traditional vaccine is inactivated</li>
+                            <li>new attenuated mucosal vaccine: single dose = protection, good T cell responses, broader recognition, IgA production</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-attenuated-vs-inactivated -->
+
+                <!-- START: section-safety-vs-efficacy -->
+                <section id="section-safety-vs-efficacy" class="content-section" aria-labelledby="section-heading-safety-vs-efficacy">
+                    <h2 id="section-heading-safety-vs-efficacy" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Safety vs Efficacy</span>
+                    </h2>
+                    <div class="content-card">
+                        <blockquote>"Very properly, the greatest emphasis is always placed on administering the vaccine in such a way that no unpleasant reaction ensues, but because vaccination must be safe for all, it is probably ineffective for many..."
+                            <footer>- Rene Dubos, The White Plague: Tuberculosis, Man, and Society (1952)</footer>
+                        </blockquote>
+                        <figure>
+                            <img src="../assets/images/2025_06_15_3120951a626b01f91f5cg-24-1.jpg" alt="Conceptual image or graph illustrating the balance or trade-off between vaccine safety and efficacy." class="content-image">
+                        </figure>
+                    </div>
+                </section>
+                <!-- END: section-safety-vs-efficacy -->
+
+                <!-- START: section-subunit-vaccines -->
+                <section id="section-subunit-vaccines" class="content-section" aria-labelledby="section-heading-subunit-vaccines">
+                    <h2 id="section-heading-subunit-vaccines" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Sub-unit vaccines</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>use only a portion of the pathogen, usually the part that has been shown to elicit protective responses</li>
+                            <li>adjuvants are critical for these vaccines</li>
+                            <li>can be safer -> less of an inflammatory response</li>
+                            <li>successful examples include purified and synthetic proteins, virus-like particles (HPV)</li>
+                            <li>under development include viral vectors and DNA (next week)</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-subunit-vaccines -->
+
+                <!-- START: section-conjugate-vaccines -->
+                <section id="section-conjugate-vaccines" class="content-section" aria-labelledby="section-heading-conjugate-vaccines">
+                    <h2 id="section-heading-conjugate-vaccines" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Conjugate vaccines</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>antibody responses to polysacchrides are T-independent
+                                <ul>
+                                    <li>typically lower avidity/ shorter duration</li>
+                                    <li>poor memory</li>
+                                </ul>
+                            </li>
+                            <li>can increase vaccine efficacy by linking polyS to protein carriers
+                                <ul><li>this leads to T and B cell responses and better memory/affinity</li></ul>
+                            </li>
+                            <li>high affinity, complement binding abs are the key correlate of protection</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: section-conjugate-vaccines -->
+
+                <!-- START: section-note-conclusion -->
+                <section id="section-note-conclusion" class="content-section" aria-labelledby="section-heading-note-conclusion">
+                    <h2 id="section-heading-note-conclusion" class="section-heading">
+                         <span class="heading-icon"></span>
+                        <span class="heading-text">Note that:</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>most successful vaccines:</p>
+                        <ul>
+                            <li>elicit neutralising antibody responses and B cell memory</li>
+                            <li>antibody quality/quantity critical for protection</li>
+                            <li>T cells often induced simultaneously, imp. for long term memory</li>
+                            <li>are for acute, extracellular infections</li>
+                            <li>have been made empirically</li>
+                            <li>are for childhood infections</li>
+                        </ul>
+                        <p>For many pathogens => vaccines are under development</p>
+                    </div>
+                </section>
+                <!-- END: section-note-conclusion -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+             <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="immunology-20a-vaccinology-concepts.html" class="nav-button"> 
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 61.54%;"></div> 
+                        </div>
+                       <span class="progress-text">Lecture 24 of 39</span> 
+                    </div>
+                    <a href="immunology-20c-vaccinology-2.html" class="nav-button"> 
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon"></span>
+                    </a>
+                </div>
+            </nav>
+
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> 
+</body>
+</html>

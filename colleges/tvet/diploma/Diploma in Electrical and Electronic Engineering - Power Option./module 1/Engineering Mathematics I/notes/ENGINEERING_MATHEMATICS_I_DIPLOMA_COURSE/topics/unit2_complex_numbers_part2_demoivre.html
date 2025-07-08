@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 2: Complex Numbers - 2.2 De Moivre's Theorem - Engineering Mathematics I</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      svg: { fontCache: 'global' },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit2_complex_numbers_part1_algebra.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section (2.1 Algebra)</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 30%;"></div> <!-- Example: Update percentage -->
+                        </div>
+                        <span class="progress-text">Unit 2: Complex Numbers - Part 2</span>
+                    </div>
+                    <a href="unit2_complex_numbers_part3_roots.html" class="nav-button"> <!-- Link to next logical chunk -->
+                        <span class="nav-text">Next Section (2.3 Roots)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">UNIT - II: COMPLEX NUMBERS (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: unit-2-section-2.2-demoivre -->
+                <section id="unit-2-section-2.2-demoivre" class="content-section" aria-labelledby="unit-2-section-2.2-demoivre-heading">
+                    <h2 id="unit-2-section-2.2-demoivre-heading" class="section-heading">
+                         <span class="heading-icon">🔢</span>2.2 DE-MOIVRE'S THEOREM
+                    </h2>
+                    <div class="content-card">
+                        <h4 class="subsubsection-heading">DeMoivre's Theorem: (Statement only)</h4>
+                        <ol class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">(i)</span> If ' n ' is an integer positive or negative then \((\cos \theta+i \sin \theta)^{n}=\cos n \theta+i \sin n \theta\).</li>
+                           <li class="list-item"><span class="item-icon">(ii)</span> If ' n ' is a fraction, then \(\cos n \theta+i \sin n \theta\) is one of the values of \((\cos \theta+i \sin \theta)^{n}\).</li>
+                        </ol>
+
+                        <h4 class="subsubsection-heading">Results:</h4>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1)</span> \((\cos \theta+i \sin \theta)^{n}=\cos n \theta+i \sin n \theta\)</li>
+                            <li class="list-item"><span class="item-icon">2)</span> \((\cos \theta+i \sin \theta)^{-n}=(\cos n \theta-i \sin n \theta)\)</li>
+                            <li class="list-item"><span class="item-icon">3)</span> \(\frac{1}{\cos \theta+i \sin \theta}=(\cos \theta+i \sin \theta)^{-1}=\cos \theta-i \sin \theta\)</li>
+                            <li class="list-item"><span class="item-icon">4)</span> \(\frac{1}{\cos \theta-i \sin \theta}=(\cos \theta-i \sin \theta)^{-1}=\cos \theta+i \sin \theta\)</li>
+                            <li class="list-item"><span class="item-icon">5)</span> \(\sin \theta+i \cos \theta=\cos \left(\frac{\pi}{2}-\theta\right)+i \sin \left(\frac{\pi}{2}-\theta\right)\)</li>
+                        </ol>
+
+                         <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">💡</span>Note</h4>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="item-icon">1)</span> \((\cos \theta_{1}+i \sin \theta_{1})(\cos \theta_{2}+i \sin \theta_{2})=\cos \left(\theta_{1}+\theta_{2}\right)+i \sin \left(\theta_{1}+\theta_{2}\right)\)</li>
+                                <li class="list-item"><span class="item-icon">2)</span> \((\cos \theta_{1}+i \sin \theta_{1})(\cos \theta_{2}+i \sin \theta_{2})(\cos \theta_{3}+i \sin \theta_{3})=\cos \left(\theta_{1}+\theta_{2}+\theta_{3}\right)+i \sin \left(\theta_{1}+\theta_{2}+\theta_{3}\right)\)</li>
+                                <li class="list-item"><span class="item-icon">3)</span> \((\cos \theta_{1}+i \sin \theta_{1})(\cos \theta_{2}+i \sin \theta_{2}) \ldots\left(\cos \theta_{n}+i \sin \theta_{n}\right) = \cos \left(\theta_{1}+\theta_{2}+\ldots \ldots . .+\theta_{n}\right)+i \sin \left(\theta_{1}+\theta_{2}+\ldots . .+\theta_{n}\right)\)</li>
+                            </ol>
+                        </aside>
+                    </div>
+                </section>
+                <!-- END: unit-2-section-2.2-demoivre -->
+
+                <!-- START: unit-2-demoivre-worked-examples -->
+                <section id="unit-2-demoivre-worked-examples" class="content-section worked-example" aria-labelledby="unit-2-demoivre-worked-examples-heading">
+                    <h3 id="unit-2-demoivre-worked-examples-heading" class="subsection-heading">WORKED EXAMPLES</h3>
+                    <h4 class="part-title">PART - A</h4>
+                    <div class="content-card">
+                        <p>1. If \(z=\cos 30^{\circ}+i \sin 30^{\circ}\) what is the value of \(z^{3}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(z^{3} =\left[\cos 30^{\circ}+\mathrm{i} \sin 30^{\circ}\right]^{3}\)<br>
+                            \(=\cos 90^{\circ}+\mathrm{i} \sin 90^{\circ}\)<br>
+                            \(=0+\mathrm{i}(1)=\mathrm{i}\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>2. If \(z=\cos \frac{\pi}{2}+i \sin \frac{\pi}{2}\) what is the value of \(z^{8}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(z^{8} =\left[\cos \frac{\pi}{2}+\mathrm{i} \sin \frac{\pi}{2}\right]^{8}\)<br>
+                            \(=\cos 8\left(\frac{\pi}{2}\right)+\mathrm{i} \sin 8\left(\frac{\pi}{2}\right)\)<br>
+                            \(=\cos 4 \pi+\mathrm{i} \sin 4 \pi\)<br>
+                            \(=1+\mathrm{i}(0)=1\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>3. If \(z=\cos 45^{\circ}-\mathrm{i} \sin 45^{\circ}\) what is the value of \(\frac{1}{z}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\frac{1}{z}=z^{-1}\)<br>
+                            \(=\left[\cos 45-\mathrm{i} \sin 45^{\circ}\right]^{-1}\)<br>
+                            \(=\cos 45^{\circ}+\mathrm{i} \sin 45^{\circ}\)<br>
+                            \(=\frac{1}{\sqrt{2}}+\mathrm{i} \frac{1}{\sqrt{2}}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>4. If \(\frac{1}{z}=\cos 60^{\circ}+i \sin 60^{\circ}\) what is the value of \(z\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(z =\frac{1}{\frac{1}{z}}\)<br>
+                            \(=\frac{1}{\cos 60^{\circ}+i \sin 60^{\circ}}=\left(\cos 60^{\circ}+i \sin 60^{\circ}\right)^{-1}\)<br>
+                            \(=\cos 60^{\circ}-\mathrm{i} \sin 60^{\circ}\)<br>
+                            \(=\frac{1}{2}-\mathrm{i} \frac{\sqrt{3}}{2}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>5. Find the value of \(\frac{\cos 3 \theta+i \sin 3 \theta}{\cos \theta-i \sin \theta}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\frac{\cos 3 \theta+\mathrm{i} \sin 3 \theta}{\cos \theta-\mathrm{i} \sin \theta} =(\cos 3 \theta+\mathrm{i} \sin 3 \theta)(\cos \theta-\mathrm{i} \sin \theta)^{-1}\)<br>
+                            \(=(\cos 3 \theta+\mathrm{i} \sin 3 \theta)(\cos \theta+\mathrm{i} \sin \theta)\)<br>
+                            \(=\cos (3 \theta+\theta)+\mathrm{i} \sin (3 \theta+\theta)\)<br>
+                            \(=\cos 4 \theta+\mathrm{i} \sin 4 \theta\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>6. Simplify: \((\cos 20^{\circ}+\mathrm{i} \sin 20^{\circ})(\cos 30^{\circ}+\mathrm{i} \sin 30^{\circ})(\cos 40^{\circ}+\mathrm{i} \sin 40^{\circ})\)</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\((\cos 20^{\circ}+\mathrm{i} \sin 20^{\circ})(\cos 30^{\circ}+\mathrm{i} \sin 30^{\circ})(\cos 40^{\circ}+\mathrm{i} \sin 40^{\circ})\)<br>
+                            \(=\cos \left(20^{\circ}+30^{\circ}+40^{\circ}\right)+\mathrm{i} \sin \left(20^{\circ}+30^{\circ}+40^{\circ}\right)\)<br>
+                            \(=\cos 90^{\circ}+\mathrm{i} \sin 90^{\circ}\)<br>
+                            \(=0+\mathrm{i}(1)=\mathrm{i}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>7. If \(x=\cos \theta+i \sin \theta\) find \(x+\frac{1}{x}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Given: \(x=\cos \theta+\mathrm{i} \sin \theta\)<br>
+                            \(\Rightarrow \quad \frac{1}{x}=\cos \theta-i \sin \theta\)<br>
+                            \(\therefore x+\frac{1}{x} =\cos \theta+i \sin \theta+\cos \theta-i \sin \theta\)<br>
+                            \(=2 \cos \theta\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>8. If \(x=\cos \alpha+i \sin \alpha\) and \(y=\cos \beta+i \sin \beta\) find \(xy\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(xy =(\cos \alpha+i \sin \alpha)(\cos \beta+i \sin \beta)\)<br>
+                            \(=\cos (\alpha+\beta)+i \sin (\alpha+\beta)\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>9. If \(a=\cos \alpha+i \sin \alpha\) and \(b=\cos \beta+i \sin \beta\) find \(\frac{a}{b}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\frac{a}{b} =a(b)^{-1}\)<br>
+                            \(=(\cos \alpha+i \sin \alpha)(\cos \beta+i \sin \beta)^{-1}\)<br>
+                            \(=(\cos \alpha+i \sin \alpha)(\cos \beta-i \sin \beta)\)<br>
+                            \(=\cos (\alpha-\beta)+i \sin (\alpha-\beta)\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>10. Find the product of \(3\left(\cos \frac{\pi}{3}+\mathrm{i} \sin \frac{\pi}{3}\right)\) and \(4\left(\cos \frac{\pi}{6}+\mathrm{i} \sin \frac{\pi}{6}\right)\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(3\left(\cos \frac{\pi}{3}+\mathrm{i} \sin \frac{\pi}{3}\right) \times 4\left(\cos \frac{\pi}{6}+\mathrm{i} \sin \frac{\pi}{6}\right)\)<br>
+                            \(=12\left[\cos \left(\frac{\pi}{3}+\frac{\pi}{6}\right)+\mathrm{i} \sin \left(\frac{\pi}{3}+\frac{\pi}{6}\right)\right]\)<br>
+                            \(=12\left[\cos \frac{\pi}{2}+\mathrm{i} \sin \frac{\pi}{2}\right]\)<br>
+                            \(=12[0+i(1)]=12i\)</p> <!-- Corrected cos(pi/2) and sin(pi/2) -->
+                        </div>
+                    </div>
+
+                    <h4 class="part-title">PART - B</h4>
+                     <div class="content-card">
+                        <p>1. If \(x=\cos \theta+i \sin \theta\) find the value of \(x^{m}+\frac{1}{x^{m}}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Given: \(x=\cos \theta+\mathrm{i} \sin \theta\)<br>
+                            \(\Rightarrow x^{m}=(\cos \theta+\mathrm{i} \sin \theta)^{m}=\cos m \theta+\mathrm{i} \sin m \theta\)<br>
+                            also, \(\frac{1}{x^{m}}=\left(x^{m}\right)^{-1}\)<br>
+                            \(=[\cos m \theta+\mathrm{i} \sin m \theta]^{-1}\)<br>
+                            \(\Rightarrow \frac{1}{x^{m}}=\cos m \theta-\mathrm{i} \sin m \theta\)<br>
+                            \(\therefore x^{m}+\frac{1}{x^{m}}=\cos m \theta+i \sin m \theta+\cos m \theta-i \sin m \theta=2 \cos m \theta\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>2. If \(a=\cos \alpha+i \sin \alpha\) and \(b=\cos \beta+i \sin \beta\) find \(a b+\frac{1}{a b}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Given: \(a=\cos \alpha+\mathrm{i} \sin \alpha\)<br>
+                            & \(b=\cos \beta+i \sin \beta\)<br>
+                            \(a b=(\cos \alpha+i \sin \alpha)(\cos \beta+i \sin \beta)\)<br>
+                            \(\Rightarrow a b=\cos (\alpha+\beta)+i \sin (\alpha+\beta)\)<br>
+                            and \(\frac{1}{a b}=\cos (\alpha+\beta)-i \sin (\alpha+\beta)\)<br>
+                            \(\therefore a b+\frac{1}{a b} =\cos (\alpha+\beta)+i \sin (\alpha+\beta)+\cos (\alpha+\beta)-i \sin (\alpha+\beta)\)<br>
+                            \(=2 \cos (\alpha+\beta)\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>3. Prove that \((\sin \theta+\mathrm{i} \cos \theta)^{n}=\cos n\left(\frac{\pi}{2}-\theta\right)+\mathrm{i} \sin n\left(\frac{\pi}{2}-\theta\right)\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>We have \(\quad \sin \theta=\cos \left(\frac{\pi}{2}-\theta\right)\)<br>
+                            & \(\cos \theta=\sin \left(\frac{\pi}{2}-\theta\right)\)<br>
+                            LHS: \((\sin \theta+i \cos \theta)^{n}=\left[\cos \left(\frac{\pi}{2}-\theta\right)+i \sin \left(\frac{\pi}{2}-\theta\right)\right]^{n}\)<br>
+                            \(=\cos n\left(\frac{\pi}{2}-\theta\right)+i \sin n\left(\frac{\pi}{2}-\theta\right)\) = RHS</p> <!-- Added = RHS -->
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>4. If \(x=\cos 3 \alpha+i \sin 3 \alpha, y=\cos 3 \beta+i \sin 3 \beta\) find the value \(\sqrt[3]{xy}\).</p> <!-- Corrected typo -->
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Given: \(x=\cos 3 \alpha+i \sin 3 \alpha\)<br>
+                            & \(y=\cos 3 \beta+i \sin 3 \beta\)<br>
+                            \(x y=(\cos 3 \alpha+i \sin 3 \alpha)(\cos 3 \beta+i \sin 3 \beta)\)<br>
+                            \(=\cos (3 \alpha+3 \beta)+i \sin (3 \alpha+3 \beta)\)<br>
+                            \(\Rightarrow x y=\cos 3(\alpha+\beta)+i \sin 3(\alpha+\beta)\)<br>
+                            \(\sqrt[3]{x y}=(x y)^{1 / 3}\)<br>
+                            \(=[\cos 3(\alpha+\beta)+i \sin 3(\alpha+\beta)]^{1 / 3}\)<br>
+                            \(=\cos \frac{1}{3} \cdot 3(\alpha+\beta)+i \sin \frac{1}{3} \cdot 3(\alpha+\beta)\)<br>
+                            \(=\cos (\alpha+\beta)+i \sin (\alpha+\beta)\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>5. If \(a=\cos \alpha+i \sin \alpha, b=\cos \beta+i \sin \beta\) and \(c=\cos \gamma+i \sin \gamma\) find the value of \(\frac{a b}{c}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Given: \(a=\cos \alpha+i \sin \alpha\)<br>
+                            \(b=\cos \beta+i \sin \beta\)<br>
+                            & \(c=\cos \gamma+i \sin \gamma\)<br>
+                            \(\therefore \frac{a b}{c}=a b(c)^{-1}\)<br>
+                            \(=(\cos \alpha+i \sin \alpha)(\cos \beta+i \sin \beta)(\cos \gamma+i \sin \gamma)^{-1}\)<br>
+                            \(=(\cos \alpha+i \sin \alpha)(\cos \beta+i \sin \beta)(\cos \gamma-i \sin \gamma)\)<br>
+                            \( = (\cos(\alpha+\beta) + i \sin(\alpha+\beta)) (\cos \gamma-i \sin \gamma) \)<br> <!-- Added intermediate step -->
+                            \(\Rightarrow \frac{a b}{c}=\cos (\alpha+\beta-\gamma)+i \sin (\alpha+\beta-\gamma)\)</p>
+                        </div>
+                    </div>
+
+                    <h4 class="part-title">PART - C</h4>
+                    <div class="content-card">
+                        <p>1. Simplify: \(\frac{(\cos 2 \theta+\mathrm{i} \sin 2 \theta)^{3}(\cos 3 \theta-\mathrm{i} \sin 3 \theta)^{4}}{(\cos 3 \theta+\mathrm{i} \sin 3 \theta)^{2}(\cos 4 \theta+\mathrm{i} \sin 4 \theta)^{-3}}\)</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\frac{(\cos 2 \theta+i \sin 2 \theta)^{3}(\cos 3 \theta-i \sin 3 \theta)^{4}}{(\cos 3 \theta+i \sin 3 \theta)^{2}(\cos 4 \theta+i \sin 4 \theta)^{-3}}\)<br>
+                            \(=\frac{(\cos \theta+\mathrm{i} \sin \theta)^{3 \times 2}(\cos \theta+\mathrm{i} \sin \theta)^{4 \times-3}}{(\cos \theta+\mathrm{i} \sin \theta)^{2 \times 3}(\cos \theta+\mathrm{i} \sin \theta)^{-3 \times 4}}\)<br>
+                            \(=\frac{(\cos \theta+\mathrm{i} \sin \theta)^{6}(\cos \theta+\mathrm{i} \sin \theta)^{-12}}{(\cos \theta+\mathrm{i} \sin \theta)^{6}(\cos \theta+\mathrm{i} \sin \theta)^{-12}}\)<br>
+                            \(=\frac{(\cos \theta+\mathrm{i} \sin \theta)^{-6}}{(\cos \theta+\mathrm{i} \sin \theta)^{-6}}\)<br> <!-- Simpler calculation -->
+                            \(=(\cos \theta+\mathrm{i} \sin \theta)^{0}\)<br>
+                            \(=\cos 0+\mathrm{i} \sin 0\)<br>
+                            \(=1+\mathrm{i}(0)=1\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>2. Simplify : \(\frac{(\cos 2 \theta+\mathrm{i} \sin 2 \theta)^{3}(\cos 4 \theta-\mathrm{i} \sin 4 \theta)^{3}}{\cos 3 \theta+\mathrm{i} \sin 3 \theta}\) when \(\theta=\frac{\pi}{9}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\(\frac{(\cos 2 \theta+\mathrm{i} \sin 2 \theta)^{3}(\cos 4 \theta-\mathrm{i} \sin 4 \theta)^{3}}{\cos 3 \theta+\mathrm{i} \sin 3 \theta}\)<br>
+                            \(=\frac{(\cos \theta+\mathrm{i} \sin \theta)^{3 \times 2}(\cos \theta+\mathrm{i} \sin \theta)^{3 \times-4}}{(\cos \theta+\mathrm{i} \sin \theta)^{3}}\)<br>
+                            \(=\frac{(\cos \theta+\mathrm{i} \sin \theta)^{6}(\cos \theta+\mathrm{i} \sin \theta)^{-12}}{(\cos \theta+\mathrm{i} \sin \theta)^{3}}\)<br>
+                            \(=\frac{(\cos \theta+\mathrm{i} \sin \theta)^{-6}}{(\cos \theta+\mathrm{i} \sin \theta)^{3}}\)<br> <!-- Simpler calculation -->
+                            \(=(\cos \theta+\mathrm{i} \sin \theta)^{-6-3}\)<br>
+                            \(=(\cos \theta+\mathrm{i} \sin \theta)^{-9}\)<br>
+                            \(=\cos (-9 \theta)+i \sin (-9 \theta)\)<br> <!-- Applying De Moivre's -->
+                            \(=\cos 9 \theta-\mathrm{i} \sin 9 \theta \quad\) when \(\theta=\frac{\pi}{9}\)<br>
+                            \(=\cos 9\left(\frac{\pi}{9}\right)-\mathrm{i} \sin 9\left(\frac{\pi}{9}\right)\)<br>
+                            \(=\cos \pi-\mathrm{i} \sin \pi\)<br>
+                            \(=-1-\mathrm{i}(0)=-1\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>3. Prove that \(\left(\frac{\cos \theta+\mathrm{i} \sin \theta}{\sin \theta+\mathrm{i} \cos \theta}\right)^{4}=\cos 8 \theta+\mathrm{i} \sin 8 \theta\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>LHS : \(\left(\frac{\cos \theta+i \sin \theta}{\sin \theta+i \cos \theta}\right)^{4}\) <br>
+                            \( = \left(\frac{\cos \theta+i \sin \theta}{i(\cos \theta - i \sin \theta)}\right)^{4} = \left(\frac{\cos \theta+i \sin \theta}{i(\cos \theta + i \sin \theta)^{-1}}\right)^{4} \)<br> <!-- Using i property -->
+                            \( = \left(\frac{(\cos \theta+i \sin \theta)^{1 - (-1)}}{i}\right)^{4} = \left(\frac{(\cos \theta+i \sin \theta)^{2}}{i}\right)^{4} \)<br>
+                            \( = \frac{((\cos \theta+i \sin \theta)^{2})^4}{i^4} = \frac{(\cos \theta+i \sin \theta)^{8}}{1} \)<br>
+                            \(=\cos 8 \theta+i \sin 8 \theta=\text { RHS }\)</p>
+                             <!-- Alternative solution from MMD, less standard manipulation -->
+                            <!--
+                            \(=\left[\frac{\cos \theta+i \sin \theta}{\sin \theta+i \cos \theta} \times \frac{i}{i}\right]^{4}\) <br>
+                            \(=(i)^{4}\left[\frac{\cos \theta+i \sin \theta}{i \sin \theta+i^{2} \cos \theta}\right]^{4}\) <br>
+                            \(=1\left[\frac{\cos \theta+i \sin \theta}{-\cos \theta+i \sin \theta}\right]^{4}\) <br>
+                             \(=\left[\frac{\cos \theta+i \sin \theta}{-(\cos \theta-i \sin \theta)}\right]^{4}\) <br>
+                             \(=\left[\frac{\cos \theta+i \sin \theta}{(-1)(\cos \theta+i \sin \theta)^{-1}}\right]^{4}\) <br> <!-- Correcting sign and power -->
+                            \( = \left[ (-1) (\cos \theta+i \sin \theta)^{1 - (-1)} \right]^4 = \left[ (-1) (\cos \theta+i \sin \theta)^{2} \right]^{4} \) <br>
+                             \( = (-1)^4 ((\cos \theta+i \sin \theta)^{2})^{4} \) <br>
+                             \( = (1) (\cos \theta+i \sin \theta)^{8} \) <br>
+                            \(=\cos 8 \theta+i \sin 8 \theta=\text { RHS }\) -->
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>4. Prove that \(\left[\frac{1+\cos \theta+i \sin \theta}{1+\cos \theta-i \sin \theta}\right]^{n}=\cos n \theta+i \sin n \theta\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(z=\cos \theta+\mathrm{i} \sin \theta\) <br>
+                            \(\Rightarrow \frac{1}{Z}=\cos \theta-\mathrm{i} \sin \theta\) <br>
+                            LHS : \(\left[\frac{1+\cos \theta+i \sin \theta}{1+\cos \theta-i \sin \theta}\right]^{\mathrm{n}}\) <br>
+                             Consider the numerator: \(1 + \cos \theta + i \sin \theta = (1+\cos \theta) + i \sin \theta = 2 \cos^2(\theta/2) + i (2 \sin(\theta/2)\cos(\theta/2)) = 2 \cos(\theta/2)[\cos(\theta/2) + i \sin(\theta/2)]\) <br>
+                             Consider the denominator: \(1 + \cos \theta - i \sin \theta = (1+\cos \theta) - i \sin \theta = 2 \cos^2(\theta/2) - i (2 \sin(\theta/2)\cos(\theta/2)) = 2 \cos(\theta/2)[\cos(\theta/2) - i \sin(\theta/2)]\) <br>
+                            LHS = \( \left[ \frac{2 \cos(\theta/2)(\cos(\theta/2) + i \sin(\theta/2))}{2 \cos(\theta/2)(\cos(\theta/2) - i \sin(\theta/2))} \right]^n = \left[ \frac{\cos(\theta/2) + i \sin(\theta/2)}{\cos(-\theta/2) + i \sin(-\theta/2)} \right]^n \) <br>
+                             \( = \left[ \cos(\theta/2 - (-\theta/2)) + i \sin(\theta/2 - (-\theta/2)) \right]^n = [\cos \theta + i \sin \theta]^n \) <br>
+                            \( = z^n \) <br>
+                            \(=\cos n \theta+\mathrm{i} \sin \mathrm{n} \theta=\mathrm{RHS}\)</p>
+                            <!-- Original MMD proof:
+                            \(=\left[\frac{1+z}{1+\frac{1}{z}}\right]^{n}\) <br>
+                            \(=\left[\frac{1+z}{\frac{z+1}{z}}\right]^{n}\) <br>
+                            \(=\left[\frac{z(1+z)}{(1+z)}\right]^{n}\) <br>
+                            \( =z^{n} \) <br>
+                             \( =(\cos \theta+\mathrm{i} \sin \theta)^{n} \) <br>
+                             \( =\cos n \theta+\mathrm{i} \sin n \theta=\mathrm{RHS} \) -->
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>5. Show that \(\left[\frac{1+\sin A+i \cos A}{1+\sin A-i \cos A}\right]^{n}=\cos n\left(\frac{\pi}{2}-A\right)+i \sin n\left(\frac{\pi}{2}-A\right)\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(z=\sin \mathrm{A}+\mathrm{i} \cos \mathrm{A}\) <br>
+                            \(\Rightarrow z=\cos \left(\frac{\pi}{2}-\mathrm{A}\right)+\mathrm{i} \sin \left(\frac{\pi}{2}-\mathrm{A}\right)\) <br>
+                            \(\therefore \frac{1}{Z}=\cos \left(\frac{\pi}{2}-\mathrm{A}\right)-\mathrm{i} \sin \left(\frac{\pi}{2}-\mathrm{A}\right)=\sin \mathrm{A}-\mathrm{i} \cos \mathrm{A}\)</p>
+                            <p>LHS \(\left[\frac{1+\sin A+i \cos A}{1+\sin A-i \cos A}\right]^{\mathrm{n}}\) <br>
+                            \(=\left[\frac{1+z}{1+\frac{1}{z}}\right]^{\mathrm{n}}\) <br>
+                            \(=\left[\frac{1+z}{\frac{z+1}{z}}\right]^{n}\) <br>
+                            \(=\left[\frac{z(1+z)}{(1+z)}\right]^{n}\) <br>
+                            \( =(z)^{n} \) <br>
+                            \( =\left[\cos \left(\frac{\pi}{2}-\mathrm{A}\right)+\mathrm{i} \sin \left(\frac{\pi}{2}-\mathrm{A}\right)\right]^{\mathrm{n}} \) <br>
+                            \( =\cos n\left(\frac{\pi}{2}-\mathrm{A}\right)+\mathrm{i} \sin n\left(\frac{\pi}{2}-\mathrm{A}\right) = RHS \) </p> <!-- Added = RHS -->
+                        </div>
+                    </div>
+                    <div class="content-card">
+                         <p>6. If \(a=\cos \theta+i \sin \theta, b=\cos \phi+i \sin \phi\) prove that<br>
+                         (i) \(\cos (\theta+\phi)=\frac{1}{2}\left[a b+\frac{1}{a b}\right]\)<br>
+                         (ii) \(\sin (\theta-\phi)=\frac{1}{2 \mathrm{i}}\left[\frac{a}{b}-\frac{b}{a}\right]\)</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Given \(a=\cos \theta+\mathrm{i} \sin \theta\)<br>
+                            & \(b=\cos \phi+i \sin \phi\)</p>
+                            <p>Now, \(ab=(\cos \theta+\mathrm{i} \sin \theta)(\cos \phi+\mathrm{i} \sin \phi)\)<br>
+                            \(\Rightarrow ab=\cos (\theta+\phi)+\mathrm{i} \sin (\theta+\phi)\) .....(1)<br>
+                            also, \(\frac{1}{ab}=(ab)^{-1}=[\cos (\theta+\phi)+\mathrm{i} \sin (\theta+\phi)]^{-1}\)<br>
+                            \(\Rightarrow \frac{1}{ab}=\cos (\theta+\phi)-\mathrm{i} \sin (\theta+\phi)\) .....(2)</p>
+                            <p>\(\therefore(1)+(2) \Rightarrow\)<br>
+                            \(ab+\frac{1}{ab}=\cos (\theta+\phi)+\mathrm{i} \sin (\theta+\phi)+\cos (\theta+\phi)-\mathrm{i} \sin (\theta+\phi)\)<br>
+                            \(\Rightarrow ab+\frac{1}{ab}=2 \cos (\theta+\phi)\)<br>
+                            \(\Rightarrow \cos (\theta+\phi)=\frac{1}{2}\left[a b+\frac{1}{a b}\right]\)</p>
+                            <p>(ii) \(\frac{a}{b}=a(b)^{-1}\)<br>
+                            \(=(\cos \theta+i \sin \theta)(\cos \phi+i \sin \phi)^{-1}\)<br>
+                            \(=(\cos \theta+\mathrm{i} \sin \theta)(\cos \phi-\mathrm{i} \sin \phi)\)<br>
+                            \(\Rightarrow \frac{a}{b}=\cos (\theta-\phi)+\mathrm{i} \sin (\theta-\phi)\).....(3)<br>
+                            also, \(\frac{b}{a}=\left(\frac{a}{b}\right)^{-1}=[\cos (\theta-\phi)+\mathrm{i} \sin (\theta-\phi)]^{-1}\)<br>
+                            \(\Rightarrow \frac{b}{a}=\cos (\theta-\phi)-\mathrm{i} \sin (\theta-\phi)\) .....(4)</p>
+                            <p>(3) \(-(4) \Rightarrow\)<br>
+                            \(\frac{a}{b}-\frac{b}{a}=\cos (\theta-\phi)+\mathrm{i} \sin (\theta-\phi)-(\cos (\theta-\phi)-\mathrm{i} \sin (\theta-\phi))\)<br> <!-- Corrected subtraction -->
+                            \(\Rightarrow \frac{a}{b}-\frac{b}{a}=2 \mathrm{i} \sin (\theta-\phi)\)<br>
+                            \(\Rightarrow \sin (\theta-\phi)=\frac{1}{2 \mathrm{i}}\left[\frac{a}{b}-\frac{b}{a}\right]\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>7. If \(a=\cos x+i \sin x, b=\cos y+i \sin y\) prove that<br>
+                        (i) \(\sqrt{a b}+\frac{1}{\sqrt{a b}}=2 \cos \left(\frac{x+y}{2}\right)\)<br>
+                        (ii) \(\sqrt{\frac{a}{b}}+\sqrt{\frac{b}{a}}=2 \cos \left(\frac{x-y}{2}\right)\)</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Given: \(a=\cos x+i \sin x\)<br>
+                            & \(b=\cos y+i \sin y\)</p>
+                            <p>(i) Now, \(ab=(\cos x+i \sin x)(\cos y+i \sin y)\)<br>
+                            \(\Rightarrow a b=\cos (x+y)+i \sin (x+y)\)<br>
+                            \(\therefore \sqrt{a b}=(a b)^{1 / 2}=[\cos (x+y)+i \sin (x+y)]^{1 / 2}\)<br>
+                            \(\Rightarrow \sqrt{a b}=\cos \left(\frac{x+y}{2}\right)+i \sin \left(\frac{x+y}{2}\right)\) .....(1)<br>
+                            also, \(\frac{1}{\sqrt{a b}}=(\sqrt{a b})^{-1}=\left[\cos \left(\frac{x+y}{2}\right)+i \sin \left(\frac{x+y}{2}\right)\right]^{-1}\)<br>
+                            \(\Rightarrow \frac{1}{\sqrt{a b}}=\cos \left(\frac{x+y}{2}\right)-i \sin \left(\frac{x+y}{2}\right)\) .....(2)<br>
+                            \(\therefore(1)+(2) \Rightarrow\)<br>
+                            \(\sqrt{a b}+\frac{1}{\sqrt{a b}}=\cos \left(\frac{x+y}{2}\right)+i \sin \left(\frac{x+y}{2}\right)+\cos \left(\frac{x+y}{2}\right)-i \sin \left(\frac{x+y}{2}\right)\)<br>
+                            \(\Rightarrow \sqrt{a b}+\frac{1}{\sqrt{a b}}=2 \cos \left(\frac{x+y}{2}\right)\)</p>
+                            <p>(ii) \(\frac{a}{b}=a(b)^{-1} =(\cos x+i \sin x)(\cos y+i \sin y)^{-1}\)<br>
+                            \(=(\cos x+i \sin x)(\cos y-i \sin y)\)<br>
+                            \(\Rightarrow \quad \frac{a}{b} =\cos (x-y)+i \sin (x-y)\)</p>
+                            <p>\(\therefore \sqrt{\frac{a}{b}}=\left(\frac{a}{b}\right)^{1 / 2}=[\cos (x-y)+i \sin (x-y)]^{1 / 2}\)<br>
+                            \(\Rightarrow \quad \sqrt{\frac{a}{b}}=\cos \left(\frac{x-y}{2}\right)+i \sin \left(\frac{x-y}{2}\right)\) .....(3)<br>
+                            also, \(\quad \sqrt{\frac{b}{a}}=\left(\sqrt{\frac{a}{b}}\right)^{-1}=\left[\cos \left(\frac{x-y}{2}\right)+i \sin \left(\frac{x-y}{2}\right)\right]^{-1}\)<br>
+                            \(\Rightarrow \quad \sqrt{\frac{b}{a}}=\cos \left(\frac{x-y}{2}\right)-i \sin \left(\frac{x-y}{2}\right)\) .....(4)</p>
+                            <p>\(\therefore(3)+(4) \Rightarrow\)<br>
+                            \(\sqrt{\frac{a}{b}}+\sqrt{\frac{b}{a}}=\cos \left(\frac{x-y}{2}\right)+i \sin \left(\frac{x-y}{2}\right)+\cos \left(\frac{x-y}{2}\right)-i \sin \left(\frac{x-y}{2}\right)\)<br>
+                            \(\Rightarrow \sqrt{\frac{a}{b}}+\sqrt{\frac{b}{a}}=2 \cos \left(\frac{x-y}{2}\right)\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                         <p>8. If \(a=\cos \alpha+i \sin \alpha, b=\cos \beta+i \sin \beta\) and \(c=\cos \gamma+i \sin \gamma\) find the value of \(\frac{a b}{c}-\frac{c}{a b}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Given:<br>
+                            \(a=\cos \alpha+i \sin \alpha\)<br>
+                            \(b=\cos \beta+i \sin \beta\)<br>
+                            & \(c=\cos \gamma+i \sin \gamma\)</p>
+                            <p>Now,<br>
+                            \(\frac{a b}{c}= a b(c)^{-1}\)<br>
+                            \(=(\cos \alpha+i \sin \alpha)(\cos \beta+i \sin \beta)(\cos \gamma+i \sin \gamma)^{-1}\)<br>
+                            \(=(\cos \alpha+i \sin \alpha)(\cos \beta+i \sin \beta)(\cos \gamma-i \sin \gamma)\)<br>
+                            \(\Rightarrow \quad \frac{a b}{c} =\cos (\alpha+\beta-\gamma)+i \sin (\alpha+\beta-\gamma)\) .....(1)<br>
+                            also, \(\frac{c}{a b} =\left[\frac{a b}{c}\right]^{-1}\)<br>
+                            \(=[\cos (\alpha+\beta-\gamma)+i \sin (\alpha+\beta-\gamma)]^{-1}\)<br>
+                            \(\Rightarrow \frac{c}{a b} =\cos (\alpha+\beta-\gamma)-i \sin (\alpha+\beta-\gamma)\) .....(2)</p>
+                            <p>\(\therefore(1)-(2) \Rightarrow\)<br>
+                            \(\frac{a b}{c}-\frac{c}{a b}=\cos (\alpha+\beta-\gamma)+i \sin (\alpha+\beta-\gamma)-(\cos (\alpha+\beta-\gamma)-i \sin (\alpha+\beta-\gamma))\)<br>
+                            \(\Rightarrow \frac{a b}{c}-\frac{c}{a b}=2 \operatorname{isin}(\alpha+\beta-\gamma)\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>9. If \(x+\frac{1}{x}=2 \cos \theta\) prove that (i) \(x^{n}+\frac{1}{x^{n}}=2 \cos n \theta \quad\) (ii) \(x^{n}-\frac{1}{x^{n}}=2 i \sin n \theta\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Given: \(x+\frac{1}{x}=2 \cos \theta\)<br>
+                            \(\frac{x^{2}+1}{x}=2 \cos \theta\)<br>
+                            \(x^{2}+1=2 x \cos \theta\)<br>
+                            \(x^{2}-2 x \cos \theta+1=0\)</p>
+                            <p>Here \(a=1, b=-2 \cos \theta \& c=1\)<br>
+                            \(\therefore x=\frac{-b \pm \sqrt{b^{2}-4 a c}}{2 a}\)<br>
+                            \(=\frac{2 \cos \theta \pm \sqrt{(-2 \cos \theta)^{2}-4 \times 1 \times 1}}{2 \times 1}\)<br>
+                            \(=\frac{2 \cos \theta \pm \sqrt{4 \cos ^{2} \theta-4}}{2}\)<br>
+                            \(=\frac{2 \cos \theta \pm \sqrt{4\left(\cos ^{2} \theta-1\right)}}{2}\)<br>
+                            \(=\frac{2 \cos \theta \pm \sqrt{4\left(-\sin ^{2} \theta\right)}}{2}\)<br>
+                            \(=\frac{2 \cos \theta \pm \mathrm{i} 2 \sin \theta}{2}\)<br>
+                            \(=\frac{2[\cos \theta \pm \mathrm{i} \sin \theta]}{2}\)<br>
+                            \(\Rightarrow x =\cos \theta \pm \mathrm{i} \sin \theta\)</p>
+                            <p>Consider \(x=\cos \theta+\mathrm{i} \sin \theta\)<br>
+                            \(\therefore x^{n}=(\cos \theta+i \sin \theta)^{n}=\cos n \theta+i \sin n \theta\)<br>
+                            & \(\frac{1}{x^{n}}=\cos n \theta-i \sin n \theta\)</p>
+                            <p>(i) \(x^{n}+\frac{1}{x^{n}}=\cos n \theta+i \sin n \theta+\cos n \theta-i \sin n \theta\)<br>
+                            \(\Rightarrow x^{n}+\frac{1}{x^{n}}=2 \cos n \theta\)</p>
+                            <p>(ii) \(x^{n}-\frac{1}{x^{n}}=\cos n \theta+i \sin n \theta-(\cos n \theta-i \sin n \theta)\)<br> <!-- Corrected parenthesis -->
+                            \(\Rightarrow x^{n}-\frac{1}{x^{n}}=2 i \sin n \theta\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>10. Show that \((1+i)^{n}+(1-i)^{n}=2^{\frac{n+2}{2}} \cos \frac{n \pi}{4}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(1+\mathrm{i}=\mathrm{r}(\cos \theta+\mathrm{i} \sin \theta)=\mathrm{r} \cos \theta+\mathrm{i} r \sin \theta\)<br> <!-- Corrected typo -->
+                            Equating real & imaginary parts on both sides<br>
+                            \(r \cos \theta=1 \quad \& \quad r \sin \theta=1\)</p>
+                            <p>Now, \((r \cos \theta)^{2}+(r \sin \theta)^{2}=(1)^{2}+(1)^{2}\)<br>
+                            \(\Rightarrow r^{2} \cos ^{2} \theta+r^{2} \sin ^{2} \theta=1+1\)<br>
+                            \(\Rightarrow r^{2}\left(\cos ^{2} \theta+\sin ^{2} \theta\right)=2\)<br>
+                            \(\Rightarrow r^{2}(1) =2\)<br>
+                            \(\Rightarrow r^{2}=2 \quad \Rightarrow \quad r=\sqrt{2}\)</p>
+                            <p>Also, \(\frac{r \sin \theta}{r \cos \theta}=\frac{1}{1}\)<br>
+                            \(\Rightarrow \tan \theta=1\)<br>
+                            \(\Rightarrow \theta=\tan ^{-1}(1)\)<br>
+                            \(\Rightarrow \theta=\frac{\pi}{4}\)<br>
+                            \(\therefore 1+\mathrm{i}=\sqrt{2}\left[\cos \frac{\pi}{4}+\mathrm{i} \sin \frac{\pi}{4}\right]\) .....(1)</p>
+                            <p>Similarly we can prove that <br>
+                            \(1-\mathrm{i}=\sqrt{2}\left[\cos \frac{\pi}{4}-\mathrm{i} \sin \frac{\pi}{4}\right]\). .....(2)</p>
+                            <p>LHS: \((1+i)^{n}+(1-i)^{n}\)<br>
+                            \(=\left[\sqrt{2}\left(\cos \frac{\pi}{4}+\mathrm{i} \sin \frac{\pi}{4}\right)\right]^{\mathrm{n}}+\left[\sqrt{2}\left(\cos \frac{\pi}{4}-\mathrm{i} \sin \frac{\pi}{4}\right)\right]^{\mathrm{n}}\)<br>
+                            \(=(\sqrt{2})^{n}\left[\cos \frac{\pi}{4}+\mathrm{i} \sin \frac{\pi}{4}\right]^{\mathrm{n}}+(\sqrt{2})^{n}\left[\cos \frac{\pi}{4}-\mathrm{i} \sin \frac{\pi}{4}\right]^{\mathrm{n}}\)<br>
+                            \(=(\sqrt{2})^{n}\left[\left(\cos \frac{n \pi}{4}+i \sin \frac{n \pi}{4}\right)+\left(\cos \frac{n \pi}{4}-i \sin \frac{n \pi}{4}\right)\right]\)<br> <!-- Applied De Moivre's -->
+                            \(=2^{\frac{n}{2}}\left[2 \cos \frac{n \pi}{4}\right]\)<br>
+                            \(=2^{\frac{n}{2}+1} \cos \frac{n \pi}{4}\)<br>
+                            \(=2^{\frac{n+2}{2}} \cos \frac{n \pi}{4}=\text { RHS }\)</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: unit-2-demoivre-worked-examples -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit2_complex_numbers_part1_algebra.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section (2.1 Algebra)</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-text">Unit 2: Complex Numbers - Part 2</span>
+                    </div>
+                    <a href="unit2_complex_numbers_part3_roots.html" class="nav-button"> <!-- Link to next logical chunk -->
+                        <span class="nav-text">Next Section (2.3 Roots)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
