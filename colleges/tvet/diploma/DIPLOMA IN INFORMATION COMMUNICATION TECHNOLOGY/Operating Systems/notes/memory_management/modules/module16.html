@@ -1,0 +1,299 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 16 - Deadlocks</title>
+  <meta name="description" content="Deadlock prevention, avoidance, detection, and recovery.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="16">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module15.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 16 of 16</span>
+        </div>
+         <a href="#" class="nav-button" style="visibility:hidden">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Deadlocks</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Define Deadlock.</li>
+          <li>Explain Deadlock Characterization</li>
+          <li>List methods for handling Deadlocks</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 3.3 DEAD LOCKS</h2>
+      </section>
+
+      <section>
+        <h2>📚 3.3.1. System Model</h2>
+          <ul>
+            <li>For the purposes of deadlock discussion, a system can be modeled as a collection of limited resources, which can be partitioned into different categories, to be allocated to a number of processes, each having different needs.</li>
+            <li>Resource categories may include memory, printers, CPUs, open files, tape drives, CD-ROMS, etc.</li>
+            <li>By definition, all the resources within a category are equivalent, and a request of this category can be equally satisfied by any one of the resources in that category. If this is not the case (i.e. if there is some difference between the resources within a category ), then that category needs to be further divided into separate categories. For example, "printers" may need to be separated into "laser printers" and "color inkjet printers".</li>
+            <li>Some categories may have a single resource.</li>
+            <li>In normal operation a process must request a resource before using it, and release it when it is done, in the following sequence:
+            <ol>
+              <li>Request - If the request cannot be immediately granted, then the process must wait until the resource(s) it needs become available. Example: system calls open( ), malloc(), new(), and request( ).</li>
+              <li>Use - The process uses the resource. Example: prints to the printer or reads from the file.</li>
+              <li>Release - The process relinquishes the resource. so that it becomes available for other processes. Example: close( ), free( ), delete( ), and release( ).</li>
+            </ol>
+            </li>
+            <li>For all kernel-managed resources, the kernel keeps track of what resources are free and which are allocated, to which process they are allocated, and a queue of processes waiting for this resource to become available. Application-managed resources can be controlled using mutexes or wait( ) and signal() calls, (i.e. binary or counting semaphores. )</li>
+            <li>A set of processes is deadlocked when every process in the set is waiting for a resource that is currently allocated to another process in the set (and which can only be released when that other waiting process makes progress. )</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>📚 3.3.2. Deadlock Characterization</h2>
+        <p>Necessary Conditions:</p>
+        <p>There are four conditions that are necessary to achieve deadlock:</p>
+      </section>
+
+      <section>
+        <h2>📚 Mutual Exclusion</h2>
+          <p>At least one resource must be held in a non-sharable mode; If any other process requests this resource, then that process must wait for the resource to be released.</p>
+      </section>
+
+      <section>
+        <h2>📚 Hold and Wait</h2>
+          <p>A process must be simultaneously holding at least one resource and waiting for at least one resource that is currently being held by some other process.</p>
+      </section>
+
+      <section>
+        <h2>📚 No preemption</h2>
+          <p>Once a process is holding a resource (i.e. once its request has been granted), then that resource cannot be taken away from that process until the process voluntarily releases it.</p>
+      </section>
+
+      <section>
+        <h2>📚 Circular Wait</h2>
+          <p>A set of processes { P0, P1, P2, . . ., PN } must exist such that every P[ i ] is waiting for P[ (i+1) % (N + 1 ) ]. ( Note that this condition implies the hold-and-wait condition, but it is easier to deal with the conditions if the four are considered separately.)</p>
+      </section>
+
+      <section>
+        <h2>📚 Resource-Allocation Graph</h2>
+        <p>In some cases deadlocks can be understood more clearly through the use of Resource-Allocation Graphs, having the following properties:</p>
+        <ul>
+          <li>A set of resource categories, { R1, R2, R3, . . ., RN }, which appear as square nodes on the graph. Dots inside the resource nodes indicate specific instances of the resource. (E.g. two dots might represent two laser printers. )</li>
+          <li>A set of processes, { P1, P2, P3, . . ., PN }</li>
+          <li>Request Edges - A set of directed arcs from Pi to Rj, indicating that process Pi has requested Rj, and is currently waiting for that resource to become available.</li>
+          <li>Assignment Edges - A set of directed arcs from Rj to Pi indicating that resource Rj has been allocated to process Pi, and that Pi is currently holding resource Rj.</li>
+        </ul>
+        <p>Note that a request edge can be converted into an assignment edge by reversing the direction of the arc when the request is granted. (However note also that request edges point to the category box, whereas assignment edges emanate from a particular instance dot within the box. )</p>
+        <p><img src="../assets/images/module16-resource-allocation-graph-diagram.png" alt="Resource Allocation Graph diagram" width="600" height="300"></p>
+        <ul>
+          <li>🔍 P₁</li>
+          <li>🔍 R₁</li>
+          <li>🔍 P₂</li>
+          <li>🔍 R₂</li>
+          <li>🔍 P₃</li>
+          <li>🔍 R₃</li>
+          <li>🔍 R₄</li>
+        </ul>
+          <p>*If a resource-allocation graph contains no cycles, then the system is not deadlocked. ( When looking for cycles, remember that these are directed graphs.) See the example in Figure 7.2 above.</p>
+          <p>*If a resource-allocation graph does contain cycles AND each resource category contains only a single instance, then a deadlock exists.</p>
+          <p>*If a resource category contains more than one instance, then the presence of a cycle in the resource-allocation graph indicates the possibility of a deadlock, but does not guarantee one. Consider, for example, Figures 7.3 and 7.4 below:</p>
+        <p><img src="../assets/images/module16-resource-allocation-graph-cycle-diagram.png" alt="Resource Allocation graph with cycle diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 P₁</li>
+            <li>🔍 P₂</li>
+            <li>🔍 R₁</li>
+            <li>🔍 R₃</li>
+            <li>🔍 R₂</li>
+            <li>🔍 R₄</li>
+          </ul>
+        <p><img src="../assets/images/module16-unsafe-state-resource-allocation-graph-diagram.png" alt="An Unsafe State in a Resource Allocation Graph diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 P₁</li>
+            <li>🔍 P₂</li>
+            <li>🔍 R₁</li>
+            <li>🔍 R₂</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>📚 3.3.3. Methods for Handling Deadlocks</h2>
+        <p>Generally speaking there are three ways of handling deadlocks:</p>
+          <ul>
+            <li>Deadlock prevention or avoidance - Do not allow the system to get into a deadlocked state.</li>
+            <li>Deadlock detection and recovery - Abort a process or preempt some resources when deadlocks are detected.</li>
+            <li>Ignore the problem all together - If deadlocks only occur once a year or so, it may be better to simply let them happen and reboot as necessary than to incur the constant overhead and system performance penalties associated with deadlock prevention or detection. This is the approach that both Windows and UNIX take.</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>📚 3.3.4. Deadlock Prevention</h2>
+        <p>Deadlocks can be prevented by preventing at least one of the four required conditions:</p>
+        <p>Mutual Exclusion</p>
+          <p>Shared resources such as read-only files do not lead to deadlocks.</p>
+          <p>Unfortunately some resources, such as printers and tape drives, require exclusive access by a single process.</p>
+        <p>Hold and Wait</p>
+        <p>To prevent this condition processes must be prevented from holding one or more resources while simultaneously waiting for one or more others. There are several possibilities for this:</p>
+          <ol>
+            <li>Require that all processes request all resources at one time. This can be wasteful of system resources if a process needs one resource early in its execution and doesn't need some other resource until much later.</li>
+            <li>Require that processes holding resources must release them before requesting new resources, and then re-acquire the released resources along with the new ones in a single new request. This can be a problem if a process has partially completed an operation using a resource and then fails to get it re-allocated after releasing it.</li>
+            <li>Either of the methods described above can lead to starvation if a process requires one or more popular resources.</li>
+          </ol>
+        <p>No Preemption</p>
+        <p>Preemption of process resource allocations can prevent this condition of deadlocks, when it is possible.</p>
+          <ol>
+            <li>One approach is that if a process is forced to wait when requesting a new resource, then all other resources previously held by this process are implicitly released, ( preempted), forcing this process to re-acquire the old resources along with the new resources in a single request, similar to the previous discussion.</li>
+            <li>Another approach is that when a resource is requested and not available, then the system looks to see what other processes currently have those resources and are themselves blocked waiting for some other resource. If such a process is found, then some of their resources may get preempted and added to the list of resources for which the process is waiting.</li>
+            <li>Either of these approaches may be applicable for resources whose states are easily saved and restored, such as registers and memory, but are generally not applicable to other devices such as printers and tape drives.</li>
+          </ol>
+        <p>Circular Wait</p>
+          <ol>
+            <li>One way to avoid circular wait is to number all resources, and to require that processes request resources only in strictly increasing (or decreasing) order.</li>
+            <li>In other words, in order to request resource Rj, a process must first release all Ri such that i >= j.</li>
+            <li>One big challenge in this scheme is determining the relative ordering of the different resources</li>
+          </ol>
+      </section>
+
+      <section>
+        <h2>📚 Deadlock Avoidance</h2>
+        <p>The general idea behind deadlock avoidance is to prevent deadlocks from ever happening, by preventing at least one of the aforementioned conditions.</p>
+        <p>This requires more information about each process, AND tends to lead to low device utilization. (I.e. it is a conservative approach. )</p>
+        <p>In some algorithms the scheduler only needs to know the maximum number of each resource that a process might potentially use. In more complex algorithms the scheduler can also take advantage of the schedule of exactly what resources may be needed in what order.</p>
+        <p>When a scheduler sees that starting a process or granting resource requests may lead to future deadlocks, then that process is just not started or the request is not granted.</p>
+        <p>A resource allocation state is defined by the number of available and allocated resources, and the maximum requirements of all processes in the system.</p>
+          <ol>
+            <li>A state is safe if the system can allocate all resources requested by all processes (up to their stated maximums) without entering a deadlock state.</li>
+            <li>More formally, a state is safe if there exists a safe sequence of processes { P0, P1, P2, . . ., PN } such that all of the resource requests for Pi can be granted using the resources currently allocated to Pi and all processes Pj where j < i. ( I.e. if all the processes prior to Pi finish and free up their resources, then Pi will be able to finish also, using the resources that they have freed up. )</li>
+            <li>If a safe sequence does not exist, then the system is in an unsafe state, which MAY lead to deadlock. ( All safe states are deadlock free, but not all unsafe states lead to deadlocks.)</li>
+          </ol>
+        <p><img src="../assets/images/module16-safe-unsafe-deadlock-diagram.png" alt="Safe, unsafe, and deadlocked state spaces diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 safe</li>
+            <li>🔍 unsafe</li>
+            <li>🔍 deadlock</li>
+          </ul>
+        <p>For example, consider a system with 12 tape drives, allocated as follows. Is this a safe state? What is the safe sequence?</p>
+        <p><img src="../assets/images/module16-safe-state-example-diagram.png" alt="Safe State example" width="600" height="300"></p>
+        <ul>
+          <li>🔍 Maximum Needs</li>
+          <li>🔍 Current Allocation</li>
+          <li>🔍 P0</li>
+          <li>🔍 P1</li>
+          <li>🔍 P2</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Resource-Allocation Graph Algorithm</h2>
+        <ul>
+          <li>If resource categories have only single instances of their resources, then deadlock states can be detected by cycles in the resource-allocation graphs.</li>
+          <li>In this case, unsafe states can be recognized and avoided by augmenting the resource-allocation graph with claim edges, noted by dashed lines, which point from a process to a resource that it may request in the future.</li>
+          <li>In order for this technique to work, all claim edges must be added to the graph for any particular process before that process is allowed to request any resources. ( Alternatively, processes may only make requests for resources for which they have already established claim edges, and claim edges cannot be added to any process that is currently holding resources. )</li>
+          <li>When a process makes a request, the claim edge Pi->Rj is converted to a request edge. Similarly when a resource is released, the assignment reverts back to a claim edge.</li>
+          <li>This approach works by denying requests that would produce cycles in the resource-allocation graph, taking claim edges into effect.</li>
+        </ul>
+        <p>Consider for example what happens when process P2 requests resource R2:</p>
+        <p><img src="../assets/images/module16-resource-allocation-graph-avoidance-diagram.png" alt="Resource allocation graph for dead lock avoidance" width="600" height="300"></p>
+          <ul>
+            <li>🔍 R₁</li>
+            <li>🔍 P₁</li>
+            <li>🔍 P₂</li>
+            <li>🔍 R₂</li>
+          </ul>
+        <p>The resulting resource-allocation graph would have a cycle in it, and so the request cannot be granted.</p>
+        <p><img src="../assets/images/module16-unsafe-state-resource-allocation-graph-2-diagram.png" alt="An Unsafe State in a Resource Allocation Graph diagram" width="600" height="300"></p>
+          <ul>
+            <li>🔍 P₁</li>
+            <li>🔍 R₁</li>
+            <li>🔍 P₂</li>
+            <li>🔍 R₂</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>📚 Banker's Algorithm</h2>
+        <ul>
+          <li>For resource categories that contain more than one instance the resource-allocation graph method does not work, and more complex (and less efficient) methods must be chosen.</li>
+          <li>The Banker's Algorithm gets its name because it is a method that bankers could use to assure that when they lend out resources they will still be able to satisfy all their clients. ( A banker won't loan out a little money to start building a house unless they are assured that they will later be able to loan out the rest of the money to finish the house. )</li>
+          <li>When a process starts up, it must state in advance the maximum allocation of resources it may request, up to the amount available on the system.</li>
+          <li>When a request is made, the scheduler determines whether granting the request would leave the system in a safe state. If not, then the process must wait until the request can be granted safely.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Recovery From Deadlock</h2>
+          <p>There are three basic approaches to recovery from deadlock:</p>
+          <ol>
+            <li>Inform the system operator, and allow him/her to take manual intervention.</li>
+            <li>Terminate one or more processes involved in the deadlock</li>
+            <li>Preempt resources.</li>
+          </ol>
+          <p>Process Termination</p>
+          <p>1. Two basic approaches, both of which recover resources allocated to terminated processes:</p>
+          <ol>
+            <li>Terminate all processes involved in the deadlock. This definitely solves the deadlock, but at the expense of terminating more processes than would be absolutely necessary.</li>
+            <li>Terminate processes one by one until the deadlock is broken. This is more conservative, but requires doing deadlock detection after each step.</li>
+          </ol>
+          <p>2. In the latter case there are many factors that can go into deciding which processes to terminate next:</p>
+          <ol>
+            <li>Process priorities.</li>
+            <li>How long the process has been running, and how close it is to finishing.</li>
+            <li>How many and what type of resources is the process holding. ( Are they easy to preempt and restore?)</li>
+            <li>How many more resources does the process need to complete.</li>
+            <li>How many processes will need to be terminated</li>
+            <li>Whether the process is interactive or batch.</li>
+          </ol>
+          <p>Resource Preemption</p>
+          <p>When preempting resources to relieve deadlock, there are three important issues to be addressed:</p>
+            <p>Selecting a victim - Deciding which resources to preempt from which processes involves many of the same decision criteria outlined above.</p>
+            <p>Rollback - Ideally one would like to roll back a preempted process to a safe state prior to the point at which that resource was originally allocated to the process. Unfortunately it can be difficult or impossible to determine what such a safe state is, and so the only safe rollback is to roll back all the way back to the beginning. ( I.e. abort the process and make it start over. )</p>
+            <p>Starvation - How do you guarantee that a process won't starve because its resources are constantly being preempted? One option would be to use a priority system, and increase the priority of a process every time its resources get preempted. Eventually it should get a high enough priority that it won't get preempted any more.</p>
+      </section>
+
+      <section>
+        <h2>📝 Summary</h2>
+        <p>This module has gone through Deadlocks, their methods of handling them and prevention. It has described the Resource-Allocation Graph Algorithm and the Banker's Algorithm. Also, the process for handling a deadlock, such as by informing the system operator, terminating one or more processes and resource preemption.</p>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module15.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 16 of 16</span>
+          </div>
+            <a href="#" class="nav-button" style="visibility:hidden">
+          Next <span>→</span>
+        </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>
+
+    

@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Digital Transmission - Data Communication and Networking</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <style>
+        .encoding-container {
+            margin: 2rem 0;
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .encoding-title {
+            text-align: center;
+            margin-bottom: 1rem;
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+
+        .scheme-demo {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+        }
+
+        .comparison-table th,
+        .comparison-table td {
+            padding: 0.75rem;
+            border: 1px solid var(--border-color);
+        }
+
+        .comparison-table th {
+            background: #f8f9fa;
+            color: var(--secondary-color);
+        }
+
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .pros-cons {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .pros-cons > div {
+            padding: 1rem;
+            background: #f8f9fa;
+            border-radius: 8px;
+        }
+
+        .pros-cons h4 {
+            margin: 0 0 0.5rem 0;
+            color: var(--secondary-color);
+        }
+
+        .formula {
+            font-family: monospace;
+            background: #f8f9fa;
+            padding: 0.5rem 1rem;
+            border-radius: 4px;
+            display: inline-block;
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <article class="document-content-wrapper">
+            <!-- Navigation (Top) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="digital-to-analog.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Digital-to-Analog Conversion</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 2 • Section 6</span>
+                    </div>
+                    <a href="bandwidth-utilization.html" class="nav-button next-link-style">
+                        <span class="nav-text">Next: Bandwidth Utilization</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+                <div class="breadcrumbs">
+                    <a href="../../index.html">Home</a> &gt; <a href="../chapter-2.html">Chapter 2</a> &gt; Digital Transmission
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="page-title">Digital Transmission</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <section class="content-section">
+                    <div class="content-card">
+                        <p>Digital transmission involves sending digital data between two points. Various line coding schemes are used to represent digital data as digital signals. Each scheme has its own advantages and characteristics.</p>
+                    </div>
+
+                    <!-- NRZ -->
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">Non-Return to Zero (NRZ)</span>
+                    </h2>
+                    
+                    <div class="scheme-demo">
+                        <p>In NRZ encoding, the signal level remains constant throughout the bit interval. Two voltage levels represent the two binary values.</p>
+
+                        <div class="encoding-container">
+                            <div class="encoding-title">NRZ Encoding</div>
+                            <div id="nrz-demo"></div>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div>
+                                <h4>Advantages</h4>
+                                <ul>
+                                    <li>Simple implementation</li>
+                                    <li>Efficient bandwidth usage</li>
+                                    <li>No signal transitions for consecutive identical bits</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Disadvantages</h4>
+                                <ul>
+                                    <li>No error detection capability</li>
+                                    <li>DC component present</li>
+                                    <li>Synchronization issues with long strings of same bit</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- RZ -->
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">Return to Zero (RZ)</span>
+                    </h2>
+                    
+                    <div class="scheme-demo">
+                        <p>RZ encoding returns to zero level in the middle of each bit period. This provides better synchronization but requires more bandwidth.</p>
+
+                        <div class="encoding-container">
+                            <div class="encoding-title">RZ Encoding</div>
+                            <div id="rz-demo"></div>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div>
+                                <h4>Advantages</h4>
+                                <ul>
+                                    <li>Built-in synchronization</li>
+                                    <li>No DC component</li>
+                                    <li>Easy clock recovery</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Disadvantages</h4>
+                                <ul>
+                                    <li>Requires twice the bandwidth of NRZ</li>
+                                    <li>More complex implementation</li>
+                                    <li>Inefficient use of bandwidth</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Manchester -->
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚡</span>
+                        <span class="heading-text">Manchester Encoding</span>
+                    </h2>
+                    
+                    <div class="scheme-demo">
+                        <p>Manchester encoding combines the clock signal with data by having a transition in the middle of each bit period. The direction of transition determines the bit value.</p>
+
+                        <div class="encoding-container">
+                            <div class="encoding-title">Manchester Encoding</div>
+                            <div id="manchester-demo"></div>
+                        </div>
+
+                        <div class="info-box note">
+                            <div class="info-header">
+                                <span class="info-icon">💡</span>
+                                <span class="info-label">Encoding Rule</span>
+                            </div>
+                            <div class="info-content">
+                                <ul>
+                                    <li>Bit 1: Transition from high to low in middle of bit</li>
+                                    <li>Bit 0: Transition from low to high in middle of bit</li>
+                                    <li>Always has a transition in middle of bit period</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="pros-cons">
+                            <div>
+                                <h4>Advantages</h4>
+                                <ul>
+                                    <li>Self-clocking</li>
+                                    <li>No DC component</li>
+                                    <li>Error detection capability</li>
+                                </ul>
+                            </div>
+                            <div>
+                                <h4>Disadvantages</h4>
+                                <ul>
+                                    <li>Requires twice the bandwidth of NRZ</li>
+                                    <li>More complex implementation</li>
+                                    <li>Higher signal frequency components</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Comparison Table -->
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">Encoding Schemes Comparison</span>
+                    </h2>
+
+                    <div class="content-card">
+                        <table class="comparison-table">
+                            <thead>
+                                <tr>
+                                    <th>Characteristic</th>
+                                    <th>NRZ</th>
+                                    <th>RZ</th>
+                                    <th>Manchester</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Bandwidth Requirement</td>
+                                    <td>Low</td>
+                                    <td>High</td>
+                                    <td>High</td>
+                                </tr>
+                                <tr>
+                                    <td>Clock Recovery</td>
+                                    <td>Poor</td>
+                                    <td>Good</td>
+                                    <td>Excellent</td>
+                                </tr>
+                                <tr>
+                                    <td>Error Detection</td>
+                                    <td>No</td>
+                                    <td>Limited</td>
+                                    <td>Yes</td>
+                                </tr>
+                                <tr>
+                                    <td>DC Component</td>
+                                    <td>Yes</td>
+                                    <td>No</td>
+                                    <td>No</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- Key Points Section -->
+                <section class="key-points-section">
+                    <div class="key-points-container">
+                        <div class="key-points-header">
+                            <span class="key-points-icon">📝</span>
+                            <h3 class="key-points-title">Key Points to Remember</h3>
+                        </div>
+                        <div class="key-points-content">
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Different encoding schemes offer trade-offs between bandwidth efficiency and reliability.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Manchester encoding provides built-in synchronization but requires more bandwidth.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Clock recovery and DC balance are important considerations in choosing an encoding scheme.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Navigation (Bottom) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="digital-to-analog.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Digital-to-Analog Conversion</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 2 • Section 6</span>
+                    </div>
+                    <a href="bandwidth-utilization.html" class="nav-button next-link-style">
+                        <span class="nav-text">Next: Bandwidth Utilization</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../../js/signal-visualizations.js"></script>
+    <script src="../../js/digital-encoding.js"></script>
+</body>
+</html>

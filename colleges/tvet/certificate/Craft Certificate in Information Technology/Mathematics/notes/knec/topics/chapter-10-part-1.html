@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10: Representation Of Instruction (Part 1) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-3c.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 10 (Part 1)</span>
+                    </div>
+                    <a href="chapter-10-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 10 : Representation Of Instruction</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-10-objectives -->
+                <section id="chapter-10-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you should be able to:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">understand instruction word format;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">describe the differences between addressing techniques;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">have an understanding of instruction types.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-10-objectives -->
+
+                <!-- START: chapter-10-introduction -->
+                <section id="section-10-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💡</span>
+                        <span class="heading-text">10.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The principles of architecture extend through almost every aspect of computer organisation. Included are the lengths of the instruction words, whether or not length is variable, and how many addresses in memory are referenced by an instruction word.</p> <!-- MMD typos: almot, (In ctruction, ;iin -->
+                        <p>Other architectural considerations concern the number of bits in each memory word, whether numbers are handled in 1's or 2's complement form or in BCD or some combination of these. What are the instructions provided, how are the memories organised, and how are input/output devices interfaced? As can be seen, computer architecture is a large and rich subject that deals with most aspects of computer design and organisation.</p> <!-- MMD typos: ©acein, handied, hoy, architect iry -->
+                    </div>
+                </section>
+                <!-- END: chapter-10-introduction -->
+
+                <!-- START: chapter-10-instruction-word-construction -->
+                <section id="section-10-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🛠️</span>
+                        <span class="heading-text">10.2 Construction of an Instruction Word</span> <!-- MMD typo: Construciten -->
+                    </h2>
+                    <div class="content-card">
+                        <p>A computer word is an ordered set of characters handled as a group. Basically all words consist of a set of binary digits, and the meaning of the digits depends on several factors. For instance, the bits <code>01000100</code> could represent the decimal number 68 in a pure binary computer, and the decimal number 44 in a BCD computer that uses an 8,4,2,1 code. Thus, the meaning of a set of digits is determined by its usage.</p>
+                        <p>Other interpretations are possible, for instruction words are stored just as data words are, and the digits could represent an instruction to the computer. Since memory locations can store either instruction words or data words, the programmers and system operators must see that the instruction words are used to determine the sequence of operations that the computer performs, and that reasonable meanings are assigned to the words.</p> <!-- MMD typo: performs, and that the computer performs, and that -->
+                    </div>
+                </section>
+                <!-- END: chapter-10-instruction-word-construction -->
+
+                <!-- START: chapter-10-instruction-word-formats -->
+                <section id="section-10-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📄</span>
+                        <span class="heading-text">10.3 Instruction Word Formats</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">10.3.1 Numbers of Addresses</h3>
+                        <p>The number of divisions in the basic instruction word is determined primarily by the number of addresses referred to. The single-address instruction has been covered. Most current computers however, have two-address instruction words with three sections; the first section consists of the op code and the second and third sections generally each contain the address of an operand. Different computers used addresses differently.</p>
+                        <p>Single-address instruction format:</p>
+                        <pre class="code-block"><code>+----------------+-------------------+
+| Operation Code | Address of operand|
++----------------+-------------------+</code></pre>
+                        <p>Two-address instruction format:</p>
+                        <pre class="code-block"><code>+----------------+-------------------+-------------------+
+| Operation Code | Address of operand| Address of operand|
+|                |        (A)        |        (B)        |
++----------------+-------------------+-------------------+</code></pre>
+                        <p>In many computers, instead of a single accumulator, there are two or more registers called either multiple or general-purpose registers, or simple general registers. Instruction words with two addresses can operate in one of the following modes:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">
+                                <p><strong>Memory, memory.</strong> Both addresses refer to memory locations. For two memory address A and B, the instruction <code>ADD A, B</code> would cause the operation.</p>
+                                <div class="equation">$$ MEM[A] \leftarrow MEM[A] + MEM[B] $$</div>
+                                <p>Note: <code>MEM[A]</code> means "The contents of address A in memory".</p> <!-- MMD typo: o a datess -->
+                                <p>Example: Add the numbers in memory locations 963 and 492, and store into memory location 963.</p> <!-- MMD typo: memery 10 cations, € -->
+                                <pre class="code-block"><code>+-----+-----+-----+
+| Add | 963 | 492 |
++-----+-----+-----+
+        MEM   MEM</code></pre>
+                            </li>
+                            <li class="list-item">
+                                <p><strong>General register, memory.</strong> Address A in the instruction word specifies the general register to be used, and the second address indicated the location in memory. A LOAD ACCUMULATOR instruction (<code>LOAD A, B</code>) would cause the contents at location B in memory to be transferred into the general register denoted A. In symbols, <span class="math-inline">$GR_A \leftarrow MEM[B]$</span>.</p> <!-- MMD typos: de ised, indicated, corionts, d-neted -->
+                                <p>Example: Add the number at memory location 492 into the operand in GR<sub>3</sub> and store into GR<sub>3</sub>.</p> <!-- MMD typo: Examule -->
+                                <pre class="code-block"><code>+-----+---+-----+
+| Add | 3 | 492 |
++-----+---+-----+
+        GR  MEM</code></pre>
+                            </li>
+                            <li class="list-item">
+                                <p><strong>Memory, general register.</strong> The memory address A gives the location of the operand in memory, and the general register code B is the register involved. An instruction might be a STORE instruction (<code>STO A, B</code>), which would move the contents of the general register into memory: <span class="math-inline">$MEM[A] \leftarrow GR_B$</span>.</p>
+                                <p>Example: Add the value in GR4 into the value address at 1738 and store into address 1738.</p>
+                                <pre class="code-block"><code>+-----+------+---+
+| Add | 1738 | 4 |
++-----+------+---+
+        MEM    GR</code></pre>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-10-instruction-word-formats -->
+
+                <!-- START: chapter-10-representation -->
+                <section id="section-10-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💾</span>
+                        <span class="heading-text">10.4 Representation of Instruction and Data</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Important features of a computer's architecture are the number of bits in instruction words, the size of memory words, and the way data is represented in the computer.</p>
+                        <p>Business data processing involves much manipulation involving character strings (names, addresses, text, etc.). The desire to create computer architectures that conserve on instruction word length and also permit efficient storage of character strings of arbitrary length has led to a number of computer architectures with:</p>
+                        <ol>
+                            <li>only 8 bits at each address in memory, so that a single alphanumeric character can be stored at each address, and</li> <!-- MMD typo: an -->
+                            <li>instruction words with variable lengths (each word length is some multiple of 8 bits).</li>
+                        </ol>
+                        <p>As a result, most computers now have memories where addresses are 8-bits bytes. Instruction words are variable length, with each being some multiple of 8 bits. Data words are also multiples of 8 bits, with many computers having 8-, 16-, 32-, and even 64-bit data word lengths.</p> <!-- MMD typo: compu ers -->
+                    </div>
+                </section>
+                <!-- END: chapter-10-representation -->
+
+                <!-- START: chapter-10-addressing -->
+                <section id="section-10-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📍</span>
+                        <span class="heading-text">10.5 Addressing Techniques</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>There are several techniques used to specify a memory address. The use of any of these techniques is generally motivated by one of the following considerations:</p> <!-- MMD typos: 5°, c fy, moty ate -->
+                        <ol>
+                            <li>Desire to shorten address section</li>
+                            <li>Programmer convenience</li>
+                            <li>System operation facilities</li>
+                        </ol>
+                        <p>The basic addressing techniques now in use: direct addressing, indirect addressing and indexed addressing.</p>
+
+                        <h3 class="subsection-heading">10.5.1 Direct Addressing</h3>
+                        <p>By simply giving the complete binary memory address is the most direct way to locate an operand or to jump. As a result, most computers provide for some form of direct addressing.</p>
+                        <p>Example: <code>MOV AX, TABLE</code></p>
+                        <p>This instruction loads the contents of data memory location TABLE into the AX register.</p>
+
+                        <h3 class="subsection-heading">10.5.2 Indirect Addressing</h3>
+                        <p>Another widely used addressing variation is called indirect addressing where the instruction word gives the address not of the operand to be used, but the address of the address of the operand.</p>
+                        <p>For example, if we <code>ADD 302</code> and the instruction is a conventional direct-addressing instruction, the number at location 302 will be added to the word currently in the accumulator. If the addition instruction is indirectly addressed, and we write <code>IAD 302</code> (indirect ADD), then the number stored at address 302 will give the address of the operand to be used. As an example, when the instruction word at address 5 in the following memory is performed, it will cause the number 164 to be added to the current contents of the accumulator.</p>
+                        <pre class="code-block"><code>Memory Address | Contents
+---------------+----------
+       5       | IAD 302
+       :       | :
+      302      | 495
+       :       | :
+      495      | 164</code></pre>
+
+                        <h3 class="subsection-heading">10.5.3 Indexed Addressing</h3>
+                        <p>There is a variation on conventional direct memory addressing that facilities programming, particularly the programming of instruction sequences that are to be repeated many times on a set of data distributed throughout the machine. This technique is called indexing.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-10-addressing -->
+
+                <!-- START: chapter-10-instruction-types -->
+                <section id="section-10-6" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚙️</span>
+                        <span class="heading-text">10.6 Instruction Types</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The instruction set can be classified under 4 main groups:</p> <!-- MMD typo: undei -->
+                        <ol>
+                            <li>Data Transfer</li>
+                            <li>Arithmetic</li>
+                            <li>Control Transfer</li>
+                            <li>String Instructions</li>
+                        </ol>
+
+                        <h3 class="subsection-heading">10.6.1 Data Transfer Instructions</h3>
+                        <!-- Content continues in next chunk -->
+                    </div>
+                </section>
+                <!-- END: chapter-10-instruction-types -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-9-part-3c.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 10 (Part 1)</span>
+                    </div>
+                    <a href="chapter-10-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

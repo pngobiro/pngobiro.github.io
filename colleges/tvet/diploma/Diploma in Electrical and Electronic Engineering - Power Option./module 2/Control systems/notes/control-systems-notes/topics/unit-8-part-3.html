@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 8: Frequency Response & Bode Plot (Part 3)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-8-part-2.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 8 (Part 3) of 9</span>
+                    </div>
+                    <a href="unit-8-part-4.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <!-- Reusing title from part 1 -->
+                <h1 class="section-title">Unit-8: Frequency-Response Analysis & Bode Plot</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: unit-8-nyquist-drawing-steps -->
+                <section id="unit-8-nyquist-drawing-steps" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✍️</span>
+                        <span class="heading-text">Stability analysis to draw the Nyquist plot</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Here, we will discuss the steps that will help in the stability analysis to draw the Nyquist plot.</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text"><strong>Determining the poles and zeroes</strong><br>
+                                From the given transfer function, we need to determine the poles and zeroes to check the valid points.</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text"><strong>Selecting a Nyquist plot</strong><br> <!-- MMD says plot, should be contour -->
+                                We need to select a Nyquist plot that should enclose all the poles and zeroes present on the right-half of the s-plane except the singular points. The singular points are considered as the points lying on the imaginary axis. Hence, these points are avoided.<br>
+                                If the transfer function has a pole at zero or origin, the contour encloses all the poles and zeroes except the origin.<br>
+                                If there are no poles on the imaginary axis, the contour will appear as:
+                                <!-- Using corrected filename -->
+                                <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-089-1.jpg" alt="Standard Nyquist contour C1, C2, C3 for systems without poles on the imaginary axis." class="content-image">
+                                Both the avoided points (origin and imaginary) in the contour are shown below:
+                                <!-- Using corrected filename -->
+                                <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-089-2.jpg" alt="Nyquist contour showing small semi-circular detours around poles on the imaginary axis (including origin)." class="content-image">
+                                For mapping, the contour needs to be analytical. Let's first discuss about mapping.</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text"><strong>Mapping a contour</strong><br>
+                                A singular point (point on the imaginary axis) is not analytical. Hence, it is generally avoided. The Nyquist contour is mapped to determine the encirclement of the point -1 + j0. The contour is drawn based on the transfer function is G(s)H(s).<br>
+                                There are four sections C1, C2, C3, and C4. The Nyquist criterion pot is divided into four sections so that the process can be easily carried out section wise. At last, all the sections are combined to produce the desired Nyquist plot. Let the four sections be:
+                                <!-- Using corrected filename -->
+                                <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-090-1.jpg" alt="Nyquist contour showing the four sections C1, C2, C3, and C4 (small semi-circle around origin)." class="content-image">
+                                The order of these sections is somewhat similar as shown above.</span>
+                             </li>
+                            <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text"><strong>Range for the first section C1</strong><br>
+                                We know that the Nyquist range is from -infinity to infinity, and the value of $\omega$ in section C1 ranges from 0 to infinity. The contour will be drawn in G(s)H(s) plane with respect to the above range, and it will be the locus plot of $G(j\omega)H(j\omega)$.<br>
+                                We can use various methods of mapping the first section C1, such as sketching the locus from the given transfer function, finding the frequency by equating the real and imaginary parts to zero, using the polar plot method (type and order of the system), and separating the magnitude and the phase..</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">5.</span>
+                                <span class="item-text"><strong>Range for the second section C2</strong><br>
+                                The second section is generally of infinite radius. Here, it is a semi-circle of infinite radius. The range of the second section is from -90 degrees to +90 degrees. It can be obtained by: <!-- MMD says -90 to +90, but the angle should be +90 to -90 for standard contour direction -->
+                                <div class="equation">$$ s = \lim_{R \rightarrow \infty} Re^{j\theta} $$</div>
+                                <div class="equation">$$ \theta = +\frac{\pi}{2} \text{ to } -\frac{\pi}{2} $$</div> <!-- Corrected range -->
+                                If the transfer function is in the form $G(s)H(s) = K(1 + sT)/[s(1 + sT1)(1 + sT2)]$, the term $(1 + sT)$ can be assumed as $sT$. <!-- MMD example doesn't match this explanation fully -->
+                                The value of the transfer function at the specific value of theta will be:
+                                <div class="equation">$$ \text{At } \theta = +\frac{\pi}{2}, \quad G(s)H(s) = 0 \cdot e^{-j\frac{\pi}{2}(n-m)} $$</div>
+                                <div class="equation">$$ \text{At } \theta = -\frac{\pi}{2}, \quad G(s)H(s) = 0 \cdot e^{+j\frac{\pi}{2}(n-m)} $$</div>
+                                Where, N is the number of poles and m is the number of zeroes. The value of n is greater than or equal to m.</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">6.</span>
+                                <span class="item-text"><strong>Range for the second section C3</strong><br> <!-- Should be third section -->
+                                In the third section C3, the value of $\omega$ ranges from -infinity to zero. The locus of the third section is just the inverse of the polar plot of $G(j\omega)H(j\omega)$. We can also say that it is the inverse of the first section. The resulted plot will be the mirror image of the polar with respect to the real axis.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">7.</span>
+                                <span class="item-text"><strong>Range for the second section C4</strong><br> <!-- Should be fourth section -->
+                                The argument of the forth section varies from- 90 degrees to 90 degrees. The Nyquist contour of this section has a semicircle of zero radii. The mapping of the section C4 is given by the condition:
+                                <div class="equation">$$ s = \lim_{r \rightarrow 0} re^{j\theta} $$</div> <!-- Changed R to r for small radius -->
+                                <div class="equation">$$ \theta = -\frac{\pi}{2} \text{ to } +\frac{\pi}{2} $$</div>
+                                If the transfer function is in the form $G(s)H(s) = K(1 + sT)/[s^y(1 + sT1)(1 + sT2)]$, the term $(1 + sT)$ can be assumed as 1.
+                                The value of the transfer function at the specific value of theta will be:
+                                <div class="equation">$$ \text{At } \theta = +\frac{\pi}{2}, \quad G(s)H(s) = \infty \cdot e^{-j\frac{\pi}{2}y} $$</div>
+                                <div class="equation">$$ \text{At } \theta = -\frac{\pi}{2}, \quad G(s)H(s) = \infty \cdot e^{+j\frac{\pi}{2}y} $$</div>
+                                Where, Y is the number of poles (at the origin).
+                                <div class="content-card" style="background-color: #fff9e6; border-color: #ffe58f; margin-top:1rem;"> <!-- Highlight note -->
+                                   <p><strong>Note:</strong> If there are no poles at the origin of the Nyquist plot, the section C4 will be absent.</p>
+                                </div>
+                                </span>
+                             </li>
+                        </ol>
+                        <p>Let's discuss an example of the Nyquist plot for better understanding. We will follow the steps discussed above.</p>
+                    </div>
+                </section>
+                <!-- END: unit-8-nyquist-drawing-steps -->
+
+                <!-- START: unit-8-nyquist-example -->
+                <section id="unit-8-nyquist-example" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✍️</span>
+                        <span class="heading-text">Examples</span> <!-- Changed heading from MMD -->
+                    </h2>
+                    <div class="content-card">
+                         <p>Consider the below example:</p>
+                         <p><strong>Example:</strong> Draw the Nyquist plot for the system whose open loop transfer function is given by:</p>
+                         <div class="equation">$$ G(s)H(s) = K/[s(s + 2)(s + 10)] $$</div>
+                         <p>Also determine the range of K for which the system is stable.</p>
+                         <p><strong>Solution:</strong> The transfer function is given by:</p>
+                         <div class="equation">$$ G(s)H(s) = K/[s(s + 2)(s + 10)] $$</div>
+                         <p><strong>Step 1: Determining the poles and zeroes.</strong></p>
+                         <p>Since, the transfer function has no numerator in terms of s, there are no zeroes present in the function. There are only three poles (at s=0, s=-2, s=-10).</p>
+                         <!-- Time constant form -->
+                         <div class="equation">$$ G(s)H(s) = K/[s \cdot 2(s/2 + 1) \cdot 10(s/10 + 1)] = K/[20s(1 + 0.5s)(1 + 0.1s)]$$</div>
+                         <div class="equation">$$ G(s)H(s) = 0.05K/[s(1 + 0.5s)(1 + 0.1s)] $$</div>
+                         <p>The open loop function has a pole at the origin, which is shown below:</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-092-1.jpg" alt="Nyquist contour in the s-plane for a system with a pole at the origin, showing the detour C4 around the origin." class="content-image">
+
+                         <p>Now, we will perform the mapping of all four sections separately. At last, all four sections will be combined to produce the desired results.</p>
+
+                         <p><strong>Step 2: Mapping of section C1</strong></p>
+                         <p>The value of $\omega$ in section C1 ranges from $0^+$ to infinity. The contour will be drawn in G(s)H(s) plane with respect to the above range will be the locus plot of $G(j\omega)H(j\omega)$.</p>
+                         <div class="equation">$$ G(s)H(s) = 0.05K/[s(1 + 0.5s)(1 + 0.1s)] $$</div>
+                         <div class="equation">$$ G(j\omega)H(j\omega) = 0.05K/[ j\omega(1 + 0.5j\omega)(1 + 0.1j\omega)] $$</div>
+                         <div class="equation">$$ G(j\omega)H(j\omega) = 0.05K/[ j\omega(1 + 0.6j\omega - 0.05\omega^2)] $$</div>
+                         <div class="equation">$$ G(j\omega)H(j\omega) = 0.05K/[-0.6 \omega^2 + j\omega(1 - 0.05\omega^2)] $$</div>
+                         <p>The corresponding imaginary term will be 0 and the resulted frequency will be the crossover phase frequency, which is given by:</p>
+                         <p>$\omega(1 - 0.05\omega^2) = 0$</p>
+                         <p>$1 - 0.05\omega^2 = 0 \quad (\text{since } \omega \neq 0 \text{ on C1})$</p>
+                         <p>$\omega^2 = 1/0.05 = 20$</p>
+                         <p>$\omega = \sqrt{20} \approx 4.472$ radians/second = crossover phase frequency</p>
+                         <p>Now, we will put the value of the above frequency in the real part of the $G(j\omega)H(j\omega)$, which is given by:</p> <!-- Should be the full expression -->
+                         <p>At $\omega^2 = 20$, the expression becomes:</p>
+                         <div class="equation">$$ G(j\omega)H(j\omega) = \frac{0.05K}{-0.6 \omega^2 + j(0)} = \frac{0.05K}{-0.6 \times 20} = \frac{0.05K}{-12} $$</div>
+                         <div class="equation">$$ G(j\omega)H(j\omega) \approx -0.00417K $$</div>
+                         <p>From the given transfer function, we can easily determine that the system is of type 1 and order 3.</p>
+                         <p>The polar plot will start at $ \infty \angle -90^\circ $ (as $\omega \to 0^+$), crosses the real axis at $-0.00417K$ (when $\omega \approx 4.472$), and end at $0 \angle -270^\circ$ (as $\omega \to \infty$), as shown below:</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-094-1.jpg" alt="Polar plot (Section C1 mapping) for the example system, starting from -inf on imaginary axis, crossing negative real axis at -0.00417K, ending at origin from positive imaginary axis." class="content-image">
+
+                         <p><strong>Step 3: Mapping of section C2</strong></p>
+                         <p>The range of the second section is from +90 degrees to -90 degrees. It can be obtained by:</p>
+                         <div class="equation">$$ s = \lim_{R \rightarrow \infty} Re^{j\theta} \quad \text{where } \theta = +\frac{\pi}{2} \text{ to } -\frac{\pi}{2} $$</div>
+                         <p>If the transfer function is in the form $G(s)H(s) = 0.05K/[s(1 + 0.5s)(1 + 0.1s)]$, for large $s$, the term $(1 + sT)$ can be assumed as $sT$. It is given by:</p>
+                         <div class="equation">$$ G(s)H(s) \approx \frac{0.05K}{s(0.5s)(0.1s)} = \frac{0.05K}{0.05s^3} = \frac{K}{s^3} $$</div>
+                         <!-- <p>Let, the value of s be:</p> MMD text redundant -->
+                         <div class="equation">$$ G(s)H(s)|_{s=Re^{j\theta}} = \frac{K}{(Re^{j\theta})^3} = \frac{K}{R^3 e^{j3\theta}} = \frac{K}{R^3} e^{-j3\theta} $$</div>
+                          <p>As $R \to \infty$, $|G(s)H(s)| \to 0$.</p>
+                         <p>The value of the transfer function at the specific value of theta will be:</p>
+                         <p>At $\theta = +\pi/2$, Angle = $-3(\pi/2) = -270^\circ$</p>
+                         <p>At $\theta = -\pi/2$, Angle = $-3(-\pi/2) = +270^\circ$</p>
+                         <p>Thus, the section C2 varying from -270 degrees to 270 degrees will appear as the plane shown in the below image:</p> <!-- Angles are phase of G(s)H(s) -->
+                          <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-095-1.jpg" alt="Mapping of Section C2 (infinite semicircle in s-plane) to the origin in the G(s)H(s) plane." class="content-image">
+                         <p>Section C2 in s-plane</p> <!-- Caption from MMD -->
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-095-2.jpg" alt="Close up of the origin in G(s)H(s) plane showing the mapping of C2 as a point (zero magnitude)." class="content-image">
+                         <p>Mapping of section C2 in G(s)H(s) plane</p> <!-- Caption from MMD -->
+
+                         <p><strong>Step 4: Mapping of section C3</strong></p>
+                         <p>We know that the section C3 is simply the inverse (mirror image across real axis) of section C1. Thus, the locus plot of the section C3 will be the increase on the real axis at the same point, as shown below:</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-096-1.jpg" alt="Polar plot showing mapping of section C3, which is the mirror image of C1 across the real axis." class="content-image">
+
+                         <p><strong>Step 5: Mapping of section C4</strong></p>
+                         <p>Let's plot the C4 section of the Nyquist plot.</p>
+                         <p>The argument of the fourth section varies from -90 degrees to 90 degrees. The Nyquist contour of this section has a semicircle of zero radii. The condition gives the mapping of the section C4:</p>
+                         <div class="equation">$$ s = \lim_{r \rightarrow 0} re^{j\theta} \quad \text{where } \theta = -\frac{\pi}{2} \text{ to } +\frac{\pi}{2} $$</div>
+                         <p>If the transfer function is in the form $G(s)H(s) = 0.05K/[s(1 + 0.5s)(1 + 0.1s)]$, for small $s$ (near origin), the term $(1 + sT)$ can be assumed as 1. It is given by:</p>
+                         <div class="equation">$$ G(s)H(s) \approx \frac{0.05K}{s(1)(1)} = \frac{0.05K}{s} $$</div>
+                          <!-- <p>Let, the value of s be:</p> MMD text redundant -->
+                         <div class="equation">$$ G(s)H(s)|_{s=re^{j\theta}} = \frac{0.05K}{re^{j\theta}} = \frac{0.05K}{r} e^{-j\theta} $$</div>
+                         <p>As $r \to 0$, $|G(s)H(s)| \to \infty$.</p>
+                         <p>The value of the transfer function at the specific value of theta will be:</p> <!-- Angle refers to phase of G(s)H(s) -->
+                         <p>At $\theta = +\pi/2$, Angle = $-\theta = -\pi/2 = -90^\circ$</p>
+                         <p>At $\theta = -\pi/2$, Angle = $-\theta = -(-\pi/2) = +\pi/2 = +90^\circ$</p>
+                         <p>We can say that the section C4 is mapped in the s-plane as a circular arc of infinite radius (in G(s)H(s) plane). The locus is shown below:</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-097-1.jpg" alt="Mapping of section C4 (small semicircle around origin in s-plane) to an infinite semicircle in the G(s)H(s) plane, going from -90 to +90 degrees clockwise." class="content-image">
+                         <p>Mapping of section C4 in G(s)H(s) plane</p> <!-- Caption from MMD -->
+
+                         <p><strong>Step 6: Stability analysis</strong></p>
+                         <p>We will find the value of K when the contour passes through the point (-1 + j0).</p>
+                         <p>From Step 2, the crossing point on the real axis is $-0.00417K$.</p>
+                         <p>Set this equal to -1:</p>
+                         <p>$-0.00417K = -1$</p>
+                         <p>The limiting value of K will be:</p>
+                         <p>$K = 1/0.00417$</p>
+                         <p>$K \approx 239.8 \approx 240$</p>
+
+                         <p><strong>Step 7: Complete Nyquist plot</strong></p>
+                         <p>The complete Nyquist plot after combining all the above four sections are shown below:</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-098-1.jpg" alt="Complete Nyquist plot for the example system, combining mappings of C1, C2, C3, C4. Shows encirclement of -1+j0 for K>240." class="content-image">
+
+                         <p>We will find the stability at the two values of K.</p>
+                         <h4 class="subsubsection-heading">K< 240</h4>
+                         <p>When the value of K is less than 240, the contour does not cross the real axis to the left of -1, and the point -1 + j0 is <strong>not encircled</strong>. There are no open-loop poles on the right half of the s-plane (P=0). According to the Nyquist criterion (N = P - Z), the number of encirclements N must be 0 for stability (since P=0), which means Z=0 (no closed-loop poles in RHP). Hence, the system at this value of K is <strong>stable</strong>.</p>
+                         <h4 class="subsubsection-heading">K>240</h4>
+                         <p>When the value of K is greater than 240, the contour crosses the real axis to the left of -1, and the point -1 + j0 is <strong>encircled two times</strong> in the <strong>clockwise</strong> direction (N=-2). There are no open-loop poles on the right half of the s-plane (P=0). According to the Nyquist criterion (N = P - Z), we have -2 = 0 - Z, which implies Z=2. This means there are two closed-loop poles in the right-half s-plane. Hence, the system at this value of K is <strong>unstable</strong>.</p>
+                         <p>Thus, for the stability of the given transfer function, the value of K is $0 < K < 240$.</p>
+                    </div>
+                 </section>
+                <!-- END: unit-8-nyquist-example -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-8-part-2.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 8 (Part 3) of 9</span>
+                    </div>
+                    <a href="unit-8-part-4.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

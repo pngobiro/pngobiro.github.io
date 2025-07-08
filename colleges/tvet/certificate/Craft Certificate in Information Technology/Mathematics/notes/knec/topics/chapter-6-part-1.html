@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 6: Boolean Algebra (II) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 6</span>
+                    </div>
+                    <a href="chapter-7-part-1a.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 6 : Boolean Algebra (II)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-6-objectives -->
+                <section id="chapter-6-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you would have learnt:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to analyse and simplify circuits by Boolean Algebra;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to draw a logic circuit.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-6-objectives -->
+
+                <!-- START: chapter-6-introduction -->
+                <section id="section-6-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💡</span>
+                        <span class="heading-text">6.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In addition to our 'ordinary' Boolean algebra, De Morgan's Laws is one tool used for simplifying complex expressions in Boolean algebra or complex switching circuits.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-6-introduction -->
+
+                <!-- START: chapter-6-laws -->
+                <section id="section-6-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📜</span>
+                        <span class="heading-text">6.2 The Laws of Boolean Algebra</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>Commutative law</strong></p>
+                        <div class="equation">$$ A \cdot B = B \cdot A $$</div>
+                        <div class="equation">$$ A + B = B + A $$</div>
+
+                        <p><strong>Associative law</strong></p>
+                        <div class="equation">$$ A \cdot (B \cdot C) = (A \cdot B) \cdot C = A \cdot B \cdot C $$</div>
+                        <div class="equation">$$ A + (B + C) = (A + B) + C = A + B + C $$</div>
+
+                        <p><strong>Distributive law</strong></p>
+                        <div class="equation">$$ A \cdot (B + C) = A \cdot B + A \cdot C $$</div>
+                        <div class="equation">$$ (A + B) \cdot (A + C) = A + B \cdot C $$</div> <!-- Simplified form -->
+
+                        <p><strong>Boolean rules (Identities)</strong></p>
+                        <div class="table-container">
+                           <table class="content-table">
+                                <tbody>
+                                    <tr><td><span class="math-inline">$A \cdot 0 = 0$</span></td><td><span class="math-inline">$A + 0 = A$</span></td></tr>
+                                    <tr><td><span class="math-inline">$A \cdot 1 = A$</span></td><td><span class="math-inline">$A + 1 = 1$</span></td></tr>
+                                    <tr><td><span class="math-inline">$A \cdot A = A$</span></td><td><span class="math-inline">$A + A = A$</span></td></tr>
+                                    <tr><td><span class="math-inline">$A \cdot \overline{A} = 0$</span></td><td><span class="math-inline">$A + \overline{A} = 1$</span></td></tr>
+                                    <tr><td><span class="math-inline">$\overline{\overline{A}} = A$</span> (Double Negation)</td><td></td></tr>
+                               </tbody>
+                           </table>
+                        </div>
+
+                        <p><strong>Properties of absorption</strong></p>
+                        <div class="equation">$$ A + (A \cdot B) = A $$</div>
+                        <div class="equation">$$ A \cdot (A + B) = A $$</div>
+                        <div class="equation">$$ A + (\overline{A} \cdot B) = A + B $$</div>
+                        <div class="equation">$$ A \cdot (\overline{A} + B) = A \cdot B $$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-6-laws -->
+
+                <!-- START: chapter-6-simplification -->
+                <section id="section-6-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✨</span>
+                        <span class="heading-text">6.3 Simplification of Expressions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The rules given may be used to simplify Boolean expression, just as the rules of normal algebra may be used to simplify expression. Consider the expression</p>
+                        <div class="equation">$$ (A+B)(A+\overline{B})(\overline{A}+C) $$</div>
+                        <p>The first two terms <span class="math-inline">$(A+B)(A+\overline{B})$</span> reduce to A (using distributive law <span class="math-inline">$X+YZ = (X+Y)(X+Z)$</span> in reverse, or by expansion as shown in Ch 5).</p>
+                        <p>The expression becomes <span class="math-inline">$A(\overline{A}+C)$</span>.</p>
+                        <p>Applying distributive law: <span class="math-inline">$A \cdot \overline{A} + A \cdot C$</span>.</p>
+                        <p>Since <span class="math-inline">$A \cdot \overline{A} = 0$</span>, the expression simplifies to <span class="math-inline">$0 + A \cdot C = A \cdot C$</span>.</p>
+
+                        <p>Another expression that may be simplified is <span class="math-inline">$A B C + A \overline{B} C + A B \overline{C}$</span>.</p>
+                        <p>Factor out A: <span class="math-inline">$A(B C + \overline{B} C + B \overline{C})$</span>.</p>
+                        <p>Factor C from first two terms inside parenthesis: <span class="math-inline">$A(C(B + \overline{B}) + B \overline{C})$</span>.</p>
+                        <p>Since <span class="math-inline">$B + \overline{B} = 1$</span>: <span class="math-inline">$A(C \cdot 1 + B \overline{C}) = A(C + B \overline{C})$</span>.</p>
+                        <p>Using absorption rule <span class="math-inline">$X + \overline{X} Y = X + Y$</span>: <span class="math-inline">$C + B \overline{C} = C + B$</span>.</p>
+                        <p>The expression simplifies to <span class="math-inline">$A(B+C)$</span> or <span class="math-inline">$A B + A C$</span>.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-6-simplification -->
+
+                <!-- START: chapter-6-demorgan -->
+                <section id="section-6-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">¬</span>
+                        <span class="heading-text">6.4 De Morgan's Laws</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The following two rules constitute De Morgan's Laws:</p>
+                        <div class="equation">$$ \overline{A+B} = \overline{A} \cdot \overline{B} $$</div>
+                        <div class="equation">$$ \overline{A \cdot B} = \overline{A} + \overline{B} $$</div>
+                        <p>The complement of any Boolean expression, or part of any expression, may be found by means of this law. Using these rules, two steps are used to form a complement:</p>
+                        <ol>
+                            <li>Change all AND (.) operators to OR (+) and all OR (+) operators to AND (.).</li>
+                            <li>Complement each individual variable (and constant).</li>
+                        </ol>
+                        <p>Example: Complement of <span class="math-inline">$A+B \cdot C$</span></p>
+                        <p><span class="math-inline">$\overline{A+(B \cdot C)} = \overline{A} \cdot \overline{(B \cdot C)} = \overline{A} \cdot (\overline{B} + \overline{C})$</span></p>
+
+                        <p>Example: Complement of <span class="math-inline">$A \overline{B} + C \overline{D}$</span></p>
+                        <p><span class="math-inline">$\overline{(A \cdot \overline{B}) + (C \cdot \overline{D})} = \overline{(A \cdot \overline{B})} \cdot \overline{(C \cdot \overline{D})} = (\overline{A} + \overline{\overline{B}}) \cdot (\overline{C} + \overline{\overline{D}}) = (\overline{A} + B) \cdot (\overline{C} + D)$</span></p>
+
+                        <p>Example: Simplify <span class="math-inline">$\overline{\overline{A}+\overline{B} \cdot C+C \cdot B}$</span></p>
+                        <p>= <span class="math-inline">$\overline{\overline{A}} \cdot \overline{(\overline{B} \cdot C)} \cdot \overline{(C \cdot B)}$</span> (De Morgan's Law)</p>
+                        <p>= <span class="math-inline">$A \cdot (B + \overline{C}) \cdot (\overline{C} + \overline{B})$</span> (Double Negation and De Morgan's Law)</p>
+                        <p>= <span class="math-inline">$A \cdot (B\overline{C} + B\overline{B} + \overline{C}\overline{C} + \overline{C}\overline{B})$</span> (Distributive Law)</p>
+                        <p>= <span class="math-inline">$A \cdot (B\overline{C} + 0 + \overline{C} + \overline{B}\overline{C})$</span> (Identity Laws)</p>
+                        <p>= <span class="math-inline">$A \cdot (\overline{C}(B+1+\overline{B}))$</span> (Factoring)</p>
+                        <p>= <span class="math-inline">$A \cdot (\overline{C}(1))$</span> (Identity Law)</p>
+                        <p>= <span class="math-inline">$A \cdot \overline{C}$</span></p>
+                    </div>
+                </section>
+                <!-- END: chapter-6-demorgan -->
+
+                <!-- START: chapter-6-points-remember -->
+                <section id="chapter-6-points-remember" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📌</span>
+                        <span class="heading-text">Points to Remember (Boolean Algebra II)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Boolean algebra and De Morgan's laws are two tools to simplify complicated logic expressions or logic circuits.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-6-points-remember -->
+
+                <!-- START: chapter-6-past-questions -->
+                <section id="section-6-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">6.5 Past Years Questions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Draw the logic circuit for the following expression using NAND gates only.</p>
+                        <div class="equation">$$ \overline{\overline{A} \cdot \overline{B} \cdot \overline{C}} $$</div>
+                        <p>Using Boolean algebra, simplify:</p>
+                        <div class="equation">$$ (\overline{A+C}) \cdot \overline{B C}+\overline{A C+B} $$</div>
+                        <p>Using Boolean algebra simplify:</p>
+                        <div class="equation">$$ A B \bar{C}+A B(\overline{\bar{A} B \bar{C}+(\bar{A})} \overline{\bar{B}+C}) $$</div> <!-- MMD formatting unclear -->
+                        <p>a. Using Boolean algebra, simplify the expression: <span class="math-inline">$A(B+A B C+A C)$</span>.</p>
+                        <p>b. From the simplified expression, draw the logic circuit.</p>
+                        <p>a. Use Boolean Algebra to show that:</p>
+                        <div class="equation">$$ (A \cdot B+B \cdot C+A \cdot C) \cdot(\overline{A \cdot B \cdot C})=\bar{A} \cdot B \cdot C+A \cdot \bar{B} \cdot C+A \cdot B \cdot \bar{C} $$</div>
+                        <p>b. Draw a logic circuit for the expression.</p>
+                        <div class="equation">$$ \overline{A B} \cdot C+A \cdot \overline{B \cdot C}+\text { A.B. } \bar{C} $$</div>
+                        <p>a. If <span class="math-inline">$X = \overline{A \cdot B} + C + \overline{A}$</span>, create a TRUTH TABLE for X .</p>
+                        <p>b. Using the truth table, show that X can be represented by a single NAND gate.</p>
+                        <p>If <span class="math-inline">$X = \overline{A B+C}$</span></p>
+                        <p>a. Using De Morgan's Laws only, prove that <span class="math-inline">$X = (\overline{A}+\overline{B}) \cdot \overline{C}$</span></p>
+                        <p>b. [Question missing/unclear in MMD]</p>
+                        <p>a. A, B and C are switches in the electrical circuit shown below. If a switch is on, it has a Boolean value of '1', otherwise it has '0'. The light bulb will light if C=1 and either A=1 or B=1. The light bulb 'X' has a Boolean value of '1' if it is lit, otherwise it has the value '0'.</p>
+                        <!-- Circuit diagram missing in MMD -->
+                        <ol type="i">
+                            <li>Draw a truth table relating the inputs (A, B and C) to the output X. [4]</li>
+                            <li>Write down, but do not simplify the Boolean Expression of X.</li>
+                            <li>Simplify the expression using a Boolean Algebra.</li>
+                            <li>Redesign the circuit using NAND gates only.</li>
+                        </ol>
+                        <p>b. Using only De Morgan's law and Boolean algebra simplify:</p>
+                        <div class="equation">$$ (\overline{A+C}) \cdot A B+B C+A $$</div>
+                        <p>Simplify using Boolean algebra <span class="math-inline">$(\overline{A B} - \overline{A B})$</span>.</p> <!-- Expression seems incorrect -->
+                        <p>a. From the following truth table, obtain the expressions for 'yes' (X=1) and 'no' (X=0) for X and simplify them using Boolean algebra. [10]</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>C</th><th>X</th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>b. Construct the logic circuit for simplified 'yes' and 'no'.</p>
+                        <p>In a beauty contest, three judges A, B and C can register their votes as '1' or '0' through switches allocated to them. Contestants will be disqualified if two or more judges register '0' votes for them.</p>
+                        <ol type="a">
+                            <li>Use a Boolean Algebra to obtain a simplified Boolean expression for the outputs 'qualified' and 'disqualified'.</li>
+                            <li>Construct a logic circuit for the simplified disqualified output.</li>
+                        </ol>
+                        <p>Find an expression for X from the following truth table and simplify it using a Boolean algebra.</p>
+                        <div class="table-container">
+                             <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>C</th><th>X</th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>a. Simplify the following expression using Boolean Algebra:</p>
+                        <div class="equation">$$ (\overline{\overline{A B}+A C}) A(\bar{A} \bar{B}+(\overline{B+C})) $$</div>
+                        <p>b. Using Boolean algebra only, prove that the expression <span class="math-inline">$A \cdot (\overline{A B}+B C) = A \cdot \overline{B}$</span></p>
+                        <p>c. Obtain an expression for X from the following truth table, and simplify it using a Boolean algebra.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>C</th><th>X</th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>0</td><td>0</td><td>1</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>0</td><td>0</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>When <span class="math-inline">$X = (A+C) \cdot (\overline{A \cdot B+C})$</span></p>
+                        <ol type="a">
+                            <li>Create a TRUTH TABLE for X including columns for <span class="math-inline">$(A+C)$</span>, <span class="math-inline">$(A \cdot B+C)$</span> and <span class="math-inline">$\overline{(A \cdot B+C)}$</span></li>
+                            <li>Produce a Boolean expression for this table</li>
+                            <li>Use ONLY De Morgan's laws and Boolean algebra to simplify the original expression for X.</li>
+                        </ol>
+                        <p>A manufacturing process has three status checks, A, B and C. The process continues without interruption, if one of the following conditions holds:</p>
+                        <ul class="enhanced-list">
+                            <li>all three have a value of 1,</li>
+                            <li>all three have value of 0,</li>
+                            <li>A has a value of 1 and ONE of B or C has a value of 0</li>
+                            <li>A has a value of 0 and C has a value of 1</li>
+                        </ul>
+                        <ol type="a">
+                            <li>If the process continues, write down, in terms of A, B and C an appropriate Boolean expression. [4]</li>
+                            <li>Use Boolean algebra to simplify this expression.</li>
+                            <li>If the process is interrupted, an electronic signal is produced. Draw the logic circuit necessary to produce such a signal.</li>
+                        </ol>
+                        <p>Using Boolean Algebra prove</p>
+                        <div class="equation">$$ \overline{A(B+AC)} + \overline{C} \overline{A \overline{B} C+BC} = \overline{A}+\overline{B}+\overline{C} $$</div>
+                        <p>A spaceship is exploring the distant planet IDCS. There are four components of the spaceship which are important for landing: the rockets (R); the navigation system (N); the wheels (W), the hull (H). Because the planet IDCS is so far away, these components break down quite often. The spaceship can only land if one or more of the following conditions are met:</p>
+                        <ol type="i">
+                            <li>the hull (H) is functioning and either the rockets (R) or the wheels (W) are functioning.</li>
+                            <li>the rockets (R) and wheels (W) are both functioning.</li>
+                            <li>the navigation (N) system is functioning and the rockets (R) are functioning.</li>
+                        </ol>
+                        <ol type="a">
+                            <li>Construct a truth table which indicates whether landing is possible or not, for all values of R, W, N and H. [8]</li>
+                            <li>Write a Boolean expression which states the conditions under which the spaceship can land. Simplify your answer as much as possible. [4]</li>
+                            <li>Design a logic circuit to implement the Boolean expression you derived as your answer to part (b). Use only 2-input AND, 2-input OR and/or 1-input NOT gates (as many of each as is necessary).</li>
+                            <li>Suppose the spaceship is approaching to land with all its components in full working order, when the following events occur, in order:
+                                <ol type="i">
+                                    <li>the rockets fail.</li>
+                                    <li>the navigation system fails.</li>
+                                    <li>the wheels fail.</li>
+                                    <li>the hull fails.</li>
+                                </ol>
+                            </li>
+                        </ol>
+                        <p>After which event will the spaceship be unable to land?</p>
+                        <p>e. If, instead of having four components important for landing, a new, improved spaceship had six such components, how many entries would be needed in a truth table to cover all the possible combinations of components' functionality?</p> <!-- MMD typo: llllll -->
+                    </div>
+                </section>
+                <!-- END: chapter-6-past-questions -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-5-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 6</span>
+                    </div>
+                    <a href="chapter-7-part-1a.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

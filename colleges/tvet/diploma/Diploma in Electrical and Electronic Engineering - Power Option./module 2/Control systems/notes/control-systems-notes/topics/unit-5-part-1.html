@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 5: Time Domain Analysis (Part 1)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-4-part-2.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 5 (Part 1) of 9</span>
+                    </div>
+                    <a href="unit-5-part-2.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Unit-5: Time Domain Analysis of Control Systems</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: unit-5-time-response-intro -->
+                <section id="unit-5-time-response-intro" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">⏱️</span>
+                        <span class="heading-text">Control system- Time response Analysis</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>The primary purpose of the time response analysis is to evaluate the system's performance with respect to time. The time-response graph is shown below:</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-039-1.jpg" alt="Graph showing time response C(t) vs t, separating into transient part and steady state part." class="content-image">
+                        <p>It comprises of two parts, transient part and the steady state part.</p>
+                        <p>After applying an input to the control system, the output takes some time to reach the steady condition. The response during this stage is known as transient response and constitutes the transient part of the graph, as shown above. The graph when achieves the steady start after the transient part is known a steady part.</p>
+                        <p>To describe a system, we need to develop the relationship between the inputs and output of the system that are the functions of time. The most common model used to describe such behavior is known as the differential equation. The analysis of the system can be done with the help of a differential equation by applying different inputs to it.</p>
+                        <p>The common input signal is shown below:</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-039-2.jpg" alt="Block diagram showing input r(t) -> System -> output c(t), labeled 'System with input and output'." class="content-image">
+                        <p>A test signal r(t) is applied as the input to the system that results in the response c(t). The input signal of a system can take many forms.</p>
+                     </div>
+                </section>
+                <!-- END: unit-5-time-response-intro -->
+
+                <!-- START: unit-5-transient-steady-state -->
+                <section id="unit-5-transient-steady-state" class="content-section">
+                    <h2 class="section-heading">
+                         <span class="heading-icon">📈</span>
+                         <span class="heading-text">Transient and Steady-State Response</span>
+                     </h2>
+                     <div class="content-card">
+                        <h3 class="subsection-heading">Transient Response</h3>
+                        <p>It is a part of the time response that reaches 0 (zero) when the time becomes very large. In the graph analysis containing poles and zeroes, the poles lying on the left half of the s-plane gives the transient response. We can also say that it is a part of the response where output continuously increases or decreases. The transient response is also known as the temporary part of the response.</p>
+                        <p>Or</p>
+                        <p>Transient response is defined as the change in the response of the system from the equilibrium state.</p>
+                        <p>For example,</p>
+                        <h4 class="subsubsection-heading">The switching time of a bipolar transistor</h4>
+                        <p>The characteristics BJT or Bipolar Junction transistor depicts the transient nature.</p>
+
+                        <h3 class="subsection-heading">Steady-state response</h3>
+                        <p>The response that comes after the transient response is called the steady-state response. In the graph analysis containing poles and zeroes, the poles on the imaginary axis give the steady-state response. We can also say that it is a part of the response where output remains constant. The output can also vary periodically with constant amplitude and frequency. The steady-state response is also known as the steady-state part of the response. It is a function of the input signal and hence also known as the forced response of the system.</p>
+                        <p>Let's discuss some examples where we will find the transient and steady-state terms of the given equation.</p>
+                        <h4 class="subsubsection-heading">Examples</h4>
+                        <p><strong>Example 1:</strong> $5 + 2e^{-t}$</p> <!-- Corrected caret notation -->
+                        <p><strong>Solution:</strong></p>
+                        <p>Here, the transient part of the equation is $2e^{-t}$ because as t approaches to infinity, the term becomes 0. Hence, $2e^{-t}$ is the transient term. In the case of the first term 5, it will remain same when t approaches infinity. Hence, 5 is the steady-state term of the equation.</p>
+                        <p><strong>Example 2:</strong> $10 + 5e^{t}$</p> <!-- Corrected caret notation -->
+                        <p><strong>Solution:</strong></p>
+                        <p>Here, the first term, 10, is the steady-state term of the equation because it will remain the same when t approaches infinity. In the case of the second term, $5e^{t}$, the result is infinity when t approaches infinity. Hence, it is not a transient term. It is because something to the power infinity is always infinity.</p>
+                         <p>So, there is only a steady-state term in the equation.</p>
+                     </div>
+                </section>
+                <!-- END: unit-5-transient-steady-state -->
+
+                <!-- START: unit-5-standard-signals -->
+                <section id="unit-5-standard-signals" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🚦</span>
+                        <span class="heading-text">Standard signals</span>
+                    </h2>
+                    <div class="content-card">
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">Step Input signal</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">Ramp input signal</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">Sinusoidal input signal</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">Impulse input signal</span></li>
+                        </ol>
+
+                        <h3 class="subsection-heading">Step Input signal</h3>
+                        <p>For the positive value, the step input shows constant values of the time. It has zero value for the negative value of the time signal. The initial value of the signal is and the transition is in the form of step size with a constant value. If the constant value of the signal is 1, it is called step input signal, which is represented as:</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-041-1.jpg" alt="Graph of a unit step input signal u(t) showing 0 for t<0 and 1 for t>=0." class="content-image">
+                        <p>The value of the signal is:</p>
+                        <p>0 for t=0 and</p> <!-- Should likely be t<0, preserving verbatim -->
+                        <p>1 for t>0</p>
+                        <p>The graph is a function of one variable named t.</p>
+
+                        <h3 class="subsection-heading">Ramp input signal</h3>
+                        <p>The graph of the ramp input signal is in the shape of ramp. It depicts the linear increase that begins at some specific point. The value of the ramp signal shows the constant change with respect to time. The value of the signal is 0 for negative values. It means that it shows the output for positive inputs.</p>
+                        <p>The ramp function is represented as:</p>
+                         <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-042-1.jpg" alt="Graph of a ramp input signal r(t)=at, showing a line with positive slope starting from the origin." class="content-image">
+                        <p>The value of the signal is:</p>
+                        <p>At for t>0 and</p>
+                        <p>0 for t<0</p> <!-- Corrected less than symbol -->
+                        <p>If the value of A is 1 when t>0. The signal is known as unit ramp signal.</p>
+
+                        <h3 class="subsection-heading">Sinusoidal input signal</h3>
+                        <p>A sinusoidal input is one whose oscillations can be described by an equation in the formof sine. The response of the linear process to a sinusoidal is sinusoidal. The signal is given by:</p>
+                        <div class="equation">$$ r(t)=A \sin (\omega t+\emptyset) $$</div>
+                        <p>The sinusoidal signal in the control system is represented as:</p>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-042-2.jpg" alt="Graph of a sinusoidal input signal showing amplitude A and period T." class="content-image">
+                        <p>The sine wave starts from zero, covers positive value, reach zero, covers negative values, and again reaches zero, as shown above.</p>
+
+                        <h3 class="subsection-heading">Impulse Input signal</h3>
+                        <p>The impulse signal is a type of high amplitude signal and has a very short duration. It means that the magnitude approaches infinity when the time reaches zero. Thus, we can say that the value of the signal is infinity at t =0. Otherwise, its value is 0.</p>
+                         <!-- Mathpix converted equation -->
+                         <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-043-1.jpg" alt="Integral of delta(t) dt from -inf to +inf = 1" class="content-image"> -->
+                         <div class="equation">$$ \int_{-\infty}^{\infty} \delta(\mathrm{t}) \mathrm{dt}=1 $$</div>
+                         <p>Its integration from -infinity to infinity is 1, as shown above.</p>
+                         <p>It is a physical non-existing signal, which is defined based on the area concept. It is not based on the amplitude concept. The impulse input signal is represented as:</p>
+                         <!-- Using corrected image filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-043-1.jpg" alt="Graph of an impulse signal delta(t) showing an arrow of infinite height at t=0." class="content-image">
+                     </div>
+                 </section>
+                <!-- END: unit-5-standard-signals -->
+
+                 <!-- START: unit-5-lti-analysis -->
+                 <section id="unit-5-lti-analysis" class="content-section">
+                     <h2 class="section-heading">
+                         <span class="heading-icon">📊</span>
+                         <span class="heading-text">Transient and Steady State Analysis of Linear Time Invariant (LTI) Systems</span>
+                     </h2>
+                     <div class="content-card">
+                        <h3 class="subsection-heading">Time Response Analysis</h3>
+                        <p>When the energy state of any system is disturbed, and the disturbances occur at input, output or both ends, then it takes some time to change from one state to another state. This time that is required to change from one state to another state is known as transient time and the value of current and voltage during this period is called transient response.</p>
+                        <p>Depending upon the parameters of the system, the transient may have oscillations which may be either sustained or decaying in nature.</p>
+                        <p>Thus time response of a control system is divided into two parts-</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">Transient response analysis.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">Steady State Analysis.</span></li>
+                        </ol>
+                        <h3 class="subsection-heading">Transient State response</h3>
+                        <p>It deals with the nature of the response of a system when subjected to an input.</p>
+                        <h3 class="subsection-heading">Steady State Analysis</h3>
+                        <p>It deals with the estimation of the magnitude of steady-state error between input and output.</p>
+                        <h3 class="subsection-heading">Different Type of Standard Test Signals</h3>
+                        <p>The various inputs or disturbances affecting the performance of a system are mathematically represented as a standard test signal.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">Step signal ( sudden input )</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">Ramp Signal (velocity type of input )</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">Parabolic Signal ( type of acceleration input )</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">Impulse signal (sudden shock )</span></li>
+                        </ul>
+                        <p><strong>NOTE</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">Step signal and impulse signal are bounded input signal.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">Ramp signal and parabolic signal are an unbounded input signal.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">Step signal, a ramp signal, and periodic signal are for time domain analysis. Only an impulse signal is essential for steady-state analysis.</span></li>
+                        </ul>
+                        <h3 class="subsection-heading">Characteristics of Time-domain Analysis</h3>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">Every transfer function representing the control system is of a particular type of order.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The steady state analysis depends upon the type of the system.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The type of the system is determined from open loop transfer function G(S).H(S)</span></li>
+                         </ul>
+                         <p><strong>Transient Time:</strong> The time required to change from one state to another is called the transient time.</p>
+                         <p><strong>Transient Response:</strong> The value of current and voltage during the time change is called transient response.</p>
+                          <!-- Using corrected image filenames -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-045-1.jpg" alt="Generic Input Signal vs Time graph." class="content-image" style="max-width: 45%; display: inline-block; vertical-align: top; margin-right: 5%;"> <!-- Basic layout attempt -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-045-2.jpg" alt="Generic Output Response vs Time graph showing transient state, steady state, and steady state error." class="content-image" style="max-width: 45%; display: inline-block; vertical-align: top;"> <!-- Basic layout attempt -->
+
+                         <p>So, we can say that the transient response is the part of the response which goes to zero as time increases and the steady-state response is the part of the total response after transient has died. If the steady-state response is the part of the output does not match with the input then the system has a steady state error.</p>
+                     </div>
+                 </section>
+                 <!-- END: unit-5-lti-analysis -->
+
+                 <!-- START: unit-5-test-signals-transient -->
+                 <section id="unit-5-test-signals-transient" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧪</span>
+                        <span class="heading-text">Test input signal for transient analysis</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>For the analysis of the time response of a control system, the following input signals are used.</p>
+
+                        <h3 class="subsection-heading">Step Function</h3>
+                         <!-- Using corrected image filenames -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-045-3.jpg" alt="Circuit diagram for generating a step function using a switch and voltage source." class="content-image" style="max-width: 45%; display: inline-block; vertical-align: top; margin-right: 5%;">
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-045-4.jpg" alt="Graph of a step function with amplitude K starting at t=0." class="content-image" style="max-width: 45%; display: inline-block; vertical-align: top;">
+                        <p>A unit step function is denoted by u(t) and is defined as</p>
+                        <p>$u(t) = 0 ; t=0$ and</p> <!-- MMD has semicolon -->
+                        <p>$= 1; t>0$</p>
+                        <p><strong>Laplace Transform:</strong></p>
+                         <!-- Mathpix converted equation -->
+                        <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-045-5.jpg" alt="Laplace transform of unit step function = 1/s" class="content-image"> -->
+                        <div class="equation">$$ \mathcal{L}\{f(t)\}=\int_{0}^{\infty} f(t) e^{-s t} dt =\int_{0}^{\infty} u(t) e^{-s t} d t = \int_{0}^{\infty} 1 e^{-s t} d t=\frac{1}{s} $$</div>
+                        <p>Step function is also called displacement function. If input is R(S), then $R(s) = 1/s$</p>
+
+                        <h3 class="subsection-heading">Ramp Function</h3>
+                        <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-046-1.jpg" alt="Graph of Ramp Function r(t)=Kt for t>=0." class="content-image">
+                        <p>This function starts from the origin and linearly decreases or increases with time as shown in the figure above.</p>
+                        <p>Let r(t) be the ramp function then</p>
+                        <p>$r(t) = 0 \quad ; t<0$</p>
+                        <p>$= Kt \quad ; t>0$</p>
+                        <p>Where 'K' is the slope of the line, for a positive value of 'K' the slope is upward, and the slope is downward for the negative value of 'K.'</p>
+                        <p><strong>Laplace transform</strong></p>
+                        <!-- Mathpix converted equations -->
+                        <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-046-2.jpg" alt="Laplace transform of ramp r(t)=Kt is K/s^2" class="content-image"> -->
+                        <div class="equation">$$ \mathcal{L}\{r(t)\}=\int_{0}^{\infty} r(t) e^{-s t} d t=\int_{0}^{\infty} K t e^{-s t} d t=\frac{K}{s^{2}} $$</div>
+                        <div class="equation">$$ R(S)=\frac{K}{s^{2}} $$</div>
+
+                        <h3 class="subsection-heading">Parabolic Function</h3>
+                        <!-- Using corrected image filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-046-2.jpg" alt="Graph of Parabolic function r(t)=Kt^2/2 for t>=0." class="content-image"> <!-- Reusing ramp function image as per MMD? MMD image link seems wrong -->
+                         <!-- Reusing ramp image as per MMD source. Consider replacing with a parabolic image if available -->
+                        <p>The value of r(t) is zero when t<0 and is a quadratic function of time when t>0.</p>
+                        <p>Therefore, $r(t) = 0 \quad ; t<0$</p>
+                        <p>$= (Kt^2)/2 \quad ; t>0$</p>
+                        <p>Where 'K' is constant for unit parabolic function K = 1. The unit parabolic function is defined as</p>
+                        <p>$r (t) = 0 \quad ; t<0$</p>
+                        <p>$= t^2/2 \quad ; t>0$</p>
+                        <p><strong>Laplace Transform</strong></p>
+                         <!-- Mathpix converted equations - NOTE: MMD shows K/s^2 which is wrong for parabolic. Correcting based on standard transforms. -->
+                         <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-047-1.jpg" alt="Laplace Transform of Kt^2/2 is K/s^3" class="content-image"> -->
+                        <div class="equation">$$ \mathcal{L}\{r(t)\}=\int_{0}^{\infty} \frac{Kt^2}{2} e^{-s t} d t = \frac{K}{s^{3}} $$</div>
+                         <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-047-2.jpg" alt="R(S) = K/s^3" class="content-image"> -->
+                         <div class="equation">$$ R(S)=\frac{K}{s^{3}} $$</div>
+
+                        <h3 class="subsection-heading">Impulse Function</h3>
+                         <!-- Using corrected image filenames -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-047-1.jpg" alt="Approximation of impulse function using a rectangular pulse of width T and height 1/T, as T approaches 0." class="content-image" style="max-width: 45%; display: inline-block; vertical-align: top; margin-right: 5%;">
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-047-2.jpg" alt="Ideal impulse function graph." class="content-image" style="max-width: 45%; display: inline-block; vertical-align: top;">
+                        <p>A unit impulse function is defined as</p>
+                        <!-- Mathpix converted equation -->
+                        <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-047-3.jpg" alt="delta(t) definition: 0 for t!=0, infinity for t=0, integral = 1." class="content-image"> -->
+                        <div class="equation">$$ \delta(\mathrm{t})=\left\{\begin{array}{cc} 0, & t \neq 0 \\ \infty, & t=0 \end{array} \quad \int_{-\infty}^{\infty} \delta(t) d t=1\right. $$</div>
+                        <p>Thus we can say that impulse function has zero value everywhere except at t=0 where the amplitude is infinite.</p>
+                        <!-- Mathpix converted equations -->
+                         <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-048-1.jpg" alt="delta(t) = d/dt u(t)" class="content-image"> -->
+                        <div class="equation">$$ \delta(\mathrm{t}) = \frac{d}{dt} u(t) $$</div>
+                         <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-048-2.jpg" alt="Laplace transform of delta(t) = 1" class="content-image"> -->
+                         <div class="equation">$$ \mathcal{L}\{\delta(\mathrm{t})\} = \mathcal{L}\left\{\frac{d}{d t}[u(t)]\right\} = s \mathcal{L}\{u(t)\} = s \cdot \frac{1}{s}=1 $$</div>
+                     </div>
+                 </section>
+                 <!-- END: unit-5-test-signals-transient -->
+
+                 <!-- START: unit-5-first-order-system -->
+                <section id="unit-5-first-order-system" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">1️⃣</span>
+                        <span class="heading-text">Time Response of first order system</span>
+                    </h2>
+                    <div class="content-card">
+                        <!-- Using corrected image filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-048-1.jpg" alt="Block diagram of a first-order system with feedback." class="content-image">
+                        <!-- Mathpix converted equations -->
+                        <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-048-2.jpg" alt="C(s)/R(s) derivation" class="content-image"> -->
+                        <div class="equation">$$ \frac{C(s)}{R(s)}=\frac{G(s)}{1 \pm G(s) H(s)} $$</div>
+                        <div class="equation">$$ \frac{\frac{1}{S T}}{1+\frac{1}{S T} \times 1} $$</div>
+                        <div class="equation">$$ \text{Transfer function} =\frac{C(s)}{R(s)}=\frac{1}{1+S T} $$</div>
+                        <p>In the above transfer function, the power of 's' is the one in the denominator. That is why the above transfer function is of the first order, and the system is said to be the first order system.</p>
+                    </div>
+                </section>
+                 <!-- END: unit-5-first-order-system -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-4-part-2.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 5 (Part 1) of 9</span>
+                    </div>
+                    <a href="unit-5-part-2.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

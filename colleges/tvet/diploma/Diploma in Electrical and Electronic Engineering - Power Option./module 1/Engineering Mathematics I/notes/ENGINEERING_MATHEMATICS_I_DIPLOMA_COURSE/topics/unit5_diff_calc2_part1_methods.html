@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 5: Differential Calculus II - 5.1 Differentiation Methods - Engineering Mathematics I</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      svg: { fontCache: 'global' },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit4_inv_trig_diff_calc1_part3_differentiation.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section (4.3 Differentiation)</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 70%;"></div> <!-- Example: Update percentage -->
+                        </div>
+                        <span class="progress-text">Unit 5: Diff Calc II - Part 1</span>
+                    </div>
+                    <a href="unit5_diff_calc2_part2_successive_diff.html" class="nav-button"> <!-- Link to next logical chunk -->
+                        <span class="nav-text">Next Section (5.2 Successive Diff)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">UNIT - V: DIFFERENTIAL CALCULUS-II</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                 <!-- START: unit-5-overview -->
+                <section id="unit-5-overview" class="content-section unit-description" aria-labelledby="unit-5-overview-heading">
+                     <h2 id="unit-5-overview-heading" class="section-heading visually-hidden">Unit 5 Overview</h2>
+                     <div class="content-card">
+                        <p>5.1 DIFFERENTIATION METHODS: Differentiation of function functions (chain rule), Inverse Trigonometric functions and Implict functions. Simple Problems.</p>
+                        <p>5.2 SUCCESSIVE DIFFERENTIATION: Successive differentiation up to second order (parametric form not included). Definition of differential equation, order and degree, formation of differential equation. Simple problems.</p>
+                        <p>5.3 PARTIAL DIFFERENTIATION: Definition - Partial differentiation of two variables up to second order only. Simple Problems.</p>
+                    </div>
+                </section>
+                <!-- END: unit-5-overview -->
+
+                <!-- START: unit-5-section-5.1-diff-methods -->
+                <section id="unit-5-section-5.1-diff-methods" class="content-section" aria-labelledby="unit-5-section-5.1-heading">
+                    <h2 id="unit-5-section-5.1-heading" class="section-heading">
+                        <span class="heading-icon">🔗</span>5.1 DIFFERENTIATION METHODS
+                    </h2>
+                    <div class="content-card">
+                        <h4 class="subsubsection-heading">Function of Funtions Rule:</h4>
+                        <p>If 'y' is a function of 'u' and 'u' is a function of 'x' then the derivative of 'y' w.r.t 'x' is equal to the product of the derivative of 'y' w.r.t 'u' and the derivative of 'u' w.r.t 'x'.</p>
+                        <div class="equation">i.e. \(\frac{d y}{d x}=\frac{d y}{d u} \cdot \frac{d u}{d x}\)</div>
+                        <p>It is called function of function rule. This rule can be extended which is known as 'Chain rule'.</p>
+
+                        <h4 class="subsubsection-heading">Chain rule:</h4>
+                        <p>If 'y' is a function of 'u' and 'u' is a function of 'v' and 'v' is a function of 'x' then.</p>
+                        <div class="equation">\(\frac{d y}{d x}=\frac{d y}{d u} \cdot \frac{d u}{d v} \frac{d v}{d x}\)</div>
+                    </div>
+
+                    <!-- START: unit-5-chain-rule-worked-examples -->
+                    <section id="unit-5-chain-rule-worked-examples" class="content-section worked-example" aria-labelledby="unit-5-chain-rule-worked-examples-heading">
+                       <h3 id="unit-5-chain-rule-worked-examples-heading" class="subsection-heading">Worked Examples (Chain Rule)</h3>
+                        <h4 class="part-title">PART -A</h4>
+                        <div class="content-card">
+                            <p>Find \(\frac{d y}{d x}\) if</p>
+                            <ol>
+                                <li>\(y=(2 x+5)^{3}\)</li>
+                                <li>\(y=\sqrt{\sin x}\)</li>
+                                <li>\(y=\cos ^{4} x\)</li>
+                                <li>\(y=e^{\tan x}\)</li>
+                                <li>\(y=\log (\sec x)\)</li>
+                                <li>\(y=\sin m x\)</li>
+                                <li>\(y=\sec \sqrt{x}\)</li>
+                                <li>\(y=\cos (2-3 x)\)</li>
+                            </ol>
+                            <div class="solution">
+                                <p>Solution:</p>
+                                <p>1) \(y=(2 x+5)^{3}\) <br> Let \(y=u^{3}\) where \(u=2 x+5\) <br> \(\frac{d y}{d u}=3 u^{2} \quad | \quad \frac{d u}{d x}=2\) <br> \(\frac{d y}{d x}=\frac{d y}{d u} \cdot \frac{d u}{d x} = \left(3 u^{2}\right)(2) = 6 u^2 = 6(2 x+5)^{2}\)</p>
+                                <p>2) \(y=\sqrt{\sin x}\) <br> Let \(y=\sqrt{u}\) where \(u=\sin x\) <br> \(\frac{d y}{d u}=\frac{1}{2 \sqrt{u}} \quad | \quad \frac{d u}{d x}=\cos x\) <br> \(\frac{d y}{d x}=\left(\frac{1}{2 \sqrt{u}}\right)(\cos x) = \frac{\cos x}{2 \sqrt{\sin x}}\)</p>
+                                <p>3) \(y=\cos ^{4} x\) <br> Let \(y=u^{4}\) where \(u=\cos x\) <br> \(\frac{d y}{d u}=4 u^{3} \quad | \quad \frac{d u}{d x}=-\sin x\) <br> \(\frac{d y}{d x}=4 u^{3}(-\sin x) = -4 \cos^3 x \sin x\)</p>
+                                <p>4) \(y=e^{\tan x}\) <br> Let \(y=e^{u}\) where \(u=\tan x\) <br> \(\frac{d y}{d u}=e^{u} \quad | \quad \frac{d u}{d x}=\sec ^{2} x\) <br> \(\frac{d y}{d x}=\left(e^{u}\right)\left(\sec ^{2} x\right) = e^{\tan x} \sec ^{2} x\)</p>
+                                <p>5) \(y=\log (\sec x)\) <br> Let \(y=\log u\) where \(u=\sec x\) <br> \(\frac{d y}{d u}=\frac{1}{u} \quad | \quad \frac{d u}{d x}=\sec x \tan x\) <br> \(\frac{d y}{d x}=\left(\frac{1}{u}\right)(\sec x \tan x) = \frac{1}{\sec x}(\sec x \tan x) = \tan x\)</p>
+                                <p>6) \(y=\sin m x\) <br> Let \(y=\sin u\) where \(u=m x\) <br> \(\frac{d y}{d u}=\cos u \quad | \quad \frac{d u}{d x}=m\) <br> \(\frac{d y}{d x} =(\cos u)(m) = m \cos m x\)</p>
+                                <p>7) \(y=\cos (2-3 x)\) <br> Let \(y=\cos u\) where \(u=2-3 x\) <br> \(\frac{d y}{d u}=-\sin u \quad | \quad \frac{d u}{d x}=0-3(1) =-3\) <br> \(\frac{d y}{d x}=(-\sin u)(-3) = 3 \sin (2-3 x)\)</p>
+                                <p>8) \(y=\sec \sqrt{x}\) <br> Let \(y=\sec u\) where \(u=\sqrt{x}\) <br> \(\frac{d y}{d u}=\sec u \tan u \quad | \quad \frac{d u}{d x}=\frac{1}{2 \sqrt{x}}\) <br> \(\frac{d y}{d x} =(\sec u \tan u)\left(\frac{1}{2 \sqrt{x}}\right) = \frac{1}{2 \sqrt{x}} \sec \sqrt{x} \tan \sqrt{x}\)</p>
+                            </div>
+                        </div>
+                        <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">💡</span>Note:</h4>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="item-icon">1.</span> \(\frac{d}{d x}\left(e^{m x}\right)=m e^{m x}\)</li>
+                                <li class="list-item"><span class="item-icon">2.</span> \(\frac{d}{d x}(\sin m x)=m \cos m x\)</li>
+                                <li class="list-item"><span class="item-icon">3.</span> \(\frac{d}{d x}(\cos m x)=-m \sin m x\)</li>
+                                <li class="list-item"><span class="item-icon">4.</span> \(\frac{d}{d x}(\tan m x)=m \sec ^{2} m x\)</li>
+                                <li class="list-item"><span class="item-icon">5.</span> \(\frac{d}{d x}(\cot m x)=-m \operatorname{cosec}^{2} m x\)</li>
+                                <li class="list-item"><span class="item-icon">6.</span> \(\frac{d}{d x}(\sec m x)=m \sec m x \tan m x\)</li>
+                                <li class="list-item"><span class="item-icon">7.</span> \(\frac{d}{d x}(\operatorname{cosec} m x)=-m \operatorname{cosec} m x \cot m x\)</li>
+                            </ol>
+                         </aside>
+
+                         <h4 class="part-title">PART - B</h4>
+                         <div class="content-card">
+                            <p>Differentiate the following w.r.t 'x'.</p>
+                            <ol>
+                                <li>\(\left(2 x^{2}-3 x+1\right)^{3}\)</li>
+                                <li>\(\cos \left(e^{5 x}\right)\)</li>
+                                <li>\(e^{\sin ^{2} x}\)</li>
+                                <li>\(\log (\sec x+\tan x)\)</li>
+                                <li>\(y=\operatorname{cosec}^{3}(5 x+1)\)</li>
+                            </ol>
+                             <div class="solution">
+                                <p>Solution:</p>
+                                <p>1) Let \(y=\left(2 x^{2}-3 x+1\right)^{3}\) <br> Let \(y=u^{3}\) where \(u=2 x^{2}-3 x+1\) <br> \(\frac{d y}{d u}=3 u^{2} \quad | \quad \frac{d u}{d x}=4 x-3\) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx} = \left(3 u^{2}\right)(4 x-3) = 3\left(2 x^{2}-3 x+1\right)^{2}(4 x-3)\)</p>
+                                <p>2) Let \(y=\cos \left(e^{5 x}\right)\) <br> Let \(y=\cos u\) where \(u=e^{5 x}\) <br> \(\frac{d y}{d u}=-\sin u \quad | \quad \frac{d u}{d x}=5 e^{5 x}\) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx}=(-\sin u)\left(5 e^{5 x}\right) = -5 e^{5 x} \sin \left(e^{5 x}\right)\)</p>
+                                <p>3) Let \(y=e^{\sin ^{2} x}\) <br> Let \(y=e^{u}\) where \(u=\sin ^{2} x\) <br> \(\frac{d y}{d u}=e^{u} \quad | \quad\) Let \(u=v^{2}\) where \(v=\sin x\) <br> \(\frac{d u}{d v}=2 v \quad | \quad \frac{d v}{d x}=\cos x\) <br> \(\frac{d y}{d x}=\frac{d y}{d u} \cdot \frac{d u}{d v} \cdot \frac{d v}{d x}\) <br> \(=\left(e^{u}\right)(2 v)(\cos x)\) <br> \( = e^{\sin^2 x} (2 \sin x) (\cos x) = e^{\sin^2 x} \sin(2x) \)</p>
+                                <p>4) Let \(y=\log (\sec x+\tan x)\) <br> Let \(y=\log u\) where \(u=\sec x+\tan x\) <br> \(\frac{d y}{d u}=\frac{1}{u} \quad | \quad \frac{d u}{d x}=\sec x \tan x+\sec ^{2} x = \sec x(\tan x+\sec x)\) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx} = \left(\frac{1}{u}\right)[\sec x(\tan x+\sec x)]\) <br> \(=\frac{1}{(\sec x+\tan x)} \cdot \sec x(\tan x+\sec x)\) <br> \(=\sec x\)</p>
+                                <p>5) Let \(y=\operatorname{cosec}^{3}(5 x+1)\) <br> Let \(y=u^{3}\) where \(u=\operatorname{cosec}(5 x+1)\) <br> \(\frac{d y}{d u}=3 u^{2} \quad | \quad\) Let \(u=\operatorname{cosec} v\) where \(v=5 x+1\) <br> \(\frac{d u}{d v}=-\operatorname{cosec} v \cot v \quad | \quad \frac{d v}{d x}=5\) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dv}\frac{dv}{dx} = \left(3 u^{2}\right)(-\operatorname{cosec} v \cot v)(5)\) <br> \(=-15 \operatorname{cosec}^{2}(5 x+1) \cdot \operatorname{cosec}(5 x+1) \cot (5 x+1)\) <br> \( =-15 \operatorname{cosec}^{3}(5 x+1) \cot (5 x+1) \)</p>
+                             </div>
+                         </div>
+
+                         <h4 class="part-title">PART - C</h4>
+                        <div class="content-card">
+                            <p>Differentitate the following w.r.t x.</p>
+                            <ol>
+                                <li>\(y=\sin \left(e^{x} \log x\right)\)</li>
+                                <li>\(y=\left(x^{2}+5\right) e^{-2 x} \sin x\)</li>
+                                <li>\(y=(x \cos x)^{3}\)</li>
+                                <li>\(y=\log \left(\frac{1-\cos x}{1+\cos x}\right)\)</li>
+                                <li>\(y=\sqrt{\frac{1-x^{3}}{1+x^{3}}}\)</li> <!-- Corrected typo -->
+                                <li>\(y=e^{4 x}+\sin \left(x^{2}+5\right)\)</li>
+                                <li>\(y=x^{3} e^{-5 x} \log (\sec x)\)</li>
+                             </ol>
+                             <div class="solution">
+                                <p>Solution:</p>
+                                <p>1) \(y=\sin \left(e^{x} \log x\right)\) <br> Let \(y=\sin u\) where \(u=e^{x} \log x\) <br> \(\frac{d y}{d u}=\cos u \quad | \quad \frac{d u}{d x}=e^{x} \frac{1}{x}+\log x \times e^{x} = e^{x}\left(\frac{1}{x}+\log x\right)\) (using product rule) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx}=(\cos u)\left[e^{x}\left(\frac{1}{x}+\log x\right)\right] = \cos \left(e^{x} \log x\right)\left[e^{x}\left(\frac{1}{x}+\log x\right)\right]\)</p>
+                                <p>2) \(y=\left(x^{2}+5\right) e^{-2 x} \sin x\) <br> Let \(u=x^{2}+5 \implies \frac{du}{dx}=2x\) <br> Let \(v=e^{-2 x} \implies \frac{dv}{dx}=e^{-2 x}(-2) = -2e^{-2x}\) <br> Let \(w=\sin x \implies \frac{dw}{dx}=\cos x\) <br> \(\frac{d y}{d x}=u v \frac{d w}{d x}+v w \frac{d u}{d x}+u w \frac{d v}{d x}\) <br> \(=\left(x^{2}+5\right) e^{-2 x} \cos x+e^{-2 x} \sin x(2 x)+\left(x^{2}+5\right) \sin x\left(-2 e^{-2 x}\right)\) </p> <!-- Corrected typo -->
+                                <p>3) \(y=(x \cos x)^{3}\) <br> Let \(y=u^{3}\) where \(u=x \cos x\) <br> \(\frac{d y}{d u}=3 u^{2} \quad | \quad \frac{d u}{d x}=x(-\sin x)+\cos x(1) = -x \sin x+\cos x\) (using product rule) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx} = \left(3 u^{2}\right)(-x \sin x+\cos x) = 3(x \cos x)^{2}(-x \sin x+\cos x)\)</p>
+                                <p>4) \(y=\log \left(\frac{1-\cos x}{1+\cos x}\right)\) <br> Note: \(\frac{1-\cos x}{1+\cos x} = \frac{2\sin^2(x/2)}{2\cos^2(x/2)} = \tan^2(x/2)\). So \(y = \log(\tan^2(x/2)) = 2 \log(\tan(x/2))\). <br> Let \(y=2 \log u\) where \(u = \tan(x/2)\). <br> \(\frac{dy}{du} = \frac{2}{u} \quad | \quad \frac{du}{dx} = \sec^2(x/2) \cdot \frac{1}{2}\) <br> \(\frac{dy}{dx} = \frac{dy}{du} \frac{du}{dx} = \frac{2}{\tan(x/2)} \cdot \frac{1}{2} \sec^2(x/2) = \frac{\cos(x/2)}{\sin(x/2)} \cdot \frac{1}{\cos^2(x/2)} = \frac{1}{\sin(x/2)\cos(x/2)} = \frac{2}{2\sin(x/2)\cos(x/2)} = \frac{2}{\sin x} = 2 \operatorname{cosec} x\)</p>
+                               <!-- Original MMD proof using quotient rule (valid but longer):
+                                <p>Let \(y=\log u\) where \(u=\frac{1-\cos x}{1+\cos x}\) <br>
+                                \(\frac{d y}{d u}=\frac{1}{u} \quad | \quad \frac{d u}{d x}=\frac{(1+\cos x)(+\sin x)-(1-\cos x)(-\sin x)}{(1+\cos x)^{2}}\) <br>
+                                \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx} = \left(\frac{1}{u}\right)\left[\frac{\sin x(1+\cos x)+\sin x(1-\cos x)}{(1+\cos x)^{2}}\right]\) <br>
+                                \(=\left(\frac{1+\cos x}{1-\cos x}\right)\left[\frac{\sin x + \sin x \cos x + \sin x - \sin x \cos x}{(1+\cos x)^{2}}\right]\) <br> <!-- Corrected expansion -->
+                                \(= \left(\frac{1+\cos x}{1-\cos x}\right)\left[\frac{2 \sin x}{(1+\cos x)^{2}}\right]\) <br>
+                                \(=\frac{2 \sin x}{(1-\cos x)(1+\cos x)}=\frac{2 \sin x}{1-\cos ^{2} x}\)<br>
+                                \(=\frac{2 \sin x}{\sin ^{2} x}\)<br>
+                                \(=\frac{2}{\sin x} = 2 \operatorname{cosec} x\)</p> -->
+                                <p>5) \(y=\sqrt{\frac{1-x^{3}}{1+x^{3}}}\) <br> Let \(y=\sqrt{u}\) where \(u=\frac{1-x^{3}}{1+x^{3}}\) <br> \(\frac{d y}{d u}=\frac{1}{2 \sqrt{u}} \quad | \quad \frac{d u}{d x}=\frac{\left(1+x^{3}\right)\left(-3 x^{2}\right)-\left(1-x^{3}\right)\left(3 x^{2}\right)}{\left(1+x^{3}\right)^{2}}\) <br> \( = \frac{-3x^2 - 3x^5 - 3x^2 + 3x^5}{(1+x^3)^2} = \frac{-6 x^{2}}{\left(1+x^{3}\right)^{2}}\) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx} = \left(\frac{1}{2 \sqrt{u}}\right) \frac{-6 x^{2}}{\left(1+x^{3}\right)^{2}}\) <br> \(=\frac{1}{2 \sqrt{\frac{1-x^{3}}{1+x^{3}}}}\left[\frac{-6 x^{2}}{\left(1+x^{3}\right)^{2}}\right]\) <br> \(=\frac{-3 x^{2}}{\left(1+x^{3}\right)^{2}} \sqrt{\frac{1+x^{3}}{1-x^{3}}} = \frac{-3x^2}{(1+x^3)^{3/2} \sqrt{1-x^3}} \)</p>
+                                <p>6) \(y=e^{4 x}+\sin \left(x^{2}+5\right)\) <br> \(\frac{d y}{d x} = \frac{d}{dx}(e^{4x}) + \frac{d}{dx}(\sin(x^2+5)) \) <br> \( = e^{4 x} \cdot 4+\cos \left(x^{2}+5\right) \cdot \frac{d}{dx}(x^2+5) \) <br> \( = 4 e^{4 x}+ \cos(x^2+5) \cdot (2 x+0) \)<br> \( = 4 e^{4 x}+2 x \cos \left(x^{2}+5\right) \)</p>
+                                <p>7) \(y=x^{3} e^{-5 x} \log (\sec x)\) <br> Let \(u =x^{3} \implies \frac{du}{dx} =3 x^{2}\) <br> Let \(v =e^{-5 x} \implies \frac{dv}{dx} =e^{-5 x}(-5) = -5e^{-5x}\) <br> Let \(w =\log (\sec x) \implies \frac{dw}{dx} =\frac{1}{\sec x} (\sec x \tan x) = \tan x\) <br> \(\frac{d y}{d x}=u v \frac{d w}{d x}+v w \frac{d u}{d x}+u w \frac{d v}{d x}\) <br> \( =x^{3} e^{-5 x} \tan x+e^{-5 x} \log (\sec x)\left(3 x^{2}\right)+x^{3} \log (\sec x)\left(-5 e^{-5 x}\right) \)</p>
+                             </div>
+                        </div>
+                    </section>
+                 <!-- END: unit-5-chain-rule-worked-examples -->
+
+                 <!-- START: unit-5-section-5.1.2-inv-trig-diff -->
+                 <section id="unit-5-section-5.1.2-inv-trig-diff" class="content-section" aria-labelledby="unit-5-section-5.1.2-heading">
+                     <h3 id="unit-5-section-5.1.2-heading" class="subsection-heading">5.1.2 DIFFERENTIATION OF INVERSE TRIGONOMETRIC FUNCTIONS</h3>
+                     <div class="content-card">
+                        <p>If \(x=\sin y\) then we get a unique real value of x to the given angle y. But if x is given y has many values.</p>
+                        <p>We can express y interms of x as \(y=\sin ^{-1} x\) "Inverse sine of x". The Quantities \(\sin ^{-1} x, \cos ^{-1} x, \tan ^{-1} x, \cot ^{-1} x, \sec ^{-1} x, \operatorname{cosec}^{-1} x\) are called Inverse Trigonometric Functions.</p>
+                        <p><strong>Differential co-efficient of \(\sin ^{-1} x\):</strong></p>
+                        <p>Let \(y=\sin ^{-1} x\) <br>
+                        \(\Rightarrow \sin y=x\) <br>
+                        Differentiating w.r.t x <br>
+                        \(\cos y \cdot \frac{d y}{d x} =1\) <br>
+                        \(\frac{d y}{d x} =\frac{1}{\cos y}\) <br>
+                        \(=\frac{1}{\sqrt{1-\sin ^{2} y}}\) <br>
+                        i.e., \(\frac{d}{d x}\left(\sin ^{-1} x\right)=\frac{1}{\sqrt{1-x^{2}}}\)</p>
+                        <p>Similarly we get</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">(i)</span> \(\frac{d}{d x}\left(\cos ^{-1} x\right)=\frac{-1}{\sqrt{1-x^{2}}}\)</li>
+                            <li class="list-item"><span class="item-icon">(ii)</span> \(\frac{d}{d x}\left(\tan ^{-1} x\right)=\frac{1}{1+x^{2}}\)</li>
+                            <li class="list-item"><span class="item-icon">(iii)</span> \(\frac{d}{d x}\left(\cot ^{-1} x\right)=\frac{-1}{1+x^{2}}\)</li>
+                            <li class="list-item"><span class="item-icon">(iv)</span> \(\frac{d}{d x}\left(\sec ^{-1} x\right)=\frac{1}{x \sqrt{x^{2}-1}}\)</li> <!-- Corrected sign -->
+                            <li class="list-item"><span class="item-icon">(v)</span> \(\frac{d}{d x}\left(\operatorname{cosec}^{-1} x\right)=\frac{-1}{x \sqrt{x^{2}-1}}\)</li>
+                        </ol>
+                    </div>
+                 </section>
+                 <!-- END: unit-5-section-5.1.2-inv-trig-diff -->
+
+                 <!-- START: unit-5-inv-trig-diff-worked-examples -->
+                 <section id="unit-5-inv-trig-diff-worked-examples" class="content-section worked-example" aria-labelledby="unit-5-inv-trig-diff-worked-examples-heading">
+                    <h3 id="unit-5-inv-trig-diff-worked-examples-heading" class="subsection-heading">Worked Examples (Inverse Trig Diff)</h3>
+                    <h4 class="part-title">PART - A</h4>
+                     <div class="content-card">
+                        <p>Find \(\frac{d y}{d x}\) if</p>
+                         <p>(i) \(y=\sin ^{-1} \sqrt{x}\) <br> (ii) \(y=\cos ^{-1}(2 x)\) <br> (iii) \(y=\tan ^{-1}(\log x)\)</p>
+                         <div class="solution">
+                            <p>Solution:</p>
+                            <p>(i) \(y=\sin ^{-1} \sqrt{x}\) <br> Let \(y=\sin ^{-1} u\) where \(u=\sqrt{x}\) <br> \(\frac{d y}{d u}=\frac{1}{\sqrt{1-u^{2}}} \quad | \quad \frac{d u}{d x}=\frac{1}{2 \sqrt{x}}\) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx} = \left(\frac{1}{\sqrt{1-u^{2}}}\right)\left(\frac{1}{2 \sqrt{x}}\right)\) <br> \(=\frac{1}{\sqrt{1-(\sqrt{x})^{2}}} \frac{1}{2 \sqrt{x}}\) <br> \(=\frac{1}{\sqrt{1-x}} \cdot \frac{1}{2 \sqrt{x}}\) <br> \(=\frac{1}{2 \sqrt{x(1-x)}}\)</p>
+                            <p>(ii) \(y=\cos ^{-1}(2 x)\) <br> Let \(y=\cos ^{-1} u\) where \(u=2 x\) <br> \(\frac{d y}{d u}=\frac{-1}{\sqrt{1-u^{2}}} \quad | \quad \frac{d u}{d x}=2\) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx} = \frac{-1}{\sqrt{1-u^{2}}} \cdot 2\) <br> \(=\frac{-1}{\sqrt{1-(2 x)^{2}}} \cdot 2\) <br> \(\frac{d y}{d x}=\frac{-2}{\sqrt{1-4 x^{2}}}\)</p>
+                            <p>(iii) \(y=\tan ^{-1}(\log x)\) <br> Let \(y=\tan ^{-1} u\) where \(u=\log x\) <br> \(\frac{d y}{d u}=\frac{1}{1+u^{2}} \quad | \quad \frac{d u}{d x}=\frac{1}{x}\) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx} = \left(\frac{1}{1+u^{2}}\right)\left(\frac{1}{x}\right)\) <br> \(=\frac{1}{x\left[1+(\log x)^{2}\right]}\)</p>
+                         </div>
+                    </div>
+
+                     <h4 class="part-title">PART - B</h4>
+                      <div class="content-card">
+                        <p>Find \(\frac{d y}{d x}\) if</p>
+                         <p>(i) \(y=\sin ^{-1}(\cos x)\) <br> (ii) \(y=\cos ^{-1}(2 x+3)\) <br> (iii) \(y=\cos ^{-1}\left(2 x^{2}-1\right)\) <br> (iv) \(y=\sin ^{-1}\left(3 x-4 x^{3}\right)\)</p>
+                        <div class="solution">
+                             <p>Solution:</p>
+                             <p>(i) \(y=\sin ^{-1}(\cos x)\) <br> Let \(y =\sin ^{-1} u\) where \(u=\cos x\) <br> \(\frac{d y}{d u}=\frac{1}{\sqrt{1-u^{2}}} \quad | \quad \frac{d u}{d x}=-\sin x\) <br> \(\frac{d y}{d x}=\frac{dy}{du}\frac{du}{dx} = \left(\frac{1}{\sqrt{1-u^{2}}}\right)(-\sin x)\) <br> \(=\frac{1}{\sqrt{1-\cos ^{2} x}}(-\sin x)\) <br> \(=\frac{-\sin x}{\sqrt{\sin ^{2} x}}= \frac{-\sin x}{|\sin x|} = -1\) (Assuming \(\sin x > 0\))</p>
+                            <p>(ii) \(y=\cos ^{-1}(2 x+3)\) <br> \(\frac{d y}{d x} =\frac{-1}{\sqrt{1-(2 x+3)^{2}}} \cdot \frac{d}{d x}(2 x+3)\) <br> \(=\frac{-1}{\sqrt{1-(2 x+3)^{2}}} \times 2\) <br> \(=\frac{-2}{\sqrt{1-(2 x+3)^{2}}}\)</p>
+                            <p>(iii) \(y=\cos ^{-1}\left(2 x^{2}-1\right)\) <br>
+                            Method 1: Chain Rule <br>
+                             \(\frac{d y}{d x} =\frac{-1}{\sqrt{1-\left(2 x^{2}-1\right)^{2}}} \cdot \frac{d}{d x}\left(2 x^{2}-1\right)\) <br> <!-- Corrected derivative -->
+                            \(=\frac{-1}{\sqrt{1-\left(4x^4 - 4x^2 + 1\right)}} \cdot 4 x\) <br> <!-- Corrected derivative -->
+                            \(=\frac{-4 x}{\sqrt{1-4 x^{4}+4 x^{2}-1}}=\frac{-4 x}{\sqrt{4 x^{2}-4 x^{4}}}=\frac{-4 x}{2 |x| \sqrt{1-x^{2}}} = \frac{-2 \text{sgn}(x)}{\sqrt{1-x^{2}}}\) (for \(x \neq 0\))</p>
+                             <p>Method 2: Substitution (ALITER)<br>
+                             Let \(y=\cos ^{-1}\left(2 x^{2}-1\right)\) <br> Put \(x=\cos \theta \implies \theta=\cos^{-1}x\) <br>
+                             \(y =\cos ^{-1}\left(2 \cos ^{2} \theta-1\right)\) <br>
+                             \(=\cos ^{-1}(\cos 2 \theta)\) <br>
+                             \(y =2 \theta\) <br>
+                             \(y =2 \cos ^{-1} x\) <br>
+                             \(\frac{d y}{d x} =2 \times \frac{-1}{\sqrt{1-x^{2}}}=\frac{-2}{\sqrt{1-x^{2}}}\) (This result is valid for the principal value range of \(\cos^{-1}\))</p>
+                             <p>(iv) \(y=\sin ^{-1}\left(3 x-4 x^{3}\right)\) <br>
+                             Method 1: Chain Rule <br>
+                             \(\frac{d y}{d x}=\frac{1}{\sqrt{1-\left(3 x-4 x^{3}\right)^{2}}} \cdot \frac{d}{dx}(3x-4x^3) = \frac{1}{\sqrt{1-\left(3 x-4 x^{3}\right)^{2}}} \cdot \left(3-12 x^{2}\right)\)</p>
+                            <p>Method 2: Substitution (ALITER)<br>
+                            Put \(x=\sin \theta \implies \theta=\sin^{-1}x\)<br>
+                             \(y =\sin ^{-1}\left(3 \sin \theta-4 \sin ^{3} \theta\right)\) <br>
+                             \(=\sin ^{-1}(\sin 3 \theta)\) <br>
+                             \(y =3 \theta\) <br>
+                             \(y =3 \sin ^{-1} x\) <br>
+                             \(\frac{d y}{d x} =\frac{3}{\sqrt{1-x^{2}}}\) (Valid for principal value range)</p>
+                        </div>
+                    </div>
+
+                    <h4 class="part-title">PART - C</h4>
+                    <div class="content-card">
+                        <p>Find \(\frac{dy}{dx}\) if</p>
+                         <p>(i) \(y=\cos ^{-1}\left(\frac{1-x^{2}}{1+x^{2}}\right)\) <br> (ii) \(y=\sin ^{-1}\left(\frac{2 x}{1+x^{2}}\right)\) <br> (iii) \(y=\tan ^{-1}\left(\frac{2 x}{1-x^{2}}\right)\) <br> (iv) \(y=\left(1+x^{2}\right) \tan ^{-1} x\)</p>
+                         <div class="solution">
+                            <p>Solution:</p>
+                            <p>(i) \(y=\cos ^{-1}\left(\frac{1-x^{2}}{1+x^{2}}\right)\) <br> Let \(x=\tan \theta \Rightarrow \theta=\tan ^{-1} x\) <br> \(y =\cos ^{-1}\left(\frac{1-\tan ^{2} \theta}{1+\tan ^{2} \theta}\right)\) <br> \(=\cos ^{-1}(\cos 2 \theta)\) <br> \(=2 \theta\) <br> \(y =2 \tan ^{-1} x\) <br> \(\frac{d y}{d x} =2 \frac{1}{1+x^{2}}\)</p>
+                            <p>(ii) \(y=\sin ^{-1}\left(\frac{2 x}{1+x^{2}}\right)\) <br> Let \(x=\tan \theta \Rightarrow \theta=\tan ^{-1} x\) <br> \(y =\sin ^{-1}\left(\frac{2 \tan \theta}{1+\tan ^{2} \theta}\right)\) <br> \(=\sin ^{-1}(\sin 2 \theta)\) <br> \(=2 \theta\) <br> \(y =2 \tan ^{-1} x\) <br> \(\frac{d y}{d x} =2 \cdot \frac{1}{1+x^{2}}\)</p>
+                            <p>(iii) \(y=\tan ^{-1}\left(\frac{2 x}{1-x^{2}}\right)\) <br> Let \(x=\tan \theta \Rightarrow \theta=\tan ^{-1} x\) <br> \(y =\tan ^{-1}\left(\frac{2 \tan \theta}{1-\tan ^{2} \theta}\right)\) <br> \(=\tan ^{-1}(\tan 2 \theta)\) <br> \(y =2 \theta\) <br> \(y =2 \tan ^{-1} x\) <br> \(\frac{d y}{d x} =2 \cdot \frac{1}{1+x^{2}}\)</p>
+                            <p>(iv) \(y=\left(1+x^{2}\right) \tan ^{-1} x\) <br> \(\frac{d y}{d x} =\left(1+x^{2}\right) \frac{d}{dx}(\tan^{-1}x) + \tan ^{-1} x \frac{d}{dx}(1+x^2)\) (using product rule)<br> \( = \left(1+x^{2}\right) \frac{1}{1+x^{2}}+\tan ^{-1} x(0+2 x) \) <br> \( =1+2 x \tan ^{-1} x\)</p>
+                         </div>
+                     </div>
+                 </section>
+                 <!-- END: unit-5-inv-trig-diff-worked-examples -->
+
+                <!-- START: unit-5-section-5.1.3-implicit-functions -->
+                <section id="unit-5-section-5.1.3-implicit-functions" class="content-section" aria-labelledby="unit-5-section-5.1.3-heading">
+                     <h3 id="unit-5-section-5.1.3-heading" class="subsection-heading">5.1.3 IMPLICIT FUNCTION</h3>
+                     <div class="content-card">
+                        <p>If the variables x and y are connected by a relation \(f(x, y)=0\) then it is called an implicit function. i.e If the dependent variable (y) cannot be expressed explicitly in terms of the independent variable x.</p>
+                        <p>Example: (i) \(x^{2}+y^{2}-4 x+y+12=0\) <br> (ii) \(\frac{x^{2}}{a^{2}}+\frac{y^{2}}{b^{2}}=1 \quad\) are implicit function</p>
+                     </div>
+                </section>
+                <!-- END: unit-5-section-5.1.3-implicit-functions -->
+
+                <!-- START: unit-5-implicit-worked-examples -->
+                 <section id="unit-5-implicit-worked-examples" class="content-section worked-example" aria-labelledby="unit-5-implicit-worked-examples-heading">
+                    <h3 id="unit-5-implicit-worked-examples-heading" class="subsection-heading">Worked Examples (Implicit Diff)</h3>
+                    <h4 class="part-title">PART -B</h4>
+                    <div class="content-card">
+                         <p>1. Find \(\frac{d y}{d x}\) if</p>
+                         <p>(i) \(x^{2}+y^{2}+2 y=0\) <br> (ii) \(x^{2}+y^{2}=a^{2}\) <br> (iii) \(x y=c^{2}\) <br> (iv) \(\sqrt{y}+\sqrt{x}=\sqrt{a}\)</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>(i) \(x^{2}+y^{2}+2 y=0\) <br> Differentiate w.r.t x <br> \(2 x+2 y \frac{d y}{d x}+2 \frac{d y}{d x}=0\) <br> \(x+y \frac{d y}{d x}+\frac{d y}{d x}=0\) <br> \((y+1) \frac{d y}{d x}=-x\) <br> \(\frac{d y}{d x}=\frac{-x}{1+y}\)</p>
+                            <p>(ii) \(x^{2}+y^{2}=a^{2}\) <br> Differentiate w.r.t x <br> \(2 x+2 y \frac{d y}{d x}=0\) <br> \(x+y \frac{d y}{d x}=0\) <br> \(y \frac{d y}{d x}=-x\) <br> \(\frac{d y}{d x}=\frac{-x}{y}\)</p>
+                            <p>(iii) \(x y=c^{2}\) <br> Differentiate w.r.t x <br> \(x \cdot \frac{d y}{d x}+y(1)=0\) (using product rule) <br> \(x \frac{d y}{d x}=-y\) <br> \(\frac{d y}{d x}=\frac{-y}{x}\)</p>
+                            <p>(iv) \(\sqrt{y}+\sqrt{x}=\sqrt{a}\) <br> Differentiate w.r.t x <br> \(\frac{1}{2 \sqrt{x}}+\frac{1}{2 \sqrt{y}} \cdot \frac{d y}{d x}=0\) <br> Multiply by 2 <br> \(\frac{1}{\sqrt{x}}+\frac{1}{\sqrt{y}} \cdot \frac{d y}{d x}=0\) <br> \(\frac{1}{\sqrt{y}} \frac{d y}{d x}=\frac{-1}{\sqrt{x}}\) <br> \(\frac{d y}{d x}=\frac{-\sqrt{y}}{\sqrt{x}}\)</p>
+                        </div>
+                    </div>
+
+                    <h4 class="part-title">PART - C</h4>
+                    <div class="content-card">
+                         <p>1. Find \(\frac{d y}{d x}\) if</p>
+                         <p>(i) \(\cos x+\sin y=c\) <br> (ii) \(x^{2} \sin y=c\) <br> (iii) \(y=a+x e^{y}\)</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>(i) \(\cos x+\sin y=c\) <br> Differentiate w.r.t x <br> \(-\sin x+\cos y \cdot \frac{d y}{d x}=0\) <br> \(\cos y \cdot \frac{d y}{d x}=\sin x\) <br> \(\frac{d y}{d x}=\frac{\sin x}{\cos y}\)</p>
+                            <p>(ii) \(x^{2} \sin y=c\) <br> Differentiate w.r.t x <br> \(x^{2} (\cos y \cdot \frac{d y}{d x})+\sin y(2 x)=0\) (using product rule) <br> \(x^{2} \cos y \cdot \frac{d y}{d x}=-2 x \sin y\) <br> \(\frac{d y}{d x}=\frac{-2 x \sin y}{x^{2} \cos y}\) <br> \(\frac{d y}{d x}=\frac{-2}{x} \tan y\)</p>
+                            <p>(iii) \(y=a+x e^{y}\) <br> Differentiate w.r.t x <br> \(\frac{d y}{d x}=0+x (e^{y} \cdot \frac{d y}{d x})+e^{y}(1)\) (using product rule) <br> \(\frac{d y}{d x}=x e^{y} \frac{d y}{d x}+e^{y}\) <br> \(\frac{d y}{d x}-x e^{y} \frac{d y}{d x}=e^{y}\) <br> \(\frac{d y}{d x}\left(1-x e^{y}\right)=e^{y}\) <br> \(\frac{d y}{d x}=\frac{e^{y}}{1-x e^{y}}\)</p>
+                        </div>
+                    </div>
+                     <div class="content-card">
+                        <p>2. Find \(\frac{d y}{d x}\) if</p>
+                        <p>(i) \(x^{3}+y^{3}=3 a x y\) <br> (ii) \(x^{2}+y^{2}-4 x+6 y-5=0\) <br> (iii) \(x^{2}+y^{2}=x y\) <br> (iv) \(a x^{2}+2 h x y+b y^{2}+2 g x+2 f y+c=0\)</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>(i) \(x^{3}+y^{3}=3 a x y\) <br> Differentiate w.r.t x <br> \(3 x^{2}+3 y^{2} \frac{d y}{d x}=3 a\left[x \frac{d y}{d x}+y(1)\right]\) (using product rule)<br> Divide by 3 <br> \(x^{2}+y^{2} \frac{d y}{d x}=a\left[x \frac{d y}{d x}+y\right]\) <br> \(x^{2}+y^{2} \frac{d y}{d x}=a x \frac{d y}{d x}+a y\) <br> <!-- Expanded -->
+                            \(y^{2} \frac{d y}{d x}-a x \frac{d y}{d x}=a y-x^{2}\) <br> \(\left(y^{2}-a x\right) \frac{d y}{d x}=a y-x^{2}\) <br> \(\frac{d y}{d x}=\frac{a y-x^{2}}{y^{2}-a x}\)</p>
+                            <p>(ii) \(x^{2}+y^{2}-4 x+6 y-5=0\) <br> Differentiating w.r.t x <br> \(2 x+2 y \frac{d y}{d x}-4+6 \frac{d y}{d x}=0\) <br> \(2 y \frac{d y}{d x}+6 \frac{d y}{d x}=-2 x+4\) <br> \(\frac{d y}{d x}(2 y+6)=-2 x+4\) <br> \(\frac{d y}{d x}=\frac{-2 x+4}{2 y+6}=\frac{2(-x+2)}{2(y+3)}\) <br> \(=\frac{-x+2}{y+3}\)</p>
+                            <p>(iii) \(x^{2}+y^{2}=x y\) <br> Differentiating w.r.t x , <br> \(2 x+2 y \frac{d y}{d x}=x \frac{d y}{d x}+y(1)\) (uv rule) <br> \(2 y \frac{d y}{d x}-x \frac{d y}{d x}=y-2 x\) <br> \(\frac{d y}{d x}(2 y-x)=y-2 x\) <br> \(\frac{d y}{d x}=\frac{y-2 x}{2 y-x}\)</p>
+                            <p>(iv) \(a x^{2}+2 h x y+b y^{2}+2 g x+2 f y+c=0\) <br> Differentiate w.r.t x <br> \(2 a x+2 h\left[x \cdot \frac{d y}{d x}+y(1)\right]+b(2 y) \cdot \frac{d y}{d x}+2 g(1)+2 f \cdot \frac{d y}{d x}+0=0\) <br> Divide by 2 <br> \(a x+h x \frac{d y}{d x}+h y+b y \frac{d y}{d x}+g+f \frac{d y}{d x}=0\) <br> \(\frac{d y}{d x}(h x+b y+f)=-a x-h y-g\) <br> \(\frac{d y}{d x}=-\frac{a x+h y+g}{h x+b y+f}\)</p> <!-- Factored out negative -->
+                        </div>
+                    </div>
+                 </section>
+                 <!-- END: unit-5-implicit-worked-examples -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+             <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="unit4_inv_trig_diff_calc1_part3_differentiation.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section (4.3 Differentiation)</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 70%;"></div>
+                        </div>
+                        <span class="progress-text">Unit 5: Diff Calc II - Part 1</span>
+                    </div>
+                    <a href="unit5_diff_calc2_part2_successive_diff.html" class="nav-button"> <!-- Link to next logical chunk -->
+                        <span class="nav-text">Next Section (5.2 Successive Diff)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

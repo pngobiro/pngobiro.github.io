@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7 (Part 1): Estimation &amp; Sampling Distributions - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-6.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 7 (Part 1): Estimation Intro</span>
+                    </div>
+                    <a href="chapter-7-part-2.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-7-part-1 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER SEVEN <br> Estimation</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-7-learning-objectives">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">7.1 Learning Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the end of this chapter, the student is expected to be able to:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Define estimation and differentiate between point and interval estimation</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Understand the concept of sampling distribution of means and proportions</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Understand the properties of point estimators (unbiasedness, efficiency, consistency)</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Construct confidence intervals for population means and proportions (for large samples)</span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text">Understand the factors affecting the width of a confidence interval</span></li>
+                            <li class="list-item"><span class="item-icon">6.</span><span class="item-text">Determine the sample size required for estimating population means and proportions</span></li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-7-introduction">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📖</span>
+                        <span class="heading-text">7.2 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Statistical inference is the process of drawing conclusions about a population based on information obtained from a sample drawn from that population.</p>
+                        <p>There are two main branches of statistical inference:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Estimation:</strong> Estimating the value of an unknown population parameter (e.g., population mean $\mu$, population proportion P) using sample data.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Hypothesis Testing:</strong> Testing a claim or hypothesis about a population parameter using sample data (Covered in Chapter 8).</span></li>
+                        </ol>
+                        <p>This chapter focuses on estimation.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-7-point-estimation">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📍</span>
+                        <span class="heading-text">7.3 Point estimation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A <strong>point estimate</strong> is a single numerical value calculated from sample data that serves as the best guess for the value of an unknown population parameter.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The sample mean ($\bar{x}$) is the point estimate for the population mean ($\mu$).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The sample proportion ($p$) is the point estimate for the population proportion ($P$).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The sample standard deviation ($s$) is the point estimate for the population standard deviation ($\sigma$).</span></li>
+                        </ul>
+                        <p><strong>Properties of Good Point Estimators:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Unbiasedness:</strong> The expected value (average over all possible samples) of the estimator equals the true population parameter. $E(\bar{x}) = \mu$. $E(p) = P$. ($s^2$ is an unbiased estimator of $\sigma^2$, which is why we use $n-1$ in the denominator).</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Efficiency:</strong> Among unbiased estimators, the one with the smallest variance (smallest spread in its sampling distribution) is considered the most efficient. $\bar{x}$ is the most efficient estimator of $\mu$.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Consistency:</strong> As the sample size ($n$) increases, the estimator gets closer and closer to the true population parameter.</span></li>
+                        </ul>
+                        <p>While point estimates provide a single best guess, they don't convey the uncertainty associated with the estimate. Interval estimation addresses this.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-7-sampling-distribution-means">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">7.4 Sampling distribution of means</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Imagine taking many random samples of the same size ($n$) from a population and calculating the mean ($\bar{x}$) for each sample. The distribution of these sample means is called the <strong>sampling distribution of the mean</strong>.</p>
+                        <p><strong>Key Properties:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Mean of the Sampling Distribution:</strong> The mean of all possible sample means ($\mu_{\bar{x}}$) is equal to the population mean ($\mu$). $E(\bar{x}) = \mu_{\bar{x}} = \mu$. (This confirms $\bar{x}$ is an unbiased estimator of $\mu$).</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Standard Deviation of the Sampling Distribution (Standard Error of the Mean, SEM):</strong> The standard deviation of all possible sample means ($\sigma_{\bar{x}}$) is related to the population standard deviation ($\sigma$) and the sample size ($n$):
+                                <div class="equation">$$ \sigma_{\bar{x}} = \text{SEM} = \frac{\sigma}{\sqrt{n}} $$</div>
+                                (If sampling is from a finite population without replacement and $n/N > 0.05$, a finite population correction factor is applied: $\sigma_{\bar{x}} = \frac{\sigma}{\sqrt{n}} \sqrt{\frac{N-n}{N-1}}$).
+                                <br>The standard error measures the variability of sample means around the population mean. It decreases as the sample size ($n$) increases.
+                            </span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Shape of the Sampling Distribution (Central Limit Theorem - CLT):</strong>
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>If the original population is normally distributed, the sampling distribution of $\bar{x}$ will also be normally distributed, regardless of the sample size $n$.</li>
+                                    <li><strong>Central Limit Theorem (CLT):</strong> If the original population is *not* normally distributed, the sampling distribution of $\bar{x}$ will become approximately normal as the sample size $n$ increases. Generally, if $n \ge 30$, the sampling distribution of $\bar{x}$ can be considered approximately normal, regardless of the shape of the original population distribution.</li>
+                                </ul>
+                            </span></li>
+                        </ul>
+                        <img src="../assets/images/chapter-7-normal-curve-1.jpg" alt="Sampling Distribution of the Mean" class="content-image">
+                        <p>The Central Limit Theorem is extremely important because it allows us to use the normal distribution for inference about the population mean even when the population itself is not normal, provided the sample size is large enough.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-7-interval-estimation">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📏</span>
+                        <span class="heading-text">7.5 Interval estimation (large samples)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>An <strong>interval estimate</strong> provides a range of plausible values for an unknown population parameter, based on sample data. This range is called a <strong>confidence interval (CI)</strong>.</p>
+                        <p>A confidence interval is associated with a <strong>confidence level</strong> (e.g., 90%, 95%, 99%), which represents the probability that the interval estimation procedure will produce an interval containing the true population parameter if the process were repeated many times.</p>
+                        <p>The general form of a confidence interval is:</p>
+                        <div class="equation">
+                            $$ \text{Point Estimate} \pm (\text{Critical Value}) \times (\text{Standard Error of the Estimate}) $$
+                        </div>
+
+                        <h3 class="subsection-heading">Confidence Interval for the Population Mean ($\mu$) (Large Samples, $\sigma$ Known or $n \ge 30$)</h3>
+                        <p>When the population standard deviation ($\sigma$) is known, or when the sample size is large ($n \ge 30$, allowing us to approximate $\sigma$ with the sample standard deviation $s$ and invoke the CLT), the confidence interval for $\mu$ is based on the Z-distribution.</p>
+                        <p>The formula for a $(1-\alpha) \times 100\%$ confidence interval for $\mu$ is:</p>
+                        <div class="equation">
+                            $$ \bar{x} \pm Z_{\alpha/2} \left( \frac{\sigma}{\sqrt{n}} \right) $$
+                        </div>
+                        <p>Or, if $\sigma$ is unknown but $n \ge 30$:</p>
+                        <div class="equation">
+                            $$ \bar{x} \pm Z_{\alpha/2} \left( \frac{s}{\sqrt{n}} \right) $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$\bar{x}$ is the sample mean.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$s$ is the sample standard deviation (used if $\sigma$ is unknown and $n \ge 30$).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$n$ is the sample size.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$Z_{\alpha/2}$ is the critical value from the standard normal distribution corresponding to the desired confidence level $(1-\alpha)$. It leaves an area of $\alpha/2$ in each tail of the Z-distribution.</span></li>
+                        </ul>
+                        <p><strong>Common Confidence Levels and $Z_{\alpha/2}$ values:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">90% Confidence Level: $\alpha = 0.10$, $\alpha/2 = 0.05$, $Z_{0.05} = 1.645$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">95% Confidence Level: $\alpha = 0.05$, $\alpha/2 = 0.025$, $Z_{0.025} = 1.96$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">99% Confidence Level: $\alpha = 0.01$, $\alpha/2 = 0.005$, $Z_{0.005} = 2.576$</span></li>
+                        </ul>
+                        <p>The term $Z_{\alpha/2} \left( \frac{s}{\sqrt{n}} \right)$ is called the <strong>margin of error (ME)</strong>.</p>
+                        <p>Confidence Interval = Point Estimate $\pm$ Margin of Error.</p>
+
+                        <p><strong>Example:</strong> A sample of 100 students has a mean weight $\bar{x} = 70$ kg with a sample standard deviation $s = 10$ kg. Construct a 95% confidence interval for the true mean weight of all students.</p>
+                        <p>Here, $n=100$ (large sample), $\bar{x}=70$, $s=10$.</p>
+                        <p>For 95% confidence, $Z_{\alpha/2} = 1.96$.</p>
+                        <p>Standard Error (SEM) = $s / \sqrt{n} = 10 / \sqrt{100} = 10 / 10 = 1$.</p>
+                        <p>Margin of Error (ME) = $Z_{\alpha/2} \times SEM = 1.96 \times 1 = 1.96$.</p>
+                        <p>Confidence Interval = $\bar{x} \pm ME = 70 \pm 1.96$.</p>
+                        <p>The 95% CI is $(70 - 1.96, 70 + 1.96) = (68.04, 71.96)$ kg.</p>
+                        <p><strong>Interpretation:</strong> We are 95% confident that the true mean weight of all students lies between 68.04 kg and 71.96 kg.</p>
+                        <!-- CI for Proportions and Small Samples in next chunk -->
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-7-part-1 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-6.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 7 (Part 1): Estimation Intro</span>
+                    </div>
+                    <a href="chapter-7-part-2.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

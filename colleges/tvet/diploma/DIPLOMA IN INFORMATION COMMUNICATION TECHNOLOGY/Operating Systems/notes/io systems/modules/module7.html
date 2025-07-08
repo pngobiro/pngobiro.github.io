@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I/O Systems - Module 7</title>
+  <meta name="description" content="Detailed transcription of Transforming I/O Requests to Hardware Operations section">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="7">
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module6.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 7 of 8</span>
+        </div>
+        <a href="module8.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="module-content">
+      <h1>5.1.5 Transforming I/O Requests to Hardware Operations</h1>
+      
+      <p>Users request data using file names which must ultimately be mapped to specific blocks of data from a specific device managed by a specific device driver.</p>
+      
+      <p>Consider as an example a simple request to read a file:</p>
+      
+      <ol>
+        <li>First the file system determines the device and the specific blocks on that device which hold the requested data.</li>
+        <li>Then the appropriate device driver is called to actually fetch the data.</li>
+        <li>The device driver may use DMA to have the hardware device place the data directly into main memory or it may use polling or interrupt-driven I/O to transfer the data a byte at a time.</li>
+        <li>The device driver transfers data between the kernel memory space and the hardware device.</li>
+        <li>The kernel transfers data between the kernel memory space and the application's address space.</li>
+      </ol>
+      
+      <h2>5.1.6 STREAMS (Optional)</h2>
+      
+      <p>STREAMS is an implementation of layered network protocols developed by Dennis Ritchie at Bell Labs and incorporated into SVR4 UNIX.</p>
+      
+      <p>STREAMS uses a series of linear linked lists of processing modules as shown in Figure 13.13 below. Each module contains a read queue and a write queue.</p>
+      
+      <figure>
+        <img src="../assets/images/module7-streams-implementation.jpg" alt="The STREAMS structure showing the linear linked lists of processing modules" width="600" height="400">
+        <figcaption>Fig: The STREAMS structure.</figcaption>
+      </figure>
+      
+      <p>A Stream Head interfaces directly with the user process and passes messages down to the modules below it.</p>
+      
+      <p>A Stream Tail interfaces with the device driver and passes messages up to the modules above it.</p>
+      
+      <p>Intermediate modules process messages going up and down the streams.</p>
+      
+      <p>Messages are passed up and down the streams using standard interfaces and module-independent messages. This allows new modules to be added to the system easily.</p>
+      
+      <p>STREAMS modules are stacked dynamically as needed.</p>
+      
+      <h2>5.1.7 Performance (Optional)</h2>
+      
+      <p>I/O is a major factor in system performance. It places heavy demands on the CPU to execute device driver code and to schedule processes fairly and efficiently as they block and unblock.</p>
+      
+      <p>I/O also requires careful attention to buffering and throughput.</p>
+      
+      <p>Network traffic especially can have high overheads due to the large number of small packets that must be processed. (In some cases thousands of interrupts per second just to process network traffic.)</p>
+      
+      <p>Interrupt handling can be relatively expensive on modern CPUs due to the need to save the current context switch to kernel mode process the interrupt and then restore the previous context.</p>
+      
+      <p>Some systems now use an interrupt handler that simply sets a bit in a table when an interrupt occurs and then polls the table periodically to process the interrupt. This works well when there are multiple interrupts for the same event or when interrupt handling can be delayed slightly without adverse effects.</p>
+      
+      <p>Devices vary greatly in their requirements for software support:</p>
+      
+      <ul>
+        <li>A mouse needs very little software support. The CPU just reads the current position and status of the buttons when needed.</li>
+        <li>Video controllers on the other hand need to be frequently told where to get the next frame and where on the screen to display it.</li>
+        <li>Disks need to be told what blocks to transfer to/from what memory addresses.</li>
+        <li>Networks need even more support from the OS to implement their complex protocols.</li>
+      </ul>
+      
+      <figure>
+        <img src="../assets/images/module7-device-functionality-progression.jpg" alt="Device functionality progression showing the evolution from application level to hardware implementation" width="600" height="400">
+        <figcaption>Fig: Device functionality progression.</figcaption>
+      </figure>
+      
+      <p>The development of new I/O algorithms often follows a progression from application level code to on-board hardware implementation as shown in Figure above. Lower-level implementations are faster and more efficient but higher-level ones are more flexible and easier to modify. Hardware-level functionality may also be harder for higher-level authorities (e.g. the kernel) to control.</p>
+      
+      <div class="summary">
+        <h2>📝 Summary</h2>
+        <ul>
+          <li>I/O requests must be transformed from high-level file operations to specific hardware commands</li>
+          <li>The transformation process involves multiple layers of the operating system</li>
+          <li>STREAMS provides a modular approach to implementing network protocols</li>
+          <li>I/O performance is critical to overall system performance</li>
+          <li>Different devices require varying levels of software support from the operating system</li>
+          <li>I/O algorithms often evolve from application level to hardware implementation</li>
+        </ul>
+      </div>
+    </main>
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module6.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 7 of 8</span>
+        </div>
+        <a href="module8.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</body>
+</html>

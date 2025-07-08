@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Data Structures (I) (Part 1a) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-6-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 7 (Part 1a)</span>
+                    </div>
+                    <a href="chapter-7-part-1b.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <img src="../assets/images/ch7-header.jpg" alt="Chapter 7 Header" style="width:100%; max-width: 600px; display: block; margin: 1em auto;">
+                 <h1 class="section-title">Chapter 7 : Data Structures (I)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-7-objectives -->
+                <section id="chapter-7-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you would have learnt:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">the basic concepts of different data structures;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">how to acquire the ability to relate the types of data structures to real life application.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-7-objectives -->
+
+                <!-- START: chapter-7-introduction -->
+                <section id="section-7-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💡</span>
+                        <span class="heading-text">7.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A data structure specifies interrelationships among data. Each data structure has unique characteristics that make it different from any other.</p>
+                        <p>The study of data structures involves learning about various interrelationships that data can have within each unique structure,</p>
+                        <p>It is important for you to understand that the data maybe unchanged, while data structures do change.</p>
+                        <p>The study of data structures is important for the system analyst and programmer in the designing of Database Management Systems.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-7-introduction -->
+
+                <!-- START: chapter-7-unit-matrix -->
+                <section id="section-7-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">7.2 The Concept of Unit Matrix</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Constructing of Example Matrices for Four Grade of Staff</p>
+                        <p>Below are tables showing the various number of staff for different grades and categories for two towns, together with their salaries.</p>
+                        <p>By organising the numbers logically the following matrices are then constructed.</p>
+                        <p><strong>Andover Town.</strong></p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Andover Staff by Grade and Category</caption>
+                                <thead>
+                                    <tr><th>Grade</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>0</td><td>2</td><td>5</td><td>16</td><td>0</td><td>0</td></tr>
+                                    <tr><td>2</td><td>2</td><td>12</td><td>15</td><td>27</td><td>5</td><td>1</td></tr>
+                                    <tr><td>3</td><td>0</td><td>0</td><td>24</td><td>15</td><td>3</td><td>2</td></tr>
+                                    <tr><td>4</td><td>0</td><td>0</td><td>10</td><td>9</td><td>2</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Matrix A (Andover):</p>
+                        <div class="equation">$$ A = \begin{bmatrix} 0 & 2 & 5 & 16 & 0 & 0 \\ 2 & 12 & 15 & 27 & 5 & 1 \\ 0 & 0 & 24 & 15 & 3 & 2 \\ 0 & 0 & 10 & 9 & 2 & 1 \end{bmatrix} $$</div>
+
+                        <p><strong>Bristol Town.</strong></p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <caption>Bristol Staff by Grade and Category</caption>
+                                <thead>
+                                    <tr><th>Grade</th><th>A</th><th>B</th><th>C</th><th>D</th><th>E</th><th>F</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>0</td><td>3</td><td>18</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>2</td><td>1</td><td>4</td><td>12</td><td>18</td><td>2</td><td>1</td></tr>
+                                    <tr><td>3</td><td>0</td><td>0</td><td>16</td><td>14</td><td>5</td><td>1</td></tr>
+                                    <tr><td>4</td><td>0</td><td>0</td><td>8</td><td>6</td><td>1</td><td>0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                         <p>Matrix B (Bristol):</p>
+                         <div class="equation">$$ B = \begin{bmatrix} 0 & 3 & 18 & 0 & 0 & 1 \\ 1 & 4 & 12 & 18 & 2 & 1 \\ 0 & 0 & 16 & 14 & 5 & 1 \\ 0 & 0 & 8 & 6 & 1 & 0 \end{bmatrix} $$</div>
+
+                        <p><strong>The wage matrix.</strong></p>
+                        <img src="../assets/images/ch7-wage-matrix.jpg" alt="Wage matrix showing salaries for different grades and categories">
+                        <p>Matrix W (Wages):</p>
+                         <div class="equation">$$ W = \begin{bmatrix} 3 & 5 & 8 & 10 & 12 & 15 \\ 4 & 6 & 10 & 12 & 15 & 18 \\ 5 & 8 & 12 & 15 & 18 & 20 \\ 6 & 10 & 15 & 18 & 20 & 24 \end{bmatrix} $$</div>
+
+                        <p><strong>Addition of Matrices</strong></p>
+                        <div class="equation">$$ A + B = T $$</div>
+                        <p>The resultant matrix T (Total Staff) can be gotten by simply adding the corresponding elements of the individual matrices. Hence by adding the matrices of the two towns the total staffs can be obtained.</p>
+                        <div class="equation">$$ T = \begin{bmatrix} 0 & 5 & 23 & 16 & 0 & 1 \\ 3 & 16 & 27 & 45 & 7 & 2 \\ 0 & 0 & 40 & 29 & 8 & 3 \\ 0 & 0 & 18 & 15 & 3 & 1 \end{bmatrix} $$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-7-unit-matrix -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-6-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 7 (Part 1a)</span>
+                    </div>
+                    <a href="chapter-7-part-1b.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

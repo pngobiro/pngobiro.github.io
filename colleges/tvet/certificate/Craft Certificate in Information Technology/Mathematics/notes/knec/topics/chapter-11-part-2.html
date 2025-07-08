@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 11: Errors And Accuracy (Part 2) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-11-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 11 (Part 2)</span>
+                    </div>
+                    <a href="chapter-12-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 11 : Errors And Accuracy (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-11-error-propagation-cont -->
+                <section id="section-11-5-cont" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">11.5 Error Propagation (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>You may try 3 * 3 * 3, what conclusion you may draw?</p>
+                        <p>Conclusion: Relative error of the multiplication is approximately the sum of the relative errors of the individual reported values.</p>
+                        <div class="equation">$$ E_r(A \times B \times C) \approx E_r(A) + E_r(B) + E_r(C) $$</div>
+                        <p>Or using absolute errors:</p>
+                        <div class="equation">$$ \frac{E_a(A \times B \times C)}{|A \times B \times C|} \approx \frac{E_a(A)}{|A|} + \frac{E_a(B)}{|B|} + \frac{E_a(C)}{|C|} $$</div>
+                        <p>Induced error in multiplication is related to the sum of the relative inherent errors in each reported value.</p>
+
+                        <p><strong>Division</strong></p>
+                        <p>Example: 7.5 / 5.3, each is rounded to 1D. Reported value = 7.5 / 5.3 ≈ 1.415</p>
+                        <p>Max value = 7.55 / 5.25 ≈ 1.438</p>
+                        <p>Min value = 7.45 / 5.35 ≈ 1.393</p>
+                        <p>Error bound = (1.438 - 1.393) / 2 = 0.045 / 2 = 0.0225</p>
+                        <p>Absolute error <span class="math-inline">$E_a \approx 0.0225$</span></p>
+                        <p>Relative error of division <span class="math-inline">$E_r \approx 100 \times (0.0225 / 1.415) \approx 1.59\%$</span></p>
+                        <p>Relative error of 7.5 = <span class="math-inline">$100 \times (0.05 / 7.5) \approx 0.667\%$</span></p>
+                        <p>Relative error of 5.3 = <span class="math-inline">$100 \times (0.05 / 5.3) \approx 0.943\%$</span></p>
+                        <p>Sum of relative errors = 0.667% + 0.943% = 1.61%</p>
+                        <p>Try 3.5 / 1.5</p>
+                        <p>Conclusion: Relative error of the division is approximately the sum of the relative errors of individual reported values.</p>
+                        <div class="equation">$$ E_r(A / B) \approx E_r(A) + E_r(B) $$</div>
+                        <p>Or using absolute errors:</p>
+                        <div class="equation">$$ \frac{E_a(A / B)}{|A / B|} \approx \frac{E_a(A)}{|A|} + \frac{E_a(B)}{|B|} $$</div>
+
+                        <p>Finally, try a combination of arithmetic operation, multiplying and division.</p>
+                        <p>Example: <span class="math-inline">$(3.5 \times 13.5 \times 1.5) / (7.0 \times 4.5 \times 40.5)$</span></p>
+                        <p>In what ways the error propagated is maximised?</p>
+                        <p>Multiply the top row and bottom row respectively, then divide the numerator by the denominator.</p>
+                        <p>In what ways the error may be minimised?</p>
+                        <p>(3.5/7.0) * (13.5/4.5) * (1.5/40.5), the individual divisions will produce values which are relatively small, overflow error may be reduced.</p>
+
+                        <p><strong>Rounding</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Rounding errors frequently occur when doing manual decimal arithmetic. They occur with even greater frequency in computer arithmetic.</li>
+                            <li class="list-item">Example: If 0.0056 is rounded to 3 decimal places the answer is 0.006. A rounding error of 0.006 - 0.0056 = 0.0004 is therefore induced.</li>
+                            <li class="list-item">If 0.0055 is rounded to 3 decimal places, we may use the following rule (round half to even): If the digit to be rounded is 5, and the preceding digit is odd, round up. If the preceding digit is even, round down (or keep as is).</li>
+                            <li class="list-item">0.0055 is rounded to 0.006 (since 5 is odd).</li>
+                            <li class="list-item">If 0.0045 is rounded to 3 decimal places, the reported value is 0.004 (since 4 is even).</li>
+                        </ul>
+
+                        <p><strong>Truncation</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">If a storage space that can only accommodate 4 digits is used to store a number 67890, the least significant digit '0' will be chopped off giving 6789 as the number stored.</li>
+                            <li class="list-item">If 1010.0010111 is to be stored in 12-bit register with 4 bits to the right of the implied point. The stored data will be:</li>
+                        </ul>
+                        <img src="../assets/images/ch11-truncation-example.jpg" alt="Diagram showing truncation of binary number 1010.0010111 to 1010.0010 in a 12-bit register with 4 fractional bits">
+                        <p>Implied point</p>
+
+                        <p><strong>Overflow</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Overflow is different from truncation error in that the most significant digit will be dropped out instead of the least significant. Storing 67890 in 4 digits, the most significant digit '6' is chopped off.</li>
+                            <li class="list-item">This error is very serious in computer programming, thus many compilers and interpreters are written such that they can deliver 'overflow error' message.</li>
+                        </ul>
+
+                        <p><strong>Significant figures</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">At times, we can only take a certain number of significant figures. Take for example the population of Singapore, we may say there are 3,500,000 people taking only 2 significant figures. Even though we may have found the population to be 3,547,893, as the less significant digits 47,893 is small compared to 3,500,000.</li>
+                            <li class="list-item">A real number 2.03452355 may be expressed in 5 significant figures, as 2.0345.</li>
+                        </ul>
+
+                        <p><strong>Converting from one number system to another</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">To convert 0.7 decimal to binary number will induce an error as shown below:</li>
+                        </ul>
+                        <pre class="code-block"><code>0.7 * 2 = 1.4  -> 1
+0.4 * 2 = 0.8  -> 0
+0.8 * 2 = 1.6  -> 1
+0.6 * 2 = 1.2  -> 1
+0.2 * 2 = 0.4  -> 0
+0.4 * 2 = 0.8  -> 0
+0.8 * 2 = 1.6  -> 1
+... (repeats 100)</code></pre>
+                        <p>The series of multiplication is recurring. If we stop at 7 binary places, we have to accept that an error is induced.</p>
+                        <div class="equation">$$ (0.7)_{10} \approx (0.1011001)_2 $$</div>
+                        <p>Rounding, truncation, overflow, significant figures and change of number system will all lead to induced errors in data.</p>
+
+                        <p><strong>Check point</strong></p>
+                        <ol>
+                            <li>What is the effect on error if 3.5 * 7.25 is:
+                                <ol type="a">
+                                    <li>Calculated to integer precision;</li>
+                                    <li>Cut to 1D;</li>
+                                    <li>Rounded to 1D;</li>
+                                    <li>Calculated to 3 significant figures;</li>
+                                    <li>Worked out 'in full', with no cut or rounding.</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-11-error-propagation-cont -->
+
+                <!-- START: chapter-11-control-errors -->
+                <section id="section-11-6" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🛂</span>
+                        <span class="heading-text">11.6 To Control Errors</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>We want to calculate the volume of a sphere of radius 5.5 cm, the formula below can be used:</p>
+                        <div class="equation">$$ V = \frac{4}{3} \pi r^3 $$</div>
+                        <p>Take <span class="math-inline">$\pi \approx 3.14$</span>, and r = 5.5</p>
+                        <p>V = (4/3) * 3.14 * (5.5)<sup>3</sup> ≈ 696.556... ≈ 696.6 (to 1 DP)</p>
+                        <p>Error analysis (assuming r=5.5 is exact for now, pi is approx):</p>
+                        <p>Relative error of pi ≈ |π - 3.14| / π ≈ |3.14159... - 3.14| / 3.14159... ≈ 0.0005</p>
+                        <p>Relative error of r<sup>3</sup> ≈ 3 * E<sub>r</sub>(r)</p>
+                        <p>Relative error of V ≈ E<sub>r</sub>(4/3) + E<sub>r</sub>(π) + E<sub>r</sub>(r<sup>3</sup>) ≈ 0 + 0.0005 + 3 * E<sub>r</sub>(r)</p>
+                        <p>If r=5.5 is rounded to 1DP (error bound 0.05): E<sub>r</sub>(r) ≈ 0.05 / 5.5 ≈ 0.0091 (0.91%)</p>
+                        <p>Then E<sub>r</sub>(V) ≈ 0.0005 + 3 * 0.0091 ≈ 0.0005 + 0.0273 = 0.0278 (2.78%)</p>
+                        <p>Absolute error of V ≈ E<sub>r</sub>(V) * |V| ≈ 0.0278 * 696.6 ≈ 19.36</p>
+                        <p>This means that range of Volume is approximately 696.6 ± 19.4 cubic centimetres.</p>
+                        <p>The decimal places are not significant.</p>
+                        <p>To reduce the induced error, we should, if possible, take 'r' to more decimal places and use a more precise value for π. Raise 'r' to the third power, multiply by π, multiply by 4 and finally divide by 3. Only by taking such precautions, could we minimise the errors.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-11-control-errors -->
+
+                <!-- START: chapter-11-answers -->
+                <section id="section-11-answers" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✅</span>
+                        <span class="heading-text">Answers to check points</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>20. There are many possible sources of mistakes at this stage;</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Document omitted or misread;</li>
+                            <li class="list-item">Transposition errors;</li>
+                            <li class="list-item">Characters omitted;</li>
+                            <li class="list-item">Mis-keying;</li>
+                            <li class="list-item">Out of range;</li>
+                            <li class="list-item">Invalid datatype;</li>
+                        </ul>
+                        <p>21. There are many possible answers:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Hashing the invoice numbers;</li>
+                            <li class="list-item">Hashing the dates;</li>
+                            <li class="list-item">Batching totals of amount of money;</li>
+                            <li class="list-item">Batching totals of number of items withdrawn from store;</li>
+                        </ul>
+                        <p>Parity checking is testing the make-up of the binary digits in a coded eight-bit byte.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Even parity: by making the leftmost digit a 1, if the total numbers of 1's in the remaining seven bits is odd (to make total even); 0 otherwise.</li>
+                            <li class="list-item">Odd parity: by making the leftmost digit a 1, if total number of 1's in the remaining seven bits is even (to make total odd); 0 otherwise.</li>
+                        </ul>
+                        <p>22.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Data</th><th>Hash Total (W: 4,3,2)</th><th>Divide by 7, take remainder</th><th>7 - remainder</th><th>Final data</th></tr></thead>
+                                <tbody>
+                                    <tr><td>439</td><td>4*4 + 3*3 + 9*2 = 16+9+18 = 43</td><td>43 mod 7 = 1</td><td>7 - 1 = 6</td><td>4396</td></tr>
+                                    <tr><td>1058535</td><td>1*8+0*7+5*6+8*5+5*4+3*3+5*2 = 8+0+30+40+20+9+10 = 117</td><td>117 mod 7 = 5</td><td>7 - 5 = 2</td><td>10585352</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>23.</p>
+                        <div class="table-container">
+                             <table class="content-table">
+                                <thead><tr><th>Data</th><th>Hash Total (W: 5,4,3,2)</th><th>Divide by 7, remainder</th><th>Result</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1794</td><td>1*5+7*4+9*3+4*2 = 5+28+27+8 = 68</td><td>68 mod 7 = 5</td><td>Not valid (remainder should be 0)</td></tr>
+                                    <tr><td>10545722</td><td>1*9+0*8+5*7+4*6+5*5+7*4+2*3+2*2 = 9+0+35+24+25+28+6+4 = 131</td><td>131 mod 7 = 5</td><td>Not valid (remainder should be 0)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>24. Mistakes are made due to human carelessness in handling data. Errors arise from the data itself, i.e. Inherent error; it may be brought in due to external factors like rounding, limit of computer systems, i.e. Induced error.</p>
+                        <p>25.</p>
+                        <ul class="enhanced-list">
+                            <li>a. Error bound = ±0.05 cm (Range: 3.45 cm -- 3.55 cm)</li>
+                            <li>b. Error bound = ±0.05 s (Range: 45.25 s -- 45.35 s)</li>
+                        </ul>
+                        <p>26.</p>
+                        <ul class="enhanced-list">
+                            <li>a. Max Rel Error = 100 * (0.05 / 13.5) ≈ 0.37%</li>
+                            <li>b. Max Rel Error = 100 * (0.05 / 130.5) ≈ 0.038%</li>
+                            <li>c. Max Rel Error = 100 * (0.05 / 1300.5) ≈ 0.0038%</li>
+                        </ul>
+                        <p>27. 3.5 * 7.25 = 25.375</p>
+                        <ul class="enhanced-list">
+                            <li>a. Integer precision: 25. Absolute Error = |25 - 25.375| = 0.375. Relative Error ≈ 1.48%</li>
+                            <li>b. Cut to 1D: 25.3. Absolute Error = |25.3 - 25.375| = 0.075. Relative Error ≈ 0.30%</li>
+                            <li>c. Rounded to 1D: 25.4. Absolute Error = |25.4 - 25.375| = 0.025. Relative Error ≈ 0.10%</li>
+                            <li>d. Calculated to 3 significant figures: 25.4. Absolute Error = 0.025. Relative Error ≈ 0.10%</li>
+                            <li>e. 'In full': Absolute Error = 0 (assuming exact calculation). Relative Error = 0%.</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-11-answers -->
+
+                <!-- START: chapter-11-points-remember -->
+                <section id="chapter-11-points-remember" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📌</span>
+                        <span class="heading-text">Points to Remember (Errors & Accuracy)</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul class="enhanced-list">
+                            <li class="list-item">To distinguish mistake from error.</li>
+                            <li class="list-item">To be aware of how to reduce mistakes. The methods are hash total, batch total, parity-bit method and check digit method.</li>
+                            <li class="list-item"><strong>Inherent error.</strong> It is error that exist by itself in the measurement scale.</li>
+                            <li class="list-item"><strong>Induced error.</strong> It is error that is brought in from 'outside' by external factors. Usually, induced error is the result of propagation of inherent errors.</li>
+                            <li class="list-item">To measure error using two quantities.
+                                <ul class="enhanced-list sub-list">
+                                    <li class="list-item">Absolute error <span class="math-inline">$E_a = |\text{reported value} - \text{true value}|$</span></li>
+                                    <li class="list-item">Relative error <span class="math-inline">$E_r = E_a / |\text{True value}|$</span></li>
+                                </ul>
+                            </li>
+                            <li class="list-item">Error can spread, or propagate.
+                                <ul class="enhanced-list sub-list">
+                                    <li class="list-item"><span class="math-inline">$E_a(A+B) = E_a(A) + E_a(B)$</span></li>
+                                    <li class="list-item">As a result of addition, the absolute error of (A+B) is the sum of absolute error of A and that of B.</li>
+                                    <li class="list-item"><span class="math-inline">$E_a(A-B) = E_a(A) + E_a(B)$</span></li>
+                                    <li class="list-item"><span class="math-inline">$E_r(A \times B \times C) \approx E_r(A) + E_r(B) + E_r(C)$</span></li>
+                                    <li class="list-item"><span class="math-inline">$E_r(A / B) \approx E_r(A) + E_r(B)$</span></li>
+                                </ul>
+                            </li>
+                            <li class="list-item">Types of errors: Rounding; Truncation; Overflow; Conversion</li>
+                            <li class="list-item">Divide a number by another, before multiplying them, is a method to reduce possible overflow error.</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-11-points-remember -->
+
+                <!-- START: chapter-11-past-questions -->
+                <section id="section-11-7" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">11.7 Past Year Questions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>21. Given that X = 5.63 and Y = 7.82, where each number has been rounded to 2 decimal places, calculate to 4 significant figures.</p>
+                        <ol type="a">
+                            <li>Relative error when they are added</li>
+                            <li>Relative error for X * Y</li>
+                        </ol>
+                        <p>x = 0.34 and y = 0.55, both corrected to 2 decimal places.</p>
+                        <p>Find</p>
+                        <ol type="a" start="3">
+                            <li>the absolute error of 2x + y</li>
+                            <li>the relative error of 2x + y</li>
+                        </ol>
+                        <p>Two values are recorded as 8.7 and -4.3 , both correct to 1D. What is the ABSOLUTE ERROR when they are added together?</p>
+                        <p>Calculate the absolute and relative error of a + b given a = 3.5 (corrected to 1D) and b = 1.55 (corrected to 2D).</p>
+                        <p>Pick the correct completion for each of the following sentences:</p>
+                        <ol type="a" start="5">
+                            <li>Discarding least significant digits of a number so it will fit in a fixed-size storage location
+                                <ol type="i">
+                                    <li>is a method of implementing floating-point numbers.</li>
+                                    <li>is called truncation.</li>
+                                    <li>does not happen on modern computers.</li>
+                                </ol>
+                            </li>
+                            <li>The difference between the reported value and the true value of a quantity
+                                <ol type="i">
+                                    <li>is the absolute error.</li>
+                                    <li>is zero.</li>
+                                    <li>is the inherent error.</li>
+                                </ol>
+                            </li>
+                            <li>Error can arise in computations
+                                <ol type="i">
+                                    <li>only when the initial readings for values are inaccurate.</li>
+                                    <li>if the mantissa of a computed result won't fit in the storage space allocated for it without loss of data.</li>
+                                    <li>because no real numbers can be represented exactly in a floating-point representation.</li>
+                                </ol>
+                            </li>
+                            <li>Subtraction is more susceptible to error propagation than is addition.[1]</li>
+                        </ol>
+                        <p>Using mod 11 and weighting of 2,3 and 4 for units, tens, and hundreds columns, calculate a check digit for 834.</p>
+                        <p>An account number consists of 10 digits, the tenth digit being a CHECK DIGIT, MODULUS 11.</p>
+                        <ol type="a" start="9">
+                            <li>Calculate an appropriate check digit for 005611350.</li>
+                            <li>Which of these numbers would be declared invalid: 0765213141, 0265073147?</li>
+                        </ol>
+                        <p>Using mod 7 and weighting of 2, 3, 4 for the units, tens and hundreds columns append an appropriate CHECK DIGIT to each of 928 and 921.</p>
+                        <p>Using modulus 11 and weighting of 2, 3 and 4 for the units, tens and hundreds columns:</p>
+                        <ol type="a" start="11">
+                            <li>append a CHECK DIGITS to the number 758.</li>
+                            <li>show why there is a problem when generating a check digit for 748, and suggest how to overcome this problem.</li>
+                            <li>determine whether or not 9752 is a VALID CODE.</li>
+                        </ol>
+                        <p>a. Using mod 11 and weighting of 2, 3 and 4 for the units, tens and hundreds columns, append a check digit to 974.</p>
+                        <p>b. Show how a transposition error occurring in the number 974 would be detected</p>
+                        <p>22. a. What is parity in a parity check?</p>
+                        <p>b. When will a parity check fail?</p> <!-- MMD typo: aaa -->
+                        <p>23. a. How is data verification performed? [2]</p>
+                        <p>b. Why might data verification be used?</p> <!-- MMD typo: bbb -->
+                        <p>c. How might the data entry be validated?</p> <!-- MMD typo: ccc -->
+                        <p>Describe what is the purpose of a check digit?</p>
+                        <p>24. a. Write the decimal fraction 4.0 as binary fraction using only four binary digits after the decimal point.</p>
+                        <p>b. Convert your answer back to denary, and determine the absolute error.</p> <!-- MMD typo: ddd -->
+                        <p>c. Calculate the relative error.</p> <!-- MMD typo: eee -->
+                    </div>
+                </section>
+                <!-- END: chapter-11-past-questions -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-11-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 11 (Part 2)</span>
+                    </div>
+                    <a href="chapter-12-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

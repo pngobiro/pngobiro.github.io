@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Computer Based Arithmetic (Part 2) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 2 (Part 2)</span>
+                    </div>
+                    <a href="chapter-3-part-1.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 2 : Computer Based Arithmetic (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-2-storage-fractions -->
+                <section id="section-2-7" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💾</span>
+                        <span class="heading-text">2.7 Storage of Fractions</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">First bit still sign bit</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Bicimal point not stored</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Implied after sign bit</span></li>
+                        </ul>
+                        <p>Decimal 0.4140625</p>
+                        <img src="../assets/images/ch2-storage-fraction-exact.jpg" alt="Diagram showing storage of 0.4140625 as a binary fraction in a 12-bit word">
+                        <p>This representation is exact.</p>
+                        <p>If 11 bits is not enough for exact representation:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Truncate</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Round off</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Extend to double length (or more)</span></li>
+                        </ul>
+                        <p>Double length fraction:</p>
+                        <p>0.7328 decimal</p>
+                        <img src="../assets/images/ch2-storage-fraction-double.jpg" alt="Diagram showing storage of 0.7328 as a binary fraction in a double-length (24-bit) word">
+                        <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Double length fractions have increased accuracy, not range</span></li> <!-- MMD typo: zccuracy -->
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-2-storage-fractions -->
+
+                <!-- START: chapter-2-storage-mixed -->
+                <section id="section-2-8" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💾</span>
+                        <span class="heading-text">2.8 Storage of Mixed Numbers (Fixed Point Notation)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Single word:</p>
+                        <p>11.75 decimal</p>
+                        <img src="../assets/images/ch2-storage-mixed-single.jpg" alt="Diagram showing storage of 11.75 in a 12-bit word with 6 bits integer, 6 bits fraction">
+                        <p>Divide as necessary</p>
+                        <p>Double word: 74.890625 decimal</p>
+                        <img src="../assets/images/ch2-storage-mixed-double.jpg" alt="Diagram showing storage of 74.890625 in a double-length (24-bit) word">
+                        <p>Usual convention is one word for integral part, the other for fraction</p>
+                    </div>
+                </section>
+                <!-- END: chapter-2-storage-mixed -->
+
+                <!-- START: chapter-2-storage-2s-complement -->
+                <section id="section-2-9" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💾</span>
+                        <span class="heading-text">2.9 Storage of Number Using 2's Complement Method</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Sign-modulus method is unsuitable for calculation. Computers usually use 2's complement method to store numbers and calculation.</p>
+                        <p>In 2's complement method, no sign bit is reserved to indicate the sign of number.</p>
+                        <p>However, if the leftmost bit is 0, it indicates a positive number. If the leftmost is a 1, then it is an implied negative number.</p>
+                        <p>Stored numbers in 2's complement method can be defined in 4 stages.</p>
+                        <p><strong>Steps:</strong></p>
+                        <ol>
+                            <li>Convert absolute value of given no. into binary.</li>
+                            <li>Store binary no. into given computer word.</li>
+                            <li>Check if given no is positive, the steps are completed.</li>
+                            <li>If given no is negative then
+                                <ol type="a">
+                                    <li>Invert all bits (<span class="math-inline">$0 \rightarrow 1, 1 \rightarrow 0$</span>)</li>
+                                    <li>Add 1 to the inverted no.</li>
+                                </ol>
+                            </li>
+                        </ol>
+                        <p>Example: Store 45 and -45 into 8 bit register</p>
+                        <p><strong>To store 45:</strong></p>
+                        <p>Steps:</p>
+                        <ol>
+                            <li>45 in binary : 101101</li>
+                            <li>45 in 8 bit: 00101101</li>
+                            <li>Since no. (45) is positive, task is completed.</li> <!-- MMD typo: positio -->
+                        </ol>
+                        <p><strong>To store -45:</strong></p>
+                        <p>Steps:</p>
+                        <ol>
+                            <li>45 in binary : 101101</li> <!-- MMD repeated step numbers -->
+                            <li>45 in 8 bits: 00101101</li>
+                            <li>-45:
+                                <ol type="a">
+                                    <li>Invert: 11010010</li>
+                                    <li>Add 1:
+                                        <pre>  11010010\n+        1\n----------\n  11010011</pre>
+                                    </li>
+                                </ol>
+                            </li>
+                        </ol>
+                        <p>The range of number that can be stored in n-bit comp word in 2's complement format is</p>
+                        <div class="equation">$$ -\left(2^{n-1}\right) \text { to } \left(2^{n-1}-1\right) $$</div>
+                        <p>Example: in 8 bit word, the range is</p>
+                        <div class="equation">$$ -\left(2^{8-1}\right) \text { to } \left(2^{8-1}-1\right) = -128 \text { to } 127 $$</div>
+                    </div>
+                </section>
+                <!-- END: chapter-2-storage-2s-complement -->
+
+                <!-- START: chapter-2-tens-complement -->
+                <section id="section-2-10" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔟</span>
+                        <span class="heading-text">2.10 Ten's Complement</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>8's complement = 2 because <span class="math-inline">$8+2=10$</span> as such</p> <!-- MMD typo: 8' -->
+                        <div class="equation">$$ \begin{aligned} & 8-2 = (8+8)-10 = 6 \\ & 6-4 = (6+6)-10 = 2 \end{aligned} $$</div>
+                        <p>These findings have a significant impact on the arithmetic operation in computer.</p> <!-- MMD typo: arithmatics -->
+                    </div>
+                </section>
+                <!-- END: chapter-2-tens-complement -->
+
+                <!-- START: chapter-2-twos-complement-subtraction -->
+                <section id="section-2-11" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✌️</span>
+                        <span class="heading-text">2.11 Two's Complement Subtraction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Computers can only do addition, so subtraction is done by adding the complement of the subtrahend to the minuend.</p>
+                        <p>(Using four bits to store the binary number)</p>
+                        <p>Example: 5 - 3</p>
+                        <pre class="code-block"><code>  5 -> 0101
+  3 -> 0011
+
+  Find 2's complement of 3 (subtrahend):
+    Invert 0011 -> 1100
+    Add 1      -> +  1
+                  ----
+                  1101 (This is -3 in 2's complement)
+
+  Add to minuend (5):
+      0101  (5)
+    + 1101  (-3)
+    ------
+ (1) 0010  (Result is 2, ignore carry)</code></pre>
+                    </div>
+                </section>
+                <!-- END: chapter-2-twos-complement-subtraction -->
+
+                <!-- START: chapter-2-recomplementing -->
+                <section id="section-2-12" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">2.12 Recomplementing Cases</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>If the minuend is lesser than the subtrahend then it is necessary to recomplement the answer and add a minus sign to it.</p> <!-- MMD typo: lasear -->
+                        <p>Example: 3 - 5</p>
+                        <pre class="code-block"><code>  3 -> 0011
+  5 -> 0101
+
+  Find 2's complement of 5 (subtrahend):
+    Invert 0101 -> 1010
+    Add 1      -> +  1
+                  ----
+                  1011 (This is -5 in 2's complement)
+
+  Add to minuend (3):
+      0011  (3)
+    + 1011  (-5)
+    ------
+      1110  (Result is negative, indicated by leading 1)
+
+  Recomplement the result (1110) to find magnitude:
+    Invert 1110 -> 0001
+    Add 1      -> +  1
+                  ----
+                  0010 (Magnitude is 2)
+
+  Final Answer: -2 (Add minus sign)</code></pre>
+                    </div>
+                </section>
+                <!-- END: chapter-2-recomplementing -->
+
+                <!-- START: chapter-2-shift-operations -->
+                <section id="section-2-13" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">↔️</span>
+                        <span class="heading-text">2.13 Shift Operations</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Shifting refers to a process whereby it is possible to physically move the pattern of bits within a computer word to the left or to the right. A number of different types of shift operations do exist. The most common are circular, logical and arithmetic shifts. We will only be interested in the arithmetic shift operation.</p>
+
+                        <h3 class="subsection-heading">2.13.1 Shift Operations to Achieve Multiplication</h3>
+                        <p>If every bit in a 12-bit word is moved one place to the left it immediately has an associated place-value which is twice that previously associated with it and so the effect of shifting one place to the left is to double the value of the quantity originally stored. If shifted two places to the left, this doubling is repeated, so that the result is now four times the original; three place shifted to the left has the effect of multiplying the quantity by eight (since <span class="math-inline">$8=2^3$</span>) and so on.</p> <!-- MMD typo: 23 -->
+                        <p>Under these circumstances the gaps which occur at the right hand end of the word as the shifting takes place are filled with zeros and anything shifted beyond the left-hand end is lost. Additionally, this process is only valid so long as the sign-bit remains as zero, (although techniques do exist to cope with negative quantities). But if a positive number is to be multiplied in this way and there is possible overflow, it is possible to avoid the difficulty by going into double-length.</p> <!-- Corrected logic -->
+                        <p>Example:</p>
+                        <img src="../assets/images/ch2-shift-operations-example.jpg" alt="Diagram showing left shift operations for multiplication by 2, 4, 8">
+
+                        <h3 class="subsection-heading">2.13.2 Shift Operations to Achieve Division</h3>
+                        <p>Just as shifting to the left effects multiplication by the relevant power of two, so shifting to the right achieves division by the relevant power of two. In this case the gaps caused by shifting occur at the left-hand end of the word and are replaced by copies of the sign-bit to retain arithmetic significance: it is in fact more straightforward to cope with negative values here than in the case of multiplication. Any bit shifted beyond the right-hand end of the word is lost and the result is a truncated form of division.</p>
+                        <p>If the last bit to be shifted beyond the right-hand end of the word were to be 1, then added back on to the right-hand end bit the result would be a rounded form of the same division.</p> <!-- Corrected logic -->
+                    </div>
+                </section>
+                <!-- END: chapter-2-shift-operations -->
+
+                <!-- START: chapter-2-past-questions -->
+                <section id="section-2-14" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">2.14 Past Years Questions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>7. If a computer stores integers in one byte using the two's complement:</p>
+                        <ol type="a"> <!-- Assuming 'l' starts list 'a' -->
+                            <li>What range of integers can be represented?</li>
+                            <li>Show how the computer would evaluate -100-40. You must show all working.</li>
+                            <li>Briefly comment on your results in (b).</li>
+                        </ol>
+                        <ol type="a">
+                             <li>Determine the range of integer that could be stored in a 6 bits register in two's complement form.</li>
+                             <li>Using two's complement, evaluate the following numbers which are stored in 5 bits registers, evaluate the following:
+                                <ol type="i">
+                                    <li>12-15</li>
+                                    <li>15-10</li>
+                                </ol>
+                             </li>
+                        </ol>
+                        <p>A particular computer's 8 bit registers store number in two's complement.</p> <!-- MMD typo: two' -->
+                        <ol type="a"> <!-- Assuming 'p' starts list 'a' -->
+                            <li>Show how -96 is represented.</li>
+                            <li>Show how 85-120 would be evaluated.</li> <!-- MMD typo: eval lated -->
+                        </ol>
+                        <ol type="a">
+                            <li>Express 101.101 and -110.11 in binary using 8 bits for the integer part and 8 bits for the (unrounded) fraction part.</li> <!-- Corrected -1/0.11 and unaunded -->
+                            <li>Convert the fraction 10011100.10100110 to decimal.</li>
+                        </ol>
+                        <p>Calculate the following using two's complement subtraction, assuming the numbers are stored in 8-bit registers: 13-56.</p> <!-- MMD typo: usinecenplement -->
+                        <ol type="a">
+                            <li>If numbers are held in an 8 BIT register in TWO's COMPLEMENT form. <!-- MMD typo: Ii mumbers -->
+                                <ol type="i">
+                                    <li>Write down the COMPLETE range of INTEGERS which can be held.</li>
+                                    <li>Show how 96-124 would be evaluated.</li>
+                                </ol>
+                            </li>
+                            <li>If a very simple 4 BIT register were to be used.
+                                <ol type="i">
+                                    <li>What would the binary representation of <span class="math-inline">$0.7_{10}$</span> be?</li>
+                                    <li>What denary value would the register actually hold?</li>
+                                </ol>
+                            </li>
+                        </ol>
+                        <p>Show, in BINARY, how a 12-BIT register would hold.</p>
+                        <ol type="i">
+                            <li>The integer -894 using TWO's complement.</li>
+                            <li>Show how -894 would be added to ITSELF using TWO's complement and justify that the CORRECT answer is obtained.</li>
+                            <li>Show what happens if -894 is added yet again. [1]</li>
+                            <li>What is this situation called?</li>
+                        </ol>
+                        <p>Using TWO's COMPLEMENT, base 10 integers are to be stored in an EIGHT bit register.</p>
+                        <ol type="a"> <!-- Assuming 's' starts list 'a' -->
+                            <li>What range of INTEGERS, (expressed in DENARY form) can be stored? [2]</li>
+                            <li>Show how <span class="math-inline">$71_{10}$</span> is represented.</li>
+                            <li>Show how <span class="math-inline">$-83_{10}$</span> is represented.</li>
+                            <li>Show how <span class="math-inline">$71_{10}-83_{10}$</span> would be evaluated.</li>
+                        </ol>
+                         <ol type="a">
+                            <li>If a computer stores integers in two bytes using TWO's complement: <!-- MMD typo: v. ing -->
+                                <ol type="i">
+                                    <li>What is the range of integers which can be represented?</li>
+                                    <li>How would the computer evaluate 47-125? Show all your working. [4]</li>
+                                </ol>
+                            </li>
+                            <li>Given 1001001101 in a 12-bit word, interpret this in denary if it is of format: <!-- MMD typo: 1001001101 n -->
+                                <ol type="i">
+                                    <li>TWO's complement.</li> <!-- MMD typo: comr,lement. -->
+                                    <li>Fixed point number with 6 decimal places.</li> <!-- MMD typo: pbirt -->
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-2-past-questions -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-2-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 2 (Part 2)</span>
+                    </div>
+                    <a href="chapter-3-part-1.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

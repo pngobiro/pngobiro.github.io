@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Sub-Programs (Part 1)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-6-part-3.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 7 (Part 1)</span>
+                    </div>
+                    <a href="chapter-7-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 7: Sub-Programs (Part 1)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-7-part-1 -->
+                <section id="chapter-7-intro" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔧</span>
+                        <span class="heading-text">Introduction to Sub-Program and Functions/Procedures</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The natural structure of a Visual Basic program is as independent sections of code delimited by "Private Sub ObjectName_Event" and "End Sub" statements. Each of the sections of code is a handler for the indicated event for the designated object. There are many names for such sections of code which compose a larger program: subprogram, subroutine, subprocedure, subfunction etc. Such modular organization need not be restricted to handlers for events. Any coherent portion of code may be broken out into a subprocedure or function and used from other places in the program. An event handler is an example of a subprocedure. A function differs from a subprocedure in being able to return a value.</p>
+                        <p>A subprocedure is of the form:</p>
+                        <pre><code class="language-vb">Private Sub Procedurename()
+    ' Statement(s)
+End Sub
+
+' or
+
+Private Sub Procedurename(argument AS type, ...)
+    ' Statement(s)
+End Sub
+</code></pre>
+                        <p>A function is of the form:</p>
+                        <pre><code class="language-vb">Private Function Procedurename(argument AS type, ...) AS functiontype
+    Procedurename = ...
+End Function
+</code></pre>
+                        <p>A subprocedure or function may be created from the "Tools" menu or simply typed in in the (General) section of the code page. The types of arguments and of a function return may be specified by the single character type indicators instead of with AS.</p>
+                        <p>Just as clicking on a command button generates an event that starts the execution of the appropriate event handler, the statement:</p>
+                        <pre><code class="language-vb">Call Procedurename
+' or
+Call Procedurename(arguments)
+</code></pre>
+                        <p>If there are arguments, starts the execution of the subprocedure. Once the subprocedure has run, execution continues at the statement after the call. The number of arguments in the call should match the number of arguments in the declaration, and while Basic will do some conversions automatically, it is best if the types match as well.</p>
+                        <p>An alternative form of Call is to use the procedure name as a command followed by the arguments without the surrounding parentheses.</p>
+                        <p>A function with its arguments is used in expressions in place of variables, providing the results of its execution at that point in the expression. For example if we have a command button, Command1, two text boxes for numeric input, Text1 and Text2 and a picture box for output, we can apply the Pythagorean theorem with:</p>
+                        <pre><code class="language-vb">Private Function hypotenuse(a AS Double, b AS Double) AS Double
+    hypotenuse = Sqr(a^2 + b^2)
+End Function
+
+Private Sub Command1_Click()
+    Picture1.Cls
+    Picture1.Print hypotenuse(Val#(Text1.Text), Val#(Text2.Text))
+End Sub
+</code></pre>
+                    </div>
+                </section>
+
+                <section id="chapter-7-builtins" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📋</span>
+                        <span class="heading-text">Useful Built-in Functions</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>There are several useful built-in functions, some of which are given in the following table:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tbody>
+                                    <tr><td>Abs(arg)</td><td>Absolute value of arg</td></tr>
+                                    <tr><td>Asc(str$)</td><td>ASCII numeric code for the first character of str$</td></tr>
+                                    <tr><td>Atn(arg)</td><td>Arctangent of arg</td></tr>
+                                    <tr><td>Chr$(arg)</td><td>One character string for which arg is the ASCII numeric code</td></tr>
+                                    <tr><td>Ctype(arg)</td><td>Converts arg to the indicated type, where type is one of Bool, Byte, Cur, Date, Dbl, Int, Lng, Sng, Str or Var</td></tr>
+                                    <tr><td>Cos(arg)</td><td>Cosine of arg in radians</td></tr>
+                                    <tr><td>Exp(arg)</td><td>e to the power arg</td></tr>
+                                    <tr><td>Fix(arg)</td><td>Integer part of arg (by truncation)</td></tr>
+                                    <tr><td>Format(arg, str$)</td><td>String derived from arg using format string str$</td></tr>
+                                    <tr><td>Hex$(arg)</td><td>String representing arg as hexadecimal</td></tr>
+                                    <tr><td>InStr(str$, probe$)</td><td>Position of probe$ in str$ or 0</td></tr>
+                                    <tr><td>InStr(offset, str$, probe$)</td><td>As with Instr, but starting at offset</td></tr>
+                                    <tr><td>Int(arg)</td><td>Largest integer <= arg</td></tr>
+                                    <tr><td>Left$(str$, n)</td><td>Leftmost n characters of str$</td></tr>
+                                    <tr><td>Len(str$)</td><td>Length of str$</td></tr>
+                                    <tr><td>Log(arg)</td><td>Natural logarithm of arg</td></tr>
+                                    <tr><td>Mid$(str$, offset, n)</td><td>Substring of str$ of length n starting at offset. May be used as the left hand side of an assignment</td></tr>
+                                    <tr><td>Oct$(arg)</td><td>String representing arg as octal</td></tr>
+                                    <tr><td>Right$(str$, n)</td><td>Rightmost n characters of str$</td></tr>
+                                    <tr><td>Rnd</td><td>Random number from 0 to 1</td></tr>
+                                    <tr><td>Sgn(arg)</td><td>-1 if arg is negative, 0 if arg is zero, 1 if arg is positive</td></tr>
+                                    <tr><td>Sin(arg)</td><td>Sine of arg in radians</td></tr>
+                                    <tr><td>Space$(n)</td><td>String of n spaces</td></tr>
+                                    <tr><td>Sqr(arg)</td><td>Square root of arg</td></tr>
+                                    <tr><td>Str$(arg)</td><td>String representing the number in arg</td></tr>
+                                    <tr><td>Tan(arg)</td><td>Tangent of arg in radians</td></tr>
+                                    <tr><td>Val(str$)</td><td>Number represented by str$</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: chapter-7-part-1 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-6-part-3.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 7 (Part 1)</span>
+                    </div>
+                    <a href="chapter-7-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,464 @@
+/* Base styles */
+:root {
+    --primary-color: #0056b3; /* Darker blue */
+    --secondary-color: #007bff; /* Standard blue */
+    --text-color: #343a40; /* Darker gray */
+    --light-bg: #f8f9fa;
+    --border-color: #dee2e6; /* Lighter border */
+    --sidebar-width: 250px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* Modern system font stack */
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: #fff; /* Ensure clean white background */
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header */
+header {
+    background-image: linear-gradient(to right, var(--primary-color), var(--secondary-color)); /* Add gradient */
+    color: white; /* Set text color back to white */
+    padding: 2rem 0;
+    margin-bottom: 3rem; /* Increase margin */
+    border-bottom: none; /* Remove border as background provides separation */
+}
+
+header h1 {
+    font-size: 2.2rem; /* Slightly larger */
+    margin-bottom: 0.5rem;
+    /* color: var(--text-color); */ /* Remove - inherit white */
+}
+
+header h2 {
+    font-size: 1.4rem; /* Slightly smaller */
+    font-weight: 400; /* Regular weight */
+    /* color: #6c757d; */ /* Remove - inherit white */
+    opacity: 0.9; /* Slightly less prominent */
+}
+
+.exam-details {
+    margin-top: 1rem;
+    padding: 0.5rem 0; /* Add some vertical padding */
+    /* color: #6c757d; */ /* Remove - inherit white */
+    font-size: 0.9rem;
+    opacity: 0.9; /* Slightly less prominent */
+}
+
+/* Main content layout */
+.main-content {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem auto;
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    background: var(--light-bg);
+    border-radius: 10px; /* Slightly more rounded corners */
+    padding: 1.2rem; /* Increased padding */
+    position: sticky;
+    top: 1rem;
+    height: calc(100vh - 2rem);
+    overflow-y: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+}
+.content-wrapper {
+    padding: 0 1rem; /* Add horizontal padding */
+}
+
+.sidebar-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-nav ul {
+    list-style: none;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 0.6rem; /* Increased padding */
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px; /* Slightly more rounded corners */
+    transition: background-color 0.3s ease; /* Smoother transition */
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active,
+.sidebar-nav .expanded > h4 {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Main content area */
+main { /* Renamed from .content-area to main for semantic clarity */
+    flex-grow: 1;
+    padding: 1rem 0; /* Add vertical padding */
+}
+
+/* Content sections within main */
+.paper-intro,
+.paper-content {
+    padding: 1rem; /* Add padding to intro and content sections */
+    margin-bottom: 2rem; /* Add space below sections */
+}
+
+/* Question styling */
+.question {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.question h3 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.question-content {
+    margin-bottom: 1.5rem;
+}
+
+.answer-section {
+    background: #e9ecef; /* Slightly tinted background */
+    border-radius: 4px;
+    padding: 1rem;
+    margin-top: 1rem;
+    border-top: 1px solid var(--border-color); /* Add separator */
+}
+
+.answer-section h4 {
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+}
+
+.answer-content h5 { /* Style sub-headings in answers */
+    font-weight: 600;
+    margin-top: 1.2rem;
+    margin-bottom: 0.6rem;
+    color: #333; /* Slightly darker than default text */
+}
+
+/* Improve spacing within question/answer content */
+.question-content p,
+.answer-content p,
+.question-content ul,
+.answer-content ul,
+.question-content ol,
+.answer-content ol,
+.question-content pre,
+.answer-content pre {
+    margin-bottom: 1rem;
+}
+
+/* Ensure standard list indentation and style */
+.question-content ul,
+.answer-content ul {
+    padding-left: 1.5rem; /* Standard indentation */
+    list-style-type: disc; /* Explicitly set bullet style */
+    list-style-position: outside; /* Ensure markers are outside text flow */
+}
+.question-content ol,
+.answer-content ol {
+    padding-left: 1.5rem; /* Standard indentation */
+    list-style-type: decimal; /* Explicitly set number style */
+    list-style-position: outside; /* Ensure markers are outside text flow */
+}
+
+/* Add spacing between list items */
+.question-content li,
+.answer-content li {
+    margin-bottom: 0.5rem; /* Adjust spacing between items */
+}
+
+/* Style inline code */
+code {
+    font-family: 'Consolas', 'Monaco', monospace;
+    background-color: #f0f0f0; /* Light gray background */
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    font-size: 0.95em;
+}
+
+/* Code blocks */
+pre {
+    background: #2d2d2d;
+    color: #f8f8f2;
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto;
+    font-family: 'Consolas', 'Monaco', monospace;
+    margin: 1rem 0;
+}
+
+/* Ensure code within pre doesn't inherit inline styles */
+pre code {
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    font-size: 1em; /* Inherit pre font size */
+}
+
+/* Tables */
+.data-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1rem 0;
+}
+
+.data-table th,
+.data-table td {
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+}
+
+.data-table th {
+    background: var(--light-bg);
+    font-weight: 600;
+}
+
+/* Navigation buttons */
+.paper-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+}
+
+.btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.btn:hover {
+    background: var(--secondary-color);
+}
+
+/* Scroll to top button */
+.scroll-to-top {
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 40px;
+    height: 40px;
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    display: none;
+    font-size: 20px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+.scroll-to-top:hover {
+    background: var(--secondary-color);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    .container {
+        padding: 0 0.25rem; /* Further reduce horizontal padding */
+        max-width: none; /* Remove max-width constraint on mobile */
+    }
+
+    header {
+        padding: 1.5rem 0; /* Reduce header padding */
+        margin-bottom: 1.5rem; /* Reduce margin */
+    }
+    header h1 {
+        font-size: 1.8rem; /* Reduce h1 size */
+    }
+    header h2 {
+        font-size: 1.2rem; /* Reduce h2 size */
+    }
+
+    .main-content {
+        flex-direction: column;
+        gap: 0; /* Remove gap when stacked */
+        margin: 1rem auto; /* Adjust margin */
+    }
+
+    .sidebar {
+        width: 100%;
+        position: static;
+        height: auto;
+        margin-bottom: 1rem; /* Further reduce margin */
+        padding: 0.5rem; /* Further reduce padding */
+    }
+
+    main {
+        /* max-width: 100%; */ /* Already handled by width: 100% */
+        width: 100%; /* Ensure main takes full width */
+        padding: 0; /* Remove main padding, rely on section padding */
+    }
+
+    .paper-intro,
+    .paper-content {
+        padding: 0.5rem; /* Reduce section padding */
+    }
+
+    .question {
+        padding: 0.5rem; /* Further reduce question padding */
+        margin-bottom: 1.5rem; /* Adjust margin */
+    }
+
+    /* Make images responsive */
+    img {
+        max-width: 100%;
+        height: auto;
+        display: block; /* Prevent extra space below images */
+    }
+
+    /* Allow horizontal scroll for wide code blocks and tables */
+    pre,
+    .data-table {
+        overflow-x: auto;
+        max-width: 100%; /* Ensure element doesn't expand beyond container */
+    }
+
+    /* Improve spacing within content on mobile */
+    .question-content p,
+    .answer-content p {
+        margin-bottom: 0.8rem; /* Slightly adjust paragraph spacing */
+    }
+    .question-content li,
+    .answer-content li {
+        margin-bottom: 0.7rem; /* Increase spacing between list items */
+    }
+
+    .answer-section {
+        padding: 0.8rem; /* Adjust answer section padding */
+    }
+
+    .paper-grid {
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); /* Adjust min card width */
+        gap: 1rem; /* Reduce gap */
+    }
+
+    .paper-card {
+        padding: 1rem; /* Adjust card padding */
+    }
+
+    .scroll-to-top {
+        bottom: 1rem;
+        right: 1rem;
+    }
+}
+
+/* Paper grid and cards */
+.paper-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem; /* Increased gap */
+    margin: 2rem 0;
+}
+
+.paper-card {
+    background: var(--light-bg); /* Use light background */
+    border: none; /* Remove border */
+    border-radius: 12px; /* More rounded */
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow */
+    transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+}
+
+.paper-card:hover {
+    transform: translateY(-5px); /* Slightly more lift */
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1); /* Enhanced shadow on hover */
+}
+
+.paper-card h3 {
+    color: var(--primary-color);
+    margin-bottom: 0.75rem; /* Reduced margin */
+    font-size: 1.15rem; /* Slightly larger */
+    font-weight: 600;
+}
+
+.paper-card .meta {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.paper-card .actions {
+    display: flex;
+    gap: 1rem;
+}
+
+.year-section {
+    margin-bottom: 4rem; /* Increased bottom margin */
+}
+
+.year-section h2 {
+    color: var(--primary-color); /* Use primary color */
+    margin-bottom: 2rem; /* Increased margin below heading */
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color); /* Lighter border */
+    font-size: 1.8rem; /* Even larger */
+    font-weight: 300; /* Lighter weight for modern feel */
+    letter-spacing: 1px; /* Add some letter spacing */
+}
+
+/* Print styles */
+@media print {
+    .sidebar,
+    .paper-navigation,
+    .scroll-to-top {
+        display: none;
+    }
+
+    main {
+        max-width: 100%;
+    }
+
+    .question {
+        break-inside: avoid;
+        border: none;
+        box-shadow: none;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}
+
+/* Index page specific link styling */
+.paper-card h3 a {
+    text-decoration: none;
+    color: inherit; /* Inherit color from h3 */
+}
+
+.paper-card h3 a:hover {
+    text-decoration: underline; /* Underline on hover */
+    color: var(--secondary-color); /* Change color on hover */
+}

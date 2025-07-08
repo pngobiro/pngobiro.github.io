@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5 (Part 3): Poisson, Normal &amp; Exercises - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-part-2.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 5 (Part 3): Poisson, Normal</span>
+                    </div>
+                    <a href="chapter-6.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-5-part-3 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER FIVE <br> Elementary Probability and probability distribution (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-5-common-distributions-cont">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎲</span>
+                        <span class="heading-text">5.5 Random variables and probability distributions (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Common Probability Distributions (Continued)</h3>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">2. The Poisson Distribution</h4>
+                        <p>Used for discrete random variables representing the number of events occurring in a fixed interval of time or space, when these events occur independently and with a known average rate.</p>
+                        <p>Examples: Number of phone calls received per hour, number of bacteria colonies per plate, number of radioactive decays per minute.</p>
+                        <p>The probability of observing exactly $x$ events in an interval is given by the <strong>Poisson Probability Formula</strong>:</p>
+                        <div class="equation">
+                            $$ P(X=x) = \frac{e^{-\lambda} \lambda^x}{x!} \quad \text{for } x = 0, 1, 2, ... $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$X$ is the number of events.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$\lambda$ (lambda) is the average number of events per interval (the rate parameter).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$e$ is the base of the natural logarithm ($e \approx 2.71828$).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$x!$ is x factorial.</span></li>
+                        </ul>
+
+                        <p><strong>Mean and Variance of Poisson Distribution:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Mean: $E(X) = \mu = \lambda$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Variance: $Var(X) = \sigma^2 = \lambda$</span></li>
+                        </ul>
+                        <p>(Note: For the Poisson distribution, the mean and variance are equal).</p>
+
+                        <p><strong>Example:</strong> A hospital emergency room receives patients at an average rate of 3 per hour ($\lambda=3$). What is the probability that exactly 2 patients arrive in the next hour ($x=2$)?</p>
+                        <div class="equation">
+                            $$ P(X=2) = \frac{e^{-3} 3^2}{2!} = \frac{(0.0498) \times 9}{2 \times 1} = \frac{0.4482}{2} = 0.2241 $$
+                        </div>
+                        <p>So, there is about a 22.41% probability that exactly 2 patients will arrive in the next hour.</p>
+                        <p>The Poisson distribution can approximate the Binomial distribution when $n$ is large and $p$ is small (typically $n \ge 20$ and $p \le 0.05$), using $\lambda = np$.</p>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">3. The Normal (Gaussian) Distribution</h4>
+                        <p>The most important distribution for continuous random variables in statistics.</p>
+                        <p>Many natural phenomena follow a normal distribution (e.g., height, weight, blood pressure, measurement errors).</p>
+                        <p>It is described by its mean ($\mu$) and standard deviation ($\sigma$).</p>
+                        <p>The probability density function (PDF) is:</p>
+                        <div class="equation">
+                            $$ f(x) = \frac{1}{\sigma \sqrt{2\pi}} e^{-\frac{1}{2} \left( \frac{x-\mu}{\sigma} \right)^2} $$
+                        </div>
+                        <p><strong>Properties of the Normal Distribution:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Bell-shaped and symmetric about the mean ($\mu$).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Mean = Median = Mode.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The curve extends indefinitely in both directions but approaches the horizontal axis asymptotically.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The total area under the curve is 1 (or 100%).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The shape is determined by $\mu$ and $\sigma$. Changing $\mu$ shifts the curve left or right. Changing $\sigma$ changes the spread (smaller $\sigma$ = taller, narrower curve; larger $\sigma$ = shorter, wider curve).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Empirical Rule applies (approx. 68% within $\pm 1\sigma$, 95% within $\pm 2\sigma$, 99.7% within $\pm 3\sigma$).</span></li>
+                        </ul>
+                        <img src="../assets/images/chapter-5-normal-curve-1.jpg" alt="Normal Distribution Curve" class="content-image">
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">The Standard Normal Distribution (Z-distribution)</h4>
+                        <p>A special case of the normal distribution with mean $\mu=0$ and standard deviation $\sigma=1$. Denoted as N(0, 1).</p>
+                        <p>Any normal random variable X with mean $\mu$ and standard deviation $\sigma$ can be transformed into a standard normal variable Z using the <strong>Z-score formula</strong>:</p>
+                        <div class="equation">
+                            $$ Z = \frac{X - \mu}{\sigma} $$
+                        </div>
+                        <p>The Z-score represents the number of standard deviations a particular value X is away from the mean $\mu$.</p>
+                        <p>Probabilities for the standard normal distribution are found using standard normal tables (like Table A2 in the appendix) or statistical software. The table typically gives the area under the curve to the left of a given Z-score, $P(Z \le z)$.</p>
+
+                        <p><strong>Example:</strong> Assume adult male heights are normally distributed with $\mu = 175$ cm and $\sigma = 7$ cm. What is the probability that a randomly selected adult male is shorter than 182 cm?</p>
+                        <p>First, find the Z-score for X = 182 cm:</p>
+                        <div class="equation">
+                            $$ Z = \frac{182 - 175}{7} = \frac{7}{7} = 1.00 $$
+                        </div>
+                        <p>We need to find $P(X < 182)$, which is equivalent to $P(Z < 1.00)$.</p>
+                        <p>Using a standard normal table (or software), look up the area to the left of Z = 1.00. This area is approximately 0.8413.</p>
+                        <p>So, $P(X < 182) = P(Z < 1.00) \approx 0.8413$. There is about an 84.13% probability that a randomly selected adult male is shorter than 182 cm.</p>
+
+                        <p><strong>Example:</strong> What is the probability that a male's height is between 168 cm and 189 cm?</p>
+                        <p>Find Z-scores for X=168 and X=189:</p>
+                        <div class="equation">
+                            $$ Z_1 = \frac{168 - 175}{7} = \frac{-7}{7} = -1.00 $$
+                            $$ Z_2 = \frac{189 - 175}{7} = \frac{14}{7} = 2.00 $$
+                        </div>
+                        <p>We need $P(168 < X < 189) = P(-1.00 < Z < 2.00)$.</p>
+                        <p>This is calculated as $P(Z < 2.00) - P(Z < -1.00)$.</p>
+                        <p>From the table: $P(Z < 2.00) \approx 0.9772$ and $P(Z < -1.00) \approx 0.1587$.</p>
+                        <div class="equation">
+                            $$ P(-1.00 < Z < 2.00) = 0.9772 - 0.1587 = 0.8185 $$
+                        </div>
+                        <p>So, there is about an 81.85% probability that a male's height is between 168 cm and 189 cm.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-5-exercises">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">✏️</span>
+                        <span class="heading-text">5.6 Exercises</span>
+                    </h2>
+                    <div class="content-card">
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Define mutually exclusive events and independent events. Give examples of each related to health.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">If the probability of having disease A is 0.1, the probability of having disease B is 0.2, and the probability of having both is 0.05, are the two diseases mutually exclusive? Are they independent? What is the probability of having either disease A or disease B?</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">A screening test for a disease has a sensitivity of 90% (probability of testing positive if diseased) and a specificity of 95% (probability of testing negative if not diseased). If the prevalence of the disease in the population is 10%, what is the probability that a person who tests positive actually has the disease (Positive Predictive Value)? (Hint: Use conditional probability or Bayes' theorem).</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Suppose 5% of people in a population have a certain genetic trait. If 10 people are randomly selected, what is the probability that exactly 2 people have the trait? What is the expected number of people with the trait in the sample? (Identify the distribution).</span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text">The number of emergency calls received by an ambulance service follows a Poisson distribution with an average of 4 calls per hour. What is the probability that exactly 5 calls are received in a given hour? What is the probability of receiving 2 or fewer calls in an hour?</span></li>
+                            <li class="list-item"><span class="item-icon">6.</span><span class="item-text">Systolic blood pressure (SBP) in a population is normally distributed with a mean of 120 mmHg and a standard deviation of 10 mmHg.
+                                <ol type="a" style="margin-left: 20px; margin-top: 5px;">
+                                    <li>What is the probability that a randomly selected person has an SBP less than 130 mmHg?</li>
+                                    <li>What is the probability that a person has an SBP between 110 mmHg and 140 mmHg?</li>
+                                    <li>What SBP level corresponds to the 90th percentile?</li>
+                                </ol>
+                            </span></li>
+                        </ol>
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-5-part-3 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-part-2.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 5 (Part 3): Poisson, Normal</span>
+                    </div>
+                    <a href="chapter-6.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

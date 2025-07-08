@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Data Structures (I) (Part 2) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-1c.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 7 (Part 2)</span>
+                    </div>
+                    <a href="chapter-8-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 7 : Data Structures (I) (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-7-linked-list -->
+                <section id="section-7-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔗</span>
+                        <span class="heading-text">7.5 Linked List</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A linked list, or one-way list, is a linear collection of data elements, called nodes, where the linear order is given by means of pointers. That is, each node is divided into two parts : the first part contains the information of the element, and the second part, called the link field or next pointer field, contains the address of the next node in the list.</p>
+                        <p><strong>Example: Linked list with 3 nodes</strong></p>
+                        <img src="../assets/images/ch7-linked-list-3nodes.jpg" alt="Diagram of a simple linked list with 3 nodes (A, B, C) and pointers">
+                        <p>A more useful application of a list is a linked list. The Invoice Number, Customer Number, Date and Amount are linked by a two way pointer.</p> <!-- MMD typo: trou -->
+                        <img src="../assets/images/ch7-linked-list-invoice.jpg" alt="Diagram showing linked records for invoices with two-way pointers">
+                        <p>The list after ordering</p>
+                        <p>Accessing any of the data items allows the access to the others</p>
+
+                        <p><strong>Example:</strong></p>
+                        <p>A LINKED TABLE holding KEY numerical values in ASCENDING order of which the POINTER 'LISTSTART' holds the value 2, contains:</p>
+                        <p>LISTSTART = 2</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>INDEX</th><th>KEY</th><th>LINK TO NEXT RECORD</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>84</td><td>2</td></tr> <!-- MMD had REX -->
+                                    <tr><td>2</td><td>96</td><td>3</td></tr>
+                                    <tr><td>3</td><td>105</td><td>-1</td></tr>
+                                    <!-- Empty rows omitted -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <ol type="i">
+                            <li>Re-write the table as it would appear if we added, at INDEX 4 THE KEY 95 and KEY 110 at INDEX 5 (4).</li>
+                            <li>Show the original table as it would appear if KEY 96 were DELETED (2).</li>
+                        </ol>
+                        <p>Solution for part c(i);</p>
+                        <p>LISTSTART = 2</p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>INDEX</th><th>KEY</th><th>LINK TO NEXT RECORD</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1</td><td>84</td><td>4</td></tr>
+                                    <tr><td>2</td><td>96</td><td>3</td></tr>
+                                    <tr><td>3</td><td>105</td><td>5</td></tr>
+                                    <tr><td>4</td><td>95</td><td>1</td></tr> <!-- Should link to 2? MMD seems incorrect -->
+                                    <tr><td>5</td><td>110</td><td>-1</td></tr> <!-- Added Key 110 -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Solution for part c(ii)(to be solve in class)</p>
+
+                        <h3 class="subsection-heading">7.5.1 System Lists</h3>
+                        <p>Program location in main memory and its control during execution by linked list for example calling of subroutines by main programs.</p>
+                        <p>By managing pointers locations, the economy of storage and speed of execution are achieved.</p>
+                        <img src="../assets/images/ch7-system-lists-pointers.jpg" alt="Diagram illustrating program lists with pointers for main program and subroutines">
+                        <p>Program Lists with pointers</p>
+                    </div>
+                </section>
+                <!-- END: chapter-7-linked-list -->
+
+                <!-- START: chapter-7-queues -->
+                <section id="section-7-6" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🚶</span>
+                        <span class="heading-text">7.6 Queues</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The queue is yet another data structure which differs in a number of ways from the stack. It may be used in real-time processing, for scheduling of jobs in the context of an operating systems or in other similar applications such as data transfer.</p> <!-- MMD typos: fol, simil s -->
+                        <p>It is a FIFO (First-In-First-Out) structure which means that the first item to enter the queue is the first item to leave and new items always get added to the end of the queue.</p> <!-- MMD typo: ancra -->
+                        <p>As with the stack we can represent a queue by a one-dimensional array with the need for two pointers. The first to indicate the front of the queue and the other to indicate the next space capable of holding an element joining the queue, these being the head and tail pointers respectively.</p> <!-- MMD typos: capate, poiniers -->
+                        <p>A method of inserting and retrieving data is similar to a stack but on 'FIRST-IN-FIRST-OUT'</p>
+                        <img src="../assets/images/ch7-queue-fifo.jpg" alt="Diagram illustrating FIFO queue operation with head and tail pointers">
+                        <p>1. 'DEQUEUE' (Remove from head)</p> <!-- Corrected POP -->
+                        <p>2. 'LIST'</p>
+                        <p>3. 'ENQUEUE' (Add to tail)</p> <!-- Corrected PUSH -->
+                        <p>The queue operation is awkward because the elements are pushed to the front and new elements are added from the bottom, sometimes referred to as a PUSHUP STACK or LIST.</p>
+                        <p>Other types of queues can be the DEQUE (or DOUBLE - ended - Queue) and the WRAP - AROUND - STACK.</p>
+
+                        <h3 class="subsection-heading">7.6.1 DEQUE</h3>
+                        <p>Data are push and pop (add and delete) from both ends.</p>
+
+                        <h3 class="subsection-heading">7.6.2 Wrap-Around-Stack (Circular queue)</h3>
+                        <p>In this type the tail pointer cannot be pushed out but moves in a circular manner ahead of the head pointer.</p>
+                        <img src="../assets/images/ch7-circular-queue.jpg" alt="Diagram illustrating a circular queue (wrap-around stack)">
+                    </div>
+                </section>
+                <!-- END: chapter-7-queues -->
+
+                <!-- START: chapter-7-stacks -->
+                <section id="section-7-7" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📚</span>
+                        <span class="heading-text">7.7 Stacks</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The stack is an example of a data structure found quite commonly in computing which is especially used in system software. They may by used to carry out stages of a calculation, for handling interruptions in translation programs or to pass information from a main program to a subprogram.</p> <!-- MMD typos: exampic, ased, ter -->
+                        <p>The main physical characteristic of a stack is that it is a LIFO (Last-In-First-Out) structure. It can be likened to a pile of plates in which it is easy (if sometime a little unstable) to add extra plates to the top. Plates can also be easily removed from the top of the pile, but not by extrication from the bottom of the pile.</p>
+                        <p>We can represent a stack as a one-dimensional array with two pointers, one pointing to the base of the stack (to identify the first element) and the other pointing to the position of the first available element, this being called the stack pointer. These are only two possible operations that can be done with a stack, namely adding an item to the top of the stack (called stacking or pushing) and the other is that of popping, or taking an item off the stack.</p> <!-- MMD typo: stock -->
+                        <p>An example of Stack Operation.</p>
+                        <pre class="code-block language-basic"><code>DIM S(50)
+REM **PUSHING SEQUENCE**
+IF P <= 50 THEN 120
+PRINT "STACK FULL"
+STOP
+120 LET S(P) = E
+LET P = P + 1
+GOTO 90
+:</code></pre> <!-- Added line number 120 -->
+                        <img src="../assets/images/ch7-stack-operation.jpg" alt="Diagram illustrating stack operations (PUSH and POP) with a stack pointer">
+
+                        <h3 class="subsection-heading">7.7.1 Corruption by Machine</h3>
+                        <p>Machines and computers do not 'clean up'!</p> <!-- MMD typo: fot -->
+                        <p>A 'POP' operation merely copies a datum from a memory location to another leaving the previous datum intact.</p> <!-- MMD typo: Erecly, previcts uatum -->
+                        <p>For a push, make sure the location is empty else 'Invoice'; into a location previously holding a longer string 'calendar' on retrieving gives 'Invoicer'.</p> <!-- MMD typo: pusi, iold -->
+                        <p>Hence Corruption of Data!!</p>
+                    </div>
+                </section>
+                <!-- END: chapter-7-stacks -->
+
+                <!-- START: chapter-7-points-remember -->
+                <section id="chapter-7-points-remember" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📌</span>
+                        <span class="heading-text">Points to Remember (Data Structures I)</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul class="enhanced-list">
+                            <li class="list-item">An array is a storage area in primary memory. Each data entry stored in an array is accessed with a single subscript or index value.</li>
+                            <li class="list-item">Arrays can be one-dimensional or multi-dimensional.</li>
+                            <li class="list-item">Arithmetic operations applied to a two-dimensional table result in a matrix.</li>
+                            <li class="list-item">Linked list is data structures that permit records in a file or entries in an array to be maintained in logical order without remaining in physical order.</li>
+                            <li class="list-item">Linked list uses a pair of pointers: the head (list) pointer for the start of the list and tail pointer for the last entry.</li>
+                            <li class="list-item">Stacks are data structures which exhibit behaviour known as LIFO (last in, first out).</li>
+                            <li class="list-item">Additions to a stack are 'PUSHED' onto the top of it and deletion are 'POPPED' singly off the top.</li> <!-- MMD typo: POPED -->
+                            <li class="list-item">Stacks use a pair of pointers: the head (or base) and the stack pointer (top).</li> <!-- MMD typo: tail poirttr -->
+                            <li class="list-item">Queues are data structures that exhibit FIFO (first in, first out) behaviour.</li>
+                            <li class="list-item">Queues use a pair of pointers: the head pointer, and the tail pointer which indicate the next available location.</li> <!-- MMD typo: poiner, ind -->
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-7-points-remember -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-7-part-1c.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 7 (Part 2)</span>
+                    </div>
+                    <a href="chapter-8-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

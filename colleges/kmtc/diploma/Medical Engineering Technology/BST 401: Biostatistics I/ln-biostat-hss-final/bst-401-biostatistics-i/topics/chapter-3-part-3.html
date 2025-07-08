@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3 (Part 3): Std Dev, CV &amp; Exercises - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-3-part-2.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 3 (Part 3): Std Dev, CV, Exercises</span>
+                    </div>
+                    <a href="chapter-4-part-1.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-3-part-3 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER THREE <br> Summarizing data (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-3-variation-cont">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">↔️</span>
+                        <span class="heading-text">3.4 Measures of Variation (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">The Variance (Continued)</h3>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Variance for Grouped Data</h4>
+                        <p>The sample variance for grouped data is calculated using class midpoints:</p>
+                        <div class="equation">
+                            $$ s^2 = \frac{\sum_{i=1}^{k} f_i (m_i - \bar{x})^2}{n-1} $$
+                        </div>
+                        <p>Computational formula:</p>
+                        <div class="equation">
+                            $$ s^2 = \frac{\sum f_i m_i^2 - \frac{(\sum f_i m_i)^2}{n}}{n-1} $$
+                        </div>
+
+                        <p><strong>Example:</strong> Calculate the sample variance using the grouped frequency distribution from Table 2.3. We know $\bar{x} = 71.75$ and $n=40$.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Table 3.2 Calculation of Variance from Grouped Data</caption>
+                                <thead>
+                                    <tr><th>Weight (kg)</th><th>Midpoint ($m_i$)</th><th>Freq ($f_i$)</th><th>$f_i m_i$</th><th>$m_i^2$</th><th>$f_i m_i^2$</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>55 - 60</td><td>57.5</td><td>6</td><td>345.0</td><td>3306.25</td><td>19837.5</td></tr>
+                                    <tr><td>61 - 66</td><td>63.5</td><td>8</td><td>508.0</td><td>4032.25</td><td>32258.0</td></tr>
+                                    <tr><td>67 - 72</td><td>69.5</td><td>9</td><td>625.5</td><td>4830.25</td><td>43472.25</td></tr>
+                                    <tr><td>73 - 78</td><td>75.5</td><td>7</td><td>528.5</td><td>5700.25</td><td>39901.75</td></tr>
+                                    <tr><td>79 - 84</td><td>81.5</td><td>4</td><td>326.0</td><td>6642.25</td><td>26569.0</td></tr>
+                                    <tr><td>85 - 90</td><td>87.5</td><td>4</td><td>350.0</td><td>7656.25</td><td>30625.0</td></tr>
+                                    <tr><td>91 - 96</td><td>93.5</td><td>2</td><td>187.0</td><td>8742.25</td><td>17484.5</td></tr>
+                                    <tr><td><strong>Total</strong></td><td></td><td><strong>40</strong></td><td><strong>2870.0</strong></td><td></td><td><strong>210148.0</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Using the computational formula:</p>
+                        <div class="equation">
+                            $$ s^2 = \frac{210148.0 - \frac{(2870.0)^2}{40}}{40-1} = \frac{210148.0 - \frac{8236900}{40}}{39} $$
+                            $$ s^2 = \frac{210148.0 - 205922.5}{39} = \frac{4225.5}{39} \approx 108.35 \text{ kg}^2 $$
+                        </div>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Properties of Variance:</h4>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Always non-negative ($s^2 \ge 0$).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Uses all data values.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Sensitive to outliers (since deviations are squared).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The unit of variance is the square of the unit of the original data (e.g., kg²), making interpretation difficult.</span></li>
+                        </ul>
+
+                        <h3 class="subsection-heading">The Standard Deviation</h3>
+                        <p>The standard deviation is the most commonly used measure of variation.</p>
+                        <p>It is the square root of the variance.</p>
+                        <p>It measures the typical or average deviation of observations from the mean.</p>
+                        <p>The <strong>sample standard deviation</strong>, denoted by $s$, is:</p>
+                        <div class="equation">
+                            $$ s = \sqrt{s^2} = \sqrt{\frac{\sum (x_i - \bar{x})^2}{n-1}} $$
+                        </div>
+                        <p>The <strong>population standard deviation</strong>, denoted by $\sigma$, is:</p>
+                        <div class="equation">
+                            $$ \sigma = \sqrt{\sigma^2} = \sqrt{\frac{\sum (X_i - \mu)^2}{N}} $$
+                        </div>
+
+                        <p><strong>Example (Ungrouped):</strong> For the first 5 weights, $s^2 = 47.8$.</p>
+                        <div class="equation">
+                            $$ s = \sqrt{47.8} \approx 6.91 \text{ kg} $$
+                        </div>
+                        <p><strong>Example (Grouped):</strong> For the 40 weights, $s^2 \approx 108.35$.</p>
+                        <div class="equation">
+                            $$ s = \sqrt{108.35} \approx 10.41 \text{ kg} $$
+                        </div>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Properties of Standard Deviation:</h4>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Always non-negative ($s \ge 0$).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Has the same unit as the original data, making it easier to interpret than variance.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Uses all data values.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Sensitive to outliers.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">For normally distributed data (bell-shaped curve):
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Approximately 68% of data falls within $\bar{x} \pm 1s$.</li>
+                                    <li>Approximately 95% of data falls within $\bar{x} \pm 2s$.</li>
+                                    <li>Approximately 99.7% of data falls within $\bar{x} \pm 3s$. (Empirical Rule)</li>
+                                </ul>
+                            </span></li>
+                        </ul>
+
+                        <h3 class="subsection-heading">The Coefficient of Variation (CV)</h3>
+                        <p>The coefficient of variation expresses the standard deviation as a percentage of the mean.</p>
+                        <p>It is a unitless measure of relative variability, useful for comparing the dispersion of data sets with different units or different means.</p>
+                        <div class="equation">
+                            $$ CV = \left( \frac{s}{\bar{x}} \right) \times 100\% $$
+                        </div>
+                        <p>For population data:</p>
+                        <div class="equation">
+                            $$ CV = \left( \frac{\sigma}{\mu} \right) \times 100\% $$
+                        </div>
+
+                        <p><strong>Example:</strong> For the 40 student weights, $\bar{x} = 71.75$ kg and $s \approx 10.41$ kg.</p>
+                        <div class="equation">
+                            $$ CV = \left( \frac{10.41}{71.75} \right) \times 100\% \approx 14.51\% $$
+                        </div>
+                        <p>This means the standard deviation is about 14.5% of the mean weight.</p>
+                        <p>A higher CV indicates greater relative variability.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-3-exercises">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">✏️</span>
+                        <span class="heading-text">3.5 Exercises</span>
+                    </h2>
+                    <div class="content-card">
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Calculate the mean, median, mode, range, variance, standard deviation, and coefficient of variation for the Biostatistics scores of 30 students given in Chapter 2, Exercise 2 (70, 75, 80, 65, 72, 78, 85, 76, 68, 74, 82, 90, 71, 77, 88, 69, 73, 79, 81, 86, 74, 78, 83, 67, 70, 76, 84, 79, 72, 87).</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Calculate the mean, median (using the formula), mode (using the formula), variance, and standard deviation for the grouped frequency distribution of student weights (Table 2.3 / Table 3.1). Compare the grouped mean with the mean calculated from the original 40 data points if available.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Consider two sets of data:
+                                <ul style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Set A: 10, 20, 30, 40, 50</li>
+                                    <li>Set B: 28, 30, 30, 32, 30</li>
+                                </ul>
+                                Calculate the mean and standard deviation for each set. Which set has greater variability based on standard deviation? Which set has greater relative variability based on the coefficient of variation?
+                            </span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Why is the standard deviation generally preferred over the variance for describing data spread?</span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text">When is the median a better measure of central tendency than the mean? Give an example.</span></li>
+                        </ol>
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-3-part-3 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-3-part-2.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 3 (Part 3): Std Dev, CV, Exercises</span>
+                    </div>
+                    <a href="chapter-4-part-1.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PV Module Characteristics (I-V Curve, Sizing, Connections)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="06-pv-modules.html" class="nav-button ">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 41.18%;"></div> <!-- Set percentage dynamically (7/17 * 100) -->
+                        </div>
+                        <span class="progress-text">Unit 7 of 17</span> <!-- Update text -->
+                    </div>
+                    <a href="08-pv-module-mounting-maintenance.html" class="nav-button ">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">PV Module Characteristics (I-V Curve, Sizing, Connections)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: the-iv-curve -->
+                <section id="the-iv-curve" class="content-section" aria-labelledby="the-iv-curve-heading">
+                    <h2 id="the-iv-curve-heading" class="section-heading">
+                        <span class="heading-icon">📉</span>
+                        <span class="heading-text">THE I-V CURVE</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>I-V curves are used to compare solar cell modules and to predict their performance at various temperatures, voltage loads and levels of insolation. Each solar cell and module has its own particular set of operating characteristics. At a given voltage, a module (or cell) will produce a certain current. These properties are described by the current-voltage curve, better known as the I-V curve.</p>
+                        <p>Figure shows an I-V curve for a module rated at 42 Wp at STC. The left-hand side (I) gives the current the module produces depending on voltage. The bottom side gives the voltage produced by the module at various currents. At each point along the line, you can determine the power of the module by multiplying the current by the voltage. For example, imagine a battery being charged by a module: at 12 volts (Point A, Figure 3.4), the current from the module is 3.2 amps and the power output is 38.4 watts (amps $\times$ volts $=$ power, so $12 \mathrm{~V} \times 3.2 \mathrm{~A}=38.4 \mathrm{~W}$, which is less than the rated 42 Wp ).</p>
+                        <img src="../assets/images/2025_05_12_735dd22c22905b8a4f0ag-18-1.jpg" alt="I-V curve showing current vs voltage for a solar module, with points A, B, C, and D indicated." class="content-image">
+                        <p>There are several points of interest about the I-V curve in Figure</p>
+                        <p>There are several points of interest about the I-V curve in Figure 3.4:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text"><dfn>Isc</dfn>, the short-circuit current, is the current measured in full sunlight when the positive and negative wires are 'shorted'. In practice, a suitably rated ammeter is attached to the positive and negative leads of the module. On the I-V curve, this is the point where the curve crosses 0 volts (Point B). This is the maximum current that the module is capable of producing.</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text"><dfn>Voc</dfn>, the open circuit voltage, is the voltage measured with an open circuit. It is measured with the module in full sunlight using a voltmeter attached to the positive and negative leads of the module. On the I-V curve, this is the point where the curve crosses 0 amps (Point C ). This is the maximum voltage that the module can produce on a sunny day.</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text"><dfn>Pm</dfn>, the maximum power point, is the point on the I-V curve where the module produces the greatest power (its rated maximum, which in this example is 42 Wp ). The maximum power point is always found at the place where the curve begins to bend steeply downward ('the knee', Point D). It is advisable to operate a module as near to the maximum power point as possible. If, for example, the module in Figure 3.4 is operating a load that demands 16 volts (Point E), power output (at 36 watts) is much less than that at the maximum power at Point D.</span>
+                            </li>
+                        </ul>
+                        <p>In general, the closer the 'knee' of the I-V curve is to the shape of a square, the better output characteristics of the module. Crystalline modules have I-V curves that are more 'square' than thin film modules.</p>
+                    </div>
+                </section>
+                <!-- END: the-iv-curve -->
+
+                <!-- START: size-output-power -->
+                <section id="size-output-power" class="content-section" aria-labelledby="size-output-power-heading">
+                    <h2 id="size-output-power-heading" class="section-heading">
+                        <span class="heading-icon">📏</span>
+                        <span class="heading-text">SIZE (OUTPUT POWER)</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>As mentioned previously, the output power of a PV module is indicated as Wp (watt peak). However, Wp of a PV module depends on intensity of sunlight and temperature. Therefore, standard measurements of output power are tested at the condition of $1,000 \mathrm{~W} / \mathrm{m} 2, 25^{\circ} \mathrm{C}$, AM1.5.</p>
+                        <p>Since the actual operating conditions vary, it is necessary to consider several factors that affect output efficiency of a PV module. Factors that affect output power are;</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Intensity of solar radiation Low solar radiation reduce output power</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Temperature of module High temperature reduce output power Surface temperature of a PV module may go up 50 to $60^{\circ} \mathrm{C}$.</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Degradation and dust of module Dust on surface of PV module reduces the intensity of solar radiation reaching the solar cell surface. Degradation is high for amorphous type modules.</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Effectiveness of maximum power point Battery charging voltage is different from maximum power point.</span>
+                            </li>
+                        </ul>
+                        <p>Available output power is estimated as,</p>
+                        <div class="equation">$$ \text{Wp actual} = \text{K} \times \text{Wp catalog} $$</div>
+                        <p>K is total loss factor mentioned above.</p>
+                        <p>This handout uses 0.8 for crystalline PV modules and 0.6 for amorphous PV modules.</p>
+
+                         <!-- START: example-calculating-module-output -->
+                         <section id="example-calculating-module-output" aria-labelledby="example-calculating-module-output-heading">
+                              <h3 id="example-calculating-module-output-heading" class="subsection-heading">Example for calculating module output</h3>
+                              <p>Use the calculation below to predict your module's output on a typical day:</p>
+                                <p>Operating current at load (amps) $\times$ peak sun hours $($ PSH $) = $ Expected output of module $($ amp-hours $/$ Ah $)$</p>
+                                <p>When charging a battery at 12.6 V , the current output of a module is about 3.1 A . If the site receives 5 peak sun hours, then the module output is: $3.1 \mathrm{~A} \times 5 \mathrm{psh}=15.5 \mathrm{Ah}$</p>
+                                <p>This figure can be multiplied by 12 V to get watt-hours (Wh): $15.5 \mathrm{Ah} \times 12 \mathrm{~V}=186 \mathrm{Wh}$</p>
+                         </section>
+                         <!-- END: example-calculating-module-output -->
+
+                         <!-- START: peak-hours -->
+                         <section id="peak-hours" aria-labelledby="peak-hours-heading">
+                              <h3 id="peak-hours-heading" class="subsection-heading">PEAK HOURS</h3>
+                              <p>Available power per day is based on how many hours of sunlight are obtained. Intensity of sunlight during a day is shown below. Total area under this curve is total sunlight. To average this area for calculation, some lower part is moved to upper part and peak part is moved to lower part. This averaged area (hatched area) is same as original area. This averaged hour is called peak hours. To calculate power per day, Wp is multiplied by peak hours.</p>
+                              <p>The value of peak hours depends on areas and should be obtained by actual measurement. As peak hours change daily, there is minimum peak hours, average peak hours and maximum peak hours in a year. Minimum peak hours is normally used to ensure load demand. However, load demand varies and if minimum peak hours is used, the system sizing becomes bigger and costs more.</p>
+                         </section>
+                         <!-- END: peak-hours -->
+
+                         <!-- START: example-peak-hours -->
+                         <section id="example-peak-hours" aria-labelledby="example-peak-hours-heading">
+                              <h3 id="example-peak-hours-heading" class="subsection-heading">Example. 1.</h3>
+                              <p>How much ampere-hour is generated per day with 55 Wp PV module in the area where 5 hours of peak hours is obtained? Wp actual $=\mathrm{K} \times 55 \mathrm{Wp}=0.8 \times 55 \mathrm{Wp}=44 \mathrm{Wp}$</p>
+                                <p>$\mathrm{Wh}=\mathrm{Wp}$ actual $\times$ Peak hours $=44 \mathrm{Wp} \times 5.0 \mathrm{~h}=220 \mathrm{Wh}$</p>
+                                <p>$\mathrm{Ah}=\mathrm{Wh} / 12 \mathrm{~V}=220 \mathrm{Wh} / 12 \mathrm{~V}=18.3 \mathrm{Ah}$</p>
+                                <p>The answer is 18.3 Ah per day.</p>
+                         </section>
+                         <!-- END: example-peak-hours -->
+
+                         <!-- START: tilt-angle -->
+                         <section id="tilt-angle" aria-labelledby="tilt-angle-heading">
+                              <h3 id="tilt-angle-heading" class="subsection-heading">TILT ANGLE</h3>
+                              <p>To obtain maximum sunlight, a PV module has to face to the sun. Ideally, PV module should track the sun. However, tracking system is expensive and not economical for SHS. Therefore, a PV module is fixed at an optimum tilt angle. Solar radiation changes daily and monthly so that using tilt angle targeted to worst month would be a better solution. However, this method requires actual record of solar radiation throughout the year and worst month of solar radiation is not always a heavy load month.</p>
+                              <p>tilt angle is the latitude plus $5^{\circ}$ to $10^{\circ}$ and round it to $5^{\circ}$ step.</p>
+                         </section>
+                         <!-- END: tilt-angle -->
+
+                         <!-- START: example-tilt-angle -->
+                         <section id="example-tilt-angle" aria-labelledby="example-tilt-angle-heading">
+                              <h3 id="example-tilt-angle-heading" class="subsection-heading">Example.</h3>
+                              <p>Show orientation and recommended tilt angle at Harare. Latitude of Harare is $18^{\circ} \mathrm{S}$.</p>
+                              <p>$18^{\circ}+5^{\circ}=23^{\circ}$ then rounded to $25^{\circ}, 18^{\circ}+10^{\circ}=28^{\circ}$ then rounded to $30^{\circ}$</p>
+                              <p>Orientation is North.</p>
+                              <p>Tilt angle is $25^{\circ}$ or $30^{\circ}$.</p>
+                         </section>
+                         <!-- END: example-tilt-angle -->
+
+                         <!-- START: measurement-actual-power -->
+                         <section id="measurement-actual-power" aria-labelledby="measurement-actual-power-heading">
+                              <h3 id="measurement-actual-power-heading" class="subsection-heading">MEASUREMENT OF ACTUAL POWER</h3>
+                              <p>It is recommended to measure the actual output of a PV module before you purchase it. Vmp and Imp are necessary to obtain output power. This requires the measurement of I-V curve of the PV module. However, an easy alternative is to measure Voc and Isc and estimate Vmp and Imp.</p>
+                         </section>
+                         <!-- END: measurement-actual-power -->
+
+                         <!-- START: measurement-voc-isc -->
+                         <section id="measurement-voc-isc" aria-labelledby="measurement-voc-isc-heading">
+                              <h3 id="measurement-voc-isc-heading" class="subsection-heading">MEASUREMENT OF VOC AND ISC</h3>
+                              <p>Place a PV module under the sun for at least 30 minutes to stabilize surface temperature on a sunny day between 11 a.m. and 1 p.m.. Then measure Voc measured and Isc measured. Isc measured changes depending on orientation and tilt angle of a PV module. Make sure the PV module is faced to the sun and obtain maximum Isc by adjusting orientation and tilt angle.</p>
+                         </section>
+                         <!-- END: measurement-voc-isc -->
+
+                         <!-- START: estimation-vmp -->
+                         <section id="estimation-vmp" aria-labelledby="estimation-vmp-heading">
+                              <h3 id="estimation-vmp-heading" class="subsection-heading">Estimation of Vmp</h3>
+                              <p>The difference between Voc and Vmp is almost same as catalog value and measured value. Therefore, Vmp measured is estimated from Voc measured.</p>
+                              <div class="equation">$$ \text{Vmp measured} = \text{Voc measured} - (\text{Voc catalog} - \text{Vmp catalog}) $$</div>
+                         </section>
+                         <!-- END: estimation-vmp -->
+
+                         <!-- START: estimation-imp -->
+                         <section id="estimation-imp" aria-labelledby="estimation-imp-heading">
+                              <h3 id="estimation-imp-heading" class="subsection-heading">Estimation of Imp</h3>
+                              <p>The Ratio between Isc and Imp is almost same as catalog value and measured value. Therefore, Imp measured is obtained from Isc measured.</p>
+                               <div class="equation">$$ \text{Imp measured} = \text{Isc measured} \times (\text{Imp catalog} / \text{Isc catalog}) $$</div>
+                         </section>
+                         <!-- END: estimation-imp -->
+
+                         <!-- START: connections-other-pv-modules -->
+                         <section id="connections-other-pv-modules" aria-labelledby="connections-other-pv-modules-heading">
+                              <h3 id="connections-other-pv-modules-heading" class="subsection-heading">CONNECTIONS TO OTHER PV MODULES</h3>
+                              <p>To obtain more power, PV module can be connected in an array. Both parallel and series connection are possible. All modules should be of the same model. It is not recommended to mix modules of different types and sizes.</p>
+                         </section>
+                         <!-- END: connections-other-pv-modules -->
+
+                         <!-- START: parallel-connection -->
+                         <section id="parallel-connection" aria-labelledby="parallel-connection-heading">
+                              <h3 id="parallel-connection-heading" class="subsection-heading">PARALLEL CONNECTION</h3>
+                               <ul class="enhanced-list">
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Total voltage is the average of the PV module voltages.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Total current is the sum of the PV module current.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Blocking diode is necessary to prevent reverse current in case of a module is shadowed.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Blocking diode reduce output voltage to approximately 0.3 to 0.6 V depends on diodes.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">This voltage drop reduces efficiency to approximately 0.97 .</span>
+                                    </li>
+                                </ul>
+                              <img src="../assets/images/2025_05_12_735dd22c22905b8a4f0ag-21-1.jpg" alt="Diagram showing two solar panels connected in parallel with blocking diodes." class="content-image">
+                                <p>A. Parallel Connection</p>
+                                <div class="equation">
+                                $$ \begin{aligned} \text { Total } & =(25 \mathrm{~W}+25 \mathrm{~W}) \times 0.97 \\ & =48.5 \mathrm{~W} \end{aligned} $$
+                                </div>
+                         </section>
+                         <!-- END: parallel-connection -->
+
+                         <!-- START: series-connection -->
+                         <section id="series-connection" aria-labelledby="series-connection-heading">
+                              <h3 id="series-connection-heading" class="subsection-heading">SERIES CONNECTION</h3>
+                               <p>Series connection</p>
+                               <ul class="enhanced-list">
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Total voltage is the sum of the PV module voltages.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Total current is limited by the smallest PV module current.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Bypass diode is necessary to avoid low performance in case a module is shadowed or break down.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Efficiency is approximately 0.95</span>
+                                    </li>
+                                </ul>
+                                <img src="../assets/images/2025_05_12_735dd22c22905b8a4f0ag-22-1.jpg" alt="Diagram showing two solar panels connected in series with bypass diodes." class="content-image">
+                                <div class="equation">
+                                > C. Series Connection $\begin{gathered}\text { Total }=10 \mathrm{~W} \times 0.95=9.5 \mathrm{~W} \\ \text { for } 12 \mathrm{~V} \text { system}\end{gathered}$
+                                </div>
+                         </section>
+                         <!-- END: series-connection -->
+
+                         <!-- START: specifications -->
+                         <section id="specifications" class="content-section" aria-labelledby="specifications-heading">
+                              <h2 id="specifications-heading" class="section-heading">
+                                <span class="heading-icon">📋</span>
+                                <span class="heading-text">SPECIFICATIONS</span>
+                            </h2>
+                             <div class="content-card">
+                                 <!-- START: spec-type -->
+                                 <section id="spec-type" aria-labelledby="spec-type-heading">
+                                      <h3 id="spec-type-heading" class="subsection-heading">Type</h3>
+                                      <p>Use the monocrystalline or polycrystalline types of modules. The amorphous type is not recommended unless used for smaller application ( 20 W or less) such as solar lantern.</p>
+                                 </section>
+                                 <!-- END: spec-type -->
+
+                                 <!-- START: spec-number-of-cells -->
+                                 <section id="spec-number-of-cells" aria-labelledby="spec-number-of-cells-heading">
+                                      <h3 id="spec-number-of-cells-heading" class="subsection-heading">Number of cells</h3>
+                                      <p>A minimum of 36 cells is required. A PV module with 34 or less cells may not be enough to charge battery at high temperatures (tropical condition).</p>
+                                 </section>
+                                 <!-- END: spec-number-of-cells -->
+
+                                 <!-- START: spec-parameters -->
+                                 <section id="spec-parameters" aria-labelledby="spec-parameters-heading">
+                                      <h3 id="spec-parameters-heading" class="subsection-heading">Parameters</h3>
+                                      <p>Check if manufacturer has adequate production testing facilities to monitor quality of daily production of modules. If manufacture does not have such facilities, do not buy from them.</p>
+                                       <ul class="enhanced-list">
+                                            <li class="list-item">
+                                                <span class="item-icon">•</span>
+                                                <span class="item-text"><dfn>Pm</dfn> Output power at maximum power point ($1000 \mathrm{~W} / \mathrm{m} 2, 25^{\circ} \mathrm{C}$, AM1.5)</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="item-icon">•</span>
+                                                <span class="item-text"><dfn>Imp</dfn> Current at maximum power point</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="item-icon">•</span>
+                                                <span class="item-text"><dfn>Vmp</dfn> Voltage at maximum power point</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="item-icon">•</span>
+                                                <span class="item-text"><dfn>Isc</dfn> Current at short circuit</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="item-icon">•</span>
+                                                <span class="item-text"><dfn>Voc</dfn> Voltage at open circuit</span>
+                                            </li>
+                                        </ul>
+                                 </section>
+                                 <!-- END: spec-parameters -->
+                            </div>
+                        </section>
+                        <!-- END: specifications -->
+
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <!-- Repeat exact same links as top navigation -->
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="05-principles-thermal-applications.html" class="nav-button ">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 41.18%;"></div>
+                        </div>
+                        <span class="progress-text">Unit 7 of 17</span>
+                    </div>
+                    <a href="08-pv-module-mounting-maintenance.html" class="nav-button ">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

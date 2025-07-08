@@ -1,0 +1,529 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --border-color: #dcdde1;
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Navigation container */
+.document-nav {
+    margin: 2rem 0;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Navigation buttons with distinct colors */
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* Table of Contents link */
+.nav-button[href*="index.html"] {
+    color: #2980b9;
+    border-color: #2980b9;
+}
+
+.nav-button[href*="index.html"]:hover {
+    background: #eef7fc;
+}
+
+/* Previous Section link */
+.nav-links .nav-button:nth-child(2) {
+    color: #e67e22;
+    border-color: #e67e22;
+}
+
+.nav-links .nav-button:nth-child(2):hover {
+    background: #fef5ec;
+}
+
+/* Next Section link */
+.nav-links .nav-button:last-child {
+    color: #27ae60;
+    border-color: #27ae60;
+}
+
+.nav-links .nav-button:last-child:hover {
+    background: #eefaf3;
+}
+
+/* Disabled states */
+.nav-button.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.nav-button.disabled[href="#"] {
+    opacity: 0.7;
+    background: #fafafa;
+}
+
+/* Table of Contents Styling */
+.toc-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.toc-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+.toc-title {
+    font-size: 2.5em;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.toc-subtitle {
+    font-size: 1.2em;
+    color: #7f8c8d;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+}
+
+.toc-chapter {
+    margin-bottom: 25px;
+    border-left: 3px solid #3498db;
+    padding-left: 15px;
+}
+
+.toc-chapter-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.toc-section-list {
+    list-style: none;
+    padding-left: 20px; /* Indent sections */
+}
+
+.toc-section-item {
+    margin-bottom: 8px;
+}
+
+.toc-link {
+    text-decoration: none;
+    color: #2980b9;
+    font-size: 1.1em;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: block;
+    padding: 5px 0;
+}
+
+.toc-link:hover {
+    color: #1abc9c;
+    padding-left: 5px;
+}
+
+.toc-link::before {
+    content: '➔ ';
+    color: #bdc3c7;
+    margin-right: 8px;
+    font-size: 0.9em;
+}
+
+/* Content Styling */
+.document-section {
+    background: white;
+    border-radius: 8px;
+    padding: 2rem; /* Add padding to the main article */
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.section-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.title-underline {
+    width: 60px;
+    height: 4px;
+    background-color: var(--accent-color);
+    margin-top: 0.5rem;
+}
+
+.section-content {
+    margin-top: 1.5rem;
+}
+
+.content-section {
+    /* Removed background/padding here, handled by document-section */
+    margin-bottom: 2rem;
+}
+
+.content-card {
+    background: #fdfdfd; /* Slightly off-white */
+    border: 1px solid #eee;
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin-top: 1rem; /* Space below heading */
+}
+
+/* Headings */
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* Increased gap */
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-size: 1.6rem; /* Slightly larger */
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.heading-icon {
+    font-size: 1.2em; /* Make icon slightly larger */
+}
+
+.subsection-heading {
+    color: var(--secondary-color);
+    font-size: 1.3rem; /* Slightly larger */
+    font-weight: 600;
+    margin-top: 2rem; /* More space above */
+    margin-bottom: 1rem;
+    padding-bottom: 0.3rem;
+    border-bottom: 1px dashed #ddd;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1rem;
+    color: #333; /* Slightly lighter than main text color */
+}
+
+/* Tables */
+.table-container {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    /* Removed margin, background, radius, shadow - handled by container */
+}
+
+.content-table caption {
+    caption-side: top;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+    font-size: 1.1em;
+    color: var(--primary-color);
+}
+
+.content-table th,
+.content-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top; /* Align content top */
+}
+
+.content-table thead th {
+    background-color: #f1f3f5; /* Lighter header */
+    font-weight: 600;
+    color: var(--secondary-color);
+}
+
+.content-table tbody tr:nth-child(even) {
+    background-color: #f8f9fa; /* Subtle striping */
+}
+
+/* Mathematical expressions */
+.math-inline {
+    font-family: 'Times New Roman', Times, serif;
+    padding: 0 0.2em;
+    background-color: #f1f3f5; /* Subtle background */
+    border-radius: 3px;
+    font-size: 1.05em; /* Slightly larger */
+}
+
+.equation {
+    font-family: 'Times New Roman', Times, serif;
+    margin: 1.5rem auto; /* Center block equations */
+    text-align: center;
+    overflow-x: auto;
+    padding: 1rem;
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    display: block; /* Ensure it takes block space */
+}
+
+/* Lists and Images */
+/* Enhanced lists */
+.enhanced-list {
+    list-style: none;
+    padding-left: 1.5rem; /* Indent list */
+    margin-bottom: 1rem;
+}
+
+.list-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem; /* Increased gap */
+    margin-bottom: 0.6rem; /* Increased spacing */
+    position: relative;
+}
+
+.item-icon {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Use pseudo-elements for better control if needed */
+/* .list-item::before {
+    content: '•';
+    color: var(--accent-color);
+    font-weight: bold;
+    margin-right: 0.75rem;
+} */
+
+/* Images */
+img.content-image { /* More specific selector */
+    max-width: 100%;
+    height: auto;
+    border-radius: 6px; /* Slightly larger radius */
+    margin: 1.5rem auto; /* Center images */
+    display: block;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    border: 1px solid #eee; /* Light border */
+}
+
+/* Code Blocks */
+pre.code-block {
+    background-color: #f8f9fa;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.95em;
+    margin: 1.5rem 0;
+}
+
+pre.code-block code {
+    display: block; /* Ensure code takes full width */
+    white-space: pre; /* Preserve whitespace */
+}
+
+/* Key Points Section */
+.key-points-section {
+    background-color: #eaf2f8; /* Light blue background */
+    border: 1px solid #aed6f1;
+    border-left: 5px solid #3498db; /* Accent border */
+    border-radius: 6px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.key-points-container {
+    /* Container if needed, otherwise style section directly */
+}
+
+.key-points-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.key-points-icon {
+    font-size: 1.5em;
+    color: #3498db;
+}
+
+.key-points-title {
+    font-size: 1.4em;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.key-points-content {
+    /* Styling for content area if needed */
+}
+
+.key-points-list {
+    list-style: none;
+    padding: 0;
+}
+
+.key-point-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.point-marker {
+    color: #3498db;
+    font-weight: bold;
+}
+
+.key-point-item p {
+    margin: 0; /* Remove default paragraph margin */
+    color: #333;
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .toc-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .toc-title {
+        font-size: 2em;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-button {
+        justify-content: center;
+    }
+
+    .document-section {
+        padding: 1.5rem;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-heading {
+        font-size: 1.4rem;
+    }
+
+    .subsection-heading {
+        font-size: 1.2rem;
+    }
+
+    .content-table {
+        font-size: 0.9em;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 0.6rem 0.8rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .container {
+        padding: 0.5rem;
+    }
+
+     .document-section {
+        padding: 1rem;
+    }
+
+    .toc-title {
+        font-size: 1.8em;
+    }
+
+    .toc-chapter-title {
+        font-size: 1.3em;
+    }
+
+     .toc-link {
+        font-size: 1em;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .section-heading {
+        font-size: 1.25rem;
+    }
+
+    .subsection-heading {
+        font-size: 1.1rem;
+    }
+
+    body {
+        font-size: 15px; /* Adjust base font size slightly */
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 0.4rem 0.6rem;
+    }
+
+    .nav-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9em;
+    }
+}

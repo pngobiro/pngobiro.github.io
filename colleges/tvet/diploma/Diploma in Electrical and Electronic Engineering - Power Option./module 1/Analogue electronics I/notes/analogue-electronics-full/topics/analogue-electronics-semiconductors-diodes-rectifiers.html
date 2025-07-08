@@ -1,0 +1,578 @@
+<!-- topics/analogue-electronics-semiconductors-diodes-rectifiers.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 2: Semiconductors, Diodes & Rectifiers</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="analogue-electronics-intro-conduction.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 50%;"></div> <!-- Set percentage dynamically -->
+                        </div>
+                        <span class="progress-text">Part 2 of 4</span> <!-- Update text -->
+                    </div>
+                    <a href="analogue-electronics-bjt.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Semiconductor Material, Diodes, Rectification & Filtering</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: semiconductor-material -->
+                <section id="semiconductor-material" class="content-section" aria-labelledby="semiconductor-material-heading">
+                    <h2 id="semiconductor-material-heading" class="section-heading">
+                        <span class="heading-icon">💎</span>
+                        <span class="heading-text">SEMICONDUCTOR MATERIAL</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Objective:</h3>
+                        <p>Gain a basic understanding of a few semiconductor-material properties, including the two types of charge carriers that exist in a semiconductor and the two mechanisms that generate currents in a semiconductor.</p>
+                        <p>Electronic devices are fabricated by using semiconductor materials along with conductors and insulators.</p>
+                        <p>To better understand the behavior of electronic devices in circuits, we must first understand a few of the characteristics of the semiconductor material.</p>
+                        <p>Silicon is by far the most common semiconductor material used for semiconductor devices and integrated circuits.</p>
+                        <p>Other semiconductor materials are used for specialized applications.</p>
+                        <div class="table-container">
+                             <table class="content-table">
+                                 <caption>Semiconductor Materials</caption>
+                                 <thead>
+                                     <tr><th>Elemental Semiconductor</th><th></th><th>Compound Semiconductors</th><th></th></tr>
+                                 </thead>
+                                 <tbody>
+                                     <tr><td>Si</td><td>Silicon</td><td>GaAs</td><td>Gallium Arsenide</td></tr>
+                                     <tr><td>Ge</td><td>Germanium</td><td>GaP</td><td>Gallium Phosphide</td></tr>
+                                     <tr><td></td><td></td><td>AlP</td><td>Aluminium Phosphide</td></tr>
+                                     <tr><td></td><td></td><td>AlAs</td><td>Aluminium Arsenide</td></tr>
+                                     <tr><td></td><td></td><td>InP</td><td>Indium Phosphide</td></tr>
+                                </tbody>
+                             </table>
+                         </div>
+
+                         <h3 class="subsection-heading">Intrinsic Semiconductors</h3>
+                         <p>An atom comprises a nucleus, containing positively charged protons and neutral neutrons, and negatively charged electrons that orbit the nucleus.</p>
+                         <p>The electrons are distributed in various "shells" at different distances from the nucleus, and electron energy increases as the shell radius increases.</p>
+                         <p>Electrons in the outermost shell are called valence electrons, and the chemical activity of a material is determined primarily by the number of such electrons.</p>
+                         <p>Elements in the periodic table can be grouped according to the number of valence electrons.</p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <caption>Periodic Table Excerpt (Groups III, IV, V)</caption>
+                                <thead>
+                                    <tr><th>III</th><th>IV</th><th>V</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>5 B Boron</td><td>6 C Carbon</td><td></td></tr>
+                                    <tr><td>13 Al Aluminum</td><td>14 Si Silicon</td><td>15 P Phosphorus</td></tr>
+                                    <tr><td>31 Ga Gallium</td><td>32 Ge Germanium</td><td>33 As Arsenic</td></tr>
+                                    <tr><td>49 In Indium</td><td></td><td>51 Sb Antimony</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Silicon (Si) and germanium (Ge) are in group IV and are elemental semiconductors.</p>
+                        <p>In contrast, gallium arsenide is a group III-V compound semiconductor.</p>
+                        <p>The elements in group III and group V are also important in semiconductors.</p>
+
+                        <h3 class="subsection-heading">Silicon Crystal</h3>
+                        <!-- SMILES strings removed as per MMD review -->
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-049-1.jpg" alt="Diagrams illustrating silicon crystal structure: (a) 2D representation of covalent bonds, (b) 3D diamond lattice unit cell, (c) simplified 2D representation showing shared electrons." class="content-image">
+                           <figcaption>Silicon Crystal Structure Models</figcaption>
+                        </figure>
+                        <p>At T = 0 K, silicon is an insulator; no charge flows through it.</p>
+                        <p>When silicon atoms come together to form a crystal, the electrons occupy particular allowed energy bands.</p>
+                        <p>At T = 0 K, all valence electrons occupy the valence energy band</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-050-1.jpg" alt="Simplified 2D representation of silicon crystal lattice at T=0K, showing all valence electrons involved in covalent bonds." class="content-image">
+                           <figcaption>Silicon Lattice at T=0K</figcaption>
+                        </figure>
+                        <p>If the temperature increases, the valence electrons may gain thermal energy.</p>
+                        <p>Any such electron may gain enough thermal energy to break the covalent bond and move away from its original position.</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-051-1.jpg" alt="Simplified 2D representation of silicon lattice at T>0K, showing an electron breaking free from a covalent bond, becoming a free electron (e-)." class="content-image">
+                           <figcaption>Thermal Energy Breaking Covalent Bond</figcaption>
+                        </figure>
+                        <p>To break the covalent bond, the valence electron must gain minimum energy, Eg, called the bandgap energy.</p>
+                        <p>The electrons that gain this minimum energy now exist in the conduction band and are said to be free electrons.</p>
+                        <p>These free electrons in the conduction band can move throughout the crystal. The net flow of electrons in the conduction band generates a current.</p>
+                        <p>As the temperature increases, more covalent bonds are broken, and more free electrons and positive empty states are created.</p>
+                        <p>A valence electron with a certain thermal energy and is adjacent to an empty state may move into that position, making it appear as if a positive charge is moving through the semiconductor.</p>
+                        <p>This positively charged "particle" is called a hole.</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-053-1.jpg" alt="Simplified 2D silicon lattice showing an electron moving into a vacant position (hole), making the hole appear to move in the opposite direction." class="content-image">
+                           <figcaption>Hole Movement in Silicon Lattice</figcaption>
+                        </figure>
+                        <p>Then, in semiconductors, two types of charged particles contribute to the current: the negatively charged free electron and the positively charged hole.</p>
+                        <p>An intrinsic semiconductor is a single-crystal semiconductor material with no other types of atoms within the crystal.</p>
+                        <p>In an intrinsic semiconductor, the densities of electrons and holes are equal since the thermally generated electrons and holes are the only sources of such particles.</p>
+
+                        <h3 class="subsection-heading">Extrinsic Semiconductors</h3>
+                        <p>Since the electron and hole concentrations in an intrinsic semiconductor are relatively small, only minimal currents are possible.</p>
+                        <p>However, these concentrations can be significantly increased by adding controlled amounts of certain impurities.</p>
+                        <p>A desirable impurity enters the crystal lattice and replaces (i.e., substitutes for) one of the semiconductor atoms, even though the impurity atom does not have the same valence electron structure.</p>
+                        <p>For silicon, the desirable substitutional impurities are from the group III and V elements.</p>
+                        <p>The most common group V elements used for this purpose are phosphorus and arsenic.</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-058-1.jpg" alt="Silicon lattice with a Phosphorus (P) atom substituted for a Si atom. P has 5 valence electrons; 4 form covalent bonds, leaving one loosely bound electron (e-)." class="content-image">
+                           <figcaption>Phosphorus (Donor) Impurity in Silicon</figcaption>
+                        </figure>
+                        <p>For phosphorous, four valence electrons are used to satisfy the covalent bond requirements.</p>
+                        <p>The fifth valence electron is more loosely bound to the phosphorus atom.</p>
+                        <p>At room temperature, this electron has enough thermal energy to break the bond, thus being free to move through the crystal and contribute to the electron current in the semiconductor.</p>
+                        <p>When the fifth phosphorus valence electron moves into the conduction band, a positively charged phosphorus ion is created</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-060-1.jpg" alt="Silicon lattice showing a Phosphorus atom that has donated its fifth electron, becoming a fixed positive ion (P+). The donated electron is free." class="content-image">
+                           <figcaption>Donor Ionization</figcaption>
+                        </figure>
+                        <p>The phosphorus atom is called a donor impurity since it donates an electron that is free to move.</p>
+                        <p>Although the remaining phosphorus atom has a net positive charge, it is immobile in the crystal and cannot contribute to the current.</p>
+                        <p>Therefore, when a donor impurity is added to a semiconductor, free electrons are created without generating holes.</p>
+
+                        <h3 class="subsection-heading">Doping</h3>
+                        <p>This process is called doping, and it allows us to control the concentration of free electrons in a semiconductor.</p>
+                        <p>A semiconductor that contains donor impurity atoms is called an n-type semiconductor (for the negatively charged electrons) and has a preponderance of electrons compared to holes.</p>
+                        <p>The most common group III element used for silicon doping is boron.</p>
+                        <p>When a boron atom replaces a silicon atom, its three valence electrons are used to satisfy the covalent bond requirements for three of the four nearest silicon atoms.</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-063-1.jpg" alt="Silicon lattice with a Boron (B) atom substituted for a Si atom. B has 3 valence electrons, leaving one covalent bond incomplete." class="content-image">
+                           <figcaption>Boron (Acceptor) Impurity in Silicon</figcaption>
+                        </figure>
+                        <p>This leaves one bond position open.</p>
+                        <p>At room temperature, adjacent silicon valence electrons have sufficient thermal energy to move into this position, thereby creating a hole.</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-064-1.jpg" alt="Silicon lattice showing a Boron atom that has accepted an electron from a neighboring Si atom to complete its bonds, creating a hole and becoming a fixed negative ion (B-)." class="content-image">
+                           <figcaption>Acceptor Ionization and Hole Creation</figcaption>
+                        </figure>
+                         <p>Because the boron atom has accepted a valence electron, the boron is therefore called an acceptor impurity. Acceptor atoms lead to the creation of holes without electrons being generated.</p>
+                         <p>This process, also called doping, can control the concentration of holes in a semiconductor.</p>
+                         <p>A semiconductor that contains acceptor impurity atoms is called a p-type semiconductor (for the positively charged holes created) and has a majority of holes compared to electrons.</p>
+                         <p>The materials containing impurity atoms are called extrinsic semiconductors or doped semiconductors.</p>
+                         <p>The doping process, which allows us to control the concentrations of free electrons and holes, determines the material's conductivity and currents.</p>
+                    </div>
+                </section>
+                <!-- END: semiconductor-material -->
+
+                <!-- START: pn-junction-diode -->
+                <section id="pn-junction-diode" class="content-section" aria-labelledby="pn-junction-diode-heading">
+                    <h2 id="pn-junction-diode-heading" class="section-heading">
+                        <span class="heading-icon">🚦</span>
+                        <span class="heading-text">P-n Junction Diode</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>When p and n regions of semiconductor materials are adjacent to one another, they form a p-n Junction. The electronic device so formed is called a diode.</p>
+                        <p>A diode conducts current in one direction when it is operating in the forward-biased mode.</p>
+                        <p>forward-biased mode: the p-region is connected to the positive terminal of a voltage source; the n -region to the negative terminal of a voltage source.</p>
+                        <p>reverse biased mode: the p-region is connected to the negative terminal of a voltage source whereas the $\mathbf{n}$-region is connected to the positive terminal.</p>
+                        <p>For an ideal diode, the relationship between the current and voltage is given as:</p>
+                        <div class="equation">$$i_{D}=I_{S}\left[e^{\left(\frac{\mathrm{v}_{D}}{n V_{T}}\right)}-1\right]$$</div>
+                        <p>$I_{s}$ - reverse-bias saturation current ($10^{-18}-10^{-12} \mathrm{~A}$)</p>
+                        <p>$\mathrm{V}_{T}$ - Thermal voltage ( 26 mV at room Temp)</p>
+                        <p>$n$ - Ideality Factor ($1 \le n \le 2$)</p>
+
+                        <h3 class="subsection-heading">I-V Characteristics of a diode</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-070-1.jpg" alt="Graph showing the I-V characteristics of a diode. Forward-bias region shows exponential current increase for positive Vd. Reverse-bias region shows small negative saturation current (-Is) for negative Vd." class="content-image">
+                           <figcaption>Diode I-V Characteristics</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">Diode Symbols</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-071-1.jpg" alt="Top: Diagram showing a p-n junction with current Id flowing and voltage Vd across it. Bottom: Standard circuit symbol for a diode, showing anode (triangle) and cathode (bar), with Id and Vd indicated." class="content-image">
+                           <figcaption>Diode Representation and Symbol</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">Diode circuits: DC analysis and Models</h3>
+                        <p>An ideal diode has the characteristics shown:</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-072-1.jpg" alt="(a) Ideal diode I-V characteristic (vertical line at Vd=0 for Id>0, horizontal line at Id=0 for Vd<0). (b) Ideal diode equivalent circuit in reverse bias (open circuit, Id=0). (c) Ideal diode equivalent circuit in forward bias (short circuit, Vd=0)." class="content-image">
+                           <figcaption>Ideal Diode Characteristics and Models</figcaption>
+                        </figure>
+                        <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">📝</span> Task</h4>
+                           <p>(Modelling a non-ideal Diode in Matlab)</p>
+                           <p><i>(This task was in the original document - keep as is.)</i></p>
+                        </aside>
+
+                        <h3 class="subsection-heading">Diode circuits: AC analysis and Models</h3>
+                        <p>Diodes are often used in linear amplifier circuits, where time-varying signals are used.</p>
+                        <p>In such applications, we need to model the diode behavior/characteristics because ac signals may be superimposed on the dc voltages and currents.</p>
+                        <p>The total source voltage $v_{I}$ is the sum of the dc voltage $V_{PS}$ and sinusoidal voltage $v_{i}$</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-074-1.jpg" alt="Diode circuit with both DC voltage source (Vps) and AC voltage source (vi) in series, connected to a diode and a resistor R. Output voltage Vo is across R." class="content-image">
+                           <figcaption>Diode Circuit with DC and AC Sources</figcaption>
+                        </figure>
+                         <p>We can apply both dc analysis and ac analysis to this circuit.</p>
+
+                         <h4 class="subsubsection-heading">Current-Voltage Relationships</h4>
+                         <p>Since the source voltage contains both dc and ac components superimposed, the diode voltage and current will also contain a dc and ac component superimposed.</p>
+                        <figure>
+                            <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-075-1.jpg" alt="Left: Graph showing diode current (iD) vs time, composed of a DC component (IDQ) and a superimposed AC component (id). Right: Graph showing diode voltage (vD) vs time, composed of a DC component (VDQ) and a superimposed AC component (vd)." class="content-image">
+                            <figcaption>Superimposed DC and AC Components</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Model Development</h4>
+                        <p>We can develop a linear model from a nonlinear diode by assuming that the ac signal is small compared to the dc component.</p>
+                        <p>The relationship between the diode current and diode voltage is (neglecting the -1 in the diode equation):</p>
+                        <!-- Rewriting the complex exponential equation for clarity -->
+                        <div class="equation">$$ i_D \approx I_S e^{v_D / V_T} = I_S e^{(V_{DQ} + v_d) / V_T} = I_S e^{V_{DQ} / V_T} e^{v_d / V_T} $$</div>
+
+                        <p>If the ac signal is "small", then $v_{d} \ll V_{T}$ and we can expand the exponential function into a linear series, as follows:</p>
+                        <div class="equation">$$e^{\left(\frac{v_{d}}{V_{T}}\right)} \cong 1+\frac{v_{d}}{V_{T}} \quad\left[\text { from } e^x=1+\frac{x}{1!}+\frac{x^{2}}{2!}+\frac{x^{3}}{3!}+\ldots\right]$$</div>
+                        <p>We may also write the quiescent diode current as:</p>
+                        <div class="equation">$$I_{D Q}=I_{S} e^{\left(\frac{V_{D Q}}{V_{T}}\right)}$$</div>
+                        <p>The diode current-voltage relationship from can then be written as:</p>
+                         <div class="equation">$$i_{D}=I_{D Q}\left(1+\frac{v_{d}}{V_{T}}\right)=I_{D Q}+\frac{I_{D Q}}{V_{T}} \cdot v_{d}=I_{D Q}+i_{d}$$</div>
+
+                         <p>The diode ac current and voltage are related as:</p>
+                         <div class="equation">$$i_{d}=\left(\frac{I_{D Q}}{V_{T}}\right) \cdot v_{d}=g_{d} \cdot v_{d}$$</div>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Diffusion Conductance</h4>
+                             <p>$g_d = I_{DQ} / V_T$</p>
+                         </aside>
+
+                         <p>The diode ac voltage is given by:</p>
+                         <div class="equation">$$v_{d}=\left(\frac{V_{T}}{I_{D Q}}\right) \cdot i_{d}=r_{d} \cdot i_{d}$$</div>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Diffusion Resistance</h4>
+                             <p>$r_d = V_T / I_{DQ}$</p>
+                         </aside>
+
+                        <h4 class="subsubsection-heading">Full Analysis:</h4>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-079-1.jpg" alt="Top: Diode circuit with DC (Vps) and AC (vi) sources, diode, and resistor R. Bottom: DC equivalent circuit replacing AC source with short circuit." class="content-image">
+                           <figcaption>DC Analysis Circuit</figcaption>
+                        </figure>
+                         <p>1. DC Analysis</p>
+                         <p>If the diode is forward biased, then the voltage across the diode is the linear turn-on voltage.</p>
+
+                         <p>2. AC Analysis</p>
+                         <figure>
+                            <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-080-1.jpg" alt="AC equivalent circuit replacing DC source with short circuit and diode with its AC resistance rd." class="content-image">
+                           <figcaption>AC Analysis Circuit</figcaption>
+                        </figure>
+                         <p>The diode is replaced by its equivalent resistance $r_{d}$</p>
+
+                         <p>Analyze the circuit shown</p>
+                         <figure>
+                            <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-081-1.jpg" alt="Diode circuit with combined DC and AC analysis. Vps=5V, R=5kOhm, Vy=0.6V, vi=0.1sin(wt). Equations for DC current IDQ, AC resistance rd, AC current id, and AC output voltage vo_ac are shown." class="content-image">
+                           <figcaption>Example Circuit Analysis</figcaption>
+                        </figure>
+                        <p>Given:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$V_{P S}=5 V$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$R=5 k \Omega$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$V_{\gamma}=0.6 \mathrm{~V}$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$v_{i}=0.1 \sin \omega \mathrm{t}(\mathrm{~V})$</span></li>
+                         </ul>
+                         <p>DC Analysis:</p>
+                         <div class="equation">$$ I_{D Q}=\frac{V_{P S}-V_{\gamma}}{R}=\frac{5-0.6}{5}=0.88 \mathrm{~mA} \quad \text{(DC Component of diode current)} $$</div>
+                         <div class="equation">$$ V_{O_{DC}}=I_{D Q} R=0.88 \mathrm{~mA} \times 5 \mathrm{k} \Omega=4.4 \mathrm{~V} \quad \text{(DC value of output voltage)} $$</div>
+                         <p>AC analysis:</p>
+                         <div class="equation">$$ r_{d}=\frac{V_{T}}{I_{D Q}}=\frac{0.026 \mathrm{~V}}{0.88 \mathrm{~mA}}=0.0295 \mathrm{k\Omega} $$</div>
+                         <div class="equation">$$ v_{i}=i_{d} r_{d}+i_{d} R=i_{d}\left(r_{d}+R\right) $$</div>
+                         <div class="equation">$$ i_{d}=\frac{v_{i}}{r_{d}+R}=\frac{0.1 \sin \omega \mathrm{t}(\mathrm{~V})}{(0.0295+5) \mathrm{k\Omega}}=19.9 \sin \omega \mathrm{t}(\mathrm{\mu A}) \quad \text{(AC Component of diode current)} $$</div>
+                         <div class="equation">$$ v_{o_{ac}}=i_{d} R=5 \mathrm{k\Omega} \times 19.9 \sin \omega \mathrm{t}(\mathrm{\mu A})=0.0995 \sin \omega \mathrm{t}(\mathrm{~V}) \quad \text{(AC Component of output voltage)} $$</div>
+                    </div>
+                </section>
+                <!-- END: pn-junction-diode -->
+
+                <!-- START: specialized-diodes -->
+                 <section id="specialized-diodes" class="content-section" aria-labelledby="specialized-diodes-heading">
+                    <h2 id="specialized-diodes-heading" class="section-heading">
+                         <span class="heading-icon">💡</span>
+                         <span class="heading-text">Diodes for Specialized application</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Solar Cell</h3>
+                        <p>A solar cell is a p-n junction device with no voltage directly applied across the junction.</p>
+                        <p>The p-n junction, which converts solar energy into electrical energy, is connected to a load.</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-083-1.jpg" alt="Diagram of a solar cell (p-n junction). Solar energy hits the junction, creating photocurrent (Iph) which flows through an external load resistor RL, generating voltage V." class="content-image">
+                           <figcaption>Solar Cell Operation</figcaption>
+                        </figure>
+                        <p>When light hits the space-charge region, electrons and holes are generated. They are quickly separated and swept out of the spacecharge region by the electric field, thus creating a photocurrent.</p>
+                        <p>The generated photocurrent will produce a voltage across the load, which means that the solar cell has supplied power.</p>
+                        <p>Solar cells are usually fabricated from silicon but may be made from GaAs or other III-V compound semiconductors.</p>
+
+                        <h3 class="subsection-heading">Photodiode</h3>
+                        <p>Photodetectors are devices that convert optical signals into electrical signals. An example is a photodiode, which is similar to a solar cell except that the p-n junction is operated with a reverse-bias voltage.</p>
+                        <p>Incident photons or light waves create excess electrons and holes in the space-charge region. These excess carriers are quickly separated and swept out of the space-charge region by the electric field, thus creating a "photocurrent."</p>
+                        <p>This generated photocurrent is directly proportional to the incident photon flux.</p>
+
+                        <h3 class="subsection-heading">Zener Diode</h3>
+                        <p>When a reverse-bias voltage is increasingly applied to a diode, at a certain voltage called the breakdown voltage, the junction breaks down and the reverse bias current increases rapidly.</p>
+                        <h4 class="subsubsection-heading">Diode I-V characteristics showing breakdown effects</h4>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-087-1.jpg" alt="Diode I-V curve showing the reverse breakdown region. At the Zener breakdown voltage (Vz), the reverse current increases sharply. The slope in this region is 1/rz (rz = Zener resistance)." class="content-image">
+                           <figcaption>Diode Reverse Breakdown</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Characteristics of Zener Diode</h4>
+                        <p>Zener diodes are designed and fabricated to provide a specified breakdown voltage $V_{Z_{0}}$</p>
+                        <p>A Zener diode can be used as a constant-voltage reference in a circuit.</p>
+                        <p>$r_{z}$ (Zener Resistance) in the reverse breakdown region is very small</p>
+                        <p>Circuit symbol:</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-088-1.jpg" alt="Circuit symbol for a Zener diode, similar to a standard diode but with bent 'wings' on the cathode bar. Current Iz and voltage Vz are indicated." class="content-image">
+                           <figcaption>Zener Diode Symbol</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Simple Zener Diode Circuit</h4>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-089-1.jpg" alt="Simple Zener diode circuit: DC voltage source Vps=10V connected to a series resistor R, followed by a Zener diode (Vz=5.6V) connected to ground. Current I flows through R." class="content-image">
+                           <figcaption>Basic Zener Circuit Example</figcaption>
+                        </figure>
+                        <p>If the current I is to be limited to 3 mA (and neglecting diode resistance)</p>
+                        <div class="equation">$$ I=\frac{V_{P S}-V_{Z}}{R} $$</div>
+                        <div class="equation">$$ R=\frac{V_{P S}-V_{Z}}{I}=\frac{10 \mathrm{~V}-5.6 \mathrm{~V}}{3 m A}=1.47 \mathrm{k\Omega} $$</div>
+                        <p>Power dissipated in the Zener Diode:</p>
+                        <div class="equation">$$P_{Z}=I_{Z} V_{Z}=3 m A \times 5.6 \mathrm{~V}=16.8 \mathrm{~mW}$$</div>
+
+                        <h3 class="subsection-heading">Voltage regulator</h3>
+                        <p>Zener Diode circuits are used in power supplies to provide voltage regulation.</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-090-1.jpg" alt="Zener diode voltage regulator circuit. Input voltage Vps, series resistor Ri, Zener diode (Vz) in parallel with a load resistor RL. Output voltage Vl=Vz across the load." class="content-image">
+                           <figcaption>Zener Voltage Regulator Circuit</figcaption>
+                        </figure>
+                        <p>A voltage regulator should:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Maintain a constant output voltage even if the load varies.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Maintain a constant output voltage even if the input voltage varies.</span></li>
+                        </ol>
+
+                        <h4 class="subsubsection-heading">Voltage Regulator Design</h4>
+                        <p>1. Determine the proper current limiting Resistor</p>
+                        <div class="equation">$$R_{i}=\frac{V_{P S}-V_{Z}}{I_{1}}=\frac{V_{P S}-V_{Z}}{I_{Z}+I_{L}}$$</div>
+                        <p>diode current $\quad I_{Z}=\frac{V_{P S}-V_{Z}}{R_{i}}-I_{L}$ and $I_{L}=V_{Z} / R_{L}$</p>
+                        <p>For proper operation of this circuit, the diode must remain in the breakdown region and the power dissipation in the diode must not exceed its rated value.</p>
+
+                        <h4 class="subsubsection-heading">Design of Limiting Resistor</h4>
+                        <p>The current in the diode is a minimum, $I_{Z}(\min )$, when the load current is a maximum, $I_{L}$ (max), and the source voltage is a minimum, $V_{P S}(\min )$.</p>
+                        <p>The current in the diode is a maximum, $I_{Z}$ (max), when the load current is a minimum, $I_{L}(\min )$, and the source voltage is a maximum, $V_{P S}$ (max).</p>
+                        <p>Therefore:</p>
+                        <div class="equation">$$R_{i}=\frac{V_{P S}(\min )-V_{Z}}{I_{Z}(\min )+I_{L}(\max )}$$</div>
+                        <p>And</p>
+                        <div class="equation">$$R_{i}=\frac{V_{P S}(\max )-V_{Z}}{I_{Z}(\max )+I_{L}(\min )}$$</div>
+
+                        <p>Equating the two equations:</p>
+                        <div class="equation">$$\begin{aligned}
+                        & {\left[V_{P S}(\min )-V_{Z}\right] \cdot\left[I_{Z}(\max )+I_{L}(\min )\right]} \\
+                        & =\left[V_{P S}(\max )-V_{Z}\right] \cdot\left[I_{Z}(\min )+I_{L}(\max )\right]
+                        \end{aligned}$$</div>
+                        <p>We can assume that we know the range of input voltage, the range of output load current, and the Zener voltage.</p>
+                        <p>There are two unknowns, $I_{z}$ (min)and $I_{z}$ (max).</p>
+                        <p>As a minimum requirement, we can set the minimum Zener current to be one-tenth the maximum Zener current, or $I_{Z}(\mathrm{~min})=0.1 I_{Z}(\mathrm{max})$.</p>
+
+                        <p>Then $I_Z(\max)$ can be solved as:</p>
+                         <div class="equation">$$I_{Z}(\max )=\frac{I_{L}(\max ) \cdot\left[V_{P S}(\max )-V_{Z}\right]-I_{L}(\min ) \cdot\left[V_{P S}(\min )-V_{Z}\right]}{V_{P S}(\min )-0.9 V_{Z}-0.1 V_{P S}(\max )}$$</div>
+                        <p>And $R_i$ is found using:</p>
+                        <div class="equation">$$R_{i} = \frac{V_{P S}(\max )-V_{Z}}{I_{Z}(\max )+I_{L}(\min )}$$</div>
+
+                        <h4 class="subsubsection-heading">Example</h4>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-095-1.jpg" alt="Zener regulator circuit example. Vps=11-13.6V, Vz=9V. Load is a radio. Calculations for Iz(max), Ri, Pz(max), PRi, Iz(min) are shown." class="content-image">
+                           <figcaption>Zener Regulator Design Example</figcaption>
+                        </figure>
+                        <p>$I_{L}$ varies from 0 (off) to 100 mA</p>
+                        <div class="equation">$$ I_{Z}(\max )=\frac{100 \cdot[13.6-9]-0}{11-0.9(9)-0.1(13.6)} \cong 300 \mathrm{~mA} $$</div>
+                        <div class="equation">$$ R_{i}=\frac{13.6-9}{0.3+0}=15.3 \Omega $$</div>
+                        <div class="equation">$$ P_{Z}(\max )=I_{Z}(\max ) \cdot \mathrm{V}_{Z}=300 \times 9=2.7 \mathrm{~W} $$</div>
+                        <div class="equation">$$ P_{R_{i}}=\frac{\left(V_{P S(\max )}-V_{Z}\right)^{2}}{R_{i}}=\frac{(13.6-9)^{2}}{15.3} \cong 1.4 \mathrm{~W} $$</div>
+                        <div class="equation">$$ I_{z}(\min) = \frac{V_{PS}(\min) - V_Z}{R_i} - I_L(\max) = \left(\frac{11-9}{15.3}\right) - 0.1 \cong 0.0307 A = 30.7mA $$</div>
+                         <!-- Note: Original image had incorrect Iz(min) calculation, corrected here based on formula -->
+                    </div>
+                 </section>
+                 <!-- END: specialized-diodes -->
+
+                 <!-- START: power-supply -->
+                 <section id="power-supply" class="content-section" aria-labelledby="power-supply-heading">
+                    <h2 id="power-supply-heading" class="section-heading">
+                         <span class="heading-icon">⚡</span>
+                         <span class="heading-text">Power supply circuits</span>
+                    </h2>
+                    <div class="content-card">
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-096-1.jpg" alt="Block diagram of a DC power supply: AC voltage source -> Power transformer -> Diode rectifier -> Filter -> Voltage regulator -> Load." class="content-image">
+                           <figcaption>Block Diagram of a DC Power Supply</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">Diode Rectifier</h3>
+                        <p>Rectification is the process of converting an alternating (ac) voltage into one that is limited to one polarity.</p>
+                        <p>There are two types of rectifiers: half wave rectifier and full wave rectifier.</p>
+
+                        <h4 class="subsubsection-heading">Half wave rectifier</h4>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-098-1.jpg" alt="Top: Half-wave rectifier circuit using a transformer, single diode D, and load resistor R. Bottom: Voltage transfer characteristic (vo vs vs) showing output is zero for vs < Vy and vo = vs - Vy for vs > Vy." class="content-image">
+                           <figcaption>Half-Wave Rectifier Circuit and Transfer Characteristic</figcaption>
+                        </figure>
+                         <!-- Adding equation from image -->
+                         <div class="equation">$$ \frac{v_1}{v_s} = \frac{N_1}{N_2} $$</div>
+
+                         <p>To fully analyse the diode circuit, the piecewise linear model of the diode is used.</p>
+                         <h5 class="subsubsection-heading">Steps:</h5>
+                         <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Determine the input voltage condition such that a diode is conducting (on). Then find the output signal for this condition.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Determine the input voltage condition such that a diode is not conducting (off). Then find the output signal for this condition.</span></li>
+                         </ol>
+
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-100-1.jpg" alt="Top: Half-wave rectifier circuit using piecewise linear model (ideal diode + voltage source Vy + resistor rf). Bottom: Voltage transfer characteristic vo vs vs, showing slope = R/(R+rf) when diode is on." class="content-image">
+                           <figcaption>Half-Wave Rectifier Analysis using Piecewise Linear Model</figcaption>
+                         </figure>
+                         <!-- Adding equations from image/context -->
+                         <p>Assuming ideal diode for simplicity as shown in next slide context ($r_f=0$):</p>
+                         <p>When $v_{s}>V_{\gamma}$ (diode is ON):</p>
+                         <div class="equation">$$i_{D}=\frac{v_{s}-V_{\gamma}}{R}$$</div>
+                         <div class="equation">$$v_{o}=i_{D} R=v_{s}-V_{\gamma}$$</div>
+                         <p>When $v_{s} \le V_{\gamma}$ (diode is OFF):</p>
+                         <div class="equation">$$ i_D = 0 $$</div>
+                         <div class="equation">$$ v_o = 0 $$</div>
+                         <p>For $v_{s}>V_{\gamma}$ the slope of the transfer curve is 1 (assuming ideal diode model where $r_f=0$).</p>
+                         <p>If $v_{s}$ is sinusoidal, the output can be determined using the voltage transfer characteristics.</p>
+
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-102-1.jpg" alt="Waveforms for half-wave rectifier: Top - Sinusoidal input voltage (vs). Middle - Rectified output voltage (vo), positive half-cycles only, clipped at Vy. Bottom - Voltage across the diode (vd)." class="content-image">
+                           <figcaption>Half-Wave Rectifier Waveforms</figcaption>
+                        </figure>
+
+                        <p>Consequently, the diode must be capable of handling the peak current in the forward direction and sustaining the largest peak inverse voltage (PIV) without breakdown.</p>
+                        <p>The current can be used to charge a battery.</p>
+                         <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">📝</span> Task</h4>
+                           <p>[Task: Battery Charger]</p>
+                           <p><i>(This task was in the original document - keep as is.)</i></p>
+                        </aside>
+
+                        <h3 class="subsection-heading">FULL WAVE RECTIFIER</h3>
+                        <h4 class="subsubsection-heading">With Center Tap Transformer</h4>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-105-1.jpg" alt="Full-wave rectifier circuit using a center-tapped transformer, two diodes (D1, D2), and a load resistor R." class="content-image">
+                           <figcaption>Full-Wave Center-Tapped Rectifier Circuit</figcaption>
+                        </figure>
+                        <p>The primary winding connected to the ac source has $N_{1}$ windings, and each half of the secondary winding has $N_{2}$ windings.</p>
+                         <div class="equation">$$v_{s}=v_{1} \times \frac{N_{2}}{N_{1}}$$</div>
+                         <p>(Note: $v_s$ here refers to the voltage across one half of the secondary)</p>
+
+                        <h5 class="subsubsection-heading">Waveforms</h5>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-106-1.jpg" alt="Waveforms for center-tapped full-wave rectifier: Input voltage (vs - sinusoidal), output voltage (vo - full-wave rectified), diode currents (iD1, iD2 - half-wave each, alternating)." class="content-image">
+                           <figcaption>Full-Wave Center-Tapped Rectifier Waveforms</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Full wave Bridge Rectifier</h4>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-107-1.jpg" alt="Full-wave bridge rectifier circuit using a transformer (no center tap), four diodes (D1-D4) in a bridge configuration, and a load resistor R." class="content-image">
+                           <figcaption>Full-Wave Bridge Rectifier Circuit</figcaption>
+                        </figure>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-108-1.jpg" alt="Full-wave bridge rectifier circuit without transformer shown explicitly. Input voltage |vs| applied to the bridge, output vo across resistor R." class="content-image">
+                           <figcaption>Full-Wave Bridge Rectifier (Simplified)</figcaption>
+                        </figure>
+
+                         <h5 class="subsubsection-heading">Waveforms</h5>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-109-1.jpg" alt="Waveforms for full-wave bridge rectifier: Input voltage (vs - sinusoidal), output voltage (vo - full-wave rectified, peaks lower by 2*Vy)." class="content-image">
+                           <figcaption>Full-Wave Bridge Rectifier Waveforms</figcaption>
+                        </figure>
+
+                         <h4 class="subsubsection-heading">Differences between center-tap and bridge Full wave rectifiers</h4>
+                         <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Only half as many turns are required for the secondary winding in the bridge rectifier. This is true because only half of the secondary winding of the center-tapped transformer is utilized at any one time.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">For the bridge circuit, the peak inverse voltage that any diode must sustain without breakdown is only half that of the center-tapped transformer circuit.</span></li>
+                         </ul>
+
+                         <h3 class="subsection-heading">Filter</h3>
+                         <p>The output voltage from the diode rectifier, though unipolar, contains ripples.</p>
+                         <p>These ripples can be reduced by incorporating a filter circuit.</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-111-1.jpg" alt="Simple capacitor filter circuit added to a rectifier output. A capacitor C is placed in parallel with the load resistor R." class="content-image">
+                           <figcaption>Capacitor Filter Circuit</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Waveforms</h4>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-112-1.jpg" alt="Top: Output waveform of a rectifier with a capacitor filter (vo), showing reduced ripple compared to unfiltered output (dashed line). Bottom: Close-up showing ripple voltage Vr, peak voltage Vm, minimum voltage Vl." class="content-image">
+                           <figcaption>Filtered Rectifier Output Waveforms</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Filter Capacitor Value</h4>
+                        <p>Half wave rectifier</p>
+                        <div class="equation">$$ v_{r} \approx \frac{V_{M}}{f R C} $$</div>
+                        <p>Full wave rectifier</p>
+                         <div class="equation">$$ v_{r} \approx \frac{V_{M}}{2 f R C} $$</div>
+                         <p>Where $v_r$ is the peak-to-peak ripple voltage, $V_M$ is the peak rectified voltage, $f$ is the AC line frequency, R is the load resistance, and C is the filter capacitance.</p>
+                    </div>
+                 </section>
+                 <!-- END: power-supply -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="analogue-electronics-intro-conduction.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 50%;"></div>
+                        </div>
+                        <span class="progress-text">Part 2 of 4</span>
+                    </div>
+                    <a href="analogue-electronics-bjt.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

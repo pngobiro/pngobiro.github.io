@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 12: Statistics (Part 1) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-11-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 12 (Part 1)</span>
+                    </div>
+                    <a href="chapter-12-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 12 : Statistics</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-12-objectives -->
+                <section id="chapter-12-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you would have learnt:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to understand why statistics are used to solve real life problem;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to use general guidelines to organise data into Frequency Table;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to use various charts and graph to display data, e.g. Histogram Cumulative Frequency Diagram;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to calculate Mean, Median, Mode as measures of central tendency;</span></li> <!-- Corrected MMD -->
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">to calculate Standard Deviation, Variance as measures of spread or dispersion.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-12-objectives -->
+
+                <!-- START: chapter-12-introduction -->
+                <section id="section-12-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💡</span>
+                        <span class="heading-text">12.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <!-- MMD line 5125 seems out of place, likely a copy-paste error from Ch 6 -->
+                        <p>Statistics are used to solve real-life problems in various situations:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Processes that entail destructive testing of products if physical testing is carried out. E.g. To substantiate the life span of light bulbs from a factory.</li> <!-- MMD typo: des rysen, cmistantiate -->
+                            <li class="list-item">Situations are too large and too complicated if physically counting were carried out. E.g. The number of people suffering from AIDS in Asia.</li> <!-- MMD typo: teo -->
+                            <li class="list-item">Situations where forecast or predictions are to be made based on past information. E.g. The weather forecasting.</li>
+                        </ul>
+                        <p>Statistics involve the process of collecting data from a sample, make appropriate deductions from the sample. In this chapter, we will look at how to organise data into frequency table, display data in proper charts and calculate relevant quantities.</p> <!-- MMD typo: now -->
+                    </div>
+                </section>
+                <!-- END: chapter-12-introduction -->
+
+                <!-- START: chapter-12-raw-data -->
+                <section id="section-12-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">12.2 Raw Data</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Raw data, once collected has to be organised numerically. An example is the set of names of male students obtained from an alphabetical listing of a public school records.</p>
+                        <h3 class="subsection-heading">12.2.1 Arrays</h3>
+                        <p>An array is an arrangement of raw numerical data in ascending or descending order of magnitude. The difference between the largest and smallest numbers is called the <strong>range</strong> of the data. For example, if the heaviest weight of 100 male students is 74 kg and the lightest weight is 60 kg, then the range is 74 - 60 which gives 14 kg.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-12-raw-data -->
+
+                <!-- START: chapter-12-grouped-data -->
+                <section id="section-12-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">12.3 Grouped Data</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">12.3.1 Frequency Distributions</h3>
+                        <p>When summarising large masses of raw data it is often useful to distribute the data into classes or categories and to determine the number of individuals belonging to each class, called the <strong>class frequency</strong>. A tabular arrangement of these data by classes together with the corresponding class frequencies is called a <strong>frequency distribution</strong> or <strong>frequency table</strong>. The table below shows a frequency distribution of weights (recorded to the nearest kg) of 100 male students at Informatics Computer School.</p> <!-- MMD typo: 2 x 100 -->
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Mass (Kilogram)</th><th>Number of Students (Frequency)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>60-62</td><td>5</td></tr> <!-- Added missing frequency -->
+                                    <tr><td>63-65</td><td>18</td></tr> <!-- Added missing frequency -->
+                                    <tr><td>66-68</td><td>42</td></tr>
+                                    <tr><td>69-71</td><td>27</td></tr>
+                                    <tr><td>72-74</td><td>8</td></tr>
+                                    <tr><td><strong>Total</strong></td><td><strong>100</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The first class, for example, consists of weights from 60 to 62 kg. Since 5 students have weights falling between this class, the corresponding class frequency is 5.</p>
+                        <p>Data organised and summarised as in the above frequency distribution are often called <strong>grouped data</strong>.</p>
+
+                        <h3 class="subsection-heading">12.3.2 Class Intervals and Class Limits</h3>
+                        <p>A range of values defining a class such as 60-62 in the above table is called a <strong>class interval</strong>. The end numbers, 60 and 62, are called <strong>class limits</strong>. The smallest number 60 is the <strong>lower class limit</strong> and the larger number 62 is the <strong>upper class limit</strong>.</p>
+
+                        <h3 class="subsection-heading">12.3.3 Class Boundaries</h3>
+                        <p>If weights are recorded to the nearest kg, the class interval 60-62 theoretically includes all measurements from 59.5 kg to 62.5 kg. These numbers, indicated briefly by the exact numbers 59.5 and 62.5, are called <strong>class boundaries</strong> or true class limits. The smaller number 59.5 is the <strong>lower class boundary</strong> and the larger number 62.5 is the <strong>upper class boundary</strong>.</p>
+                        <p>Sometimes, class boundaries are used to symbolise classes. For example, the various classes in the first column of the previous table could be indicated by 59.5-62.5, 62.5-65.5, etc.</p>
+
+                        <h3 class="subsection-heading">12.3.4 The Size of a Class Interval</h3>
+                        <p>The size of a class interval is the difference between the lower and the upper class boundaries and is also referred to as the <strong>class width</strong>, <strong>class size</strong> or class strength. For instance, the class interval size for the above example is 62.5 - 59.5 = 3.</p>
+
+                        <h3 class="subsection-heading">12.3.5 The Class Mark</h3>
+                        <p>The <strong>class mark</strong> is the midpoint of the class interval and is obtained by adding the lower and upper class limits and dividing by two. Thus the class mark of the interval 60-62 is (60+62)/2 = 61. The class mark is also known as the <strong>class midpoint</strong>.</p>
+                        <p>General rules for forming frequency distributions:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Determine the largest and smallest numbers in the raw data and thus find the range.</li> <!-- MMD typo: rambers -->
+                            <li class="list-item">Divide the range into a convenient number of class intervals having the same size.</li>
+                            <li class="list-item">Determine the number of observations falling into each class interval.</li> <!-- MMD typo: obervations -->
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-12-grouped-data -->
+
+                <!-- START: chapter-12-presentation -->
+                <section id="section-12-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">12.4 Presentation of Statistical Data</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A graph is a pictorial representation of the relationship between variables. Many types of graphs are employed in statistics, depending on the nature of the data involved and the purpose for which the graphs are intended. Among these are bar graphs, pie graphs, pictographs, etc. These graphs are sometimes referred to as charts or diagrams.</p> <!-- MMD typo: m°, rarpose, giqphs -->
+
+                        <h3 class="subsection-heading">12.4.1 Histogram and Frequency Polygons</h3>
+                        <p>There are two graphical representations of frequency distributions.</p>
+                        <p>A <strong>histogram</strong> of a frequency distribution consists of a set of rectangles having</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">Bases on a horizontal axis with centres at the class marks and lengths equal to the class interval sizes; and</li>
+                            <li class="list-item">Areas proportional to class frequencies.</li>
+                        </ul>
+                        <p>A <strong>frequency polygon</strong> corresponding to the above frequencies plotted against class marks. It can be obtained by connecting midpoints of the tops of the rectangles in the histogram.</p>
+                        <p>The histogram and frequency polygon corresponding to the frequency distribution of weights are shown on the same set of axes in the graph below. It is necessary to add the extensions PQ and RS to the next lower and higher-class marks which have corresponding class frequency of zero.</p>
+                        <img src="../assets/images/ch12-histogram-polygon.jpg" alt="Histogram and Frequency Polygon for student weights">
+
+                        <h3 class="subsection-heading">12.4.2 Cumulative Frequency Distributions</h3>
+                        <p>The total frequency of all values less than the upper class boundary of a given class interval is called the <strong>cumulative frequency</strong> up to and including the class interval. For example, the cumulative frequency up to and including the class interval 66-68 is 5 + 18 + 42 = 65, signifying that altogether 65 students have weights less than 68.5 kg.</p>
+                        <p>A graph showing the cumulative frequency less than any upper class boundary plotted against the upper class boundary is called a <strong>cumulative frequency polygon</strong> or <strong>Ogive</strong>.</p>
+
+                        <p><strong>Example:</strong></p>
+                        <p>The final marks for Computer Science of 80 students at ABC University are recorded in the following table.</p>
+                        <pre class="code-block"><code>68 84 75 82 68 90 62 88 76 93
+73 79 88 73 60 93 71 59 85 75
+61 65 75 87 74 62 95 78 63 72
+66 78 82 75 94 77 69 74 68 60
+96 78 89 61 75 95 60 79 83 71
+79 62 67 97 78 85 76 65 71 75
+65 80 73 57 88 78 62 76 53 74
+86 67 73 81 72 63 76 75 85 77</code></pre>
+                        <p>Using the above data, draw:</p>
+                        <ol type="a">
+                            <li>A histogram,</li>
+                            <li>A frequency polygon, and</li>
+                            <li>A cumulative frequency curve.</li>
+                        </ol>
+                        <p>Solution:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Class</th><th>Class Mark</th><th>Frequency</th><th>Cumulative Frequency</th></tr></thead>
+                                <tbody>
+                                    <tr><td>56-60</td><td>58</td><td>6</td><td>6</td></tr>
+                                    <tr><td>61-65</td><td>63</td><td>11</td><td>17</td></tr>
+                                    <tr><td>66-70</td><td>68</td><td>7</td><td>24</td></tr>
+                                    <tr><td>71-75</td><td>73</td><td>19</td><td>43</td></tr>
+                                    <tr><td>76-80</td><td>78</td><td>15</td><td>58</td></tr> <!-- MMD typo: 50 -->
+                                    <tr><td>81-85</td><td>83</td><td>8</td><td>66</td></tr>
+                                    <tr><td>86-90</td><td>88</td><td>7</td><td>73</td></tr>
+                                    <tr><td>91-95</td><td>93</td><td>5</td><td>78</td></tr>
+                                    <tr><td>96-100</td><td>98</td><td>2</td><td>80</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <img src="../assets/images/ch12-marks-histogram-polygon.jpg" alt="Histogram and Frequency Polygon for student marks">
+                        <p>Cumulative Frequency Table:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Marks (less than or =)</th><th>Cumulative Frequency</th></tr></thead>
+                                <tbody>
+                                    <tr><td>20.5</td><td>3</td></tr> <!-- Adjusted boundary -->
+                                    <tr><td>40.5</td><td>22</td></tr> <!-- Adjusted boundary -->
+                                    <tr><td>60.5</td><td>57</td></tr> <!-- Adjusted boundary -->
+                                    <tr><td>80.5</td><td>79</td></tr> <!-- Adjusted boundary -->
+                                    <tr><td>100.5</td><td>80</td></tr> <!-- Adjusted boundary -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Cumulative Frequency Diagram (Ogive):</p>
+                        <img src="../assets/images/ch12-cumulative-frequency-ogive.jpg" alt="Cumulative Frequency Diagram (Ogive) for student marks">
+                        <p>Figure 12-1</p>
+                        <p>From the above Figure 12-1, there are 40 students who score 52 marks or less and the other 40 score more than 52 marks. The median is 52 marks.</p>
+                        <p>In Figure 12-1, 39 mark is the lower quartile, which is the mark below which 25% of the population of students score (or 20 out of 80). 61 marks is the upper quartile below which 75% of the student score, (or 60 out of 80). The range of (61 - 39) = 22 is the Inter-quartile range.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-12-presentation -->
+
+                <!-- START: chapter-12-central-tendency -->
+                <section id="section-12-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">12.5 Three Statistical Quantities of Central Tendency</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">12.5.1 The Arithmetic Mean</h3>
+                        <p>The arithmetic mean or the <strong>mean</strong> of a set of n numbers <span class="math-inline">$X_1, X_2, X_3, \ldots, X_N$</span> is denoted by <span class="math-inline">$\bar{X}$</span> and is defined as</p>
+                        <div class="equation">$$ \bar{X} = \frac{X_1 + X_2 + X_3 + \ldots + X_N}{N} = \frac{\sum_{j=1}^{N} X_j}{N} = \frac{\sum X}{N} $$</div>
+                        <p><strong>Example:</strong></p>
+                        <p>The arithmetic mean of the numbers 8, 3, 5, 12, 10 is</p>
+                        <div class="equation">$$ \bar{X} = \frac{8+3+5+12+10}{5} = \frac{38}{5} = 7.6 $$</div>
+                        <p>If the numbers <span class="math-inline">$X_1, X_2, \ldots, X_N$</span> occur <span class="math-inline">$f_1, f_2, \ldots, f_N$</span> times respectively the arithmetic mean is given by:</p> <!-- MMD typo: tir.es -->
+                        <div class="equation">$$ \bar{X} = \frac{f_1 X_1 + f_2 X_2 + \ldots + f_N X_N}{f_1 + f_2 + \ldots + f_N} = \frac{\sum_{j=1}^{N} f_j X_j}{\sum_{j=1}^{N} f_j} = \frac{\sum fX}{\sum f} $$</div> <!-- Corrected formula -->
+                        <p><strong>Example:</strong></p>
+                        <p>The arithmetic mean the numbers 5, 8, 6 and 2 which occurs 3, 2, 4 and 1 time respectively is:</p>
+                        <div class="equation">$$ \bar{X} = \frac{(3)(5)+(2)(8)+(4)(6)+(1)(2)}{3+2+4+1} = \frac{15+16+24+2}{10} = 5.7 $$</div>
+
+                        <h3 class="subsection-heading">12.5.2 The Median</h3>
+                        <p>The <strong>median</strong> of a set of numbers arranged in order of magnitude (i.e. in an array) is the middle value or the arithmetic mean of the two middle values.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>The set of numbers 3, 4, 4, <strong>6</strong>, 6, 8, 8, 8, 10 has a median of 6.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>The set of numbers 5, 5, 7, <strong>9, 11</strong>, 12, 15, 18 has a median = (9 + 11) / 2 = 10.</p>
+                        <p>For a grouped data, the median, obtained by interpolation is given by</p>
+                        <div class="equation">$$ \text{Median} = L_1 + \left( \frac{\frac{N}{2} - (\sum f)_1}{f_{\text{median}}} \right) \times c $$</div>
+                        <p>where</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="math-inline">$L_1$</span> = Lower class boundary of the median class (i.e. the class containing the median).</li>
+                            <li class="list-item"><span class="math-inline">$N$</span> = Number of items in the data (i.e. total frequency).</li>
+                            <li class="list-item"><span class="math-inline">$(\sum f)_1$</span> = Sum of frequencies of all classes lower than the median class.</li>
+                            <li class="list-item"><span class="math-inline">$f_{\text{median}}$</span> = Frequency of median class.</li>
+                            <li class="list-item"><span class="math-inline">$c$</span> = Size of median class interval.</li>
+                        </ul>
+                        <p>Median of grouped data may also be obtained graphically using cumulative Frequency Diagram.</p>
+                        <p><strong>Example:</strong></p>
+                        <p>By first creating a cumulative frequency table and then a cumulative frequency diagram, estimate the median of the following survey of the examination marks of 80 students on a particular computer course.</p>
+                        <div class="table-container">
+                             <table class="content-table">
+                                <thead><tr><th>Marks (%)</th><th>No. of students</th></tr></thead>
+                                <tbody>
+                                    <tr><td>0-20</td><td>3</td></tr>
+                                    <tr><td>21-40</td><td>19</td></tr>
+                                    <tr><td>41-60</td><td>35</td></tr>
+                                    <tr><td>61-80</td><td>22</td></tr>
+                                    <tr><td>81-100</td><td>1</td></tr> <!-- MMD typo: 1 -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Median is the mark below which 50% of the students' score, and therefore above which another 50% of the student score.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Marks (Upper Boundary)</th><th>Cumulative Frequency</th></tr></thead> <!-- Changed to Upper Boundary -->
+                                <tbody>
+                                    <tr><td>20.5</td><td>3</td></tr>
+                                    <tr><td>40.5</td><td>22</td></tr>
+                                    <tr><td>60.5</td><td>57</td></tr>
+                                    <tr><td>80.5</td><td>79</td></tr>
+                                    <tr><td>100.5</td><td>80</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Cumulative Frequency Table</p>
+                        <img src="../assets/images/ch12-cumulative-frequency-ogive.jpg" alt="Cumulative Frequency Diagram (Ogive) for student marks">
+                        <p>Figure 12-1</p>
+                        <p>From the above Figure 12-1, there are 40 students who score 52 marks or less and the other 40 score more than 52 marks. The median is 52 marks.</p>
+                        <p>In Figure 12-1, 39 mark is the lower quartile, which is the mark below which 25% of the population of students score (or 20 out of 80). 61 marks is the upper quartile below which 75% of the student score, (or 60 out of 80). The range of (61 - 39) = 22 is the Inter-quartile range.</p>
+
+                        <h3 class="subsection-heading">12.5.3 The Mode</h3>
+                        <!-- Content continues in next chunk -->
+                    </div>
+                </section>
+                <!-- END: chapter-12-central-tendency -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-11-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 12 (Part 1)</span>
+                    </div>
+                    <a href="chapter-12-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

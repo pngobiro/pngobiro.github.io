@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 7: OSI Model and TCP/IP Protocol Suite - Data Communication and Networking</title>
+    <meta name="description" content="Study the OSI seven-layer model and the TCP/IP protocol suite, comparing their architectures and functionalities.">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <article class="learning-module" data-module="7">
+        <nav class="module-nav">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="module6.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module 7 of 9</span>
+                </div>
+                <a href="module8.html" class="nav-button">
+                    Next <span>→</span>
+                </a>
+            </div>
+        </nav>
+
+        <header class="module-header">
+            <h1>Module 7: OSI Model and TCP/IP Protocol Suite</h1>
+            <section class="module-objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Understand the purpose and layers of the OSI Model.</li>
+                    <li>Describe the functions of each layer in the OSI Model: Physical, Data Link, Network, Transport, Session, Presentation, and Application.</li>
+                    <li>Explain the TCP/IP Protocol Suite and its layers.</li>
+                    <li>Compare and contrast the OSI Model and TCP/IP Protocol Suite.</li>
+                </ul>
+            </section>
+        </header>
+
+        <main class="module-content">
+            <section class="content-section">
+                <h2>📚 THE OSI MODEL</h2>
+                <div class="content-block">
+                    <p>The OSI model is based on a proposal developed by the International Standards Organization (ISO) as a first step toward international standardization of the protocols used in the various layers (Day and Zimmermann, 1983). It was revised in 1995(Day, 1995). The model is called the ISO-OSI (Open Systems Interconnection) Reference Model because it deals with connecting open systems—that is, systems that are open for communication with other systems.</p>
+                    <p>The OSI model is a layered framework for the design of network systems that allows communication between all types of computer systems. It consists of seven separate but related layers, each of which defines a part of the process of moving information across a network.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/osi_model_layers.png"
+                             alt="Diagram illustrating Seven layers of the OSI model."
+                             width="600" height="300">
+                        <figcaption>Seven layers of the OSI model</figcaption>
+                    </figure>
+                    <p>The OSI model is composed of seven ordered layers: physical (layer 1), data link (layer 2), network (layer 3), transport (layer 4), session (layer 5), presentation (layer 6), and application (layer 7). Figure below shows the layers involved when a message is sent from device A to device B. As the message travels from A to B, it may pass through many intermediate nodes. These intermediate nodes usually involve only the first three layers of the OSI model.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 LAYERS IN THE OSI MODEL</h2>
+                <div class="content-block">
+                    <h3>1. Physical Layer</h3>
+                    <p>The physical layer coordinates the functions required to carry a bit stream over a physical medium. It deals with the mechanical and electrical specifications of the interface and transmission medium. It also defines the procedures and functions that physical devices and interfaces have to perform for transmission to occur.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/osi_model_processes.png"
+                             alt="Diagram illustrating OSI Model layers and processes."
+                             width="600" height="300">
+                        <figcaption>OSI Model Layer Processes</figcaption>
+                    </figure>
+                    <p>The physical layer is also concerned with the following:</p>
+                    <ul>
+                        <li><strong>Physical characteristics of interfaces and medium.</strong> The physical layer defines the characteristics of the interface between the devices and the transmission medium. It also defines the type of transmission medium.</li>
+                        <li><strong>Representation of bits.</strong> The physical layer data consists of a stream of bits (sequence of 0s or 1s) with no interpretation. To be transmitted, bits must be encoded into signals--electrical or optical. The physical layer defines the type of encoding .</li>
+                        <li><strong>Data rate.</strong> The transmission rate-the number of bits sent each second-is also defined by the physical layer. In other words, the physical layer defines the duration of a bit, which is how long it lasts.</li>
+                        <li><strong>Synchronization of bits.</strong> The sender and receiver not only must use the same bit rate but also must be synchronized at the bit level. In other words, the sender and the receiver clocks must be synchronized.</li>
+                        <li><strong>Line configuration.</strong> The physical layer is concerned with the connection of devices to the media. In a point-to-point configuration, two devices are connected through a dedicated link. In a multipoint configuration, a link is shared among several devices.</li>
+                        <li><strong>Physical topology.</strong> The physical topology defines how devices are connected to make a network. Devices can be connected by using a mesh topology (every device is connected to every other device), a star topology (devices are connected through a central device), a ring topology (each device is connected to the next, forming a ring), a bus topology (every device is on a common link), or a hybrid topology (this is a combination of two or more topologies).</li>
+                        <li><strong>Transmission mode.</strong> The physical layer also defines the direction of transmission between two devices: simplex, half-duplex, or full-duplex. In simplex mode, only one device can send; the other can only receive. The simplex mode is a one-way communication. In the half-duplex mode, two devices can send and receive, but not at the same time. In a full-duplex (or simply duplex) mode, two devices can send and receive at the same time.</li>
+                    </ul>
+
+                    <h3>2. Data Link Layer</h3>
+                    <p>The data link layer transforms the physical layer, a raw transmission facility, to a reliable link. It makes the physical layer appear error-free to the upper layer (network layer).</p>
+                    <p>Other responsibilities of the data link layer include the following:</p>
+                    <ul>
+                        <li><strong>Framing.</strong> The data link layer divides the stream of bits received from the network layer into manageable data units called frames.</li>
+                        <li><strong>Physical addressing.</strong> If frames are to be distributed to different systems on the network, the data link layer adds a header to the frame to define the sender and/or receiver of the frame. If the frame is intended for a system outside the sender's network, the receiver address is the address of the device that connects the network to the next one.</li>
+                        <li><strong>Flow control.</strong> If the rate at which the data are absorbed by the receiver is less than the rate at which data are produced in the sender, the data link layer imposes a flow control mechanism to avoid overwhelming the receiver.</li>
+                        <li><strong>Error control.</strong> The data link layer adds reliability to the physical layer by adding mechanisms to detect and retransmit damaged or lost frames. It also uses a mechanism to recognize duplicate frames. Error control is normally achieved through a trailer added to the end of the frame.</li>
+                        <li><strong>Access control.</strong> When two or more devices are connected to the same link, data link layer protocols are necessary to determine which device has control over the link at any given time.</li>
+                    </ul>
+
+                    <h3>3. Network Layer</h3>
+                    <p>The network layer is responsible for the source-to-destination delivery of a packet, possibly across multiple networks (links). Whereas the data link layer oversees the delivery of the packet between two systems on the same network (links), the network layer ensures that each packet gets from its point of origin to its final destination. If two systems are connected to the same link, there is usually no need for a network layer. However, if the two systems are attached to different networks (links) with connecting devices between the networks (links), there is often a need for the network layer to accomplish source-to-destination delivery.</p>
+                    <p>Other responsibilities of the network layer include the following:</p>
+                    <ul>
+                        <li><strong>Logical addressing.</strong> The physical addressing implemented by the data link layer handles the addressing problem locally. If a packet passes the network boundary, we need another addressing system to help distinguish the source and destination systems. The network layer adds a header to the packet coming from the upper layer that, among other things, includes the logical addresses of the sender and receiver.</li>
+                        <li><strong>Routing.</strong> When independent networks or links are connected to create internetworks (network of networks) or a large network, the connecting devices (called routers or switches) route or switch the packets to their final destination. One of the functions of the network layer is to provide this mechanism.</li>
+                    </ul>
+
+                    <h3>4. Transport Layer</h3>
+                    <p>The transport layer is responsible for process-to-process delivery of the entire message. A process is an application program running on a host. Whereas the network layer oversees source-to-destination delivery of individual packets, it does not recognize any relationship between those packets. It treats each one independently, as though each piece belonged to a separate message, whether or not it does. The transport layer, on the other hand, ensures that the whole message arrives intact and in order, overseeing both error control and flow control at the source-to-destination level.</p>
+                    <p>Other responsibilities of the transport layer include the following:</p>
+                    <ul>
+                        <li><strong>Service-point addressing.</strong> Computers often run several programs at the same time. For this reason, source-to-destination delivery means delivery not only from one computer to the next but also from a specific process (running program) on one computer to a specific process (running program) on the other. The transport layer header must therefore include a type of address called a service-point address (or port address). The network layer gets each packet to the correct computer; the transport layer gets the entire message to the correct process on that computer.</li>
+                        <li><strong>Segmentation and reassembly.</strong> A message is divided into transmittable segments, with each segment containing a sequence number. These numbers enable the transport layer to reassemble the message correctly upon arriving at the destination and to identify and replace packets that were lost in transmission.</li>
+                        <li><strong>Connection control.</strong> The transport layer can be either connectionless or connection oriented. A connectionless transport layer treats each segment as an independent packet and delivers it to the transport layer at the destination machine. A connection oriented transport layer makes a connection with the transport layer at the destination machine first before delivering the packets. After all the data are transferred, the connection is terminated.</li>
+                        <li><strong>Flow control.</strong> Like the data link layer, the transport layer is responsible for flow control. However, flow control at this layer is performed end to end rather than across a single link.</li>
+                        <li><strong>Error control.</strong> Like the data link layer, the transport layer is responsible for error control. However, error control at this layer is performed process-to-process rather than across a single link. The sending transport layer makes sure that the entire message arrives at the receiving transport layer without error (damage, loss, or duplication). Error correction is usually achieved through retransmission.</li>
+                    </ul>
+
+                    <h3>5. Session Layer</h3>
+                    <p>The services provided by the first three layers (physical, data link, and network) are not sufficient for some processes. The session layer is the network <i>dialog controller</i>. It establishes, maintains, and synchronizes the interaction among communicating systems.</p>
+                    <p>Specific responsibilities of the session layer include the following:</p>
+                    <ul>
+                        <li><strong>Dialog control.</strong> The session layer allows two systems to enter into a dialog. It allows the communication between two processes to take place in either half duplex (one way at a time) or full-duplex (two ways at a time) mode.</li>
+                        <li><strong>Synchronization.</strong> The session layer allows a process to add checkpoints, or synchronization points, to a stream of data.</li>
+                    </ul>
+
+                    <h3>6. Presentation Layer</h3>
+                    <p>The presentation layer is concerned with the syntax and semantics of the information exchanged between two systems.</p>
+                    <p>Specific responsibilities of the presentation layer include the following:</p>
+                    <ul>
+                        <li><strong>Translation.</strong> The processes (running programs) in two systems are usually exchanging information in the form of character strings, numbers, and so on. The information must be changed to bit streams before being transmitted. Because different computers use different encoding systems, the presentation layer is responsible for interoperability between these different encoding methods. The presentation layer at the sender changes the information from its sender-dependent format into a common format. The presentation layer at the receiving machine changes the common format into its receiver-dependent format.</li>
+                        <li><strong>Encryption.</strong> To carry sensitive information, a system must be able to ensure privacy. Encryption means that the sender transforms the original information to another form and sends the resulting message out over the network. Decryption reverses the original process to transform the message back to its original form.</li>
+                        <li><strong>Compression.</strong> Data compression reduces the number of bits contained in the information. Data compression becomes particularly important in the transmission of multimedia such as text, audio, and video.</li>
+                    </ul>
+
+                    <h3>7. Application Layer</h3>
+                    <p>The application layer enables the user, whether human or software, to access the network. It provides user interfaces and support for services such as electronic mail, remote file access and transfer, shared database management, and other types of distributed information services.</p>
+                    <p>Specific services provided by the application layer include the following:</p>
+                    <ul>
+                        <li><strong>Network virtual terminal.</strong> A network virtual terminal is a software version of a physical terminal, and it allows a user to log on to a remote host.</li>
+                        <li><strong>File transfer, access, and management.</strong> This application allows a user to access files in a remote host (to make changes or read data), to retrieve files from a remote computer for use in the local computer, and to manage or control files in a remote computer locally.</li>
+                        <li><strong>Mail services.</strong> This application provides the basis for e-mail forwarding and storage.</li>
+                        <li><strong>Directory services.</strong> This application provides distributed database sources and access for global information about various objects and services.</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 TCP/IP PROTOCOL SUITE</h2>
+                <div class="content-block">
+                    <p>The TCPIIP protocol suite was developed prior to the OSI model. Therefore, the layers in the TCP/IP protocol suite do not exactly match those in the OSI model. The original TCP/IP protocol suite was defined as having four layers: host-to-network, internet, transport, and application. However, when TCP/IP is compared to OSI, we can say that the host-to-network layer is equivalent to the combination of the physical and data link layers. The internet layer is equivalent to the network layer, and the application layer is roughly doing the job of the session, presentation, and application layers with the transport layer in TCP/IP taking care of part of the duties of the session layer.</p>
+                    <p>TCP/IP is a hierarchical protocol made up of interactive modules, each of which provides a specific functionality; however, the modules are not necessarily interdependent. Whereas the OSI model specifies which functions belong to each of its layers, the layers of the TCP/IP protocol suite contain relatively independent protocols that can be mixed and matched depending on the needs of the system. The term <i>hierarchical</i> means that each upper-level protocol is supported by one or more lower-level protocols.</p>
+                    <p>At the transport layer, TCP/IP defines three protocols: Transmission Control Protocol (TCP), User Datagram Protocol (UDP), and Stream Control Transmission Protocol (SCTP). At the network layer, the main protocol defined by TCP/IP is the Internetworking Protocol (IP); there are also some other protocols that support data movement in this layer.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/osi_tcp_ip_comparison.png"
+                             alt="Diagram comparing OSI and TCP/IP Model layers."
+                             width="600" height="300">
+                        <figcaption>OSI and TCP/IP Model Comparison</figcaption>
+                    </figure>
+
+                    <h3>1. Host-to-Network Layer:</h3>
+                    <p>The TCP/IP reference model does not really say much about what happens here, except to point out that the host has to connect to the network using some protocol so it can send IP packets to it. This protocol is not defined and varies from host to host and network to network.</p>
+
+                    <h3>2. Internet Layer:</h3>
+                    <p>Its job is to permit hosts to inject packets into any network and have they travel independently to the destination (potentially on a different network). They may even arrive in a different order than they were sent, in which case it is the job of higher layers to rearrange them, if in-order delivery is desired.</p>
+                    <p>The internet layer defines an official packet format and protocol called IP (Internet Protocol). The job of the internet layer is to deliver IP packets where they are supposed to go. Packet routing is clearly the major issue here, as is avoiding congestion.</p>
+
+                    <h3>3. The Transport Layer:</h3>
+                    <p>The layer above the internet layer in the TCP/IP model is now usually called the transport layer. It is designed to allow peer entities on the source and destination hosts to carry on a conversation, just as in the OSI transport layer. Two end-to-end transport protocols have been defined here. The first one, TCP (Transmission Control Protocol), is a reliable connection-oriented protocol that allows a byte stream originating on one machine to be delivered without error on any other machine in the internet. It fragments the incoming byte stream into discrete messages and passes each one on to the internet layer. At the destination, the receiving TCP process reassembles the received messages into the output stream. TCP also handles flow control to make sure a fast sender cannot swamp a slow receiver with more messages than it can handle.</p>
+                    <p>The second protocol in this layer, UDP (User Datagram Protocol), is an unreliable, connectionless protocol for applications that do not want TCP's sequencing or flow control and wish to provide their own. It is also widely used for one-shot, client-server-type request-reply queries and applications in which prompt delivery is more important than accurate delivery, such as transmitting speech or video.</p>
+
+                    <h3>4. The Application Layer:</h3>
+                    <p>The TCP/IP model does not have session or presentation layers. On top of the transport layer is the application layer. It contains all the higher-level protocols. The early ones included virtual terminal (TELNET), file transfer (FTP), and electronic mail (SMTP). The virtual terminal protocol allows a user on one machine to log onto a distant machine and work there. The file transfer protocol provides a way to move data efficiently from one machine to another. Electronic mail was originally just a kind of file transfer, but later a specialized protocol (SMTP) was developed for it. Many other protocols have been added to these over the years: the Domain Name System (DNS) for mapping host names onto their network addresses, NNTP, the protocol for moving USENET news articles around, and HTTP, the protocol for fetching pages on the World Wide Web, and many others.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 Comparison of the OSI and TCP/IP Reference Models:</h2>
+                <div class="content-block">
+                    <p>The OSI and TCP/IP reference models have much in common. Both are based on the concept of a stack of independent protocols. Also, the functionality of the layers is roughly similar. For example, in both models the layers up through and including the transport layer are there to provide an end-to-end, network-independent transport service to processes wishing to communicate. These layers form the transport provider. Again in both models, the layers above transport are application-oriented users of the transport service. Despite these fundamental similarities, the two models also have many differences Three concepts are central to the OSI model:</p>
+                    <ol>
+                        <li>Services.</li>
+                        <li>Interfaces.</li>
+                        <li>Protocols.</li>
+                    </ol>
+                    <p>Probably the biggest contribution of the OSI model is to make the distinction between these three concepts explicit. Each layer performs some services for the layer above it. The service definition tells what the layer does, not how entities above it access it or how the layer works. It defines the layer's semantics.</p>
+                    <p>A layer's interface tells the processes above it how to access it. It specifies what the parameters are and what results to expect. It, too, says nothing about how the layer works inside.</p>
+                    <p>Finally, the peer protocols used in a layer are the layer's own business. It can use any protocols it wants to, as long as it gets the job done (i.e., provides the offered services). It can also change them at will without affecting software in higher layers.</p>
+                    <p>The TCP/IP model did not originally clearly distinguish between service, interface, and protocol, although people have tried to retrofit it after the fact to make it more OSI-like. For example, the only real services offered by the internet layer are SEND IP PACKET and RECEIVE IP PACKET.</p>
+                    <p>As a consequence, the protocols in the OSI model are better hidden than in the TCP/IP model and can be replaced relatively easily as the technology changes. Being able to make such changes is one of the main purposes of having layered protocols in the first place. The OSI reference model was devised before the corresponding protocols were invented. This ordering means that the model was not biased toward one particular set of protocols, a fact that made it quite general. The downside of this ordering is that the designers did not have much experience with the subject and did not have a good idea of which functionality to put in which layer.</p>
+                    <p>Another difference is in the area of connectionless versus connection-oriented communication. The OSI model supports both connectionless and connection-oriented communication in the network layer, but only connection-oriented communication in the transport layer, where it counts (because the transport service is visible to the users). The TCP/IP model has only one mode in the network layer (connectionless) but supports both modes in the transport layer, giving the users a choice. This choice is especially important for simple request-response protocols.</p>
+                </div>
+            </section>
+
+
+        </main>
+
+        <footer class="module-footer">
+            <section class="key-takeaways">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>The OSI model has 7 layers: Physical, Data Link, Network, Transport, Session, Presentation, Application.</li>
+                    <li>Each OSI layer has specific functions, from physical transmission to application services.</li>
+                    <li>The TCP/IP model has 4 layers: Host-to-network, Internet, Transport, and Application.</li>
+                    <li>TCP/IP layers roughly correspond to combined OSI layers, with some layers like Presentation and Session not explicitly defined.</li>
+                    <li>OSI model emphasizes services, interfaces, and protocols, providing a generalized framework.</li>
+                </ul>
+            </section>
+
+            <section class="knowledge-check">
+                <h2>⚡ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <p><strong>Question 1:</strong> How many layers are there in the OSI model?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Seven layers.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 2:</strong> Which layer of the OSI model is responsible for physical transmission of data?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Physical Layer (Layer 1).</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 3:</strong> Name the four layers of the TCP/IP protocol suite.</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <ol>
+                                <li>Host-to-network layer</li>
+                                <li>Internet layer</li>
+                                <li>Transport layer</li>
+                                <li>Application layer</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 4:</strong> Which OSI layer is roughly equivalent to the Internet Layer in TCP/IP?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Network Layer (Layer 3).</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 5:</strong> What are the three key concepts that the OSI model explicitly distinguishes?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <ol>
+                                <li>Services</li>
+                                <li>Interfaces</li>
+                                <li>Protocols</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="module6.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module 7 of 9</span>
+                    </div>
+                    <a href="module8.html" class="nav-button">
+                        Next <span>→</span>
+                    </a>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</body>
+</html>

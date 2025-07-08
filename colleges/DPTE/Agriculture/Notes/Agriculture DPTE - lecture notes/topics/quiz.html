@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agriculture DPTE - Teacher's Quiz</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles/main.css"> <!-- Assuming this is in the root with index.html -->
+    <style>
+        /* Quiz specific styling */
+        .quiz-container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 30px 40px;
+            background-color: var(--card-background-color);
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        }
+        .quiz-header {
+            text-align: center;
+            margin-bottom: 30px;
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 20px;
+        }
+        .quiz-title {
+            font-size: 2.2em;
+            color: var(--primary-color);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .question-area, .results-area {
+            margin-bottom: 20px;
+        }
+        .question-text {
+            font-size: 1.3em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+        .options-list {
+            list-style: none;
+            padding: 0;
+        }
+        .options-list li {
+            margin-bottom: 10px;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 5px;
+            cursor: pointer; /* Indicates it's clickable */
+            transition: background-color 0.2s ease, border-color 0.2s ease;
+        }
+        .options-list li:hover {
+            background-color: #f0f0f0;
+        }
+        .options-list li.selected {
+            background-color: var(--accent-color);
+            color: white;
+            border-color: var(--accent-hover-color);
+        }
+        .options-list li.correct-answer {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #28a745;
+            font-weight: bold;
+        }
+        .options-list li.incorrect-answer {
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #dc3545;
+            font-weight: bold;
+        }
+        .options-list li.incorrectly-selected { /* To highlight the one chosen by user if incorrect */
+            background-color: #f8d7da;
+            color: #721c24;
+            border-color: #dc3545;
+            /* Add an additional visual cue if needed, like a strikethrough */
+        }
+        .options-list input[type="radio"] {
+            margin-right: 10px;
+            vertical-align: middle;
+            pointer-events: none; /* Make radio buttons non-clickable directly, only via LI */
+        }
+        .options-list label {
+            vertical-align: middle;
+            cursor: pointer;
+        }
+        .feedback {
+            margin-top: 15px;
+            padding: 10px;
+            border-radius: 5px;
+            font-weight: 500;
+            margin-bottom: 20px; /* Space between feedback and next button */
+        }
+        .feedback.correct {
+            background-color: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .feedback.incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .quiz-button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            text-decoration: none;
+            background: var(--accent-color);
+            color: white;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.2s ease;
+            cursor: pointer;
+            font-size: 1em;
+            font-weight: 500;
+            margin-right: 10px; /* Space between buttons if multiple */
+        }
+        .quiz-button:hover:not(:disabled) {
+            background-color: var(--accent-hover-color);
+        }
+        .quiz-button:disabled {
+            background-color: var(--muted-text-color);
+            cursor: not-allowed;
+            opacity: 0.6;
+        }
+        .progress-text {
+             font-size: 0.9em;
+             color: var(--secondary-color);
+             margin-bottom: 10px;
+             text-align: right;
+        }
+        .results-area h2 {
+            color: var(--primary-color);
+        }
+        .back-to-toc {
+            display: block;
+            text-align: center;
+            margin-top: 30px;
+            color: var(--accent-color);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .back-to-toc:hover {
+            text-decoration: underline;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="quiz-container">
+        <header class="quiz-header">
+            <h1 class="quiz-title">Agriculture DPTE - Teacher's Quiz</h1>
+        </header>
+
+        <div id="quiz-area">
+            <div id="progress-text-container" class="progress-text"></div>
+            <div class="question-area">
+                <p id="question-text" class="question-text"></p>
+                <ul id="options-list" class="options-list">
+                    <!-- Options will be populated by JS -->
+                </ul>
+            </div>
+            <div id="feedback-area" class="feedback" style="display:none;"></div>
+            <!-- Removed submit-btn -->
+            <button id="next-btn" class="quiz-button" style="display:none;">Next Question</button>
+        </div>
+
+        <div id="results-area" class="results-area" style="display:none;">
+            <h2>Quiz Completed!</h2>
+            <p id="score-text" class="question-text" style="font-size: 1.5em;"></p>
+            <p id="summary-text" style="font-size: 1.1em; margin-bottom: 20px;"></p>
+            <button id="restart-btn" class="quiz-button">Restart Quiz</button>
+        </div>
+        <a href="index.html" class="back-to-toc">Back to Table of Contents</a>
+    </div>
+
+    <script>
+        const questions = [
+            {
+                question: "Which of the following is NOT explicitly listed as one of the National Goals of Education in Kenya according to the notes?",
+                options: [
+                    "Foster nationalism and patriotism",
+                    "Promote advanced scientific research in agriculture",
+                    "Promote individual development and self-fulfilment",
+                    "Promote respect for Kenya's rich and varied cultures"
+                ],
+                answer: "Promote advanced scientific research in agriculture",
+                explanation: "While agricultural development is a theme, 'advanced scientific research in agriculture' is not listed as a specific National Goal of Education. The goals focus more broadly on national unity, development needs, individual fulfillment, values, equality, culture, international consciousness, and health/environment."
+            },
+            {
+                question: "According to the notes, what percentage of Kenya's export earnings are from agriculture?",
+                options: ["50%", "60%", "70%", "80%"],
+                answer: "70%",
+                explanation: "The notes state: '$70 \\% $ of Kenya's export are from agriculture.'"
+            },
+            {
+                question: "The process by which animals and crops became dependent on human beings for their existence is called:",
+                options: ["Cultivation", "Domestication", "Husbandry", "Pastoralism"],
+                answer: "Domestication",
+                explanation: "The notes define: 'Over many years both animals and crops became dependent on human beings for their existence. Therefore this process is called domestication.'"
+            },
+            {
+                question: "Which of these is listed as a primary problem hindering agricultural development in Kenya related to skills?",
+                options: [
+                    "Fluctuation of commodity prices",
+                    "Lack of adequate skills and knowledge among farmers",
+                    "Poor land tenure system",
+                    "Government policy on taxation"
+                ],
+                answer: "Lack of adequate skills and knowledge among farmers",
+                explanation: "Section 'PROBLEMS HINDERING DEVELOPMENT OF AGRICULTURE IN KENYA.' lists 'Lack of adequate skills and knowledge' as item 2."
+            },
+            {
+                question: "The natural loose material on the earth's crust which supports plant growth is defined as:",
+                options: ["Humus", "Weathered rock", "Soil", "Loam"],
+                answer: "Soil",
+                explanation: "The notes define Soil as: '-Is the natural loose material on earth's crust which supports plant growth .'"
+            },
+            {
+                question: "Which soil horizon is known as the 'zone of illuviation' because leached nutrients accumulate there?",
+                options: ["Horizon A (Top soil)", "Horizon B (Sub-soil)", "Horizon C (Weathered rock)", "Horizon O (Organic horizon)"],
+                answer: "Horizon B (Sub-soil)",
+                explanation: "The notes state for Horizon B: '-this layer is called zone of illuviation because leached nutrients accumulate here'."
+            },
+            {
+                question: "Which soil type is described as having high water holding capacity, high capillarity, and cracks when dry?",
+                options: ["Sand Soil", "Loam Soil", "Clay Soil", "Silt Soil"],
+                answer: "Clay Soil",
+                explanation: "Characteristics of Clay Soil include: 'Has high water holding capacity (WHC)', 'High capillarity.', and 'Cracks when dry.'"
+            },
+            {
+                question: "Nitrogen, Phosphorous, and Potassium are categorized as:",
+                options: ["Micro-nutrients", "Trace elements", "Macro-nutrients", "Secondary nutrients"],
+                answer: "Macro-nutrients",
+                explanation: "Under 'ESSENTIAL NUTRIENTS', the notes list Nitrogen, Phosphorous, and Potassium under 'macro-nutrients'."
+            },
+            {
+                question: "Which type of soil erosion involves the formation of small channels by water carrying away soil?",
+                options: ["Splash erosion", "Sheet erosion", "Rill erosion", "Gully erosion"],
+                answer: "Rill erosion",
+                explanation: "Rill erosion is defined as: '-small channels are formed in which soil is carried by water'."
+            },
+            {
+                question: "Which of these is NOT an agent of soil erosion mentioned in the notes?",
+                options: ["Wind", "Water", "Animals", "Temperature fluctuations causing rock breakdown"],
+                answer: "Temperature fluctuations causing rock breakdown",
+                explanation: "Wind, Water, and Animals are listed as agents of soil erosion. Temperature fluctuations are agents of weathering (soil formation), not directly erosion in this context."
+            },
+            {
+                question: "What is the primary characteristic of pastoralism as a form of livestock farming?",
+                options: [
+                    "Rearing livestock in permanent settled farms",
+                    "Rearing fish in ponds",
+                    "Rearing livestock by nomads in limited places",
+                    "Rearing birds for eggs and meat"
+                ],
+                answer: "Rearing livestock by nomads in limited places",
+                explanation: "Pastoralism is defined as: '- rearing livestock by nomads in limited places.'"
+            },
+            {
+                question: "A business plan for an income-generating project in school should include all the following EXCEPT:",
+                options: [
+                    "Project title",
+                    "Detailed daily weather forecasts for the project duration",
+                    "Market and potential clients",
+                    "Investment required and sources of funding"
+                ],
+                answer: "Detailed daily weather forecasts for the project duration",
+                explanation: "The section 'HOW TO DEVELOP A SIMPLE BUSINESS PLAN' lists several components, but detailed daily weather forecasts are not among them, being too specific and unpredictable for a general plan."
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+        let answeredThisQuestion = false; // Flag to prevent multiple answers per question
+
+        const questionTextElement = document.getElementById('question-text');
+        const optionsListElement = document.getElementById('options-list');
+        const feedbackAreaElement = document.getElementById('feedback-area');
+        const nextBtnElement = document.getElementById('next-btn'); // No submit-btn anymore
+        const quizAreaElement = document.getElementById('quiz-area');
+        const resultsAreaElement = document.getElementById('results-area');
+        const scoreTextElement = document.getElementById('score-text');
+        const summaryTextElement = document.getElementById('summary-text');
+        const restartBtnElement = document.getElementById('restart-btn');
+        const progressTextContainer = document.getElementById('progress-text-container');
+
+
+        function loadQuestion() {
+            answeredThisQuestion = false; // Reset flag for new question
+            feedbackAreaElement.style.display = 'none';
+            feedbackAreaElement.className = 'feedback'; // Reset feedback styling
+            nextBtnElement.style.display = 'none'; // Hide next button until answer is chosen
+
+            const currentQuestion = questions[currentQuestionIndex];
+            questionTextElement.textContent = currentQuestion.question;
+            optionsListElement.innerHTML = ''; // Clear previous options
+
+            progressTextContainer.textContent = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+
+            currentQuestion.options.forEach((option, index) => {
+                const li = document.createElement('li');
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = 'option';
+                radio.value = option;
+                radio.id = 'option' + index;
+                // radio.style.pointerEvents = 'none'; // Make radio itself unclickable, only the li
+
+                const label = document.createElement('label');
+                label.htmlFor = 'option' + index;
+                label.textContent = option;
+                
+                li.appendChild(radio);
+                li.appendChild(label);
+
+                li.addEventListener('click', () => handleOptionSelection(li, radio, option));
+                
+                optionsListElement.appendChild(li);
+            });
+        }
+
+        function handleOptionSelection(selectedLi, selectedRadio, userAnswer) {
+            if (answeredThisQuestion) return; // Prevent multiple selections/checks
+
+            answeredThisQuestion = true; // Mark question as answered
+
+            // Visually mark the selected option
+            selectedLi.classList.add('selected');
+            selectedRadio.checked = true;
+
+            const currentQuestion = questions[currentQuestionIndex];
+
+            // Disable all options immediately after selection
+            optionsListElement.querySelectorAll('li').forEach(li => {
+                li.style.cursor = 'default';
+                const radioInside = li.querySelector('input[type="radio"]');
+                if (radioInside) radioInside.disabled = true;
+            });
+
+            // Check answer and provide feedback
+            if (userAnswer === currentQuestion.answer) {
+                score++;
+                selectedLi.classList.remove('selected'); // Remove selected style
+                selectedLi.classList.add('correct-answer'); // Apply correct styling
+                feedbackAreaElement.innerHTML = "<strong>Correct!</strong> " + (currentQuestion.explanation || "");
+                feedbackAreaElement.className = 'feedback correct';
+            } else {
+                selectedLi.classList.remove('selected'); // Remove selected style
+                selectedLi.classList.add('incorrectly-selected'); // Apply incorrect styling to the user's choice
+
+                // Find and highlight the correct answer
+                optionsListElement.querySelectorAll('li').forEach(li => {
+                    const radioValue = li.querySelector('input[type="radio"]').value;
+                    if (radioValue === currentQuestion.answer) {
+                        li.classList.add('correct-answer');
+                    }
+                });
+
+                feedbackAreaElement.innerHTML = `<strong>Incorrect.</strong> The correct answer was: "<strong>${currentQuestion.answer}</strong>". <br>` + (currentQuestion.explanation || "");
+                feedbackAreaElement.className = 'feedback incorrect';
+            }
+            feedbackAreaElement.style.display = 'block';
+            nextBtnElement.style.display = 'inline-block'; // Show next button
+        }
+
+        nextBtnElement.addEventListener('click', () => {
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        });
+
+        restartBtnElement.addEventListener('click', () => {
+            currentQuestionIndex = 0;
+            score = 0;
+            resultsAreaElement.style.display = 'none';
+            quizAreaElement.style.display = 'block';
+            loadQuestion();
+        });
+
+        function showResults() {
+            quizAreaElement.style.display = 'none';
+            resultsAreaElement.style.display = 'block';
+            scoreTextElement.textContent = `Your Score: ${score} out of ${questions.length}`;
+            
+            let summaryMsg = "";
+            const percentage = (score / questions.length) * 100;
+            if (percentage >= 80) {
+                summaryMsg = "Excellent work! You have a strong understanding of the material.";
+            } else if (percentage >= 60) {
+                summaryMsg = "Good job! You have a good grasp of the key concepts.";
+            } else if (percentage >= 40) {
+                summaryMsg = "Fair effort. Consider reviewing the material for better understanding.";
+            } else {
+                summaryMsg = "It might be helpful to review the lecture notes more thoroughly.";
+            }
+            summaryTextElement.textContent = summaryMsg;
+        }
+
+        // Start the quiz
+        loadQuestion();
+    </script>
+</body>
+</html>

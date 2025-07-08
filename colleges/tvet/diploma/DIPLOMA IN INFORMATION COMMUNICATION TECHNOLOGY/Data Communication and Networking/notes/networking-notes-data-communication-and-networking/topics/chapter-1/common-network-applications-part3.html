@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Common Network Applications (Part 3: SMTP, POP3, IMAP4) - Networking Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <article class="document-content-wrapper">
+            <!-- Navigation (Top) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="common-network-applications-part2.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Applications (Part 2)</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 16 (Part 3)</span>
+                    </div>
+                    <a href="common-network-applications-part4.html" class="nav-button next-link-style"> <!-- Updated next link -->
+                        <span class="nav-text">Next: Applications (Part 4)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+                <div class="breadcrumbs">
+                    <a href="../../index.html">Home</a> > Common Network Applications (Part 3)
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="page-title">Common Network Applications (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- SMTP -->
+                <section class="content-section" id="smtp">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📤</span>
+                        <span class="heading-text">3. SMTP (Simple Mail Transfer Protocol)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The actual mail transfer is done through message transfer agents (MTAs). To send mail, a system must have the client MTA, and to receive mail, a system must have a server MTA. The formal protocol that defines the MTA client and server in the Internet is called the Simple Mail Transfer Protocol (SMTP).</p>
+                        <p><i>(Figure showing SMTP usage between sender, servers, and receiver)</i></p> <!-- Placeholder for image description -->
+                        <p>SMTP is used two times, between the sender and the sender's mail server and between the two mail servers. SMTP simply defines how commands and responses must be sent back and forth.</p>
+                        <h3 class="subsection-heading">Commands and Responses</h3>
+                        <p>SMTP uses commands and responses to transfer messages between an MTA client and an MTA server <i>(see Figure 26.17)</i>.</p>
+                        <p><i>(Figure 26.17 showing SMTP commands and responses)</i></p> <!-- Placeholder for image description -->
+                        <h4>Commands</h4>
+                        <p>Commands are sent from the client to the server. The format of a command is shown in Figure 26.18. It consists of a keyword followed by zero or more arguments. SMTP defines 14 commands. The first five are mandatory; every implementation must support these five commands. The next three are often used and highly recommended. The last six are seldom used.</p>
+                        <p><i>(Figure 26.18 showing command format)</i></p> <!-- Placeholder for image description -->
+                        <p><i>(Table showing SMTP commands)</i></p> <!-- Placeholder for table description -->
+                        <h4>Responses</h4>
+                        <p>Responses are sent from the server to the client. A response is a three digit code that may be followed by additional textual information. <i>(Table 26.8 lists some of the responses.)</i></p>
+                        <p><i>(Table 26.8 showing SMTP responses)</i></p> <!-- Placeholder for table description -->
+                        <h3 class="subsection-heading">Mail Transfer Phases</h3>
+                        <p>The process of transferring a mail message occurs in three phases: connection establishment, mail transfer, and connection termination.</p>
+                    </div>
+                </section>
+
+                <!-- POP3 -->
+                <section class="content-section" id="pop3">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📥</span>
+                        <span class="heading-text">4. POP3 (Post Office Protocol, version 3)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Post Office Protocol, version 3 (POP3) is simple and limited in functionality. The client POP3 software is installed on the recipient computer; the server POP3 software is installed on the mail server. Mail access starts with the client when the user needs to download e-mail from the mailbox on the mail server. The client opens a connection to the server on TCP port 110. It then sends its user name and password to access the mailbox. The user can then list and retrieve the mail messages, one by one.</p>
+                        <p>POP3 has two modes: the delete mode and the keep mode. In the delete mode, the mail is deleted from the mailbox after each retrieval. In the keep mode, the mail remains in the mailbox after retrieval. The delete mode is normally used when the user is working at her permanent computer and can save and organize the received mail after reading or replying. The keep mode is normally used when the user accesses her mail away from her primary computer (e.g., a laptop). The mail is read but kept in the system for later retrieval and organizing.</p>
+                        <p><i>(Figure showing POP3 interaction)</i></p> <!-- Placeholder for image description -->
+                    </div>
+                </section>
+
+                <!-- IMAP4 -->
+                <section class="content-section" id="imap4">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📨</span>
+                        <span class="heading-text">5. IMAP4 (Internet Mail Access Protocol, version 4)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Another mail access protocol is Internet Mail Access Protocol, version 4 (IMAP4). IMAP4 is similar to POP3, but it has more features; IMAP4 is more powerful and more complex.</p>
+                        <p>POP3 is deficient in several ways. It does not allow the user to organize her mail on the server; the user cannot have different folders on the server. In addition, POP3 does not allow the user to partially check the contents of the mail before downloading. IMAP4 provides the following extra functions:</p>
+                        <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">✅</span>
+                                <span class="item-text">A user can check the e-mail header prior to downloading.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">✅</span>
+                                <span class="item-text">A user can search the contents of the e-mail for a specific string of characters prior to downloading.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">✅</span>
+                                <span class="item-text">A user can partially download e-mail. This is especially useful if bandwidth is limited and the e-mail contains multimedia with high bandwidth requirements.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">✅</span>
+                                <span class="item-text">A user can create, delete, or rename mailboxes on the mail server.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">✅</span>
+                                <span class="item-text">A user can create a hierarchy of mailboxes in a folder for e-mail storage.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                 <!-- Key Points Section -->
+                <section class="key-points-section">
+                    <div class="key-points-container">
+                        <div class="key-points-header">
+                            <span class="key-points-icon">📝</span>
+                            <h3 class="key-points-title">Key Points to Remember (SMTP, POP3, IMAP4)</h3>
+                        </div>
+                        <div class="key-points-content">
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>SMTP is used for transferring mail between MTAs (client to server, server to server).</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>SMTP uses commands (client to server) and responses (server to client).</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>POP3 is a simple protocol for retrieving mail from a server (delete or keep mode).</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>IMAP4 is a more powerful mail access protocol allowing server-side organization, partial downloads, and header checking.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Navigation (Bottom) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="common-network-applications-part2.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Applications (Part 2)</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 16 (Part 3)</span>
+                    </div>
+                    <a href="common-network-applications-part4.html" class="nav-button next-link-style"> <!-- Updated next link -->
+                        <span class="nav-text">Next: Applications (Part 4)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+</body>
+</html>

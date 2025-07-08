@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Database Design - MS Access Course Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-components.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 50%;"></div>
+                        </div>
+                        <span class="progress-text">Chapter 3 of 6</span>
+                    </div>
+                    <a href="chapter-4-creation.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 3: Database Design</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: database-design-intro -->
+                <section id="database-design-intro" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">DESIGNING A DATABASE STRUCTURE</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Good database design makes the database easy to maintain. Data is stored in tables and each table contains data about only one subject, e.g., Customers.</p>
+                        <p>Before using Ms-Access to build tables, queries, forms, and other objects, it is advisable that you first sketch out and rework the design on a paper.</p>
+                    </div>
+                </section>
+                <!-- END: database-design-intro -->
+
+                <!-- START: design-steps -->
+                <section id="design-steps" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📝</span>
+                        <span class="heading-text">Basic Steps in Designing a Database</span>
+                    </h2>
+                    <div class="content-card">
+                        <ol class="enhanced-list">
+                            <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text"><strong>Determine the purpose of the database file and how it has to be used.</strong></span>
+                                <ul class="enhanced-list">
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Think about the questions that you would like the database to answer.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Gather the forms used to record the data.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Sketch out the reports you would like the database to produce.</span>
+                                    </li>
+                                </ul>
+                                <p>This helps you to determine what facts (Fields) will be stored in the database and what table each fact belongs to.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text"><strong>Determine the fields needed in the database.</strong></span>
+                                <p>Each field is a fact about a particular subject. E.g., if you are designing a database that will handle your customers, you might need to store the following facts: Company name, Address, City, State, & Phone no.</p>
+                                <p>Create a separate field for each of these facts.</p>
+                                <p>When determining the fields that are needed, ensure that the following design principles are observed:</p>
+                                <ul class="enhanced-list">
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Include all of the information you will need.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">Store the information in the smallest logical parts. E.g., a name is usually split into 2 or 3 fields; First Name, Middle Name & Last Name. This makes it easy to sort the data.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">The Fields should not be similar to each other.</span>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text"><strong>Determine the type of tables needed in the database.</strong></span>
+                                <p>Each table should contain information about one subject. The list of fields you have will enable you to know what tables you need.</p>
+                                <p>E.g., if you have a HireDate field, its subject is an employee, and so it belongs in the Employees table.</p>
+                                <p>You might have a table for Customers, a table for Products, and a table for Orders.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text"><strong>Identify the field or fields with unique values in each record.</strong></span>
+                                <p>In order for Ms-Access to connect information stored in separate tables; for instance, to connect a customer with all the customer's orders, each table in your database must include a Primary key (a field or set of fields that uniquely identifies each individual record in the table).</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">5.</span>
+                                <span class="item-text"><strong>Determine the relationships between tables.</strong></span>
+                                <p>After dividing your information into tables and identifying primary key fields, you need a way to tell Ms-Access how to bring related information back together again in meaningful ways. This is done by defining Relationships between the tables.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">6.</span>
+                                <span class="item-text"><strong>Refining the design.</strong></span>
+                                <p>After designing the tables, fields, and relationships you need, study the design and detect any mistakes that might remain. If there is any, change your database design before entering the data.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">7.</span>
+                                <span class="item-text"><strong>Entering data and creating other database objects.</strong></span>
+                                <p>After making sure that the table structures meet your needs, add your data to the tables.</p>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: design-steps -->
+
+                <!-- Same navigation at bottom -->
+                <nav class="document-nav">
+                    <div class="nav-links">
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Table of Contents</span>
+                        </a>
+                        <a href="chapter-2-components.html" class="nav-button">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous Section</span>
+                        </a>
+                        <div class="document-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 50%;"></div>
+                            </div>
+                            <span class="progress-text">Chapter 3 of 6</span>
+                        </div>
+                        <a href="chapter-4-creation.html" class="nav-button">
+                            <span class="nav-text">Next Section</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                </nav>
+            </main>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

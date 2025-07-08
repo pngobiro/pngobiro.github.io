@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 9: Common Network Applications - Data Communication and Networking</title>
+    <meta name="description" content="Explore common network applications like TELNET, Email (SMTP, POP3, IMAP), FTP, and HTTP, and their associated protocols.">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <article class="learning-module" data-module="9">
+        <nav class="module-nav">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="module8.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module 9 of 9</span>
+                </div>
+            </div>
+        </nav>
+
+        <header class="module-header">
+            <h1>Module 9: Common Network Applications</h1>
+            <section class="module-objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Describe TELNET and its function for virtual terminal service.</li>
+                    <li>Explain Electronic Mail services, including User Agents, SMTP, POP3, and IMAP.</li>
+                    <li>Understand File Transfer Protocol (FTP) and its operation.</li>
+                    <li>Describe Hypertext Transfer Protocol (HTTP) and its role in accessing web data.</li>
+                    <li>Outline the HTTP transaction process and message formats.</li>
+                </ul>
+            </section>
+        </header>
+
+        <main class="module-content">
+            <section class="content-section">
+                <h2>📚 COMMON NETWORK APPLICATIONS</h2>
+                <div class="content-block">
+                    <h3>1. TELNET</h3>
+                    <p>TELNET is an abbreviation for TErminaL NETwork. It is the standard TCP/IP protocol for virtual terminal service as proposed by the International Organization for Standards (ISO). TELNET enables the establishment of a connection to a remote system in such a way that the local terminal appears to be a terminal at the remote system. TELNET was designed at a time when most operating systems, such as UNIX, were operating in a timesharing environment. In such an environment, a large computer supports multiple users. The interaction between a user and the computer occurs through a terminal, which is usually a combination of keyboard, monitor, and mouse. Even a microcomputer can simulate a terminal with a terminal emulator.</p>
+                    <h4>Logging</h4>
+                    <p>In a timesharing environment, users are part of the system with some right to access resources. Each authorized user has an identification and probably, a password. The user identification defines the user as part of the system. To access the system, the user logs into the system with a user id or log-in name. The system also includes password checking to prevent an unauthorized user from accessing the resources. Figure 26.1 shows the logging process.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/telnet_login_process.png"
+                             alt="Diagram illustrating Local and remote log-in process for TELNET."
+                             width="600" height="300">
+                        <figcaption>Figure 26.1 Local and remote log-in</figcaption>
+                    </figure>
+                    <p>When a user logs into a local timesharing system, it is called local log-in. As a user types at a terminal or at a workstation running a terminal emulator, the keystrokes are accepted by the terminal driver. The terminal driver passes the characters to the operating system. The operating system, in turn, interprets the combination of characters and invokes the desired application program or utility. When a user wants to access an application program or utility located on a remote machine, she performs remote log-in. Here the TELNET client and server programs come into use. The user sends the keystrokes to the terminal driver, where the local operating system accepts the characters but does not interpret them. The characters are sent to the TELNET client, which transforms the characters to a universal character set called <i>network virtual terminal (NVT) characters</i> and delivers them to the local TCP/IP protocol stack. The commands or text, in NVT form, travel through the Internet and arrive at the TCP/IP stack at the remote machine. Here the characters are delivered to the operating system and passed to the TELNET server, which changes the characters to the corresponding characters understandable by the remote computer. However, the characters cannot be passed directly to the operating system because the remote operating system is not designed to receive characters from a TELNET server: It is designed to receive characters from a terminal driver. The solution is to add a piece of software called a <i>pseudoterminal driver</i> which pretends that the characters are coming from a terminal. The operating system then passes the characters to the appropriate application program.</p>
+
+                    <h3>2. ELECTRONIC MAIL</h3>
+                    <p>One of the most popular Internet services is electronic mail (e-mail). The designers of the Internet probably never imagined the popularity of this application program. At the beginning of the Internet era, the messages sent by electronic mail were short and consisted of text only; they let people exchange quick memos. Today, electronic mail is much more complex. It allows a message to include text, audio, and video. It also allows one message to be sent to one or more recipients.</p>
+                    <h4>Architecture</h4>
+                    <h5>User Agent</h5>
+                    <p>The first component of an electronic mail system is the user agent. It provides service to the user to make the process of sending and receiving a message easier.</p>
+                    <h5>Services Provided by a User Agent</h5>
+                    <p>A user agent is a software package (program) that composes, reads, replies to, and forwards messages. It also handles mailboxes. Figure 26.11 shows the services of a typical user agent.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/email_user_agent_services.png"
+                             alt="Diagram illustrating Services of user agent for email."
+                             width="600" height="300">
+                        <figcaption>Figure 26.11 Services of user agent</figcaption>
+                    </figure>
+                    <h6>Composing Messages</h6>
+                    <p>A user agent helps the user compose the e-mail message to be sent out. Most user agents provide a template on the screen to be filled in by the user. Some even have a built-in editor that can do spell checking, grammar checking, and other tasks expected from a sophisticated word processor. A user, of course, could alternatively use his or her favorite text editor or word processor to create the message and import it, or cut and paste it, into the user agent template.</p>
+                    <h6>Reading Messages</h6>
+                    <p>The second duty of the user agent is to read the incoming messages. When a user invokes a user agent, it first checks the mail in the incoming mailbox. Most user agents show a one-line summary of each received mail. Each e-mail contains the following fields.</p>
+                    <ol>
+                        <li>A number field.</li>
+                        <li>A flag field that shows the status of the mail such as new, already read but not replied to, or read and replied to.</li>
+                        <li>The size of the message.</li>
+                        <li>The sender.</li>
+                        <li>The optional subject field.</li>
+                    </ol>
+                    <h6>Replying to Messages</h6>
+                    <p>After reading a message, a user can use the user agent to reply to a message. A user agent usually allows the user to reply to the original sender or to reply to all recipients of the message. The reply message may contain the original message and the new message.</p>
+                    <h6>Forwarding Messages</h6>
+                    <p><i>Replying</i> is defined as sending a message to the sender or recipients of the copy. <i>Forwarding</i> is defined as sending the message to a third party. A user agent allows the receiver to forward the message, with or without extra comments, to a third party.</p>
+                    <h6>Handling Mailboxes</h6>
+                    <p>A user agent normally creates two mailboxes: an inbox and an outbox. Each box is a file with a special format that can be handled by the user agent. The inbox keeps all the received e-mails until they are deleted by the user. The outbox keeps all the sent e-mails until the user deletes them. Most user agents today are capable of creating customized mailboxes.</p>
+                    <h6>User Agent Types</h6>
+                    <p>There are two types of user agents: command-driven and GUI-based.</p>
+                    <ul>
+                        <li><strong>Command-Driven:</strong> Command-driven user agents belong to the early days of electronic mail. They are still present as the underlying user agents in servers. A command-driven user agent normally accepts a one-character command from the keyboard to perform its task. For example, a user can type the character <i>r</i>, at the command prompt, to reply to the sender of the message, or type the character <i>R</i> to reply to the sender and all recipients. Some examples of command-driven user agents are <i>mail</i>, <i>pine</i>, and <i>elm</i>.</li>
+                        <li><strong>GUI-Based:</strong> Modern user agents are GUI-based. They contain graphical-user interface (GUI) components that allow the user to interact with the software by using both the keyboard and the mouse. They have graphical components such as icons, menu bars, and windows that make the services easy to access. Some examples of GUI-based user agents are Eudora, Microsoft's Outlook, and Netscape.</li>
+                    </ul>
+                    <h6>Addresses</h6>
+                    <p>To deliver mail, a mail handling system must use an addressing system with unique addresses. In the Internet, the address consists of two parts: a local part and a domain name, separated by an @ sign</p>
+                    <ul>
+                        <li><strong>Local Part:</strong> The local part defines the name of a special file, called the user mailbox, where all the mail received for a user is stored for retrieval by the message access agent.</li>
+                        <li><strong>Domain Name:</strong> The second part of the address is the domain name. An organization usually selects one or more hosts to receive and send e-mail; the hosts are sometimes called <i>mail servers</i> or <i>exchangers</i>. The domain name assigned to each mail exchanger either comes from the DNS database or is a logical name (for example, the name of the organization).</li>
+                    </ul>
+                    <h4>3. SMTP</h4>
+                    <p>The actual mail transfer is done through message transfer agents. To send mail, a system must have the client MTA, and to receive mail, a system must have a server MTA. The formal protocol that defines the MTA client and server in the Internet is called the Simple Mail Transfer Protocol (SMTP).</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/smtp_range.png"
+                             alt="Diagram illustrating SMTP range in email transfer."
+                             width="600" height="300">
+                        <figcaption>Figure 26.16 SMTP range</figcaption>
+                    </figure>
+                    <p>SMTP is used two times, between the sender and the sender's mail server and between the two mail servers. SMTP simply defines how commands and responses must be sent back and forth.</p>
+                    <h5>Commands and Responses</h5>
+                    <p>SMTP uses commands and responses to transfer messages between an MTA client and an MTA server (see Figure 26.17).</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/smtp_commands_responses.png"
+                             alt="Diagram illustrating SMTP Commands and responses flow."
+                             width="600" height="300">
+                        <figcaption>Figure 26.17 Commands and responses</figcaption>
+                    </figure>
+                    <h6>Commands:</h6>
+                    <p>Commands are sent from the client to the server. The format of a command is shown in Figure 26.18. It consists of a keyword followed by zero or more arguments. SMTP defines 14 commands. The first five are mandatory; every implementation must support these five commands. The next three are often used and highly recommended. The last six are seldom used.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/smtp_command_format.png"
+                             alt="Diagram illustrating SMTP Command format."
+                             width="600" height="300">
+                        <figcaption>Figure 26.18 Command format</figcaption>
+                    </figure>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/smtp_commands_table.png"
+                             alt="Table listing SMTP Commands."
+                             width="600" height="300">
+                        <figcaption>Table 26.7 Commands</figcaption>
+                    </figure>
+                    <h6>Responses:</h6>
+                    <p>Responses are sent from the server to the client. A response is a three digit code that may be followed by additional textual information. Table 26.8 lists some of the responses.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/smtp_responses_table.png"
+                             alt="Table listing SMTP Responses."
+                             width="600" height="300">
+                        <figcaption>Table 26.8 Responses</figcaption>
+                    </figure>
+                    <h5>Mail Transfer Phases</h5>
+                    <p>The process of transferring a mail message occurs in three phases: connection establishment, mail transfer, and connection termination.</p>
+
+                    <h4>4. POP3</h4>
+                    <p>Post Office Protocol, version 3 (POP3) is simple and limited in functionality. The client POP3 software is installed on the recipient computer; the server POP3 software is installed on the mail server. Mail access starts with the client when the user needs to download e-mail from the mailbox on the mail server. The client opens a connection to the server on TCP port 110. It then sends its user name and password to access the mailbox. The user can then list and retrieve the mail messages, one by one.</p>
+                    <p>POP3 has two modes: the delete mode and the keep mode. In the delete mode, the mail is deleted from the mailbox after each retrieval. In the keep mode, the mail remains in the mailbox after retrieval. The delete mode is normally used when the user is working at her permanent computer and can save and organize the received mail after reading or replying. The keep mode is normally used when the user accesses her mail away from her primary computer (e.g., a laptop). The mail is read but kept in the system for later retrieval and organizing.</p>
+
+                    <h4>5. IMAP</h4>
+                    <p>Another mail access protocol is Internet Mail Access Protocol, version 4 (IMAP4). IMAP4 is similar to POP3, but it has more features; IMAP4 is more powerful and more complex.</p>
+                    <p>POP3 is deficient in several ways. It does not allow the user to organize her mail on the server; the user cannot have different folders on the server. In addition, POP3 does not allow the user to partially check the contents of the mail before downloading. IMAP4 provides the following extra functions:</p>
+                    <ol type="a">
+                        <li>A user can check the e-mail header prior to downloading.</li>
+                        <li>A user can search the contents of the e-mail for a specific string of characters prior to downloading.</li>
+                        <li>A user can partially download e-mail. This is especially useful if bandwidth is limited and the e-mail contains multimedia with high bandwidth requirements.</li>
+                        <li>A user can create, delete, or rename mailboxes on the mail server.</li>
+                        <li>A user can create a hierarchy of mailboxes in a folder for e-mail storage.</li>
+                    </ol>
+
+                    <h4>6. Web-Based Mail</h4>
+                    <p>E-mail is such a common application that some websites today provide this service to anyone who accesses the site. Two common sites are Hotmail and Yahoo. The idea is very simple. Mail transfer from Alice's browser to her mail server is done through HTTP. The transfer of the message from the sending mail server to the receiving mail server is still through SMTP. Finally, the message from the receiving server (the Web server) to Bob's browser is done through HTTP. The last phase is very interesting. Instead of POP3 or IMAP4, HTTP is normally used. When Bob needs to retrieve his e-mails, he sends a message to the website (Hotmail, for example). The website sends a form to be filled in by Bob, which includes the log-in name and the password. If the log-in name and password match, the e-mail is transferred from the Web server to Bob's browser in HTML format.</p>
+
+                    <h4>7. FTP</h4>
+                    <p>File Transfer Protocol (FTP) is the standard mechanism provided by TCP/IP for copying a file from one host to another. Although transferring files from one system to another seems simple and straightforward, some problems must be dealt with first. For example, two systems may use different file name conventions. Two systems may have different ways to represent text and data. Two systems may have different directory structures. All these problems have been solved by FTP in a very simple and elegant approach.</p>
+                    <p>FTP differs from other client/server applications in that it establishes two connections between the hosts. One connection is used for data transfer, the other for control information (commands and responses). Separation of commands and data transfer makes FTP more efficient. The control connection uses very simple rules of communication. We need to transfer only a line of command or a line of response at a time. The data connection, on the other hand, needs more complex rules due to the variety of data types transferred. However, the difference in complexity is at the FTP level, not TCP. For TCP, both connections are treated the same. FTP uses two well-known TCP ports: Port 21 is used for the control connection, and port 20 is used for the data connection.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/ftp_model.png"
+                             alt="Diagram illustrating Basic model of FTP operation."
+                             width="600" height="300">
+                        <figcaption>Figure 26.21 FTP</figcaption>
+                    </figure>
+                    <p>Figure 26.21 shows the basic model of FTP. The client has three components: user interface, client control process, and the client data transfer process. The server has two components: the server control process and the server data transfer process. The control connection is made between the control processes. The data connection is made between the data transfer processes.</p>
+                    <p>The control connection remains connected during the entire interactive FTP session. The data connection is opened and then closed for each file transferred. It opens each time commands that involve transferring files are used, and it closes when the file is transferred. In other words, when a user starts an FTP session, the control connection opens. While the control connection is open, the data connection can be opened and closed multiple times if several files are transferred.</p>
+                    <h5>Transmission Mode:</h5>
+                    <p>FTP can transfer a file across the data connection by using one of the following three transmission modes: stream mode, block mode, and compressed mode. The stream mode is the default mode. Data are delivered from FTP to TCP as a continuous stream of bytes. TCP is responsible for chopping data into segments of appropriate size. If the data are simply a stream of bytes (file structure), no end-of-file is needed. End-of-file in this case is the closing of the data connection by the sender. If the data are divided into records (record structure), each record will have a 1-byte end-of-record (EOR) character and the end of the file will have a 1-byte end-of-file (EOF) character. In block mode, data can be delivered from FTP to TCP in blocks. In this case, each block is preceded by a 3-byte header. The first byte is called the <i>block descriptor</i>; the next 2 bytes define the size of the block in bytes. In the compressed mode, if the file is big, the data can be compressed. The compression method normally used is run-length encoding. In this method, consecutive appearances of a data unit are replaced by one occurrence and the number of repetitions. In a text file, this is usually spaces (blanks). In a binary file, null characters are usually compressed.</p>
+
+                    <h4>8. HTTP</h4>
+                    <p>The Hypertext Transfer Protocol (HTTP) is a protocol used mainly to access data on the World Wide Web. HTTP functions as a combination of FTP and SMTP. It is similar to FTP because it transfers files and uses the services of TCP. However, it is much simpler than FTP because it uses only one TCP connection. There is no separate control connection; only data are transferred between the client and the server. HTTP is like SMTP because the data transferred between the client and the server look like SMTP messages. In addition, the format of the messages is controlled by MIME-like headers. Unlike SMTP, the HTTP messages are not destined to be read by humans; they are read and interpreted by the HTTP server and HTTP client (browser). SMTP messages are stored and forwarded, but HTTP messages are delivered immediately. The commands from the client to the server are embedded in a request message. The contents of the requested file or other information are embedded in a response message. HTTP uses the services of TCP on well-known port 80.</p>
+                    <h5>HTTP Transaction</h5>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/http_transaction.png"
+                             alt="Diagram illustrating HTTP transaction between client and server."
+                             width="600" height="300">
+                        <figcaption>Figure 27.12 HTTP transaction</figcaption>
+                    </figure>
+                    <p>Figure 27.12 illustrates the HTTP transaction between the client and server. Although HTTP uses the services of TCP, HTTP itself is a stateless protocol. The client initializes the transaction by sending a request message. The server replies by sending a response.</p>
+                    <h5>Messages</h5>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/http_messages_format.png"
+                             alt="Diagram illustrating HTTP Request and response messages format."
+                             width="600" height="300">
+                        <figcaption>Figure 27.13 Request and response messages</figcaption>
+                    </figure>
+                    <p>The formats of the request and response messages are similar; both are shown in Figure 27.13. A request message consists of a request line, a header, and sometimes a body. A response message consists of a status line, a header, and sometimes a body.</p>
+                    <h5>Request and Status Lines:</h5>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/http_request_status_lines.png"
+                             alt="Diagram illustrating HTTP Request and status lines format."
+                             width="600" height="300">
+                        <figcaption>Figure 27.14 Request and status lines</figcaption>
+                    </figure>
+                    <p>The first line in a request message is called a request line; the first line in the response message is called the status line. There is one common field, as shown in Figure 27.14.</p>
+                    <ol type="a">
+                        <li><strong>Request type.</strong> This field is used in the request message. In version 1.1 of HTTP, several request types are defined. The request type is categorized into <i>methods</i> as defined in Table 27.1.</li>
+                         <figure class="content-image">
+                            <img src="../assets/diagrams/http_methods_table.png"
+                                 alt="Table listing HTTP Methods."
+                                 width="600" height="300">
+                            <figcaption>Table 27.1 Methods</figcaption>
+                        </figure>
+                        <li><strong>URL.</strong> URL means Uniform Resource Locator</li>
+                        <li><strong>Version.</strong> The current version of HTTP</li>
+                        <li><strong>Status code.</strong> This field is used in the response message. The status code field is similar to those in the FTP and the SMTP protocols. It consists of three digits. Whereas the codes in the 100 range are only informational, the codes in the 200 range indicate a successful request. The codes in the 300 range redirect the client to another URL, and the codes in the 400 range indicate an error at the client site. Finally, the codes in the 500 range indicate an error at the server site. We list the most common codes in Table 27.2.</li>
+                        <li><strong>Status phrase.</strong> This field is used in the response message. It explains the status code in text form. Table 27.2 also gives the status phrase.</li>
+                         <figure class="content-image">
+                            <img src="../assets/diagrams/http_status_codes_table.png"
+                                 alt="Table listing HTTP Status codes."
+                                 width="600" height="300">
+                            <figcaption>Table 27.2 Status codes</figcaption>
+                        </figure>
+                    </ol>
+                </div>
+            </section>
+        </main>
+
+        <footer class="module-footer">
+            <section class="key-takeaways">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>TELNET provides virtual terminal access to remote systems.</li>
+                    <li>Email involves User Agents, SMTP (for sending), POP3/IMAP (for receiving).</li>
+                    <li>FTP is used for file transfer, using separate control and data connections.</li>
+                    <li>HTTP is used for accessing web data, simpler than FTP, using request and response messages.</li>
+                    <li>HTTP messages include request/status lines, headers, and body.</li>
+                </ul>
+            </section>
+
+            <section class="knowledge-check">
+                <h2>⚡ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <p><strong>Question 1:</strong> What is the primary function of TELNET?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>To provide virtual terminal service, allowing users to log in and work on remote machines.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 2:</strong> Name the protocols commonly used for receiving emails from a mail server.</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <ol>
+                                <li>POP3 (Post Office Protocol version 3)</li>
+                                <li>IMAP4 (Internet Mail Access Protocol version 4)</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 3:</strong> How does FTP differ from other client/server applications in terms of connections?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>FTP establishes two connections: one for data transfer and another for control information.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 4:</strong> What protocol is primarily used for accessing data on the World Wide Web?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>HTTP (Hypertext Transfer Protocol).</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 5:</strong> What are the main components of an HTTP request message?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <ol>
+                                <li>Request line</li>
+                                <li>Header</li>
+                                <li>Body (optional)</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="module8.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module 9 of 9</span>
+                    </div>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</body>
+</html>

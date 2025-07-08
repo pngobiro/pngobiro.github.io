@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Data Structures (I) (Part 1c) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-1b.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 7 (Part 1c)</span>
+                    </div>
+                    <a href="chapter-7-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 7 : Data Structures (I) (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-7-arrays-spreadsheets -->
+                <section id="section-7-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">7.3 Arrays and Spreadsheets</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>It is especially easy to manipulate arrays using spreadsheets. It allows very quick calculation and re-calculation of large matrices. This allows 'WHAT IF' analysis to be performed. Try this out during your Lotus 1-2-3 lessons.</p>
+                        <p>Arrays on paper is limited to 2 dimensional but multi-dimensional array can specify on spreadsheets and even in programming languages more than 2 dimensional arrays are required to store related variable. For example, in the analysis of aircraft movement such as pitching yaw and rolling.</p>
+                        <img src="../assets/images/ch7-multi-dim-array.jpg" alt="Diagram illustrating 1D, 2D, and 3D arrays">
+                        <p>How many Dimensional Array Required?</p> <!-- MMD typo: Reqrinet -->
+                        <p>Ans: (1, 2, 3, 4 or 5)</p>
+                        <p>Another use of the array is the storing numbers and string arrays respectively. String arrays can be operated on by concatenation of the elements in the respective arrays.</p> <!-- MMD typo: oporated -->
+                        <p>Array addresses, in the computer can be assigned by having two bytes for each number. For an array size of 4 * 7, the total number of bytes <span class="math-inline">$4 \times 7 \times 2 = 56$</span>, the first block of 14 bytes are the first row and next 14 bytes for the next row and so on.</p> <!-- MMD typo: areredy, 52, bres -->
+
+                        <h3 class="subsection-heading">7.3.1 Elementary Array Operations</h3>
+                        <p>(Examples of the use of arrays in Pascal programming.)</p>
+                        <div class="table-container">
+                             <table class="content-table">
+                                 <caption>Student Exam Marks</caption>
+                                <thead><tr><th>Student Number</th><th>Science</th><th>Geography</th><th>History</th><th>Mathematics</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1307</td><td>46</td><td>58</td><td>24</td><td>49</td></tr>
+                                    <tr><td>1314</td><td>71</td><td>42</td><td>54</td><td>83</td></tr>
+                                    <tr><td>1318</td><td>24</td><td>17</td><td>20</td><td>19</td></tr>
+                                    <tr><td>1321</td><td>83</td><td>46</td><td>53</td><td>78</td></tr>
+                                    <tr><td>1327</td><td>75</td><td>58</td><td>62</td><td>88</td></tr>
+                                    <tr><td>1334</td><td>40</td><td>32</td><td>6</td><td>47</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Example: {This program fills the array row by row.}</p>
+                        <pre class="code-block language-pascal"><code>For Row := 1 to 6 Do
+Begin
+  For Col := 1 to 5 Do
+    Readln(Table[Row, Col]);
+End;</code></pre>
+                        <p>Example: {This program fills the array column by column}</p>
+                         <pre class="code-block language-pascal"><code>For Col := 1 to 5 Do
+Begin
+  For Row := 1 to 6 Do
+    Readln(Table[Row, Col]);
+End;</code></pre>
+                    </div>
+                </section>
+                <!-- END: chapter-7-arrays-spreadsheets -->
+
+                <!-- START: chapter-7-lists -->
+                <section id="section-7-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📝</span>
+                        <span class="heading-text">7.4 Lists</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A record consists of different data items stored in an array.</p>
+                        <p>Below is a list consisting of four data items that are not linked. An example is given below.</p>
+                        <p>Four lists which must stay 'linked'.</p>
+                        <img src="../assets/images/ch7-linked-lists.jpg" alt="Diagram showing four separate lists (arrays) representing linked records: Name, Address, Tel, Post Code">
+                        <p>Four lists which must stay 'linked'</p>
+
+                        <p><strong>An Example of a Linked Record</strong></p>
+                        <p>Try the following quiz by matching the device to the explanation. This will provide a better understanding of linked records.</p>
+                        <ol>
+                            <li>Modem</li>
+                            <li>Front-End Processor</li>
+                            <li>Repeater</li> <!-- Added from explanation A -->
+                            <li>Multiplexer</li> <!-- Added from explanation C -->
+                        </ol>
+                        <ol type="A">
+                            <li>A device used to receive signals from one circuit and automatically repeat and amplify and reshape the signals to another circuit. (Repeater)</li>
+                            <li>A system which removes some of the processing load from a central computer, typically handling communication coordination functions before the data is sent to the central system for processing. (Front-End Processor)</li>
+                            <li>A device which enables several terminals to share a single communication line. (Multiplexer)</li> <!-- Added explanation C -->
+                            <li>A device which converts digital signals to analogue signals and vice versa. (Modem)</li> <!-- Added explanation D -->
+                        </ol>
+                        <!-- MMD Abstract tag likely indicates end of content for this section -->
+                    </div>
+                </section>
+                <!-- END: chapter-7-lists -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-7-part-1b.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 7 (Part 1c)</span>
+                    </div>
+                    <a href="chapter-7-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

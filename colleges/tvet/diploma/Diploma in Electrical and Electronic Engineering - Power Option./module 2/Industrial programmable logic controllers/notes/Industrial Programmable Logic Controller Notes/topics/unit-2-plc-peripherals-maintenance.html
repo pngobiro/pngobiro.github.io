@@ -1,0 +1,363 @@
+<!-- topics/unit-2-plc-peripherals-maintenance.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 2 Part 3: Peripherals, Safety, Installation, Faults</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-2-plc-programming.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 40%;"></div> <!-- Chunk 4/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 4 of 10</span>
+                    </div>
+                    <a href="unit-3-scada.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <!-- Re-state main topic as context -->
+                 <p style="text-align: center; font-size: 1rem; color: var(--muted-text-color); margin-bottom: 0;">TOPIC 2: PROGRAMMABLE LOGIC CONTROLLER (PLC)</p>
+                <h1 class="section-title">Peripherals, Safety, Installation & Maintenance</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: topic-2-peripherals -->
+                <section id="topic-2-peripherals" class="content-section" aria-labelledby="topic-2-peripherals-heading">
+                    <h2 id="topic-2-peripherals-heading" class="section-heading">
+                        <span class="heading-icon">🖱️</span>
+                        <span class="heading-text">PLC External peripherals</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A <dfn>peripheral</dfn> is a device that is connected to a host PLC, but not part of it. It expands the host's capabilities but does not form part of the core PLC architecture.</p>
+                        <p>Peripheral devices to the PLC and its I/O base(s) can be anything from a host computer and controls console to a motor drive unit or field unit switch.</p>
+                        <p>Printers end industrial terminals used for programming are also peripheral devices.</p>
+                        <p>These external operating devices, with their sometimes harsh and/or fast signal characteristics, must be able to interface with the PLC's sensitive microprocessor.</p>
+                        <p>There are three different types of peripherals:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Input</strong>, used to interact with, or send data to the computer/ PLC (mouse, keyboard etc)</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Output</strong>, which provides output to the user from the PLC/computer (Monitors, printers, displays etc)</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Storage</strong>, which stores data processed by the computer (Hard drives, flash drives etc)</span></li>
+                        </ul>
+
+                        <h3 class="subsection-heading">1) Printers</h3>
+                        <p>In computing, a printer is a peripheral which produces a representation of an electronic document on physical media such as paper. Many printers are local peripherals connected directly to a nearby personal computer. Individual printers are often designed to support both local and network connected users at the same time. Most Multifunction printers (MFPs) include printing, scanning, and copying among their many features.</p>
+                        <p>Printers can be classified by the printer technology they employ, with many techniques being available as commercial products.</p>
+                        <p>The choice of print technology has a great effect on the cost of the printer and cost of operation, speed, quality and permanence of documents and noise.</p>
+                        <p>A second aspect of printer technology that is often forgotten is resistance to alteration: liquid ink, such as from an inkjet head or fabric ribbon, becomes absorbed by the paper fibers, so documents printed with liquid ink are more difficult to alter than documents printed with toner or solid inks, which do not penetrate below the paper surface.</p>
+
+                        <h3 class="subsection-heading">2) Network interface controller (NIC)</h3>
+                        <p>NIC also known as network interface card, network adaptor is a computer hardware component that connects a PLC to a computer network.</p>
+                        <p>It is an expansion card that allows PLC/computers to communicate over a computer network</p>
+                        <p>The network controller implements the electronic circuitry required to communicate using a specific physical layer end data link layer standard such as Ethernet, WI-FI or token ring.</p>
+                        <p>This provides a base for a full network protocol stack, allowing communication among small groups of PLC/computers on the same LAN and large - scale network communication through routable protocols such as IP.</p>
+                        <p>The NIC may use one or more of two techniques to indicate the availability of packets to transfer.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Polling</strong> is where the CPU examines the status of the peripheral under program control</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Interrupt - driven I/O</strong> is where the peripheral alerts the CPU that it is ready to transfer data.</span></li>
+                        </ul>
+                        <p>and may use one or more of two techniques to transfer packet data:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Programmed input/output</strong> is where the CPU moves the data to or from the designated peripheral to memory.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Direct memory access</strong> is where an intelligent peripheral assumes control of the system bus to access memory directly. This removes load from the CPU but requires more logic on the card. In addition, a packet buffer on the NIC may not be required and latency can be reduced.</span></li>
+                        </ul>
+
+                        <h3 class="subsection-heading">3) Programmer interface</h3>
+                        <p>The programmer interface in the industrial design field of human machine interaction, is the space where interaction between human and machine occurs.</p>
+                        <p>The goal of this interaction is effective operation and control of the machine on the user's end, and feedback from the machine which aids the operator in making operational decisions.</p>
+                        <p>Examples of this broad concept of user interfaces include the interactive aspects of computer operating systems, hand tools, heavy machinery operator controls, and process controls.</p>
+                        <p>The user/programmer interface includes hardware (physical) and software (logical) components</p>
+                        <p>It provides a means of</p>
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Input</strong>, allowing the user to manipulate a system</span></li>
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Output</strong>, allowing the system to indicate the effects of the user's manipulation.</span></li>
+                        </ul>
+                        <p>Generally, the goal of human-machine interaction engineering is to produce a user interface which makes it easy, efficient, and enjoyable to operate a machine in the way which produces the desired result. This generally means that the operator needs to provide minimal input to achieve the desired output, and also that the machine minimizes undesired outputs to the human.</p>
+                        <p>With the increased use of personal computers and the relative decline in societal awareness of heavy machinery, the term user interface is generally assumed to mean the graphical user interface, while industrial control panel and machinery control design discussions more commonly refer to human-machine interfaces.</p>
+                    </div>
+                </section>
+                <!-- END: topic-2-peripherals -->
+
+                <!-- START: topic-2-safety -->
+                <section id="topic-2-safety" class="content-section" aria-labelledby="topic-2-safety-heading">
+                    <h2 id="topic-2-safety-heading" class="section-heading">
+                        <span class="heading-icon">🛡️</span>
+                        <span class="heading-text">PLC Systems and safety</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>An important standard is <strong>IEC (International Electro-technical Commission) 61508</strong>: functional safety of electrical/electronic programmable electronic safety-related systems.</p>
+                        <p>In order to provide functional safety of a machine or plant, the safety-related protective or control systems must function correctly and when a failure occurs it must operate so that the plant or machine is brought into a safe shut-down state.</p>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-safety -->
+
+                <!-- START: topic-2-fail-safe -->
+                <section id="topic-2-fail-safe" class="content-section" aria-labelledby="topic-2-fail-safe-heading">
+                    <h2 id="topic-2-fail-safe-heading" class="section-heading">
+                        <span class="heading-icon">⚠️</span>
+                        <span class="heading-text">Fail-safe design</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>Safety must be a priority in the design of a PLC system. Thus emergency stop buttons and safety guard switches must be hard wired and not depend on the PLC software for implementation so that in the situation where there is a failure of the stop switch or PLC, the system is automatically safe. The system must be <strong>fail-safe</strong>.</p>
+                        <p><strong>Fail-safe design</strong> is a method of designing control system such that if a critical component in the system fails, the system immediately becomes disabled.</p>
+                        <p>Hence, fail-safe design is the procedure or programming to ensure safety of the operator and processes.</p>
+                        <p>Fail-safe design rules of thumb for selecting No or NC devices are as follows:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>NO</strong> - when wiring switches or sensors that start actions, use normally open switches so there is a problem with the switch the process will not start.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>NC</strong> - When wiring switches that stop process use normally closed switches so if they fail the process will stop.</span></li>
+                         </ul>
+                         <p>The following program, START will override STOP and RUN will switch on as long as START is pressed.</p>
+                         <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-025-1.jpg" alt="Ladder Diagram showing Start contact in parallel with Run contact, both in series with Stop NC contact, controlling Run output coil. This is labelled Unsafe." class="content-image" style="max-width: 300px;">
+                               <figcaption>Unsafe start/stop program</figcaption>
+                          </figure>
+                         <p>With a PLC system, a stop signal can be provided by a switch as above</p>
+                         <p>This arrangement however is unsafe as an emergency stop because if there is fault and the switch cannot be operated, then no stop the system.</p>
+                         <p>What is required is a system that will still stop if a failure occurs in the stop switch.</p>
+                         <p>The program has the STOP switch as the open contacts. However, because the hardwired stop switch has normally closed contacts then the program has the signal to close the program contacts.</p>
+                          <figure style="text-align: center;">
+                               <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-025-2.jpg" alt="Ladder Diagram showing Start contact in parallel with Run contact, both in series with Stop NO contact, controlling Run output coil. This is labelled Safe." class="content-image" style="max-width: 300px;">
+                                <figcaption>Pressing the stop switch (Safer Design)</figcaption>
+                           </figure>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-fail-safe -->
+
+                <!-- START: topic-2-creation-phases -->
+                <section id="topic-2-creation-phases" class="content-section" aria-labelledby="topic-2-creation-phases-heading">
+                    <h2 id="topic-2-creation-phases-heading" class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">Phases of creating a PLC system</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This involves fives phases; design, selection and supply, programming, installation, commissioning.</p>
+                        <h3 class="subsection-heading">1. Phase 1 - Design</h3>
+                        <p>This is the designing of the system installation which include communication systems. In this stage, it shows all design basis documents, now the system will be constructed and commissioning of the same.</p>
+
+                        <h3 class="subsection-heading">2. Phase 2 - Selection and Supply</h3>
+                        <p>After the planning phase of the design, the equipment can be ordered. The first decision is the type of controller rack, mini, micro or software based. The decision will depend on:-</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Number of logical inputs and outputs</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Memory size</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Number of special I/O modules</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Method/techniques of communication - serial and networked communication allow the PLC to be programmed and talk to other PLC</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Availability of programming software and other tools that determine the programming and debugging</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Scan time - the shorter the scan time the higher the cost.</span></li>
+                        </ul>
+                        <p>The process of selecting a PLC follows the following steps</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Understand the process to be controlled</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Select the vendor/seller of PLC modules</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Plan the ladder logic for the control</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Count the program instructions and enter the values into the sheet.</span></li>
+                         </ul>
+
+                        <h3 class="subsection-heading">3. Phase 3 - Programming</h3>
+                        <p>This stage involves programming the PLC, depending on the language used. It will also depend on the type of programmer available.</p>
+                         <ol type="i" class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">i)</span><span class="item-text"><strong>PLC software for personal computers</strong> - Similar to the specialized programming units, but software runs on a multiuse, user supplied computer. This approach is typically preferred.</span></li>
+                            <li class="list-item"><span class="item-icon">ii)</span><span class="item-text"><strong>Hand held units (or integrated)</strong> - allow programming PLC using a calculator type interface. Often done using mnemonics.</span></li>
+                            <li class="list-item"><span class="item-icon">iii)</span><span class="item-text"><strong>Specialized programming units</strong> - effectively a portable computer that allows graphical editing of the ladder logic, and fast uploads/downloads/monitoring of the PLC</span></li>
+                         </ol>
+
+                        <h3 class="subsection-heading">4. Phase 4 - installation</h3>
+                        <p>This stage involves installing and placing all components of PLC system hardware and software in compliance with the design document. It entails the following phase/steps:</p>
+                        <ol type="i" class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">i)</span><span class="item-text"><strong>Panel/cabinet installation</strong> - The panel/cabinet installed should allow enough space for air circulation. Do not install PLC above equipment that generate large amount of heat. Do not install the PLC in a panel or cabinet with high voltage equipment. Provide a clear path for operation and maintenance.</span></li>
+                            <li class="list-item"><span class="item-icon">ii)</span><span class="item-text"><strong>Installation of CPU unit and I/O unit</strong> - The small PLC must be installed in the horizontal position for the big PLC before installing; the units have to be compiled one by one. To build a rack PLC, provide back plane (Back plane is a simple device having two functions. The first is to provide physical support for units to be mounted to it. The second is to provide the connectors and electrical pathways necessary for connecting the units mounted to it.</span></li>
+                            <li class="list-item"><span class="item-icon">iii)</span><span class="item-text"><strong>Installing the expansion unit or expansion I/O unit</strong> - expansion I/O unit are usually attached when amount of the devices to be controlled increase its amount over than capabilities of the existing I/O unit or attached when needed to a special need like temperature sensor. Insert the expansion I/O units connecting cable into the CPU units or expansion I/O unit expansion connector.</span></li>
+                            <li class="list-item"><span class="item-icon">iv)</span><span class="item-text"><strong>Installing I/O devices</strong> - I/O devices are attached at the place has been determined in the work plan and wiring diagram. For switches are usually attached at the panel while the sensor, solenoid and motor is usually placed at the machine to be controlled.</span></li>
+                            <li class="list-item"><span class="item-icon">v)</span><span class="item-text"><strong>Wiring and connection</strong> - Hanging ducts is used if power cables carrying more than 10A 400 v or 20A 220 V must be run alongside the I/O wiring (that is in parallel with it); at least 300 mm must be left between the power cables and the I/O wiring. Ensure proper grounding of all electrical installation. All electrical rack and machine element should be grounded to a central ground bus.</span></li>
+                        </ol>
+
+                         <h3 class="subsection-heading">5. Phase 5 - Commissioning</h3>
+                         <p>Commissioning of a PLC system involves</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Checking that all the cable connection between the PLC and the plant being controlled are complete, safe and to the required specifications and meeting standards.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Checking that the incoming power supply matches the voltage setting for which the PLC is set.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Checking that emergency stop buttons work.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Checking that all protective devices are set to their appropriate trip settings.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Checking that all I/O devices are connected to the correct I/O points and giving the correct signals.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Loading and testing the software.</span></li>
+                         </ul>
+                    </div>
+                </section>
+                <!-- END: topic-2-creation-phases -->
+
+                <!-- START: topic-2-fault-finding -->
+                <section id="topic-2-fault-finding" class="content-section" aria-labelledby="topic-2-fault-finding-heading">
+                    <h2 id="topic-2-fault-finding-heading" class="section-heading">
+                        <span class="heading-icon">🛠️</span>
+                        <span class="heading-text">Fault finding</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>With any PLC controlled plant, the major faults are likely to be with sensors, actuators and wiring rather than within the PLC itself.</p>
+                        <p>Of the fault within the PLC, most likely to be in the I/O channels or power supply rather than in the CPU</p>
+                        <p>For example, consider a single output device failing to turn on though the output LED is on. If testing of the PLC output voltage indicates that its normal then the fault might be a wiring fault or a device fault. If checking of the voltage at the device indicates the voltage there is normal then the fault is the device.</p>
+                        <p>Many PLCs provide built-in fault analysis procedure which carries out self-testing and display fault codes, with possibly a brief message, which can be translated by looking up the code in a list to give the source of the fault and possible methods of recovery.</p>
+
+                         <h3 class="subsection-heading">Fault detection technique</h3>
+                         <p>The following are some of the common fault detection techniques used.</p>
+                         <ol type="i" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">i)</span><span class="item-text"><strong>Timing checks</strong> - The term <strong>watchdog</strong> is used for a timing check that is carried out by the PLC to check that some function has been carried out within the normal time. If the function is not carried out within the normal time, then a fault is assumed to have occurred and the watch dog timer trips, setting off an alarm and perhaps closing down the PLC. As part of the internal diagnostic of PLC, watchdog timers are used to detect for faults.
+                                  <figure style="text-align: center;">
+                                       <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-027-1.jpg" alt="Ladder diagram example for a timing check (watchdog)." class="content-image" style="max-width: 300px;">
+                                       <figcaption>Watchdog Timer Ladder Example</figcaption>
+                                  </figure>
+                                  <p>Time check can also be built into the ladder logic program. This is where additional ladder rungs might included so that when a function starts, a timer is started. If the function does not complete when the timer finishes a fault is signaled.</p>
+                              </span></li>
+                             <li class="list-item"><span class="item-icon">ii)</span><span class="item-text"><strong>Last output set</strong> - This technique involves the use of status lamps to indicate the last output that has been set during a process which has come to a halt. Such lamps are built into the program so that as each output occurs a lamp comes on. The lamps on thus indicate which output are occurring. The program has to be designed to turn off previous status lamps and turn on a new status lamp as each new output is turned on.</span></li>
+                             <li class="list-item"><span class="item-icon">iii)</span><span class="item-text"><strong>Replication</strong> - replication check involves duplication i.e. replication, the PLC system. This could mean that the system repeats every operation twice and if it gets the same result it is assumed there is no fault. This procedure can detect transient fault. Alternatively, is to have duplicate PLC systems and compare the results given by the two systems. In the absence of the fault the two results should be the same, a fault showing up as a difference.</span></li>
+                             <li class="list-item"><span class="item-icon">iv)</span><span class="item-text"><strong>Expected values checks</strong> - Software errors can be detected by checking whether an expected value is obtained when a specific input occurs. If the expected value is not obtained then a fault is assumed to be occurring.</span></li>
+                         </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-2-fault-finding -->
+
+                <!-- START: topic-2-maintenance -->
+                <section id="topic-2-maintenance" class="content-section" aria-labelledby="topic-2-maintenance-heading">
+                    <h2 id="topic-2-maintenance-heading" class="section-heading">
+                        <span class="heading-icon">🔧</span>
+                        <span class="heading-text">Installation and Maintenance</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>The design of programmable controllers includes a number of rugged features that allow PLCs to be installed in almost any industrial environment.</p>
+                        <p><strong>System layout</strong> is the conscientious approach to placing and interconnecting components not only to satisfy the application, but also to ensure that the controller will operate trouble free in its environment.</p>
+                        <p>In addition to programmable controller equipment, the system layout also encompasses the other components that form the total system. These components include isolation transformers, auxiliary power supplies, safety control relays, and incoming line noise suppressors.</p>
+                        <p>Although programmable controllers are tough machines, a little foresight during their installation will ensure proper system operation.</p>
+                        <p>In a carefully constructed layout, these components are easy to access and maintain. Nevertheless, careful installation planning can increase system productivity and decrease maintenance problems.</p>
+                        <p>The best location for a programmable controller is near the machine or process that it will control, as long as temperature, humidity, and electrical noise are not problems.</p>
+                        <p>Placing the controller near the equipment and using remote I/O where possible will minimize wire runs and simplify start-up and maintenance</p>
+                        <p>Programmable controllers are designed to be easy to maintain, to ensure trouble-free operation. Still, several maintenance aspects should be considered once the system is in place and operational. Certain maintenance measures, if performed periodically, will minimize the chance of system malfunction.</p>
+                        <p><strong>Preventive maintenance</strong> of programmable controller systems includes only a few basic procedures, which will greatly reduce the failure rate of system components.</p>
+                        <p>Preventive maintenance for the PLC system should be scheduled with the regular machine or equipment maintenance, so that the equipment and controller are down for a minimum amount of time.</p>
+                        <p>However, the schedule for PLC preventive maintenance depends on the controller's environment-the harsher the environment, the more frequent the maintenance.</p>
+                        <p>The following are guidelines for preventive measures:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Periodically clean or replace any filters that have been installed in enclosures at a frequency dependent on the amount of dust in the area.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Do not allow dirt and dust to accumulate on the PLC's components; the central processing unit and I/O system are not designed to be dust proof. If dust builds up on heat sinks and electronic circuitry, it can obstruct heat dissipation, causing circuit malfunction.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Periodically check the connections to the I/O modules to ensure that all plugs, sockets, terminal strips, and modules have good connections. Also, check that the module is securely installed.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Ensure that heavy, noise-generating equipment is not located too close to the PLC.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Make sure that unnecessary items are kept away the equipment inside the enclosure.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">If the PLC system enclosure is in an environment that exhibits vibration, install a vibration detector that can interface with the PLC as a preventive measure. This way, the programmable controller can monitor high levels of vibration, which can lead to the loosening of connections</span></li>
+                         </ul>
+
+                        <h3 class="subsection-heading">Topic Questions</h3>
+                        <ol class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Define a programmable Logic Controller (PLC's).</span></li>
+                           <li class="list-item"><span class="item-icon">2.</span><span class="item-text">State the four steps in the operation of programmable logic controller (PLC).</span></li>
+                           <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Draw a labeled block diagram of the internal architecture of a Programmable Logic Controller (PLC) and state the function of each block.</span></li>
+                           <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Define ladder logic control system.</span></li>
+                           <li class="list-item"><span class="item-icon">5.</span><span class="item-text">With the aid of a block diagram, explain how a PLC process input from the sensors.</span></li>
+                           <li class="list-item"><span class="item-icon">6.</span><span class="item-text">Describe the following Programmable Logic Controller (PLC) system styles.
+                               <ol type="i">
+                                   <li>Unitary</li>
+                                   <li>Modular</li>
+                                   <li>Rack Mounting</li>
+                               </ol>
+                           </span></li>
+                           <li class="list-item"><span class="item-icon">7.</span><span class="item-text">With the aid of a diagram, explain how PLC's can be used to control water level in a tank.</span></li>
+                           <li class="list-item"><span class="item-icon">8.</span><span class="item-text">Explain why user interface is necessary in PLC's.</span></li>
+                           <li class="list-item"><span class="item-icon">9.</span><span class="item-text">Explain how fault-finding is carried out in PLC systems.</span></li>
+                           <li class="list-item"><span class="item-icon">10.</span><span class="item-text">Explain the operation of the following input devices, stating the form of the signal being sensed and the output: (a) reed switch, (b) incremental shaft encoder, (c) photoelectric transmissive switch, (d) diaphragm pressure switch</span></li>
+                           <li class="list-item"><span class="item-icon">11.</span><span class="item-text">Explain how the on-off operation and direction of a d.c. motor can be controlled by switches</span></li>
+                           <li class="list-item"><span class="item-icon">12.</span><span class="item-text">Explain the continuous updating and the mass input/output copying methods of processing inputs/outputs.</span></li>
+                           <li class="list-item"><span class="item-icon">13.</span><span class="item-text">Devise a timing watchdog program to be used to switch off a machine if faults occur in any of the systems controlling its actions.</span></li>
+                           <li class="list-item"><span class="item-icon">14.</span><span class="item-text">Devise ladder programs which can be used to:
+                               <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                   <li class="list-item"><span class="item-icon">-</span><span class="item-text">Maintain an output on, even when the input ceases and when there is a power failure.</span></li>
+                                   <li class="list-item"><span class="item-icon">-</span><span class="item-text">Switch on an output for a time of one cycle following a brief input.</span></li>
+                                   <li class="list-item"><span class="item-icon">-</span><span class="item-text">Switch on the power to a set of rungs.</span></li>
+                               </ul>
+                           </span></li>
+                           <li class="list-item"><span class="item-icon">15.</span><span class="item-text">Devise ladder programs for systems that will carry out the following tasks:
+                                <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Switch on an output 5 s after receiving an input and keep it on for the duration of that input.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Switch on an output for the duration of the input and then keep it on for a further 5 s .</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Switch on an output for 5 s after the start of an input signal</span></li>
+                                </ul>
+                           </span></li>
+                            <li class="list-item"><span class="item-icon">16.</span><span class="item-text">Devise ladder programs for systems that will carry out the following tasks:
+                                <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Give an output after a photocell sensor has given 10 pulse input signals as a result of detecting 10 objects passing in front of it.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Give an output when the number of people in a store reaches 100, there continually being people entering and leaving the store.</span></li>
+                                </ul>
+                            </span></li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: topic-2-maintenance -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <!-- Repeat exact same links as top navigation -->
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-2-plc-programming.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 40%;"></div> <!-- Chunk 4/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 4 of 10</span>
+                    </div>
+                    <a href="unit-3-scada.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1: Algebra - 1.3 Binomial Theorem - Engineering Mathematics I</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      svg: { fontCache: 'global' },
+      options: { skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre'] }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit1_algebra_part2_matrices.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section (1.2 Matrices)</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 20%;"></div> <!-- Example: Update as per total chunks -->
+                        </div>
+                        <span class="progress-text">Unit 1: Algebra - Part 3</span>
+                    </div>
+                    <a href="unit2_complex_numbers_part1_algebra.html" class="nav-button"> <!-- Link to next logical chunk (Start of Unit 2) -->
+                        <span class="nav-text">Next Section (Unit 2.1)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">UNIT - I: ALGEBRA (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: unit-1-binomial-theorem -->
+                <section id="unit-1-binomial-theorem" class="content-section" aria-labelledby="unit-1-binomial-theorem-heading">
+                    <h2 id="unit-1-binomial-theorem-heading" class="section-heading">
+                        <span class="heading-icon">➕</span>1.3 BINOMIAL THEOREM
+                    </h2>
+                    <div class="content-card">
+                        <h4 class="subsubsection-heading">Definition of Factorial Notation:</h4>
+                        <p>The Continued Product of first 'n' natural numbers is called n factorial and is denoted by n! or \(\lfloor n\). <br>
+                        i.e \(\lfloor n =1 \times 2 \times 3 \times \ldots \ldots . .(n-1) \times n\) <br>
+                        \(\lfloor 5 =1 \times 2 \times 3 \times 4 \times 5\) <br>
+                        \(\lfloor 5 =120\)</p>
+
+                        <h4 class="subsubsection-heading">Zero factorial:</h4>
+                        <p>We will require zero factorial for calculating any value which contains zero factorial. It does not make any sense to define it as the product of the integers from 1 to zero. So we define \(\lfloor 0 =1\).</p>
+
+                        <h4 class="subsubsection-heading">Definition of Permutation and Combination:</h4>
+                        <p>First we begin with the following problem. We want to select 2 Carrom players from among 5 players. Let us denote them by the letters A, B, C, D and E.</p>
+                        <p>To select 2 players, we shall first take A and then with him, associate B, C, D and E. That is AB, AC, AD and AE are four types of selection of 2 players. Also starting with B , we have BC, BD and BE , with C, CD and CE , and finally starting with D , we have DE only.</p>
+                        <p>So, totally there are 10 ways. If we denote the number of ways of selection of 2 players out of 5 players, symbolically denoted by \(5C_{2}=10\).</p>
+                        <p>Also, let us assume that the selected 2 players want to give pose for a photo. Two chairs are brought as shown below, there are two types of arrangements.</p>
+                        <table>
+                            <thead>
+                                <tr><th>Arrangement -1</th><th>Arrangement -2</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>A     B</td><td>B     A</td></tr>
+                                <tr><td>Chair -1     Chair -2</td><td>Chair -1     Chair -2</td></tr>
+                            </tbody>
+                        </table>
+                        <p>Thus we see that for one selection, there are two different arrangements, and so for the total of 10 selection, the total number of arrangements is 20.</p>
+                        <p>That is if the number of ways of arrangement of 2 players out of 5 players is denoted by \(5P_{2}\). We have \(5P_{2}=20\).</p>
+                        <p>The above "arrangement" and "selection" are usually called "permutation" and "combination".<br>
+                        Where \(nP_{r}\) is the number of ways of arrangement (or permutation) of " r " things out of ' n ' things. Also \(nC_{r}\) is the number of ways of selection (or combination) of "r" things out of " n " things.</p>
+                        <aside class="callout note" role="note">
+                            <h4 class="callout-title"><span class="callout-icon">💡</span>Note</h4>
+                            <p>The value of \(nP_{r}\) and \(nC_{r}\) are given below.<br>
+                            \(nP_{r}=\frac{\lfloor n}{\lfloor n-r}\) (or) \(\frac{n!}{(n-r)!}\) <br>
+                            \(nC_{r}=\frac{n!}{(n-r)!r!}\)</p>
+                        </aside>
+
+                        <h4 class="subsubsection-heading">BINOMIAL THEOREM</h4>
+                        <p>Binomial means an expression, consist of two numbers (or) terms connected by plus sign or minus sign.</p>
+                        <p>Example: \(x+y ; 2 x-y ; x^{3}-\frac{1}{x}\) etc.</p>
+                        <p>In binomial theorem, we deal with the powers of binomial expressions. From School Studies, we know that<br>
+                        \((x+a)^{2}=x^{2}+2 x a+a^{2}\) and <br>
+                        \((x+a)^{3}=x^{3}+3 x^{2} a+3 x a^{2}+a^{3}\)</p>
+                        <p>we can write the expansion of \((x+a)^{3}\) as below<br>
+                        \((x+a)^{3}=3 C_{0} x^{3} a^{0}+3 C_{1} x^{2} a^{1}+3 C_{2} x^{1} a^{2}+3 C_{3} x^{0} a^{3}\).<br>
+                        Where \(3 C_{0}=3 C_{3}=1 \quad nC_{r}=nC_{n-r}\)<br>
+                        Similarly for \((x+a)^{4}, (x+a)^{5}\) can be expanded as mentioned above.</p>
+
+                        <h4 class="subsubsection-heading">Binomial theorem for a positive integral index:</h4>
+                        <p>If " n " is any positive integer, then \((x+a)^{n}=x^{n}+nC_{1} x^{n-1} a+nC_{2} x^{n-2} a^{2}+\ldots .+nC_{r} x^{n-r} a^{r}+\ldots \ldots . .+a^{n}\).</p>
+                        <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">💡</span>Note</h4>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="item-icon">1.</span>The total number of terms in the expansion is \((n+1)\).</li>
+                                <li class="list-item"><span class="item-icon">2.</span>In each term, sum of the powers of x and a is equal to n.</li>
+                                <li class="list-item"><span class="item-icon">3.</span>The general term of \((x+a)^{n}\) is \(T_{r+1}=nC_{r} x^{n-r} a^{r}\) i.e \((r+1)^{th}\) term</li>
+                                <li class="list-item"><span class="item-icon">4.</span>If the power 'n' is an even integer, there is only one middle term which is at \((\frac{n}{2}+1)^{th}\) place and if 'n' is odd integer there are two middle terms, which are at \((\frac{n+1}{2})^{th}\) and \((\frac{n+3}{2})^{th}\) places.</li>
+                            </ol>
+                        </aside>
+
+                        <h4 class="subsubsection-heading">Binomial Theorem for rational index:</h4>
+                        <p>If x is numerically less than one and n any rational number, then <br>
+                        \((1+x)^{n}=1+n x+\frac{n(n-1)}{1 \times 2} x^{2}+\frac{n(n-1)(n-2)}{1 \times 2 \times 3} x^{3}+\ldots \ldots \ldots . .\)</p>
+                        <aside class="callout note" role="note">
+                           <h4 class="callout-title"><span class="callout-icon">💡</span>Note</h4>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="item-icon">1.</span>The number of terms in the expansion is infinite.</li>
+                                <li class="list-item"><span class="item-icon">2.</span>Here the notations \(nC_{0}, nC_{1}, nC_{2} \ldots \ldots\) etc are meaningless. Since n is a rational number.</li>
+                                <li class="list-item"><span class="item-icon">3.</span>Also here we consider, is expansions for negative integers upto -3 . When the values of 'n' are -1, -2, -3 the expansions are
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="item-icon">(i)</span> \((1-x)^{-1}=1+x+x^{2}+x^{3}+\ldots \ldots \ldots . .\)</li>
+                                        <li class="list-item"><span class="item-icon">(ii)</span> \((1+x)^{-1}=1-x+x^{2}-x^{3}+\ldots \ldots \ldots . .\)</li>
+                                        <li class="list-item"><span class="item-icon">(iii)</span> \((1-x)^{-2}=1+2 x+3 x^{2}+4 x^{3}+\ldots \ldots \ldots . .\)</li>
+                                        <li class="list-item"><span class="item-icon">(iv)</span> \((1+x)^{-2}=1-2 x+3 x^{2}-4 x^{3}+\ldots \ldots \ldots . .\)</li>
+                                        <li class="list-item"><span class="item-icon">(v)</span> \((1-x)^{-3}=1+3 x+6 x^{2}+10 x^{3}+\ldots \ldots \ldots . .\)</li>
+                                        <li class="list-item"><span class="item-icon">(vi)</span> \((1+x)^{-3}=1-3 x+6 x^{2}-10 x^{3}+\ldots \ldots \ldots . .\)</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </aside>
+                    </div>
+                </section>
+                <!-- END: unit-1-binomial-theorem -->
+
+                <!-- START: unit-1-binomial-theorem-worked-examples -->
+                <section id="unit-1-binomial-theorem-worked-examples" class="content-section worked-example" aria-labelledby="unit-1-binomial-theorem-worked-examples-heading">
+                    <h3 id="unit-1-binomial-theorem-worked-examples-heading" class="subsection-heading">WORKED EXAMPLES</h3>
+                    <h4 class="part-title">PART - A</h4>
+                    <div class="content-card">
+                        <p>1. Write down the number of terms in \(\left(x^{2}+\frac{2}{x}\right)^{11}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>The number of terms is \(n+1=11+1=12\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>2. Which term in \((3x-y)^{6}\) is the middle term.</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Here \(n=6\) (even) <br>
+                            Middle term \(=\left(\frac{n}{2}+1\right)\) <br>
+                            \(=\left(\frac{6}{2}+1\right)=3+1\) <br>
+                            \(=4^{\text {th }} \text { term }\) <br>
+                            \(\therefore\) 4th term is the middle term.</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>3. Write down the expansion for \((1-x)^{-1}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\((1-x)^{-1}=1+x+x^{2}+x^{3}+\ldots \ldots \ldots \ldots\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>4. Expand by using Binomial Theorem \((3x-2y)^{3}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\((3x-2y)^{3}=(3x)^{3}+3C_{1}(3x)^{2}(-2y)^{1}+3C_{2}(3x)^{1}(-2y)^{2}+(-2y)^{3}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>5. Which are the two middle terms in \(\left(2x^{2}+\frac{3}{x}\right)^{13}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Here \(n=13\) (odd) <br>
+                            Middle terms are \((\frac{n+1}{2})^{th}\) and \((\frac{n+3}{2})^{th}\). i.e \(\frac{13+1}{2}=\frac{14}{2}=7\) and <br>
+                            \(\frac{13+3}{2}=\frac{16}{2}=8\) <br>
+                            \(\therefore 7^{th}\) and \(8^{th}\) terms are two middle terms.</p>
+                        </div>
+                    </div>
+
+                    <h4 class="part-title">PART - B</h4>
+                    <div class="content-card">
+                        <p>1. Find the general term in the expansion of \(\left(x+\frac{1}{2x}\right)^{7}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Let \(\left(x+\frac{1}{2x}\right)^{7}=(X+A)^{n}\) <br>
+                            Where \(X=x ; n=7, \quad A=\frac{1}{2x}\) <br>
+                            general term \(T_{r+1}=nC_{r}X^{n-r}A^{r}\) <br>
+                            i.e \(T_{r+1}=7C_{r}x^{7-r}\left(\frac{1}{2x}\right)^{r}=7C_{r}x^{7-r}\frac{1}{2^{r}x^{r}}=7C_{r}\frac{x^{7-2r}}{2^{r}}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>2. Find the 5th term in the expansion of \(\left(x+\frac{1}{x}\right)^{8}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>The general term \(T_{r+1}=nC_{r}x^{n-r}a^{r}\) <br>
+                            Put \(r=4\), we get 5th term \(T_{5}\). Also \(x=x, a=\frac{1}{x}, n=8\). <br>
+                            \(T_{5} =8C_{4}x^{8-4}\left(\frac{1}{x}\right)^{4}\) <br>
+                            \(=8C_{4}x^{4}\left(\frac{1}{x}\right)^{4}\) <br>
+                            \(=8C_{4}x^{4}\frac{1}{x^{4}}\) <br>
+                            \(T_{5} =8C_{4}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>3. Expand in higher powers of x upto three terms \((1+3x)^{-2}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\((1+x)^{-2}=1-2 x+3 x^{2}-4 x^{3}+\ldots \ldots \ldots . .\) <br>
+                            where x = 3x only <br>
+                            \(\therefore(1+3x)^{-2} =1-2(3x)+3(3x)^{2}-4(3x)^{3}\) <br>
+                            \(=1-6x+27x^{2}-108x^{3}+\ldots \ldots . . .\)</p>
+                        </div>
+                    </div>
+
+                    <h4 class="part-title">PART - C</h4>
+                    <div class="content-card">
+                        <p>1. Find the middle terms in the expansion of \(\left(2x^{2}+\frac{1}{x}\right)^{11}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Since here 'n' is odd number, the total number of terms is even and so there are two middle terms. <br>
+                            \((\frac{n+1}{2})^{th}\) and \((\frac{n+3}{2})^{th}\) terms are middle terms. <br>
+                            \((\frac{11+1}{2})^{th}\) and \((\frac{11+3}{2})^{th}\) i.e \(6^{th}\) and \(7^{th}\) terms. <br>
+                            Put \(r=5\) and 6 in the general term. <br>
+                            Now, general term is \(T_{r+1}=nC_{r}x^{n-r}a^{r}\) <br>
+                            \(T_{5+1} =11C_{5}(2x^{2})^{11-5}\left(\frac{1}{x}\right)^{5}\) <br>
+                            \(T_{6} =11C_{5}(2x^{2})^{6}\left(\frac{1}{x}\right)^{5}=11C_{5}2^{6}x^{12}\frac{1}{x^{5}}=11C_{5}2^{6}x^{7}\)</p>
+                            <p>Put \(r=6\) <br>
+                            \(T_{6+1} =11C_{6}(2x^{2})^{11-6}\left(\frac{1}{x}\right)^{6}\) <br>
+                            \(T_{7} =11C_{6}(2x^{2})^{5}\left(\frac{1}{x}\right)^{6}=11C_{6}2^{5}x^{10}\frac{1}{x^{6}}=11C_{6}2^{5}x^{4}\)</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>2. Find the co-efficient of \(x^{32}\) in the expansion of \(\left(x^{4}-\frac{1}{x^{3}}\right)^{15}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Now, general terms is \(T_{r+1}=nC_{r}x^{n-r}a^{r}\) <br>
+                            \(T_{r+1} =15C_{r}(x^{4})^{15-r}\left(\frac{-1}{x^{3}}\right)^{r}\) <br>
+                            \(=15C_{r}x^{60-4r}(-1)^{r}x^{-3r}\) <br>
+                            \(T_{r+1} =15C_{r}(-1)^{r}x^{60-7r} \quad \ldots \ldots \ldots . .(i)\)</p>
+                            <p>To find the co-efficient of \(x^{32}\), put <br>
+                            \(32 =60-7r\) <br>
+                            \(7r =60-32\) <br>
+                            \(7r =28\) <br>
+                            \(r =\frac{28}{7}\) <br>
+                            \(r =4\)</p>
+                            <p>Applying \(r=4\) in the equation (i), we get <br>
+                            \(T_{4+1}=15C_{4}(-1)^{4}x^{60-7(4)}\) <br>
+                            \(T_{5}=15C_{4}x^{32}\) <br>
+                            \(\therefore\) co-efficient of \(x^{32}\) is \(15C_{4}\).</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>3. Find the term independent of x in the expansion of \(\left(x-\frac{1}{x}\right)^{10}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>Now, general term \(T_{r+1}=nC_{r}x^{n-r}a^{r}\) <br>
+                            \(T_{r+1} =10C_{r}x^{10-r}\left(\frac{-1}{x}\right)^{r}\) <br>
+                            \(=10C_{r}x^{10-r}(-1)^{r}x^{-r}\) <br>
+                            \(T_{r+1} =10C_{r}(-1)^{r}x^{10-2r} \ldots \ldots \ldots . .(i)\)</p>
+                            <p>To find independent term, put \(10-2r=0\) <br>
+                            i.e \(10-2r=0\) <br>
+                            \(10 =2r\) <br>
+                            \(5 =r, \quad r=5\)</p>
+                            <p>Put \(r=5\) in equation (i) we get <br>
+                            \(T_{5+1} =10C_{5}(-1)^{5}x^{10-2(5)}\) <br>
+                            \(=10C_{5}(-1)x^{0}\) <br>
+                            \(T_{6} =-10C_{5}\) i.e The term independent of x is \(-10C_{5}\).</p>
+                        </div>
+                    </div>
+                    <div class="content-card">
+                        <p>4. Write the first three terms in the expansion of \((3-4x)^{-3}\).</p>
+                        <div class="solution">
+                            <p>Solution:</p>
+                            <p>\((3-4x)^{-3} =3^{-3}\left(1-\frac{4}{3}x\right)^{-3}\) <br>
+                            \(=\frac{1}{3^{3}}\left[1+(-3)\left(-\frac{4}{3}x\right)+\frac{(-3)(-3-1)}{1.2}\left(\frac{-4}{3}x\right)^{2}+\ldots \ldots \ldots . .\right]\) <br>
+                            \(=\frac{1}{27}\left[1+4x+\frac{(-3)(-4)}{2}\left(\frac{16x^{2}}{9}\right)+\ldots \ldots \ldots .\right]\) <br>
+                            \(=\frac{1}{27}\left[1+4x+\frac{32x^{2}}{3}+\ldots \ldots . .\right]\)</p>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: unit-1-binomial-theorem-worked-examples -->
+
+                <!-- START: unit-1-exercises -->
+                <section id="unit-1-exercises" class="content-section" aria-labelledby="unit-1-exercises-heading">
+                    <h2 id="unit-1-exercises-heading" class="section-heading"><span class="heading-icon">✏️</span>EXERCISES</h2>
+                    <div class="content-card">
+                        <h4 class="part-title">PART - A</h4>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span>Solve \(\left|\begin{array}{cc}x & 2 \\ x & 3x\end{array}\right|=0\).</li>
+                            <li class="list-item"><span class="item-icon">2.</span>Solve \(\left|\begin{array}{ll}x & 8 \\ 2 & x\end{array}\right|=0\).</li>
+                            <li class="list-item"><span class="item-icon">3.</span>Find the value of the determinant \(\left|\begin{array}{cc}\sin \theta & -\cos \theta \\ \cos \theta & \sin \theta\end{array}\right|\).</li>
+                            <li class="list-item"><span class="item-icon">4.</span>Find the value of the minor of 3 in the determinant \(\left|\begin{array}{ccc}1 & 2 & -1 \\ 3 & 4 & 1 \\ 5 & -1 & 0\end{array}\right|\).</li>
+                            <li class="list-item"><span class="item-icon">5.</span>Find the co-factor value of 5 in the determinant \(\left|\begin{array}{ccc}1 & 1 & 3 \\ -1 & 0 & 5 \\ 4 & 2 & 0\end{array}\right|\).</li>
+                            <li class="list-item"><span class="item-icon">6.</span>If \(A=\left[\begin{array}{ccc}2 & 1 & -1 \\ 0 & 2 & 1\end{array}\right], B=\left[\begin{array}{ccc}2 & 2 & 4 \\ 10 & 0 & 4\end{array}\right]\) find \(A-B\).</li>
+                            <li class="list-item"><span class="item-icon">7.</span>Show that the matrix \(\left[\begin{array}{ccc}1 & -2 & 3 \\ 0 & 1 & 3 \\ 2 & -4 & 6\end{array}\right]\) is singular.</li>
+                            <li class="list-item"><span class="item-icon">8.</span>Find the adjoint of \(\left[\begin{array}{cc}3 & 2 \\ -3 & 4\end{array}\right]\).</li>
+                            <li class="list-item"><span class="item-icon">9.</span>How many terms are there in the expansion of \((2x-y)^{15}\).</li>
+                            <li class="list-item"><span class="item-icon">10.</span>Which are the middle terms in the expansion of \(\left(3x^{2}-\frac{1}{x}\right)^{21}\).</li>
+                            <li class="list-item"><span class="item-icon">11.</span>Expand upto three terms of \((1+x)^{-3}\).</li>
+                            <li class="list-item"><span class="item-icon">12.</span>Find the rank of \(\left(\begin{array}{cc}1 & 2 \\ -3 & -6\end{array}\right)\).</li>
+                            <li class="list-item"><span class="item-icon">13.</span>Find the rank of \(\left(\begin{array}{ll}-5 & -6 \\ 20 & 24\end{array}\right)\).</li>
+                            <li class="list-item"><span class="item-icon">14.</span>Find the rank of \(\left(\begin{array}{ccc}2 & 3 & 5 \\ 4 & 1 & -8\end{array}\right)\).</li>
+                            <li class="list-item"><span class="item-icon">15.</span>Find the rank of \(\left(\begin{array}{cc}1 & 2 \\ 3 & -8 \\ -4 & 5\end{array}\right)\).</li>
+                            <li class="list-item"><span class="item-icon">16.</span>Find the rank of \(\left(\begin{array}{ccc}1 & 1 & -1 \\ 2 & 1 & 0 \\ -1 & 2 & 3\end{array}\right)\).</li>
+                        </ol>
+                    </div>
+                    <div class="content-card">
+                        <h4 class="part-title">PART - B</h4>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span>Find the value of 'x' if \(\left(\begin{array}{ccc}1 & -1 & 2 \\ 5 & 3 & x \\ 2 & 1 & 4\end{array}\right)=0\).</li>
+                            <li class="list-item"><span class="item-icon">2.</span>Solve by using Cramer's rule: \(x-y=1; 2x-3y=-1\).</li>
+                            <li class="list-item"><span class="item-icon">3.</span>If \(A=\left[\begin{array}{cc}2 & 1 \\ -1 & 0\end{array}\right], B=\left[\begin{array}{ll}2 & 0 \\ 1 & 5\end{array}\right]\) find \(AB\).</li>
+                            <li class="list-item"><span class="item-icon">4.</span>Find the inverse of \(\left[\begin{array}{cc}2 & 3 \\ -1 & 4\end{array}\right]\).</li>
+                            <li class="list-item"><span class="item-icon">5.</span>Find x if the matrix \(\left[\begin{array}{ccc}1 & 2 & 3 \\ 5 & -1 & -2 \\ 2 & x & 6\end{array}\right]\) is singular.</li>
+                            <li class="list-item"><span class="item-icon">6.</span>Find the general term in the expansion of \(\left(x+\frac{2}{x^{2}}\right)^{10}\).</li>
+                            <li class="list-item"><span class="item-icon">7.</span>Find the 5th term in the expansion of \(\left(x^{2}+\frac{1}{x}\right)^{15}\).</li>
+                            <li class="list-item"><span class="item-icon">8.</span>Write the first 3 terms of \((1-2x)^{-2}\).</li>
+                            <li class="list-item"><span class="item-icon">9.</span>Find the rank of \(\left(\begin{array}{ccc}3 & -4 & 1 \\ -6 & 8 & -2\end{array}\right)\).</li>
+                            <li class="list-item"><span class="item-icon">10.</span>Find the rank of \(\left(\begin{array}{cc}1 & -2 \\ -3 & 6 \\ 5 & -10\end{array}\right)\).</li>
+                            <li class="list-item"><span class="item-icon">11.</span>Find the rank of \(\left(\begin{array}{ccc}2 & 5 & 7 \\ 7 & 1 & 6 \\ 5 & -4 & -1\end{array}\right)\).</li>
+                            <li class="list-item"><span class="item-icon">12.</span>Find the rank of \(\left(\begin{array}{ccc}-3 & 2 & 0 \\ 7 & -1 & 11 \\ 5 & 4 & 22\end{array}\right)\).</li>
+                        </ol>
+                    </div>
+                    <div class="content-card">
+                        <h4 class="part-title">PART - C</h4>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span>Solve: \(3x-y+2z=8; x-y+z=2\) and \(2x+y-z=1\) using Cramer's rule. (Note: original text had 2x, likely typo for 2z)</li>
+                            <li class="list-item"><span class="item-icon">2.</span>Solve: \(x+2y-z=-3; 3x+y+z=4\) and \(x-y+2z=6\), using Cramer's rule.</li>
+                            <li class="list-item"><span class="item-icon">3.</span>Find the inverse of \(\left(\begin{array}{ccc}1 & -1 & 1 \\ 2 & -3 & -3 \\ 6 & -2 & -1\end{array}\right)\).</li>
+                            <li class="list-item"><span class="item-icon">4.</span>If \(A=\left(\begin{array}{cc}3 & 6 \\ 1 & -2\end{array}\right)\) and \(B=\left(\begin{array}{ll}5 & 0 \\ 2 & 3\end{array}\right)\) verify \((AB)^{-1}=B^{-1}A^{-1}\).</li>
+                            <li class="list-item"><span class="item-icon">5.</span>If \(A=\left[\begin{array}{ccc}1 & 2 & 3 \\ 3 & 1 & 2 \\ 1 & -1 & 0\end{array}\right]\) and \(B=\left[\begin{array}{ccc}-1 & 1 & 0 \\ 0 & 1 & 2 \\ 2 & 1 & 3\end{array}\right]\) find \(AB\) and \(BA\).</li>
+                            <li class="list-item"><span class="item-icon">6.</span>If \(A=\left(\begin{array}{cc}3 & -5 \\ -4 & 2\end{array}\right)\) show that \(A^{2}-5A-14I=0\).</li>
+                            <li class="list-item"><span class="item-icon">7.</span>Find the rank of the matrix \(\left[\begin{array}{ccc}1 & 2 & 3 \\ 2 & 4 & 7 \\ 3 & 6 & 10\end{array}\right]\).</li>
+                            <li class="list-item"><span class="item-icon">8.</span>Find the rank of the matrix \(\left[\begin{array}{cccc}1 & 2 & 1 & 0 \\ -2 & 4 & 3 & 0 \\ 1 & 0 & 2 & -8\end{array}\right]\).</li>
+                            <li class="list-item"><span class="item-icon">9.</span>Find the middle terms in the expansion of \(\left(x^{3}+\frac{2}{x^{3}}\right)^{11}\).</li>
+                            <li class="list-item"><span class="item-icon">10.</span>Find the co-efficient of \((x^{-5})\) in the expansion of \(\left(x-\frac{3}{5x^{2}}\right)^{7}\).</li>
+                            <li class="list-item"><span class="item-icon">11.</span>Find the term independent of x in the expansion of \(\left(x+\frac{1}{x}\right)^{10}\).</li>
+                            <li class="list-item"><span class="item-icon">12.</span>Find the term independent of x in the expansion of \(\left(3 \sqrt{x}-\frac{2}{x^{2}}\right)^{10}\).</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: unit-1-exercises -->
+
+                <!-- START: unit-1-answers -->
+                <section id="unit-1-answers" class="content-section answer-section" aria-labelledby="unit-1-answers-heading">
+                    <h2 id="unit-1-answers-heading" class="section-heading"><span class="heading-icon">✔️</span>ANSWERS</h2>
+                    <div class="content-card">
+                        <h4 class="part-title">PART - A</h4>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1)</span> \(x=0, \frac{2}{3}\)</li>
+                            <li class="list-item"><span class="item-icon">2)</span> \(x=+4,-4\)</li>
+                            <li class="list-item"><span class="item-icon">3)</span> one</li>
+                            <li class="list-item"><span class="item-icon">4)</span> - 1</li>
+                            <li class="list-item"><span class="item-icon">5)</span> +2</li>
+                            <li class="list-item"><span class="item-icon">6)</span> \(\left[\begin{array}{ccc}0 & -1 & -5 \\ -10 & 2 & -3\end{array}\right]\)</li>
+                            <li class="list-item"><span class="item-icon">8)</span> \(\left[\begin{array}{cc}4 & -2 \\ 3 & 3\end{array}\right]\)</li>
+                            <li class="list-item"><span class="item-icon">9)</span> 16</li>
+                            <li class="list-item"><span class="item-icon">10)</span> 11th and 12th</li>
+                            <li class="list-item"><span class="item-icon">11)</span> \(1-3x+6x^2\)</li>
+                            <li class="list-item"><span class="item-icon">12)</span> 1</li>
+                            <li class="list-item"><span class="item-icon">13)</span> 1</li>
+                            <li class="list-item"><span class="item-icon">14)</span> 2</li>
+                            <li class="list-item"><span class="item-icon">15)</span> 2</li>
+                            <li class="list-item"><span class="item-icon">16)</span> 3</li>
+                        </ol>
+                    </div>
+                    <div class="content-card">
+                        <h4 class="part-title">PART - B</h4>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1)</span> \(x=10\)</li>
+                            <li class="list-item"><span class="item-icon">2)</span> \(x=4; y=3\)</li>
+                            <li class="list-item"><span class="item-icon">3)</span> \(\left[\begin{array}{cc}5 & 5 \\ -2 & 0\end{array}\right]\)</li>
+                            <li class="list-item"><span class="item-icon">4)</span> \(\frac{1}{11}\left[\begin{array}{cc}4 & -3 \\ 1 & 2\end{array}\right]\)</li>
+                            <li class="list-item"><span class="item-icon">5)</span> \(x=\frac{68}{17}\)</li>
+                            <li class="list-item"><span class="item-icon">6)</span> \(10C_{r}x^{10-3r}2^{r}\)</li>
+                            <li class="list-item"><span class="item-icon">7)</span> \(15C_{4}x^{30-3r}\) (This seems to be the general term \(T_{r+1}\) for the r=4 case, specific calculation for \(T_5\) would be \(15C_4 x^{22}(1/x)^4 = 15C_4 x^{18}\) based on typical expansion)</li>
+                            <li class="list-item"><span class="item-icon">8)</span> \(1+4x+12x^{2}\)</li>
+                            <li class="list-item"><span class="item-icon">9)</span> 1</li>
+                            <li class="list-item"><span class="item-icon">10)</span> 1</li>
+                            <li class="list-item"><span class="item-icon">11)</span> 2</li>
+                            <li class="list-item"><span class="item-icon">12)</span> 2</li>
+                        </ol>
+                    </div>
+                    <div class="content-card">
+                        <h4 class="part-title">PART - C</h4>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1)</span> (1,3,4)</li>
+                            <li class="list-item"><span class="item-icon">2)</span> (1,-1,2)</li>
+                            <li class="list-item"><span class="item-icon">3)</span> \(-\frac{1}{15}\left[\begin{array}{ccc}-9 & -3 & 0 \\ -16 & -7 & 5 \\ -22 & -4 & 5\end{array}\right]\)</li>
+                            <li class="list-item"><span class="item-icon">5)</span> \(AB=\left[\begin{array}{ccc}5 & 6 & 13 \\ 1 & 6 & 8 \\ -1 & 0 & -2\end{array}\right]\) ; \(BA=\left[\begin{array}{ccc}2 & -1 & -1 \\ 5 & -1 & 2 \\ 8 & 2 & 8\end{array}\right]\)</li>
+                            <li class="list-item"><span class="item-icon">7)</span> rank=2</li>
+                            <li class="list-item"><span class="item-icon">8)</span> rank=3</li>
+                            <li class="list-item"><span class="item-icon">9)</span> \(11C_{5}32x^{3}, 11C_{6}\frac{64}{x^{3}}\)</li>
+                            <li class="list-item"><span class="item-icon">10)</span> \(7C_{4}\left(\frac{-3}{5}\right)^{4}\) (Corrected to C(7,4) as per general term, index for (-3/5) will be 4 if x^-5 is the target) </li>
+                            <li class="list-item"><span class="item-icon">11)</span> \(10C_{5}\)</li>
+                            <li class="list-item"><span class="item-icon">12)</span> \(10C_{2}3^{8}(-2)^{2}\) (Corrected to include powers of coefficients)</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: unit-1-answers -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit1_algebra_part2_matrices.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section (1.2 Matrices)</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
+                        <span class="progress-text">Unit 1: Algebra - Part 3</span>
+                    </div>
+                    <a href="unit2_complex_numbers_part1_algebra.html" class="nav-button">
+                        <span class="nav-text">Next Section (Unit 2.1)</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

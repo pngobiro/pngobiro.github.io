@@ -1,0 +1,143 @@
+      
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 8 - Advanced Page Replacement</title>
+  <meta name="description" content="LRU approximations, second chance, and counting-based algorithms.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="8">
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module7.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 8 of 16</span>
+        </div>
+        <a href="module9.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>📚 Advanced Page Replacement</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Understand LRU Approximations</li>
+          <li>Describe Additional-Reference-Bits, Second-Chance, and Enhanced Second-Chance Algorithms.</li>
+          <li>Explain Counting-Based Page Replacement</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+
+      <section>
+        <h2>📚 LRU-Approximation Page Replacement</h2>
+          <ul>
+            <li>Unfortunately full implementation of LRU requires hardware support, and few systems provide the full hardware support necessary.</li>
+            <li>However many systems offer some degree of HW support, enough to approximate LRU fairly well. ( In the absence of ANY hardware support, FIFO might be the best available choice. )</li>
+            <li>In particular, many systems provide a reference bit for every entry in a page table, which is set anytime that page is accessed. Initially all bits are set to zero, and they can also all be cleared at any time. One bit of precision is enough to distinguish pages that have been accessed since the last clear from those that have not, but does not provide any finer grain of detail.</li>
+          </ul>
+      </section>
+
+      <section>
+        <h2>📚 Additional-Reference-Bits Algorithm</h2>
+        <ul>
+          <li>Finer grain is possible by storing the most recent 8 reference bits for each page in an 8-bit byte in the page table entry, which is interpreted as an unsigned int.
+            <ul>
+              <li>At periodic intervals ( clock interrupts ), the OS takes over, and right-shifts each of the reference bytes by one bit.</li>
+              <li>The high-order (leftmost ) bit is then filled in with the current value of the reference bit, and the reference bits are cleared.</li>
+              <li>At any given time, the page with the smallest value for the reference byte is the LRU page.</li>
+            </ul>
+          </li>
+          <li>Obviously the specific number of bits used and the frequency with which the reference byte is updated are adjustable, and are tuned to give the fastest performance on a given hardware platform.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Second-Chance Algorithm</h2>
+        <ul>
+          <li>The second chance algorithm is essentially a FIFO, except the reference bit is used to give pages a second chance at staying in the page table.
+            <ul>
+              <li>When a page must be replaced, the page table is scanned in a FIFO ( circular queue ) manner.</li>
+              <li>If a page is found with its reference bit not set, then that page is selected as the next victim.</li>
+              <li>If, however, the next page in the FIFO does have its reference bit set, then it is given a second chance:</li>
+              <li>The reference bit is cleared, and the FIFO search continues.</li>
+              <li>If some other page is found that did not have its reference bit set, then that page will be selected as the victim, and this page (the one being given the second chance ) will be allowed to stay in the page table.</li>
+              <li>If, however, there are no other pages that do not have their reference bit set, then this page will be selected as the victim when the FIFO search circles back around to this page on the second pass.</li>
+            </ul>
+          </li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Enhanced Second-Chance Algorithm</h2>
+        <ul>
+          <li>The enhanced second chance algorithm looks at the reference bit and the modify bit ( dirty bit) as an ordered page, and classifies pages into one of four classes:
+            <ol>
+              <li>(0,0) - Neither recently used nor modified.</li>
+              <li>(0,1) - Not recently used, but modified.</li>
+              <li>(1,0) - Recently used, but clean.</li>
+              <li>(1,1) - Recently used and modified.</li>
+            </ol>
+          </li>
+          <li>This algorithm searches the page table in a circular fashion ( in as many as four passes ), looking for the first page it can find in the lowest numbered category. I.e. it first makes a pass looking for a ( 0, 0 ), and then if it can't find one, it makes another pass looking for a (0, 1), etc.</li>
+          <li>The main difference between this algorithm and the previous one is the preference for replacing clean pages if possible.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📚 Counting-Based Page Replacement</h2>
+        <ul>
+          <li>There are several algorithms based on counting the number of references that have been made to a given page, such as:
+          <ul>
+            <li>Least Frequently Used, LFU: Replace the page with the lowest reference count. A problem can occur if a page is used frequently initially and then not used any more, as the reference count remains high. A solution to this problem is to right- shift the counters periodically, yielding a time-decaying average reference count.</li>
+            <li>Most Frequently Used, MFU: Replace the page with the highest reference count. The logic behind this idea is that pages that have already been referenced a lot have been in the system a long time, and we are probably done with them, whereas pages referenced only a few times have only recently been loaded, and we still need them.</li>
+          </ul>
+          </li>
+          <li>In general counting-based algorithms are not commonly used, as their implementation is expensive and they do not approximate OPT well.</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>📝 Summary</h2>
+        <p>This module discussed various advanced page replacement algorithms. In short, the page replacement algorithms such as: LRU approximations which use HW for support; Additional-Reference-Bits Algorithm uses 8-bit byte in the page table entry; Second-Chance algorithm is essentially a FIFO; Enhanced Second-Chance Algorithm looks at the reference bit and the modify bit; and Counting-Based Page Replacement</p>
+      </section>
+
+    </main>
+
+    <footer class="module-footer">
+      <nav class="module-nav">
+        <div class="nav-links">
+          <a href="../index.html" class="nav-button">
+            <span>←</span> Home
+          </a>
+          <a href="module7.html" class="nav-button">
+            <span>←</span> Previous
+          </a>
+          <div class="module-progress">
+            <span>Module 8 of 16</span>
+          </div>
+          <a href="module9.html" class="nav-button">
+            Next <span>→</span>
+          </a>
+        </div>
+      </nav>
+    </footer>
+
+  </article>
+</body>
+</html>
+
+    

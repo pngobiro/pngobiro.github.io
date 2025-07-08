@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Probability - Part 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 5 Part 2 of 2</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-6-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 5: PROBABILITY (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-5-tree-diagrams -->
+                <section id="chapter-5-tree-diagrams" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🌳</span>
+                        <span class="heading-text">Probability Tree Diagrams</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Calculating probabilities can be hard, sometimes we add them, sometimes we multiply them, and often it is hard to figure out what to do ... tree diagrams to the rescue!</p>
+                        <p>Here is a tree diagram for the toss of a coin:</p>
+                        <img src="../assets/images/chapter-5-tree-coin1.jpg" alt="Tree diagram for a single coin toss showing Head and Tail outcomes with probability 0.5 each" class="content-image">
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The probability of each branch is written on the branch</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The outcome is written at the end of the branch</span></li>
+                        </ul>
+                        <p>We can extend the tree diagram to two tosses of a coin:</p>
+                        <img src="../assets/images/chapter-5-tree-coin2.jpg" alt="Tree diagram for two coin tosses showing HH, HT, TH, TT outcomes" class="content-image">
+                        <p>How do we calculate the overall probabilities?</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">We multiply probabilities along the branches</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">We add probabilities down columns</span></li>
+                        </ul>
+                        <img src="../assets/images/chapter-5-tree-coin2-probs.jpg" alt="Tree diagram for two coin tosses with calculated probabilities for each outcome (0.25 each)" class="content-image">
+                        <p>Now we can see such things as:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The probability of "Head, Head" is <span class="math-inline">$0.5 \times 0.5=\mathbf{0 . 2 5}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">All probabilities add to <span class="math-inline">$\mathbf{1 . 0}$</span> (which is always a good check)</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The probability of getting at least one Head from two tosses is <span class="math-inline">$0.25+0.25+0.25=\mathbf{0 . 7 5}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">... and more</span></li>
+                        </ul>
+                        <p>That was a simple example using independent events (each toss of a coin is independent of the previous toss), but tree diagrams are really wonderful for figuring out dependent events (where an event depends on what happens in the previous event) like this example:</p>
+                        <h3 class="subsection-heading">Example: Soccer Game</h3>
+                        <p>You are off to soccer, and love being the Goalkeeper, but that depends who is the Coach today:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">with Coach Sam the probability of being Goalkeeper is <span class="math-inline">$\mathbf{0 . 5}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">with Coach Alex the probability of being Goalkeeper is <span class="math-inline">$\mathbf{0 . 3}$</span></span></li>
+                        </ul>
+                        <p>Sam is Coach more often ... about 6 out of every 10 games (a probability of <span class="math-inline">$\mathbf{0 . 6}$</span> ).</p>
+                        <p>So, what is the probability you will be a Goalkeeper today?</p>
+                        <p>Let's build the tree diagram. First we show the two possible coaches: Sam or Alex:</p>
+                        <img src="../assets/images/chapter-5-tree-soccer1.jpg" alt="First level of soccer tree diagram showing Sam (0.6) and Alex (0.4)" class="content-image">
+                        <p>The probability of getting Sam is 0.6 , so the probability of Alex must be 0.4 (together the probability is 1)</p>
+                        <p>Now, if you get Sam, there is 0.5 probability of being Goalie (and 0.5 of not being Goalie):</p>
+                        <img src="../assets/images/chapter-5-tree-soccer2.jpg" alt="Second level of soccer tree diagram showing Goalie (0.5) and Not Goalie (0.5) branches under Sam" class="content-image">
+                        <p>If you get Alex, there is 0.3 probability of being Goalie (and 0.7 not):</p>
+                        <img src="../assets/images/chapter-5-tree-soccer3.jpg" alt="Completed soccer tree diagram showing branches under Alex" class="content-image">
+                        <p>The tree diagram is complete, now let's calculate the overall probabilities. This is done by multiplying each probability along the "branches" of the tree.</p>
+                        <p>Here is how to do it for the "Sam, Yes" branch:</p>
+                        <img src="../assets/images/chapter-5-tree-soccer4.jpg" alt="Calculation for the 'Sam, Yes' branch: 0.6 * 0.5 = 0.3" class="content-image">
+                        <p>(When we take the 0.6 chance of Sam being coach and include the 0.5 chance that Sam will let you be Goalkeeper we end up with an 0.3 chance.)</p>
+                        <p>But we are not done yet! We haven't included Alex as Coach:</p>
+                        <img src="../assets/images/chapter-5-tree-soccer5.jpg" alt="Calculation for the 'Alex, Yes' branch: 0.4 * 0.3 = 0.12" class="content-image">
+                        <p>An 0.4 chance of Alex as Coach, followed by an 0.3 chance gives 0.12 .</p>
+                        <p>Now we add the column:</p>
+                        <p><span class="math-inline">$0.3+0.12=\mathbf{0 . 4 2}$</span> probability of being a Goalkeeper today</p>
+                        <p>(That is a <span class="math-inline">$42 \%$</span> chance)</p>
+                        <h3 class="subsection-heading">Check</h3>
+                        <p>One final step: complete the calculations and make sure they add to 1 :</p>
+                        <img src="../assets/images/chapter-5-tree-soccer-final.jpg" alt="Completed soccer tree diagram with all probabilities calculated, summing to 1.0" class="content-image">
+                        <p>Yes, it all adds up.</p>
+                        <h3 class="subsection-heading">Conclusion</h3>
+                        <p>So there you go, when in doubt draw a tree diagram, multiply along the branches and add the columns. Make sure all probabilities add to 1 and you are good to go.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-tree-diagrams -->
+
+                <!-- START: chapter-5-set-theory-probability -->
+                <section id="chapter-5-set-theory-probability" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">∪∩</span>
+                        <span class="heading-text">Set Theory in Probability</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A sample space is defined as a universal set of all possible outcomes from a given experiment.</p>
+                        <p>Given two events <span class="math-inline">$\mathbf{A}$</span> and <span class="math-inline">$\mathbf{B}$</span> and given that these events are part of a sample space <span class="math-inline">$\mathbf{S}$</span>. This sample space is represented as a set as in the diagram below.</p>
+                        <img src="../assets/images/chapter-5-set-theory-venn.jpg" alt="Venn diagram showing sample space S with events A, B, and C (complement)" class="content-image">
+                        <p>The entire sample space of <span class="math-inline">$\mathbf{S}$</span> is given by:</p>
+                        <div class="equation">$$S=\{A, B, C\}$$</div>
+                        <p>Remember the following from set theory:</p>
+                        <div class="equation">$$\begin{aligned} & C=(A \cup B)^{\prime} \\ & A \cup B=A+B-(A \cap B) \end{aligned}$$</div>
+                        <p>The different regions of the set <span class="math-inline">$\mathbf{S}$</span> can be explained as using the rules of probability.</p>
+                        <h3 class="subsection-heading">Rules of Probability</h3>
+                        <p>When dealing with more than one event, there are certain rules that we must follow when studying probability of these events. These rules depend greatly on whether the events we are looking at are Independent or dependent on each other.</p>
+                        <p>First acknowledge that</p>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~S})=\mathrm{P}(\mathrm{~A} \cup \mathrm{~B} \cup \mathrm{C})$$</div>
+                        <h4 class="subsection-heading">Multiplication Rule (<span class="math-inline">$A \cap B$</span>)</h4>
+                        <p>This region is referred to as 'A intersection B' and in probability; this region refers to the event that both <span class="math-inline">$\mathbf{A}$</span> and <span class="math-inline">$\mathbf{B}$</span> happen. When we use the word and we are referring to multiplication, thus <span class="math-inline">$\mathbf{A}$</span> and <span class="math-inline">$\mathbf{B}$</span> can be thought of as <span class="math-inline">$\mathbf{A \times B}$</span> or (using dot notation which is more popular in probability) A•B</p>
+                        <p>If <span class="math-inline">$\mathbf{A}$</span> and <span class="math-inline">$\mathbf{B}$</span> are dependent events, the probability of this event happening can be calculated as shown below:</p>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~A} \cap \mathrm{~B})=\mathrm{P}(\mathrm{~A} \cup \mathrm{~B})-(\mathrm{P}(\mathrm{~A} \text { only })+\mathrm{P}(\mathrm{~B} \text { only }))$$</div>
+                        <p>If <span class="math-inline">$\mathbf{A}$</span> and <span class="math-inline">$\mathbf{B}$</span> are independent events, the probability of this event happening can be calculated as shown below:</p>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~A} \cap \mathrm{~B})=\mathrm{P}(\mathrm{~A}) \times \mathrm{P}(\mathrm{~B})$$</div>
+                        <p>Conditional probability for two independent events can be redefined using the relationship above to become:</p>
+                        <div class="equation">$$\begin{gathered} P(B \mid A)=\frac{P(A \cap B)}{P(A)} \\ P(B \mid A)=\frac{P(A) \times P(B)}{P(A)} \end{gathered}$$</div>
+                        <div class="equation">$$P(B \mid A)=P(B)$$</div>
+                        <p>The above is consistent with the definition of independent events, the occurrence of event <span class="math-inline">$\mathbf{A}$</span> in no way influences the occurrence of event <span class="math-inline">$\mathbf{B}$</span>, and so the probability that event <span class="math-inline">$\mathbf{B}$</span> occurs given that event <span class="math-inline">$\mathbf{A}$</span> has occurred is the same as the probability of event <span class="math-inline">$\mathbf{B}$</span>.</p>
+                        <h4 class="subsection-heading">Additive Rule (<span class="math-inline">$A \cup B$</span>)</h4>
+                        <p>In probability we refer to the addition operator (+) as or. Thus when we want to we want to define some event such that the event can be A or B , to find the probability of that event:</p>
+                        <div class="equation">$$\begin{gathered} \mathrm{P}(\mathrm{~A}+\mathrm{B})=\mathrm{P}(\mathrm{~A} \cup \mathrm{~B}) \\ \mathrm{P}(\mathrm{~A} \cup \mathrm{~B})=\mathrm{P}(\mathrm{A})+\mathrm{P}(\mathrm{B})-\mathrm{P}(\mathrm{~A} \cap \mathrm{~B}) \end{gathered}$$</div> <!-- Corrected formula -->
+                        <p>Thus it follows that:</p>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~A}+\mathrm{B})=\mathrm{P}(\mathrm{~A})+\mathrm{P}(\mathrm{~B})-\mathrm{P}(\mathrm{~A} \cap \mathrm{~B})$$</div>
+                        <p>But remember from set theory that and from the way we defined our sample space above:</p>
+                        <div class="equation">$$(\mathrm{A} \cup \mathrm{~B})=1-(\mathrm{A} \cup \mathrm{~B})^{\prime}$$</div>
+                        <p>and that:</p>
+                        <div class="equation">$$(\mathrm{A} \cup \mathrm{~B})^{\prime}=\mathrm{C}$$</div>
+                        <p>So we can now redefine out event as</p>
+                        <div class="equation">$$\begin{gathered} \mathrm{P}(\mathrm{~A}+\mathrm{B})=1-\mathrm{P}(\mathrm{~A} \cup \mathrm{~B})^{\prime} \\ \mathrm{P}(\mathrm{~A}+\mathrm{B})=1-\mathrm{P}(\mathrm{C}) \end{gathered}$$</div>
+                        <p>The above is sometimes referred to as the subtraction rule.</p>
+                        <h4 class="subsection-heading">Mutual Exclusivity</h4>
+                        <p>Certain special pairs of events have a unique relationship referred to as mutual exclusivity. Two events are said to be mutually exclusive if they can't occur at the same time. For a given sample space, its either one or the other but not both. As a consequence, mutually exclusive events have their probability defined as follows:</p>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~A})+\mathrm{P}(\mathrm{~B})=1$$</div>
+                        <p>An example of mutually exclusive events are the outcomes of a fair coin flip. When you flip a fair coin, you either get a head or a tail but not both, we can prove that these events are mutually exclusive by adding their probabilities:</p>
+                        <div class="equation">$$\mathrm{P}(\text { head })+\mathrm{P}(\text { tail })=\frac{1}{2}+\frac{1}{2}=1$$</div>
+                        <p>For any given pair of events, if the sum of their probabilities is equal to one, then those two events are mutually exclusive.</p>
+                        <h4 class="subsection-heading">Rules of Probability for Mutually Exclusive Events</h4>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Multiplication Rule: From the definition of mutually exclusive events, we should quickly conclude the following:</span></li>
+                        </ul>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~A} \cap \mathrm{~B})=0$$</div>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Addition Rule: As we defined above, the addition rule applies to mutually exclusive events as follows:</span></li>
+                        </ul>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~A}+\mathrm{B})= \mathrm{P}(\mathrm{A} \cup \mathrm{B}) = \mathrm{P}(\mathrm{A}) + \mathrm{P}(\mathrm{B})$$</div> <!-- Corrected rule -->
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Subtraction Rule: From the addition rule above, we can conclude that the subtraction rule for mutually exclusive events takes the form;</span></li>
+                        </ul>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~A} \cup \mathrm{~B})^{\prime}= \mathrm{P}(\mathrm{C}) = 1 - (\mathrm{P}(\mathrm{A}) + \mathrm{P}(\mathrm{B}))$$</div> <!-- Corrected rule -->
+                        <h4 class="subsection-heading">Conditional Probability for Mutually Exclusive Events</h4>
+                        <p>We have defined conditional probability with the following equation:</p>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~B} \mid \mathrm{A})=\frac{\mathrm{P}(\mathrm{~A} \cap \mathrm{~B})}{\mathrm{P}(\mathrm{~A})}$$</div>
+                        <p>We can redefine the above using the multiplication rule</p>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~A} \cap \mathrm{~B})=0$$</div>
+                        <p>hence</p>
+                        <div class="equation">$$\mathrm{P}(\mathrm{~B} \mid \mathrm{A})=\frac{0}{\mathrm{P}(\mathrm{~A})}=0$$</div>
+                        <p>Below is a venn diagram of a set containing two mutually exclusive events <span class="math-inline">$\mathbf{A}$</span> and <span class="math-inline">$\mathbf{B}$</span>.</p>
+                        <img src="../assets/images/chapter-5-mutually-exclusive-venn.jpg" alt="Venn diagram showing two mutually exclusive (disjoint) sets A and B" class="content-image">
+                    </div>
+                </section>
+                <!-- END: chapter-5-set-theory-probability -->
+
+                <!-- START: chapter-5-probability-distribution -->
+                <section id="chapter-5-probability-distribution" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">Probability Distribution</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The Poisson random variable satisfies the following conditions:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">The number of successes in two disjoint time intervals is independent.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">The probability of a success during a small time interval is proportional to the entire length of the time interval.</span></li>
+                        </ol>
+                        <p>Apart from disjoint time intervals, the Poisson random variable also applies to disjoint regions of space.</p>
+                        <h3 class="subsection-heading">Applications</h3>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">the number of deaths by horse kicking in the Prussian army (first application)</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">birth defects and genetic mutations</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">rare diseases (like Leukemia, but not AIDS because it is infectious and so not independent) - especially in legal cases</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">car accidents</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">traffic flow and ideal gap distance</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">number of typing errors on a page</span></li>
+                        </ul>
+                        <p>Downloaded by Patrick Ngobiro (pngobiro@gmail.com)</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">hairs found in McDonald's hamburgers</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">spread of an endangered animal in Africa</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">failure of a machine in one month</span></li>
+                        </ul>
+                        <p>The probability distribution of a Poisson random variable <span class="math-inline">$X$</span> representing the number of successes occurring in a given time interval or a specified region of space is given by the formula:</p>
+                        <div class="equation">$$P(X=x)=\frac{e^{-\mu} \mu^{x}}{x!}$$</div> <!-- Corrected formula -->
+                        <p>where</p>
+                        <p><span class="math-inline">$x=0,1,2,3 \ldots$</span></p>
+                        <p><span class="math-inline">$e=2.71828$</span> (but use your calculator's <span class="math-inline">$e$</span> button)</p>
+                        <p><span class="math-inline">$\mu=$</span> mean number of successes in the given time interval or region of space</p>
+                        <p>The normal (or Gaussian) distribution is a very commonly occurring continuous probability distribution-a function that tells the probability of a number in some context falling between any two real numbers. a theoretical frequency distribution represented by a normal curve.</p>
+                        <img src="../assets/images/chapter-5-normal-distribution.jpg" alt="Graph of a normal distribution curve (bell curve)" class="content-image">
+                        <p>Figure 4.1: A Normal Distribution</p> <!-- MMD Figure number seems wrong -->
+                        <p>The normal distribution is</p>
+                        <div class="equation">$$f(x)=\frac{1}{\sigma \sqrt{2 \pi}} e^{-\frac{(x-\mu)^{2}}{2 \sigma^{2}}} .$$</div>
+                        <p>The parameter <span class="math-inline">$\mu$</span> in this formula is the mean or expectation of the distribution (and also its median and mode). The parameter <span class="math-inline">$\sigma$</span> is its standard deviation; its variance is therefore <span class="math-inline">$\sigma^{2}$</span>. A random variable with a Gaussian distribution is said to be normally distributed and is called a normal deviate.</p>
+                        <p>If <span class="math-inline">$\mu=0$</span> and <span class="math-inline">$\sigma=1$</span>, the distribution is called the standard normal distribution or the unit normal distribution, and a random variable with that distribution is a standard normal deviate.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-probability-distribution -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 5 Part 2 of 2</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-6-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

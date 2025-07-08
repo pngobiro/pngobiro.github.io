@@ -1,0 +1,622 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --border-color: #dcdde1;
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Navigation container */
+.document-nav {
+    margin: 2rem 0;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Navigation buttons with distinct colors */
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* Table of Contents link */
+.nav-button[href*="index.html"] {
+    color: #2980b9;
+    border-color: #2980b9;
+}
+
+.nav-button[href*="index.html"]:hover {
+    background: #eef7fc;
+}
+
+/* Previous Section link */
+.nav-links .nav-button:nth-child(2) { /* Adjust if structure changes */
+    color: #e67e22;
+    border-color: #e67e22;
+}
+
+.nav-links .nav-button:nth-child(2):hover { /* Adjust if structure changes */
+    background: #fef5ec;
+}
+
+/* Next Section link */
+.nav-links .nav-button:last-child {
+    color: #27ae60;
+    border-color: #27ae60;
+}
+
+.nav-links .nav-button:last-child:hover {
+    background: #eefaf3;
+}
+
+/* Progress indicator styling */
+.document-progress {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    flex-grow: 1; /* Allows it to take available space */
+    justify-content: center; /* Center progress elements */
+    min-width: 150px; /* Ensure some minimum width */
+}
+
+.progress-bar {
+    width: 100px; /* Fixed width for the bar */
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent-color);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.9em;
+    color: var(--secondary-color);
+    white-space: nowrap;
+}
+
+
+/* Disabled states */
+.nav-button.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+    pointer-events: none; /* Prevent clicks */
+}
+
+.nav-button.disabled { /* More specific selector if needed */
+    opacity: 0.7;
+    background: #fafafa;
+    border-color: var(--border-color);
+    color: #aaa; /* Dim the text color */
+}
+
+
+/* Table of Contents Styling */
+.toc-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.toc-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+.toc-title {
+    font-size: 2.5em;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.toc-subtitle {
+    font-size: 1.2em;
+    color: #7f8c8d;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+}
+
+.toc-chapter {
+    margin-bottom: 25px;
+    border-left: 3px solid #3498db;
+    padding-left: 15px;
+}
+
+.toc-chapter-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.toc-section-list {
+    list-style: none;
+    padding-left: 10px; /* Indent sections */
+}
+
+.toc-section-item {
+    margin-bottom: 8px;
+}
+
+.toc-link {
+    text-decoration: none;
+    color: #2980b9;
+    font-size: 1.1em;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: block;
+    padding: 5px 0;
+}
+
+.toc-link:hover {
+    color: #1abc9c;
+    padding-left: 5px;
+}
+
+.toc-link::before {
+    content: '➔ ';
+    color: #bdc3c7;
+    margin-right: 8px;
+    font-size: 0.9em;
+}
+
+/* Content Styling */
+.document-section {
+    background: #ffffff; /* Ensure article background is white */
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    margin-bottom: 2rem; /* Add margin below the main article container */
+}
+
+.section-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.title-underline {
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-color);
+    margin: 0 auto 1rem auto; /* Center the underline */
+    border-radius: 2px;
+}
+
+
+.content-section {
+    background: white; /* Keep individual sections white if needed, or remove if article bg is enough */
+    border-radius: 8px;
+    padding: 1.5rem; /* Padding within each section */
+    margin-bottom: 2rem; /* Space between sections */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Subtle shadow for sections */
+}
+
+.content-card {
+    padding: 1rem; /* Padding inside the card, adjust as needed */
+    /* background: #fdfdfd; /* Slightly off-white background for card */
+    /* border: 1px solid var(--border-color); */
+    /* border-radius: 6px; */
+}
+
+/* Headings */
+.section-heading { /* For H2 within content sections */
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* Increased gap */
+    margin-bottom: 1.5rem; /* Increased margin */
+    color: var(--primary-color);
+    font-size: 1.8rem; /* Larger H2 */
+    font-weight: 600;
+    border-bottom: 1px solid #eee; /* Subtle separator */
+    padding-bottom: 0.5rem;
+}
+
+.heading-icon {
+    font-size: 1.5rem; /* Larger icon */
+}
+
+.heading-text {
+    flex-grow: 1;
+}
+
+
+.subsection-heading { /* For H3 */
+    color: var(--secondary-color);
+    font-size: 1.4rem; /* Larger H3 */
+    font-weight: 600;
+    margin-top: 2rem; /* More space above H3 */
+    margin-bottom: 1rem;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1rem;
+    color: var(--text-color); /* Ensure consistent text color */
+}
+
+/* Tables */
+.table-container {
+    margin: 1.5rem 0;
+    overflow-x: auto; /* Ensure horizontal scrolling on small screens */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0; /* Remove margin if container has it */
+    background: white;
+}
+
+.content-table caption {
+    caption-side: bottom;
+    padding: 0.75rem;
+    font-size: 0.9em;
+    color: #555;
+    text-align: center;
+    background-color: #f8f9fa;
+    border-top: 1px solid var(--border-color);
+}
+
+
+.content-table th,
+.content-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top; /* Align content to top */
+}
+
+.content-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+    color: var(--primary-color);
+}
+
+.content-table tbody tr:nth-child(even) {
+    background-color: #fdfdfd; /* Subtle striping */
+}
+
+/* Mathematical expressions */
+.math-inline {
+    font-family: 'Times New Roman', Times, serif; /* Ensure MathJax font consistency */
+    padding: 0 0.2em;
+    /* font-size: 1.05em; /* Slightly larger inline math */
+}
+
+.equation { /* For block math $$...$$ */
+    font-family: 'Times New Roman', Times, serif;
+    margin: 1.5rem auto; /* Center block equations */
+    text-align: center;
+    overflow-x: auto; /* Allow scrolling for wide equations */
+    padding: 1rem;
+    background: #f9f9f9; /* Subtle background for block math */
+    border: 1px solid #eee;
+    border-radius: 4px;
+    max-width: 100%; /* Ensure it doesn't overflow container */
+}
+
+/* Adjust MathJax font size if needed */
+mjx-container {
+    font-size: 1.1em; /* Increase base MathJax size */
+}
+
+
+/* Lists and Images */
+/* Enhanced lists */
+.enhanced-list { /* For ul */
+    list-style: none;
+    padding-left: 1.5rem; /* Indentation for the list */
+    margin-bottom: 1rem;
+}
+
+.enhanced-list ol { /* Nested ordered lists */
+     list-style-type: lower-alpha; /* Example: a, b, c */
+     padding-left: 1.5rem;
+     margin-top: 0.5rem;
+}
+
+.enhanced-list ul { /* Nested unordered lists */
+     list-style-type: circle; /* Example: hollow circle */
+     padding-left: 1.5rem;
+     margin-top: 0.5rem;
+}
+
+
+.list-item { /* For li */
+    display: flex;
+    align-items: baseline; /* Align icon/marker with text baseline */
+    gap: 0.75rem; /* Space between icon and text */
+    margin-bottom: 0.75rem; /* Space between list items */
+}
+
+.item-icon {
+    color: var(--accent-color);
+    font-weight: bold;
+    flex-shrink: 0; /* Prevent icon from shrinking */
+    /* Use content for specific icons if needed */
+}
+
+.item-text {
+    flex-grow: 1;
+}
+
+/* Specific list types if needed */
+ul[type="disc"] .item-icon::before { content: "•"; }
+ul[type="circle"] .item-icon::before { content: "◦"; }
+ul[type="square"] .item-icon::before { content: "▪"; }
+/* Add more for checkmarks, etc. */
+ul.checklist .item-icon::before { content: "✓"; color: green; }
+
+
+/* Images */
+img.content-image { /* Class for general content images */
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 1.5rem auto; /* Center images with margin */
+    display: block; /* Ensure block display for centering */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+    border: 1px solid var(--border-color); /* Optional border */
+}
+
+figure { /* Wrap images in figures for captions */
+    margin: 1.5rem auto;
+    max-width: 100%;
+}
+
+figcaption {
+    text-align: center;
+    font-size: 0.9em;
+    color: #555;
+    margin-top: 0.5rem;
+}
+
+
+/* Key Points Section */
+.key-points-section {
+    background-color: #eaf2f8; /* Light blue background */
+    border: 1px solid #aed6f1;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.key-points-container {
+    /* Container styling if needed */
+}
+
+.key-points-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #aed6f1;
+}
+
+.key-points-icon {
+    font-size: 1.5rem;
+    color: #3498db; /* Accent color */
+}
+
+.key-points-title { /* H3 */
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0; /* Remove default margin */
+}
+
+.key-points-content {
+    /* Content area styling */
+}
+
+.key-points-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.key-point-item {
+    display: flex;
+    align-items: flex-start; /* Align icon top */
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.point-marker {
+    color: #3498db; /* Accent color */
+    font-weight: bold;
+    padding-top: 0.1em; /* Align marker slightly */
+}
+
+.key-point-item p {
+    margin: 0; /* Remove default paragraph margin */
+    flex-grow: 1;
+}
+
+
+/* Code Block Formatting */
+pre.code-block {
+    background-color: #2d2d2d; /* Dark background */
+    color: #f8f8f2; /* Light text */
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto; /* Allow horizontal scrolling */
+    margin: 1.5rem 0;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font */
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+pre.code-block code {
+    display: block; /* Ensure code takes full width */
+    white-space: pre; /* Preserve whitespace */
+}
+
+/* Add syntax highlighting classes if using a library like Prism.js or highlight.js */
+/* Example for Python (adjust based on library) */
+.language-python .token.keyword { color: #f92672; }
+.language-python .token.string { color: #e6db74; }
+.language-python .token.function { color: #a6e22e; }
+.language-python .token.comment { color: #75715e; }
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .toc-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .toc-title {
+        font-size: 2em;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-heading {
+        font-size: 1.5rem;
+    }
+
+    .subsection-heading {
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-button {
+        justify-content: center;
+    }
+
+    .document-progress {
+        order: -1; /* Move progress bar up on mobile */
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .content-table {
+        font-size: 0.9em;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 15px; /* Slightly smaller base font */
+    }
+
+    .container {
+        padding: 0.5rem;
+    }
+
+     .document-section {
+        padding: 1rem; /* Less padding on article */
+    }
+
+    .toc-title {
+        font-size: 1.8em;
+    }
+
+    .toc-chapter-title {
+        font-size: 1.2em;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .section-heading {
+        font-size: 1.3rem;
+        gap: 0.5rem;
+    }
+
+     .heading-icon {
+        font-size: 1.2rem;
+    }
+
+    .subsection-heading {
+        font-size: 1.1rem;
+    }
+
+    .nav-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9em;
+    }
+
+    .progress-text {
+        font-size: 0.8em;
+    }
+
+    pre.code-block {
+        font-size: 0.9em;
+    }
+}

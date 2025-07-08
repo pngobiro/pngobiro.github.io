@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Database Tables (Part 2) - MS Access Course Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-tables-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">Chapter 5 (Part 2) of 6</span>
+                    </div>
+                    <a href="#" class="nav-button disabled">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 5: Database Tables (Part 2)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: field-properties -->
+                <section id="field-properties" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚙️</span>
+                        <span class="heading-text">FIELD PROPERTIES</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The table's Design view is divided into 2 parts. The lower part is used to display and assign field properties to selected fields.</p>
+                        <p>Field properties - a set of characteristics that provide additional control over how the data in a field is stored, entered, or displayed.</p>
+                        <p>Each data type has a different set of properties.</p>
+
+                        <h3 class="subsection-heading">The different field properties include:</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text"><strong>FieldSize</strong></span>
+                                <p>The FieldSize property defines/controls the maximum no. of characters that can be entered/stored in a Text or Number field.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text"><strong>Format</strong></span>
+                                <p>The Format property specifies how (the way) data is displayed in a field & printed. Number & Currency fields provide predefined display formats. They include Currency, Fixed, General, Percent, Scientific, General data, Medium date, Medium time.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text"><strong>Decimal places</strong></span>
+                                <p>It is used to define the no. of decimal places in values. This option is used on fields that already have the Fixed format such as in Number and Currency fields.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text"><strong>Default value</strong></span>
+                                <p>It allows you to define a value that will automatically be inserted into the field as you add new records. It is used in Text and Memo fields.</p>
+                                <p>For example, to insert the current date in the Admission date field use "Date()".</p>
+                                <p>The default value affects only new records inserted.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">5.</span>
+                                <span class="item-text"><strong>Validation Rule</strong></span>
+                                <p>It allows you to create an expression or a formula that will test data when being entered into the field.</p>
+                                <p>It automatically rejects faulty/flawed entries, e.g., entering very large or very small figures in the Age or Salary fields.</p>
+                                
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Validation Rule</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Between 18 and 55</td>
+                                                <td>Limits an age field from 18 to 55</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$<10000$</td>
+                                                <td>Allows any value less than 10000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$<=500$ AND $<=1000$</td>
+                                                <td>Accepts any entry between 500 and 1000</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$>$ Date()</td>
+                                                <td>Allows entries whose dates are the current date or later</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$<$ Date()</td>
+                                                <td>Allows the current date and before</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">6.</span>
+                                <span class="item-text"><strong>Validation Text</strong></span>
+                                <p>Defines an error message that will be displayed when the validation rule is violated/broken.</p>
+                                <p>It must be typed in earlier.</p>
+                                <p>Enter a useful message that can be clearly understood by the input clerk.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">7.</span>
+                                <span class="item-text"><strong>Required</strong></span>
+                                <p>It controls the entry of important fields.</p>
+                                <p>When this option is set to YES, an entry must be made within that field, i.e., it ensures that the field is not left blank.</p>
+                                <p>A YES option is equivalent of typing IS NOT NULL as a field Validation rule.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">8.</span>
+                                <span class="item-text"><strong>Input Mask</strong></span>
+                                <p>Lets you define a pre-formatted pattern for the entry of data into a Date or a Text field. The data in that field must conform to a pattern.</p>
+                                <p>Examples of data include:</p>
+                                <ul class="enhanced-list">
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">0#/0#/0# - forces 2-digits entries for the year, month and date in a date field</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">A - Allows letters or digits into a field, but an entry is required</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">9 - Allows letters or digits in a field, but no entry is required</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">000000 - Allows a 6-digit number (not more or less than that)</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">999999 - Allows 6 or less digits</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">AAAAA - only 5 characters are to be entered</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">> - converts the field entry to Uppercase</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="item-icon">•</span>
+                                        <span class="item-text">< - converts the field entry to Lowercase</span>
+                                    </li>
+                                </ul>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">9.</span>
+                                <span class="item-text"><strong>Allow Zero Length</strong></span>
+                                <p>Applies to Text and Memo field data types.</p>
+                                <p>Setting the value in Allow Zero Length property to YES and the Required property YES, the field must contain at least one character.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">10.</span>
+                                <span class="item-text"><strong>Caption</strong></span>
+                                <p>This is an alternative name used (other than the fieldname) in order to appear in the fieldname header button in Table datasheet view and as a label in Forms.</p>
+                                <p>They provide a neat and descriptive name since the fieldname should be kept small for practical use.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">11.</span>
+                                <span class="item-text"><strong>Indexed</strong></span>
+                                <p>[Yes (Duplicates OK)] - Gives sorted, indexed field and can allow data duplicates.</p>
+                                <p>[Yes (No duplicates)] - Gives sorted, indexed field but cannot allow data duplicates.</p>
+                                <p>Note: It is not available for Memo or OLE object data types.</p>
+                            </li>
+
+                            <li class="list-item">
+                                <span class="item-icon">12.</span>
+                                <span class="item-text"><strong>New Values</strong></span>
+                                <p>Applies only to AutoNumber fields.</p>
+                                <p>Ms-Access can increment the AutoNumber field by 1 for each new record, or fill in the field with a randomly generated no., depending on the New Values property setting that you choose.</p>
+                            </li>
+                        </ol>
+                        <p class="note"><strong>Note:</strong> To check the Field properties set for the records in a table, click Properties on the Edit menu.</p>
+                    </div>
+                </section>
+                <!-- END: field-properties -->
+
+                <!-- Same navigation at bottom -->
+                <nav class="document-nav">
+                    <div class="nav-links">
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Table of Contents</span>
+                        </a>
+                        <a href="chapter-5-tables-part-1.html" class="nav-button">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous Section</span>
+                        </a>
+                        <div class="document-progress">
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%;"></div>
+                            </div>
+                            <span class="progress-text">Chapter 5 (Part 2) of 6</span>
+                        </div>
+                        <a href="#" class="nav-button disabled">
+                            <span class="nav-text">Next Section</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                </nav>
+            </main>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

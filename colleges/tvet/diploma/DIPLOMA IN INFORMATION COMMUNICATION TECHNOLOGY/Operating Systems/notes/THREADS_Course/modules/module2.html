@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Process Synchronization - Operating Systems: Threads and Process Management</title>
+  <meta name="description" content="Critical section problems, synchronization mechanisms, and classical synchronization problems">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="2">
+    <!-- Top Navigation -->
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module1.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 2 of 3</span>
+        </div>
+        <a href="module3.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>Process Synchronization</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Understand the critical section problem and its requirements</li>
+          <li>Explore various synchronization mechanisms including Peterson's solution, hardware solutions, and semaphores</li>
+          <li>Analyze classical synchronization problems such as the bounded-buffer, readers-writers, and dining-philosophers problems</li>
+          <li>Examine high-level synchronization constructs like monitors</li>
+          <li>Compare synchronization implementations in different operating systems</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+      <section id="introduction">
+        <h2>2.2 Process Synchronization</h2>
+        <div class="content-block">
+          <p>📚 In a multithreaded or multiprocess environment, multiple threads or processes may need to access shared resources. Without proper synchronization, this concurrent access can lead to data inconsistency and unpredictable behavior. Process synchronization provides mechanisms to ensure the orderly execution of cooperating processes.</p>
+          
+          <p>Key challenges in process synchronization include:</p>
+          <ul>
+            <li>Ensuring that shared data remains consistent when accessed concurrently</li>
+            <li>Coordinating the execution of multiple processes or threads</li>
+            <li>Preventing race conditions, deadlocks, and other synchronization-related issues</li>
+          </ul>
+          
+          <p>To illustrate these challenges, let's consider the "producer-consumer" problem:</p>
+          <ul>
+            <li>A producer process produces data that is consumed by a consumer process</li>
+            <li>The producer and consumer share a fixed-size buffer</li>
+            <li>We need to keep track of the number of full buffers using an integer variable "count"</li>
+            <li>The producer increments count after producing a new buffer</li>
+            <li>The consumer decrements count after consuming a buffer</li>
+          </ul>
+          
+          <p>Here's a simplified implementation of the producer-consumer problem:</p>
+          
+          <pre><code>// Producer
+while (true) {
+  /* produce an item and put in nextProduced */
+  while (count == BUFFER_SIZE)
+    ; // do nothing
+  buffer[in] = nextProduced;
+  in = (in + 1) % BUFFER_SIZE;
+  count++;
+}
+
+// Consumer
+while (true) {
+  while (count == 0)
+    ; // do nothing
+  nextConsumed = buffer[out];
+  out = (out + 1) % BUFFER_SIZE;
+  count--;
+  /* consume the item in nextConsumed */
+}</code></pre>
+          
+          <p>This implementation has a critical flaw: the operations on the shared variable "count" are not atomic, which can lead to race conditions.</p>
+        </div>
+      </section>
+
+      <section id="critical-section">
+        <h2>2.2.1 Critical Section Problem</h2>
+        <div class="content-block">
+          <p>📚 A critical section is a segment of code that accesses shared data and must not be executed by more than one process at a time. The critical section problem involves designing a protocol that processes can use to cooperate without conflict.</p>
+          
+          <h3>Race Condition</h3>
+          <p>A race condition occurs when two or more processes try to access and manipulate the same data concurrently, and the outcome depends on the order of execution. For example, consider the implementation of count++ and count-- in our producer-consumer example:</p>
+          
+          <pre><code>// count++ could be implemented as
+register1 = count
+register1 = register1 + 1
+count = register1
+
+// count-- could be implemented as
+register2 = count
+register2 = register2 - 1
+count = register2</code></pre>
+          
+          <p>If these operations are interleaved, we can get incorrect results. For example, with count = 5 initially:</p>
+          <ol>
+            <li>Producer executes register1 = count {register1 = 5}</li>
+            <li>Producer executes register1 = register1 + 1 {register1 = 6}</li>
+            <li>Consumer executes register2 = count {register2 = 5}</li>
+            <li>Consumer executes register2 = register2 - 1 {register2 = 4}</li>
+            <li>Producer executes count = register1 {count = 6}</li>
+            <li>Consumer executes count = register2 {count = 4}</li>
+          </ol>
+          
+          <p>The final value of count is 4, but it should be 5 (one increment and one decrement). This is a race condition.</p>
+          
+          <h3>Requirements for the Solution to Critical-Section Problem</h3>
+          <p>A valid solution to the critical section problem must satisfy three requirements:</p>
+          <ol>
+            <li><strong>Mutual Exclusion</strong>: If process Pi is executing in its critical section, then no other processes can be executing in their critical sections.</li>
+            <li><strong>Progress</strong>: If no process is executing in its critical section and there exist some processes that wish to enter their critical section, then the selection of the processes that will enter the critical section next cannot be postponed indefinitely.</li>
+            <li><strong>Bounded Waiting</strong>: A bound must exist on the number of times that other processes are allowed to enter their critical sections after a process has made a request to enter its critical section and before that request is granted.</li>
+          </ol>
+          
+          <p>Two general approaches are used to handle critical sections in operating systems:</p>
+          <ul>
+            <li><strong>Preemptive Kernel</strong>: Allows a process to be preempted while it is running in kernel mode.</li>
+            <li><strong>Non-Preemptive Kernel</strong>: Does not allow a process running in kernel mode to be preempted. These are free from race conditions on kernel data structures.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="petersons-solution">
+        <h2>2.2.2 Peterson's Solution</h2>
+        <div class="content-block">
+          <p>📚 Peterson's solution is a software-based solution to the critical section problem for two processes. It uses two shared variables:</p>
+          <ul>
+            <li><code>int turn</code>: Indicates whose turn it is to enter the critical section</li>
+            <li><code>boolean flag[2]</code>: Indicates if a process is ready to enter its critical section. <code>flag[i] = true</code> implies that process Pi is ready.</li>
+          </ul>
+          
+          <p>The algorithm for Process Pi is as follows:</p>
+          
+          <pre><code>while (true) {
+  flag[i] = TRUE;
+  turn = j;
+  while (flag[j] && turn == j);
+  // CRITICAL SECTION
+  flag[i] = FALSE;
+  // REMAINDER SECTION
+}</code></pre>
+          
+          <p>This solution assumes that the LOAD and STORE instructions are atomic, meaning they cannot be interrupted.</p>
+          
+          <h3>Solution to Critical Section Problem using Locks</h3>
+          <p>A more general approach to solving the critical section problem is to use locks:</p>
+          
+          <pre><code>do {
+  acquire lock
+  // Critical Section
+  release lock
+  // Remainder Section
+} while (true);</code></pre>
+          
+          <p>Race conditions are prevented by protecting the critical region with locks.</p>
+        </div>
+      </section>
+
+      <section id="synchronization-hardware">
+        <h2>2.2.3 Synchronization Hardware</h2>
+        <div class="content-block">
+          <p>📚 Many systems provide hardware support for critical section code through special atomic hardware instructions.</p>
+          
+          <p>In a uniprocessor environment, we can disable interrupts to solve the critical section problem. This ensures that the currently running code executes without preemption. However, this approach is inefficient in multiprocessor systems because disabling interrupts on all processors takes too much time.</p>
+          
+          <p>Modern machines provide special atomic hardware instructions that allow us to either test and set a memory word or swap the contents of two memory words automatically. These operations are done through an uninterruptible unit.</p>
+          
+          <h3>TestAndSet()</h3>
+          <p>The TestAndSet() instruction is a special atomic hardware instruction that allows us to test a memory location and set its value in a single, uninterruptible operation:</p>
+          
+          <pre><code>boolean TestAndSet(boolean *target) {
+  boolean rv = *target;
+  *target = TRUE;
+  return rv;
+}</code></pre>
+          
+          <p>To implement mutual exclusion using TestAndSet(), we declare a shared Boolean variable called 'lock' (initialized to false):</p>
+          
+          <pre><code>while (true) {
+  while (TestAndSet(&lock))
+    ; /* do nothing */
+  // critical section
+  lock = FALSE;
+  // remainder section
+}</code></pre>
+          
+          <h3>Swap()</h3>
+          <p>The Swap() instruction is another special atomic hardware instruction that allows us to swap the contents of two memory words:</p>
+          
+          <pre><code>void Swap(boolean *a, boolean *b) {
+  boolean temp = *a;
+  *a = *b;
+  *b = temp;
+}</code></pre>
+          
+          <p>To implement mutual exclusion using Swap(), we declare a shared Boolean variable called 'lock' (initialized to FALSE):</p>
+          
+          <pre><code>while (true) {
+  key = TRUE;
+  while (key == TRUE)
+    Swap(&lock, &key);
+  // critical section
+  lock = FALSE;
+  // remainder section
+}</code></pre>
+          
+          <p>Each process has a local Boolean variable called 'key'.</p>
+        </div>
+      </section>
+
+      <section id="mutex-locks">
+        <h2>2.2.4 Mutex Locks</h2>
+        <div class="content-block">
+          <p>📚 A mutex (mutual exclusion) lock is a high-level synchronization tool that provides mutual exclusion. It's essentially a variable that can be in one of two states: locked or unlocked. The mutex lock has two operations:</p>
+          <ul>
+            <li><code>acquire()</code>: Acquires the lock if it's available, otherwise waits until it becomes available</li>
+            <li><code>release()</code>: Releases the lock, making it available for other processes</li>
+          </ul>
+          
+          <p>A process must acquire the lock before entering its critical section and release it when it exits the critical section:</p>
+          
+          <pre><code>acquire(mutex);
+// critical section
+release(mutex);</code></pre>
+          
+          <p>The acquire() operation can be implemented using busy waiting (also known as spinlock):</p>
+          
+          <pre><code>acquire() {
+  while (!available)
+    ; // busy wait
+  available = false;
+}
+
+release() {
+  available = true;
+}</code></pre>
+          
+          <p>Busy waiting wastes CPU cycles, but it's acceptable in multiprocessor systems where the lock is held for a short time, as it avoids the overhead of context switching.</p>
+        </div>
+      </section>
+
+      <section id="semaphores">
+        <h2>2.2.5 Semaphores</h2>
+        <div class="content-block">
+          <p>📚 A semaphore is a synchronization tool that does not require busy waiting. It's an integer variable that, apart from initialization, can only be accessed through two standard atomic operations: wait() and signal() (originally termed P() and V() from the Dutch words "proberen" and "verhogen").</p>
+          
+          <h3>Definition of wait() and signal()</h3>
+          <pre><code>wait(S) {
+  while S <= 0
+    ; // no-op
+  S--;
+}
+
+signal(S) {
+  S++;
+}</code></pre>
+          
+          <p>All modifications to the integer value of the semaphore in the wait() and signal() operations must be executed indivisibly. When one process changes the semaphore value, no other process can change the same semaphore value simultaneously.</p>
+          
+          <h3>Types of Semaphores</h3>
+          <p>There are two types of semaphores:</p>
+          <ul>
+            <li><strong>Counting Semaphore</strong>: The value can range over an unrestricted domain. Used to control access to a resource with multiple instances.</li>
+            <li><strong>Binary Semaphore</strong>: The value can only be 0 or 1. Equivalent to a mutex lock.</li>
+          </ul>
+          
+          <h3>Usage of Semaphores</h3>
+          <p>Counting semaphores are used to control access to a resource with a finite number of instances. The semaphore is initialized to the number of resources available. A process that wants to use a resource performs a wait() operation (decrementing the count), and a process that releases a resource performs a signal() operation (incrementing the count).</p>
+          
+          <p>Binary semaphores can be used to enforce mutual exclusion or to synchronize the execution of processes. For example, to ensure that process P1 executes statement S1 before process P2 executes statement S2, we can use a binary semaphore 'synch' initialized to 0:</p>
+          
+          <pre><code>// Process P0
+S0;
+signal(synch);
+
+// Process P1
+wait(synch);
+S1;</code></pre>
+          
+          <h3>Implementation of Semaphores with No Busy Waiting</h3>
+          <p>The main disadvantage of the semaphore definition is that it requires busy waiting. To overcome this, we can modify the wait() and signal() operations to block a process when it can't proceed, rather than having it busy wait.</p>
+          
+          <p>We can define a semaphore as a C struct:</p>
+          
+          <pre><code>typedef struct {
+  int value;
+  struct process *list;
+} semaphore;</code></pre>
+          
+          <p>Each semaphore has an integer value and a list of processes. When a process performs a wait() operation on the semaphore, it adds itself to the list if it can't proceed. When a process performs a signal() operation, it removes a process from the list and wakes it up.</p>
+          
+          <p>Implementation of wait() with no busy waiting:</p>
+          
+          <pre><code>wait(S) {
+  value--;
+  if (value < 0) {
+    add this process to waiting queue
+    block();
+  }
+}</code></pre>
+          
+          <p>Implementation of signal() with no busy waiting:</p>
+          
+          <pre><code>signal(S) {
+  value++;
+  if (value <= 0) {
+    remove a process P from the waiting queue
+    wakeup(P);
+  }
+}</code></pre>
+          
+          <h3>Deadlock and Starvation</h3>
+          <p>The implementation of semaphores with a waiting queue may result in a situation where two or more processes are waiting indefinitely for an event that can only be caused by one of the waiting processes. This is called a deadlock.</p>
+          
+          <p>For example, consider two processes P0 and P1, each accessing two semaphores S and Q initialized to 1:</p>
+          
+          <pre><code>// Process P0
+wait(S);
+wait(Q);
+...
+signal(S);
+signal(Q);
+
+// Process P1
+wait(Q);
+wait(S);
+...
+signal(Q);
+signal(S);</code></pre>
+          
+          <p>If P0 executes wait(S) and P1 executes wait(Q), then P0 will be waiting for Q (which is held by P1) and P1 will be waiting for S (which is held by P0). This is a deadlock.</p>
+          
+          <p>Starvation or indefinite blocking occurs when a process may never be removed from the semaphore queue in which it is suspended.</p>
+        </div>
+      </section>
+
+      <section id="classical-problems">
+        <h2>2.2.6 Classical Problems of Synchronization</h2>
+        <div class="content-block">
+          <p>📚 Several classical problems have been formulated to illustrate the challenges of process synchronization:</p>
+          <ul>
+            <li>Bounded-Buffer Problem</li>
+            <li>Readers and Writers Problem</li>
+            <li>Dining-Philosophers Problem</li>
+          </ul>
+          
+          <h3>Bounded-Buffer Problem</h3>
+          <p>In the bounded-buffer problem, we have a fixed number of buffers, each capable of holding one item. A producer process produces items and places them in the buffer, while a consumer process removes items from the buffer.</p>
+          
+          <p>We need to ensure that:</p>
+          <ul>
+            <li>The producer doesn't try to add an item to a full buffer</li>
+            <li>The consumer doesn't try to remove an item from an empty buffer</li>
+            <li>The producer and consumer don't access the same buffer simultaneously</li>
+          </ul>
+          
+          <p>We can use semaphores to solve this problem:</p>
+          <ul>
+            <li><code>semaphore mutex = 1</code>: Provides mutual exclusion for accessing the buffer</li>
+            <li><code>semaphore full = 0</code>: Counts the number of full buffers</li>
+            <li><code>semaphore empty = N</code>: Counts the number of empty buffers (initially N)</li>
+          </ul>
+          
+          <p>The structure of the producer process:</p>
+          
+          <pre><code>while (true) {
+  // produce an item
+  wait(empty);
+  wait(mutex);
+  // add the item to the buffer
+  signal(mutex);
+  signal(full);
+}</code></pre>
+          
+          <p>The structure of the consumer process:</p>
+          
+          <pre><code>while (true) {
+  wait(full);
+  wait(mutex);
+  // remove an item from buffer
+  signal(mutex);
+  signal(empty);
+  // consume the removed item
+}</code></pre>
+          
+          <h3>Readers-Writers Problem</h3>
+          <p>In the readers-writers problem, a data set is shared among multiple processes:</p>
+          <ul>
+            <li><strong>Readers</strong>: Only read the data set, do not perform any updates</li>
+            <li><strong>Writers</strong>: Can both read and write the data set (perform updates)</li>
+          </ul>
+          
+          <p>The problem is to ensure that:</p>
+          <ul>
+            <li>Multiple readers can read the data set simultaneously</li>
+            <li>Only one writer can access the data set at a time</li>
+            <li>When a writer is accessing the data set, no reader can access it</li>
+          </ul>
+          
+          <p>We can use semaphores to solve this problem:</p>
+          <ul>
+            <li><code>semaphore mutex = 1</code>: Provides mutual exclusion for updating the readcount variable</li>
+            <li><code>semaphore wrt = 1</code>: Provides mutual exclusion for writers</li>
+            <li><code>int readcount = 0</code>: Keeps track of how many processes are currently reading the data set</li>
+          </ul>
+          
+          <p>The structure of a writer process:</p>
+          
+          <pre><code>while (true) {
+  wait(wrt);
+  // writing is performed
+  signal(wrt);
+}</code></pre>
+          
+          <p>The structure of a reader process:</p>
+          
+          <pre><code>while (true) {
+  wait(mutex);
+  readcount++;
+  if (readcount == 1) wait(wrt);
+  signal(mutex);
+  // reading is performed
+  wait(mutex);
+  readcount--;
+  if (readcount == 0) signal(wrt);
+  signal(mutex);
+}</code></pre>
+          
+          <h3>Dining-Philosophers Problem</h3>
+          <p>The dining-philosophers problem is a classic synchronization problem that illustrates the challenges of deadlock and resource allocation.</p>
+          
+          <p>Five philosophers sit at a round table with five chopsticks, one between each pair of philosophers. A philosopher alternates between thinking and eating. To eat, a philosopher needs to pick up the two chopsticks adjacent to them.</p>
+          
+          <figure>
+            <img src="../assets/images/module2-dining-philosophers.png" alt="Diagram of the dining philosophers problem showing five philosophers sitting around a table with chopsticks between them" width="600" height="300">
+            <figcaption>The Dining Philosophers Problem</figcaption>
+          </figure>
+          
+          <p>We can represent each chopstick as a semaphore:</p>
+          <pre><code>semaphore chopstick[5] = {1, 1, 1, 1, 1};</code></pre>
+          
+          <p>The structure of Philosopher i:</p>
+          
+          <pre><code>while (true) {
+  wait(chopstick[i]);
+  wait(chopstick[(i + 1) % 5]);
+  // eat
+  signal(chopstick[i]);
+  signal(chopstick[(i + 1) % 5]);
+  // think
+}</code></pre>
+          
+          <p>This solution has a problem: it can lead to deadlock. If all philosophers pick up their left chopstick simultaneously, they will all be waiting for their right chopstick, which is already held by another philosopher.</p>
+        </div>
+      </section>
+
+      <section id="monitors">
+        <h2>2.2.7 Monitors</h2>
+        <div class="content-block">
+          <p>📚 A monitor is a high-level synchronization construct that encapsulates shared data and the procedures that operate on that data in a module. It ensures that only one process can be active within the monitor at a time, providing mutual exclusion automatically.</p>
+          
+          <p>The syntax of a monitor is:</p>
+          
+          <pre><code>monitor monitor-name {
+  // shared variable declarations
+  procedure P1(...) { ... }
+  ...
+  procedure Pn(...) { ... }
+  initialization code(...) { ... }
+}</code></pre>
+          
+          <figure>
+            <img src="../assets/images/module2-monitor-structure.png" alt="Schematic diagram of a monitor showing shared variables, procedures, and the monitor entry queue" width="600" height="300">
+            <figcaption>Schematic view of a Monitor</figcaption>
+          </figure>
+          
+          <h3>Condition Variables</h3>
+          <p>Monitors provide a synchronization mechanism through condition variables. A condition variable allows a process to wait for a certain condition to become true and to signal other processes when a condition becomes true.</p>
+          
+          <p>The operations on a condition variable are:</p>
+          <ul>
+            <li><code>x.wait()</code>: The process that invokes this operation is suspended until another process invokes <code>x.signal()</code></li>
+            <li><code>x.signal()</code>: Resumes one suspended process that invoked <code>x.wait()</code>. If no process is suspended, then the signal operation has no effect.</li>
+          </ul>
+          
+          <p>When a process invokes <code>x.signal()</code> and there is a suspended process, there are two possibilities:</p>
+          <ol>
+            <li><strong>Signal and wait</strong>: The signaling process waits until the resumed process leaves the monitor or waits for another condition</li>
+            <li><strong>Signal and continue</strong>: The resumed process waits until the signaling process leaves the monitor or waits for another condition</li>
+          </ol>
+          
+          <figure>
+            <img src="../assets/images/module2-monitor-condition-variables.png" alt="Diagram showing how condition variables work within a monitor, including wait and signal operations" width="600" height="300">
+            <figcaption>Monitor with Condition Variables</figcaption>
+          </figure>
+          
+          <h3>Solution to Dining Philosophers using Monitors</h3>
+          <p>We can use a monitor to solve the dining-philosophers problem:</p>
+          
+          <pre><code>monitor DP {
+  enum { THINKING, HUNGRY, EATING} state[5];
+  condition self[5];
+  
+  void pickup(int i) {
+    state[i] = HUNGRY;
+    test(i);
+    if (state[i] != EATING) self[i].wait;
+  }
+  
+  void putdown(int i) {
+    state[i] = THINKING;
+    // test left and right neighbors
+    test((i + 4) % 5);
+    test((i + 1) % 5);
+  }
+  
+  void test(int i) {
+    if ((state[(i + 4) % 5] != EATING) &&
+        (state[i] == HUNGRY) &&
+        (state[(i + 1) % 5] != EATING)) {
+      state[i] = EATING;
+      self[i].signal();
+    }
+  }
+  
+  initialization_code() {
+    for (int i = 0; i < 5; i++)
+      state[i] = THINKING;
+  }
+}</code></pre>
+          
+          <p>Each philosopher i invokes the operations pickup() and putdown() in the following sequence:</p>
+          
+          <pre><code>dp.pickup(i);
+// EAT
+dp.putdown(i);</code></pre>
+          
+          <h3>Monitor Implementation Using Semaphores</h3>
+          <p>Monitors can be implemented using semaphores. For each monitor, we have:</p>
+          
+          <pre><code>semaphore mutex = 1; // provides mutual exclusion
+semaphore next = 0; // used for signaling
+int next_count = 0; // count of processes waiting on next</code></pre>
+          
+          <p>Each procedure F in the monitor is replaced by:</p>
+          
+          <pre><code>wait(mutex);
+...
+// body of F
+...
+if (next_count > 0)
+  signal(next);
+else
+  signal(mutex);</code></pre>
+          
+          <p>For each condition variable x, we have:</p>
+          
+          <pre><code>semaphore x_sem = 0; // for processes waiting on x
+int x_count = 0; // count of processes waiting on x</code></pre>
+          
+          <p>The operation x.wait() is implemented as:</p>
+          
+          <pre><code>x_count++;
+if (next_count > 0)
+  signal(next);
+else
+  signal(mutex);
+wait(x_sem);
+x_count--;</code></pre>
+          
+          <p>The operation x.signal() is implemented as:</p>
+          
+          <pre><code>if (x_count > 0) {
+  next_count++;
+  signal(x_sem);
+  wait(next);
+  next_count--;
+}</code></pre>
+        </div>
+      </section>
+
+      <section id="synchronization-examples">
+        <h2>2.2.8 Synchronization Examples</h2>
+        <div class="content-block">
+          <p>📚 Different operating systems implement synchronization mechanisms in various ways:</p>
+          
+          <h3>Windows XP Synchronization</h3>
+          <ul>
+            <li>Uses interrupt masks to protect access to global resources on uniprocessor systems</li>
+            <li>Uses spinlocks on multiprocessor systems</li>
+            <li>Provides dispatcher objects which may act as either mutexes or semaphores</li>
+            <li>Dispatcher objects may also provide events, which act much like condition variables</li>
+          </ul>
+          
+          <h3>Linux Synchronization</h3>
+          <ul>
+            <li>Disables interrupts to implement short critical sections</li>
+            <li>Provides semaphores and spin locks for synchronization</li>
+            <li>On multiprocessor systems, provides specialized mechanisms for efficient synchronization</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="alternative-approaches">
+        <h2>2.2.9 Alternative Approaches</h2>
+        <div class="content-block">
+          <p>📚 Besides the synchronization mechanisms discussed so far, there are several alternative approaches to handling concurrency and synchronization:</p>
+          
+          <h3>Transactional Memory</h3>
+          <p>Transactional memory is a concurrency control mechanism analogous to database transactions for controlling access to shared memory in concurrent computing. It simplifies concurrent programming by allowing a group of load and store instructions to execute in an atomic way.</p>
+          
+          <h3>OpenMP</h3>
+          <p>OpenMP (Open Multi-Processing) is an API that supports multi-platform shared memory multiprocessing programming in C, C++, and Fortran. It provides a set of compiler directives, library routines, and environment variables that influence run-time behavior.</p>
+          
+          <h3>Functional Programming Languages</h3>
+          <p>Functional programming languages like Haskell, Erlang, and Clojure handle concurrency differently from imperative languages. They often use immutable data structures and avoid shared state, which eliminates many synchronization issues.</p>
+        </div>
+      </section>
+
+      <section id="summary">
+        <h2>📝 Module Summary</h2>
+        <div class="summary-block">
+          <ul>
+            <li>Process synchronization is essential for maintaining data consistency in concurrent systems.</li>
+            <li>The critical section problem involves designing a protocol that processes can use to cooperate without conflict.</li>
+            <li>A valid solution to the critical section problem must satisfy mutual exclusion, progress, and bounded waiting requirements.</li>
+            <li>Peterson's solution is a software-based solution to the critical section problem for two processes.</li>
+            <li>Hardware synchronization instructions like TestAndSet() and Swap() provide atomic operations for implementing mutual exclusion.</li>
+            <li>Semaphores are synchronization tools that can be used for both mutual exclusion and process coordination.</li>
+            <li>Classical synchronization problems include the bounded-buffer problem, readers-writers problem, and dining-philosophers problem.</li>
+            <li>Monitors are high-level synchronization constructs that encapsulate shared data and the procedures that operate on that data.</li>
+            <li>Different operating systems implement synchronization mechanisms in various ways, tailored to their specific architectures and requirements.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="assessment">
+        <h2>⚡ Knowledge Check</h2>
+        <div class="assessment-block">
+          <ol>
+            <li>
+              <p>What are the three requirements for a valid solution to the critical section problem?</p>
+              <ol type="a">
+                <li>Mutual Exclusion, Progress, Bounded Waiting</li>
+                <li>Atomicity, Consistency, Isolation</li>
+                <li>Synchronization, Coordination, Communication</li>
+                <li>Locking, Unlocking, Signaling</li>
+              </ol>
+            </li>
+            <li>
+              <p>Which of the following is NOT a classical synchronization problem?</p>
+              <ol type="a">
+                <li>Bounded-Buffer Problem</li>
+                <li>Readers-Writers Problem</li>
+                <li>Dining-Philosophers Problem</li>
+                <li>Producer-Consumer Problem</li>
+              </ol>
+            </li>
+            <li>
+              <p>What is the main advantage of monitors over semaphores?</p>
+              <ol type="a">
+                <li>Monitors provide automatic mutual exclusion</li>
+                <li>Monitors are faster than semaphores</li>
+                <li>Monitors use less memory than semaphores</li>
+                <li>Monitors can be used in more situations than semaphores</li>
+              </ol>
+            </li>
+            <li>
+              <p>What is a race condition?</p>
+              <ol type="a">
+                <li>When two or more processes try to access and manipulate the same data concurrently, and the outcome depends on the order of execution</li>
+                <li>When a process is waiting indefinitely for a resource that will never become available</li>
+                <li>When two processes are each waiting for the other to release a resource</li>
+                <li>When a process is executing too slowly and cannot keep up with other processes</li>
+              </ol>
+            </li>
+            <li>
+              <p>Which of the following is a hardware solution to the critical section problem?</p>
+              <ol type="a">
+                <li>Peterson's Solution</li>
+                <li>TestAndSet() instruction</li>
+                <li>Monitors</li>
+                <li>Semaphores</li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="module-footer">
+      <h2>Related Resources</h2>
+      <ul>
+        <li><a href="#">Synchronization Mechanisms in Operating Systems</a></li>
+        <li><a href="#">Advanced Semaphore Programming</a></li>
+        <li><a href="#">Monitor Implementation Guide</a></li>
+      </ul>
+    </footer>
+
+    <!-- Bottom Navigation (identical to top) -->
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module1.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 2 of 3</span>
+        </div>
+        <a href="module3.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</body>
+</html>

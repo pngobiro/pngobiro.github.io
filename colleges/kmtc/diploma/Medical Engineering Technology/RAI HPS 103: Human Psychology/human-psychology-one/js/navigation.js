@@ -1,0 +1,1 @@
+// Navigation functionality will be added here later if needed.

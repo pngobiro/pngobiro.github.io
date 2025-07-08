@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8 (Part 2): Tests for Proportions &amp; Small Samples (t-test) - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-1.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 2): Proportions &amp; t-test</span>
+                    </div>
+                    <a href="chapter-8-part-3.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-8-part-2 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER EIGHT <br> Hypothesis Testing (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-8-tests-proportions-large">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧪</span>
+                        <span class="heading-text">8.5 Tests of significance on means and proportions (large samples) (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+
+                        <h3 class="subsection-heading">Hypothesis Test for a Single Population Proportion ($P$) (Large Sample)</h3>
+                        <p><strong>Assumptions:</strong> Sample is random, sample size is large ($np_0 \ge 5$ and $nq_0 \ge 5$, where $p_0$ is the hypothesized proportion and $q_0 = 1-p_0$).</p>
+                        <p><strong>Hypotheses:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Two-tailed: $H_0: P = P_0$ vs $H_1: P \ne P_0$</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Left-tailed: $H_0: P \ge P_0$ vs $H_1: P < P_0$</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Right-tailed: $H_0: P \le P_0$ vs $H_1: P > P_0$</span></li>
+                        </ul>
+                        <p>(Where $P_0$ is the hypothesized value of the population proportion).</p>
+                        <p><strong>Test Statistic (Z-test):</strong></p>
+                        <div class="equation">
+                            $$ Z_{calc} = \frac{p - P_0}{\sqrt{P_0(1-P_0)/n}} $$
+                        </div>
+                        <p>Where $p = x/n$ is the sample proportion.</p>
+                        <p><strong>Decision Rule:</strong> Same as for the mean (using Z critical values or p-value approach).</p>
+
+                        <p><strong>Example:</strong> It is claimed that 30% ($P_0=0.30$) of adults in a region are smokers. In a random sample of 200 adults ($n=200$), 70 are found to be smokers ($x=70$). Test the claim at $\alpha = 0.05$.</p>
+                        <p><strong>Step 1: Hypotheses</strong></p>
+                        <p>$H_0: P = 0.30$ (The proportion of smokers is 30%)</p>
+                        <p>$H_1: P \ne 0.30$ (The proportion of smokers is different from 30%) (Two-tailed test)</p>
+                        <p><strong>Step 2: Level of Significance</strong></p>
+                        <p>$\alpha = 0.05$</p>
+                        <p><strong>Step 3: Check Assumptions & Calculate Test Statistic</strong></p>
+                        <p>Check large sample: $np_0 = 200(0.30) = 60 \ge 5$. $nq_0 = 200(1-0.30) = 140 \ge 5$. Condition met.</p>
+                        <p>Sample proportion $p = x/n = 70/200 = 0.35$.</p>
+                        <div class="equation">
+                            $$ Z_{calc} = \frac{0.35 - 0.30}{\sqrt{0.30(1-0.30)/200}} = \frac{0.05}{\sqrt{0.30(0.70)/200}} = \frac{0.05}{\sqrt{0.21/200}} = \frac{0.05}{\sqrt{0.00105}} \approx \frac{0.05}{0.0324} \approx 1.543 $$
+                        </div>
+                        <p><strong>Step 4: Decision Rule (Critical Value Approach)</strong></p>
+                        <p>For a two-tailed test with $\alpha = 0.05$, the critical values are $Z_{\alpha/2} = \pm Z_{0.025} = \pm 1.96$.</p>
+                        <p>Reject $H_0$ if $|Z_{calc}| > 1.96$.</p>
+                        <p><strong>Step 5: Decision</strong></p>
+                        <p>Since $|Z_{calc}| = 1.543$ is not greater than $1.96$, we do not reject $H_0$.</p>
+                        <p><strong>Step 6: Interpretation</strong></p>
+                        <p>There is not sufficient evidence at the 0.05 significance level to conclude that the proportion of smokers in this region is different from 30%.</p>
+
+                        <p><strong>Decision Rule (P-value Approach for the example):</strong></p>
+                        <p>For a two-tailed test, p-value = $2 \times P(Z > |Z_{calc}|) = 2 \times P(Z > 1.543)$.</p>
+                        <p>Using a Z-table, $P(Z < 1.543) \approx 0.9386$.</p>
+                        <p>p-value = $2 \times (1 - 0.9386) = 2 \times 0.0614 = 0.1228$.</p>
+                        <p>Decision: Since p-value (0.1228) $> \alpha (0.05)$, we do not reject $H_0$. (Same conclusion).</p>
+
+                        <h3 class="subsection-heading">Hypothesis Test for Comparing Two Population Means ($\mu_1 - \mu_2$) (Large Independent Samples)</h3>
+                        <p>Used to compare the means of two independent groups when both sample sizes are large ($n_1 \ge 30$ and $n_2 \ge 30$).</p>
+                        <p><strong>Hypotheses:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Two-tailed: $H_0: \mu_1 = \mu_2$ (or $\mu_1 - \mu_2 = 0$) vs $H_1: \mu_1 \ne \mu_2$ (or $\mu_1 - \mu_2 \ne 0$)</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Left-tailed: $H_0: \mu_1 \ge \mu_2$ vs $H_1: \mu_1 < \mu_2$</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Right-tailed: $H_0: \mu_1 \le \mu_2$ vs $H_1: \mu_1 > \mu_2$</span></li>
+                        </ul>
+                        <p><strong>Test Statistic (Z-test):</strong></p>
+                        <div class="equation">
+                            $$ Z_{calc} = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)_0}{\sqrt{\frac{\sigma_1^2}{n_1} + \frac{\sigma_2^2}{n_2}}} $$
+                        </div>
+                        <p>Where $(\mu_1 - \mu_2)_0$ is the hypothesized difference (usually 0 under $H_0$). If population variances $\sigma_1^2$ and $\sigma_2^2$ are unknown, use sample variances $s_1^2$ and $s_2^2$ since samples are large.</p>
+                        <div class="equation">
+                             $$ Z_{calc} = \frac{(\bar{x}_1 - \bar{x}_2)}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}} \quad (\text{when testing } H_0: \mu_1 = \mu_2) $$
+                        </div>
+                        <p><strong>Decision Rule:</strong> Use Z critical values or p-value approach as before.</p>
+
+                        <p><strong>Example:</strong> Compare the mean recovery times for two groups. Group 1 (New Drug): $n_1=50, \bar{x}_1=10.8, s_1=3$. Group 2 (Standard Drug): $n_2=60, \bar{x}_2=12.0, s_2=3.5$. Test if the new drug has a shorter mean recovery time at $\alpha=0.05$.</p>
+                        <p>$H_0: \mu_1 \ge \mu_2$</p>
+                        <p>$H_1: \mu_1 < \mu_2$ (Left-tailed)</p>
+                        <div class="equation">
+                             $$ Z_{calc} = \frac{(10.8 - 12.0)}{\sqrt{\frac{3^2}{50} + \frac{3.5^2}{60}}} = \frac{-1.2}{\sqrt{\frac{9}{50} + \frac{12.25}{60}}} = \frac{-1.2}{\sqrt{0.18 + 0.204}} = \frac{-1.2}{\sqrt{0.384}} \approx \frac{-1.2}{0.620} \approx -1.935 $$
+                        </div>
+                        <p>Critical value for left-tailed test at $\alpha=0.05$ is $-Z_{0.05} = -1.645$.</p>
+                        <p>Since $Z_{calc} = -1.935 < -1.645$, reject $H_0$.</p>
+                        <p>Conclusion: There is sufficient evidence at $\alpha=0.05$ that the new drug has a shorter mean recovery time.</p>
+
+                        <h3 class="subsection-heading">Hypothesis Test for Comparing Two Population Proportions ($P_1 - P_2$) (Large Independent Samples)</h3>
+                        <p>Used to compare proportions from two independent groups when sample sizes are large ($n_1p_1, n_1q_1, n_2p_2, n_2q_2$ all $\ge 5$).</p>
+                        <p><strong>Hypotheses:</strong></p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Two-tailed: $H_0: P_1 = P_2$ vs $H_1: P_1 \ne P_2$</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Left-tailed: $H_0: P_1 \ge P_2$ vs $H_1: P_1 < P_2$</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Right-tailed: $H_0: P_1 \le P_2$ vs $H_1: P_1 > P_2$</span></li>
+                        </ul>
+                        <p><strong>Test Statistic (Z-test):</strong></p>
+                        <p>First, calculate the pooled sample proportion ($\bar{p}$) under the assumption $H_0: P_1 = P_2$:</p>
+                        <div class="equation">
+                            $$ \bar{p} = \frac{x_1 + x_2}{n_1 + n_2} $$
+                        </div>
+                        <p>Then calculate the test statistic:</p>
+                        <div class="equation">
+                            $$ Z_{calc} = \frac{(p_1 - p_2)}{\sqrt{\bar{p}(1-\bar{p}) \left( \frac{1}{n_1} + \frac{1}{n_2} \right)}} $$
+                        </div>
+                        <p>Where $p_1 = x_1/n_1$ and $p_2 = x_2/n_2$.</p>
+                        <p><strong>Decision Rule:</strong> Use Z critical values or p-value approach.</p>
+
+                        <p><strong>Example:</strong> Test if the proportion of hypertensive individuals differs between males and females. Sample 1 (Males): $n_1=200, x_1=60 \implies p_1=0.30$. Sample 2 (Females): $n_2=150, x_2=30 \implies p_2=0.20$. Use $\alpha=0.05$.</p>
+                        <p>$H_0: P_1 = P_2$</p>
+                        <p>$H_1: P_1 \ne P_2$ (Two-tailed)</p>
+                        <p>Pooled proportion: $\bar{p} = (60+30)/(200+150) = 90/350 \approx 0.257$.</p>
+                        <div class="equation">
+                             $$ Z_{calc} = \frac{(0.30 - 0.20)}{\sqrt{0.257(1-0.257) \left( \frac{1}{200} + \frac{1}{150} \right)}} = \frac{0.10}{\sqrt{0.257(0.743) \left( 0.005 + 0.00667 \right)}} $$
+                             $$ = \frac{0.10}{\sqrt{0.191(0.01167)}} = \frac{0.10}{\sqrt{0.002229}} \approx \frac{0.10}{0.0472} \approx 2.119 $$
+                        </div>
+                        <p>Critical values for two-tailed test at $\alpha=0.05$ are $\pm 1.96$.</p>
+                        <p>Since $|Z_{calc}| = 2.119 > 1.96$, reject $H_0$.</p>
+                        <p>Conclusion: There is sufficient evidence at $\alpha=0.05$ that the proportion of hypertensive individuals differs between males and females.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-8-one-tailed-tests">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➡️</span>
+                        <span class="heading-text">8.6 One tailed tests</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>As seen in the examples above, one-tailed tests are used when the alternative hypothesis specifies a direction (less than < or greater than >).</p>
+                        <p>The critical region is located entirely in one tail of the distribution.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Left-tailed test ($H_1$ uses <):</strong> Reject $H_0$ if the test statistic is less than the negative critical value (e.g., $Z_{calc} < -Z_{\alpha}$ or $t_{calc} < -t_{\alpha, df}$). The p-value is the area to the left of the calculated test statistic.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Right-tailed test ($H_1$ uses >):</strong> Reject $H_0$ if the test statistic is greater than the positive critical value (e.g., $Z_{calc} > Z_{\alpha}$ or $t_{calc} > t_{\alpha, df}$). The p-value is the area to the right of the calculated test statistic.</span></li>
+                        </ul>
+                        <p>The choice between a one-tailed and two-tailed test depends on the research question before collecting data. If there is a specific directional interest (e.g., proving something is *better*, *shorter*, *higher*), a one-tailed test is appropriate. If the interest is simply whether there is *any difference*, a two-tailed test is used.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-8-small-samples-means">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔬</span>
+                        <span class="heading-text">8.7 Comparing the means of small samples</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>When comparing the means of two groups with small sample sizes ($n_1 < 30$ or $n_2 < 30$) and unknown population standard deviations, we use the t-test, assuming the populations are approximately normally distributed.</p>
+                        <p>There are two main cases depending on whether the samples are independent or paired.</p>
+
+                        <h3 class="subsection-heading">Independent Samples t-test</h3>
+                        <p>Used when the two samples are selected independently from two populations.</p>
+                        <p><strong>Additional Assumption:</strong> We often need to decide whether to assume the population variances are equal ($\sigma_1^2 = \sigma_2^2$) or unequal ($\sigma_1^2 \ne \sigma_2^2$). A preliminary test (like Levene's test or F-test for variances) can be used, but often the unequal variances version (Welch's t-test) is preferred as it is more robust.</p>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Case 1: Assuming Equal Population Variances</h4>
+                        <p>First, calculate the pooled sample variance ($s_p^2$), which is a weighted average of the two sample variances:</p>
+                        <div class="equation">
+                            $$ s_p^2 = \frac{(n_1-1)s_1^2 + (n_2-1)s_2^2}{n_1 + n_2 - 2} $$
+                        </div>
+                        <p>The test statistic is:</p>
+                        <div class="equation">
+                            $$ t_{calc} = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)_0}{\sqrt{s_p^2 \left( \frac{1}{n_1} + \frac{1}{n_2} \right)}} $$
+                        </div>
+                        <p>The degrees of freedom for the t-distribution are $df = n_1 + n_2 - 2$.</p>
+
+                        <h4 style="font-weight: 600; margin-top: 1.5rem; margin-bottom: 0.5rem;">Case 2: Assuming Unequal Population Variances (Welch's t-test)</h4>
+                        <p>The test statistic is:</p>
+                         <div class="equation">
+                            $$ t_{calc} = \frac{(\bar{x}_1 - \bar{x}_2) - (\mu_1 - \mu_2)_0}{\sqrt{\frac{s_1^2}{n_1} + \frac{s_2^2}{n_2}}} $$
+                        </div>
+                        <p>The degrees of freedom are calculated using the Welch-Satterthwaite equation (complex formula, often calculated by software):</p>
+                        <div class="equation">
+                             $$ df \approx \frac{\left( \frac{s_1^2}{n_1} + \frac{s_2^2}{n_2} \right)^2}{\frac{\left( \frac{s_1^2}{n_1} \right)^2}{n_1-1} + \frac{\left( \frac{s_2^2}{n_2} \right)^2}{n_2-1}} $$
+                        </div>
+                        <p>(The calculated df is often not an integer and may be rounded down).</p>
+                        <img src="../assets/images/chapter-8-tdist-curve-1.jpg" alt="t-Distribution Curve" class="content-image">
+
+                        <p><strong>Decision Rule:</strong> Compare $t_{calc}$ to the critical value $t_{\alpha/2, df}$ (two-tailed) or $t_{\alpha, df}$ (one-tailed) from the t-distribution table using the appropriate degrees of freedom, or use the p-value approach.</p>
+
+                        <p><strong>Example (Assuming Equal Variances):</strong> A sample of 10 male students ($n_1=10$) has a mean height $\bar{x}_1=175$ cm, $s_1=6$ cm. A sample of 12 female students ($n_2=12$) has $\bar{x}_2=165$ cm, $s_2=5$ cm. Test if there is a significant difference in mean height between males and females at $\alpha=0.05$, assuming equal variances and normal distributions.</p>
+                        <p>$H_0: \mu_1 = \mu_2$</p>
+                        <p>$H_1: \mu_1 \ne \mu_2$ (Two-tailed)</p>
+                        <p>Pooled variance:</p>
+                        <div class="equation">
+                             $$ s_p^2 = \frac{(10-1)6^2 + (12-1)5^2}{10 + 12 - 2} = \frac{9(36) + 11(25)}{20} = \frac{324 + 275}{20} = \frac{599}{20} = 29.95 $$
+                        </div>
+                        <p>Test statistic:</p>
+                        <div class="equation">
+                             $$ t_{calc} = \frac{(175 - 165) - 0}{\sqrt{29.95 \left( \frac{1}{10} + \frac{1}{12} \right)}} = \frac{10}{\sqrt{29.95 (0.1 + 0.0833)}} = \frac{10}{\sqrt{29.95 (0.1833)}} = \frac{10}{\sqrt{5.489}} \approx \frac{10}{2.343} \approx 4.268 $$
+                        </div>
+                        <p>Degrees of freedom $df = 10 + 12 - 2 = 20$.</p>
+                        <p>Critical value $t_{\alpha/2, df} = t_{0.025, 20}$ from t-table is 2.086.</p>
+                        <p>Decision: Since $|t_{calc}| = 4.268 > 2.086$, reject $H_0$.</p>
+                        <p>Conclusion: There is a significant difference in mean height between male and female students at $\alpha=0.05$.</p>
+                        <!-- Paired t-test in next chunk -->
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-8-part-2 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-1.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 2): Proportions &amp; t-test</span>
+                    </div>
+                    <a href="chapter-8-part-3.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

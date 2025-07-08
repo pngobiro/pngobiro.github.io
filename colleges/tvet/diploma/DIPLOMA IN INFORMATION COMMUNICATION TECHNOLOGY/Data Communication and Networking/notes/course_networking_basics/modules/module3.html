@@ -1,0 +1,307 @@
+      
+<!-- module/module3.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3: Signals, Impairment, and Data Rate Limits - Data Communication and Networking</title>
+    <meta name="description" content="Understand analog and digital signals, transmission impairments like attenuation, distortion, noise, and data rate limits including Nyquist and Shannon theorems.">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <article class="learning-module" data-module="3">
+        <nav class="module-nav">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="module2.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module 3 of 9</span>
+                </div>
+                <a href="module4.html" class="nav-button">
+                    Next <span>→</span>
+                </a>
+            </div>
+        </nav>
+
+        <header class="module-header">
+            <h1>Module 3: Signals, Impairment, and Data Rate Limits</h1>
+            <section class="module-objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Differentiate between analog and digital data and signals.</li>
+                    <li>Understand periodic and nonperiodic signals, and sine waves.</li>
+                    <li>Explain characteristics of signals: peak amplitude, period, frequency, phase, and wavelength.</li>
+                    <li>Define bandwidth and its significance.</li>
+                    <li>Describe digital signals and bit rate.</li>
+                    <li>Identify and explain transmission impairments: attenuation, distortion, and noise.</li>
+                    <li>Understand Signal-to-Noise Ratio (SNR) and its importance.</li>
+                    <li>Learn about data rate limits and the Nyquist Bit Rate and Shannon Capacity formulas.</li>
+                </ul>
+            </section>
+        </header>
+
+        <main class="module-content">
+            <section class="content-section">
+                <h2>📚 ANALOG AND DIGITAL</h2>
+                <div class="content-block">
+                    <h3>Analog Data:</h3>
+                    <p>The term <i>analog data</i> refers to information that is continuous; For example, an analog clock that has hour, minute, and second hands gives information in a continuous form; the movements of the hands are continuous. Analog data, such as the sounds made by a human voice, take on continuous values. When someone speaks, an analog wave is created in the air. This can be captured by a microphone and converted to an analog signal or sampled and converted to a digital signal.</p>
+                    <h3>Digital Data:</h3>
+                    <p><i>Digital data</i> refers to information that has discrete states. For example, a digital clock that reports the hours and the minutes will change suddenly from 8:05 to 8:06. Digital data takes on discrete values. For example, data are stored in computer memory in the form of Os and 1s. They can be converted to a digital signal or modulated into an analog signal for transmission across a medium.</p>
+                    <h3>Analog and Digital Signals:</h3>
+                    <p>Like the data they represent, signals can be either analog or digital. An analog signal has infinitely many levels of intensity over a period of time. As the wave moves from value A to value B, it passes through and includes an infinite number of values along its path. A digital signal, on the other hand, can have only a limited number of defined values. Although each value can be any number, it is often as simple as 1 and O. The simplest way to show signals is by plotting them on a pair of perpendicular axes. The vertical axis represents the value or strength of a signal. The horizontal axis represents time. Figure below illustrates an analog signal and a digital signal. The curve representing the analog signal passes through an infinite number of points. The vertical lines of the digital signal, however, demonstrate the sudden jump that the signal makes from value to value.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/analog_digital_signals.png"
+                             alt="Diagram comparing analog and digital signals."
+                             width="600" height="300">
+                        <figcaption>Figure 3.1 Comparison of analog and digital signals</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 Periodic and Nonperiodic Signals:</h2>
+                <div class="content-block">
+                    <p>A periodic signal completes a pattern within a measurable time frame, called a period, and repeats that pattern over subsequent identical periods. The completion of one full pattern is called a cycle. A nonperiodic signal changes without exhibiting a pattern or cycle that repeats over time.</p>
+                    <h3>PERIODIC ANALOG SIGNALS:</h3>
+                    <p>Periodic analog signals can be classified as simple or composite. A simple periodic analog signal, a sine wave, cannot be decomposed into simpler signals. A composite periodic analog signal is composed of multiple sine waves.</p>
+                    <h3>Sine Wave</h3>
+                    <p>The sine wave is the most fundamental form of a periodic analog signal. When we visualize it as a simple oscillating curve, its change over the course of a cycle is smooth and consistent, a continuous, rolling flow. Figure below shows a sine wave. Each cycle consists of a single arc above the time axis followed by a single arc below it.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/sine_wave.png"
+                             alt="Diagram of a sine wave."
+                             width="600" height="300">
+                        <figcaption>A sine wave</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 Characteristics of Signals:</h2>
+                <div class="content-block">
+                    <h3>1. Peak Amplitude</h3>
+                    <p>The peak amplitude of a signal is the absolute value of its highest intensity, proportional to the energy it carries. For electric signals, peak amplitude is normally measured in <i>volts</i>. Figure below shows two signals and their peak amplitudes.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/signal_amplitude.png"
+                             alt="Diagram showing signals with different peak amplitudes."
+                             width="600" height="300">
+                        <figcaption>Two signals with the same phase and frequency, but different amplitudes</figcaption>
+                    </figure>
+
+                    <h3>2. Period and Frequency</h3>
+                    <p>Period refers to the amount of time, in seconds, a signal needs to complete 1 cycle.</p>
+                    <p>Frequency refers to the number of periods in I s. Note that period and frequency are just one characteristic defined in two ways. Period is the inverse of frequency, and frequency is the inverse of period, as the following formulas show.</p>
+                    <p>f=1/T  and  T=1/f</p>
+                    <p>Period is formally expressed in seconds. Frequency is formally expressed in Hertz (Hz), which is cycle per second.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/signal_frequency.png"
+                             alt="Diagram showing signals with different frequencies."
+                             width="600" height="300">
+                        <figcaption>Two signals with the same amplitude and phase, but different frequencies</figcaption>
+                    </figure>
+
+                    <h3>3. Phase</h3>
+                    <p>The term phase describes the position of the waveform relative to time O. If we think of the wave as something that can be shifted backward or forward along the time axis, phase describes the amount of that shift. It indicates the status of the first cycle. Phase is measured in degrees or radians [360° is 2π rad; 1° is 2π/360 rad, and 1 rad is 360/(2π)]. A phase shift of 360° corresponds to a shift of a complete period; a phase shift of 180° corresponds to a shift of one-half of a period; and a phase shift of 90° corresponds to a shift of one-quarter of a period.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/signal_phase.png"
+                             alt="Diagram showing signals with different phases."
+                             width="600" height="300">
+                        <figcaption>Three sine waves with the same amplitude and frequency, but different phases</figcaption>
+                    </figure>
+                    <ol>
+                        <li>A sine wave with a phase of 0° starts at time 0 with a zero amplitude. The amplitude is increasing.</li>
+                        <li>A sine wave with a phase of 90° starts at time 0 with a peak amplitude. The amplitude is decreasing.</li>
+                        <li>A sine wave with a phase of 180° starts at time 0 with a zero amplitude. The amplitude is decreasing.</li>
+                    </ol>
+
+                    <h3>4. Wavelength</h3>
+                    <p>Wavelength is another characteristic of a signal traveling through a transmission medium. Wavelength binds the period or the frequency of a simple sine wave to the propagation speed of the medium. While the frequency of a signal is independent of the medium, the wavelength depends on both the frequency and the medium. Wavelength is a property of any type of signal. In data communications, we often use wavelength to describe the transmission of light in an optical fiber. The wavelength is the distance a simple signal can travel in one period. Wavelength can be calculated if one is given the propagation speed (the speed of light) and the period of the signal. However, since period and frequency are related to each other, if we represent wavelength by λ, propagation speed by c (speed of light), and frequency by f, we get</p>
+                    <p>Wavelength=Propagation speed * Period = propagation speed/frequency</p>
+                    <p>λ=c/f</p>
+                    <p>The wavelength is normally measured in micrometers (microns) instead of meters.</p>
+
+                    <h3>Bandwidth</h3>
+                    <p>The range of frequencies contained in a composite signal is its bandwidth. The bandwidth is normally a difference between two numbers. For example, if a composite signal contains frequencies between 1000 and 5000, its bandwidth is 5000 - 1000, or 4000. Figure 3.12 shows the concept of bandwidth. The figure depicts two composite signals, one periodic and the other nonperiodic. The bandwidth of the periodic signal contains all integer frequencies between 1000 and 5000 (1000, 100 I, 1002, ...). The bandwidth of the nonperiodic signals has the same range, but the frequencies are continuous.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/signal_bandwidth.png"
+                             alt="Diagram illustrating bandwidth of periodic and nonperiodic signals."
+                             width="600" height="300">
+                        <figcaption>Figure 3.12 The bandwidth of periodic and nonperiodic composite signals</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 DIGITAL SIGNALS</h2>
+                <div class="content-block">
+                    <p>In addition to being represented by an analog signal, information can also be represented by a digital signal. For example, a 1 can be encoded as a positive voltage and a 0 as zero voltage. A digital signal can have more than two levels. In this case, we can send more than 1 bit for each level. Figure 3.16 shows two signals, one with two levels and the other with four.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/digital_signals_levels.png"
+                             alt="Diagram illustrating digital signals with two and four levels."
+                             width="600" height="300">
+                        <figcaption>Figure 3.16 Two digital signals: one with two signal levels and the other with four signal levels</figcaption>
+                    </figure>
+                    <p>We send 1 bit per level in part a of the figure and 2 bits per level in part b of the figure. In general, if a signal has L levels, each level needs log<sub>2</sub>L bits.</p>
+                    <h3>Bit Rate</h3>
+                    <p>Most digital signals are nonperiodic, and thus period and frequency are not appropriate characteristics. Another term-bit rate is used to describe digital signals. The bit rate is the number of bits sent in 1s, expressed in bits per second (bps). Figure 3.16 shows the bit rate for two signals.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 TRANSMISSION IMPAIRMENT</h2>
+                <div class="content-block">
+                    <p>Signals travel through transmission media, which are not perfect. The imperfection causes signal impairment. This means that the signal at the beginning of the medium is not the same as the signal at the end of the medium. What is sent is not what is received. Three causes of impairment are attenuation, distortion, and noise.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/transmission_impairment_causes.png"
+                             alt="Diagram illustrating the causes of transmission impairment: Attenuation, Distortion, and Noise."
+                             width="600" height="300">
+                        <figcaption>Causes of impairment</figcaption>
+                    </figure>
+                    <h3>1. Attenuation</h3>
+                    <p>Attenuation means a loss of energy. When a signal, simple or composite, travels through a medium, it loses some of its energy in overcoming the resistance of the medium. That is why a wire carrying electric signals gets warm, if not hot, after a while. Some of the electrical energy in the signal is converted to heat. To compensate for this loss, amplifiers are used to amplify the signal. Attenuation is measured in terms of Decibels.</p>
+                    <p>The decibel (dB) measures the relative strengths of two signals or one signal at two different points. Note that the decibel is negative if a signal is attenuated and positive if a signal is amplified.</p>
+                    <p>dB=10log<sub>10</sub> P2/P1</p>
+                    <p>Variables PI and P2 are the powers of a signal at points 1 and 2, respectively.</p>
+
+                    <h3>2. Distortion:</h3>
+                    <p>Distortion means that the signal changes its form or shape. Distortion can occur in a composite signal made of different frequencies. Each signal component has its own propagation speed through a medium and, therefore, its own delay in arriving at the final destination. Differences in delay may create a difference in phase if the delay is not exactly the same as the period duration. In other words, signal components at the receiver have phases different from what they had at the sender. The shape of the composite signal is therefore not the same. Figure 3.28 shows the effect of distortion on a composite signal.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/signal_distortion.png"
+                             alt="Diagram illustrating signal distortion."
+                             width="600" height="300">
+                        <figcaption>Figure 3.28 Distortion</figcaption>
+                    </figure>
+
+                    <h3>3. Noise</h3>
+                    <p>Noise is another cause of impairment. Several types of noise, such as thermal noise, induced noise, crosstalk, and impulse noise, may corrupt the signal. Thermal noise is the random motion of electrons in a wire which creates an extra signal not originally sent by the transmitter. Induced noise comes from sources such as motors and appliances. These devices act as a sending antenna, and the transmission medium acts as the receiving antenna. Crosstalk is the effect of one wire on the other. One wire acts as a sending antenna and the other as the receiving antenna. Impulse noise is a spike (a signal with high energy in a very short time) that comes from power lines, lightning, and so on.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 Signal-to-Noise Ratio (SNR)</h2>
+                <div class="content-block">
+                    <p>The signal-to-noise ratio is defined as</p>
+                    <p>SNR= Average Signal power / Average Noise Power</p>
+                    <p>SNR is actually the ratio of what is wanted (signal) to what is not wanted (noise). A high SNR means the signal is less corrupted by noise; a low SNR means the signal is more corrupted by noise. Because SNR is the ratio of two powers, it is often described in decibel units, SNR<sub>dB</sub>, defined as</p>
+                    <p>SNR<sub>dB</sub> = 10log<sub>10</sub> SNR</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 DATA RATE LIMITS</h2>
+                <div class="content-block">
+                    <p>A very important consideration in data communications is how fast we can send data, in bits per second. over a channel. Data rate depends on three factors:</p>
+                    <ol>
+                        <li>The bandwidth available</li>
+                        <li>The level of the signals we use</li>
+                        <li>The quality of the channel (the level of noise)</li>
+                    </ol>
+                    <p>Two theoretical formulas were developed to calculate the data rate: one by Nyquist for a noiseless channel. another by Shannon for a noisy channel.</p>
+                    <h3>Noiseless Channel: Nyquist Bit Rate</h3>
+                    <p>For a noiseless channel, the Nyquist bit rate formula defines the theoretical maximum bit rate</p>
+                    <p>BitRate = 2 x bandwidth x log<sub>2</sub> L</p>
+                    <p>In this formula, bandwidth is the bandwidth of the channel, L is the number of signal levels used to represent data, and BitRate is the bit rate in bits per second. According to the formula, we might think that, given a specific bandwidth, we can have any bit rate we want by increasing the number of signallevels. Although the idea is theoretically correct, practically there is a limit. When we increase the number of signallevels, we impose a burden on the receiver. If the number of levels in a signal is just 2, the receiver can easily distinguish between a 0 and a 1. If the level of a signal is 64, the receiver must be very sophisticated to distinguish between 64 different levels. In other words, increasing the levels of a signal reduces the reliability of the system.</p>
+
+                    <h3>Noisy Channel: Shannon Capacity</h3>
+                    <p>In reality, we cannot have a noiseless channel; the channel is always noisy. In 1944, Claude Shannon introduced a formula, called the Shannon capacity, to determine the theoretical highest data rate for a noisy channel:</p>
+                    <p>Capacity =bandwidth x log<sub>2</sub> (1 +SNR)</p>
+                    <p>In this formula, bandwidth is the bandwidth of the channel, SNR is the signal-to-noise ratio, and capacity is the capacity of the channel in bits per second. Note that in the Shannon formula there is no indication of the signal level, which means that no matter how many levels we have, we cannot achieve a data rate higher than the capacity of the channel. In other words, the formula defines a characteristic of the channel, not the method of transmission.</p>
+
+                    <h3>Bandwidth in Bits per Seconds</h3>
+                    <p>The term bandwidth can also refer to the number of bits per second that a channel, a link, or even a network can transmit. For example, one can say the bandwidth of a Fast Ethernet network is a maximum of 100 Mbps. This means that this network can send 100 Mbps.</p>
+                </div>
+            </section>
+
+
+        </main>
+
+        <footer class="module-footer">
+            <section class="key-takeaways">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Analog signals are continuous; digital signals are discrete.</li>
+                    <li>Signal characteristics include amplitude, period, frequency, phase, and wavelength.</li>
+                    <li>Bandwidth is the range of frequencies in a composite signal.</li>
+                    <li>Digital signals are described by bit rate.</li>
+                    <li>Transmission impairments are attenuation, distortion, and noise.</li>
+                    <li>SNR indicates signal quality relative to noise.</li>
+                    <li>Nyquist Bit Rate and Shannon Capacity define theoretical data rate limits.</li>
+                </ul>
+            </section>
+
+            <section class="knowledge-check">
+                <h2>⚡ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <p><strong>Question 1:</strong> What is the key difference between analog and digital signals?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Analog signals are continuous, while digital signals are discrete.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 2:</strong> Define bandwidth in the context of signals.</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Bandwidth is the range of frequencies contained in a composite signal.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 3:</strong> Name three types of transmission impairments.</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <ol>
+                                <li>Attenuation</li>
+                                <li>Distortion</li>
+                                <li>Noise</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 4:</strong> What does SNR stand for, and what does it represent?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>SNR stands for Signal-to-Noise Ratio. It represents the ratio of signal power to noise power and indicates signal quality.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 5:</strong> What are the main factors that limit data rate according to the Nyquist and Shannon theorems?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Nyquist theorem: Bandwidth and number of signal levels. Shannon theorem: Bandwidth and Signal-to-Noise Ratio (SNR).</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="module2.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module 3 of 9</span>
+                    </div>
+                    <a href="module4.html" class="nav-button">
+                        Next <span>→</span>
+                    </a>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</body>
+</html>
+
+    

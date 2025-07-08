@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Threads and Multicore Programming - Operating Systems: Threads and Process Management</title>
+  <meta name="description" content="Introduction to threads, their benefits, and implementation models">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="1">
+    <!-- Top Navigation -->
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="#" class="nav-button disabled">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 1 of 3</span>
+        </div>
+        <a href="module2.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <header class="module-header">
+      <h1>Threads and Multicore Programming</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Understand the concept of threads and their benefits</li>
+          <li>Differentiate between various multithreading models</li>
+          <li>Explore different thread libraries and their implementations</li>
+          <li>Identify common threading issues and their solutions</li>
+        </ul>
+      </section>
+    </header>
+
+    <main class="module-content">
+      <section id="overview">
+        <h2>2.1.1 Overview</h2>
+        <div class="content-block">
+          <p>📚 Threads are a fundamental component of modern operating systems, allowing for efficient execution of multiple tasks within a single process. This module introduces the concept of threads, their benefits, and various implementation models.</p>
+        </div>
+      </section>
+
+      <section id="multicore-programming">
+        <h2>2.1.2 Multicore Programming</h2>
+        <div class="content-block">
+          <p>📚 Multicore processors have become the standard in modern computing systems. These processors contain multiple computing cores on a single chip, allowing for true parallel execution of tasks. Threads are essential for taking advantage of multicore architectures, as they enable a single application to utilize multiple cores simultaneously.</p>
+          
+          <p>Multicore programming involves designing software that can effectively utilize multiple processor cores. This requires understanding of:</p>
+          <ul>
+            <li>Parallel execution models</li>
+            <li>Task decomposition strategies</li>
+            <li>Synchronization mechanisms</li>
+            <li>Load balancing techniques</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="multithreading-models">
+        <h2>2.1.3 Multithreading Models</h2>
+        
+        <h3>Single & Multithreaded Processes</h3>
+        <div class="content-block">
+          <p>📚 A traditional process contains a single thread of execution, while a multithreaded process contains multiple threads that can execute concurrently. Each thread has its own thread ID, program counter, register set, and stack, but shares the process's code section, data section, and other operating system resources with other threads in the same process.</p>
+          
+          <figure>
+            <img src="../assets/images/module1-single-vs-multithreaded.png" alt="Diagram comparing single-threaded and multi-threaded process models, showing how threads share resources within a process" width="600" height="300">
+            <figcaption>Comparison of single-threaded and multi-threaded process models</figcaption>
+          </figure>
+        </div>
+
+        <h3>Benefits</h3>
+        <div class="content-block">
+          <p>📚 Multithreading provides several important benefits:</p>
+          <ul>
+            <li><strong>Responsiveness</strong>: Multithreading can improve application responsiveness by allowing one thread to continue execution while another is blocked or performing a lengthy operation.</li>
+            <li><strong>Resource Sharing</strong>: Threads share the memory and resources of the process to which they belong, making communication between threads more efficient than communication between separate processes.</li>
+            <li><strong>Economy</strong>: Creating and managing threads requires fewer system resources than creating and managing processes.</li>
+            <li><strong>Utilization of MP Architectures</strong>: Threads can execute in parallel on different processor cores, taking full advantage of multiprocessor or multicore systems.</li>
+          </ul>
+        </div>
+
+        <h3>User Threads</h3>
+        <div class="content-block">
+          <p>📚 User threads are managed by user-level thread libraries without kernel support. The operating system is unaware of these threads, seeing only a single process. Thread management operations (creation, scheduling, etc.) are handled by the thread library and don't require system calls.</p>
+          
+          <p>Three primary thread libraries are:</p>
+          <ul>
+            <li><strong>POSIX Pthreads</strong>: A standard API for thread creation and synchronization defined by the IEEE POSIX standard.</li>
+            <li><strong>Win32 threads</strong>: Microsoft's thread implementation for Windows operating systems.</li>
+            <li><strong>Java threads</strong>: The threading facilities provided by the Java Virtual Machine.</li>
+          </ul>
+        </div>
+
+        <h3>Multithreading Models</h3>
+        <div class="content-block">
+          <p>📚 There are three common models for the relationship between user threads and kernel threads:</p>
+          
+          <h4>Many-to-One</h4>
+          <p>In the Many-to-One model, many user-level threads are mapped to a single kernel thread. Thread management is efficient as it's done in user space, but if a user thread makes a blocking system call, the entire process blocks. Additionally, this model cannot take advantage of multiprocessing since only one thread can access the kernel at a time.</p>
+          
+          <figure>
+            <img src="../assets/images/module1-many-to-one-model.png" alt="Many-to-One threading model diagram showing multiple user threads mapped to a single kernel thread" width="600" height="300">
+            <figcaption>Many-to-One threading model</figcaption>
+          </figure>
+          
+          <h4>One-to-One</h4>
+          <p>The One-to-One model maps each user thread to a kernel thread. This provides more concurrency than the Many-to-One model and allows multiple threads to run in parallel on multiprocessors. However, creating a user thread requires creating a corresponding kernel thread, which can burden system resources if too many threads are created.</p>
+          
+          <figure>
+            <img src="../assets/images/module1-one-to-one-model.png" alt="One-to-One threading model diagram showing each user thread mapped to its own kernel thread" width="600" height="300">
+            <figcaption>One-to-One threading model</figcaption>
+          </figure>
+          
+          <h4>Many-to-Many</h4>
+          <p>The Many-to-Many model multiplexes many user-level threads to a smaller or equal number of kernel threads. This model provides the best of both worlds:</p>
+          <ul>
+            <li>Allows many user level threads to be mapped to many kernel threads</li>
+            <li>Allows the operating system to create a sufficient number of kernel threads</li>
+            <li>Examples include Solaris prior to version 9 and Windows NT/2000 with the Thread Fiber package</li>
+          </ul>
+          
+          <figure>
+            <img src="../assets/images/module1-many-to-many-model.png" alt="Many-to-Many threading model diagram showing multiple user threads mapped to multiple kernel threads" width="600" height="300">
+            <figcaption>Many-to-Many threading model</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section id="thread-libraries">
+        <h2>2.1.4 Thread Libraries</h2>
+        <div class="content-block">
+          <p>📚 A thread library provides the programmer with an API for creating and managing threads. There are two primary ways of implementing a thread library:</p>
+          
+          <ol>
+            <li><strong>Library entirely in user space</strong>: All code and data structures for the library exist in user space with no kernel support. Function calls in the API are implemented as user-space library functions. This approach has the advantage of not requiring any kernel modifications but may lack certain performance benefits.</li>
+            <li><strong>Kernel-level library supported by the OS</strong>: API functions are implemented through system calls to the kernel. This approach may be more efficient but requires kernel support.</li>
+          </ol>
+          
+          <p>The three main thread libraries discussed in this section are:</p>
+          <ul>
+            <li>POSIX Pthreads</li>
+            <li>Win32 threads</li>
+            <li>Java threads</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="implicit-threading">
+        <h2>2.1.5 Implicit Threading</h2>
+        <div class="content-block">
+          <p>📚 As multicore systems have grown more common, system designers have looked for ways to make parallel programming easier and less error-prone. One approach is to transfer the responsibility for creating and managing threads from application developers to compilers and run-time libraries. This is known as implicit threading.</p>
+          
+          <p>Several approaches to implicit threading include:</p>
+          <ul>
+            <li><strong>Thread Pools</strong>: Create a number of threads at process startup and place them in a pool where they wait for work.</li>
+            <li><strong>OpenMP</strong>: A set of compiler directives and an API for programs written in C, C++, or FORTRAN that provides support for parallel programming in shared-memory environments.</li>
+            <li><strong>Grand Central Dispatch (GCD)</strong>: Apple's technology for macOS and iOS operating systems that provides a language feature, API, and run-time library for managing concurrent operations.</li>
+            <li><strong>Intel Threading Building Blocks (TBB)</strong>: A C++ template library that abstracts thread management away from the programmer.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="threading-issues">
+        <h2>2.1.6 Threading Issues</h2>
+        <div class="content-block">
+          <p>📚 Several issues must be considered in designing multithreaded programs:</p>
+          
+          <h3>Semantics of fork() and exec() system calls</h3>
+          <p>When a thread calls fork(), does the new process duplicate all threads or only the thread that called fork()? Some UNIX systems provide two versions of fork() for this reason.</p>
+          
+          <h3>Thread cancellation</h3>
+          <p>Thread cancellation involves terminating a thread before it has completed. Cancellation can be complicated if the thread being terminated is in the middle of updating data shared with other threads.</p>
+          
+          <p>Two general approaches to thread cancellation are:</p>
+          <ul>
+            <li><strong>Asynchronous cancellation</strong>: Terminates the target thread immediately</li>
+            <li><strong>Deferred cancellation</strong>: Allows the target thread to periodically check if it should be cancelled</li>
+          </ul>
+          
+          <h3>Signal handling</h3>
+          <p>Signals are used in UNIX systems to notify a process that a particular event has occurred. A signal handler is used to process signals. Where should a signal be delivered in a multithreaded program?</p>
+          <ul>
+            <li>Deliver the signal to the thread to which the signal applies</li>
+            <li>Deliver the signal to every thread in the process</li>
+            <li>Deliver the signal to certain threads in the process</li>
+            <li>Assign a specific thread to receive all signals for the process</li>
+          </ul>
+          
+          <h3>Thread pools</h3>
+          <p>Creating and destroying threads as they are needed can be inefficient. Thread pools maintain a number of threads waiting for work, eliminating the overhead of creating new threads.</p>
+          
+          <h3>Thread-specific data</h3>
+          <p>Thread-specific data is data that each thread maintains a separate copy of. This is useful when you need each thread to have its own unique data.</p>
+          
+          <h3>Scheduler activations</h3>
+          <p>Scheduler activations provide a mechanism for communication between the kernel and the thread library, allowing an application to maintain the correct number of kernel threads.</p>
+        </div>
+      </section>
+
+      <section id="os-implementations">
+        <h2>Operating System Thread Implementations</h2>
+        
+        <h3>Windows XP Threads</h3>
+        <div class="content-block">
+          <p>📚 Windows XP implements the one-to-one mapping model. Each thread contains:</p>
+          <ul>
+            <li>A thread ID</li>
+            <li>Register set</li>
+            <li>Separate user and kernel stacks</li>
+            <li>Private data storage area</li>
+          </ul>
+          
+          <p>The register set, stacks, and private storage area are known as the context of the threads.</p>
+          
+          <p>The primary data structures of a thread include:</p>
+          <ul>
+            <li>ETHREAD (executive thread block)</li>
+            <li>KTHREAD (kernel thread block)</li>
+            <li>TEB (thread environment block)</li>
+          </ul>
+        </div>
+        
+        <h3>Linux Threads</h3>
+        <div class="content-block">
+          <p>📚 Linux refers to threads as tasks rather than threads. Thread creation is done through the clone() system call, which allows a child task to share the address space of the parent task (process).</p>
+        </div>
+        
+        <h3>Java Threads</h3>
+        <div class="content-block">
+          <p>📚 Java threads are managed by the JVM (Java Virtual Machine). Java threads may be created by:</p>
+          <ul>
+            <li>Extending the Thread class</li>
+            <li>Implementing the Runnable interface</li>
+          </ul>
+          
+          <p>The JVM maps Java threads to the underlying operating system's thread model, which varies depending on the platform.</p>
+        </div>
+      </section>
+
+      <section id="summary">
+        <h2>📝 Module Summary</h2>
+        <div class="summary-block">
+          <ul>
+            <li>Threads are fundamental components of modern operating systems that allow for efficient execution of multiple tasks within a single process.</li>
+            <li>Benefits of multithreading include improved responsiveness, efficient resource sharing, economy of system resources, and better utilization of multiprocessor architectures.</li>
+            <li>Three main multithreading models exist: Many-to-One, One-to-One, and Many-to-Many, each with different trade-offs in terms of performance and resource usage.</li>
+            <li>Thread libraries (POSIX Pthreads, Win32, Java threads) provide APIs for creating and managing threads.</li>
+            <li>Implicit threading transfers the responsibility of thread management from developers to compilers and run-time libraries.</li>
+            <li>Key threading issues include fork/exec semantics, thread cancellation, signal handling, thread pools, thread-specific data, and scheduler activations.</li>
+            <li>Different operating systems implement threading in various ways, with Windows using a one-to-one model, Linux using tasks with the clone() system call, and Java threads being managed by the JVM.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section id="assessment">
+        <h2>⚡ Knowledge Check</h2>
+        <div class="assessment-block">
+          <ol>
+            <li>
+              <p>What are the four main benefits of multithreading?</p>
+              <ol type="a">
+                <li>Responsiveness, Resource Sharing, Economy, Utilization of MP Architectures</li>
+                <li>Speed, Memory Management, CPU Utilization, I/O Handling</li>
+                <li>Parallelism, Concurrency, Synchronization, Communication</li>
+                <li>Performance, Reliability, Scalability, Maintainability</li>
+              </ol>
+            </li>
+            <li>
+              <p>Which threading model maps many user-level threads to a single kernel thread?</p>
+              <ol type="a">
+                <li>One-to-One</li>
+                <li>Many-to-One</li>
+                <li>Many-to-Many</li>
+                <li>One-to-Many</li>
+              </ol>
+            </li>
+            <li>
+              <p>What are the two approaches to thread cancellation?</p>
+              <ol type="a">
+                <li>Synchronous and Asynchronous</li>
+                <li>Immediate and Delayed</li>
+                <li>Asynchronous and Deferred</li>
+                <li>Forced and Voluntary</li>
+              </ol>
+            </li>
+            <li>
+              <p>Which of the following is NOT one of the three primary thread libraries mentioned in the module?</p>
+              <ol type="a">
+                <li>POSIX Pthreads</li>
+                <li>Win32 threads</li>
+                <li>Java threads</li>
+                <li>Python threads</li>
+              </ol>
+            </li>
+            <li>
+              <p>In Linux, threads are referred to as:</p>
+              <ol type="a">
+                <li>Processes</li>
+                <li>Tasks</li>
+                <li>Fibers</li>
+                <li>Lightweight processes</li>
+              </ol>
+            </li>
+          </ol>
+        </div>
+      </section>
+    </main>
+
+    <footer class="module-footer">
+      <h2>Related Resources</h2>
+      <ul>
+        <li><a href="#">POSIX Threads Programming Guide</a></li>
+        <li><a href="#">Java Thread Programming Tutorial</a></li>
+        <li><a href="#">Windows Thread API Documentation</a></li>
+      </ul>
+    </footer>
+
+    <!-- Bottom Navigation (identical to top) -->
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="#" class="nav-button disabled">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 1 of 3</span>
+        </div>
+        <a href="module2.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</body>
+</html>

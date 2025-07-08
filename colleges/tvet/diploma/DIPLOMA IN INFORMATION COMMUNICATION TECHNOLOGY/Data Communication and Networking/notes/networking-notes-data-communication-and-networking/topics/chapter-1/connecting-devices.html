@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Connecting Devices - Networking Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <article class="document-content-wrapper">
+            <!-- Navigation (Top) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="tcp-ip-suite.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: TCP/IP Suite</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 19</span> <!-- Adjusted section number -->
+                    </div>
+                    <span class="nav-button disabled">Next →</span> <!-- No next link as this is the last section -->
+                </div>
+                <div class="breadcrumbs">
+                    <a href="../../index.html">Home</a> &gt; Connecting Devices
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="page-title">Connecting Devices</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- Introduction -->
+                <section class="content-section" id="devices-intro">
+                     <div class="content-card">
+                        <p>Connecting devices are used to connect segments of a network together. In general, connecting devices can be divided into five categories according to the layer in which they operate in a network:</p>
+                        <p><i>(Figure showing types of connecting devices)</i></p> <!-- Placeholder for image description -->
+                    </div>
+                </section>
+
+                <!-- Repeaters -->
+                <section class="content-section" id="repeaters">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📡</span>
+                        <span class="heading-text">1. Repeaters (Layer 1)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A repeater is an electronic device that operates only at the physical layer. Repeaters receive signals on the input ports, regenerate or amplify the bits, and forward them to the output ports.</p>
+                        <p>For example, suppose we have a cable internet distribution system. Because of the high attenuation of coax cables over long distances, the signal received at a home 5 km away is almost indistinguishable from noise. By placing repeaters at 1-km intervals along the cable, each repeater gets a clean signal, amplifies it, and puts out a strong signal for the next km of cable.</p>
+                        <p>A repeater can also interconnect LANs that use different types of media. For example, it can connect a coaxial-cable segment to a fiber-optic segment. In this case, it will not only regenerate the signal but also convert it from one type to another.</p>
+                        <p>A repeater has a regenerative capability that can overcome the data rate, distance, and noise limitations of physical media. However, the device cannot help in an overloaded situation. If the traffic level is high, packet collisions and congestion still occur.</p>
+                        <p><i>(Figure showing repeater operation)</i></p> <!-- Placeholder for image description -->
+                    </div>
+                </section>
+
+                <!-- Hubs -->
+                <section class="content-section" id="hubs">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔌</span>
+                        <span class="heading-text">2. Hubs (Layer 1)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A hub is a multiport repeater; it is actually a repeater with multiple ports. A repeater is a two-port device; a hub is a multiport device.</p>
+                        <p>If a packet arrives at a port, the hub regenerates and amplifies the electrical signal and broadcasts it to all other ports. All stations connected to other ports receive the broadcast packet. Hubs act as wiring concentrators in a star topology, but the topology is still logically a bus topology, where all stations share the same collision domain.</p>
+                        <p><i>(Figure showing hub operation)</i></p> <!-- Placeholder for image description -->
+                    </div>
+                </section>
+
+                <!-- Bridges -->
+                <section class="content-section" id="bridges">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🌉</span>
+                        <span class="heading-text">3. Bridges (Layer 2)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A bridge operates in both the physical and the data link layer. As a physical layer device, it regenerates the signal it receives. As a data link layer device, the bridge can check the physical (MAC) addresses (source and destination) contained in the frame.</p>
+                        <p>A bridge has filtering capability. It can check the destination address of a frame and decide if the frame should be forwarded or dropped. If the frame is to be forwarded, the decision must specify the port to which the frame should be forwarded. A bridge has a table that maps addresses to ports.</p>
+                        <p><i>(Figure showing bridge operation)</i></p> <!-- Placeholder for image description -->
+                    </div>
+                </section>
+
+                <!-- Switches -->
+                <section class="content-section" id="switches">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">4. Switches (Layer 2)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A switch is a multiport bridge; it is a bridge with multiple ports. However, bridges have become less popular today. They are being replaced by switches, which perform the same functions but more efficiently. A bridge with a few ports can connect a few LANs together. A switch with tens or hundreds of ports can connect many LANs together.</p>
+                        <p>A switch, as a multiport bridge, can connect LANs and, at the same time, divide a LAN into segments. A segment is a group of devices or other segments connected by a switch port. In other words, a switch defines collision domains; each segment is a separate collision domain.</p>
+                        <p><i>(Figure showing switch operation)</i></p> <!-- Placeholder for image description -->
+                    </div>
+                </section>
+
+                <!-- Routers -->
+                <section class="content-section" id="routers">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📶</span>
+                        <span class="heading-text">5. Routers (Layer 3)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A router is a three-layer device that routes packets based on their logical addresses (host-to-host addressing). A router normally connects LANs and WANs in the Internet and has a routing table that is used for making decisions about the route. The routing tables are normally dynamic and are updated using routing protocols.</p>
+                        <p><i>(Figure showing router operation)</i></p> <!-- Placeholder for image description -->
+                    </div>
+                </section>
+
+                <!-- Connecting Devices Summary -->
+                <section class="content-section" id="comparing-devices">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚖️</span>
+                        <span class="heading-text">Comparing Connecting Devices</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>We can compare connecting devices based on their characteristics:</p>
+                        <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">1️⃣</span>
+                                <span class="item-text"><b>Layer Operation:</b> Repeaters and hubs operate in the physical layer; bridges and switches operate in the data link layer; routers operate in the network layer.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">2️⃣</span>
+                                <span class="item-text"><b>Addressing:</b> Repeaters and hubs do not use addressing; bridges and switches use physical addresses; routers use logical addresses.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">3️⃣</span>
+                                <span class="item-text"><b>Collision Domains:</b> Repeaters and hubs do not separate collision domains; bridges, switches, and routers separate collision domains.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+
+                 <!-- Key Points Section -->
+                <section class="key-points-section">
+                    <div class="key-points-container">
+                        <div class="key-points-header">
+                            <span class="key-points-icon">📝</span>
+                            <h3 class="key-points-title">Key Points to Remember (Connecting Devices)</h3>
+                        </div>
+                        <div class="key-points-content">
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Repeaters (Layer 1) regenerate signals to extend network reach.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Hubs (Layer 1) are multiport repeaters that broadcast to all ports.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Bridges (Layer 2) can filter frames based on MAC addresses.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Switches (Layer 2) are multiport bridges that create separate collision domains.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Routers (Layer 3) use logical addresses to route packets between networks.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Navigation (Bottom) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="tcp-ip-suite.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: TCP/IP Suite</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 19</span> <!-- Adjusted section number -->
+                    </div>
+                    <span class="nav-button disabled">Next →</span> <!-- No next link as this is the last section -->
+                </div>
+            </nav>
+        </article>
+    </div>
+</body>
+</html>

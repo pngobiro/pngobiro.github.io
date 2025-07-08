@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ethernet Address - Networking Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../../styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <article class="document-content-wrapper">
+            <!-- Navigation (Top) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="switching.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Switching</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 14</span> <!-- Adjusted section number -->
+                    </div>
+                    <a href="internet-protocol-address.html" class="nav-button next-link-style"> <!-- Updated next link -->
+                        <span class="nav-text">Next: Internet Protocol Address</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+                <div class="breadcrumbs">
+                    <a href="../../index.html">Home</a> > Ethernet Address
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="page-title">Ethernet Address</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <section class="content-section" id="ethernet-address-intro">
+                     <div class="content-card">
+                        <p><b>Ethernet or physical or MAC address</b></p>
+                        <p>Each station on an Ethernet network (such as a PC, workstation, or printer) has its own network interface card (NIC). The NIC fits inside the station and provides the station with a 6-byte physical address. As shown in Figure 13.6, the Ethernet address is 6 bytes (48 bits), normally written in hexadecimal notation, with a colon between the bytes.</p>
+                        <p><i>(Figure 13.6 showing Ethernet address format)</i></p> <!-- Placeholder for image description -->
+                    </div>
+                </section>
+
+                <!-- Address Types -->
+                <section class="content-section" id="address-types">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🏷️</span>
+                        <span class="heading-text">Unicast, Multicast, and Broadcast Addresses</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A source address is always a unicast address-the frame comes from only one station. The destination address, however, can be unicast, multicast, or broadcast. If the least significant bit of the first byte in a destination address is 0, the address is unicast; otherwise, it is multicast. A unicast destination address defines only one recipient; the relationship between the sender and the receiver is one-to-one. A multicast destination address defines a group of addresses; the relationship between the sender and the receivers is one-to-many. The broadcast address is a special case of the multicast address; the recipients are all the stations on the LAN. A broadcast destination address is forty-eight 1's.</p>
+                        <h4>For Example:</h4>
+                         <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">a)</span>
+                                <span class="item-text"><b>4A:30:10:21:10:1A</b> - This is a unicast address because A (1010<sub>2</sub>) has the least significant bit as 0.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">b)</span>
+                                <span class="item-text"><b>47:20:1B:2E:08:EE</b> - This is a multicast address because 7 (0111<sub>2</sub>) has the least significant bit as 1.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">c)</span>
+                                <span class="item-text"><b>FF:FF:FF:FF:FF:FF</b> - This is a broadcast address because all digits are F's (all bits are 1s).</span>
+                            </li>
+                        </ul>
+                        <p>The way the addresses are sent out on line is different from the way they are written in hexadecimal notation. The transmission is left-to-right, byte by byte; however, for each byte, the least significant bit is sent first and the most significant bit is sent last. This means that the bit that defines an address as unicast or multicast arrives first at the receiver.</p>
+                    </div>
+                </section>
+
+                 <!-- Key Points Section -->
+                <section class="key-points-section">
+                    <div class="key-points-container">
+                        <div class="key-points-header">
+                            <span class="key-points-icon">📝</span>
+                            <h3 class="key-points-title">Key Points to Remember</h3>
+                        </div>
+                        <div class="key-points-content">
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Ethernet addresses (MAC/physical) are 6-byte (48-bit) unique identifiers assigned to NICs.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Addresses are typically written in hexadecimal notation with colons (e.g., 4A:30:10:21:10:1A).</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Source addresses are always unicast.</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>Destination addresses can be unicast (one-to-one), multicast (one-to-many), or broadcast (one-to-all).</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>The least significant bit of the first byte determines if a destination address is unicast (0) or multicast (1).</p>
+                                </li>
+                                 <li class="key-point-item">
+                                    <span class="point-icon key-icon">🔑</span>
+                                    <p>The broadcast address is FF:FF:FF:FF:FF:FF.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <!-- Navigation (Bottom) -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../../index.html" class="nav-button toc-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="switching.html" class="nav-button prev-link-style">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Switching</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 1 • Section 14</span> <!-- Adjusted section number -->
+                    </div>
+                    <a href="internet-protocol-address.html" class="nav-button next-link-style"> <!-- Updated next link -->
+                        <span class="nav-text">Next: Internet Protocol Address</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+</body>
+</html>

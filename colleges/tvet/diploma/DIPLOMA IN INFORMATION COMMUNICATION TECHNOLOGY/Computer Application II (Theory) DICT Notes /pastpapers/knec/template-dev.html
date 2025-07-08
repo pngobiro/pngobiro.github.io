@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[MONTH YEAR] - Computer Application II Past Paper</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="js/sidebar-navigation.js" defer></script>
+    <script src="js/sidebar-include.js" defer></script>
+    <script src="js/validate-paper.js" defer></script>
+    <style>
+        /* Development mode styles */
+        .dev-toolbar {
+            position: fixed;
+            bottom: 1rem;
+            left: 1rem;
+            z-index: 1000;
+            background: rgba(0, 0, 0, 0.8);
+            padding: 0.5rem;
+            border-radius: 4px;
+            color: white;
+            font-size: 0.9rem;
+        }
+        
+        .dev-toolbar button {
+            margin: 0.25rem;
+            padding: 0.25rem 0.5rem;
+            border: none;
+            border-radius: 2px;
+            background: var(--primary-color);
+            color: white;
+            cursor: pointer;
+        }
+        
+        .dev-toolbar button:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Highlight missing elements */
+        [data-missing="true"] {
+            outline: 2px dashed red !important;
+        }
+
+        /* Show element types */
+        .dev-mode .question::before,
+        .dev-mode .answer-section::before {
+            content: attr(class);
+            position: absolute;
+            top: -1.5em;
+            left: 0;
+            font-size: 0.8em;
+            background: #333;
+            color: white;
+            padding: 0.2em 0.5em;
+            border-radius: 2px;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="dev-toolbar">
+        <button onclick="document.body.classList.toggle('dev-mode')">Toggle Dev Mode</button>
+        <button onclick="validatePaper()">Validate</button>
+        <button onclick="document.designMode = document.designMode === 'on' ? 'off' : 'on'">Toggle Edit Mode</button>
+    </div>
+
+    <header>
+        <div class="container">
+            <h1>Computer Application II</h1>
+            <h2>[MONTH YEAR] Past Paper</h2>
+            <div class="exam-details">
+                <p>Paper Code: 2920/202A</p>
+                <p>Duration: 2 hours</p>
+                <p>Module II</p>
+            </div>
+        </div>
+    </header>
+    
+    <div class="container main-content">
+        <!-- Sidebar will be injected here -->
+        <main>
+            <div class="paper-navigation top">
+                <a href="index.html" class="btn">Home</a>
+                <a href="[PREVIOUS_PAPER].html" class="btn">Previous Paper</a>
+                <a href="[NEXT_PAPER].html" class="btn">Next Paper</a>
+            </div>
+            
+            <section class="paper-intro">
+                <h2>THE KENYA NATIONAL EXAMINATIONS COUNCIL</h2>
+                <h3>DIPLOMA IN INFORMATION COMMUNICATION TECHNOLOGY</h3>
+                <div class="instructions">
+                    <h4>INSTRUCTIONS TO CANDIDATES</h4>
+                    <p>This paper consists of SIX questions.</p>
+                    <p>Answer FOUR of the SIX questions in the answer booklet provided.</p>
+                    <p>Candidates should answer the questions in English.</p>
+                    <p>This paper consists of [X] printed pages.</p>
+                    <p>Candidates should check the question paper to ascertain that all the pages are printed as indicated and that no questions are missing.</p>
+                </div>
+            </section>
+            
+            <section class="paper-content">
+                <!-- Question Template -->
+                <div class="question">
+                    <h3>Question 1 (15 marks)</h3>
+                    <div class="question-content">
+                        <p>(a) [Question text] (X marks)</p>
+                        <p>(b) [Question text] (Y marks)</p>
+                        <p>(c) [Question text] (Z marks)</p>
+                    </div>
+                    <div class="answer-section">
+                        <h4>Answer</h4>
+                        <div class="answer-content">
+                            <p><strong>(a)</strong></p>
+                            <!-- Answer content -->
+                            
+                            <p><strong>(b)</strong></p>
+                            <!-- Answer content -->
+                            
+                            <p><strong>(c)</strong></p>
+                            <!-- Answer content -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Add more questions following the same structure -->
+            </section>
+            
+            <div class="paper-navigation bottom">
+                <a href="index.html" class="btn">Home</a>
+                <a href="[PREVIOUS_PAPER].html" class="btn">Previous Paper</a>
+                <a href="[NEXT_PAPER].html" class="btn">Next Paper</a>
+            </div>
+        </main>
+    </div>
+    
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Computer Application II Past Papers Collection | Kenya National Examinations Council</p>
+        </div>
+    </footer>
+
+    <script>
+        // Development helper functions
+        const devTools = {
+            highlightMissing() {
+                const validation = validatePaper();
+                document.querySelectorAll('[data-missing]').forEach(el => {
+                    el.removeAttribute('data-missing');
+                });
+                validation.errors.forEach(error => {
+                    const matches = error.match(/Missing .+ \((.+)\)/);
+                    if (matches) {
+                        const selector = matches[1];
+                        document.querySelector(selector)?.setAttribute('data-missing', 'true');
+                    }
+                });
+            },
+
+            init() {
+                // Add keyboard shortcuts
+                document.addEventListener('keydown', e => {
+                    if (e.ctrlKey && e.key === 'v') { // Ctrl+V to validate
+                        validatePaper();
+                    }
+                    if (e.ctrlKey && e.key === 'd') { // Ctrl+D to toggle dev mode
+                        document.body.classList.toggle('dev-mode');
+                    }
+                });
+            }
+        };
+
+        devTools.init();
+    </script>
+</body>
+</html>
