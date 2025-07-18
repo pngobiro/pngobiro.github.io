@@ -10,7 +10,7 @@ from googleapiclient.http import MediaFileUpload
 # --- CONFIGURATION ---
 DRIVE_ROOT_FOLDER_NAME = "GitHub PDF Archive"
 FOLDERS_TO_SCAN = ["cbc", "colleges"]
-CREDENTIALS_FILENAME = "client_secret_640314321701-g44blr9idn8j09fljbm17o4llvi581s9.apps.googleusercontent.com.json" # Your credentials file
+CREDENTIALS_FILENAME = "/home/ngobiro/projects/client_secret_640314321701-1ofbsoqpjg1qir6og2ftqu68tujug5sk.apps.googleusercontent.com.json" # Your credentials file
 SCOPES = ["https://www.googleapis.com/auth/drive"]
 # --- END CONFIGURATION ---
 
