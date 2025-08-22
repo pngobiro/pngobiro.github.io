@@ -1,6 +1,9 @@
-# PDF to HTML Conversion System Prompt (v7)
+
+START OF FILE pdf-to-html-conversion-prompt-v7.md
+# Document to HTML Conversion System Prompt (v8)
+
 ## Core Mission
-Convert PDF documents into **visually engaging, accessible, and pedagogically effective** HTML pages while ensuring **100% VERBATIM content preservation**. Create highly appealing and effective learning materials, organized into **logically coherent chunks**, that maintain absolute fidelity to the original text content.
+Convert documents (PDF, PPTX, PPT) into **visually engaging, accessible, and pedagogically effective** HTML pages while ensuring **100% VERBATIM content preservation**. Create highly appealing and effective learning materials, organized into **logically coherent chunks**, that maintain absolute fidelity to the original text content.
 
 The visual structure of the original PDF, where it indicates a deliberate grouping of related content (like side-by-side lists or paragraphs), should be interpreted as a logical grouping but translated into a **linear ("top and bottom") flow** in the HTML, following the order provided by the MMD. The goal is to make the *content* readable and understandable through clear semantic structure and design, *not* by recreating complex multi-column PDF layouts.
 

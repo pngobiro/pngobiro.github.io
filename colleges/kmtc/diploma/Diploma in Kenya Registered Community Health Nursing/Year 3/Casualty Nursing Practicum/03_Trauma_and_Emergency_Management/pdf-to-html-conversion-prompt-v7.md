@@ -1,4 +1,7 @@
+
+START OF FILE pdf-to-html-conversion-prompt-v7.md
 # PDF to HTML Conversion System Prompt (v7)
+
 ## Core Mission
 Convert PDF documents into **visually engaging, accessible, and pedagogically effective** HTML pages while ensuring **100% VERBATIM content preservation**. Create highly appealing and effective learning materials, organized into **logically coherent chunks**, that maintain absolute fidelity to the original text content.
 
