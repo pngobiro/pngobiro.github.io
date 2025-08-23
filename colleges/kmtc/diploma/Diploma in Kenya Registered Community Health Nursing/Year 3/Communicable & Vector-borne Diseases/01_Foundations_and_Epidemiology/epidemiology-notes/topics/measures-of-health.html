@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Measures of Morbidity, Mortality and Association</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            tags: 'ams' // Use AMS numbering of equations
+        },
+        svg: { fontCache: 'global' },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="foundations-of-epidemiology.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div> <!-- Set percentage dynamically -->
+                        </div>
+                       <span class="progress-text">Lecture 2 of 2</span> <!-- Update text -->
+                    </div>
+                    <a href="#" class="nav-button disabled"> <!-- Add 'disabled' class if last chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Measures of Morbidity, Mortality and Association</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: intro-measures -->
+                <section id="intro-measures" class="content-section" aria-labelledby="section-heading-1">
+                    <h2 id="section-heading-1" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">Introduction to Measures</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Define and use:</p>
+                        <ul>
+                            <li>Ratio</li>
+                            <li>Proportion</li>
+                            <li>Rate</li>
+                            <li>Odds</li>
+                        </ul>
+                        <p>Define and use:</p>
+                        <ul>
+                            <li>Prevalence</li>
+                            <li>Incidence
+                                <ul>
+                                    <li>Cumulative incidence/risk</li>
+                                    <li>Incidence rate/density</li>
+                                    <li>odds</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Measures used in epidemiology</caption>
+                                <thead>
+                                    <tr><th>Class of Measure</th><th>Purpose</th><th>Description</th><th>Example</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td rowspan="4">Disease frequency</td>
+                                        <td>Surveillance</td>
+                                        <td rowspan="4">Risk assessment</td>
+                                        <td>-Incidence</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>-Cumulative incidence/risk</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>-Incidence rate/density</td>
+                                    </tr>
+                                     <tr>
+                                        <td></td>
+                                        <td>-odds<br>-Prevalence<br>-Point prevalence<br>-Period prevalence</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="2">Association</td>
+                                        <td>Etiology</td>
+                                        <td rowspan="2">Prognosis</td>
+                                        <td>Relative risk (risk ratio)</td>
+                                    </tr>
+                                     <tr>
+                                        <td></td>
+                                        <td>Rate ratio<br>Odds ratio</td>
+                                    </tr>
+                                    <tr>
+                                        <td rowspan="3">Impact</td>
+                                        <td>Etiology</td>
+                                        <td rowspan="3">Health appraisal<br>Policy formulation</td>
+                                        <td>Attributable risk</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Attrib. risk percent</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td>Pop. Attrib. risk percent</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: intro-measures -->
+
+                <!-- START: frequency-measures -->
+                <section id="frequency-measures" class="content-section" aria-labelledby="section-heading-2">
+                    <h2 id="section-heading-2" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">Measures of frequency</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>-The basic tools to describe quantitatively the causes and patterns of disease, or any other event related to health in human populations.</p>
+                        <p>-For example: How many people are affected by a certain disease? What is the rate at which the disease in occurring through time? How does the disease burden vary by geographical region, by sex, by age, or various modes of exposure? Etc.,</p>
+                        
+                        <h3 class="subsection-heading">Vital statistics and demographics</h3>
+                        <p>Vital statistics are important to researchers, epidemiologist, health planners, and other health professionals to:</p>
+                        <ol>
+                            <li>determine the health status of a community</li>
+                            <li>to decide how best to provide a health service</li>
+                            <li>to plan a public health program</li>
+                            <li>to evaluate a program's effectiveness</li>
+                        </ol>
+                        <p>- Demographic variables describe a population's characteristics</p>
+                    </div>
+                </section>
+                <!-- END: frequency-measures -->
+
+                <!-- START: data-sources -->
+                <section id="data-sources" class="content-section" aria-labelledby="section-heading-3">
+                    <h2 id="section-heading-3" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">Sources of Vital Statistics And Demographic Data</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Three main sources of vital statistics</p>
+                        <ol>
+                            <li>Census</li>
+                            <li>Registration of vital events</li>
+                            <li>Morbidity surveys</li>
+                        </ol>
+
+                        <h3 class="subsection-heading">1. The Census</h3>
+                        <ul>
+                            <li>Kenya has conducted census of population since 1948, held every 10 years</li>
+                            <li>Each household and resident is enumerated</li>
+                            <li>Information obtained on each person includes</li>
+                        </ul>
+                        <ol>
+                            <li>gender</li>
+                            <li>age</li>
+                            <li>race</li>
+                            <li>marital status</li>
+                            <li>place of residence</li>
+                            <li>relationship to or position as head of household</li>
+                        </ol>
+                        <p>Census is a systematic sample of households that provides the following information</p>
+                        <ol>
+                            <li>income</li>
+                            <li>housing</li>
+                            <li>number of children born</li>
+                            <li>education</li>
+                            <li>employment status</li>
+                            <li>means of transportation to work</li>
+                            <li>occupation</li>
+                        </ol>
+                        <p>Census tables are published for:</p>
+                        <ul>
+                            <li>Country</li>
+                            <li>Province</li>
+                            <li>County</li>
+                            <li>District</li>
+                            <li>Division</li>
+                            <li>Location</li>
+                            <li>Sublocation</li>
+                        </ul>
+
+                        <h3 class="subsection-heading">2. REGISTRATION OF VITAL EVENTS</h3>
+                        <p>Vital events are:</p>
+                        <ol>
+                            <li>births</li>
+                            <li>deaths</li>
+                            <li>marriages</li>
+                            <li>divorces</li>
+                        </ol>
+                        <p>State law (Kenya) requires that all vital events be registered</p>
+                        <p><strong>Birth certificates serve as proof of:</strong></p>
+                        <ol>
+                            <li>Citizenship</li>
+                            <li>Age</li>
+                            <li>Birthplace</li>
+                            <li>Parentage</li>
+                        </ol>
+                        <p><strong>Death certificates are required as:</strong></p>
+                        <ol>
+                            <li>Burial documents</li>
+                            <li>Settlement of estates and insurance claims</li>
+                        </ol>
+
+                        <h4 class="subsubsection-heading">Annual Registration Of Vital Events</h4>
+                        <p><strong>Birth registration</strong> - All births required by law to be registered</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Birth Certificate Information</caption>
+                                <tbody>
+                                    <tr><td>1. Name</td><td>6. Occupation of father</td></tr>
+                                    <tr><td>2. Sex</td><td>7. Place of birth</td></tr>
+                                    <tr><td>3. Date and time of birth</td><td>8. Residence of mother</td></tr>
+                                    <tr><td>4. Race of parents</td><td>9. Physician’s (or attendant's)</td></tr>
+                                    <tr><td>5. Birth order</td><td></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Death Certificate</caption>
+                                <tbody>
+                                    <tr><td>1. Name</td><td>5. Place of birth</td></tr>
+                                    <tr><td>2. Date and time of death</td><td>6. Names of decedent's parents</td></tr>
+                                    <tr><td>3. Race</td><td>7. Name and address of survivor (or informant)</td></tr>
+                                    <tr><td>4. Age</td><td>8.Marital status</td></tr>
+                                    <tr><td>- Village</td><td>9. Occupation</td></tr>
+                                    <tr><td>- Ethnic group</td><td>10. Place of residence</td></tr>
+                                    <tr><td></td><td>11. Cause(s) of death</td></tr>
+                                    <tr><td></td><td>12. Place of death</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p><strong>MoPH&S (Department of Disease Control)</strong></p>
+                        <ul>
+                            <li>13. Burial data</li>
+                            <li>14. If death due to injury: accident, suicide, or homicide</li>
+                            <li>15. Physician's (or coroner's) certification</li>
+                            <li>Health surveillance, monitoring and analysis</li>
+                            <li>Investigation of disease outbreaks, epidemics and risk to health</li>
+                            <li>Designing and establishing disease prevention programmes</li>
+                        </ul>
+                        
+                        <h4 class="subsubsection-heading">Mortality Data</h4>
+                        <ol>
+                            <li>Death certificate number</li>
+                            <li>District where the death occurred</li>
+                            <li>Date of the death</li>
+                            <li>Copies can be ordered from the Districts’vital statistics office</li>
+                        </ol>
+                        <p><strong>Nosologist</strong> - working for the central ministries; these individuals perform the task of classifying deaths into various numerical categories using the two current volumes on how to classify a particular cause of death (COD)</p>
+
+                        <h3 class="subsection-heading">3. MORBIDITY SURVEYS</h3>
+                        <ul>
+                            <li>This gives data on the prevalence of disease)</li>
+                            <li>It is more difficult to gather than mortality data</li>
+                            <li><strong>Gathering morbidity data</strong>
+                                <ul>
+                                    <li>Compulsory reporting of specific conditions</li>
+                                    <li>Still wide gaps in data today</li>
+                                </ul>
+                            </li>
+                            <li><strong>Data flow</strong>
+                                <ul>
+                                    <li>Local</li>
+                                    <li>Regional</li>
+                                    <li>National</li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <p><strong>Alternative methods of gathering estimates of morbidity data</strong></p>
+                        <ol>
+                            <li>Reportable diseases</li>
+                            <li>National Health Survey</li>
+                            <li>Hospital records data</li>
+                            <li>Industrial hygiene records</li>
+                            <li>School Nurse records</li>
+                            <li>Medical care subgroups (most often: prepaid medical plans)</li>
+                        </ol>
+                        <p><strong>MORBIDITY SURVEYS, Examples</strong></p>
+                        <ul>
+                            <li>Kenya Demographic & Health Survey</li>
+                            <li>Household health expenditure & Utilization survey</li>
+                            <li>Kenya Aids Indicator Survey</li>
+                            <li>Malaria Survey</li>
+                            <li>Population and Housing Census</li>
+                            <li>National Health Survey</li>
+                            <li>Kenya Urban Reproductive Health Initiative (KURHI)</li>
+                            <li>Chronic-disease registries (most often: tumor registries)</li>
+                            <li>Insurance industry data</li>
+                        </ul>
+                        <p>Published medical care data results. Includes:</p>
+                        <ul>
+                            <li>a. incidence</li>
+                            <li>b. prevalence rates for many diseases</li>
+                            <li>c. length of hospital stays</li>
+                            <li>d. hospitalizations by cause</li>
+                            <li>e. number of days of disability</li>
+                            <li>f. patterns of ambulatory care service</li>
+                        </ul>
+
+                        <h4 class="subsubsection-heading">Chronic-disease registries</h4>
+                        <ol>
+                            <li>Most are cancer related (therefore know as cancer or tumor registries) defined as a "facility for the collection, storage, analysis, and interpretation of data on persons with cancer e.g. BRECC registry</li>
+                            <li><strong>Other registries</strong>
+                                <ol type="a">
+                                    <li>cardiovascular disease</li>
+                                    <li>tuberculosis</li>
+                                    <li>diabetes</li>
+                                    <li>psychiatric disease</li>
+                                </ol>
+                            </li>
+                            <li><strong>Registry types</strong>
+                                <ol type="a">
+                                    <li>hospital-based - they work within the walls of a hospital or group of hospitals</li>
+                                    <li>population-based - they serve a population of defined composition and size</li>
+                                </ol>
+                            </li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: data-sources -->
+                
+                <!-- START: ratios-proportions-rates -->
+                <section id="ratios-proportions-rates" class="content-section" aria-labelledby="section-heading-4">
+                    <h2 id="section-heading-4" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">VITAL STATISTICS RATIOS, PROPORTIONS and RATES</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Ratio</h3>
+                        <p>The quotient of 2 numbers</p>
+                        <ul>
+                            <li>Numerator NOT necessarily INCLUDED in the denominator</li>
+                            <li>Allows comparing quantities of different nature Ratio</li>
+                        </ul>
+                        <p><strong>Examples of Ratios</strong></p>
+                        <ul>
+                            <li># beds per doctor - 850 beds / 10 doctors - R= 85 beds for 1 doctor</li>
+                            <li># participants per facilitator</li>
+                            <li># inhabitants per latrine</li>
+                            <li>Sex ratio: Male / Female Female / Male</li>
+                            <li>Odds ratio</li>
+                            <li>Rate ratio</li>
+                            <li>Prevalence ratio</li>
+                        </ul>
+
+                        <h3 class="subsection-heading">Proportion</h3>
+                        <p>is an expression of the form where</p>
+                        <div class="equation">$$\left(\frac{a}{a+b}\right) c$$</div>
+                        <p>a, a+b, and c are defined for rates</p>
+                        <p><strong>Proportion:</strong></p>
+                        <p>Is a quotient of 2 numbers</p>
+                        <ul>
+                            <li>Numerator NECESSARILY INCLUDED in the denominator</li>
+                            <li>Quantities have to be of the same nature</li>
+                            <li>Proportion always ranges between 0 and 1</li>
+                            <li>Percentage = proportion × 100</li>
+                        </ul>
+
+                        <h4 class="subsubsection-heading">Example 1</h4>
+                        <p>Population 3500 women<br>6500 men</p>
+                        <p>Proportion of men = 6500 / (3500 + 6500) = 0.65 or 65%<br>
+                        Male to female ratio = 6500 / 3500 = 1.86<br>
+                        Female to male ratio = 3500 / 6500 = 0.54</p>
+                        
+                        <h4 class="subsubsection-heading">Example 2</h4>
+                        <p>AIDS cases: 4000 male cases<br>2000 female cases</p>
+                        <p>Q : What is the proportion of male cases among all cases? Female cases among all cases?</p>
+
+                        <h3 class="subsection-heading">Rate</h3>
+                        <p>is an expression like where</p>
+                        <div class="equation">$$\left[\frac{a}{(a+b) t}\right] c$$</div>
+                        <ul>
+                            <li>a = the number of persons experiencing a particular event during a given period</li>
+                            <li>a+b = the number of persons who are at risk of experiencing the particular event during the same period</li>
+                            <li>t = the total time at risk</li>
+                            <li>c = a multiplier, such as 100, 1000, 10,000, or 100,000</li>
+                            <li>The purpose of the multiplier, or base, is to avoid the inconvenience of working with minute decimal fractions</li>
+                        </ul>
+                        <p>Rate is a quotient of 2 numbers</p>
+                        <ul>
+                            <li>Speed of occurrence of an event over time</li>
+                            <li>Numerator - number/EVENTS observed for a given time</li>
+                            <li>Denominator - population in which the events occur (population at risk)</li>
+                            <li>includes time</li>
+                        </ul>
+                        <p>Rate is something that may change over time. Something that is observed during some time.</p>
+                        <ul>
+                            <li>Measures the speed of occurrence of an event</li>
+                            <li>Measures the probability to become sick by unit of time</li>
+                            <li>Measures the risk of disease</li>
+                        </ul>
+                        <p>However rate is frequently used instead of ratio or proportion !! Time is included in the denominator !!</p>
+
+                        <h4 class="subsubsection-heading">Example of calculating a rate</h4>
+                        <p>Mortality rate of tetanus in X country in 1995</p>
+                        <ul>
+                            <li>Tetanus deaths: 17</li>
+                            <li>Population in 1995: 58 million</li>
+                        </ul>
+                        <p>Mortality rate = 0.029 / 100,000 / year</p>
+                        <p>- Rate may be expressed in any power of 10 - 100, 1,000, 10,000, 100,000</p>
+                        
+                        <h3 class="subsection-heading">Three kinds of rates</h3>
+                        <ol type="a">
+                            <li><strong>Crude Rates</strong>
+                                <ul>
+                                    <li>i. computed for an entire population</li>
+                                    <li>ii. disregard differences that usually exist by age, sex, race, or some category of disease</li>
+                                </ul>
+                            </li>
+                            <li><strong>Specific Rates</strong>
+                                <ul>
+                                    <li>i. consider the differences among subgroups consider the differences</li>
+                                    <li>ii. computed by age, race, sex, or some other variable</li>
+                                </ul>
+                            </li>
+                            <li><strong>Adjusted (or standardized) Rates</strong>
+                                <ul>
+                                    <li>- Used to make valid summary comparisons between two or more groups possessing different age (or other) distributions</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <h3 class="subsection-heading">Odds</h3>
+                        <p>Probability that an event will happen divided by Probability that an event will not happen</p>
+                    </div>
+                </section>
+                <!-- END: ratios-proportions-rates -->
+                
+                <!-- START: measures-of-morbidity -->
+                <section id="measures-of-morbidity" class="content-section" aria-labelledby="section-heading-5">
+                    <h2 id="section-heading-5" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">MEASURES OF MORBIDITY</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Two types of measures:</p>
+                        <ol>
+                            <li><strong>Prevalence: Measures population diseases status</strong><br>
+                            Prevalence: Number of cases of disease at a specific time / Population at risk at that time
+                            <ul>
+                                <li>Proportion of a population affected by a disease at a given time.</li>
+                                <li>Expressed as a percentage (%)</li>
+                            </ul>
+                            </li>
+                        </ol>
+                        
+                        <h4 class="subsubsection-heading">Types of Prevalence</h4>
+                        <ul>
+                            <li>Point prevalence (Proportion of a population that is affected by disease at a given point in time.)</li>
+                            <li>Period prevalence (Prevalence in a period of time)</li>
+                        </ul>
+                        
+                        <h4 class="subsubsection-heading">Uses of Prevalence Data</h4>
+                        <ul>
+                            <li>Assessing health care needs</li>
+                            <li>Planning health services</li>
+                            <li>Measure occurrence of conditions with gradual onset</li>
+                            <li>Study chronic diseases</li>
+                        </ul>
+                        
+                        <ol start="2">
+                            <li><strong>Incidence :</strong>
+                                <ul>
+                                    <li>Whereas prevalence is the frequency of existing cases in a population, incidence is frequency of new cases in a defined population over a specified period of time.</li>
+                                    <li>Incidence assess frequency of disease onset</li>
+                                    <li>There are 3 different ways of measuring incidence</li>
+                                    <li>-Cumulative incidence/risk</li>
+                                    <li>-Incidence density or incidence rate</li>
+                                    <li>-odds</li>
+                                </ul>
+                            </li>
+                        </ol>
+
+                        <h4 class="subsubsection-heading">Cumulative Incidence (CI)</h4>
+                        <p>Number of NEW cases of disease during a period / Population at risk during this period (disease free at the begining)</p>
+                        
+                        <h4 class="subsubsection-heading">Odds</h4>
+                        <ul>
+                            <li>Similar to cumulative incidence but rather than use the number of disease free people at the beginning of the period (population at risk), we use number of disease free people at end of the specified time for the denominator</li>
+                            <li>Odds of disease = number of new cases during a period / number of people still disease free by end of period</li>
+                        </ul>
+
+                        <h4 class="subsubsection-heading">Note</h4>
+                        <ul>
+                            <li>Both cumulative incidence/risk and odds assume that the population at risk is followed up over a specified time period.</li>
+                            <li>Also assumed is that the those who were included at the start of the period are counted at the end.</li>
+                            <li>This is called a closed population or a cohort</li>
+                        </ul>
+
+                        <h4 class="subsubsection-heading">Incidence Rate/Density</h4>
+                        <ul>
+                            <li>Defined as the number of newly reported cases of a given disease in a calendar year divided by the population on July 1 of that year, with the quotient multiplied by a convenient factor, usually, 1000, 100,000, or 1,000,000</li>
+                        </ul>
+                        <p>IR = Number of NEW cases of disease during a period / Total person-time at risk in this period of observation</p>
+                        <p><strong>Also called force of morbidity or orincidence density</strong></p>
+                        <p>Denominator: - is a measure of time - the sum of each individual's time at risk and free from disease</p>
+                        <p>Incidence rate must take into account;</p>
+                        <ul>
+                            <li>-number of individuals who become ill in a population</li>
+                            <li>-and the time periods experienced by members of the population during which the events occur</li>
+                        </ul>
+                        <p>- Incidence rate looks at incidence in dynamic/open population where</p>
+                        <ul>
+                            <li>People enter and exit population at risk at different points</li>
+                            <li>Follow up for long periods</li>
+                            <li>People are at risk for different lengths</li>
+                            <li>Instead of counting the disease free individuals at the start, the time that each individual spends in the study before becoming a case is calculated.</li>
+                            <li>This is called the person time at risk</li>
+                        </ul>
+                        
+                        <h3 class="subsection-heading">Comparing Incidence and Prevalence</h3>
+                        <h4>Incidence</h4>
+                        <ul>
+                            <li>New cases or events over period of time</li>
+                            <li>Useful studying factors causing disease, disease "risk"</li>
+                        </ul>
+                        <h4>Prevalence</h4>
+                        <ul>
+                            <li>All cases at point/period of time</li>
+                            <li>Useful for measuring size of problem and planning</li>
+                        </ul>
+
+                        <h3 class="subsection-heading">Relationship of Incidence to Prevalence</h3>
+                        <ul>
+                            <li>Prevalence depends on both on incidence rate and duration of disease</li>
+                            <li>Because prevalence affected by factors such as migration and duration, incidence is preferred for studying etiology.</li>
+                        </ul>
+                        
+                        <h3 class="subsection-heading">Special types of Incidence</h3>
+                        <p><strong>Morbidity rate</strong> = # cases / Population at risk</p>
+                        <p><strong>Mortality rate</strong> = # deaths / Population at risk</p>
+                        <p><strong>Case Fatality rate</strong> = # deaths from a disease / Total cases of that disease</p>
+                        <p><strong>Attack rate</strong> = # cases during |epidemic" / Population at risk</p>
+
+                        <h4 class="subsubsection-heading">Attack Rate</h4>
+                        <ul>
+                            <li>An attack rate is an incidence rate calculated for a specific disease for a limited period of time during an epidemic</li>
+                            <li>Usually expressed for the entire epidemic period, from the first to the last case</li>
+                        </ul>
+                        <p><strong>Attack Rate</strong> = Number of new cases of a specified disease reported during an epidemic period of time / Population at risk during the same time interval</p>
+                        <p><strong>Secondary Attack Rate</strong> = Number of new cases of a specified disease among contacts of known cases / Size of contact population at risk</p>
+                        
+                        <h4 class="subsubsection-heading">Example: Attack rate</h4>
+                        <p>Seven cases of hepatitis A occurred among 70 children attending a childcare center. Each infected child came from a different family. The total number of persons in the 7 affected families was 32. One incubation period later, 5 family members of the 7 infected children also developed hepatitis A.</p>
+                        <p><strong>A. Calculate the attack rate in the child care center</strong></p>
+                        <p><strong>B. Calculate the secondary attack rate</strong></p>
+                        
+                        <h3 class="subsection-heading">PREVALENCE PROPORTION</h3>
+                        <p>- Defined as the number of existing cases of a given disease at a given time divided by the population at that time, with the quotient multiplied by 1000, 100,000, or 1,000,000</p>
+                        
+                        <h3 class="subsection-heading">CASE-FATALITY PROPORTION</h3>
+                        <p>- Defined as the number of deaths assigned to a given cause in a certain period by the number of cases of the disease reported during the same period, with the quotient multiplied by 100</p>
+
+                    </div>
+                </section>
+                <!-- END: measures-of-morbidity -->
+
+                <!-- START: measures-of-mortality -->
+                <section id="measures-of-mortality" class="content-section" aria-labelledby="section-heading-6">
+                    <h2 id="section-heading-6" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">MEASURES OF MORTALITY</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>When the event under study is death rather than the occurrence of disease, we usually use the term mortality (rate) rather than cumulative incidence.</p>
+                        <ul>
+                            <li>Crude Death Rate (CDR)</li>
+                            <li>Cause-specific Death Rate</li>
+                            <li>Neonatal Mortality Rate</li>
+                            <li>Perinatal Mortality Rate (PMR)</li>
+                            <li>Infant Mortality Rate (IMR)</li>
+                            <li>Child Mortality Rate (CMR)</li>
+                            <li>Maternal Mortality Rate (MMR)</li>
+                        </ul>
+                        <p>- Each rate is a measure of the relative frequency of deaths that occurred in a given population over a specific period<br>
+                        - Mortality Rate - must know the population and time at risk to compute the mortality rate</p>
+                        
+                        <h3 class="subsection-heading">ANNUAL CRUDE DEATH RATE (CDR)</h3>
+                        <ul>
+                            <li>Defined as the number of deaths in a calendar year divided by the population on July 1 of that year, with the quotient multiplied by 1000</li>
+                            <li>Universally used</li>
+                            <li>A generalized indicator of the health of a population</li>
+                        </ul>
+                        
+                        <h3 class="subsection-heading">AGE-SPECIFIC DEATH RATE(ASDR)</h3>
+                        <p>- Defined as the number of deaths in a specific age group in a calendar year divided by the population of the same age group on July 1 of that year, with the quotient multiplied by 1000</p>
+                        
+                        <h3 class="subsection-heading">CAUSE-SPECIFIC DEATH RATE</h3>
+                        <p>- Defined as the number of deaths assigned to a specific cause in a calendar year divided by the population on July 1 of that year, with the quotient multiplied by 100,000</p>
+
+                        <h3 class="subsection-heading">CAUSE- /RACE SPECIFIC DEATH RATE</h3>
+                        <p>- One of many possible examples of how the idea of specific death rates may be extended simultaneously to cover two characteristics</p>
+                        
+                        <h3 class="subsection-heading">PROPORTIONAL MORTALITY RATE</h3>
+                        <p>- Defined as the number of deaths assigned to a specific cause in a calendar year divided by the total number of deaths in that year, with the quotient multiplied by 100</p>
+                        
+                        <h3 class="subsection-heading">MATERNAL MORTALITY RATIO</h3>
+                        <p>- Defined as the number of deaths assigned to puerperal causes (i.e. related to childbearing) in a calendar year divided by the number of live births in that year, with the quotient multiplied by 100,000</p>
+                        
+                        <h3 class="subsection-heading">INFANT MORTALITY RATE</h3>
+                        <p>- Defined as the number of deaths of persons of age 0-1 in a calendar year divided by the number of live births in that year, with the quotient multiplied by 1000</p>
+                        
+                        <h3 class="subsection-heading">NEONATAL MORTALITY PROPORTION</h3>
+                        <p>- Defined as the number of deaths of neonates (i.e., infants less than 28 days of age) that occurred in a calendar year divided by the number of live births in that year, with the quotient multiplied by 1000</p>
+                        
+                        <h3 class="subsection-heading">FETAL DEATH RATIO</h3>
+                        <ul>
+                            <li>Fetal death is defined as the delivery of a fetus that shows no evidence of life (no heart action, breathing, or movement of voluntary muscles) if the 20th week of gestation has been completed or if the period of gestation was unstated</li>
+                            <li>Fetal death ration is defined as the number of fetal deaths in a calendar year divided by the number of live births in that year, with the quotient multiplied by 1000.</li>
+                            <li>Note that this ratio only applies to fetal deaths that occur in the second half of pregnancy. No reporting is required for early miscarriage</li>
+                        </ul>
+                        
+                        <h3 class="subsection-heading">PERINATAL MORTALITY PROPORTION</h3>
+                        <p>- Defined as the number of fetal plus neonatal deaths divided by the number of live births plus fetal deaths, with the quotient multiplied by 1000</p>
+                    </div>
+                </section>
+                <!-- END: measures-of-mortality -->
+                
+                <!-- START: measures-of-fertility -->
+                <section id="measures-of-fertility" class="content-section" aria-labelledby="section-heading-7">
+                    <h2 id="section-heading-7" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">MEASURES OF FERTILITY</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul>
+                            <li>Indispensable for approaching population control problems</li>
+                            <li>Particularly useful in planning maternal and child health services</li>
+                            <li>Helps school boards plan for future needs for facilities and teachers</li>
+                        </ul>
+                        
+                        <h3 class="subsection-heading">CRUDE BIRTH RATE(CBR)</h3>
+                        <ul>
+                            <li>Defined as the number of live births in a calendar year divided by the population on July 1 of that year, with the quotient multiplied by 1000</li>
+                            <li>Non-too-sensitive measure as the population (denominator) includes both men and women</li>
+                        </ul>
+                        
+                        <h3 class="subsection-heading">GENERAL FERTILITY RATE</h3>
+                        <p>Defined as the number of live births in a calendar year divided by the number of women ages 15-44 at midyear, with the quotient multiplied by 1000</p>
+                    </div>
+                </section>
+                <!-- END: measures-of-fertility -->
+
+                 <!-- Optional Key Points Section -->
+                 <aside class="key-points-section" role="region" aria-labelledby="key-points-title-id">
+                      <div class="key-points-container">
+                           <div class="key-points-header">
+                                <span class="key-points-icon"> </span>
+                                <h3 id="key-points-title-id" class="key-points-title">Key Points</h3>
+                           </div>
+                           <div class="key-points-content">
+                                <ul class="key-points-list">
+                                     <li class="key-point-item">
+                                          <span class="point-marker">•</span>
+                                          <p><strong>Ratio: The quotient of 2 numbers. Numerator NOT necessarily INCLUDED in the denominator.</strong></p>
+                                     </li>
+                                     <li class="key-point-item">
+                                          <span class="point-marker">•</span>
+                                          <p><strong>Proportion: Is a quotient of 2 numbers. Numerator NECESSARILY INCLUDED in the denominator.</strong></p>
+                                     </li>
+                                     <li class="key-point-item">
+                                          <span class="point-marker">•</span>
+                                          <p><strong>Rate: Measures the speed of occurrence of an event over time. Time is included in the denominator.</strong></p>
+                                     </li>
+                                     <li class="key-point-item">
+                                          <span class="point-marker">•</span>
+                                          <p><strong>Prevalence: Measures population diseases status. Number of cases of disease at a specific time / Population at risk at that time.</strong></p>
+                                     </li>
+                                     <li class="key-point-item">
+                                          <span class="point-marker">•</span>
+                                          <p><strong>Incidence: is frequency of new cases in a defined population over a specified period of time.</strong></p>
+                                     </li>
+                                </ul>
+                           </div>
+                      </div>
+                 </aside>
+
+            </main>
+
+            <!-- Bottom Navigation -->
+             <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="foundations-of-epidemiology.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                       <span class="progress-text">Lecture 2 of 2</span>
+                    </div>
+                    <a href="#" class="nav-button disabled">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

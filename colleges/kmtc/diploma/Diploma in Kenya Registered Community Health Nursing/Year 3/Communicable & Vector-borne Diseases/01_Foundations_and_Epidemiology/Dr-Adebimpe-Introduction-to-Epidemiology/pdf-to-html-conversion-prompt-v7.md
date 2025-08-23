@@ -12,8 +12,9 @@ The visual structure of the original PDF, where it indicates a deliberate groupi
 2.  **Initial Extraction**: Convert PDF to intermediate format (MMD) using Mathpix.
 3.  **MMD Review & Correction**: **Manually open and review the generated MMD file. Correct any obvious OCR errors, especially in tables, complex equations, or code snippets.** **Crucially, identify and remove spurious characters (like 't ', '• ' used inconsistently outside of clear list patterns) that are artifacts of the PDF conversion process and are NOT part of the original text content.** Identify text patterns that represent intended lists (e.g., lines beginning consistently with '-', '*', '•', or numbered prefixes). This step is crucial *before* HTML conversion.
 4.  **Content Chunking**: Divide *corrected* MMD content into **logically coherent sections** based on document structure (chapters, major sections). Use common sense to avoid overly long or short files.
-5.  **HTML Templating**: Set up base HTML structure with proper semantic elements and accessibility features based on the **HTML Layout and Structure** section below.
-6.  **Content Transfer & Semantic Conversion**: Move *corrected* content from MMD to HTML chunks with proper semantic markup. **Convert identified list-like patterns into proper HTML `<ul>` or `<ol>` elements, preserving the exact text content of each item.** Maintain the **linear flow** provided by the MMD.
+5.  **Chunk Content Extraction**: Create a temporary MMD file for each chunk containing only the content for that chunk.
+6.  **HTML Templating**: Set up base HTML structure with proper semantic elements and accessibility features based on the **HTML Layout and Structure** section below.
+7.  **Content Transfer & Semantic Conversion**: Move *corrected* content from the temporary MMD chunk files to HTML chunks with proper semantic markup. **Convert identified list-like patterns into proper HTML `<ul>` or `<ol>` elements, preserving the exact text content of each item.** Maintain the **linear flow** provided by the MMD.
 7.  **100% Content Verification**: Validate verbatim content preservation against the *original PDF source* for each chunk. **Specifically verify that all original text, formulas, data in tables, and code snippets are present exactly as in the source PDF (after correcting OCR errors). Verify that the text within converted list items is verbatim.**
 8.  **Visual Enhancement & Styling Implementation**: Apply styling and layout enhancements using the **CSS Styling Instructions** below *only after* content verification (Step 7) is complete. Ensure styling enhances readability of the linear content flow and improves the learning experience through clear visual hierarchy and distinction of content types (e.g., lists, definitions, callouts).
 9.  **Resource Handling**: Extract/download and organize images and other media using the specified **Image Handling** rules and correct filenames.
@@ -51,6 +52,11 @@ The visual structure of the original PDF, where it indicates a deliberate groupi
     *   **Mandatory:** Each chunk MUST include a link back to the main `index.html` (Table of Contents).
     *   **Recommended:** Include breadcrumb navigation showing the user's current location within the document structure (e.g., `Home > Lecture 3 > Section 2`).
     *   **Recommended:** Include a progress indicator (e.g., "Lecture 3 of 7").
+
+## Chunk Content Extraction Process
+1.  **Identify Chunk Boundaries:** Programmatically identify the start and end markers for each chunk in the main MMD file. The start of a chunk is the heading that defines it (e.g., a line starting with `\section*` or a major heading). The end of a chunk is the line immediately preceding the start of the next chunk, or the end of the file.
+2.  **Create Temporary Chunk Files:** For each identified chunk, create a temporary MMD file (e.g., `temp_chunk_1.mmd`, `temp_chunk_2.mmd`). These files will contain *only* the MMD content for that specific chunk.
+3.  **Use Temporary Files as Source:** When creating the final HTML files, use the corresponding temporary MMD chunk file as the sole source of content. This ensures that all content for a given chunk is included and prevents accidental omissions.
 
 ## Content Preservation Rules
 1.  **CRITICAL: ALL original pedagogical content must be preserved EXACTLY AS-IS from the source PDF (after correcting OCR errors).** This includes text, formulas, data in tables, code snippets, and the *intent* of figures.
@@ -1077,8 +1083,9 @@ For each section/page, verify:
 ### Content Extraction & Preparation
 [ ] MMD conversion completed
 [ ] **MMD reviewed, OCR errors corrected, spurious characters/prefixes cleaned**
+[ ] **Temporary MMD chunk files created and verified**
 [ ] HTML template created
-[ ] Main content populated from corrected and cleaned MMD
+[ ] Main content populated from **temporary MMD chunk files**
 
 ### Content Verification (against PDF)
 [ ] Line-by-line content verification completed (Verbatim content check)
