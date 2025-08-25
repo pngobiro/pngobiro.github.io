@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # --- Configuration ---
-MMD_FILE="FIRST AID AND TRAUMA MANAGEMENT.mmd" # Input MMD file name
-OUTPUT_DIR="first-aid/assets/images" # Output directory for images
+MMD_FILE="community health 2 Notes.mmd" # Input MMD file name
+OUTPUT_DIR="html_output/assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
 # --- Ensure Output Directory Exists ---
