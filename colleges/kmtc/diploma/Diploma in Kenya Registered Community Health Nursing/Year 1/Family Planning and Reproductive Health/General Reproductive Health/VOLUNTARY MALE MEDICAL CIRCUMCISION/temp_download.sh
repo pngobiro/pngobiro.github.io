@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- Configuration ---
-MMD_FILE="SEXUAL ASSAULT.txt" # Input MMD file name
+MMD_FILE="VOLUNTARY MALE MEDICAL CIRCUMCISION PDF.mmd" # Input MMD file name
 OUTPUT_DIR="assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
