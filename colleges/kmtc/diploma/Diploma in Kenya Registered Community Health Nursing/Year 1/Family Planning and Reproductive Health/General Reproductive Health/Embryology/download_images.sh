@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- Configuration ---
-MMD_FILE="mmd_files/FANC.txt" # Input MMD file name
+MMD_FILE="mmd_files/1. INTRODUCTION TO EMBRYOLOGY.txt" # Input MMD file name
 OUTPUT_DIR="assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
