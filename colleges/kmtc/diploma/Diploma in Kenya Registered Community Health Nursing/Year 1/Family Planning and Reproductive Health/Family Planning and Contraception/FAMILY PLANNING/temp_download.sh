@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- Configuration ---
-MMD_FILE="INTRODUCTION REPRODUCTIVE HEALTH.mmd" # Input MMD file name
+MMD_FILE="FAMILY PLANING & RH.txt" # Input MMD file name
 OUTPUT_DIR="assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
