@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # --- Configuration ---
-MMD_FILE="First Aid Digital Book-1.txt" # Input MMD file name
+MMD_FILE="TRAUMA_BASICS.mmd" # Input MMD file name
 OUTPUT_DIR="assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
