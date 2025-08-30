@@ -1,0 +1,1 @@
+convert pptx , ppt , ms word  to pdf using libreoffice --headless --convert-to pdf then to mmd using @pdf-to-html-conversion-prompt-v7.md and get images using @download_images.sh , then create files and folder structure including index.html 
