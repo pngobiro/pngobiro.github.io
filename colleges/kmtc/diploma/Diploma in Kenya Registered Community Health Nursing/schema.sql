@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS subjects;
+
+CREATE TABLE subjects (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name TEXT NOT NULL,
+    year INTEGER NOT NULL
+);
