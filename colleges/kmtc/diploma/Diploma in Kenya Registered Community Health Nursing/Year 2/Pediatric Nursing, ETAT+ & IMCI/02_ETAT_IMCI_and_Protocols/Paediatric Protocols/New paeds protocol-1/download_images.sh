@@ -10,7 +10,7 @@
 # =============================================================================
 
 # --- Configuration ---
-MMD_FILE="Basic Paediatric protocal 5th edition 19th Sep 2022.txt" # Input MMD file name
+MMD_FILE="New paeds protocol-1.mmd" # Input MMD file name
 OUTPUT_DIR="assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
