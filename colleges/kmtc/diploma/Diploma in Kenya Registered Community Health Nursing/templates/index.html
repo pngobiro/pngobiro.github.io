@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KMTC Timetable</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        .timetable-entry { margin-bottom: 15px; padding: 10px; border: 1px solid #eee; border-radius: 5px; }
+        .subject-title { font-weight: bold; color: #0056b3; }
+        .checklist, .comments { margin-top: 5px; font-size: 0.9em; }
+        .comments textarea { width: 98%; height: 50px; border: 1px solid #ccc; }
+        .download-button { margin-top: 20px; padding: 10px 15px; background-color: #28a745; color: white; text-decoration: none; border-radius: 5px; }
+    </style>
+</head>
+<body>
+    <h1>Diploma in Kenya Registered Community Health Nursing - Timetable</h1>
+
+    <a href="/generate_pdf_web" class="download-button">Download Timetable as PDF</a>
+
+    {% for entry in timetable %}
+    <div class="timetable-entry">
+        <p><strong>{{ entry.date }} ({{ entry.day_of_week }}):</strong> <span class="subject-title">{{ entry.subject }} (Year {{ entry.year }})</span></p>
+        <div class="checklist">
+            <p><strong>Checklist:</strong></p>
+            <ul>
+                <li><input type="checkbox"> Review notes</li>
+                <li><input type="checkbox"> Complete assigned readings</li>
+                <li><input type="checkbox"> Practice questions</li>
+            </ul>
+        </div>
+        <div class="comments">
+            <p><strong>Comments:</strong></p>
+            <textarea placeholder="Add specific notes or reflections here"></textarea>
+        </div>
+    </div>
+    {% endfor %}
+</body>
+</html>
