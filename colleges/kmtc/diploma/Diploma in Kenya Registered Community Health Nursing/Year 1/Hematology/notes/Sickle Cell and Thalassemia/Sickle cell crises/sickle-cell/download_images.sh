@@ -10,7 +10,7 @@
 # =============================================================================
 
 # --- Configuration ---
-MMD_FILE="sickle-cell/sickle-cell.mmd" # Input MMD file name
+MMD_FILE="sickle-cell-crises.mmd" # Input MMD file name
 OUTPUT_DIR="sickle-cell/assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
