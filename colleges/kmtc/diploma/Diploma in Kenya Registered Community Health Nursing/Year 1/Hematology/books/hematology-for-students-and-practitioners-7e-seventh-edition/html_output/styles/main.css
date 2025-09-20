@@ -21,13 +21,13 @@
     --text-medium: #5d6d7e;
     --text-light: #85929e;
     --border-color: #bdc3c7;
-
+    
     /* Typography */
     --font-family-primary: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     --font-family-mono: 'Courier New', Courier, monospace;
     --line-height-base: 1.6;
     --line-height-headings: 1.2;
-
+    
     /* Spacing */
     --spacing-xs: 0.25rem;
     --spacing-sm: 0.5rem;
@@ -35,15 +35,15 @@
     --spacing-lg: 1.5rem;
     --spacing-xl: 2rem;
     --spacing-xxl: 3rem;
-
+    
     /* Breakpoints */
     --breakpoint-md: 768px;
     --breakpoint-sm: 480px;
-
+    
     /* Border Radius */
     --border-radius: 6px;
     --border-radius-lg: 12px;
-
+    
     /* Shadows */
     --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
     --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
@@ -278,6 +278,119 @@ main {
     transform: translateY(-2px);
 }
 
+/* Document Navigation (Top and Bottom) */
+.document-nav {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-lg) 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--white);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.nav-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    color: var(--white);
+}
+
+.nav-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.document-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    min-width: 150px;
+    justify-content: center;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.progress-text {
+    font-size: 0.85em;
+    color: var(--white);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Top Navigation Specific */
+.section-header + .document-nav {
+    margin-top: 0;
+}
+
+/* Bottom Navigation Specific */
+.section-content + .document-nav {
+    margin-bottom: 0;
+}
+
+/* Responsive for Document Nav */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: stretch;
+    }
+
+    .nav-button {
+        justify-content: center;
+    }
+
+    .document-progress {
+        order: -1;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .document-nav {
+        padding: var(--spacing-sm);
+    }
+
+    .nav-button {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.9em;
+    }
+}
+
 .navigation a:disabled,
 .navigation a.disabled {
     opacity: 0.5;
@@ -413,16 +526,16 @@ hr {
         background: white;
         color: black;
     }
-
+    
     .navigation {
         display: none;
     }
-
+    
     main {
         box-shadow: none;
         padding: var(--spacing-md);
     }
-
+    
     .content-card {
         box-shadow: none;
         border: 1px solid #ccc;
@@ -438,37 +551,37 @@ hr {
         --spacing-xl: 1.5rem;
         --spacing-xxl: 2rem;
     }
-
+    
     body {
         font-size: 14px;
     }
-
+    
     h1 {
         font-size: 2rem;
     }
-
+    
     h2 {
         font-size: 1.75rem;
     }
-
+    
     h3 {
         font-size: 1.5rem;
     }
-
+    
     main {
         padding: var(--spacing-lg);
         margin: var(--spacing-sm) 0;
     }
-
+    
     .navigation {
         flex-direction: column;
         text-align: center;
     }
-
+    
     table {
         font-size: 0.9em;
     }
-
+    
     th, td {
         padding: var(--spacing-xs) var(--spacing-sm);
     }
@@ -482,28 +595,28 @@ hr {
         --spacing-xl: 1rem;
         --spacing-xxl: 1.5rem;
     }
-
+    
     body {
         font-size: 13px;
     }
-
+    
     h1 {
         font-size: 1.75rem;
     }
-
+    
     h2 {
         font-size: 1.5rem;
     }
-
+    
     h3 {
         font-size: 1.25rem;
     }
-
+    
     main {
         padding: var(--spacing-md);
         border-radius: var(--border-radius);
     }
-
+    
     .content-card {
         padding: var(--spacing-md);
     }

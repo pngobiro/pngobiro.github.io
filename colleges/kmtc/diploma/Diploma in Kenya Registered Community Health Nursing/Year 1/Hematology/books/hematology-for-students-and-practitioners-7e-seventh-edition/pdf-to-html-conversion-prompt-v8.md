@@ -1,4 +1,4 @@
-# PDF to HTML Conversion System Prompt (v7)
+# PDF to HTML Conversion System Prompt (v8)
 
 ## Core Mission
 Convert PDF documents into **visually engaging, accessible, and pedagogically effective** HTML pages while ensuring **100% VERBATIM content preservation**. Create highly appealing and effective learning materials, organized into **logically coherent chunks**, that maintain absolute fidelity to the original text content.
@@ -402,8 +402,7 @@ js/
             <!-- ... more rows ... -->
         </tbody>
     </table>
-</div>
-```
+</div>```
 
 **Mathematical Expressions (Inline and Block):**
 ```html
@@ -423,8 +422,7 @@ a^2 + b^2 = c^2 \label{eq:pythagorean}
 ```
 
 **Lists (Ordered and Unordered):**
-*Use these semantic tags for lists converted from patterns or explicitly defined lists. Apply `class="enhanced-list"` for custom styling.*
-```html
+*Use these semantic tags for lists converted from patterns or explicitly defined lists. Apply `class="enhanced-list"` for custom styling.*```html
 <!-- Unordered List -->
 <ul> <!-- Use class="enhanced-list" for enhanced styling if needed -->
     <li>[Verbatim List item text 1]</li>
@@ -755,6 +753,119 @@ main {
     transform: translateY(-2px);
 }
 
+/* Document Navigation (Top and Bottom) */
+.document-nav {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-lg) 0;
+    box-shadow: var(--shadow-sm);
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--white);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+.nav-button:hover {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-1px);
+    color: var(--white);
+}
+
+.nav-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.document-progress {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    min-width: 150px;
+    justify-content: center;
+}
+
+.progress-bar {
+    flex: 1;
+    height: 4px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 2px;
+    overflow: hidden;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+    border-radius: 2px;
+}
+
+.progress-text {
+    font-size: 0.85em;
+    color: var(--white);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+/* Top Navigation Specific */
+.section-header + .document-nav {
+    margin-top: 0;
+}
+
+/* Bottom Navigation Specific */
+.section-content + .document-nav {
+    margin-bottom: 0;
+}
+
+/* Responsive for Document Nav */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        gap: var(--spacing-md);
+        align-items: stretch;
+    }
+
+    .nav-button {
+        justify-content: center;
+    }
+
+    .document-progress {
+        order: -1;
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .document-nav {
+        padding: var(--spacing-sm);
+    }
+
+    .nav-button {
+        padding: var(--spacing-xs) var(--spacing-sm);
+        font-size: 0.9em;
+    }
+}
+
 .navigation a:disabled,
 .navigation a.disabled {
     opacity: 0.5;
@@ -1038,6 +1149,23 @@ document.addEventListener('DOMContentLoaded', function() {
     // Keyboard navigability for interactive elements
 });
 ```
+
+## User Interaction Protocol for HTML Generation
+When I request an individual HTML file, please adhere to the following protocol:
+
+1.  **Primary Goal: Generate Complete Content:** Your most important task is to generate the **entire file content in a single, complete response**. It is crucial to avoid truncation or omitting sections with placeholders like `...` or `[omitted content]`. Please make every effort to output the full code block.
+
+2.  **Contingency Plan for Truncation:** I understand there may be system limitations on response length. If you absolutely **cannot** generate the full file in one response, you must follow these steps:
+    *   Generate as much of the file as possible.
+    *   Ensure you stop at a **logical and complete HTML block**, such as the end of a `</section>`, `</main>`, or `</div>` tag. Do not cut off in the middle of a tag, paragraph, or code block.
+    *   At the very end of your response, after the code block, add this specific and standardized placeholder comment:
+        `<!-- MORE CONTENT TO FOLLOW - PLEASE PROMPT 'CONTINUE' -->`
+
+3.  **Handling a 'CONTINUE' Prompt:** When I provide the prompt "continue" or "give me the omitted content," you will:
+    *   Immediately generate the next section of the HTML file, starting from exactly where you left off.
+    *   Do not repeat any content you have already provided.
+    *   If the remaining content is still too long, repeat the process: generate the next logical chunk and end with the same placeholder comment: `<!-- MORE CONTENT TO FOLLOW - PLEASE PROMPT 'CONTINUE' -->`.
+    *   Continue this process until the entire file has been generated. When you provide the final part of the file, **do not** include the placeholder comment.
 
 ## Progress Tracking and Verification
 ### Enhanced Verification Checklist
