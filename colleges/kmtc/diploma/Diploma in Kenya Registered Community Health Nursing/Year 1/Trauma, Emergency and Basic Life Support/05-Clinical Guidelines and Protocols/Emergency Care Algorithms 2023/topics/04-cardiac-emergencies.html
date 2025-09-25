@@ -1,0 +1,665 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cardiac Emergencies | Emergency Care Algorithms 2023</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\(', '\)']],
+            displayMath: [['$$', '$$'], ['\[', '\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            tags: 'ams' // Use AMS numbering of equations
+        },
+        svg: { fontCache: 'global' },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="03-airway-breathing-emergencies.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 44.4%;"></div>
+                        </div>
+                       <span class="progress-text">Part 4 of 9</span>
+                    </div>
+                    <a href="05-neurological-emergencies.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Cardiac Emergencies</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: algo11 -->
+                <section id="algo11" class="content-section" aria-labelledby="section-heading-11">
+                    <h2 id="section-heading-11" class="section-heading">
+                        <span class="heading-text">11. Chest Pain (Acute Coronary Syndrome) Algorithm</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This clinical pathway is intended to supplement, rather than substitute for, professional judgment and may be changed depending upon a patient's individual needs. Failure to comply with this pathway does not represent a breach of the standard of care.</p>
+                        <h4>Chest Discomfort Suggestive of Ischemia</h4>
+                        <p>(includes anginal equivalents (atypical symptoms) like exertional pain in the ear, jaw, neck, shoulder, arm, back, or epigastric area; exertional dyspnoea; nausea and vomiting; diaphoresis; and fatigue.</p>
+                        <ul>
+                            <li>Monitor, support ABCs in the Resuscitation Room (ER). Be prepared to provide CPR, Defibrillation and ?Thrombolysis/Fibrinolysis</li>
+                            <li>Obtain/review 12-lead ECG within 10 minutes of arrival to ED</li>
+                            <li>Do a V4R if ST elevation in lead V1 with simultaneous ST depression in V2 -? Right sided STEMI</li>
+                            <li>Do V7-V9 if ST depressions ≥ 1 mm with upright T-waves in ≥ 2 contiguous anterior precordial leads (V1 to V3) -? Posterior STEMI</li>
+                            <li>If there is ST elevation in aVR ≥ 1 mm and aVR ≥ V1 with widespread horizontal ST depression, most prominent in leads I, II and V4-6 - consult an Interventional Cardiologist immediately for PCI (Left main coronary artery occlusion/Proximal LAD lesion/Severe sub endocardial ischaemia, nonlocalized)</li>
+                            <li>Sinus Tachycardia, T wave inversion in III & V1, V3 or (S1, Q3, T3) pattern -? See 15. Pulmonary Embolism Algorithm</li>
+                            <li>Check vital signs (BP, PR, RR, SPO2, T °C, RBS)</li>
+                            <li>Start Oxygen IF SPO<sub>2</sub> &lt;90% or if patient is dyspnoeic. Maintain SPO<sub>2</sub> ≥ 90%</li>
+                            <li>Perform brief, targeted history, physical exam - Indicate time of symptoms onset</li>
+                            <li>Consider other life-threatening causes of chest pain (pulmonary embolus, cardiac tamponade, aortic dissection, tension pneumothorax, oesophageal rupture)</li>
+                            <li>Review initial 12-lead ECG</li>
+                        </ul>
+                        <p>Sequence of ECG changes seen during evolution of myocardial infarction - In the early stages of acute myocardial infarction the electrocardiogram may be normal or near normal; < 1/2 of patients with acute myocardial infarction have clear diagnostic changes on their first trace. About 10% of patients with a proved acute myocardial infarction (on the basis of clinical history and enzymatic markers) fail to develop ST segment elevation or depression. In most cases, however, serial electrocardiograms show evolving changes that tend to follow well recognised patterns.</p>
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-16-1.jpg" alt="ECG changes in myocardial infarction, showing STEMI locations and corresponding affected arteries." class="content-image">
+                        <p><em>*LAD, Left Anterior Descending; RCx, Right Circumflex; RCA, Right Coronary Artery; LCx, Left Circumflex; V4R, Right sided V4.</em><br>-Sgarbossa's Criteria for patients with Left Bundle Branch Blocks (LBBB) available in MDCalc</p>
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-16-2.jpg" alt="Flowchart categorizing chest pain based on ECG findings into STEMI, NSTEMI/Unstable Angina, or Intermediate/Low Risk." class="content-image">
+                    </div>
+                </section>
+                <!-- END: algo11 -->
+
+                <!-- START: algo12 -->
+                <section id="algo12" class="content-section" aria-labelledby="section-heading-12">
+                    <h2 id="section-heading-12" class="section-heading">
+                        <span class="heading-text">12. STEMI Algorithm</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This clinical pathway is intended to supplement, rather than substitute for, professional judgment and may be changed depending upon a patient's individual needs. Failure to comply with this pathway does not represent a breach of the standard of care.</p>
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-17-1.jpg" alt="STEMI title" class="content-image" style="max-width: 287px;">
+                        <ul>
+                            <li>Attach the patient to a DEFIBRILATOR</li>
+                            <li>Establish IV access in left forearm or antecubital vein and send blood samples for UEC, & hsTroponin</li>
+                            <li>Aspirin 300mg to chew (if not given by EMS, not allergic, no active upper GI bleeding or retinal bleeding, not a haemophiliac)</li>
+                            <li>Nitroglycerin sublingual spray <strong>0.4 mg SL</strong> for pain relief every <strong>5 mins</strong> up to relief of discomfort or MAX <strong>3 doses</strong> reached. DO NOT give nitroglycerin if:
+                                <ul>
+                                    <li>SBP &lt; 90 mmHg (or 30 mm Hg below the patient's known baseline),</li>
+                                    <li>Heart rate &gt; 100 bpm, or &lt; 50 bpm.</li>
+                                    <li>Right ventricular infarction (right ventricular infarction causes a preload dependent state)</li>
+                                    <li>Use of sildenafil or vardenafil within the previous 24 hours or tadalafil within the previous 48 hours.</li>
+                                </ul>
+                            </li>
+                            <li>Fentanyl <strong>50 µg</strong> IV if pain is NOT relieved by the <strong>3 doses</strong> of SL nitroglycerin. Repeat once if still in pain after <strong>5 mins</strong>. For persistent pain, consult a Cardiologist/Physician. Consider IVI Nitroglycerin (see C/I above)</li>
+                        </ul>
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-17-2.jpg" alt="Flowchart for STEMI management, showing decision points for PCI vs. Fibrinolysis based on time from symptom onset and contraindications." class="content-image">
+                        <h4>No contraindications for Thrombolysis/Fibrinolysis</h4>
+                        <ul>
+                            <li>Obtain informed consent for fibrinolysis/thrombolysis</li>
+                            <li>Ensure patient is connected to a defibrillator (ECG, SPO2, BP) and repeat baseline vitals. Administer fibrinolysis/thrombolysis within 10 mins of STEMI diagnosis</li>
+                        </ul>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th>Fibrinolytic Agent</th>
+                                        <th>Dose</th>
+                                        <th>Fibrin Specificity*</th>
+                                        <th>Antigenic</th>
+                                        <th>Patency Rate (90-min TIMI 2 or 3 flow)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="5"><strong>Fibrin-specific:</strong></td></tr>
+                                    <tr>
+                                        <td>Tenecteplase (TNK-tPA)</td>
+                                        <td>To reconstitute, mix the 50-mg vial in 10 mL sterile water (5 mg/mL). Give IV bolus based on weight as below:<br>&lt;60 kg - 30 mg (6 mL)<br>60 to 69 kg - 35 mg (7 mL)<br>70 to 79 kg - 40 mg (8 mL)<br>80 to 89 kg - 45 mg (9 mL)<br>≥ 90 kg - 50 mg (10 mL)</td>
+                                        <td>++++</td>
+                                        <td>No</td>
+                                        <td>85%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Reteplase (rPA)</td>
+                                        <td>10 U + 10-U IV boluses given 30 min apart</td>
+                                        <td>++</td>
+                                        <td>No</td>
+                                        <td>84%</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alteplase (tPA)</td>
+                                        <td>not to exceed 100 mg.</td>
+                                        <td>++</td>
+                                        <td>No</td>
+                                        <td>73% to 84%</td>
+                                    </tr>
+                                    <tr><td colspan="5"><strong>Non-fibrin-specific:</strong></td></tr>
+                                    <tr>
+                                        <td>Streptokinase</td>
+                                        <td>Set up second IV line for the Streptokinase. The adult dose of streptokinase for STEMI is 1.5 Million U in 50 mL of 5% dextrose in water (D5W) given IV over 30-60 minutes. Allergic reactions force the termination of many infusions before a therapeutic dose can be administered. Run Ringer's Lactate/Hartmann's Solution TKVO in other line</td>
+                                        <td>No</td>
+                                        <td>Yes§</td>
+                                        <td>60% to 68%</td>
+                                    </tr>
+                                </tbody>
+                                <tfoot>
+                                    <tr>
+                                        <td colspan="5">*Strength of fibrin specificity; "++++" is more strong, "++" is less strong.<br>§Streptokinase is highly antigenic and absolutely contraindicated within 6 mo of previous exposure because of the potential for serious allergic reaction.<br>IV indicates intravenous; rPA, reteplase plasminogen activator; TIMI, Thrombolysis In Myocardial Infarction; TNK-tPA, tenecteplase tissue-type plasminogen activator; and tPA, tissue-type plasminogen activator.</td>
+                                    </tr>
+                                </tfoot>
+                            </table>
+                        </div>
+                        <ul>
+                            <li>Monitor vital signs (BP, PR, RR, SPO2) every 15 minutes during the infusions</li>
+                            <li>Continue monitoring patient for <strong>30mins</strong> after the end of the infusions</li>
+                            <li>Transfer patient to CCU/ICU CONNECTED TO A DEFIBRILLATOR</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: algo12 -->
+
+                <!-- START: algo13 -->
+                <section id="algo13" class="content-section" aria-labelledby="section-heading-13">
+                    <h2 id="section-heading-13" class="section-heading">
+                        <span class="heading-text">13. NSTEMI/Unstable Angina Algorithm</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This clinical pathway is intended to supplement, rather than substitute for, professional judgment and may be changed depending upon a patient's individual needs. Failure to comply with this pathway does not represent a breach of the standard of care.</p>
+                        <h4>ST depression > 0.5mm or dynamic T-wave inversion ≥ 2mm; strongly suspicious for ischemia<br>High-Risk Unstable Angina/Non-ST-Elevation MI (UA/NSTEMI)</h4>
+                        <h4>Normal or Non-diagnostic changes in ST segment or T wave<br>Intermediate/Low Risk UA</h4>
+                        <ul>
+                            <li>Establish IV access and send blood samples for UEC, & hsTroponin (obtain hsTroponin at least <strong>4 hours</strong> after symptom onset, not before)</li>
+                            <li>Aspirin <strong>300 mg</strong> to chew (if not given by EMS, not allergic, no active upper GI bleeding or retinal bleeding, not a haemophiliac)</li>
+                            <li>Nitroglycerin sublingual spray <strong>0.4mg</strong> SL for pain relief every <strong>5mins</strong> up to relief of discomfort or MAX <strong>3 doses</strong> reached. DO NOT give nitroglycerin if:
+                                <ul>
+                                    <li>SBP &lt; 90mmHg (or 30 mm Hg below the patient's known baseline),</li>
+                                    <li>Heart rate &gt; 100 bpm, or &lt; 50 bpm.</li>
+                                    <li>Right ventricular infarction (right ventricular infarction causes a preload dependent state)</li>
+                                    <li>Use of sildenafil or vardenafil within the previous 24 hours or tadalafil within the previous 48 hours.</li>
+                                </ul>
+                            </li>
+                            <li>Fentanyl <strong>50 µg</strong> IV if pain is NOT relieved by the <strong>3 doses</strong> of SL nitroglycerin. Repeat once if still in pain after <strong>5 mins</strong>. For persistent pain, consult a Cardiologist/Physician. Consider IVI nitroglycerin (see C/I above)</li>
+                            <li>Consider CXR</li>
+                        </ul>
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-18-1.jpg" alt="Algorithm for NSTEMI/Unstable Angina, outlining risk stratification (TIMI score), anti-ischemic and anti-platelet therapy, and decisions for invasive vs. conservative strategy." class="content-image">
+                    </div>
+                </section>
+                <!-- END: algo13 -->
+                
+                <!-- START: algo14 -->
+                <section id="algo14" class="content-section" aria-labelledby="section-heading-14">
+                    <h2 id="section-heading-14" class="section-heading">
+                        <span class="heading-text">14. Adult Bradycardia (&lt; 50/min)/Tachycardia (&gt; 150/min) (with Pulse)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This clinical pathway is intended to supplement, rather than substitute for, professional judgment and may be changed depending upon a patient's individual needs. Failure to comply with this pathway does not represent a breach of the standard of care.</p>
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-19-1.jpg" alt="Initial assessment algorithm for bradycardia and tachycardia, focusing on identifying and treating the underlying cause." class="content-image">
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-19-2.jpg" alt="Detailed algorithm for managing persistent bradyarrhythmia and tachyarrhythmia, including drug therapies, pacing, and cardioversion." class="content-image">
+                        
+                        <div class="content-card" style="margin-top: 2rem;">
+                            <h3>Transcutaneous Pacing Procedure</h3>
+                            <p><a href="http://www.emergencymedicinekenya.org/videos">Watch video on our You Tube Channel</a></p>
+                            <ol>
+                                <li>See 14. Adult Bradycardia (&lt; 50/min)/Tachycardia (&gt; 150/min) (with Pulse) for indications. Inotropes may be used if transcutaneous pacing is NOT available.</li>
+                                <li>Explain the procedure to the patient</li>
+                                <li>Consider procedural sedation and analgesia</li>
+                                <li>Place the pacing pads on the chest of the patient as per package instructions</li>
+                                <li>Connect the pads cable to the pacing machine if not already connected</li>
+                                <li>Turn the pacer ON. Observe for markers (•) indicating the R-wave on the screen. Some machines require that you START pacing after turning the pacer on. Observe for pacing spikes (|) on the baseline.</li>
+                                <li>Set the Rate to approximately 60-70 bpm.</li>
+                                <li>Set current milliamperes (mA) output as follows: Increase milliamperes (mA) from minimum setting until every pacer spike is immediately followed by a wide QRS and a broad T wave - This is termed as Electrical Capture.</li>
+                                <li>Confirm by checking the patient's femoral pulse to see if the pulse rate matches the rate set above i.e. 60-70bpm. This is termed as Mechanical Capture.</li>
+                                <li>Recheck the patient's vital signs and confirm the patient's signs of shock are resolving i.e. increase in blood pressure, improved mentation, etc. This is termed as Physiological Capture.</li>
+                                <li>If all the above is achieved, increase the current milliamperes by <strong>10%</strong> for safety margin</li>
+                                <li>Set the Mode to 'Fixed mode'</li>
+                                <li>Transfer care to a Cardiologist without delay. DO NOT STOP PACING unless instructed to by a Cardiologist.</li>
+                            </ol>
+                            <h4>Trouble Shooting</h4>
+                            <ul>
+                                <li><strong>Pacing Spikes not seen on the base line</strong> - Confirm that you have pressed the START button</li>
+                                <li><strong>No Electrical Capture</strong> - Confirm that the pads are firmly pressed on the patient's chest. Continue increasing the milliamperes. There is no set minimum or maximum.</li>
+                                <li><strong>No Mechanical Capture</strong> - Increase the milliamperes by increments of 5-10 mA and recheck the pulse</li>
+                                <li><strong>No Physiological Capture</strong> - Consider hypovolaemia as the cause of shock and give a small fluid bolus (250-500 mls) and recheck the patient. If not, increase the set rate to 80bpm, confirm electrical capture and mechanical capture and recheck the patient</li>
+                                <li>In all cases, consult a Cardiologist.</li>
+                            </ul>
+                            <h4>Transferring a patient to another transcutaneous pacer (Handing Over Pacing)</h4>
+                            <ol>
+                                <li>DO NOT disconnect the patient from the original pacing machine</li>
+                                <li>Set the original pacing machine to 'Demand mode'</li>
+                            </ol>
+                            <p>The following steps are performed on the new pacing machine;</p>
+                            <ol start="3">
+                                <li>Place a new set of pacing pads on the chest of the patient in the anteroposterior position. Place the anterior pad directly over the heart at the precordium to the left of the lower sternal border; place the posterior pad under the patient's body beneath the heart and immediately below the scapula.</li>
+                                <li>Connect the pads cable to the new pacing machine if not already connected</li>
+                                <li>Turn the pacer ON. Observe for markers (•) indicating the R-wave on the screen. Some machines require that you START pacing after turning the pacer on. Observe for pacing spikes (|) on the baseline.</li>
+                                <li>Set the Rate higher than the rate in the original pacing machine e.g. 80-90 bpm.</li>
+                                <li>Set current milliamperes (mA) output as follows: Increase milliamperes (mA) from minimum setting until every pacer spike is immediately followed by a wide QRS and a broad T wave - This is termed as Electrical Capture.</li>
+                                <li>Confirm by checking the patient's femoral pulse to see if the pulse rate matches the rate set above i.e. 80-90bpm. This is termed as Mechanical Capture.</li>
+                                <li>Recheck the patient's vital signs and confirm the patient's signs of shock are resolving i.e. increase in blood pressure, improved mentation, etc. This is termed as Physiological Capture.</li>
+                                <li>If all the above is achieved, increase the current milliamperes by <strong>10%</strong> for safety margin</li>
+                                <li>At this point, the original pacing machine will be in a 'Standby mode'</li>
+                                <li>Disconnect the original pacing machine</li>
+                            </ol>
+                        </div>
+
+                        <div class="content-card" style="margin-top: 2rem;">
+                            <h3>Synchronized Cardioversion Procedure</h3>
+                            <p><a href="http://www.emergencymedicinekenya.org/videos">Watch video on our You Tube Channel</a></p>
+                            <ol>
+                                <li>See 14. Adult Bradycardia (&lt; 50/min)/Tachycardia (&gt; 150/min) (with Pulse) for indications.</li>
+                                <li>Explain the procedure to the patient</li>
+                                <li>Consider procedural sedation and analgesia</li>
+                                <li>Place the defibrillation pads on the chest of the patient as per package instructions</li>
+                                <li>Connect the pads cable to the pacing machine if not already connected</li>
+                                <li>Turn the defibrillator ON.</li>
+                                <li>Select the appropriate energy level e.g. 50-100J. In paediatrics, begin with 0.5-1 J/kg; if not effective, increase to 2 J/kg.</li>
+                                <li>Activate the synchronize mode by pressing the synchronize button.</li>
+                                <li>Check to verify that the machine is correctly sensing the R wave. Observe for markers (•) indicating the R-wave on the screen.</li>
+                                <li>Charge the machine to the ordered energy level.</li>
+                                <li>Before discharging the current, shout 'CLEAR' and ensure no one (including yourself) is touching the patient, bed or equipment connected to the patient.</li>
+                                <li>SHOCK the patient.</li>
+                                <li>If no change in rhythm, increase the energy level e.g. by 50 J in adults or to 2 J/Kg in paediatrics, and repeat steps 8-12</li>
+                                <li>Consult a Cardiologist without delay.</li>
+                            </ol>
+                            <h4>Trouble Shooting</h4>
+                            <p>In case you do not get a rhythm change after giving a shock, consider;</p>
+                            <ul>
+                                <li>Potential underlying causes e.g. Hs and Ts</li>
+                                <li>Poor pads connection</li>
+                                <li>Need for higher energy levels</li>
+                                <li>In all cases, consult a Cardiologist.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: algo14 -->
+                
+                <!-- START: algo15 -->
+                <section id="algo15" class="content-section" aria-labelledby="section-heading-15">
+                    <h2 id="section-heading-15" class="section-heading">
+                        <span class="heading-text">15. Pulmonary Embolism Algorithm</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This clinical pathway is intended to supplement, rather than substitute for, professional judgment and may be changed depending upon a patent's individual needs. Failure to comply with this pathway does not represent a breach of the standard of care.</p>
+                        <figure>
+                            <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-22-1.jpg" alt="Initial assessment for suspected pulmonary embolism." class="content-image">
+                            <figcaption>Clinical Gestalt or Validated clinical decision support tool (Wells score for PE available in MDCalc)</figcaption>
+                        </figure>
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-22-2.jpg" alt="Diagnostic and treatment algorithm for Pulmonary Embolism, based on risk stratification and hemodynamic stability." class="content-image">
+                        <div class="table-container">
+                            <table class="content-table">
+                                <tbody>
+                                    <tr>
+                                        <td colspan="2"><strong><sup>1</sup>Indications for Thrombolysis in PE (rule out contraindication to Thrombolysis)</strong><br>- Cardiac Arrest (consider if PEA Rhythm, unilateral leg swelling, POCUS findings)<br>- SBP &lt;90 mmHg or vasopressors required to maintain SBP ≥ 90 mmHg despite fluid resuscitation or SBP drop ≥ 40 mmHg lasting &gt;15 mins and not caused by new-onset arrhythmia, hypovolaemia or sepsis</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tenecteplase</td>
+                                        <td>Weight-based dose (range <strong>30 mg-50 mg</strong>) via IV push over 5-10 seconds, then continue CPR for at least 30 minutes after drug administration.</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Alteplase</td>
+                                        <td>100 mg over 2 hours; or<br>Cardiac Arrest: 50 mg IV bolus. Repeat once after 15 mins if no ROSC.<br>Continue CPR for at least 30 mins after last dose</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: algo15 -->
+
+                <!-- START: algo16 -->
+                <section id="algo16" class="content-section" aria-labelledby="section-heading-16">
+                    <h2 id="section-heading-16" class="section-heading">
+                        <span class="heading-text">16. Hypertension Algorithm</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This clinical pathway is intended to supplement, rather than substitute for, professional judgment and may be changed depending upon a patient's individual needs. Failure to comply with this pathway does not represent a breach of the standard of care.</p>
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-23-1.jpg" alt="Algorithm for managing hypertension, from initial assessment and screening to long-term management and follow-up." class="content-image">
+                    </div>
+                    <div class="content-card">
+                        <h3>Guideline for the Prevention, Detection, Evaluation, and Management of High Blood Pressure in Adults</h3>
+                        <h4>BLOOD PRESSURE MEASUREMENT TECHNIQUES</h4>
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-24-1.jpg" alt="Illustration showing the correct patient posture and technique for accurate blood pressure measurement." class="content-image" style="max-width: 500px; float: right; margin-left: 1rem;">
+                        <ol>
+                            <li>Note the time of most recent BP medication taken before measurements.</li>
+                            <li>At the first visit, record BP in both arms. Use the arm that gives the higher reading for subsequent readings.</li>
+                            <li>At each visit, take 3 measurements with 1 min intervals between them. Calculate the average of the last 2 measurements. If BP of first reading is &lt;130/85 mmHg, no further measurement is required.</li>
+                            <li>Blood pressure of <strong>2-3 visits ≥ 140/90 mmHg</strong> indicates hypertension.</li>
+                            <li>Provide patients the SBP/DBP readings both verbally and in writing.</li>
+                        </ol>
+                        <table class="content-table">
+                            <thead>
+                                <tr><th>Category</th><th>Systolic (mm Hg)</th><th></th><th>Diastolic (mm Hg)</th></tr>
+                            </thead>
+                            <tbody>
+                                <tr><td>Normal BP</td><td>&lt;130</td><td>and</td><td>&lt;85</td></tr>
+                                <tr><td>High-normal BP</td><td>130-139</td><td>and/or</td><td>85-89</td></tr>
+                                <tr><td>Grade 1 hypertension</td><td>140-159</td><td>and/or</td><td>90-99</td></tr>
+                                <tr><td>Grade 2 hypertension</td><td>≥ 160</td><td>and/or</td><td>≥ 100</td></tr>
+                            </tbody>
+                        </table>
+                        <h4>DIAGNOSTIC WORKUP OF HYPERTENSION</h4>
+                        <ul>
+                            <li>Assess risk factors and comorbidities</li>
+                            <li>Reveal identifiable causes of hypertension</li>
+                            <li>Assess presence of target organ damage</li>
+                            <li>Conduct history and physical examination</li>
+                            <li>Obtain/review 12-lead ECG, RBS, FBC, UEC, TSH, Urinalysis for proteinuria, Lipid profile</li>
+                        </ul>
+                    </div>
+                    <div class="content-card">
+                        <h4>Blood Pressure (BP) Thresholds and Recommendations for Treatment and Follow-Up</h4>
+                        <figure>
+                           <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-25-1.jpg" alt="Table showing BP thresholds and recommendations for treatment and follow-up based on BP category and ASCVD risk." class="content-image">
+                           <figcaption><em>* Calculate the 10-year risk for first atherosclerotic cardiovascular disease events (ASCVD; nonfatal myocardial infarction, coronary heart disease-related death, or fatal or nonfatal stroke) with the ASCVD Risk Calculator (available in MDCalc)</em></figcaption>
+                        </figure>
+                    </div>
+                    <div class="content-card">
+                        <h4>Best Proven Nonpharmacologic Interventions for Prevention and Treatment of Hypertension*</h4>
+                        <div class="table-container">
+                            <table class="content-table">
+                               <thead>
+                                  <tr>
+                                     <th></th>
+                                     <th>Nonpharmacologic Intervention</th>
+                                     <th>Dose</th>
+                                     <th>Approximate Impact on SBP (Hypertension)</th>
+                                     <th>Approximate Impact on SBP (Normotension)</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+                                  <tr>
+                                     <td>Weight loss</td>
+                                     <td>Weight/body fat</td>
+                                     <td>Ideal body weight is best goal but at least 1 kg reduction in body weight for most adults who are overweight. Expect about 1 mm Hg for every 1 kg reduction in body weight.</td>
+                                     <td>-5 mm Hg</td>
+                                     <td>-2/3 mm Hg</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Healthy diet</td>
+                                     <td>DASH dietary pattern</td>
+                                     <td>Diet rich in fruits, vegetables, whole grains, and low-fat dairy products with reduced content of saturated and trans fat</td>
+                                     <td>-11 mm Hg</td>
+                                     <td>-3 mm Hg</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Reduced intake of dietary sodium</td>
+                                     <td>Dietary sodium</td>
+                                     <td>&lt;1,500 mg/d is optimal goal but at least 1,000 mg/d reduction in most adults</td>
+                                     <td>-5/6 mm Hg</td>
+                                     <td>-2/3 mm Hg</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Enhanced intake of dietary potassium</td>
+                                     <td>Dietary potassium</td>
+                                     <td>3,500-5,000 mg/d, preferably by consumption of a diet rich in potassium</td>
+                                     <td>-4/5 mm Hg</td>
+                                     <td>-2 mm Hg</td>
+                                  </tr>
+                                  <tr>
+                                     <td rowspan="3">Physical activity</td>
+                                     <td>Aerobic</td>
+                                     <td>- 120-150 min/wk<br>- 65%-75% heart rate reserve</td>
+                                     <td>-5/8 mm Hg</td>
+                                     <td>-2/4 mm Hg</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Dynamic Resistance</td>
+                                     <td>- 90-150 min/wk<br>- 50%-80% 1 rep maximum<br>- 6 exercises, 3 sets/exercise, 10 repetitions/set</td>
+                                     <td>-4 mm Hg</td>
+                                     <td>-2 mm Hg</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Isometric Resistance</td>
+                                     <td>- 4x2 min (hand grip), 1 min rest between exercises, 30%-40% maximum voluntary contraction, 3 sessions/wk<br>- 8-10 wk</td>
+                                     <td>-5 mm Hg</td>
+                                     <td>-4 mm Hg</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Moderation in alcohol intake</td>
+                                     <td>Alcohol consumption</td>
+                                     <td>In individuals who drink alcohol, reduce alcohol† to:<br>- Men: ≤ 2 drinks daily<br>- Women: ≤ 1 drink daily</td>
+                                     <td>-4 mm Hg</td>
+                                     <td>-3 mm Hg</td>
+                                  </tr>
+                               </tbody>
+                               <tfoot>
+                                  <tr>
+                                     <td colspan="5">*Type, dose, and expected impact on BP in adults with a normal BP and with hypertension.<br>†In the United States, one "standard" drink contains roughly 14 grams of pure alcohol, which is typically found in 12 ounces of regular beer (usually about 5% alcohol), 5 ounces of wine (usually about 12% alcohol) and 1.5 ounces of distilled spirits (usually about 40% alcohol).</td>
+                                  </tr>
+                               </tfoot>
+                            </table>
+                         </div>
+                    </div>
+                    <div class="content-card">
+                        <h4>Evidence-Based Dosing for Antihypertensive Drugs</h4>
+                        <div class="table-container">
+                            <table class="content-table">
+                               <thead>
+                                  <tr>
+                                     <th>Class</th>
+                                     <th>Drug</th>
+                                     <th>Usual Dose, Range (mg per day)*</th>
+                                     <th>Daily Frequency</th>
+                                     <th>Comments</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+                                  <tr>
+                                     <td colspan="5"><strong>Primary Agents</strong></td>
+                                  </tr>
+                                  <tr>
+                                     <td rowspan="4">Thiazide or thiazide-type diuretics</td>
+                                     <td>Chlorthalidone</td>
+                                     <td>12.5-25</td>
+                                     <td>1</td>
+                                     <td rowspan="4">- Chlorthalidone preferred based on prolonged half-life and proven trial reduction of CVD<br>- Monitor for hyponatremia and hypokalemia, uric acid and calcium levels.<br>- Use with caution in patients with history of acute gout unless patient is on uric acid-lowering therapy.</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Hydrochlorothiazide</td>
+                                     <td>25-50</td>
+                                     <td>1</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Indapamide</td>
+                                     <td>1.25-2.5</td>
+                                     <td>1</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Metolazone</td>
+                                     <td>2.5-10</td>
+                                     <td>1</td>
+                                  </tr>
+                                  <tr>
+                                     <td rowspan="10">ACE Inhibitors</td>
+                                     <td>Benazepril</td>
+                                     <td>10-40</td>
+                                     <td>1 or 2</td>
+                                     <td rowspan="10">- Do not use in combination with ARBs or direct renin inhibitor<br>- Increased risk of hyperkalemia, especially in patients with CKD or in those on K+ supplements or K+-sparing drugs<br>- May cause acute renal failure in patients with severe bilateral renal artery stenosis<br>- Do not use if history of angioedema with ACE inhibitors.<br>- Avoid in pregnancy</td>
+                                  </tr>
+                                  <tr><td>Captopril</td><td>12.5-150</td><td>2 or 3</td></tr>
+                                  <tr><td>Enalapril</td><td>5-40</td><td>1 or 2</td></tr>
+                                  <tr><td>Fosinopril</td><td>10-40</td><td>1</td></tr>
+                                  <tr><td>Lisinopril</td><td>10-40</td><td>1</td></tr>
+                                  <tr><td>Moexipril</td><td>7.5-30</td><td>1 or 2</td></tr>
+                                  <tr><td>Perindopril</td><td>4-16</td><td>1</td></tr>
+                                  <tr><td>Quinapril</td><td>10-80</td><td>1 or 2</td></tr>
+                                  <tr><td>Ramipril</td><td>2.5-10</td><td>1 or 2</td></tr>
+                                  <tr><td>Trandolapril</td><td>1-4</td><td>1</td></tr>
+                                  <tr>
+                                     <td rowspan="8">ARBs</td>
+                                     <td>Azilsartan</td><td>40-80</td><td>1</td>
+                                     <td rowspan="8">- Do not use in combination with ACE inhibitors or direct renin inhibitor<br>- Increased risk of hyperkalemia in CKD or in those on K+ supplements or K+-sparing drugs<br>- May cause acute renal failure in patients with severe bilateral renal artery stenosis<br>- Do not use if history of angioedema with ARBs. Patients with a history of angioedema with an ACEI can receive an ARB beginning 6 weeks after ACEI discontinued.<br>- Avoid in pregnancy</td>
+                                  </tr>
+                                  <tr><td>Candesartan</td><td>8-32</td><td>1</td></tr>
+                                  <tr><td>Eprosartan</td><td>600-800</td><td>1 or 2</td></tr>
+                                  <tr><td>Irbesartan</td><td>150-300</td><td>1</td></tr>
+                                  <tr><td>Losartan</td><td>50-100</td><td>1 or 2</td></tr>
+                                  <tr><td>Olmesartan</td><td>20-40</td><td>1</td></tr>
+                                  <tr><td>Telmisartan</td><td>20-80</td><td>1</td></tr>
+                                  <tr><td>Valsartan</td><td>80-320</td><td>1</td></tr>
+                                  <tr>
+                                     <td rowspan="6">CCB-dihydropyridines</td>
+                                     <td>Amlodipine</td><td>2.5-10</td><td>1</td>
+                                     <td rowspan="6">- Avoid use in patients with HFrEF; amlodipine or felodipine may be used if required<br>- Associated with dose-related pedal edema, which is more common in women than men</td>
+                                  </tr>
+                                  <tr><td>Felodipine</td><td>5-10</td><td>1</td></tr>
+                                  <tr><td>Isradipine</td><td>5-10</td><td>2</td></tr>
+                                  <tr><td>Nicardipine SR</td><td>5-20</td><td>1</td></tr>
+                                  <tr><td>Nifedipine LA</td><td>60-120</td><td>1</td></tr>
+                                  <tr><td>Nisoldipine</td><td>30-90</td><td>1</td></tr>
+                                  <tr>
+                                     <td rowspan="5">CCB-nondihydropyridines</td>
+                                     <td>Diltiazem SR</td><td>180-360</td><td>2</td>
+                                     <td rowspan="5">- Avoid routine use with beta blockers due to increased risk of bradycardia and heart block<br>- Do not use in patients with HFrEF<br>- Drug interactions with diltiazem and verapamil (CYP3A4 major substrate and moderate inhibitor)</td>
+                                  </tr>
+                                  <tr><td>Diltiazem ER</td><td>120-480</td><td>1</td></tr>
+                                  <tr><td>Verapamil IR</td><td>40-80</td><td>3</td></tr>
+                                  <tr><td>Verapamil SR</td><td>120-480</td><td>1 or 2</td></tr>
+                                  <tr><td>Verapamil-delayed onset ER (various forms)</td><td>100-480</td><td>1 (in the evening)</td></tr>
+                               </tbody>
+                            </table>
+                         </div>
+                    </div>
+                </section>
+                <!-- END: algo16 -->
+
+                <!-- START: algo17 -->
+                <section id="algo17" class="content-section" aria-labelledby="section-heading-17">
+                    <h2 id="section-heading-17" class="section-heading">
+                        <span class="heading-text">17. Hypertensive Emergencies Algorithm</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>This clinical pathway is intended to supplement, rather than substitute for, professional judgment and may be changed depending upon a patient's individual needs. Failure to comply with this pathway does not represent a breach of the standard of care.</p>
+                        <img src="../assets/images/2025_09_24_e845fd66d8b7ec460a65g-28-1.jpg" alt="Initial assessment algorithm for hypertensive emergencies." class="content-image">
+                        <ul>
+                            <li>Monitor, support ABCs</li>
+                            <li>Check vital signs (BP, PR, RR, SPO2, T °C, RBS)</li>
+                            <li>Start Oxygen IF SPO<sub>2</sub> &lt;94%. Maintain SPO<sub>2</sub> ≥ 94%</li>
+                            <li>Obtain/review 12-lead ECG</li>
+                            <li>Perform brief, targeted history, physical exam</li>
+                        </ul>
+                        <p>See Hypertensive Emergencies Drug Infusions for Dosages and Precautions</p>
+                        <h4>Neurological Emergencies</h4>
+                        <p><strong>Hypertensive Encephalopathy</strong> - Reduce mean arterial pressure (MAP) 20-25% immediately. Drugs: Labetalol, Nicardipine Alt. Nitroprusside</p>
+                        <p><strong>Acute Ischemic Stroke</strong></p>
+                        <ul>
+                           <li>In patients with markedly elevated blood pressure (SBP > <strong>220 mmHg</strong> or DBP > <strong>120 mm Hg</strong>) who do not receive fibrinolysis, a reasonable goal is to lower blood pressure by <strong>15%</strong> during the first <strong>24 hours</strong> after onset of stroke.</li>
+                           <li>With indication for fibrinolysis and SBP >185 mmHg or DBP >110 mmHg - Reduce mean arterial pressure (MAP) 15% over 1 hour. Drugs: Labetalol, Nicardipine Alt. Nitroprusside. If BP is not maintained at or below 185/110 mmHg, do not administer rtPA</li>
+                           <li>After fibrinolysis - the SBP should be maintained <strong>&lt;180 mmHg</strong> and DBP <strong>&lt;105 mmHg</strong> for <strong>24 hours</strong>.</li>
+                        </ul>
+                        <p><strong>Acute Haemorrhagic Stroke and SBP >150 mmHg</strong> - No evidence exists to suggest that HTN provokes further bleeding in patients with ICH. A precipitous fall in SBP may compromise cerebral perfusion and increase mortality. Reduce SBP to a target of <strong>140 mmHg</strong> with the goal of maintaining in the range of <strong>130 to 150 mmHg</strong>. Drugs: Labetalol, Nicardipine.</p>
+                        <p><strong>Subarachnoid Haemorrhage</strong> - Maintain SBP &lt;160 mmHg until the aneurysm is treated or cerebral vasospasm occurs. Oral nimodipine is used to prevent delayed ischemic neurological deficits, but it is NOT indicated for treating acute hypertension.</p>
+                        <h4>Cardiovascular Emergencies</h4>
+                        <p><strong>Acute Coronary Event</strong> - Reduce mean arterial pressure (MAP) &lt; 140mmHg immediately. Thrombolytics are contraindicated if BP is >185/100 mmHg. Drugs: Nitroglycerine, Labetalol</p>
+                        <p><strong>Acute Cardiogenic Pulmonary Oedema</strong> - Reduce mean arterial pressure (MAP) &lt; 140mmHg immediately. Drugs: Nitroprusside or Nitroglycerine (with loop diuretic)</p>
+                        <p><strong>Acute aortic disease</strong> - Immediately reduce the SBP &lt; 120mmHg and heart rate &lt; 60bpm and maintain it at this level unless signs of end-organ hypo perfusion are present. Drugs: Esmolol and Nitroprusside or Nitroglycerine or Nicardipine. Alt. Labetalol or Metoprolol. Avoid β-blockers if there is;<br>- aortic valvular regurgitation or<br>- suspected cardiac tamponade.</p>
+                        <h4>Other Disorders</h4>
+                        <p><strong>Cocaine toxicity/Pheochromocytoma</strong> - Hypertension and tachycardia from cocaine toxicity rarely require specific treatment.</p>
+                        <ul>
+                           <li>Benzodiazepines are the preferred agents for cocaine-associated acute coronary syndromes.</li>
+                           <li>Pheochromocytoma treatment guidelines are similar to that of cocaine toxicity. β-blockers can be added for BP control only after α-blockade.</li>
+                        </ul>
+                        <p>Preferred medications - Diazepam, Phentolamine, Nitroglycerin/nitroprusside<br>Medications to avoid - β-adrenergic antagonists prior to phentolamine administration</p>
+                        <p><strong>Preeclampsia/eclampsia</strong> - In women with eclampsia or preeclampsia, SBP should be <strong>&lt; 160 mmHg</strong> and DBP &lt;110 mm Hg in the prepartum and intrapartum periods. If the platelet count is &lt; <strong>100,000 cells/mm<sup>3</sup></strong> BP should be maintained below <strong>150/100 mmHg</strong>. Patients with eclampsia or preeclampsia should also be loaded with IV Magnesium sulphate <strong>4gm</strong> diluted in 100 mL NS over 15 mins then with an infusion of <strong>2gm/hr</strong> to avoid seizures.<br>Preferred medications - Hydralazine, Labetalol, Nifedipine<br>Medications to avoid - Nitroprusside, Angiotensin-converting enzyme inhibitors, Esmolol</p>
+                    </div>
+                     <div class="content-card">
+                        <h4>Hypertensive Emergencies Drug Infusions</h4>
+                        <p><em>*For adults with a compelling condition (i.e., aortic dissection, severe preeclampsia or eclampsia, or pheochromocytoma crisis), SBP should be reduced to &lt;140 mm Hg during the first hour and to &lt;120 mm Hg in aortic dissection. For adults without a compelling condition, SBP should be reduced by no more than 25% within the first hour; then, if stable, to 160/100 mm Hg within the next 2 to 6 hours; and then cautiously to normal during the following 24 to 48 hours.</em></p>
+                        <div class="table-container">
+                            <table class="content-table">
+                               <thead>
+                                  <tr>
+                                     <th>AGENT</th>
+                                     <th>MOA</th>
+                                     <th>DOSE</th>
+                                     <th>ONSET/DURATION OF ACTION (AFTER DISCONTINUATION)</th>
+                                     <th>PRECAUTIONS</th>
+                                  </tr>
+                               </thead>
+                               <tbody>
+                                  <tr><td colspan="5"><strong>Parenteral Vasodilators</strong></td></tr>
+                                  <tr>
+                                     <td>Nitroglycerin</td>
+                                     <td>Decreases coronary vasospasm, which increases coronary blood flow. Also, induces vessel dilatation, decreasing cardiac workload.</td>
+                                     <td>Initial 5 mcg/min; increase in increments of 5 mcg/min every 3-5 min to a maximum of 20 mcg/min.</td>
+                                     <td>2-5 min / 5-10 min</td>
+                                     <td>Use only in patients with acute coronary syndrome and/or acute pulmonary oedema. Do not use in volume-depleted patients.</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Hydralazine</td>
+                                     <td>Decreases systemic resistance through direct vasodilation of arterioles.</td>
+                                     <td>Initial 10 mg via slow IV infusion (maximum initial dose 20 mg); repeat every 4-6 h as needed.</td>
+                                     <td>10 min / >1 hr</td>
+                                     <td>BP begins to decrease within 10-30 min and the fall lasts 2-4 h. Unpredictability of response and prolonged duration of action do not make hydralazine a desirable first-line agent for acute treatment in most patients.</td>
+                                  </tr>
+                                  <tr><td colspan="5"><strong>Parenteral Adrenergic Inhibitors</strong></td></tr>
+                                  <tr>
+                                     <td>Labetalol</td>
+                                     <td>α, β1, β2 Blocker</td>
+                                     <td>Initial 0.3-1.0 mg/kg dose (maximum 20 mg) slow IV injection every 10 min or 0.4-1.0 mg/kg/h IV infusion up to 3 mg/kg/h. Adjust rate up to total cumulative dose of 300 mg. This dose can be repeated every 4-6 h.</td>
+                                     <td>5-10 min / 15-30 min</td>
+                                     <td>Contraindicated in reactive airways disease or chronic obstructive pulmonary disease. Especially useful in hyperadrenergic syndromes. May worsen HF and should not be given in patients with 2nd or 3rd degree heart block or bradycardia.</td>
+                                  </tr>
+                                  <tr>
+                                     <td>Esmolol</td>
+                                     <td>Ultra-short-acting β-adrenergic blocker</td>
+                                     <td>Loading dose 500-1,000 mcg/kg/min over 1 min followed by a 50 mcg/kg/min infusion. For additional dosing, the bolus dose is repeated, and the infusion increased in 50 mcg/kg/min increments as needed to a maximum of 200 mcg/kg/min.</td>
+                                     <td>1-5 min / 15-30 min</td>
+                                     <td>Contraindicated in patients with concurrent beta-blocker therapy, bradycardia and/or decompensated HF. Monitor for bradycardia. May worsen HF. Higher doses may block beta2 receptors and impact lung function in reactive airway disease.</td>
+                                  </tr>
+                               </tbody>
+                            </table>
+                         </div>
+                    </div>
+                </section>
+                <!-- END: algo17 -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="03-airway-breathing-emergencies.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 44.4%;"></div>
+                        </div>
+                       <span class="progress-text">Part 4 of 9</span>
+                    </div>
+                    <a href="05-neurological-emergencies.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
