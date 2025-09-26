@@ -10,7 +10,7 @@
 # =============================================================================
 
 # --- Configuration ---
-MMD_FILE="principles-fundamentals.mmd" # Input MMD file name
+MMD_FILE="nanda-2021-2023.mmd" # Input MMD file name
 OUTPUT_DIR="assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
