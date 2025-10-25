@@ -10,8 +10,8 @@
 # =============================================================================
 
 # --- Configuration ---
-MMD_FILE="module_iv.mmd" # Input MMD file name
-OUTPUT_DIR="html_output/assets/images" # Output directory for images
+MMD_FILE="nursing-paper-i.mmd" # Input MMD file name
+OUTPUT_DIR="nursing-paper-i/assets/images" # Output directory for images
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
 # --- Color codes for better output ---
