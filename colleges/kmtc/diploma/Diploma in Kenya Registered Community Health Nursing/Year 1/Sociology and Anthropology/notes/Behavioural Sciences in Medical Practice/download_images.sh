@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # =============================================================================
-# Image Download Script for MMD Files
+# Image Download Script for Behavioural Sciences in Medical Practice
 # =============================================================================
 # This script extracts image URLs from MMD files and downloads them with 
 # sequential naming convention: [ID]g-[PageNum]-[SeqNum].ext
@@ -10,9 +10,9 @@
 # =============================================================================
 
 # --- Configuration ---
-MMD_FILE="BASIC SOCIAL INSTITUTIONS-1.mmd" # Input MMD file name
+MMD_FILE="Behavioural Sciences in Medical Practice.mmd" # Input MMD file name
 OUTPUT_DIR="assets/images" # Output directory for images
-PROJECT_ROOT="/" # Project root relative to script location (if needed)
+PROJECT_ROOT="." # Project root relative to script location (if needed)
 
 # --- Color codes for better output ---
 RED='\033[0;31m'
