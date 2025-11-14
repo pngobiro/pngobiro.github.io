@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Processing</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            tags: 'ams' // Use AMS numbering of equations
+        },
+        svg: { fontCache: 'global' },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="06-ms-excel.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 70%;"></div>
+                        </div>
+                       <span class="progress-text">Lecture 7 of 10</span>
+                    </div>
+                    <a href="08-ms-powerpoint.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Database Processing</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                
+                <!-- START: fundamentals -->
+                <section id="fundamentals" class="content-section" aria-labelledby="section-heading-1">
+                    <h2 id="section-heading-1" class="section-heading">
+                        <span class="heading-icon"></span>
+                        <span class="heading-text">Database Fundamentals</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>1. Database</h3>
+                        <p>Database is an organized collection of data. It's considered organized because data is stored in categories that are accessible in a logical/particular manner.</p>
+                        
+                        <h3>2. Components of database</h3>
+                        <ul>
+                            <li><strong>Files</strong> - a file is a large organized data structure that contains related data E.g. Records. A file stores data and programs in the secondary memory.</li>
+                            <li><strong>Records</strong> - it's any entry of data in a database. It can also be defined as a "group of related data about on item".</li>
+                            <li><strong>Field</strong> - a column of similar information /or/ a group of vertically arrange data that contains similar information of the same data type.</li>
+                        </ul>
+
+                        <h3>3. Database system</h3>
+                        <p>Database system is comprised of 4 major components namely:-</p>
+                        <ul>
+                            <li><strong>Data</strong> - values physically stored in the database</li>
+                            <li><strong>Database Hardware</strong> - this are computer hardware on which the database resides E.g. Secondary storage disk, together with associated devices e.g. CPU, channels ect.</li>
+                            <li><strong>Database Software</strong> - it contains DBMS which is an application program that assist users to store information in an orderly manner for timely and quick retrieval. It provide all the functions needed to define the Data Structure and the way they are store.</li>
+                            <li><strong>Database user</strong> - database users are classified into three broad categories namely:-
+                                <ol type="a">
+                                    <li>Application program</li>
+                                    <li>End user</li>
+                                    <li>Database Administrator</li>
+                                </ol>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: fundamentals -->
+
+                <!-- START: models-concepts -->
+                <section id="models-concepts" class="content-section" aria-labelledby="section-heading-2">
+                    <h2 id="section-heading-2" class="section-heading">
+                        <span class="heading-icon"></span>
+                        <span class="heading-text">Database Models and Concepts</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>4. Type of databases</h3>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th>Category</th>
+                                        <th>Database package</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Desktop Database</td>
+                                        <td>Ms-Access, Dbase, FileMaker Pro, Clipper, FoxPro, Lotus Approach</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Server Database</td>
+                                        <td>SQL server, My SQL, Oracle, Ingress, DB2,</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3>5. Entity-relationship modeling</h3>
+                        <h4>a. Entity</h4>
+                        <ul>
+                            <li>An entity is a thing or an object of significant, either real or imaginary, about which information need to be known and stored.</li>
+                            <li>An entity maybe an object with physical existence E.g. person, house etc. or a conceptual existence E.g. Job, Company, Country etc.</li>
+                            <li>An entity has partial properties/characteristics/attributes which describe it.</li>
+                        </ul>
+
+                        <h4>b. Attribute</h4>
+                        <ul>
+                            <li>An attribute is any information that serve to Qualify, Quantify, Identify, Classify, or Express the state of an Entity.</li>
+                            <li>It can also be defined as "Any description of a thing of significance E.g. Text, Number, Picture, Feelings, Smell, and Sound etc."</li>
+                            <li><strong>Primary Key</strong> is an Attribute that is used to uniquely identify an entity/record(identify a row in a table) and is chosen from candidates Key.</li>
+                        </ul>
+                        <figure>
+                             <img src="../assets/images/2025_11_14_24230bbcc28ccf493c25g-37-1.jpg" alt="Diagram showing the Student Entity with attributes: Name, Address, and Admin. No." class="content-image">
+                             <figcaption>Student Entity with attributes</figcaption>
+                        </figure>
+
+                        <h3>6. Relationship among data</h3>
+                        <p>Relationship is "An association among entities". It may also associate an entity with itself. There are three types of relation namely:-</p>
+                        <ul>
+                            <li>One - to - one relationship e.g. student and admin. No.</li>
+                            <li>One - to - many relationship e.g. student and subject</li>
+                            <li>Many - to - many relationship</li>
+                        </ul>
+
+                        <h3>7. Database model</h3>
+                        <p>Database model is a "Specific method for describing the structure and processing within a database". The three most used models are:-</p>
+                        <ul>
+                            <li><strong>Hierarchical model</strong> - establishes a parent-child relationship. The origin of data is called the Root.</li>
+                            <li><strong>Relational model</strong> - establishes relationship among entities. Data is represented in a simple Row-Column (tabular)format.</li>
+                            <li><strong>Network model</strong></li>
+                        </ul>
+
+                        <h3>8. Features of relationship</h3>
+                        <ul>
+                            <li>Each Row/Record in a relation contain data about the same Object/Entity</li>
+                            <li>Each Column/Field contains data about an attribute/property of an Object/Entity</li>
+                            <li>Each Column/Field in a table has a unique Name/Label</li>
+                            <li>The order of the Field/Column in the table is irrelevant</li>
+                            <li>All entries in a Field/Column must be of the Same Data Type e.g. Name, date, number etc.</li>
+                            <li>No Row/Record in the table can be identical (no repetition)</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: models-concepts -->
+
+                <!-- START: ms-access -->
+                <section id="ms-access" class="content-section" aria-labelledby="section-heading-3">
+                    <h2 id="section-heading-3" class="section-heading">
+                        <span class="heading-icon"></span>
+                        <span class="heading-text">Microsoft Access</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Ms-Access database consist of a single file that holds the data tables, forms, reports, queries and indexes.</p>
+                        
+                        <h3>10. Components/objects of Ms Access database</h3>
+                        <ul>
+                            <li><strong>Tables</strong> - a table is a database object that consists of Row/Record and Column/Field used to store data in a database. It's the basic unit of storage.</li>
+                            <li><strong>Forms</strong> - is a database object used to simplify data entry, viewing, editing and deleting in a database.</li>
+                            <li><strong>Reports</strong> - are use for viewing and printing of some or all the data in one or more databases.</li>
+                            <li><strong>Queries</strong> - are use to select information that meet a given criteria in one or more databases. A select query is used to create subsets of data that you can use to answer specific questions.</li>
+                        </ul>
+                        <p>Ms-Access provides a "WIZARDS" that help users design queries. Ms-Access can create a primary key if no single field have the properties required for it (i.e. should be Unique and not Null). Primary key is used to uniquely identify a Record/Row in a table. <strong>Indexing</strong> - an index file contains a subset of the data files based on one or more Key Fields.</p>
+
+                        <h3>11. Data integrity</h3>
+                        <p>Data integrity is the process of ensuring the correctness and completeness of data in the database. This is to ensure validity/validation of data values when the contents of the database are modified so that the integrity of the database is not lost. Some of the constraints of data integrity are(those that make data have errors):-</p>
+                        <ul>
+                            <li><strong>Validity integrity</strong> - ensure data entered matches the Field/column data type</li>
+                            <li><strong>Entity integrity</strong> - avoid duplication or omission of data/record by ensuring that no primary key is duplicated or is left Null</li>
+                            <li><strong>Referential integrity</strong> - it establishes a parent-child relationship i.e. any change in the parent table must and should be reflected in the child table.</li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: ms-access -->
+                
+                <!-- START: access-interface -->
+                <section id="access-interface" class="content-section" aria-labelledby="section-heading-4">
+                    <h2 id="section-heading-4" class="section-heading">
+                        <span class="heading-icon"></span>
+                        <span class="heading-text">The Access Interface and Tools</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>12. Access interface</h3>
+                        <p>The look and feel of Ms-Access interface is very similar to many of the other Ms-Office products. I.e. it has a Title Bar, Tool Bar, View Bar, Tab Bar, Status Bar, Etc.</p>
+
+                        <h3>13. Database toolbars</h3>
+                        <p>It contains all tools that are needed in access, but are in different Tab in Access 2007 e.g. Font formatting tools, Importation and exportation of data to/from external database, Creation of Tables, Forms, Reports and Queries, Database tools e.g. creation of relationship and analyzing data.</p>
+                        
+                        <h3>14. Tables</h3>
+                        <p>They are used to store your data in a database. To create a table, you must 1st create a database that will contain all the database objects. Table can be created either by using the:</p>
+                        <ul>
+                            <li>Table wizard</li>
+                            <li>Design view - used to create the table manually</li>
+                        </ul>
+                        <p>Design view has 3 components:</p>
+                        <ul>
+                            <li><strong>Field name</strong> - they are user defined and depend on the application to be used for</li>
+                            <li><strong>Data type</strong> - there are different data type in Access e.g. text, memo, number, date and time, currency, yes/no, ole object and auto-number</li>
+                            <li><strong>Description</strong> - use to describe the field</li>
+                        </ul>
+
+                        <h3>15. Primary key</h3>
+                        <p>A good relational database contains tables where each record/data can be uniquely identified. One field in the table contains a unique value for each record in the table. The unique field is called primary key and is always recommended that you define a primary key for every table you create.</p>
+
+                        <h3>16. Field properties</h3>
+                        <p>It contains two Tabs that can be used to further define the data type and format. They include:-</p>
+                        <ul>
+                            <li><strong>General Tab</strong> - contain most of the information used to define the data type</li>
+                            <li><strong>Lookup Tab</strong> - to look up values from another query or table to supply information to supply information to this field</li>
+                        </ul>
+
+                        <h3>17. Linking tables</h3>
+                        <p>We link tables to create a relationship. Relationship is the way in which information in one table is related/associated to information in another table.</p>
+                    </div>
+                </section>
+                <!-- END: access-interface -->
+
+                <!-- START: forms-queries-reports -->
+                <section id="forms-queries-reports" class="content-section" aria-labelledby="section-heading-5">
+                    <h2 id="section-heading-5" class="section-heading">
+                        <span class="heading-icon"></span>
+                        <span class="heading-text">Forms, Queries, and Reports</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>18. Forms</h3>
+                        <p>It's used to provide a friendly interface between users and Access database. A Form can be used to:-</p>
+                        <ul>
+                            <li>Display and modify data e.g. Add, delete etc.</li>
+                            <li>Accept user inputs - accept certain values</li>
+                            <li>Controlling application flow</li>
+                            <li>Displaying messages e.g. error or warnings</li>
+                            <li>For printing information</li>
+                        </ul>
+
+                        <h3>19. Controls tools</h3>
+                        <p>This are tools designed to help users navigate and utilize a Form e.g. Buttons, Radio buttons, text boxes etc. This controls are broken down into three categories namely:-</p>
+                        <ul>
+                            <li><strong>Bound</strong> - this are field of data that come from a table or a query and must have a bound control for each field that you display on the Form. Bound control cannot create a calculation</li>
+                            <li><strong>Unbound</strong> - contains a label or a text box. Calculation can be created from unbound control</li>
+                            <li><strong>Calculated</strong> - are values calculated in the Form e.g. Totals, Subtotals and average</li>
+                        </ul>
+
+                        <h3>20. Form layout</h3>
+                        <p>All forms must have a Detail section namely:-</p>
+                        <ul>
+                            <li><strong>Form Header</strong> - display information that remain the same for every record e.g. Title for the form</li>
+                            <li><strong>Page Header</strong> - display information e.g. title or header at the top of every printed page</li>
+                            <li><strong>Page Footer</strong> - display information e.g. date or page number at the bottom of every printed page</li>
+                            <li><strong>Form Footer</strong> - display information that remain the same for every record e.g. total and sub-total</li>
+                        </ul>
+                        <p>You should be able to create a custom form, modify and edit a form, add graphics to a form, and create a sub-form.</p>
+
+                        <h3>21. Expression Builder</h3>
+                        <p>Access includes built-in functions similar to the function in Excel. One can also use it to develop owns calculation. To define an expression, ones need to:-</p>
+                        <ol>
+                             <li>Select unbound control(or group of instruction) to select, right click the control then select the properties and click on the expression builder button (...)</li>
+                             <li>Begin the expression by typing "=" or click the equal sign button</li>
+                             <li>Click the button that represent the calculation that you want to enter or double-click on one of the folders that is contained in the left box of the expression builder box</li>
+                             <li>Locate field from table, query, form or report for calculation by doubleclicking on the corresponding folder in the left box</li>
+                             <li>Type any value or constants you would like to include in the expression</li>
+                        </ol>
+
+                        <h3>22. Querying Data</h3>
+                        <p>A query is a question (or group of instruction) that you ask the database when you want to pull a specific records from the database. The results/respond is/are set of records that meet the criteria that you set. A query can also be define as - custom-designed view of data from one or more tables in a database. In Access, one can query by using:-</p>
+                        <ul>
+                            <li>SQL statement</li>
+                            <li>Query wizard</li>
+                            <li>Designed a query using the design view</li>
+                        </ul>
+                        <p>Query can also be used to view data, insert data, delete data, and create new table from data retrieved from one or more existing tables.</p>
+                        
+                        <h3>23. Common criteria</h3>
+                        <p>Examples include: Between value 1 and value 2, In, Null, Is not null, Like, Not.</p>
+
+                        <h3>24. Wildcard character</h3>
+                        <p>They are used as placeholders for other characters when you don't know exactly what you are looking for. They include:-</p>
+                        <ul>
+                            <li>"*" - match any number of characters e.g. wh*</li>
+                            <li>? - match any single alphabetical character e.g. b?ll</li>
+                            <li>[] - match any single alphabetical character within the brackets</li>
+                            <li>! - match any character not in the brackets e.g. b[ae]ll</li>
+                            <li>"-" - matches any one of a range of characters e.g. d[a-d]d</li>
+                            <li># - matches any single numeric character e.g. 1#3</li>
+                        </ul>
+                        
+                        <h3>25. Sorting (retrieving records)</h3>
+                        <p>Sorting is - arranging data/record in order, according to a specific field, either in ascending or descending.</p>
+
+                        <h3>26. Reports</h3>
+                        <p>They are the best way to share data with others in a precise and understandable manner. Reports are very similar to forms, differences being that you can only use a report to print data and not anything else. One can create a report just like a form.</p>
+                    </div>
+                </section>
+                <!-- END: forms-queries-reports -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+             <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="06-ms-excel.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 70%;"></div>
+                        </div>
+                       <span class="progress-text">Lecture 7 of 10</span>
+                    </div>
+                    <a href="08-ms-powerpoint.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
