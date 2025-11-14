@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Table Relationships & Data Entry</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            tags: 'ams' // Use AMS numbering of equations
+        },
+        svg: { fontCache: 'global' },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="database-design-and-tables.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                       <span class="progress-text">Lecture 3 of 5</span>
+                    </div>
+                    <a href="database-forms.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Connecting Data and Populating Tables</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: table-relationships -->
+                <section id="table-relationships" class="content-section" aria-labelledby="section-heading-1">
+                    <h2 id="section-heading-1" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">Building Table Relationships</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>Introduction</h3>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-28-2.jpg" alt="A diagram showing interconnected nodes, representing relationships in a database." class="content-image">
+                        <p>By now, you've set up the tables you need for your database and have created fields for the different tables. Relationships provide Access 2007 with the means to bring this information together for you when you need it.</p>
+                        <p>This lesson explains how to establish relationships between the tables in an Access 2007 database. You will learn how to read and manipulate the relationship map. You will also learn about primary and foreign keys, relationship types, and referential integrity.</p>
+                        
+                        <h3>How to establish a relationship between tables:</h3>
+                        <p>Click the <strong>Relationships</strong> command in the Show/Hide group on the Database Tools tab in the Ribbon.</p>
+                        <p><strong>NOTE:</strong> Tables must be closed in order to establish relationships.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-29-1.jpg" alt="The Database Tools tab in the Access Ribbon with the 'Relationships' button highlighted." class="content-image">
+                        <p>When the Show Table dialog box appears:</p>
+                        <ul>
+                            <li>Select each table name, then click Add for the tables you want to relate.</li>
+                            <li>When you're done, close the Show Table dialog box.</li>
+                        </ul>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-29-2.jpg" alt="The 'Show Table' dialog box used to add tables to the relationship map." class="content-image">
+                        <p>You should now see a relationship map that contains all of the tables that were selected.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-30-1.jpg" alt="The relationship map in Access, showing the Customers, Orders, and Books tables." class="content-image">
+                        
+                        <h3>Understanding the relationship map</h3>
+                        <p>The relationship map lists all of the tables that were selected to relate, as well as all of the fields that were previously set up for that table. Notice that the first field has a key icon next to it. This is the <strong>primary key</strong> for the table.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-30-2.jpg" alt="A close-up of a table in the relationship map, highlighting the key icon next to the primary key field." class="content-image">
+                        
+                        <h3>Primary and foreign keys</h3>
+                        <p>A <strong>primary key</strong> is the first field in each table of the database. You may recall that this field auto-numbers by default, so every record in the table has its own unique number to identify it. Access uses this number to quickly pull information together when you run queries or reports, which are covered later.</p>
+                        <p>A <strong>foreign key</strong> is a field that is the primary field in its own table but that shows up in another table. If you look closely at the Orders table, the fields Customer ID and Book ID appear there, as well as in their own respective tables. These fields are the primary key in their own tables, but in the Orders table, they are considered foreign keys.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-31-1.jpg" alt="Diagram illustrating primary keys in the Customers and Books tables and foreign keys in the Orders table." class="content-image">
+                        
+                        <h3>Relating tables with the drag-and-drop method:</h3>
+                        <ul>
+                            <li>Select a field name from one table by holding down the left mouse button.</li>
+                            <li>Drag the field name from one table to the other table in the desired relationship.</li>
+                            <li>Drop the first field name onto the field name you want to relate by releasing the left mouse button.</li>
+                        </ul>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-31-2.jpg" alt="Demonstration of dragging the Book ID field from the Books table to the Orders table to create a relationship." class="content-image">
+                        <p>The Edit Relationships dialog box appears.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-32-1.jpg" alt="The 'Edit Relationships' dialog box, where relationship properties can be set." class="content-image">
+                        <ul>
+                            <li>Select the <strong>Enforce Referential Integrity</strong> option. This option is explained in detail below.</li>
+                            <li>Click Create.</li>
+                        </ul>
+                        
+                        <h3>Understanding types of relationships</h3>
+                        <p>The relationship type you will come across most frequently—and the one created in our bookstore scenario—is the <strong>One-to-Many</strong> relationship. It means data for that field will show up a single time in one table but many times in the related table.</p>
+                        <p>For example, the Book ID for a book should appear only once in the Books table, but it will probably appear many times in the Orders table because we hope it gets ordered many times. The symbols for the One-to-Many relationship look like this:</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-33-1.jpg" alt="The relationship map showing a one-to-many relationship, indicated by a '1' symbol on one side and an infinity symbol on the other." class="content-image">
+                        
+                        <h3>Enforcing referential integrity</h3>
+                        <p>You should click <strong>Enforce Referential Integrity</strong> to make sure you never have an order for a book that doesn't appear in the Books table. Selecting this option tells Access to check for these things when someone is working with your data records.</p>
+                        
+                        <aside class="callout note" role="note">
+                            <h4 class="callout-title"><span class="callout-icon"> </span> Challenge!</h4>
+                            <p>If you haven't already done so, save the sample Ready2Read database to your computer.</p>
+                            <ul>
+                                <li>Open the database, and establish a relationship between the Books table and the Orders table.</li>
+                                <li>Establish a relationship between the Customers table and the Orders table.</li>
+                                <li>Edit an established relationship by double-clicking the link.</li>
+                                <li>Explore the options in the Edit Relationships dialog box.</li>
+                            </ul>
+                        </aside>
+                    </div>
+                </section>
+                <!-- END: table-relationships -->
+
+                <!-- START: adding-editing-data -->
+                <section id="adding-editing-data" class="content-section" aria-labelledby="section-heading-2">
+                    <h2 id="section-heading-2" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">Adding and Editing Data in Tables</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Access 2007 databases hold the actual data records inside tables. You can add, edit, and delete records directly from these tables. This lesson will show you how to work in the tables to add new records, as well as how to edit existing records using commands like copy and paste and find and replace. It will also discuss the dangers involved in deleting records from a table, as well as the importance of setting validation rules and other field properties to ensure data is valid.</p>
+
+                        <h3>Adding records to tables</h3>
+                        <p>When you enter records into your table, you are populating the database. In Access 2007, you can do this a few different ways.</p>
+
+                        <h4>To add records in the new record row:</h4>
+                        <ul>
+                            <li>Click the record row with the asterisk that appears at the bottom of the table.</li>
+                            <li>Type the data into the appropriate fields.</li>
+                            <li>Hit Enter or the Tab key to move to the next field.</li>
+                        </ul>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-35-1.jpg" alt="The new record row at the bottom of a table, indicated by an asterisk." class="content-image">
+
+                        <h4>To add records with the New Record navigation button:</h4>
+                        <ul>
+                            <li>Click the New Record button in the navigation bar. The navigation bar is located in the bottom-left corner of the open object pane.</li>
+                        </ul>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-35-2.jpg" alt="The record navigation bar, with the 'New (blank) record' button highlighted." class="content-image">
+
+                        <h3>Editing records in tables</h3>
+                        <p>Sometimes it is necessary to edit records in the database. Like with every other task in Access 2007, this can be done several different ways.</p>
+
+                        <h4>To edit a record directly:</h4>
+                        <ul>
+                            <li>Scroll through the records, or use the navigation buttons on the navigation bar to find the record to edit.</li>
+                            <li>Click the cell containing the information that must be edited. A pencil icon appears to indicate edit mode.</li>
+                        </ul>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-36-2.jpg" alt="A record in edit mode, indicated by a pencil icon in the record selector." class="content-image">
+                        <ul>
+                            <li>Type the new information into the field.</li>
+                            <li>Click outside of the record row to apply the change.</li>
+                        </ul>
+                        
+                        <h4>To edit a record using Find and Replace:</h4>
+                        <p>Click the <strong>Find</strong> command in the Find group on the Ribbon. The Find and Replace dialog box opens.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-36-3.jpg" alt="The Find and Replace dialog box in Access." class="content-image">
+                        <ul>
+                            <li>Tell Access what to find by typing it into the <strong>Find What:</strong> area.</li>
+                            <li>Type the replace term in the <strong>Replace With:</strong> area.</li>
+                            <li>Tell Access where to look with the <strong>Look In:</strong> drop-down list.</li>
+                            <li>Tell Access what to <strong>Match:</strong> Any part of the field, the whole field, or just the start of the field.</li>
+                            <li>Tell Access how to <strong>Search:</strong> Up, Down, or All records.</li>
+                        </ul>
+                        <aside class="callout warning" role="alert">
+                            <h4 class="callout-title">Caution</h4>
+                            <p>DO NOT use Replace All because it will overwrite every instance of the Find term in the table, which can have a serious impact on your data.</p>
+                        </aside>
+
+                        <h3>To delete a record:</h3>
+                        <p>Select the record you want to delete, then right-click and select <strong>Delete Record</strong>. A dialog box appears, telling you the action cannot be undone.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-37-1.jpg" alt="The confirmation dialog box that appears when trying to delete a record." class="content-image">
+                        <p>There may be other records that rely on the record you are trying to delete. <strong>DO NOT delete a record without knowing how it will impact the rest of your database.</strong></p>
+
+                        <h3>Data validation</h3>
+                        <p>Data validation is an important database concept. It is the process by which Access tests the data that is being entered into the database to make sure it is in an acceptable—or valid—format. Access 2007 allows you to set field properties and data validation rules to force the person entering data to follow a specific format.</p>
+                        <p>Data validation is accomplished by setting data validation rules and other field properties for various fields. If a field data type had been set to Currency and a text value is entered, Access will not accept an invalid format and will display a validation error.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-39-1.jpg" alt="An error message from Access indicating that the value entered is not valid for the field." class="content-image">
+
+                        <h4>To set data validation rules:</h4>
+                        <p>In Design view, highlight the field that requires a validation rule. In the Field Properties section at the bottom half of the window, set your validation rule using the Expression Builder.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-39-2.jpg" alt="Setting a validation rule in the Field Properties section of Design View." class="content-image">
+                        
+                        <h4>Validation text</h4>
+                        <p>Validation text is a specialized error message you can set to have Access tell the user entering data the specific way you want that person to enter it. To set the validation text, enter the error message exactly as you want it to appear to users in the row directly beneath the Validation Rule row.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Field Properties for Category Field</caption>
+                                <tbody>
+                                    <tr>
+                                        <td><strong>Validation Rule</strong></td>
+                                        <td>="Fiction" Or "Non-Fiction" Or "Kids" Or "History" Or "Technology"</td>
+                                    </tr>
+                                    <tr>
+                                        <td><strong>Validation Text</strong></td>
+                                        <td>Must be Fiction, Non-Fiction, Kids, History, Technology, Home & Garden</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The image below shows the resulting error message users would see when the Category validation rule has been broken.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-41-1.jpg" alt="A custom validation error message, instructing the user on the correct data to enter." class="content-image">
+                        
+                        <h3>Using field properties to ensure data integrity</h3>
+                        <p>Another way to ensure data integrity is by setting field properties such as Field Size, Format, and Required.</p>
+                        <ul>
+                            <li><strong>Field Size</strong> can be set to hold a specific number of characters.</li>
+                            <li>The <strong>Format</strong> field property can be set to display text or numbers in a standardized way.</li>
+                            <li>Set the <strong>Required</strong> property to Yes if you want users to be required to enter something in the field.</li>
+                        </ul>
+                        
+                        <aside class="callout note" role="note">
+                            <h4 class="callout-title"><span class="callout-icon"> </span> Challenge!</h4>
+                            <p>If you haven't already done so, save the sample Ready2Read database to your computer.</p>
+                            <ul>
+                                <li>Open the database, and add records using the New Record navigation button.</li>
+                                <li>Edit a record using the Find and Replace command.</li>
+                                <li>Set a validation rule and validation text for a field in one of your tables.</li>
+                            </ul>
+                        </aside>
+                    </div>
+                </section>
+                <!-- END: adding-editing-data -->
+            </main>
+
+            <!-- Bottom Navigation -->
+             <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="database-design-and-tables.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                       <span class="progress-text">Lecture 3 of 5</span>
+                    </div>
+                    <a href="database-forms.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
