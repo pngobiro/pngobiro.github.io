@@ -1,0 +1,589 @@
+/* Medical Demography - Main Stylesheet */
+
+/* Reset and Base Styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    /* Color Scheme */
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --success-color: #27ae60;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --light-bg: #ecf0f1;
+    --white: #ffffff;
+    --text-dark: #2c3e50;
+    --text-medium: #5d6d7e;
+    --text-light: #85929e;
+    --border-color: #bdc3c7;
+    
+    /* Typography */
+    --font-family-primary: 'Inter', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    --font-family-mono: 'Courier New', Courier, monospace;
+    --line-height-base: 1.6;
+    --line-height-headings: 1.2;
+    
+    /* Spacing */
+    --spacing-xs: 0.25rem;
+    --spacing-sm: 0.5rem;
+    --spacing-md: 1rem;
+    --spacing-lg: 1.5rem;
+    --spacing-xl: 2rem;
+    --spacing-xxl: 3rem;
+    
+    /* Breakpoints */
+    --breakpoint-md: 768px;
+    --breakpoint-sm: 480px;
+    
+    /* Border Radius */
+    --border-radius: 6px;
+    --border-radius-lg: 12px;
+    
+    /* Shadows */
+    --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+    --shadow-md: 0 4px 6px rgba(0,0,0,0.1);
+    --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+}
+
+/* Base Typography */
+body {
+    font-family: var(--font-family-primary);
+    line-height: var(--line-height-base);
+    color: var(--text-dark);
+    background-color: var(--light-bg);
+    font-size: 16px;
+}
+
+/* Headings */
+h1, h2, h3, h4, h5, h6 {
+    line-height: var(--line-height-headings);
+    margin-bottom: var(--spacing-md);
+    font-weight: 700;
+    color: var(--primary-color);
+}
+
+h1 {
+    font-size: 2.5rem;
+    margin-bottom: var(--spacing-lg);
+    color: var(--primary-color);
+}
+
+.section-title {
+    font-size: 2.2rem;
+    margin-bottom: var(--spacing-sm);
+}
+
+.title-underline {
+    height: 4px;
+    width: 60px;
+    background-color: var(--accent-color);
+    margin-bottom: var(--spacing-xl);
+    border-radius: 2px;
+}
+
+h2 {
+    font-size: 1.8rem;
+    margin-top: var(--spacing-xl);
+    margin-bottom: var(--spacing-md);
+    color: var(--secondary-color);
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: var(--spacing-xs);
+}
+
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+}
+
+h3 {
+    font-size: 1.4rem;
+    margin-top: var(--spacing-lg);
+    margin-bottom: var(--spacing-sm);
+}
+
+h4 {
+    font-size: 1.2rem;
+    margin-top: var(--spacing-md);
+    margin-bottom: var(--spacing-sm);
+}
+
+h5, h6 {
+    font-size: 1.1rem;
+    margin-top: var(--spacing-sm);
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: var(--spacing-md);
+    color: var(--text-dark);
+}
+
+/* Lists */
+ul, ol {
+    margin-bottom: var(--spacing-md);
+    padding-left: var(--spacing-lg);
+}
+
+li {
+    margin-bottom: var(--spacing-xs);
+}
+
+/* Enhanced List Styling */
+.enhanced-list {
+    list-style: none;
+    padding-left: 0;
+}
+
+.enhanced-list > li {
+    position: relative;
+    padding-left: var(--spacing-xl); /* Space for icon */
+    margin-bottom: var(--spacing-sm);
+    padding-top: var(--spacing-sm);
+    padding-bottom: var(--spacing-sm);
+    padding-right: var(--spacing-md);
+    background: var(--white);
+    border-left: 4px solid var(--accent-color);
+    border-radius: 0 var(--border-radius) var(--border-radius) 0;
+    box-shadow: var(--shadow-sm);
+    transition: transform 0.2s ease;
+}
+
+.enhanced-list > li:hover {
+    transform: translateX(5px);
+}
+
+.enhanced-list > li::before {
+    content: "•";
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.5em;
+    position: absolute;
+    left: var(--spacing-sm);
+    top: 0.2em; 
+    line-height: 1;
+}
+
+/* For ordered enhanced lists, we might want numbers */
+ol.enhanced-list {
+    counter-reset: item;
+}
+
+ol.enhanced-list > li::before {
+    content: counter(item);
+    counter-increment: item;
+    font-size: 1em;
+    background: var(--accent-color);
+    color: white;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    top: var(--spacing-sm);
+    left: var(--spacing-sm);
+}
+
+/* Tables */
+.table-container {
+    overflow-x: auto;
+    margin-bottom: var(--spacing-lg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-sm);
+}
+
+table.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--white);
+    font-size: 0.95rem;
+}
+
+table.content-table caption {
+    caption-side: top;
+    text-align: left;
+    font-weight: bold;
+    padding: var(--spacing-sm);
+    color: var(--secondary-color);
+    background-color: #e8e8e8;
+}
+
+th, td {
+    padding: var(--spacing-md);
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+th {
+    background-color: var(--primary-color);
+    color: var(--white);
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+tr:nth-child(even) {
+    background-color: #f8f9fa;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Code */
+code {
+    font-family: var(--font-family-mono);
+    font-size: 0.9em;
+    background-color: #f0f0f0;
+    padding: 0.2em 0.4em;
+    border-radius: 4px;
+    color: #e83e8c;
+}
+
+pre {
+    background-color: #282c34;
+    color: #abb2bf;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    overflow-x: auto;
+    margin-bottom: var(--spacing-md);
+}
+
+pre code {
+    background: transparent;
+    padding: 0;
+    color: inherit;
+    border: none;
+}
+
+/* Images */
+img.content-image {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow-md);
+    margin: var(--spacing-lg) auto;
+    border: 1px solid var(--border-color);
+}
+
+.caption {
+    text-align: center;
+    font-style: italic;
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    margin-top: calc(var(--spacing-md) * -0.5);
+    margin-bottom: var(--spacing-lg);
+}
+
+/* Layout */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--spacing-md);
+}
+
+.document-section {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Course Header (Index Page) */
+.course-header {
+    background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+    color: var(--white);
+    padding: var(--spacing-xl) var(--spacing-md);
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+    border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.course-header h1 {
+    color: var(--white);
+    margin-bottom: var(--spacing-sm);
+    border-bottom: none;
+}
+
+.course-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    margin-bottom: var(--spacing-lg);
+}
+
+.course-meta {
+    display: flex;
+    justify-content: center;
+    gap: var(--spacing-lg);
+    font-size: 0.9rem;
+    flex-wrap: wrap;
+}
+
+/* TOC Grid */
+.toc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: var(--spacing-lg);
+    margin-bottom: var(--spacing-xl);
+}
+
+.toc-card {
+    background: var(--white);
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    box-shadow: var(--shadow-sm);
+    text-decoration: none;
+    color: var(--text-dark);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    gap: var(--spacing-md);
+    align-items: flex-start;
+    border: 1px solid var(--border-color);
+}
+
+.toc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-color);
+}
+
+.card-icon {
+    background: var(--accent-color);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    flex-shrink: 0;
+}
+
+.card-content h3 {
+    margin-top: 0;
+    color: var(--primary-color);
+    font-size: 1.2rem;
+}
+
+.mini-toc {
+    margin-top: var(--spacing-sm);
+    padding-left: var(--spacing-md);
+    font-size: 0.9rem;
+    color: var(--text-medium);
+    list-style-type: disc;
+}
+
+/* Content Section Wrapper */
+.section-content {
+    background: var(--white);
+    border-radius: var(--border-radius-lg);
+    padding: var(--spacing-xl);
+    margin: var(--spacing-lg) 0;
+    box-shadow: var(--shadow-sm);
+}
+
+/* Content Cards */
+.content-card {
+    background: #fff;
+    border: 1px solid #e1e4e8;
+    border-radius: var(--border-radius);
+    padding: var(--spacing-lg);
+    margin-bottom: var(--spacing-lg);
+    border-left: 4px solid var(--accent-color);
+}
+
+.content-card h3 {
+    margin-top: 0;
+}
+
+/* Navigation Bar */
+.document-nav {
+    background: var(--primary-color);
+    color: var(--white);
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-lg) 0;
+    box-shadow: var(--shadow-md);
+    position: sticky;
+    top: var(--spacing-sm);
+    z-index: 100;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--spacing-sm);
+}
+
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--white);
+    text-decoration: none;
+    padding: var(--spacing-sm) var(--spacing-md);
+    border-radius: var(--border-radius);
+    background: rgba(255, 255, 255, 0.1);
+    transition: all 0.2s ease;
+    font-weight: 500;
+    font-size: 0.95rem;
+}
+
+.nav-button:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+}
+
+.nav-button.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+    background: rgba(255, 255, 255, 0.05);
+}
+
+/* Progress Bar */
+.document-progress {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 150px;
+    flex: 1;
+    margin: 0 var(--spacing-md);
+}
+
+.progress-bar {
+    width: 100%;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 3px;
+    overflow: hidden;
+    margin-bottom: 4px;
+}
+
+.progress-fill {
+    height: 100%;
+    background: var(--accent-color);
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.8rem;
+    opacity: 0.9;
+}
+
+/* Footer */
+.course-footer {
+    text-align: center;
+    padding: var(--spacing-xl) 0;
+    color: var(--text-medium);
+    font-size: 0.9rem;
+    border-top: 1px solid var(--border-color);
+    margin-top: var(--spacing-xl);
+}
+
+/* Callouts */
+.callout {
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    margin: var(--spacing-md) 0;
+    border-left: 4px solid;
+}
+
+.callout.note {
+    background-color: #e3f2fd;
+    border-left-color: #2196f3;
+    color: #0d47a1;
+}
+
+.callout.warning {
+    background-color: #fff3e0;
+    border-left-color: #ff9800;
+    color: #e65100;
+}
+
+/* Definitions */
+dfn {
+    font-weight: 600;
+    color: var(--accent-color);
+    font-style: normal;
+    border-bottom: 1px dashed var(--accent-color);
+    cursor: help;
+}
+
+/* Equation Styling */
+.equation {
+    background: #f8f9fa;
+    padding: var(--spacing-md);
+    border-radius: var(--border-radius);
+    text-align: center;
+    margin: var(--spacing-md) 0;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column;
+        gap: var(--spacing-md);
+    }
+    
+    .nav-button {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .document-progress {
+        width: 100%;
+        margin: var(--spacing-sm) 0;
+        order: -1; /* Move progress to top on mobile */
+    }
+    
+    .section-content {
+        padding: var(--spacing-md);
+    }
+    
+    h1 { font-size: 2rem; }
+    h2 { font-size: 1.5rem; }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --spacing-lg: 1rem;
+        --spacing-xl: 1.5rem;
+    }
+    
+    .course-header {
+        padding: var(--spacing-lg) var(--spacing-sm);
+    }
+}
+
+/* Print Styles */
+@media print {
+    .document-nav, .course-footer, .toc-card {
+        display: none;
+    }
+    
+    body {
+        background: white;
+    }
+    
+    .section-content {
+        box-shadow: none;
+        padding: 0;
+    }
+    
+    a[href]:after {
+        content: " (" attr(href) ")";
+    }
+}
