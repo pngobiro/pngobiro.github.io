@@ -10,8 +10,8 @@
 # =============================================================================
 
 # --- Configuration ---
-MMD_FILE="psychology_1.mmd" # Input MMD file name
-OUTPUT_DIR="html_output/assets/images" # Output directory for images
+MMD_FILE="$1" # Input MMD file name from command line
+OUTPUT_DIR="$2" # Output directory for images from command line
 PROJECT_ROOT="/" # Project root relative to script location (if needed)
 
 # --- Color codes for better output ---
@@ -37,6 +37,16 @@ print_error() {
 print_progress() {
     echo -e "${BLUE}[PROGRESS]${NC} $1"
 }
+
+# --- Check arguments ---
+if [ $# -ne 2 ]; then
+    print_error "Usage: $0 <MMD_FILE> <OUTPUT_DIR>"
+    print_error "Example: $0 content.mmd assets/images"
+    exit 1
+fi
+
+MMD_FILE="$1"
+OUTPUT_DIR="$2"
 
 # --- Check if MMD file exists ---
 if [ ! -f "$MMD_FILE" ]; then
