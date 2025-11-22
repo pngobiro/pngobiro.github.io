@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7 (Part 3): Sample Size (Proportions) &amp; Exercises - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-2.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 7 (Part 3): Sample Size &amp; Exercises</span>
+                    </div>
+                    <a href="chapter-8-part-1.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-7-part-3 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER SEVEN <br> Estimation (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-7-sample-size-estimation-cont">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">7.6 Sample size estimation (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+
+                        <h3 class="subsection-heading">Sample Size for Estimating Population Proportion ($P$)</h3>
+                        <p>The margin of error (ME) for estimating $P$ (large sample) is $ME = Z_{\alpha/2} \sqrt{P(1-P)/n}$.</p>
+                        <p>Solving for $n$, we get the formula for the required sample size:</p>
+                        <div class="equation">
+                            $$ n = \frac{Z_{\alpha/2}^2 P(1-P)}{ME^2} $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$n$ = required sample size (always round up).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$Z_{\alpha/2}$ = Z-value for the desired confidence level.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$P$ = expected population proportion.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$ME$ = desired margin of error (maximum acceptable difference between $p$ and $P$, expressed as a proportion).</span></li>
+                        </ul>
+                        <p><strong>Estimating $P$:** Since the population proportion ($P$) is the value we want to estimate, it is unknown. We need an estimate for the calculation:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Use results from previous similar studies or a pilot study.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Use an educated guess.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Most conservative approach:</strong> Use $P = 0.5$. This maximizes the product $P(1-P)$ (which equals 0.25) and thus yields the largest possible required sample size, ensuring the desired margin of error is met regardless of the true proportion.</span></li>
+                        </ul>
+
+                        <p><strong>Example:</strong> We want to estimate the proportion of children who are fully immunized in a district. We desire 95% confidence and a margin of error of $\pm 5\%$ (ME = 0.05). We have no prior estimate for the proportion.</p>
+                        <p>Here, Confidence = 95% $\implies Z_{\alpha/2} = 1.96$.</p>
+                        <p>$ME = 0.05$.</p>
+                        <p>Since $P$ is unknown, use the conservative estimate $P = 0.5$.</p>
+                        <div class="equation">
+                            $$ n = \frac{(1.96)^2 (0.5)(1-0.5)}{(0.05)^2} = \frac{(3.8416) (0.25)}{0.0025} = \frac{0.9604}{0.0025} = 384.16 $$
+                        </div>
+                        <p>Always round up: $n = 385$.</p>
+                        <p>We need a sample size of at least 385 children.</p>
+
+                        <p><strong>Example (with prior estimate):</strong> If a previous study suggested the immunization proportion was around 80% ($P=0.8$), what sample size is needed with ME=0.05 and 95% confidence?</p>
+                        <div class="equation">
+                             $$ n = \frac{(1.96)^2 (0.8)(1-0.8)}{(0.05)^2} = \frac{(3.8416) (0.8)(0.2)}{0.0025} = \frac{0.614656}{0.0025} = 245.86 $$
+                        </div>
+                        <p>Round up: $n = 246$.</p>
+                        <p>Using a prior estimate (if reliable) can reduce the required sample size compared to the conservative $P=0.5$ approach.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-7-exercises">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">✏️</span>
+                        <span class="heading-text">7.7 Exercises</span>
+                    </h2>
+                    <div class="content-card">
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Explain the difference between a point estimate and an interval estimate. Which one provides more information about the population parameter?</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">What is the Central Limit Theorem, and why is it important for constructing confidence intervals for the mean?</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">A random sample of 64 medical students ($n=64$) had a mean score of 85 on a standardized test, with a sample standard deviation of 8 ($s=8$). Construct a 99% confidence interval for the true mean score of all medical students.</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">In a survey of 400 randomly selected adults ($n=400$), 120 reported experiencing back pain in the last month ($x=120$). Construct a 90% confidence interval for the true proportion of adults experiencing back pain.</span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text">A sample of 15 diabetic patients ($n=15$) had their fasting blood sugar levels measured. The sample mean was $\bar{x} = 140$ mg/dL and the sample standard deviation was $s = 12$ mg/dL. Assuming blood sugar levels are normally distributed, construct a 95% confidence interval for the true mean fasting blood sugar level in this patient population.</span></li>
+                            <li class="list-item"><span class="item-icon">6.</span><span class="item-text">A health researcher wants to estimate the average number of hours children watch television per week. They want to be 95% confident that their estimate is within $\pm 1$ hour of the true mean. Based on previous studies, the standard deviation is estimated to be 3 hours. What sample size is required?</span></li>
+                            <li class="list-item"><span class="item-icon">7.</span><span class="item-text">A public health official wants to estimate the proportion of adults in a town who have received a flu vaccine. They want the estimate to be within $\pm 4\%$ (ME=0.04) of the true proportion with 95% confidence.
+                                <ol type="a" style="margin-left: 20px; margin-top: 5px;">
+                                    <li>What sample size is needed if no prior estimate of the proportion is available?</li>
+                                    <li>What sample size is needed if it is believed that the proportion is around 30%?</li>
+                                </ol>
+                            </span></li>
+                        </ol>
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-7-part-3 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-2.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 7 (Part 3): Sample Size &amp; Exercises</span>
+                    </div>
+                    <a href="chapter-8-part-1.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

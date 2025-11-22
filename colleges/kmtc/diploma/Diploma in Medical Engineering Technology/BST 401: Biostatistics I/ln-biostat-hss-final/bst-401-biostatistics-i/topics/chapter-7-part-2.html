@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7 (Part 2): CI for Proportions &amp; Small Samples, Sample Size (Means) - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-1.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 7 (Part 2): CIs &amp; Sample Size</span>
+                    </div>
+                    <a href="chapter-7-part-3.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-7-part-2 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER SEVEN <br> Estimation (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-7-interval-estimation-cont">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📏</span>
+                        <span class="heading-text">7.5 Interval estimation (large samples) (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+
+                        <h3 class="subsection-heading">Confidence Interval for the Population Proportion ($P$) (Large Samples)</h3>
+                        <p>When the sample size is large (typically requires $np \ge 5$ and $nq \ge 5$, where $q=1-p$), the sampling distribution of the sample proportion ($p$) can be approximated by a normal distribution with mean $P$ and standard error $\sqrt{P(1-P)/n}$.</p>
+                        <p>Since $P$ is unknown, we estimate the standard error using the sample proportion $p$: Standard Error (SE) $\approx \sqrt{p(1-p)/n}$.</p>
+                        <p>The formula for a $(1-\alpha) \times 100\%$ confidence interval for $P$ is:</p>
+                        <div class="equation">
+                            $$ p \pm Z_{\alpha/2} \sqrt{\frac{p(1-p)}{n}} $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$p = x/n$ is the sample proportion (x = number of successes).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$n$ is the sample size.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$Z_{\alpha/2}$ is the critical value from the standard normal distribution.</span></li>
+                        </ul>
+
+                        <p><strong>Example:</strong> In a sample of 200 people from a community, 60 are found to be hypertensive. Construct a 95% confidence interval for the true proportion of hypertensive individuals in the community.</p>
+                        <p>Here, $n=200$, $x=60$.</p>
+                        <p>Sample proportion $p = x/n = 60/200 = 0.30$.</p>
+                        <p>Check large sample condition: $np = 200(0.30) = 60 \ge 5$. $nq = 200(1-0.30) = 200(0.70) = 140 \ge 5$. Condition met.</p>
+                        <p>For 95% confidence, $Z_{\alpha/2} = 1.96$.</p>
+                        <p>Standard Error (SE) = $\sqrt{p(1-p)/n} = \sqrt{0.30(0.70)/200} = \sqrt{0.21/200} = \sqrt{0.00105} \approx 0.0324$.</p>
+                        <p>Margin of Error (ME) = $Z_{\alpha/2} \times SE = 1.96 \times 0.0324 \approx 0.0635$.</p>
+                        <p>Confidence Interval = $p \pm ME = 0.30 \pm 0.0635$.</p>
+                        <p>The 95% CI is $(0.30 - 0.0635, 0.30 + 0.0635) = (0.2365, 0.3635)$.</p>
+                        <p><strong>Interpretation:</strong> We are 95% confident that the true proportion of hypertensive individuals in the community is between 23.65% and 36.35%.</p>
+
+                        <h3 class="subsection-heading">Confidence Interval for the Population Mean ($\mu$) (Small Samples, $\sigma$ Unknown)</h3>
+                        <p>When the population standard deviation ($\sigma$) is unknown and the sample size is small ($n < 30$), we cannot reliably use the Z-distribution unless the original population is known to be normally distributed.</p>
+                        <p>If the population is assumed to be approximately normally distributed, we use the <strong>t-distribution</strong> (also known as Student's t-distribution) instead of the Z-distribution.</p>
+                        <p>The t-distribution is similar in shape to the Z-distribution (bell-shaped, symmetric about 0) but has heavier tails, reflecting the increased uncertainty due to estimating $\sigma$ with $s$ from a small sample.</p>
+                        <p>The shape of the t-distribution depends on the <strong>degrees of freedom (df)</strong>, which for a single sample mean is $df = n-1$. As $df$ increases, the t-distribution approaches the Z-distribution.</p>
+                        <img src="../assets/images/chapter-7-tdist-curve-1.jpg" alt="t-Distribution Curve" class="content-image">
+                        <p>The formula for a $(1-\alpha) \times 100\%$ confidence interval for $\mu$ using the t-distribution is:</p>
+                        <div class="equation">
+                            $$ \bar{x} \pm t_{\alpha/2, df} \left( \frac{s}{\sqrt{n}} \right) $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$\bar{x}$ is the sample mean.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$s$ is the sample standard deviation.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$n$ is the sample size.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$t_{\alpha/2, df}$ is the critical value from the t-distribution with $df = n-1$ degrees of freedom that leaves an area of $\alpha/2$ in the upper tail. This value is found using a t-table (like Table A3 in the appendix) or statistical software.</span></li>
+                        </ul>
+
+                        <p><strong>Example:</strong> A sample of 10 patients ($n=10$) has a mean systolic blood pressure (SBP) of $\bar{x} = 125$ mmHg with a sample standard deviation $s = 8$ mmHg. Assuming SBP is normally distributed, construct a 95% confidence interval for the true mean SBP.</p>
+                        <p>Here, $n=10$ (small sample), $\bar{x}=125$, $s=8$.</p>
+                        <p>Degrees of freedom $df = n-1 = 10-1 = 9$.</p>
+                        <p>For 95% confidence, $\alpha = 0.05$, $\alpha/2 = 0.025$.</p>
+                        <p>Find the critical value $t_{0.025, 9}$ from a t-table. Looking up df=9 and upper tail area 0.025, we find $t_{0.025, 9} = 2.262$.</p>
+                        <p>Standard Error (SE) = $s / \sqrt{n} = 8 / \sqrt{10} \approx 8 / 3.162 \approx 2.53$.</p>
+                        <p>Margin of Error (ME) = $t_{\alpha/2, df} \times SE = 2.262 \times 2.53 \approx 5.72$.</p>
+                        <p>Confidence Interval = $\bar{x} \pm ME = 125 \pm 5.72$.</p>
+                        <p>The 95% CI is $(125 - 5.72, 125 + 5.72) = (119.28, 130.72)$ mmHg.</p>
+                        <p><strong>Interpretation:</strong> We are 95% confident that the true mean systolic blood pressure for this population lies between 119.28 mmHg and 130.72 mmHg.</p>
+
+                        <h3 class="subsection-heading">Factors Affecting Confidence Interval Width</h3>
+                        <p>The width of a confidence interval (Width = 2 * Margin of Error) depends on:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Confidence Level $(1-\alpha)$:** Higher confidence level (e.g., 99% vs 95%) leads to a larger critical value ($Z_{\alpha/2}$ or $t_{\alpha/2, df}$) and thus a wider interval.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Sample Size ($n$):** Larger sample size leads to a smaller standard error ($s/\sqrt{n}$ or $\sqrt{p(1-p)/n}$) and thus a narrower (more precise) interval.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Variability in the Data ($s$ or $p(1-p)$):** Greater variability leads to a larger standard error and thus a wider interval.</span></li>
+                        </ul>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-7-sample-size-estimation">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">7.6 Sample size estimation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Before conducting a study, it is crucial to determine the appropriate sample size needed to achieve the desired precision in estimation.</p>
+                        <p>Sample size calculations are based on rearranging the margin of error formula from the confidence interval.</p>
+
+                        <h3 class="subsection-heading">Sample Size for Estimating Population Mean ($\mu$)</h3>
+                        <p>The margin of error (ME) for estimating $\mu$ (large sample) is $ME = Z_{\alpha/2} (\sigma/\sqrt{n})$.</p>
+                        <p>Solving for $n$, we get the formula for the required sample size:</p>
+                        <div class="equation">
+                            $$ n = \left( \frac{Z_{\alpha/2} \sigma}{ME} \right)^2 $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$n$ = required sample size (always round up to the next whole number).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$Z_{\alpha/2}$ = Z-value for the desired confidence level.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$\sigma$ = population standard deviation.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$ME$ = desired margin of error (maximum acceptable difference between $\bar{x}$ and $\mu$).</span></li>
+                        </ul>
+                        <p><strong>Estimating $\sigma$:** Since the population standard deviation ($\sigma$) is usually unknown before the study, it needs to be estimated using:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Results from previous similar studies.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">A pilot study.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">An estimate based on the range (e.g., $\sigma \approx \text{Range}/4$ or $\sigma \approx \text{Range}/6$).</span></li>
+                        </ul>
+
+                        <p><strong>Example:</strong> We want to estimate the mean weight of students with 95% confidence and a margin of error of $\pm 2$ kg. From a previous study, the standard deviation was estimated to be $\sigma = 10$ kg. What sample size is needed?</p>
+                        <p>Here, Confidence = 95% $\implies Z_{\alpha/2} = 1.96$.</p>
+                        <p>$ME = 2$ kg.</p>
+                        <p>$\sigma = 10$ kg.</p>
+                        <div class="equation">
+                            $$ n = \left( \frac{1.96 \times 10}{2} \right)^2 = \left( \frac{19.6}{2} \right)^2 = (9.8)^2 = 96.04 $$
+                        </div>
+                        <p>Always round up: $n = 97$.</p>
+                        <p>We need a sample size of at least 97 students.</p>
+                        <!-- Sample Size for Proportions in next chunk -->
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-7-part-2 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-1.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 7 (Part 2): CIs &amp; Sample Size</span>
+                    </div>
+                    <a href="chapter-7-part-3.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
