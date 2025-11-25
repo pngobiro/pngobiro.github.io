@@ -324,6 +324,8 @@ node /home/ngobiro/.local/share/Roo-Code/MCP/mathpix-ocr-server/build/index.js "
 node /home/ngobiro/.local/share/Roo-Code/MCP/mathpix-ocr-server/build/index.js "/path/to/community-health-notes.pdf" > "community-health-notes_ocr.mmd"
 ```
 
+
+
 ### 3.2 Handling Mixed MMD Files (Multiple Papers/Categories in One PDF)
 
 **CRITICAL: Always Read and Analyze MMD Content First**
@@ -427,33 +429,46 @@ sed -n '1131,1400p' mixed.mmd > NOT_RELEVANT/practice-questions_ocr.mmd
 
 **Step 6: Update processing-status.json**
 
+For better tracking, promote split files to top-level entries in the `files` array and mark the original file as "split".
+
 ```json
 {
-  "filename": "medical-demo-mixed.pdf",
-  "notes": "Contains 5 different papers across multiple categories - split into separate MMD files",
-  "split_files": [
+  "files": [
     {
-      "mmd": "2020j-fqe_ocr.mmd",
-      "category": "FQE",
+      "filename": "medical-demo-mixed.pdf",
+      "status": "split",
+      "notes": "Contains 5 different papers - split into separate MMD files. See individual entries below.",
+      "split_files": [
+        "2020j-fqe_ocr.mmd",
+        "2022j-fqe_ocr.mmd",
+        "2021s-fqe_ocr.mmd",
+        "2023-cat1_ocr.mmd",
+        "practice-questions_ocr.mmd"
+      ]
+    },
+    {
+      "filename": "2020j-fqe_ocr.mmd",
+      "original_location": "FQE/medical-demo-mixed.mmd",
+      "status": "html_generated",
+      "paper_type": "FQE",
       "year": "2020",
-      "session": "February"
+      "session": "February",
+      "html_filename": "2020j-fqe.html",
+      "notes": "Generated from split MMD"
     },
     {
-      "mmd": "2022j-fqe_ocr.mmd",
-      "category": "FQE",
+      "filename": "2022j-fqe_ocr.mmd",
+      "original_location": "FQE/medical-demo-mixed.mmd",
+      "status": "mmd_reviewed",
+      "paper_type": "FQE",
       "year": "2022",
-      "session": "February"
-    },
-    {
-      "mmd": "2021s-fqe_ocr.mmd",
-      "category": "FQE",
-      "year": "2021",
-      "session": "September"
-    },
-    {
-      "mmd": "2023-cat1_ocr.mmd",
-      "category": "CATs",
-      "year": "2023",
+      "session": "February",
+      "notes": "Generated from split MMD"
+    }
+    // Add entries for other split files...
+  ]
+}
+```
       "session": "unknown"
     },
     {
@@ -465,6 +480,17 @@ sed -n '1131,1400p' mixed.mmd > NOT_RELEVANT/practice-questions_ocr.mmd
   ]
 }
 ```
+
+**Handling Papers from Other Courses:**
+
+If you find a paper belonging to a **different course** (e.g., a Nursing paper inside a Health Records PDF):
+
+1. **Identify**: Note the course name (e.g., "Diploma in Nursing") and subject.
+2. **Split**: Extract it to a separate MMD file.
+3. **Move**: Place it in the `NOT_RELEVANT` folder.
+4. **Name Descriptively**: Use the format `[Course]-[Subject]-[Year]-[Type].mmd`.
+   - Example: `Nursing-Pharmacology-2021-FQE.mmd`
+5. **Note**: Update `processing-status.json` with a note so it can be moved to the correct course folder later.
 
 **Key Principles:**
 
@@ -479,6 +505,7 @@ sed -n '1131,1400p' mixed.mmd > NOT_RELEVANT/practice-questions_ocr.mmd
 - **Multiple FQEs from different years** → Split to FQE folder
 - **CATs mixed with FQE** → Split to respective folders
 - **Practice questions/quizzes** → Determine if CATs or NOT_RELEVANT
+- **Papers from other courses** → Split to NOT_RELEVANT with descriptive name
 - **Revision materials** → Usually NOT_RELEVANT
 - **Marking schemes** → PRACTICAL folder
 
@@ -554,13 +581,13 @@ pastpapers/
 
 **Index File Hierarchy:**
 
-1. **Main Index** ([pastpapers/index.html](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/index.html)) - Points to all exam type indexes
-2. **Exam Type Index** ([pastpapers/FQE/index.html](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/FQE/index.html)) - Lists all FQE papers
+1. **Main Index** (`pastpapers/index.html`) - Points to all exam type indexes
+2. **Exam Type Index** (`pastpapers/FQE/index.html`) - Lists all FQE papers
 3. **Individual Paper** (`pastpapers/FQE/2023j-fqe.html`) - Actual exam with Q&A
 
 ### 4.2 Main Past Papers Index Structure
 
-The main [pastpapers/index.html](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/index.html) should:
+The main `pastpapers/index.html` should:
 - Display category cards for each exam type
 - Show count of papers in each category
 - Link to category-specific index pages
@@ -750,12 +777,60 @@ Individual Paper (pastpapers/FQE/2023j-fqe.html)
    - ✓ Medical accuracy verified
    - ✓ IDs match (question-X, answer-X)
    - ✓ No placeholder text remains
+1.  **Medical/Health Knowledge Base**
+    -   Apply domain expertise to provide accurate answers
+    -   Use standard medical terminology
+    -   Reference clinical guidelines where applicable
 
-## 5. Past Papers Index Generation
+2.  **Answer Structure Elements**
+    -   `<p class="answer-intro">` - Context/introduction
+    -   `<p><strong>(a)</strong>` - Part-by-part answers
+    -   `<ul>` or `<ol>` - Lists for multiple points
+    -   `<p class="key-point">` - Important notes or assumptions
+    -   `<figure class="answer-figure">` - Diagrams (ASCII art)
+    -   `<p class="answer-conclusion">` - Summary
 
-### 5.1 Category Index Template
+3.  **Handling Ambiguity**
+    -   If OCR data is unclear, make reasonable assumptions
+    -   Document assumptions using `.key-point` class
+    -   Base answers on standard medical/health principles
 
-Each past paper category needs an [index.html](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/index.html):
+4.  **Verification Checklist**
+    -   ✓ Answer addresses all question parts
+    -   ✓ Mark allocation is appropriate
+    -   ✓ Medical accuracy verified
+    -   ✓ IDs match (question-X, answer-X)
+    -   ✓ No placeholder text remains
+
+### 5.4 Image Handling
+
+If the MMD file contains images (e.g., charts, diagrams, anatomy figures):
+
+1.  **Use the Automation Script**:
+    -   Use the provided `download_images.sh` script (see Section 9.3).
+    -   Run: `bash download_images.sh` (ensure you configure the script or pass arguments if modified).
+    -   This will automatically download all images found in the MMD to an `assets/images` or specified folder.
+
+2.  **Verify Images**:
+    -   Check the output directory.
+    -   Ensure images are named sequentially (e.g., `[ID]g-[PageNum]-[SeqNum].jpg`).
+
+3.  **Embed in HTML**:
+    -   Use standard `<img>` tag.
+    -   Path: `images/filename.jpg` (move images to your HTML's image folder if different).
+    -   Add descriptive `alt` text.
+
+```html
+<div class="question-image">
+    <img src="images/2020-feb-fqe-fig1.jpg" alt="Population Pyramid for Country X">
+</div>
+```
+
+## 6. Past Papers Index Generation
+
+### 6.1 Category Index Template
+
+Each past paper category needs an `index.html`:
 
 ```html
 <!DOCTYPE html>
@@ -960,7 +1035,7 @@ notes/
 
 ## 7. Complete CSS Stylesheet (styles.css)
 
-**Location:** [pastpapers/styles.css](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/styles.css)
+**Location:** `pastpapers/styles.css`
 
 **Copy this complete file to every subject's pastpapers folder:**
 
@@ -1606,7 +1681,7 @@ input:checked + .dark-mode-slider:before {
 
 ## 8. Complete JavaScript File (js/sidebar-navigation.js)
 
-**Location:** [pastpapers/js/sidebar-navigation.js](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/js/sidebar-navigation.js)
+**Location:** `pastpapers/js/sidebar-navigation.js`
 
 **Copy this complete file to every subject's pastpapers/js folder:**
 
@@ -1809,7 +1884,190 @@ document.addEventListener('DOMContentLoaded', function() {
 
 ## 9. Automation Scripts
 
-### 8.1 Subject Organization Script
+### 9.1 Subject Processing Script (process_subject.py)
+
+**Location:** `process_subject.py` (in root directory)
+
+This script automates the processing of files in the `UNPROCESSED` folder for any subject.
+
+```python
+#!/usr/bin/env python3
+import os
+import sys
+import json
+import shutil
+import subprocess
+from datetime import datetime
+from pathlib import Path
+
+# Configuration
+MATHPIX_SERVER_PATH = "/home/ngobiro/.local/share/Roo-Code/MCP/mathpix-ocr-server/build/index.js"
+
+def get_timestamp():
+    return datetime.now().astimezone().isoformat()
+
+def load_status(status_file):
+    if status_file.exists():
+        with open(status_file, 'r') as f:
+            return json.load(f)
+    return {
+        "subject": "Unknown",
+        "last_updated": get_timestamp(),
+        "files": [],
+        "statistics": {
+            "total_files": 0,
+            "unprocessed": 0,
+            "mmd_generated": 0,
+            "mmd_reviewed": 0,
+            "html_generated": 0,
+            "qa_added": 0,
+            "verified": 0,
+            "completed": 0
+        },
+        "next_steps": []
+    }
+
+def save_status(status_file, data):
+    data["last_updated"] = get_timestamp()
+    
+    # Update statistics
+    stats = {k: 0 for k in data["statistics"]}
+    stats["total_files"] = len(data["files"])
+    
+    for file_entry in data["files"]:
+        status = file_entry.get("status", "unprocessed")
+        if status in stats:
+            stats[status] += 1
+            
+    data["statistics"] = stats
+    
+    with open(status_file, 'w') as f:
+        json.dump(data, f, indent=2)
+
+def process_directory(subject_path, subfolder):
+    target_dir = subject_path / subfolder
+    unprocessed_dir = target_dir / "UNPROCESSED"
+    status_file = target_dir / "processing-status.json"
+    
+    if not unprocessed_dir.exists():
+        print(f"Skipping {subfolder}: UNPROCESSED folder not found")
+        return
+
+    print(f"\nProcessing {subfolder} in {subject_path.name}...")
+    
+    # Load or create status file
+    status_data = load_status(status_file)
+    if status_data["subject"] == "Unknown":
+        status_data["subject"] = subject_path.name
+    
+    # Find PDF files
+    pdf_files = list(unprocessed_dir.glob("*.pdf"))
+    
+    if not pdf_files:
+        print("No PDF files found in UNPROCESSED")
+        return
+
+    for pdf_file in pdf_files:
+# ... (rest of script)
+```
+
+**Usage:**
+
+1.  **Make executable**: `chmod +x process_subject.py`
+2.  **Run for a subject**:
+    ```bash
+    ./process_subject.py "Year 1/Medical Demography"
+    ```
+3.  **What it does**:
+    - Scans `pastpapers/UNPROCESSED` and `notes/UNPROCESSED`.
+    - Detects new PDF files.
+    - Converts them to MMD using Mathpix.
+    - Updates `processing-status.json` automatically.
+    - Skips files that are already processed.
+
+### 9.2 Subject Organization Script
+        print(f"Found: {pdf_file.name}")
+        
+        # Check if already tracked
+        existing_entry = next((f for f in status_data["files"] if f["filename"] == pdf_file.name), None)
+        
+        if not existing_entry:
+            # Add new entry
+            new_entry = {
+                "filename": pdf_file.name,
+                "original_location": "UNPROCESSED/",
+                "current_location": "UNPROCESSED/",
+                "status": "unprocessed",
+                "processing_steps": {
+                    "pdf_received": get_timestamp(),
+                    "mmd_generated": "pending",
+                    "mmd_reviewed": "pending",
+                    "html_generated": "pending",
+                    "qa_added": "pending",
+                    "verified": "pending"
+                },
+                "paper_type": "unknown",
+                "year": "unknown",
+                "session": "unknown",
+                "html_filename": "pending",
+                "mmd_filename": "pending",
+                "questions_count": "unknown",
+                "sections": [],
+                "notes": "Auto-detected by process_subject.py"
+            }
+            status_data["files"].append(new_entry)
+            existing_entry = new_entry
+            print("  -> Added to tracking system")
+
+        # Convert to MMD if needed
+        if existing_entry["status"] == "unprocessed":
+            mmd_filename = f"{pdf_file.stem}_ocr.mmd"
+            mmd_path = unprocessed_dir / mmd_filename
+            
+            print(f"  -> Converting to MMD...")
+            try:
+                # Run Mathpix OCR
+                cmd = ["node", MATHPIX_SERVER_PATH, str(pdf_file)]
+                with open(mmd_path, "w") as outfile:
+                    subprocess.run(cmd, stdout=outfile, check=True)
+                
+                # Update status
+                existing_entry["status"] = "mmd_generated"
+                existing_entry["processing_steps"]["mmd_generated"] = get_timestamp()
+                existing_entry["mmd_filename"] = mmd_filename
+                print("  -> MMD conversion successful")
+                
+            except subprocess.CalledProcessError as e:
+                print(f"  -> Error converting to MMD: {e}")
+            except Exception as e:
+                print(f"  -> Unexpected error: {e}")
+        
+        else:
+            print(f"  -> Already processed (Status: {existing_entry['status']})")
+
+    # Save updates
+    save_status(status_file, status_data)
+    print(f"Updated status file: {status_file}")
+
+if __name__ == "__main__":
+    if len(sys.argv) < 2:
+        print("Usage: python process_subject.py <subject_directory>")
+        sys.exit(1)
+        
+    subject_dir = Path(sys.argv[1])
+    
+    if not subject_dir.exists():
+        print(f"Error: Directory {subject_dir} not found")
+        sys.exit(1)
+        
+    # Process pastpapers
+    process_directory(subject_dir, "pastpapers")
+    
+    # Process notes (optional, if structure exists)
+    process_directory(subject_dir, "notes")
+```
+
+### 9.2 Subject Organization Script
 
 ```python
 #!/usr/bin/env python3
@@ -1922,7 +2180,191 @@ if __name__ == "__main__":
         print("Usage: python organize_subjects.py <directory>")
 ```
 
-### 8.2 Index Generation Script
+### 9.3 Image Download Script (download_images.sh)
+
+**Location:** `download_images.sh` (in root directory)
+
+This script extracts image URLs from an MMD file and downloads them with sequential naming.
+
+```bash
+#!/bin/bash
+
+# =============================================================================
+# Image Download Script for MMD Files
+# =============================================================================
+# This script extracts image URLs from MMD files and downloads them with 
+# sequential naming convention: [ID]g-[PageNum]-[SeqNum].ext
+# 
+# Usage: bash download_images.sh
+# =============================================================================
+
+# --- Configuration ---
+MMD_FILE="content.mmd" # Input MMD file name
+OUTPUT_DIR="assets/images" # Output directory for images
+PROJECT_ROOT="/" # Project root relative to script location (if needed)
+
+# --- Color codes for better output ---
+RED='\033[0;31m'
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+BLUE='\033[0;34m'
+NC='\033[0m' # No Color
+
+# --- Function to print colored output ---
+print_status() {
+    echo -e "${GREEN}[INFO]${NC} $1"
+}
+
+print_warning() {
+    echo -e "${YELLOW}[WARNING]${NC} $1"
+}
+
+print_error() {
+    echo -e "${RED}[ERROR]${NC} $1"
+}
+
+print_progress() {
+    echo -e "${BLUE}[PROGRESS]${NC} $1"
+}
+
+# --- Check if MMD file exists ---
+if [ ! -f "$MMD_FILE" ]; then
+    print_error "MMD file '$MMD_FILE' not found!"
+    exit 1
+fi
+
+# --- Ensure Output Directory Exists ---
+mkdir -p "$OUTPUT_DIR"
+if [ ! -d "$OUTPUT_DIR" ]; then
+    print_error "Could not create output directory '$OUTPUT_DIR'."
+    exit 1
+fi
+
+print_status "Starting image download process..."
+print_status "Input MMD: $MMD_FILE"
+print_status "Output Directory: $OUTPUT_DIR"
+
+# --- Count total URLs for progress tracking ---
+TOTAL_URLS=$(grep -c 'https://cdn\.mathpix\.com/cropped/' "$MMD_FILE")
+print_status "Found $TOTAL_URLS image URLs to process"
+
+# --- Initialize counters ---
+SUCCESS_COUNT=0
+ERROR_COUNT=0
+CURRENT_COUNT=0
+
+# --- Extract URLs and Generate Curl Commands ---
+# Use grep to find all Mathpix image URLs
+# Use awk to process each URL, generate the correct filename, and execute curl
+grep -oP 'https://cdn\.mathpix\.com/cropped/[^)]+' "$MMD_FILE" | \
+awk -v output_dir="$OUTPUT_DIR" -v total_urls="$TOTAL_URLS" '
+BEGIN {
+    # Define associative array to keep track of sequence numbers for each base image
+    FS="/" # Use / as field separator for URL parsing
+    OFS="-" # Use - as output field separator for filename parts
+    current_count = 0;
+    success_count = 0;
+    error_count = 0;
+}
+{
+    current_count++;
+    full_url = $0; # Store the full URL
+    
+    # Clean up the URL by removing trailing braces, brackets, or other problematic characters
+    gsub(/[}\]]+$/, "", full_url);
+    gsub(/[[:space:]]+$/, "", full_url); # Remove trailing whitespace
+    
+    # Extract the filename part (e.g., 2025_08_29_b97cd1d1768641963375g-031.jpg?...)
+    split(full_url, url_parts, "/");
+    filename_with_query = url_parts[length(url_parts)];
+    
+    # Remove query string part (anything after ?)
+    split(filename_with_query, filename_parts, "?");
+    base_filename = filename_parts[1];
+    
+    # Extract the file extension (e.g., jpg, png)
+    split(base_filename, ext_parts, ".");
+    extension = ext_parts[length(ext_parts)];
+    
+    # Extract the core part used for sequencing (e.g., 2025_08_29_b97cd1d1768641963375g-031)
+    # This assumes format [ID]g-[PageNum]
+    id_page = substr(base_filename, 1, length(base_filename) - length(extension) - 1);
+    
+    # Increment the count for this specific base image ID and PageNum
+    count[id_page]++;
+    seq_num = count[id_page];
+    
+    # Construct the final output filename according to the convention
+    # [ID]g-[PageNum]-[SeqNum].ext
+    output_filename = id_page OFS seq_num "." extension;
+    output_path = output_dir "/" output_filename;
+    
+    # Print progress message
+    printf "\033[0;34m[PROGRESS]\033[0m (%d/%d) Downloading: %s (Seq %d) -> %s\n", current_count, total_urls, id_page, seq_num, output_filename;
+    
+    # Check if file already exists
+    if (system("test -f \"" output_path "\"") == 0) {
+        printf "\033[1;33m[WARNING]\033[0m File already exists, skipping: %s\n", output_filename;
+        next;
+    }
+    
+    # Execute curl command and capture return code
+    curl_cmd = sprintf("curl -f -sS -L --connect-timeout 30 --max-time 120 -o \"%s\" \"%s\"", output_path, full_url);
+    return_code = system(curl_cmd);
+    
+    if (return_code == 0) {
+        # Verify the file was actually created and has content
+        if (system("test -s \"" output_path "\"") == 0) {
+            printf "\033[0;32m[SUCCESS]\033[0m Downloaded: %s\n", output_filename;
+            success_count++;
+        } else {
+            printf "\033[0;31m[ERROR]\033[0m Downloaded file is empty: %s\n", output_filename;
+            system("rm -f \"" output_path "\""); # Remove empty file
+            error_count++;
+        }
+    } else {
+        printf "\033[0;31m[ERROR]\033[0m Failed to download: %s (curl exit code: %d)\n", output_filename, return_code;
+        printf "\033[0;31m[ERROR]\033[0m URL was: %s\n", full_url;
+        error_count++;
+    }
+    
+    # Small delay to be respectful to the server
+    system("sleep 0.1");
+}
+END {
+    printf "\n\033[0;32m[INFO]\033[0m Download process completed!\n";
+    printf "\033[0;32m[INFO]\033[0m Processed: %d URLs\n", current_count;
+    printf "\033[0;32m[INFO]\033[0m Successful: %d\n", success_count;
+    if (error_count > 0) {
+        printf "\033[0;31m[INFO]\033[0m Failed: %d\n", error_count;
+    }
+    printf "\033[0;32m[INFO]\033[0m Check the '"'"'%s'"'"' directory for downloaded images.\n", output_dir;
+}'
+
+# --- Final status report ---
+echo ""
+print_status "Image download process finished."
+print_status "Please check the '$OUTPUT_DIR' directory."
+
+# --- Optional: List downloaded files ---
+if [ "$(ls -A "$OUTPUT_DIR" 2>/dev/null)" ]; then
+    echo ""
+    print_status "Downloaded files:"
+    ls -la "$OUTPUT_DIR" | grep "^-" | wc -l | xargs printf "Total files: %s\n"
+    echo ""
+    print_status "Sample of downloaded files:"
+    ls "$OUTPUT_DIR" | head -10
+    if [ $(ls "$OUTPUT_DIR" | wc -l) -gt 10 ]; then
+        echo "... and $(($(ls "$OUTPUT_DIR" | wc -l) - 10)) more files"
+    fi
+else
+    print_warning "No files were downloaded to '$OUTPUT_DIR'"
+fi
+
+echo ""
+print_status "Script execution completed."
+exit 0
+```
 
 ```python
 #!/usr/bin/env python3
