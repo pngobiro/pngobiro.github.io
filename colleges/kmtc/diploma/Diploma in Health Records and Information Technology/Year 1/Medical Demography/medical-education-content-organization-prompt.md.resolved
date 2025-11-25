@@ -1,0 +1,2227 @@
+# Medical Education Content Organization & Conversion System
+
+## Overview
+This system organizes medical/health education materials into structured subject folders, converts PDF documents to MMD (Markdown Math) format, and generates accessible HTML websites with proper navigation and styling.
+
+## 1. Directory Structure
+
+### 1.1 Subject-Based Organization
+
+```
+[Program Name]/
+├── Year 1/
+│   ├── [Subject Name]/
+│   │   ├── notes/
+│   │   │   ├── [topic-name]/
+│   │   │   │   ├── index.html
+│   │   │   │   ├── topics/
+│   │   │   │   │   ├── topic-1.html
+│   │   │   │   │   ├── topic-2.html
+│   │   │   │   │   └── ...
+│   │   │   │   ├── assets/
+│   │   │   │   │   └── images/
+│   │   │   │   ├── styles/
+│   │   │   │   │   └── main.css
+│   │   │   │   └── js/
+│   │   │   │       └── navigation.js
+│   │   │   └── [another-topic-name]/
+│   │   └── pastpapers/
+│   │       ├── UNPROCESSED/
+│   │       │   ├── [original-pdf-files].pdf
+│   │       │   └── [original-pdf-files]_ocr.mmd
+│   │       ├── CATs/
+│   │       │   ├── [year]-[session].html
+│   │       │   ├── [year]-[session]_ocr.mmd
+│   │       │   └── ...
+│   │       ├── FQE/
+│   │       ├── SUPPLEMENTARY/
+│   │       ├── END_OF_SEMESTER/
+│   │       ├── END_OF_YEAR/
+│   │       ├── PRACTICAL/
+│   │       ├── NOT_RELEVANT/
+│   │       ├── processing-status.json
+│   │       ├── index.html
+│   │       ├── styles.css
+│   │       └── js/
+│   │           └── sidebar-navigation.js
+│   └── [Another Subject]/
+├── Year 2/
+└── index.html (Program-level index)
+```
+
+### 1.2 Past Paper Type Classification
+
+**Primary Categories:**
+- **CATs** - Continuous Assessment Tests (mid-semester tests)
+- **FQE** - Final Qualifying Examinations
+- **SUPPLEMENTARY** - Supplementary/Retake examinations
+- **END_OF_SEMESTER** - End of semester examinations
+- **END_OF_YEAR** - End of year examinations
+- **PRACTICAL** - Practical examinations with marking schemes
+- **NOT_RELEVANT** - Papers not relevant to current curriculum or misplaced files
+
+**Identification Patterns:**
+- CAT: Contains "CAT", "C.A.T", "Continuous Assessment"
+- FQE: Contains "FQE", "Final Qualifying"
+- SUPPLEMENTARY: Contains "SUPP", "Supplementary", "Retake"
+- END_OF_SEMESTER: Contains "End of Semester", "EOS", "Semester Exam"
+- END_OF_YEAR: Contains "End of Year", "EOY", "Annual Exam"
+- PRACTICAL: Contains "Practical", "Lab Exam", "Marking Key"
+- NOT_RELEVANT: Different subject code, outdated curriculum, unclear content
+
+### 1.3 File Naming Conventions
+
+**Past Papers:**
+- Format: `[year][session]-[type].html`
+- Examples:
+  - `2023j-cat1.html` (July 2023 CAT 1)
+  - `2022n-end-semester.html` (November 2022 End of Semester)
+  - `2024j-fqe.html` (July 2024 FQE)
+  - `2023-supplementary.html` (2023 Supplementary)
+
+**MMD Files:**
+- Format: `[year][session]-[type]_ocr.mmd`
+- Example: `2023j-cat1_ocr.mmd`
+
+**Notes:**
+- Use descriptive kebab-case names
+- Example: `community-health-comprehensive-notes.html`
+
+### 1.4 File Processing Tracking System
+
+**UNPROCESSED Folder:**
+- All new PDF files start in `pastpapers/UNPROCESSED/`
+- Files remain here until fully processed (MMD → HTML with Q&A)
+- After processing, move to appropriate category folder
+
+**Processing Status Tracking:**
+
+Use [processing-status.json](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/processing-status.json) in each subject's `pastpapers/` folder:
+
+```json
+{
+  "subject": "[Subject Name]",
+  "last_updated": "[ISO 8601 timestamp]",
+  "files": [
+    {
+      "filename": "[original-filename].pdf",
+      "original_location": "UNPROCESSED/",
+      "current_location": "[Category]/",
+      "status": "[current status]",
+      "processing_steps": {
+        "pdf_received": "[timestamp]",
+        "mmd_generated": "[timestamp or 'pending']",
+        "mmd_reviewed": "[timestamp or 'pending']",
+        "html_generated": "[timestamp or 'pending']",
+        "qa_added": "[timestamp or 'pending']",
+        "verified": "[timestamp or 'pending']"
+      },
+      "paper_type": "[Determined from filename or MMD analysis]",
+      "year": "[Extract from MMD content]",
+      "session": "[Extract from MMD content - February/July/September/November/etc]",
+      "html_filename": "[year][session-code]-[type].html",
+      "mmd_filename": "[filename]_ocr.mmd",
+      "questions_count": "[Count from MMD analysis]",
+      "sections": [
+        {"name": "[Section name from MMD]", "questions": "[count]", "marks": "[total]"}
+      ],
+      "notes": "[Any observations from MMD review]"
+    }
+  ],
+  "statistics": {
+    "total_files": 0,
+    "unprocessed": 0,
+    "mmd_generated": 0,
+    "mmd_reviewed": 0,
+    "html_generated": 0,
+    "qa_added": 0,
+    "verified": 0,
+    "completed": 0
+  },
+  "next_steps": ["[List of pending tasks based on current status]"]
+}
+```
+
+**Important Notes:**
+- **Subject varies**: Each subject has its own [processing-status.json](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/processing-status.json)
+- **Paper structure from MMD**: Analyze MMD content to determine:
+  - Exam date and session
+  - Number of sections
+  - Question types (MCQ, Short Answer, Essay, Practical, etc.)
+  - Mark allocation per section
+  - Total questions and marks
+- **Flexible sections**: Different subjects may have different exam structures
+- **MMD analysis required**: Always review MMD before filling in metadata
+
+**Status Values:**
+- `unprocessed` - PDF in UNPROCESSED folder, not yet converted
+- `mmd_generated` - MMD file created from PDF
+- `mmd_reviewed` - MMD file manually reviewed and corrected
+- `html_generated` - HTML file created with questions
+- `qa_added` - Comprehensive answers added to HTML
+- `verified` - Content verified, navigation tested
+- `completed` - Fully processed, moved to category folder
+
+**Workflow Checklist per File:**
+
+```markdown
+## Processing Checklist: [filename]
+
+### Stage 1: Initial Processing
+- [ ] PDF placed in UNPROCESSED folder
+- [ ] Entry created in processing-status.json with basic info
+- [ ] Initial paper type guess from filename (verify in Stage 3)
+- [ ] Target category folder identified
+
+### Stage 2: MMD Conversion
+- [ ] Run OCR: `node [ocr-server-path] "[pdf]" > "[name]_ocr.mmd"`
+- [ ] MMD file created successfully
+- [ ] Update status to 'mmd_generated'
+- [ ] MMD file size verified (not empty)
+- [ ] Save timestamp in processing_steps.mmd_generated
+
+### Stage 3: MMD Review & Analysis
+- [ ] Open MMD file for review
+- [ ] **Extract exam metadata from MMD content:**
+  - [ ] Exam date (determine year and session)
+  - [ ] Subject name (verify matches folder)
+  - [ ] Paper type (CAT/FQE/SUPPLEMENTARY/etc)
+  - [ ] Duration and time
+  - [ ] Total marks
+- [ ] **Analyze exam structure from MMD:**
+  - [ ] Count total sections
+  - [ ] Identify section types (MCQ/Short Answer/Essay/Practical/etc)
+  - [ ] Count questions per section
+  - [ ] Note marks allocation per section
+  - [ ] Determine total question count
+- [ ] **Fix content issues:**
+  - [ ] Fix OCR errors (misrecognized characters)
+  - [ ] Remove spurious characters
+  - [ ] Verify mathematical equations
+  - [ ] Check image URLs from Mathpix
+  - [ ] Identify list patterns for semantic HTML
+  - [ ] Note any ambiguous content
+- [ ] **Update processing-status.json with MMD findings:**
+  - [ ] year, session, paper_type
+  - [ ] questions_count
+  - [ ] sections array with details
+  - [ ] html_filename (based on year/session)
+- [ ] Update status to 'mmd_reviewed'
+- [ ] Save timestamp in processing_steps.mmd_reviewed
+
+### Stage 4: HTML Generation
+- [ ] Create HTML file using appropriate template
+- [ ] Add header with exam details (from MMD analysis)
+- [ ] Add instructions section (from MMD)
+- [ ] Extract and structure all questions from MMD
+- [ ] Assign proper question IDs (question-1, question-2, etc)
+- [ ] Add navigation (previous/next/home)
+- [ ] Include all sections identified in Stage 3
+- [ ] Update status to 'html_generated'
+- [ ] Save timestamp in processing_steps.html_generated
+
+### Stage 5: Answer Creation
+- [ ] For each question, create comprehensive answer
+- [ ] Use subject-specific knowledge (medical/health/technical)
+- [ ] Ensure answer IDs match question IDs
+- [ ] Verify mark allocation is appropriate
+- [ ] Include formulas, calculations, diagrams as needed
+- [ ] All questions have complete answers
+- [ ] Update status to 'qa_added'
+- [ ] Save timestamp in processing_steps.qa_added
+
+### Stage 6: Verification
+- [ ] Open HTML in browser
+- [ ] Test all navigation links
+- [ ] Verify dark mode toggle
+- [ ] Test mobile responsiveness
+- [ ] Check print styles
+- [ ] Verify MathJax/equation rendering
+- [ ] Test back-to-top button
+- [ ] Compare with original PDF (100% content preservation)
+- [ ] Verify all sections from MMD analysis are present
+- [ ] Update status to 'verified'
+- [ ] Save timestamp in processing_steps.verified
+
+### Stage 7: Finalization
+- [ ] Move PDF from UNPROCESSED to category folder
+- [ ] Move MMD to category folder
+- [ ] Ensure HTML is in category folder
+- [ ] Update category index.html (add new paper entry)
+- [ ] Update main pastpapers index.html (update counts)
+- [ ] Update processing-status.json:
+  - [ ] current_location to category folder
+  - [ ] status to 'completed'
+  - [ ] Recalculate statistics
+- [ ] Update last_updated timestamp
+- [ ] Add to next_steps if follow-up needed
+```
+
+**Key Principle:** Always analyze MMD content to determine paper structure. Do not assume structure based on subject - verify from actual exam content.
+
+## 2. Subject Identification & Organization
+
+### 2.1 Medical Knowledge-Based Subject Mapping
+
+Using medical/health education expertise, identify and merge similar subjects:
+
+**Core Medical Sciences:**
+- Human Anatomy and Physiology
+- Human Pathology
+- Medical Terminology
+- Pharmacology/Medicinal Chemistry
+
+**Health Information Management:**
+- Health Records Management
+- Health Data Classification
+- Health Information Systems
+- Computer Applications in Health Care
+
+**Public Health:**
+- Community Health
+- Epidemiology
+- Health Statistics
+- Medical Demography
+- Vital Statistics
+
+**Clinical & Applied:**
+- First Aid
+- HIV/AIDS & STIs
+- Mental Health
+- Clinical Medicine
+
+**Management & Research:**
+- Health Systems Management
+- Human Resource Management
+- Monitoring and Evaluation
+- Research Methods
+
+**Behavioral Sciences:**
+- Human Psychology
+- Medical Sociology
+
+### 2.2 Subject Folder Creation Rules
+
+1. **Analyze all files** in the directory to identify subjects
+2. **Merge similar subjects** based on medical curriculum standards
+3. **Create subject folders** with proper capitalization
+4. **Create subfolders** for `notes/` and `pastpapers/`
+5. **Within pastpapers/**, create type-specific folders
+6. **Move files** to appropriate locations based on content analysis
+
+## 3. PDF to MMD Conversion Process
+
+### 3.1 OCR Command
+
+```bash
+# Single file conversion
+node /home/ngobiro/.local/share/Roo-Code/MCP/mathpix-ocr-server/build/index.js "[full-path-to-pdf]" > "[output-name]_ocr.mmd"
+
+# Example for past paper
+node /home/ngobiro/.local/share/Roo-Code/MCP/mathpix-ocr-server/build/index.js "/path/to/2023-july-cat1.pdf" > "2023j-cat1_ocr.mmd"
+
+# Example for notes
+node /home/ngobiro/.local/share/Roo-Code/MCP/mathpix-ocr-server/build/index.js "/path/to/community-health-notes.pdf" > "community-health-notes_ocr.mmd"
+```
+
+### 3.2 Handling Mixed MMD Files (Multiple Papers/Categories in One PDF)
+
+**CRITICAL: Always Read and Analyze MMD Content First**
+
+A single PDF/MMD may contain:
+- **Multiple years** (2020, 2021, 2022 papers)
+- **Multiple categories** (CATs, FQE, quizzes, practice questions)
+- **Mixed types** (CAT 1 from 2020, FQE from 2021, CAT 2 from 2022)
+
+**DO NOT assume** - Always analyze the actual MMD content to understand what's inside.
+
+**Analysis Workflow:**
+
+**Step 1: Read the MMD File**
+```bash
+# Open and read the entire MMD
+less filename.mmd
+# or
+cat filename.mmd | more
+```
+
+**Step 2: Identify All Papers/Sections**
+
+Search for identifying markers:
+```bash
+# Find exam headers
+grep -n "FINAL QUALIFYING\|CAT\|CONTINUOUS ASSESSMENT\|QUIZ\|PRACTICE" filename.mmd
+
+# Find dates
+grep -n "DATE:" filename.mmd
+
+# Find section markers
+grep -n "SECTION 1\|SECTION ONE" filename.mmd
+```
+
+**Step 3: Determine Category for Each Paper**
+
+Look for keywords in MMD content:
+- **FQE**: "FINAL QUALIFYING EXAMINATION"
+- **CATs**: "CAT", "C.A.T", "CONTINUOUS ASSESSMENT TEST"
+- **Quizzes**: "QUIZ", "QUIZZES", "PRACTICE QUESTIONS"
+- **End of Semester**: "END OF SEMESTER", "SEMESTER EXAM"
+- **Supplementary**: "SUPPLEMENTARY", "RETAKE", "SUPP"
+
+**Step 4: Extract Metadata for Each Paper**
+
+For each identified paper, note:
+- **Category** (FQE/CAT/Quiz/etc.)
+- **Year** (from DATE field)
+- **Session** (February/July/September/November)
+- **Line numbers** (start and end)
+- **Question structure** (MCQ count, short answer count, etc.)
+
+**Example Analysis:**
+
+```
+MMD File: medical-demo-mixed.mmd (1640 lines)
+
+Analysis Results:
+1. Lines 1-312: 
+   - Type: FQE
+   - Date: February 12, 2020
+   - Filename: 2020j-fqe_ocr.mmd
+   - Category folder: FQE/
+
+2. Lines 313-570:
+   - Type: FQE  
+   - Date: February 16, 2022
+   - Filename: 2022j-fqe_ocr.mmd
+   - Category folder: FQE/
+
+3. Lines 571-880:
+   - Type: FQE
+   - Date: September 29, 2021
+   - Filename: 2021s-fqe_ocr.mmd
+   - Category folder: FQE/
+
+4. Lines 881-1130:
+   - Type: CAT 1
+   - Date: March 2023
+   - Filename: 2023-cat1_ocr.mmd
+   - Category folder: CATs/
+
+5. Lines 1131-1400:
+   - Type: Quiz/Practice
+   - Date: Unknown
+   - Filename: practice-questions_ocr.mmd
+   - Category folder: NOT_RELEVANT/ or CATs/
+```
+
+**Step 5: Split Based on Analysis**
+
+```bash
+# Split into separate files based on category AND year
+sed -n '1,312p' mixed.mmd > FQE/2020j-fqe_ocr.mmd
+sed -n '313,570p' mixed.mmd > FQE/2022j-fqe_ocr.mmd
+sed -n '571,880p' mixed.mmd > FQE/2021s-fqe_ocr.mmd
+sed -n '881,1130p' mixed.mmd > CATs/2023-cat1_ocr.mmd
+sed -n '1131,1400p' mixed.mmd > NOT_RELEVANT/practice-questions_ocr.mmd
+```
+
+**Step 6: Update processing-status.json**
+
+```json
+{
+  "filename": "medical-demo-mixed.pdf",
+  "notes": "Contains 5 different papers across multiple categories - split into separate MMD files",
+  "split_files": [
+    {
+      "mmd": "2020j-fqe_ocr.mmd",
+      "category": "FQE",
+      "year": "2020",
+      "session": "February"
+    },
+    {
+      "mmd": "2022j-fqe_ocr.mmd",
+      "category": "FQE",
+      "year": "2022",
+      "session": "February"
+    },
+    {
+      "mmd": "2021s-fqe_ocr.mmd",
+      "category": "FQE",
+      "year": "2021",
+      "session": "September"
+    },
+    {
+      "mmd": "2023-cat1_ocr.mmd",
+      "category": "CATs",
+      "year": "2023",
+      "session": "unknown"
+    },
+    {
+      "mmd": "practice-questions_ocr.mmd",
+      "category": "NOT_RELEVANT",
+      "year": "unknown",
+      "session": "unknown"
+    }
+  ]
+}
+```
+
+**Key Principles:**
+
+1. **Read First, Organize Later** - Never assume content based on filename
+2. **Analyze Category** - Determine FQE/CAT/Quiz/etc. from actual content
+3. **Extract Dates** - Get year and session from MMD content, not filename
+4. **Split by Category** - Place split files in correct category folders
+5. **Document Everything** - Update processing-status.json with findings
+
+**Common Patterns to Look For:**
+
+- **Multiple FQEs from different years** → Split to FQE folder
+- **CATs mixed with FQE** → Split to respective folders
+- **Practice questions/quizzes** → Determine if CATs or NOT_RELEVANT
+- **Revision materials** → Usually NOT_RELEVANT
+- **Marking schemes** → PRACTICAL folder
+
+### 3.3 Batch Processing Script
+
+```bash
+#!/bin/bash
+# batch_convert_to_mmd.sh
+
+OCR_SERVER="/home/ngobiro/.local/share/Roo-Code/MCP/mathpix-ocr-server/build/index.js"
+INPUT_DIR="$1"
+OUTPUT_DIR="$2"
+
+# Create output directory
+mkdir -p "$OUTPUT_DIR"
+
+# Process all PDFs
+find "$INPUT_DIR" -name "*.pdf" -type f | while read pdf_file; do
+    filename=$(basename "$pdf_file" .pdf)
+    output_file="$OUTPUT_DIR/${filename}_ocr.mmd"
+    
+    echo "Processing: $pdf_file"
+    node "$OCR_SERVER" "$pdf_file" > "$output_file"
+    echo "Created: $output_file"
+done
+
+echo "Batch conversion complete!"
+```
+
+### 3.3 Post-OCR Manual Review
+
+**Required corrections:**
+1. Fix OCR errors (misrecognized characters)
+2. Remove spurious characters
+3. Verify mathematical equations
+4. Check image URLs from Mathpix
+5. Identify list patterns for semantic HTML conversion
+6. Note any ambiguous content for clarification
+
+## 4. HTML File Organization
+
+### 4.1 Organizing HTML Files by Exam Type
+
+After generating HTML files from MMD, organize them into their respective exam type folders:
+
+**File Placement:**
+```
+pastpapers/
+├── CATs/
+│   ├── 2023j-cat1.html
+│   ├── 2023j-cat2.html
+│   ├── 2022n-cat1.html
+│   └── index.html
+├── FQE/
+│   ├── 2023j-fqe.html
+│   ├── 2022n-fqe.html
+│   ├── 2021s-fqe.html
+│   └── index.html
+├── SUPPLEMENTARY/
+│   ├── 2023-supplementary.html
+│   └── index.html
+├── END_OF_SEMESTER/
+│   └── index.html
+├── END_OF_YEAR/
+│   └── index.html
+├── PRACTICAL/
+│   └── index.html
+├── index.html (main index pointing to all exam types)
+├── styles.css
+└── js/
+    └── sidebar-navigation.js
+```
+
+**Index File Hierarchy:**
+
+1. **Main Index** ([pastpapers/index.html](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/index.html)) - Points to all exam type indexes
+2. **Exam Type Index** ([pastpapers/FQE/index.html](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/FQE/index.html)) - Lists all FQE papers
+3. **Individual Paper** (`pastpapers/FQE/2023j-fqe.html`) - Actual exam with Q&A
+
+### 4.2 Main Past Papers Index Structure
+
+The main [pastpapers/index.html](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/index.html) should:
+- Display category cards for each exam type
+- Show count of papers in each category
+- Link to category-specific index pages
+- Provide search/filter functionality
+
+**Navigation Flow:**
+```
+Main Index (pastpapers/index.html)
+    ↓
+Category Index (pastpapers/FQE/index.html)
+    ↓
+Individual Paper (pastpapers/FQE/2023j-fqe.html)
+```
+
+## 5. Past Paper HTML Conversion
+
+### 4.1 Base HTML Template for Past Papers
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[SUBJECT] - [TYPE] [MONTH] [YEAR] | KNEC Past Papers</title>
+    <link rel="stylesheet" href="../styles.css">
+    <script src="../js/sidebar-navigation.js" defer></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script>
+        MathJax = {
+            tex: {
+                inlineMath: [['$', '$'], ['\\(', '\\)']]
+            }
+        };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>[SUBJECT]</h1>
+            <h2>[TYPE] - [MONTH] [YEAR]</h2>
+            <div class="exam-details">
+                <p>Paper Code: [PAPER CODE]</p>
+                <p>Duration: [DURATION]</p>
+                <p>Module: [MODULE]</p>
+            </div>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <div class="sidebar">
+            <div class="sidebar-header">
+                <h3>Past Papers</h3>
+            </div>
+            <nav class="sidebar-nav">
+                <ul>
+                    <!-- Auto-generated links to other papers -->
+                    <li><a href="../index.html">All Papers</a></li>
+                    <li><a href="../CATs/index.html">CATs</a></li>
+                    <li><a href="../FQE/index.html">FQE</a></li>
+                    <li><a href="../END_OF_SEMESTER/index.html">End of Semester</a></li>
+                </ul>
+            </nav>
+            <div class="dark-mode-container">
+                <label class="dark-mode-toggle" for="dark-mode-toggle-sidebar">
+                    <input type="checkbox" id="dark-mode-toggle-sidebar">
+                    <span class="dark-mode-slider"></span>
+                </label>
+                <span class="dark-mode-label">Dark Mode</span>
+            </div>
+        </div>
+
+        <main>
+            <div class="paper-navigation top">
+                <a href="[previous-paper].html" class="btn">Previous Paper</a>
+                <a href="../index.html" class="btn">Home</a>
+                <a href="[next-paper].html" class="btn">Next Paper</a>
+            </div>
+
+            <section class="paper-intro">
+                <h3>Instructions to Candidates</h3>
+                <ul>
+                    <!-- Extract from MMD -->
+                </ul>
+            </section>
+
+            <section class="paper-content">
+                <!-- Questions with answers -->
+            </section>
+
+            <div class="paper-navigation bottom">
+                <a href="[previous-paper].html" class="btn">Previous Paper</a>
+                <a href="../index.html" class="btn">Home</a>
+                <a href="[next-paper].html" class="btn">Next Paper</a>
+            </div>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 [SUBJECT] Past Papers Collection | Kenya National Examinations Council</p>
+        </div>
+    </footer>
+
+    <button id="back-to-top" title="Back to Top">↑</button>
+    <div class="dark-mode-container">
+        <label class="dark-mode-toggle" for="dark-mode-toggle">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="dark-mode-slider"></span>
+        </label>
+        <span class="dark-mode-label">Dark Mode</span>
+    </div>
+</body>
+</html>
+```
+
+### 4.2 Question Structure (Simultaneous Q&A Creation)
+
+**CRITICAL: Always create questions AND answers together in a single pass.**
+
+```html
+<!-- BEGIN QUESTION 1 -->
+<div class="question" id="question-1">
+    <h3>Question 1 (15 marks)</h3>
+    <div class="question-content">
+        <p>(a) Question text for part a... (5 marks)</p>
+        <p>(b) Question text for part b... (5 marks)</p>
+        <p>(c) Question text for part c... (5 marks)</p>
+
+        <!-- If question has images -->
+        <figure class="question-figure">
+            <img src="https://cdn.mathpix.com/snip/images/[id].png" alt="[Descriptive alt text]">
+            <figcaption>Figure 1: [Description]</figcaption>
+        </figure>
+    </div>
+    
+    <div class="answer-section">
+        <h4>Answer</h4>
+        <div class="answer-content" id="answer-1">
+            <div class="answer-detail">
+                <p class="answer-intro">[Brief introduction to the answer]</p>
+
+                <p><strong>(a)</strong> [Detailed answer to part a]</p>
+                <ul>
+                    <li>[Point 1]</li>
+                    <li>[Point 2]</li>
+                </ul>
+
+                <p><strong>(b)</strong> [Detailed answer to part b]</p>
+                
+                <p><strong>(c)</strong> [Detailed answer to part c]</p>
+
+                <p class="answer-conclusion">[Summary or concluding remarks]</p>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- END QUESTION 1 -->
+```
+
+### 4.3 Answer Creation Guidelines
+
+**For each question, immediately create comprehensive answers using:**
+
+1. **Medical/Health Knowledge Base**
+   - Apply domain expertise to provide accurate answers
+   - Use standard medical terminology
+   - Reference clinical guidelines where applicable
+
+2. **Answer Structure Elements**
+   - `<p class="answer-intro">` - Context/introduction
+   - `<p><strong>(a)</strong>` - Part-by-part answers
+   - `<ul>` or `<ol>` - Lists for multiple points
+   - `<p class="key-point">` - Important notes or assumptions
+   - `<figure class="answer-figure">` - Diagrams (ASCII art)
+   - `<p class="answer-conclusion">` - Summary
+
+3. **Handling Ambiguity**
+   - If OCR data is unclear, make reasonable assumptions
+   - Document assumptions using `.key-point` class
+   - Base answers on standard medical/health principles
+
+4. **Verification Checklist**
+   - ✓ Answer addresses all question parts
+   - ✓ Mark allocation is appropriate
+   - ✓ Medical accuracy verified
+   - ✓ IDs match (question-X, answer-X)
+   - ✓ No placeholder text remains
+
+## 5. Past Papers Index Generation
+
+### 5.1 Category Index Template
+
+Each past paper category needs an [index.html](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/index.html):
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[SUBJECT] - [CATEGORY] Past Papers</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>[SUBJECT]</h1>
+            <h2>[CATEGORY] Past Papers</h2>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <main>
+            <section class="intro">
+                <h2>[CATEGORY] Examinations</h2>
+                <p>[Description of this category]</p>
+            </section>
+
+            <!-- Group by year -->
+            <section class="year-section">
+                <h2>2024</h2>
+                <div class="paper-grid">
+                    <div class="paper-card">
+                        <h3>[Month] 2024</h3>
+                        <div class="meta">
+                            <p>Questions: [N] | Duration: [X] hours</p>
+                        </div>
+                        <div class="actions">
+                            <a href="2024j-[type].html" class="btn">View Online</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Repeat for other years -->
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 [SUBJECT] Past Papers | KNEC</p>
+        </div>
+    </footer>
+</body>
+</html>
+```
+
+### 5.2 Main Past Papers Index
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[SUBJECT] - All Past Papers</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>[SUBJECT]</h1>
+            <h2>Past Papers Collection</h2>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <main>
+            <section class="intro">
+                <h2>Comprehensive Past Papers Archive</h2>
+                <p>Access all past examination papers organized by type.</p>
+            </section>
+
+            <!-- Category Cards -->
+            <section class="category-section">
+                <h2>Browse by Category</h2>
+                <div class="paper-grid">
+                    <div class="paper-card">
+                        <h3>CATs</h3>
+                        <div class="meta">
+                            <p>Continuous Assessment Tests</p>
+                            <p>Papers: [N]</p>
+                        </div>
+                        <div class="actions">
+                            <a href="CATs/index.html" class="btn">Browse CATs</a>
+                        </div>
+                    </div>
+
+                    <div class="paper-card">
+                        <h3>FQE</h3>
+                        <div class="meta">
+                            <p>Final Qualifying Examinations</p>
+                            <p>Papers: [N]</p>
+                        </div>
+                        <div class="actions">
+                            <a href="FQE/index.html" class="btn">Browse FQE</a>
+                        </div>
+                    </div>
+
+                    <!-- Repeat for other categories -->
+                </div>
+            </section>
+
+            <!-- Recent Papers -->
+            <section class="year-section">
+                <h2>Recent Papers (All Types)</h2>
+                <!-- List recent papers across all categories -->
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 [SUBJECT] Past Papers | KNEC</p>
+        </div>
+    </footer>
+</body>
+</html>
+```
+
+## 6. Notes HTML Conversion
+
+### 6.1 Notes Structure
+
+Notes follow the existing PDF-to-HTML conversion workflow with these additions:
+
+**Directory per topic set:**
+```
+notes/
+├── community-health-comprehensive/
+│   ├── index.html
+│   ├── topics/
+│   │   ├── unit-1-introduction.html
+│   │   ├── unit-2-health-promotion.html
+│   │   └── ...
+│   ├── assets/images/
+│   ├── styles/main.css
+│   └── js/navigation.js
+└── epidemiology-lecture-notes/
+    └── ...
+```
+
+### 6.2 Notes Index Template
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>[Topic Name] - [Subject]</title>
+    <link rel="stylesheet" href="styles/main.css">
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>[Topic Name]</h1>
+            <p class="subtitle">[Subject] - [Module Code]</p>
+        </div>
+    </header>
+
+    <nav class="main-nav">
+        <ul>
+            <li><a href="#overview">Overview</a></li>
+            <li><a href="#topics">Topics</a></li>
+            <li><a href="../pastpapers/index.html">Past Papers</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <section id="overview">
+            <h2>Overview</h2>
+            <p>[Brief description of the notes]</p>
+        </section>
+
+        <section id="topics">
+            <h2>Topics</h2>
+            <div class="topic-grid">
+                <div class="topic-card">
+                    <h3>Unit 1: [Title]</h3>
+                    <p>[Brief description]</p>
+                    <a href="topics/unit-1-[name].html" class="btn">Read More</a>
+                </div>
+                <!-- Repeat for other units -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 [Subject] Study Materials</p>
+    </footer>
+</body>
+</html>
+```
+
+## 7. Complete CSS Stylesheet (styles.css)
+
+**Location:** [pastpapers/styles.css](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/styles.css)
+
+**Copy this complete file to every subject's pastpapers folder:**
+
+```css
+/* Base styles */
+:root {
+    --primary-color: #1a73e8;
+    --secondary-color: #4285f4;
+    --accent-color: #e74c3c;
+    --text-color: #202124;
+    --light-bg: #f8f9fa;
+    --border-color: #dadce0;
+    --sidebar-width: 250px;
+    --header-bg: #1a73e8;
+    --header-text: #ffffff;
+    --background-color: #ffffff;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+}
+
+/* Container */
+.container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+/* Header */
+header {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+}
+
+header h2 {
+    font-size: 1.5rem;
+    font-weight: normal;
+    margin-bottom: 1rem;
+}
+
+.exam-details {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.exam-details p {
+    padding: 5px 10px;
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+}
+
+/* Main content layout */
+.main-content {
+    display: flex;
+    gap: 2rem;
+    margin: 2rem auto;
+}
+
+/* Sidebar */
+.sidebar {
+    width: var(--sidebar-width);
+    flex-shrink: 0;
+    background: var(--light-bg);
+    border-radius: 10px;
+    padding: 1.2rem;
+    position: sticky;
+    top: 1rem;
+    height: calc(100vh - 2rem);
+    overflow-y: auto;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.sidebar-header {
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.sidebar-nav ul {
+    list-style: none;
+    padding: 0;
+}
+
+.sidebar-nav li {
+    margin-bottom: 0.5rem;
+}
+
+.sidebar-nav a {
+    display: block;
+    padding: 0.6rem;
+    color: var(--text-color);
+    text-decoration: none;
+    border-radius: 6px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar-nav a:hover,
+.sidebar-nav a.active {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+/* Main content area */
+main {
+    flex-grow: 1;
+    max-width: calc(100% - var(--sidebar-width) - 2rem);
+    background-color: white;
+    border-radius: 5px;
+    padding: 25px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Question styling */
+.question {
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    padding: 1.5rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+.question h3 {
+    color: white;
+    background-color: var(--primary-color);
+    padding: 10px 15px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.question-content {
+    margin-bottom: 1.5rem;
+}
+
+.question-content p {
+    margin-bottom: 10px;
+}
+
+.answer-section {
+    background: var(--light-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 1.2rem;
+    margin-top: 1.5rem;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+    border-left: 4px solid var(--accent-color);
+}
+
+.answer-section h4 {
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.answer-detail {
+    font-size: 0.95rem;
+}
+
+.answer-detail p {
+    margin-bottom: 15px;
+}
+
+.answer-detail strong {
+    color: var(--primary-color);
+}
+
+.answer-detail ul, .answer-detail ol {
+    margin-left: 20px;
+    margin-bottom: 15px;
+    list-style: disc;
+}
+
+.answer-detail ol {
+    list-style: decimal;
+}
+
+.answer-detail li {
+    margin-bottom: 5px;
+}
+
+/* Navigation buttons */
+.paper-navigation {
+    display: flex;
+    justify-content: space-between;
+    margin: 2rem 0;
+    padding-bottom: 15px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.paper-navigation.bottom {
+    margin-top: 30px;
+    margin-bottom: 0;
+    padding-top: 15px;
+    padding-bottom: 0;
+    border-top: 1px solid var(--border-color);
+    border-bottom: none;
+}
+
+.btn {
+    display: inline-block;
+    padding: 8px 16px;
+    background: var(--primary-color);
+    color: white;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+    border: none;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: var(--secondary-color);
+}
+
+/* Paper intro */
+.paper-intro {
+    margin-bottom: 30px;
+    padding: 20px;
+    background-color: #f8f9fa;
+    border-left: 4px solid var(--secondary-color);
+    border-radius: 0 4px 4px 0;
+}
+
+.paper-intro h3 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+}
+
+.paper-intro ul {
+    margin-left: 20px;
+    list-style: disc;
+}
+
+.paper-intro li {
+    margin-bottom: 5px;
+}
+
+/* Paper content */
+.paper-content {
+    margin-bottom: 2rem;
+}
+
+/* Figure styling */
+.question-figure {
+    margin: 1.5rem 0;
+    text-align: center;
+}
+
+.question-figure img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    padding: 5px;
+    background-color: white;
+}
+
+.question-figure figcaption {
+    margin-top: 0.5rem;
+    font-style: italic;
+    color: #666;
+}
+
+/* Footer */
+footer {
+    background-color: var(--header-bg);
+    color: var(--header-text);
+    padding: 20px 0;
+    text-align: center;
+    margin-top: 4rem;
+    font-size: 0.9rem;
+}
+
+/* Back to Top Button */
+#back-to-top {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: var(--primary-color);
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    cursor: pointer;
+    display: none;
+    z-index: 99;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+#back-to-top:hover {
+    background-color: var(--secondary-color);
+}
+
+/* Dark Mode Styles */
+:root.dark-mode {
+    --primary-color: #3498db;
+    --secondary-color: #2ecc71;
+    --accent-color: #e74c3c;
+    --text-color: #f0f0f0;
+    --background-color: #121212;
+    --sidebar-bg: #1e1e1e;
+    --header-bg: #0f0f0f;
+    --header-text: #ffffff;
+    --border-color: #333;
+    --light-bg: #1e1e1e;
+}
+
+.dark-mode body {
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.dark-mode main,
+.dark-mode .question {
+    background-color: #1a1a1a;
+}
+
+.dark-mode .paper-intro,
+.dark-mode .answer-section {
+    background-color: #1e1e1e;
+}
+
+.dark-mode .sidebar-nav a:hover {
+    background-color: rgba(46, 204, 113, 0.1);
+}
+
+/* Dark Mode Toggle */
+.dark-mode-container {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 5px 10px;
+    border-radius: 20px;
+}
+
+.dark-mode-toggle {
+    position: relative;
+    display: inline-block;
+    width: 44px;
+    height: 24px;
+}
+
+.dark-mode-toggle input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.dark-mode-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 24px;
+}
+
+.dark-mode-slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+}
+
+input:checked + .dark-mode-slider {
+    background-color: var(--secondary-color);
+}
+
+input:checked + .dark-mode-slider:before {
+    transform: translateX(20px);
+}
+
+.dark-mode-label {
+    margin-left: 10px;
+    color: white;
+    font-size: 0.8rem;
+}
+
+/* Category Cards for Past Papers Index */
+.category-section {
+    margin: 3rem 0;
+}
+
+.category-section .paper-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.category-section .paper-card {
+    background: white;
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.category-section .paper-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+    border-color: var(--primary-color);
+}
+
+/* Responsive Styles */
+@media (max-width: 992px) {
+    .main-content {
+        flex-direction: column;
+    }
+
+    .sidebar {
+        flex: 0 0 100%;
+        margin-bottom: 20px;
+        position: static;
+        height: auto;
+        overflow-y: visible;
+    }
+
+    main {
+        max-width: 100%;
+    }
+
+    .exam-details {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .paper-navigation {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .btn {
+        flex: 1;
+        text-align: center;
+    }
+}
+
+@media (max-width: 768px) {
+    header h1 {
+        font-size: 1.8rem;
+    }
+
+    header h2 {
+        font-size: 1.2rem;
+    }
+
+    .container {
+        padding: 0 10px;
+    }
+
+    main {
+        padding: 15px;
+    }
+
+    .sidebar {
+        padding: 15px;
+        position: fixed;
+        top: 0;
+        left: -280px;
+        height: 100vh;
+        width: 250px;
+        z-index: 999;
+        transition: left 0.3s ease;
+        overflow-y: auto;
+        box-shadow: 0 0 15px rgba(0,0,0,0.2);
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .sidebar-backdrop {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0,0,0,0.5);
+        z-index: 998;
+    }
+
+    .sidebar-backdrop.active {
+        display: block;
+    }
+
+    .question h3 {
+        font-size: 1.1rem;
+        padding: 8px 12px;
+    }
+
+    .paper-navigation .btn {
+        padding: 6px 12px;
+        font-size: 0.9rem;
+    }
+
+    .answer-section {
+        padding: 15px;
+    }
+
+    .answer-detail {
+        font-size: 0.9rem;
+    }
+
+    .mobile-nav-toggle {
+        display: block;
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 1000;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        border-radius: 4px;
+        padding: 8px 12px;
+        font-size: 1.2rem;
+        cursor: pointer;
+    }
+}
+
+/* Answer styling enhancements */
+.answer-intro {
+    font-style: italic;
+    border-left: 3px solid var(--secondary-color);
+    padding-left: 10px;
+    margin-bottom: 20px;
+    background-color: rgba(52, 152, 219, 0.05);
+    padding: 10px;
+    border-radius: 4px;
+}
+
+.answer-conclusion {
+    margin-top: 20px;
+    font-weight: 500;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.key-point {
+    background-color: rgba(46, 204, 113, 0.1);
+    border-left: 3px solid #2ecc71;
+    padding: 10px;
+    margin: 15px 0;
+    border-radius: 4px;
+}
+
+/* Indentation for nested question parts */
+.indented-1 {
+    margin-left: 20px;
+}
+
+.indented-2 {
+    margin-left: 40px;
+}
+
+/* Print Styles */
+@media print {
+    .sidebar,
+    .paper-navigation,
+    .dark-mode-container,
+    #back-to-top,
+    .mobile-nav-toggle,
+    .sidebar-backdrop {
+        display: none !important;
+    }
+
+    main {
+        flex: 1;
+        width: 100%;
+        max-width: 100%;
+        box-shadow: none;
+        padding: 0;
+    }
+
+    .container {
+        padding: 0;
+    }
+
+    .question {
+        page-break-inside: avoid;
+        border: 1px solid #ccc;
+        margin-bottom: 1rem;
+        padding: 1rem;
+        box-shadow: none;
+    }
+
+    .question h3 {
+        background-color: #eee !important;
+        color: #000 !important;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+
+    .answer-section {
+        background-color: #f9f9f9 !important;
+        border: 1px solid #ccc;
+        print-color-adjust: exact;
+        -webkit-print-color-adjust: exact;
+    }
+}
+```
+
+## 8. Complete JavaScript File (js/sidebar-navigation.js)
+
+**Location:** [pastpapers/js/sidebar-navigation.js](file:///home/ngobiro/projects/pngobiro.github.io/colleges/kmtc/diploma/Diploma%20in%20Health%20Records%20and%20Information%20Technology/Year%201/Medical%20Demography/pastpapers/js/sidebar-navigation.js)
+
+**Copy this complete file to every subject's pastpapers/js folder:**
+
+```javascript
+// js/sidebar-navigation.js
+document.addEventListener('DOMContentLoaded', function() {
+    // Get current page URL
+    const currentPage = window.location.pathname.split('/').pop();
+
+    // Find all sidebar links
+    const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+
+    // Add active class to current page
+    sidebarLinks.forEach(link => {
+        const linkHref = link.getAttribute('href');
+        if (linkHref === currentPage) {
+            link.classList.add('active');
+        }
+    });
+
+    // Add smooth scrolling for question links
+    const questionLinks = document.querySelectorAll('a[href^="#question-"]');
+
+    questionLinks.forEach(link => {
+        link.addEventListener('click', function(e) {
+            if (currentPage === window.location.pathname.split('/').pop()) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 50,
+                        behavior: 'smooth'
+                    });
+
+                    targetElement.classList.add('highlight');
+                    setTimeout(() => {
+                        targetElement.classList.remove('highlight');
+                    }, 2000);
+                }
+            }
+        });
+    });
+
+    // Back to top button functionality
+    const backToTopBtn = document.getElementById('back-to-top');
+
+    if (backToTopBtn) {
+        window.addEventListener('scroll', function() {
+            if (window.pageYOffset > 300) {
+                backToTopBtn.style.display = 'block';
+            } else {
+                backToTopBtn.style.display = 'none';
+            }
+        });
+
+        backToTopBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+});
+
+// Dark mode functionality
+function setupDarkMode() {
+    const darkModeToggle = document.getElementById('dark-mode-toggle');
+    const darkModeToggleSidebar = document.getElementById('dark-mode-toggle-sidebar');
+    const htmlElement = document.documentElement;
+
+    const savedDarkMode = localStorage.getItem('darkMode') === 'true';
+
+    if (savedDarkMode) {
+        htmlElement.classList.add('dark-mode');
+        if (darkModeToggle) {
+            darkModeToggle.checked = true;
+        }
+        if (darkModeToggleSidebar) {
+            darkModeToggleSidebar.checked = true;
+        }
+    } else {
+        htmlElement.classList.remove('dark-mode');
+    }
+
+    const handleToggleChange = (isDarkMode, sourceToggle) => {
+        if (isDarkMode) {
+            htmlElement.classList.add('dark-mode');
+            localStorage.setItem('darkMode', 'true');
+        } else {
+            htmlElement.classList.remove('dark-mode');
+            localStorage.setItem('darkMode', 'false');
+        }
+        if (darkModeToggle && darkModeToggle !== sourceToggle) {
+            darkModeToggle.checked = isDarkMode;
+        }
+        if (darkModeToggleSidebar && darkModeToggleSidebar !== sourceToggle) {
+            darkModeToggleSidebar.checked = isDarkMode;
+        }
+    };
+
+    if (darkModeToggle) {
+        darkModeToggle.addEventListener('change', function() {
+            handleToggleChange(this.checked, this);
+        });
+    }
+    if (darkModeToggleSidebar) {
+        darkModeToggleSidebar.addEventListener('change', function() {
+            handleToggleChange(this.checked, this);
+        });
+    }
+}
+
+document.addEventListener('DOMContentLoaded', setupDarkMode);
+
+// Mobile navigation functionality
+document.addEventListener('DOMContentLoaded', function() {
+    let mobileNavToggle = document.querySelector('.mobile-nav-toggle');
+    let sidebarBackdrop = document.querySelector('.sidebar-backdrop');
+    const sidebar = document.querySelector('.sidebar');
+
+    if (sidebar) {
+        if (!mobileNavToggle) {
+            mobileNavToggle = document.createElement('button');
+            mobileNavToggle.className = 'mobile-nav-toggle';
+            mobileNavToggle.innerHTML = '☰';
+            mobileNavToggle.setAttribute('aria-label', 'Toggle navigation menu');
+            mobileNavToggle.setAttribute('aria-expanded', 'false');
+            document.body.appendChild(mobileNavToggle);
+        }
+
+        if (!sidebarBackdrop) {
+            sidebarBackdrop = document.createElement('div');
+            sidebarBackdrop.className = 'sidebar-backdrop';
+            document.body.appendChild(sidebarBackdrop);
+        }
+
+        mobileNavToggle.addEventListener('click', function() {
+            sidebar.classList.toggle('active');
+            sidebarBackdrop.classList.toggle('active');
+
+            const isExpanded = sidebar.classList.contains('active');
+            mobileNavToggle.setAttribute('aria-expanded', isExpanded);
+            mobileNavToggle.innerHTML = isExpanded ? '✕' : '☰';
+        });
+
+        sidebarBackdrop.addEventListener('click', function() {
+            sidebar.classList.remove('active');
+            sidebarBackdrop.classList.remove('active');
+            mobileNavToggle.innerHTML = '☰';
+            mobileNavToggle.setAttribute('aria-expanded', 'false');
+        });
+
+        const sidebarLinks = document.querySelectorAll('.sidebar-nav a');
+        sidebarLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                if (window.getComputedStyle(mobileNavToggle).display !== 'none') {
+                    sidebar.classList.remove('active');
+                    sidebarBackdrop.classList.remove('active');
+                    mobileNavToggle.innerHTML = '☰';
+                    mobileNavToggle.setAttribute('aria-expanded', 'false');
+                }
+            });
+        });
+
+        window.addEventListener('resize', function() {
+            const isMobileView = window.getComputedStyle(mobileNavToggle).display !== 'none';
+
+            if (!isMobileView) {
+                sidebar.classList.remove('active');
+                sidebarBackdrop.classList.remove('active');
+                mobileNavToggle.style.display = 'none';
+                sidebarBackdrop.style.display = 'none';
+                sidebar.style.position = 'sticky';
+                sidebar.style.left = 'auto';
+            } else {
+                mobileNavToggle.style.display = 'block';
+                sidebar.style.position = 'fixed';
+            }
+        });
+
+        const isMobileView = window.getComputedStyle(mobileNavToggle).display !== 'none';
+        if (isMobileView) {
+            mobileNavToggle.style.display = 'block';
+            sidebar.style.position = 'fixed';
+            sidebar.style.left = '-280px';
+            sidebarBackdrop.style.display = 'none';
+        } else {
+            mobileNavToggle.style.display = 'none';
+            sidebarBackdrop.style.display = 'none';
+            sidebar.style.position = 'sticky';
+            sidebar.style.left = 'auto';
+        }
+    }
+});
+```
+
+## 9. Automation Scripts
+
+### 8.1 Subject Organization Script
+
+```python
+#!/usr/bin/env python3
+# organize_subjects.py
+
+import os
+import shutil
+import json
+from pathlib import Path
+
+# ============================================================================
+# SUBJECT MAPPINGS - CUSTOMIZE FOR EACH COURSE/PROGRAM
+# ============================================================================
+# The mappings below are specific to "Diploma in Health Records & Information Technology"
+# 
+# FOR OTHER COURSES, CREATE DIFFERENT MAPPINGS based on that course's curriculum:
+# - Diploma in Nursing: Include subjects like Fundamentals of Nursing, Medical-Surgical Nursing, etc.
+# - Diploma in Clinical Medicine: Include subjects like Clinical Medicine, Surgery, Pediatrics, etc.
+# - Diploma in Pharmacy: Include subjects like Pharmacology, Pharmaceutical Chemistry, etc.
+# - Certificate in Community Health: Include relevant community health subjects
+# 
+# To customize: Replace the dictionary below with subjects from your course's curriculum
+# ============================================================================
+
+SUBJECT_MAPPINGS = {
+    "Community Health": ["Community Health", "Public Health"],
+    "Epidemiology": ["Epidemiology", "Disease Surveillance"],
+    "Health Statistics": ["Health Statistics", "Vital Statistics", "Biostatistics"],
+    "Medical Demography": ["Medical Demography", "Demography", "Population Studies"],
+    "Health Records Management": ["Health Records", "Medical Records", "Records Management"],
+    "Health Data Classification": ["Health Data", "Data Classification", "ICD", "Coding"],
+    "Health Information Systems": ["Health Information", "HIS", "Information Systems"],
+    "Computer Applications in Health Care": ["Computer Applications", "Health IT", "Medical Informatics"],
+    "Human Anatomy and Physiology": ["Anatomy", "Physiology", "Human Anatomy"],
+    "Human Pathology": ["Pathology", "Medical Pathology"],
+    "Medical Terminology": ["Medical Terminology", "Medical Language"],
+    "First Aid": ["First Aid", "Emergency Response"],
+    "HIV/AIDS & STIs": ["HIV", "AIDS", "STI", "STD"],
+    "Mental Health": ["Mental Health", "Psychiatry", "Psychology"],
+    "Research Methods": ["Research", "Research Methods", "Research Methodology"],
+    "Monitoring and Evaluation": ["M&E", "Monitoring", "Evaluation"],
+    "Health Systems Management": ["Health Systems", "Health Management"],
+    "Human Resource Management": ["HRM", "Human Resources"],
+}
+
+PASTPAPER_TYPES = {
+    "CATs": ["CAT", "C.A.T", "Continuous Assessment"],
+    "FQE": ["FQE", "Final Qualifying"],
+    "SUPPLEMENTARY": ["SUPP", "Supplementary", "Retake"],
+    "END_OF_SEMESTER": ["End of Semester", "EOS", "Semester Exam"],
+    "END_OF_YEAR": ["End of Year", "EOY", "Annual Exam"],
+    "PRACTICAL": ["Practical", "Lab Exam", "Marking Key"],
+}
+
+def identify_subject(filename, content_hint=""):
+    """Identify subject from filename or content"""
+    filename_lower = filename.lower()
+    
+    for subject, keywords in SUBJECT_MAPPINGS.items():
+        for keyword in keywords:
+            if keyword.lower() in filename_lower:
+                return subject
+    
+    return "Uncategorized"
+
+def identify_pastpaper_type(filename):
+    """Identify past paper type"""
+    filename_upper = filename.upper()
+    
+    for paper_type, keywords in PASTPAPER_TYPES.items():
+        for keyword in keywords:
+            if keyword.upper() in filename_upper:
+                return paper_type
+    
+    return "NOT_RELEVANT"
+
+def organize_directory(base_path):
+    """Organize files into subject structure"""
+    base_path = Path(base_path)
+    
+    # Scan all files
+    for item in base_path.rglob("*"):
+        if item.is_file() and item.suffix.lower() == ".pdf":
+            subject = identify_subject(item.name)
+            
+            # Determine if it's a past paper or notes
+            paper_type = identify_pastpaper_type(item.name)
+            
+            if paper_type != "NOT_RELEVANT":
+                # It's a past paper
+                dest_dir = base_path / subject / "pastpapers" / paper_type
+            else:
+                # It's notes or other material
+                dest_dir = base_path / subject / "notes"
+            
+            # Create destination directory
+            dest_dir.mkdir(parents=True, exist_ok=True)
+            
+            # Move file
+            dest_file = dest_dir / item.name
+            if not dest_file.exists():
+                shutil.copy2(item, dest_file)
+                print(f"Copied: {item} -> {dest_file}")
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) > 1:
+        organize_directory(sys.argv[1])
+    else:
+        print("Usage: python organize_subjects.py <directory>")
+```
+
+### 8.2 Index Generation Script
+
+```python
+#!/usr/bin/env python3
+# generate_indexes.py
+
+import os
+from pathlib import Path
+from datetime import datetime
+
+def generate_pastpaper_category_index(category_dir, subject_name):
+    """Generate index.html for a past paper category"""
+    category_name = category_dir.name
+    papers = sorted([f for f in category_dir.glob("*.html") if f.name != "index.html"])
+    
+    # Group by year
+    papers_by_year = {}
+    for paper in papers:
+        # Extract year from filename (e.g., 2023j-cat1.html)
+        year = paper.stem[:4]
+        if year.isdigit():
+            papers_by_year.setdefault(year, []).append(paper)
+    
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{subject_name} - {category_name} Past Papers</title>
+    <link rel="stylesheet" href="../styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>{subject_name}</h1>
+            <h2>{category_name} Past Papers</h2>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <main>
+            <section class="intro">
+                <h2>{category_name} Examinations</h2>
+                <p>Collection of {category_name} past papers for {subject_name}.</p>
+            </section>
+"""
+    
+    # Add papers by year
+    for year in sorted(papers_by_year.keys(), reverse=True):
+        html += f"""
+            <section class="year-section">
+                <h2>{year}</h2>
+                <div class="paper-grid">
+"""
+        for paper in papers_by_year[year]:
+            paper_name = paper.stem.replace("-", " ").title()
+            html += f"""
+                    <div class="paper-card">
+                        <h3>{paper_name}</h3>
+                        <div class="actions">
+                            <a href="{paper.name}" class="btn">View Online</a>
+                        </div>
+                    </div>
+"""
+        html += """
+                </div>
+            </section>
+"""
+    
+    html += """
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 """ + subject_name + """ Past Papers | KNEC</p>
+        </div>
+    </footer>
+</body>
+</html>
+"""
+    
+    index_file = category_dir / "index.html"
+    index_file.write_text(html)
+    print(f"Generated: {index_file}")
+
+def generate_main_pastpaper_index(pastpaper_dir, subject_name):
+    """Generate main index.html for all past papers"""
+    categories = [d for d in pastpaper_dir.iterdir() if d.is_dir()]
+    
+    html = f"""<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{subject_name} - All Past Papers</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>{subject_name}</h1>
+            <h2>Past Papers Collection</h2>
+        </div>
+    </header>
+
+    <div class="container main-content">
+        <main>
+            <section class="intro">
+                <h2>Comprehensive Past Papers Archive</h2>
+                <p>Access all past examination papers organized by type.</p>
+            </section>
+
+            <section class="category-section">
+                <h2>Browse by Category</h2>
+                <div class="paper-grid">
+"""
+    
+    for category in sorted(categories):
+        if category.name == "NOT_RELEVANT":
+            continue
+        
+        paper_count = len(list(category.glob("*.html"))) - 1  # Exclude index.html
+        
+        html += f"""
+                    <div class="paper-card">
+                        <h3>{category.name.replace("_", " ")}</h3>
+                        <div class="meta">
+                            <p>Papers: {paper_count}</p>
+                        </div>
+                        <div class="actions">
+                            <a href="{category.name}/index.html" class="btn">Browse {category.name}</a>
+                        </div>
+                    </div>
+"""
+    
+    html += """
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 """ + subject_name + """ Past Papers | KNEC</p>
+        </div>
+    </footer>
+</body>
+</html>
+"""
+    
+    index_file = pastpaper_dir / "index.html"
+    index_file.write_text(html)
+    print(f"Generated: {index_file}")
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) > 2:
+        pastpaper_dir = Path(sys.argv[1])
+        subject_name = sys.argv[2]
+        
+        # Generate category indexes
+        for category_dir in pastpaper_dir.iterdir():
+            if category_dir.is_dir() and category_dir.name != "js":
+                generate_pastpaper_category_index(category_dir, subject_name)
+        
+        # Generate main index
+        generate_main_pastpaper_index(pastpaper_dir, subject_name)
+    else:
+        print("Usage: python generate_indexes.py <pastpaper_dir> <subject_name>")
+```
+
+## 9. Complete Workflow
+
+### 9.1 Initial Organization
+
+```bash
+# 1. Organize files into subject structure
+python organize_subjects.py "/path/to/Year 1"
+
+# 2. Review and manually adjust any misclassified files
+```
+
+### 9.2 Convert PDFs to MMD
+
+```bash
+# 3. Batch convert past papers to MMD
+for subject_dir in Year\ 1/*/pastpapers; do
+    for category_dir in "$subject_dir"/*/; do
+        find "$category_dir" -name "*.pdf" -type f | while read pdf; do
+            output="${pdf%.pdf}_ocr.mmd"
+            node /home/ngobiro/.local/share/Roo-Code/MCP/mathpix-ocr-server/build/index.js "$pdf" > "$output"
+            echo "Converted: $pdf -> $output"
+        done
+    done
+done
+
+# 4. Convert notes to MMD
+for subject_dir in Year\ 1/*/notes; do
+    find "$subject_dir" -name "*.pdf" -type f | while read pdf; do
+        output="${pdf%.pdf}_ocr.mmd"
+        node /home/ngobiro/.local/share/Roo-Code/MCP/mathpix-ocr-server/build/index.js "$pdf" > "$output"
+        echo "Converted: $pdf -> $output"
+    done
+done
+```
+
+### 9.3 Manual Review
+
+```bash
+# 5. Manually review and correct each MMD file
+# - Fix OCR errors
+# - Remove spurious characters
+# - Verify equations and images
+# - Note list patterns for semantic conversion
+```
+
+### 9.4 Generate HTML
+
+```bash
+# 6. For each MMD file, generate HTML following templates
+# - Past papers: Use past paper template with Q&A structure
+# - Notes: Use notes template with topic chunking
+
+# 7. Generate all index files
+python generate_indexes.py "Year 1/Community Health/pastpapers" "Community Health"
+```
+
+### 9.5 Copy Shared Assets
+
+```bash
+# 8. Copy CSS and JS to each pastpapers directory
+cp styles.css "Year 1/Community Health/pastpapers/"
+cp -r js "Year 1/Community Health/pastpapers/"
+```
+
+### 9.6 Verification
+
+```bash
+# 9. Verify all HTML files
+# - Check navigation links
+# - Verify all questions have answers
+# - Test dark mode toggle
+# - Test mobile responsiveness
+# - Validate HTML structure
+```
+
+## 10. Key Principles
+
+### 10.1 Content Integrity
+- **100% verbatim content** from source documents
+- No summarization or paraphrasing
+- Preserve all technical terms and medical terminology
+
+### 10.2 Simultaneous Q&A Creation
+- **Never** create questions without answers
+- Process one question completely before moving to next
+- Use medical knowledge to provide accurate answers
+- Document any assumptions made
+
+### 10.3 Structural Consistency
+- Follow exact HTML templates
+- No unnecessary div nesting
+- Use semantic HTML elements
+- Apply consistent styling classes
+
+### 10.4 Accessibility
+- Proper heading hierarchy
+- Descriptive alt text for images
+- ARIA labels where appropriate
+- Mobile-responsive design
+- Dark mode support
+
+### 10.5 Future-Proofing
+- Modular structure allows easy updates
+- New papers can be added to existing categories
+- Index files can be regenerated automatically
+- CSS/JS updates propagate to all pages
+
+## 11. Quality Checklist
+
+Before considering any conversion complete:
+
+- [ ] All PDFs converted to MMD
+- [ ] All MMD files manually reviewed and corrected
+- [ ] All past papers classified into correct categories
+- [ ] All questions have complete answers
+- [ ] All HTML validates (no broken tags)
+- [ ] All navigation links work correctly
+- [ ] All images display properly
+- [ ] Dark mode toggle works
+- [ ] Mobile view is functional
+- [ ] Print styles work correctly
+- [ ] All index files generated
+- [ ] Content matches source 100%
+- [ ] Medical terminology is accurate
+- [ ] Math equations render correctly (MathJax)
+
+---
+
+**Version:** 2.0  
+**Last Updated:** 2025-11-25  
+**Purpose:** Comprehensive medical education content organization and HTML conversion system
