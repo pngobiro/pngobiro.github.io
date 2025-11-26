@@ -614,7 +614,8 @@ Individual Paper (pastpapers/FQE/2023j-fqe.html)
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>[SUBJECT] - [TYPE] [MONTH] [YEAR] | KNEC Past Papers</title>
     <link rel="stylesheet" href="../styles.css">
-    <script src="../js/sidebar-navigation.js" defer></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
     <script>
         MathJax = {
@@ -626,130 +627,243 @@ Individual Paper (pastpapers/FQE/2023j-fqe.html)
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>[SUBJECT]</h1>
-            <h2>[TYPE] - [MONTH] [YEAR]</h2>
-            <div class="exam-details">
-                <p>Paper Code: [PAPER CODE]</p>
-                <p>Duration: [DURATION]</p>
-                <p>Module: [MODULE]</p>
-            </div>
-        </div>
-    </header>
+    <!-- Mobile Navigation Toggle -->
+    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-backdrop"></div>
 
-    <div class="container main-content">
-        <div class="sidebar">
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
             <div class="sidebar-header">
-                <h3>Past Papers</h3>
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>[SUBJECT]</span>
+                </div>
             </div>
+
             <nav class="sidebar-nav">
-                <ul>
-                    <!-- Auto-generated links to other papers -->
-                    <li><a href="../index.html">All Papers</a></li>
-                    <li><a href="../CATs/index.html">CATs</a></li>
-                    <li><a href="../FQE/index.html">FQE</a></li>
-                    <li><a href="../END_OF_SEMESTER/index.html">End of Semester</a></li>
-                </ul>
+                <a href="../index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="index.html" class="nav-item active">
+                    <i class="fas fa-file-alt"></i>
+                    <span>[TYPE] Papers</span>
+                </a>
+                <div class="nav-group">
+                    <div class="nav-group-title">Sections</div>
+                    <a href="#section-1" class="nav-item sub-item">
+                        <i class="fas fa-list-ol"></i>
+                        <span>Section 1: MCQs</span>
+                    </a>
+                    <a href="#section-2" class="nav-item sub-item">
+                        <i class="fas fa-pen"></i>
+                        <span>Section 2: Short Answer</span>
+                    </a>
+                    <a href="#section-3" class="nav-item sub-item">
+                        <i class="fas fa-align-left"></i>
+                        <span>Section 3: Long Answer</span>
+                    </a>
+                </div>
             </nav>
-            <div class="dark-mode-container">
-                <label class="dark-mode-toggle" for="dark-mode-toggle-sidebar">
-                    <input type="checkbox" id="dark-mode-toggle-sidebar">
-                    <span class="dark-mode-slider"></span>
-                </label>
-                <span class="dark-mode-label">Dark Mode</span>
+
+            <div class="sidebar-footer">
+                <button class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
             </div>
-        </div>
+        </aside>
 
-        <main>
-            <div class="paper-navigation top">
-                <a href="[previous-paper].html" class="btn">Previous Paper</a>
-                <a href="../index.html" class="btn">Home</a>
-                <a href="[next-paper].html" class="btn">Next Paper</a>
-            </div>
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="paper-header">
+                <div class="paper-meta">
+                    <span class="badge fqe">[TYPE]</span>
+                    <span class="date"><i class="far fa-calendar"></i> [DATE]</span>
+                    <span class="time"><i class="far fa-clock"></i> [DURATION]</span>
+                </div>
+                <h1>[SUBJECT]</h1>
+                <p class="subtitle">[TYPE] - [DIPLOMA/COURSE NAME]</p>
 
-            <section class="paper-intro">
-                <h3>Instructions to Candidates</h3>
-                <ul>
-                    <!-- Extract from MMD -->
-                </ul>
-            </section>
+                <div class="paper-instructions">
+                    <h3><i class="fas fa-info-circle"></i> Instructions</h3>
+                    <ul>
+                        <!-- Extract from MMD -->
+                    </ul>
+                </div>
+            </header>
 
-            <section class="paper-content">
-                <!-- Questions with answers -->
-            </section>
-
-            <div class="paper-navigation bottom">
-                <a href="[previous-paper].html" class="btn">Previous Paper</a>
-                <a href="../index.html" class="btn">Home</a>
-                <a href="[next-paper].html" class="btn">Next Paper</a>
-            </div>
+            <!-- Questions will go here -->
         </main>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 [SUBJECT] Past Papers Collection | Kenya National Examinations Council</p>
-        </div>
-    </footer>
-
-    <button id="back-to-top" title="Back to Top">↑</button>
-    <div class="dark-mode-container">
-        <label class="dark-mode-toggle" for="dark-mode-toggle">
-            <input type="checkbox" id="dark-mode-toggle">
-            <span class="dark-mode-slider"></span>
-        </label>
-        <span class="dark-mode-label">Dark Mode</span>
-    </div>
+    <script src="../js/sidebar-navigation.js"></script>
 </body>
 </html>
 ```
 
 ### 4.2 Question Structure (Simultaneous Q&A Creation)
 
+> [!IMPORTANT]
+> **COMPLETE QUESTION INCLUSION REQUIRED**
+> - Every single question from the MMD file MUST be included in the HTML
+> - Never use notes like "Questions 6-40 omitted for brevity"
+> - Each question MUST have a comprehensive, detailed answer
+> - No placeholders, no "to be added later" notes
+> - This is a complete, production-ready document
+
 **CRITICAL: Always create questions AND answers together in a single pass.**
 
+**Section Structure:**
 ```html
-<!-- BEGIN QUESTION 1 -->
-<div class="question" id="question-1">
-    <h3>Question 1 (15 marks)</h3>
-    <div class="question-content">
-        <p>(a) Question text for part a... (5 marks)</p>
-        <p>(b) Question text for part b... (5 marks)</p>
-        <p>(c) Question text for part c... (5 marks)</p>
-
-        <!-- If question has images -->
-        <figure class="question-figure">
-            <img src="https://cdn.mathpix.com/snip/images/[id].png" alt="[Descriptive alt text]">
-            <figcaption>Figure 1: [Description]</figcaption>
-        </figure>
+<section id="section-1" class="exam-section">
+    <div class="section-header">
+        <h2>Section 1: Multiple Choice Questions</h2>
+        <span class="marks">40 Marks</span>
     </div>
-    
-    <div class="answer-section">
-        <h4>Answer</h4>
-        <div class="answer-content" id="answer-1">
-            <div class="answer-detail">
-                <p class="answer-intro">[Brief introduction to the answer]</p>
 
-                <p><strong>(a)</strong> [Detailed answer to part a]</p>
-                <ul>
-                    <li>[Point 1]</li>
-                    <li>[Point 2]</li>
-                </ul>
+    <div class="question-list">
+        <!-- Questions go here -->
+    </div>
+</section>
+```
 
-                <p><strong>(b)</strong> [Detailed answer to part b]</p>
-                
-                <p><strong>(c)</strong> [Detailed answer to part c]</p>
-
-                <p class="answer-conclusion">[Summary or concluding remarks]</p>
+**For Multiple Choice Questions:**
+```html
+<div class="question-card">
+    <div class="question-header">
+        <span class="q-number">1.</span>
+        <div class="q-text">Natural increase in human population refers to:</div>
+    </div>
+    <div class="options-grid">
+        <div class="option">a) The sum of the number of births and number of deaths</div>
+        <div class="option">b) The difference between the number of births and the number of deaths</div>
+        <div class="option">c) The difference between population size at given time A and time B</div>
+        <div class="option">d) The number of children born naturally without planning</div>
+    </div>
+    <div class="answer-box">
+        <details>
+            <summary>Show Answer</summary>
+            <div class="answer-content">
+                <p><strong>Correct Answer:</strong> b) The difference between the number of births and the number of deaths</p>
+                <p>Natural increase refers to the difference between births and deaths in a population, excluding migration. It is calculated as: Natural Increase = Births - Deaths</p>
             </div>
-        </div>
+        </details>
     </div>
 </div>
-<!-- END QUESTION 1 -->
+```
+
+**For Short Answer Questions:**
+```html
+<div class="question-card">
+    <div class="question-header">
+        <span class="q-number">1.</span>
+        <div class="q-text">List the factors that cause population growth (5 marks)</div>
+    </div>
+    <div class="answer-box">
+        <details>
+            <summary>Show Answer</summary>
+            <div class="answer-content">
+                <p><strong>Answer:</strong></p>
+                <p>Factors that cause population growth include:</p>
+                <ol>
+                    <li><strong>High Birth Rate:</strong> When births exceed deaths, population increases.</li>
+                    <li><strong>Improved Healthcare:</strong> Better medical facilities reduce mortality rates.</li>
+                    <li><strong>Immigration:</strong> People moving into an area increase population size.</li>
+                    <li><strong>Increased Lifespan:</strong> Better living conditions lead to longer lives.</li>
+                    <li><strong>Cultural Factors:</strong> Societies that value large families tend to have higher birth rates.</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+</div>
+```
+
+**For Questions with Images:**
+```html
+<div class="question-card">
+    <div class="question-header">
+        <span class="q-number">3.</span>
+        <div class="q-text">The chart below shows the time reference for mortality in childhood and infancy. Indicate the names given to the periods shown. (5 marks)</div>
+    </div>
+    <div class="question-image">
+        <img src="images/2020j-fqe-fig1.jpg" alt="Mortality time reference chart">
+    </div>
+    <div class="answer-box">
+        <details>
+            <summary>Show Answer</summary>
+            <div class="answer-content">
+                <p><strong>Answer:</strong></p>
+                <ol>
+                    <li><strong>Perinatal Mortality:</strong> 28 weeks gestation to 7 days after birth</li>
+                    <li><strong>Neonatal Mortality:</strong> Birth to 28 days</li>
+                    <li><strong>Post-neonatal Mortality:</strong> 28 days to 1 year</li>
+                    <li><strong>Infant Mortality:</strong> Birth to 1 year</li>
+                    <li><strong>Child Mortality:</strong> 1 year to 5 years</li>
+                    <li><strong>Under-5 Mortality:</strong> Birth to 5 years</li>
+                </ol>
+            </div>
+        </details>
+    </div>
+</div>
+```
+
+**For Questions with Tables:**
+```html
+<div class="question-card">
+    <div class="question-header">
+        <span class="q-number">1.</span>
+        <div class="q-text">
+            <p>The following data of a given country 'X' shows the age distribution. Use the data to answer the questions below.</p>
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Age group</th>
+                            <th>Male</th>
+                            <th>Female</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0-4</td>
+                            <td>1,550,000</td>
+                            <td>1,575,000</td>
+                        </tr>
+                        <!-- Additional rows -->
+                    </tbody>
+                </table>
+            </div>
+            <p>a) Present the population of country X in a population pyramid using percentages.</p>
+            <p>b) Calculate the age dependency ratio.</p>
+            <p>c) Calculate sex ratio of the population.</p>
+        </div>
+    </div>
+    <div class="answer-box">
+        <details>
+            <summary>Show Answer</summary>
+            <div class="answer-content">
+                <p><strong>Answer:</strong></p>
+                <p><strong>b) Age Dependency Ratio:</strong></p>
+                <p>Formula: $\frac{\text{Population } < 15 + \text{Population } > 64}{\text{Population } 15-64} \times 100$</p>
+                <!-- Full calculation steps -->
+            </div>
+        </details>
+    </div>
+</div>
 ```
 
 ### 4.3 Answer Creation Guidelines
+
+> [!WARNING]
+> **NO OMISSIONS ALLOWED**
+> - Create a comprehensive answer for EVERY question
+> - Do not skip questions "for brevity"
+> - Do not use placeholder answers like "Answer here" or "TBD"
+> - Each answer must be complete, accurate, and educational
 
 **For each question, immediately create comprehensive answers using:**
 
@@ -777,6 +891,7 @@ Individual Paper (pastpapers/FQE/2023j-fqe.html)
    - ✓ Medical accuracy verified
    - ✓ IDs match (question-X, answer-X)
    - ✓ No placeholder text remains
+   - ✓ ALL questions from MMD are answered
 1.  **Medical/Health Knowledge Base**
     -   Apply domain expertise to provide accurate answers
     -   Use standard medical terminology
@@ -828,9 +943,9 @@ If the MMD file contains images (e.g., charts, diagrams, anatomy figures):
 
 ## 6. Past Papers Index Generation
 
-### 6.1 Category Index Template
+### 6.1 Category Index Template (e.g., FQE/index.html)
 
-Each past paper category needs an `index.html`:
+Each past paper category needs a dedicated `index.html` that lists all papers in that category:
 
 ```html
 <!DOCTYPE html>
@@ -838,54 +953,137 @@ Each past paper category needs an `index.html`:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[SUBJECT] - [CATEGORY] Past Papers</title>
+    <title>[SUBJECT] - [CATEGORY] Past Papers | [INSTITUTION]</title>
+    <meta name="description" content="[CATEGORY] past papers for [SUBJECT] - [PROGRAM]">
     <link rel="stylesheet" href="../styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>[SUBJECT]</h1>
-            <h2>[CATEGORY] Past Papers</h2>
-        </div>
-    </header>
+    <!-- Mobile Navigation Toggle -->
+    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-backdrop"></div>
 
-    <div class="container main-content">
-        <main>
-            <section class="intro">
-                <h2>[CATEGORY] Examinations</h2>
-                <p>[Description of this category]</p>
-            </section>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>[SUBJECT]</span>
+                </div>
+            </div>
 
-            <!-- Group by year -->
-            <section class="year-section">
-                <h2>2024</h2>
-                <div class="paper-grid">
-                    <div class="paper-card">
-                        <h3>[Month] 2024</h3>
-                        <div class="meta">
-                            <p>Questions: [N] | Duration: [X] hours</p>
+            <nav class="sidebar-nav">
+                <a href="../index.html" class="nav-item">
+                    <i class="fas fa-home"></i>
+                    <span>All Papers</span>
+                </a>
+                <a href="index.html" class="nav-item active">
+                    <i class="fas fa-file-alt"></i>
+                    <span>[CATEGORY] Papers</span>
+                </a>
+                <div class="nav-group">
+                    <div class="nav-group-title">Available Years</div>
+                    <!-- Add year links dynamically -->
+                    <a href="#year-2024" class="nav-item sub-item">
+                        <i class="far fa-calendar"></i>
+                        <span>2024</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Header -->
+            <header class="paper-header">
+                <div class="paper-meta">
+                    <span class="badge [badge-class]">[CATEGORY]</span>
+                    <span class="date"><i class="fas fa-graduation-cap"></i> [Category Description]</span>
+                </div>
+                <h1>[SUBJECT] [CATEGORY] Papers</h1>
+                <p class="subtitle">[Full category description]</p>
+
+                <div class="paper-instructions">
+                    <h3><i class="fas fa-info-circle"></i> About [CATEGORY] Papers</h3>
+                    <ul>
+                        <li>[Information about this exam type]</li>
+                        <li>[Paper structure]</li>
+                        <li>[Duration and marks]</li>
+                    </ul>
+                </div>
+            </header>
+
+            <!-- Papers by Year -->
+            <section id="year-2024" class="exam-section">
+                <div class="section-header">
+                    <h2><i class="far fa-calendar-alt"></i> 2024 Examinations</h2>
+                    <span class="marks">[N] Papers</span>
+                </div>
+
+                <div class="question-list">
+                    <div class="question-card">
+                        <div class="question-header">
+                            <span class="q-number"><i class="fas fa-file-alt"></i></span>
+                            <div class="q-text">
+                                <h3 style="margin: 0 0 0.5rem 0;">[Month] 2024 [CATEGORY]</h3>
+                                <div style="display: flex; gap: 1rem; flex-wrap: wrap; font-size: 0.875rem; color: var(--text-secondary);">
+                                    <span><i class="far fa-calendar"></i> [Date]</span>
+                                    <span><i class="far fa-clock"></i> [Duration]</span>
+                                    <span><i class="fas fa-award"></i> [Total Marks]</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div style="margin: 1rem 0;">
+                            <p><strong>Paper Structure:</strong></p>
+                            <div class="options-grid" style="grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));">
+                                <div class="option" style="cursor: default;">
+                                    <i class="fas fa-list-ol"></i> [N] MCQs ([N] marks)
+                                </div>
+                                <div class="option" style="cursor: default;">
+                                    <i class="fas fa-pen"></i> [N] Short Answer ([N] marks)
+                                </div>
+                                <div class="option" style="cursor: default;">
+                                    <i class="fas fa-align-left"></i> [N] Long Answer ([N] marks)
+                                </div>
+                            </div>
                         </div>
                         <div class="actions">
-                            <a href="2024j-[type].html" class="btn">View Online</a>
+                            <a href="[year][session]-[type].html" class="btn" style="width: 100%; display: flex; align-items: center; justify-content: center; gap: 0.5rem;">
+                                <i class="fas fa-eye"></i> View Paper & Answers
+                            </a>
                         </div>
                     </div>
                 </div>
             </section>
 
-            <!-- Repeat for other years -->
+            <!-- Footer -->
+            <footer style="background: var(--bg-card); border-top: 1px solid var(--border-light); padding: 2rem; text-align: center; color: var(--text-secondary); margin-top: 3rem; border-radius: var(--radius-xl);">
+                <p style="margin-bottom: 0.5rem;"><strong>[SUBJECT] [CATEGORY] Papers</strong></p>
+                <p style="margin-bottom: 0.5rem;">[PROGRAM] | [INSTITUTION]</p>
+                <p style="font-size: 0.875rem; color: var(--text-tertiary);">© [YEAR] [EXAMINATION BODY]</p>
+            </footer>
         </main>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 [SUBJECT] Past Papers | KNEC</p>
-        </div>
-    </footer>
+    <script src="../js/sidebar-navigation.js"></script>
 </body>
 </html>
 ```
 
-### 5.2 Main Past Papers Index
+### 6.2 Main Past Papers Index (pastpapers/index.html)
+
+The main landing page that provides overview and navigation to all exam categories:
 
 ```html
 <!DOCTYPE html>
@@ -893,72 +1091,262 @@ Each past paper category needs an `index.html`:
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>[SUBJECT] - All Past Papers</title>
+    <title>[SUBJECT] - Past Papers Archive | [INSTITUTION]</title>
+    <meta name="description" content="Comprehensive collection of [SUBJECT] past examination papers for [PROGRAM] students at [INSTITUTION]">
     <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
-    <header>
-        <div class="container">
-            <h1>[SUBJECT]</h1>
-            <h2>Past Papers Collection</h2>
-        </div>
-    </header>
+    <!-- Mobile Navigation Toggle -->
+    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-backdrop"></div>
 
-    <div class="container main-content">
-        <main>
-            <section class="intro">
-                <h2>Comprehensive Past Papers Archive</h2>
-                <p>Access all past examination papers organized by type.</p>
+    <div class="layout-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>[SUBJECT]</span>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="#categories" class="nav-item">
+                    <i class="fas fa-folder-open"></i>
+                    <span>Browse by Type</span>
+                </a>
+                <a href="#recent" class="nav-item">
+                    <i class="fas fa-clock"></i>
+                    <span>Recent Papers</span>
+                </a>
+                <a href="#topics" class="nav-item">
+                    <i class="fas fa-book"></i>
+                    <span>Topics Covered</span>
+                </a>
+                <div class="nav-group">
+                    <div class="nav-group-title">Quick Access</div>
+                    <a href="FQE/index.html" class="nav-item sub-item">
+                        <i class="fas fa-file-alt"></i>
+                        <span>FQE Papers</span>
+                    </a>
+                    <a href="CATs/index.html" class="nav-item sub-item">
+                        <i class="fas fa-edit"></i>
+                        <span>CAT Papers</span>
+                    </a>
+                </div>
+            </nav>
+
+            <div class="sidebar-footer">
+                <button class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Hero Header -->
+            <header class="paper-header">
+                <div class="paper-meta">
+                    <span class="badge [badge-class]">[INSTITUTION-ABBREVIATION]</span>
+                    <span class="date"><i class="fas fa-university"></i> [INSTITUTION FULL NAME]</span>
+                </div>
+                <h1>[SUBJECT]</h1>
+                <p class="subtitle">Past Papers Collection - [PROGRAM]</p>
+            </header>
+
+            <!-- Overview Section with Statistics -->
+            <section id="overview" class="intro">
+                <h2><i class="fas fa-info-circle"></i> Comprehensive Past Papers Archive</h2>
+                <p>Access all [SUBJECT] past examination papers organized by type. Study the key concepts through comprehensive questions and detailed answers.</p>
+                
+                <!-- Statistics Cards -->
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 0.75rem; border: 1px solid var(--border-light);">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--primary-color);">[N]+</div>
+                        <div style="color: var(--text-secondary); font-size: 0.875rem;">Available Papers</div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: linear-gradient(135deg, rgba(72, 187, 120, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-radius: 0.75rem; border: 1px solid var(--border-light);">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--secondary-color);">[N]+</div>
+                        <div style="color: var(--text-secondary); font-size: 0.875rem;">Practice Questions</div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: linear-gradient(135deg, rgba(237, 137, 54, 0.1) 0%, rgba(246, 173, 85, 0.1) 100%); border-radius: 0.75rem; border: 1px solid var(--border-light);">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent-color);">[N]</div>
+                        <div style="color: var(--text-secondary); font-size: 0.875rem;">Years Covered</div>
+                    </div>
+                </div>
             </section>
 
-            <!-- Category Cards -->
-            <section class="category-section">
-                <h2>Browse by Category</h2>
+            <!-- Browse by Category -->
+            <section id="categories" class="category-section">
+                <h2><i class="fas fa-folder-open"></i> Browse by Exam Type</h2>
                 <div class="paper-grid">
+                    <!-- Category Cards -->
                     <div class="paper-card">
-                        <h3>CATs</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <h3 style="margin: 0;">[CATEGORY 1 FULL NAME]</h3>
+                            <span class="badge [badge-class]">[CATEGORY 1]</span>
+                        </div>
                         <div class="meta">
-                            <p>Continuous Assessment Tests</p>
-                            <p>Papers: [N]</p>
+                            <p><i class="fas fa-graduation-cap"></i> [Category 1 description]</p>
+                            <p><strong><i class="fas fa-file-alt"></i> Available Papers: [N]</strong></p>
+                            <p><i class="fas fa-calendar-alt"></i> Years: [Year Range]</p>
+                            <p><i class="fas fa-award"></i> [Additional info]</p>
                         </div>
                         <div class="actions">
-                            <a href="CATs/index.html" class="btn">Browse CATs</a>
+                            <a href="[CATEGORY1]/index.html" class="btn">
+                                <i class="fas fa-arrow-right"></i> Browse [CATEGORY 1] Papers
+                            </a>
                         </div>
                     </div>
 
                     <div class="paper-card">
-                        <h3>FQE</h3>
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <h3 style="margin: 0;">[CATEGORY 2 FULL NAME]</h3>
+                            <span class="badge [badge-class]">[CATEGORY 2]</span>
+                        </div>
                         <div class="meta">
-                            <p>Final Qualifying Examinations</p>
-                            <p>Papers: [N]</p>
+                            <p><i class="fas fa-edit"></i> [Category 2 description]</p>
+                            <p><strong><i class="fas fa-file-alt"></i> Available Papers: [N]</strong></p>
+                            <p><i class="fas fa-calendar-alt"></i> [Status or Year Range]</p>
                         </div>
                         <div class="actions">
-                            <a href="FQE/index.html" class="btn">Browse FQE</a>
+                            <a href="[CATEGORY2]/index.html" class="btn">
+                                <i class="fas fa-arrow-right"></i> Browse [CATEGORY 2] Papers
+                            </a>
                         </div>
                     </div>
 
-                    <!-- Repeat for other categories -->
+                    <!-- Add more category cards as needed -->
                 </div>
             </section>
 
             <!-- Recent Papers -->
-            <section class="year-section">
-                <h2>Recent Papers (All Types)</h2>
-                <!-- List recent papers across all categories -->
+            <section id="recent" class="category-section">
+                <h2><i class="fas fa-clock"></i> Recent Papers</h2>
+                <div class="paper-grid">
+                    <div class="paper-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <h3 style="margin: 0;">[Month Year] [TYPE]</h3>
+                            <span class="badge [badge-class]">[TYPE]</span>
+                        </div>
+                        <div class="meta">
+                            <p><i class="far fa-calendar"></i> [Full Date]</p>
+                            <p><i class="far fa-clock"></i> Duration: [X] hours</p>
+                            <p><i class="fas fa-award"></i> Total: [N] marks</p>
+                            <p><i class="fas fa-list-ol"></i> [N] Questions</p>
+                        </div>
+                        <div class="actions">
+                            <a href="[category]/[filename].html" class="btn">
+                                <i class="fas fa-eye"></i> View Paper
+                            </a>
+                        </div>
+                    </div>
+                    <!-- Repeat for recent papers -->
+                </div>
             </section>
+
+            <!-- Topics Covered -->
+            <section id="topics" class="intro">
+                <h2><i class="fas fa-book"></i> Topics Covered in [SUBJECT]</h2>
+                <div class="paper-grid">
+                    <div class="topic-list">
+                        <h3><i class="fas fa-[icon]"></i> [Topic Category 1]</h3>
+                        <ul>
+                            <li>[Topic 1]</li>
+                            <li>[Topic 2]</li>
+                            <li>[Topic 3]</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-list">
+                        <h3><i class="fas fa-[icon]"></i> [Topic Category 2]</h3>
+                        <ul>
+                            <li>[Topic 1]</li>
+                            <li>[Topic 2]</li>
+                            <li>[Topic 3]</li>
+                        </ul>
+                    </div>
+
+                    <div class="topic-list">
+                        <h3><i class="fas fa-[icon]"></i> [Topic Category 3]</h3>
+                        <ul>
+                            <li>[Topic 1]</li>
+                            <li>[Topic 2]</li>
+                            <li>[Topic 3]</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer -->
+            <footer style="background: var(--bg-card); border-top: 1px solid var(--border-light); padding: 2rem; text-align: center; color: var(--text-secondary); margin-top: 3rem; border-radius: var(--radius-xl);">
+                <p style="margin-bottom: 0.5rem;"><strong>[SUBJECT] Past Papers Collection</strong></p>
+                <p style="margin-bottom: 0.5rem;">[PROGRAM] | [INSTITUTION]</p>
+                <p style="font-size: 0.875rem; color: var(--text-tertiary);">© [YEAR] [EXAMINATION BODY]</p>
+            </footer>
         </main>
     </div>
 
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 [SUBJECT] Past Papers | KNEC</p>
-        </div>
-    </footer>
+    <script src="js/sidebar-navigation.js"></script>
 </body>
 </html>
 ```
 
-## 6. Notes HTML Conversion
+### 6.3 Badge Class Reference
+
+Use the following CSS classes for the `<span class="badge [badge-class]">` elements:
+
+**Pre-defined Badge Classes:**
+- `fqe` - Purple gradient (Final Qualifying Examinations)
+- `cat` - Pink-red gradient (Continuous Assessment Tests)
+
+**Example Usage:**
+```html
+<span class="badge fqe">FQE</span>
+<span class="badge cat">CAT</span>
+```
+
+**Custom Badge Styling:**
+If you need additional badge types, add them to your `styles.css`:
+
+```css
+.badge.supp {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.badge.mid {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+```
+
+**Placeholder Values Reference:**
+
+When creating new pages, replace these placeholders:
+
+| Placeholder | Example Value | Description |
+|-------------|---------------|-------------|
+| `[SUBJECT]` | Medical Demography | The subject/course name |
+| `[PROGRAM]` | Diploma in Health Records & Information Technology | Full program name |
+| `[INSTITUTION]` | KMTC | Institution abbreviation |
+| `[INSTITUTION FULL NAME]` | Kenya Medical Training College | Full institution name |
+| `[EXAMINATION BODY]` | KNEC | Kenya National Examinations Council |
+| `[YEAR]` | 2025 | Current year |
+| `[CATEGORY]` | FQE, CAT, SUPP | Exam category abbreviation |
+| `[CATEGORY FULL NAME]` | Final Qualifying Examinations | Full category name |
+| `[badge-class]` | fqe, cat, supp | CSS class for badge styling |
+| `[N]` | 6, 200, etc. | Numeric values (paper count, questions, etc.) |
+
+## 7. Notes HTML Conversion
 
 ### 6.1 Notes Structure
 
@@ -2615,6 +3003,7 @@ cp -r js "Year 1/Community Health/pastpapers/"
 
 ### 10.1 Content Integrity
 - **100% verbatim content** from source documents
+- **INCLUDE ALL QUESTIONS AND SECTIONS** from the original paper. Do not omit any questions for brevity.
 - No summarization or paraphrasing
 - Preserve all technical terms and medical terminology
 
