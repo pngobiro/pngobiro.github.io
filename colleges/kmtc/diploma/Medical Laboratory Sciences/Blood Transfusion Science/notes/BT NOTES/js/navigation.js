@@ -1,3 +1,5 @@
+// Navigation and Progress Tracking
+(function() {
     // Reading Progress Bar
     const progressBar = document.getElementById('reading-progress');
     
@@ -22,57 +24,66 @@
         // Build TOC from headings
         const headings = document.querySelectorAll('.content-section h2, .content-section h3');
         
-        headings.forEach((heading, index) => {
-            if (!heading.id) {
-                heading.id = `heading-${index}`;
-            }
-            
-            const li = document.createElement('li');
-            const a = document.createElement('a');
-            a.href = `#${heading.id}`;
-            a.textContent = heading.textContent.replace(/^[\s\S]*?(?=[A-Za-z])/, ''); // Remove icons
-            a.classList.add(heading.tagName === 'H3' ? 'toc-h3' : 'toc-h2');
-            li.appendChild(a);
-            tocList.appendChild(li);
-        });
-        
-        // Show/hide TOC based on scroll
-        let lastScrollY = 0;
-        
-        function updateTocVisibility() {
-            const scrollY = window.scrollY;
-            const showThreshold = 300;
-            
-            if (scrollY > showThreshold) {
-                floatingToc.classList.add('visible');
-            } else {
-                floatingToc.classList.remove('visible');
-            }
-            
-            lastScrollY = scrollY;
-        }
-        
-        window.addEventListener('scroll', updateTocVisibility, { passive: true });
-        
-        // Highlight active section
-        const tocLinks = tocList.querySelectorAll('a');
-        
-        function updateActiveSection() {
-            let currentSection = null;
-            
-            headings.forEach((heading) => {
-                const rect = heading.getBoundingClientRect();
-                if (rect.top <= 150) {
-                    currentSection = heading.id;
+        if (headings.length > 0) {
+             headings.forEach((heading, index) => {
+                if (!heading.id) {
+                    heading.id = `heading-${index}`;
                 }
+                
+                const li = document.createElement('li');
+                const a = document.createElement('a');
+                a.href = `#${heading.id}`;
+                // Remove icons from text content for TOC
+                const cleanText = heading.textContent.replace(/^[\s\S]*?(?=[A-Za-z])/, ''); 
+                a.textContent = cleanText || heading.textContent;
+                a.classList.add(heading.tagName === 'H3' ? 'toc-h3' : 'toc-h2');
+                li.appendChild(a);
+                tocList.appendChild(li);
             });
             
-            tocLinks.forEach((link) => {
-                link.classList.toggle('active', link.getAttribute('href') === `#${currentSection}`);
-            });
+            // Show/hide TOC based on scroll
+            let lastScrollY = 0;
+            
+            function updateTocVisibility() {
+                const scrollY = window.scrollY;
+                const showThreshold = 300;
+                
+                if (scrollY > showThreshold) {
+                    floatingToc.classList.add('visible');
+                } else {
+                    floatingToc.classList.remove('visible');
+                }
+                
+                lastScrollY = scrollY;
+            }
+            
+            window.addEventListener('scroll', updateTocVisibility, { passive: true });
+            
+            // Highlight active section
+            const tocLinks = tocList.querySelectorAll('a');
+            
+            function updateActiveSection() {
+                let currentSection = null;
+                
+                headings.forEach((heading) => {
+                    const rect = heading.getBoundingClientRect();
+                    // 150px offset for header
+                    if (rect.top <= 150) {
+                        currentSection = heading.id;
+                    }
+                });
+                
+                tocLinks.forEach((link) => {
+                    link.classList.toggle('active', link.getAttribute('href') === `#${currentSection}`);
+                });
+            }
+            
+            window.addEventListener('scroll', updateActiveSection, { passive: true });
+            updateActiveSection(); // Initial check
+        } else {
+            // Hide floating TOC if no headings found
+            floatingToc.style.display = 'none';
         }
-        
-        window.addEventListener('scroll', updateActiveSection, { passive: true });
     }
     
     // Disabled navigation buttons
@@ -87,13 +98,19 @@
             const targetId = this.getAttribute('href');
             if (targetId === '#') return;
             
-            const target = document.querySelector(targetId);
-            if (target) {
-                e.preventDefault();
-                target.scrollIntoView({
-                    behavior: 'smooth',
-                    block: 'start'
-                });
+            try {
+                const target = document.querySelector(targetId);
+                if (target) {
+                    e.preventDefault();
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Update URL hash without jumping
+                    history.pushState(null, null, targetId);
+                }
+            } catch (err) {
+                console.warn("Invalid selector:", targetId);
             }
         });
     });

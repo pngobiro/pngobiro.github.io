@@ -1,3 +1,6 @@
+// Theme Toggle - Dark/Light Mode
+(function() {
+    const THEME_KEY = 'preferred-theme';
     const themeToggle = document.getElementById('theme-toggle');
     const html = document.documentElement;
     
