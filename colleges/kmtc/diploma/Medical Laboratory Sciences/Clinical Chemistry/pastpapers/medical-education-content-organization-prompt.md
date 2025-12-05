@@ -38,6 +38,7 @@ This system organizes medical/health education materials into structured subject
 │   │       ├── END_OF_SEMESTER/
 │   │       ├── END_OF_YEAR/
 │   │       ├── PRACTICAL/
+│   │       ├── PRACTICE/
 │   │       ├── NOT_RELEVANT/
 │   │       ├── processing-status.json
 │   │       ├── index.html
@@ -58,6 +59,7 @@ This system organizes medical/health education materials into structured subject
 - **END_OF_SEMESTER** - End of semester examinations
 - **END_OF_YEAR** - End of year examinations
 - **PRACTICAL** - Practical examinations with marking schemes
+- **PRACTICE** - MCQ collections, quizzes, and Q&A documents for revision
 - **NOT_RELEVANT** - Papers not relevant to current curriculum or misplaced files
 
 **Identification Patterns:**
@@ -67,6 +69,7 @@ This system organizes medical/health education materials into structured subject
 - END_OF_SEMESTER: Contains "End of Semester", "EOS", "Semester Exam"
 - END_OF_YEAR: Contains "End of Year", "EOY", "Annual Exam"
 - PRACTICAL: Contains "Practical", "Lab Exam", "Marking Key"
+- PRACTICE: Contains "MCQ Collection", "Quiz", "Q&A", "Revision"
 - NOT_RELEVANT: Different subject code, outdated curriculum, unclear content
 
 ### 1.3 File Naming Conventions
@@ -161,6 +164,9 @@ Use [processing-status.json](file:///home/ngobiro/projects/pngobiro.github.io/co
 - `qa_added` - Comprehensive answers added to HTML
 - `verified` - Content verified, navigation tested
 - `completed` - Fully processed, moved to category folder
+- `split` - Archive file that has been split into individual papers
+- `deleted` - Duplicate file that has been removed
+- `processed_and_deleted` - Archive file that was fully processed and then removed
 
 **Workflow Checklist per File:**
 
@@ -326,190 +332,69 @@ node /home/ngobiro/.local/share/Roo-Code/MCP/mathpix-ocr-server/build/index.js "
 
 
 
-### 3.2 Handling Mixed MMD Files (Multiple Papers/Categories in One PDF)
+### 3.2 General Content Extraction Strategy (Archive Management)
 
-**CRITICAL: Always Read and Analyze MMD Content First**
+**CRITICAL: Extract ALL Content & Empty Original File**
 
-A single PDF/MMD may contain:
-- **Multiple years** (2020, 2021, 2022 papers)
-- **Multiple categories** (CATs, FQE, quizzes, practice questions)
-- **Mixed types** (CAT 1 from 2020, FQE from 2021, CAT 2 from 2022)
+When dealing with ANY file (especially large archives) that contains multiple papers, notes, or mixed content:
 
-**DO NOT assume** - Always analyze the actual MMD content to understand what's inside.
+**Goal:** Extract every useful piece of text to its own dedicated file until the original file is empty or contains only junk, then DELETE the original.
 
-**Analysis Workflow:**
+**Workflow:**
 
-**Step 1: Read the MMD File**
+1.  **Read & Analyze:**
+    -   Read the entire file (`less filename.mmd`).
+    -   Identify every distinct document (Exam 1, Exam 2, Notes, Quiz, etc.).
+    -   Note line numbers for each section.
+
+2.  **Extract Everything:**
+    -   Use `sed` to extract each section to a new, descriptively named file.
+    -   **Exams:** Extract to `[Year][Session]-[Type]_ocr.mmd` (e.g., `2023j-cat1_ocr.mmd`).
+    -   **Notes:** Extract to `[Topic]-Notes_ocr.mmd` (e.g., `Haemoglobin-Structure-Notes_ocr.mmd`).
+    -   **Quizzes/Practice:** Extract to `PRACTICE/` folder.
+    -   **Irrelevant/Other Subjects:** Extract to `NOT_RELEVANT/` with descriptive names.
+
+3.  **Verify Extraction:**
+    -   Check that new files contain the correct content.
+    -   Check the "gaps" in the original file to ensure nothing important was missed.
+
+4.  **Delete Original:**
+    -   Once **ALL** content is successfully extracted and verified, **DELETE** the original archive file.
+    -   Update `processing-status.json`: Mark the original file as `processed_and_deleted` (or `deleted`).
+    -   Add entries for all the new extracted files.
+
+**Example Extraction Command:**
 ```bash
-# Open and read the entire MMD
-less filename.mmd
-# or
-cat filename.mmd | more
+sed -n '1,312p' archive.mmd > FQE/2020j-fqe_ocr.mmd
+sed -n '313,570p' archive.mmd > NOTES/Haemoglobin-Notes_ocr.mmd
+sed -n '571,880p' archive.mmd > NOT_RELEVANT/Nursing-Exam_ocr.mmd
+# ... extract rest ...
+rm archive.mmd
 ```
 
-**Step 2: Identify All Papers/Sections**
+### 3.3 Duplicate Detection & Removal
 
-Search for identifying markers:
-```bash
-# Find exam headers
-grep -n "FINAL QUALIFYING\|CAT\|CONTINUOUS ASSESSMENT\|QUIZ\|PRACTICE" filename.mmd
+**Workflow for Managing Duplicates:**
 
-# Find dates
-grep -n "DATE:" filename.mmd
+1.  **Identify Potential Duplicates:**
+    -   Check for files with similar names (e.g., `Exam.pdf` vs `Exam (1).pdf`).
+    -   Check for identical file sizes.
+    -   Check for identical content (visual check or `diff`).
 
-# Find section markers
-grep -n "SECTION 1\|SECTION ONE" filename.mmd
-```
+2.  **Verify:**
+    -   Confirm that the file is indeed a duplicate.
+    -   Ensure a "primary" copy exists and is being processed (or has been processed).
 
-**Step 3: Determine Category for Each Paper**
+3.  **Delete:**
+    -   Remove the duplicate file immediately.
+    -   `rm "Duplicate File (1).pdf"`
 
-Look for keywords in MMD content:
-- **FQE**: "FINAL QUALIFYING EXAMINATION"
-- **CATs**: "CAT", "C.A.T", "CONTINUOUS ASSESSMENT TEST"
-- **Quizzes**: "QUIZ", "QUIZZES", "PRACTICE QUESTIONS"
-- **End of Semester**: "END OF SEMESTER", "SEMESTER EXAM"
-- **Supplementary**: "SUPPLEMENTARY", "RETAKE", "SUPP"
+4.  **Record:**
+    -   Update `processing-status.json` to maintain history.
+    -   Mark the duplicate file entry as `deleted`.
+    -   Set `current_location` to `DELETED/`.
 
-**Step 4: Extract Metadata for Each Paper**
-
-For each identified paper, note:
-- **Category** (FQE/CAT/Quiz/etc.)
-- **Year** (from DATE field)
-- **Session** (February/July/September/November)
-- **Line numbers** (start and end)
-- **Question structure** (MCQ count, short answer count, etc.)
-
-**Example Analysis:**
-
-```
-MMD File: medical-demo-mixed.mmd (1640 lines)
-
-Analysis Results:
-1. Lines 1-312: 
-   - Type: FQE
-   - Date: February 12, 2020
-   - Filename: 2020j-fqe_ocr.mmd
-   - Category folder: FQE/
-
-2. Lines 313-570:
-   - Type: FQE  
-   - Date: February 16, 2022
-   - Filename: 2022j-fqe_ocr.mmd
-   - Category folder: FQE/
-
-3. Lines 571-880:
-   - Type: FQE
-   - Date: September 29, 2021
-   - Filename: 2021s-fqe_ocr.mmd
-   - Category folder: FQE/
-
-4. Lines 881-1130:
-   - Type: CAT 1
-   - Date: March 2023
-   - Filename: 2023-cat1_ocr.mmd
-   - Category folder: CATs/
-
-5. Lines 1131-1400:
-   - Type: Quiz/Practice
-   - Date: Unknown
-   - Filename: practice-questions_ocr.mmd
-   - Category folder: NOT_RELEVANT/ or CATs/
-```
-
-**Step 5: Split Based on Analysis**
-
-```bash
-# Split into separate files based on category AND year
-sed -n '1,312p' mixed.mmd > FQE/2020j-fqe_ocr.mmd
-sed -n '313,570p' mixed.mmd > FQE/2022j-fqe_ocr.mmd
-sed -n '571,880p' mixed.mmd > FQE/2021s-fqe_ocr.mmd
-sed -n '881,1130p' mixed.mmd > CATs/2023-cat1_ocr.mmd
-sed -n '1131,1400p' mixed.mmd > NOT_RELEVANT/practice-questions_ocr.mmd
-```
-
-**Step 6: Update processing-status.json**
-
-For better tracking, promote split files to top-level entries in the `files` array and mark the original file as "split".
-
-```json
-{
-  "files": [
-    {
-      "filename": "medical-demo-mixed.pdf",
-      "status": "split",
-      "notes": "Contains 5 different papers - split into separate MMD files. See individual entries below.",
-      "split_files": [
-        "2020j-fqe_ocr.mmd",
-        "2022j-fqe_ocr.mmd",
-        "2021s-fqe_ocr.mmd",
-        "2023-cat1_ocr.mmd",
-        "practice-questions_ocr.mmd"
-      ]
-    },
-    {
-      "filename": "2020j-fqe_ocr.mmd",
-      "original_location": "FQE/medical-demo-mixed.mmd",
-      "status": "html_generated",
-      "paper_type": "FQE",
-      "year": "2020",
-      "session": "February",
-      "html_filename": "2020j-fqe.html",
-      "notes": "Generated from split MMD"
-    },
-    {
-      "filename": "2022j-fqe_ocr.mmd",
-      "original_location": "FQE/medical-demo-mixed.mmd",
-      "status": "mmd_reviewed",
-      "paper_type": "FQE",
-      "year": "2022",
-      "session": "February",
-      "notes": "Generated from split MMD"
-    }
-    // Add entries for other split files...
-  ]
-}
-```
-      "session": "unknown"
-    },
-    {
-      "mmd": "practice-questions_ocr.mmd",
-      "category": "NOT_RELEVANT",
-      "year": "unknown",
-      "session": "unknown"
-    }
-  ]
-}
-```
-
-**Handling Papers from Other Courses:**
-
-If you find a paper belonging to a **different course** (e.g., a Nursing paper inside a Health Records PDF):
-
-1. **Identify**: Note the course name (e.g., "Diploma in Nursing") and subject.
-2. **Split**: Extract it to a separate MMD file.
-3. **Move**: Place it in the `NOT_RELEVANT` folder.
-4. **Name Descriptively**: Use the format `[Course]-[Subject]-[Year]-[Type].mmd`.
-   - Example: `Nursing-Pharmacology-2021-FQE.mmd`
-5. **Note**: Update `processing-status.json` with a note so it can be moved to the correct course folder later.
-
-**Key Principles:**
-
-1. **Read First, Organize Later** - Never assume content based on filename
-2. **Analyze Category** - Determine FQE/CAT/Quiz/etc. from actual content
-3. **Extract Dates** - Get year and session from MMD content, not filename
-4. **Split by Category** - Place split files in correct category folders
-5. **Document Everything** - Update processing-status.json with findings
-
-**Common Patterns to Look For:**
-
-- **Multiple FQEs from different years** → Split to FQE folder
-- **CATs mixed with FQE** → Split to respective folders
-- **Practice questions/quizzes** → Determine if CATs or NOT_RELEVANT
-- **Papers from other courses** → Split to NOT_RELEVANT with descriptive name
-- **Revision materials** → Usually NOT_RELEVANT
-- **Marking schemes** → PRACTICAL folder
-
-### 3.3 Batch Processing Script
+### 3.4 Batch Processing Script
 
 ```bash
 #!/bin/bash
@@ -535,7 +420,7 @@ done
 echo "Batch conversion complete!"
 ```
 
-### 3.3 Post-OCR Manual Review
+### 3.5 Post-OCR Manual Review
 
 **Required corrections:**
 1. Fix OCR errors (misrecognized characters)
