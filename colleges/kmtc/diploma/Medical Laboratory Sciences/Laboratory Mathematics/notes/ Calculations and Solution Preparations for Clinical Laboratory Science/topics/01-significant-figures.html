@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Significant Figures | Laboratory Mathematics</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        svg: { fontCache: 'global' },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container" aria-hidden="true">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="page-wrapper">
+        <!-- Floating Mini-TOC -->
+        <aside class="floating-toc" id="floating-toc" aria-label="On this page">
+            <div class="floating-toc-header">
+                <span class="floating-toc-icon">📑</span>
+                <span>On this page</span>
+            </div>
+            <nav class="floating-toc-nav">
+                <ul class="floating-toc-list">
+                    <!-- Populated by JS -->
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="container">
+            <article class="document-article" role="main" id="main-content">
+                <!-- Top Navigation -->
+                <nav class="document-nav" role="navigation" aria-label="Document navigation">
+                    <div class="nav-container">
+                        <a href="../index.html" class="nav-button nav-button--toc" aria-label="Table of Contents">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">Contents</span>
+                        </a>
+                        
+                        <!-- Previous button disabled for first topic -->
+                        <span class="nav-button nav-button--prev disabled" aria-disabled="true">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </span>
+                        
+                        <div class="document-progress">
+                            <div class="progress-indicator">
+                                <span class="progress-current">01</span>
+                                <span class="progress-separator">/</span>
+                                <span class="progress-total">04</span>
+                            </div>
+                            <div class="progress-bar-container" aria-hidden="true">
+                                <div class="progress-bar-fill" style="width: 25%;"></div>
+                            </div>
+                            <span class="progress-label">Significant Figures</span>
+                        </div>
+                        
+                        <a href="02-units-and-conversions.html" class="nav-button nav-button--next" aria-label="Next section">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <ol class="breadcrumb-list">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Significant Figures</li>
+                    </ol>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span class="badge-icon">🧮</span>
+                        <span class="badge-text">Module 01</span>
+                    </div>
+                    <h1 class="document-title">Significant Figures & Operations</h1>
+                    <div class="title-meta">
+                        <span class="meta-item">
+                            <span class="meta-icon">👤</span>
+                            <span>Lovelyn Mae E. Cuison, RMT, MSMT</span>
+                        </span>
+                    </div>
+                </header>
+
+                <!-- Main Content Area -->
+                <div class="content-wrapper">
+                    
+                    <!-- Introduction -->
+                    <section id="introduction" class="content-section" aria-labelledby="heading-intro">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">01</div>
+                            <h2 id="heading-intro" class="section-title">Introduction & Learning Objectives</h2>
+                        </div>
+                        
+                        <div class="content-card">
+                            <p>Good day students! This time, we will have Laboratory Mathematics for our discussion.</p>
+                            
+                            <h3 id="learning-objectives">Learning Objectives</h3>
+                            <p>At the end of this lesson, the student is expected to:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">determine the rules in identifying significant figures;</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">memorize the units of measurement and their conversion factors; and</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">solve given mathematical problems.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Significant Figures Definition -->
+                    <section id="sig-figs-definition" class="content-section" aria-labelledby="heading-definition">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">02</div>
+                            <h2 id="heading-definition" class="section-title">Significant Figures</h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>First, what are significant figures?</p>
+                            <p>Significant figures, we also call them as <strong>significant digits</strong>, they are very important part of scientific and mathematical calculations because they deal with accuracy and precision of numbers.</p>
+                            
+                            <aside class="callout callout--note" role="note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <span class="callout-title">Uncertainty</span>
+                                </div>
+                                <div class="callout-content">
+                                    <p>So like for example, you are uncertain of your final answer. So you have to take note of the number of the significant figures in order to determine what significant figures you are going to place in your final answer. So that is why significant figures become very important in this case.</p>
+                                </div>
+                            </aside>
+
+                            <p>When making calculations, the final answer is rounded off to reflect the value with the <strong>least certainty</strong> (the <strong>fewest</strong> significant figures).</p>
+                        </div>
+                    </section>
+
+                    <!-- Rules for Significant Figures -->
+                    <section id="sig-figs-rules" class="content-section" aria-labelledby="heading-rules">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">03</div>
+                            <h2 id="heading-rules" class="section-title">Rules in Identifying Significant Figures</h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>All non zero digits are significant.</strong> That means all numbers except zero, they are all significant.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Leading zeros are not significant.</strong> So when we say leading zeros, they are all zeros before the non zero digit.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Trailing zeros are significant (decimal point).</strong> When we say trailing zeros, these are zeros after a non zero digit. But you have to take note of this one. Trailing zeros are significant only if the digits have a <strong>decimal point</strong>. So if no decimal point, then that trailing zero is not a significant digit.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Captive zeros are significant.</strong> When we say captive zeros, those are zeros that are in between of the non zero digits.</span>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="examples">Examples</h3>
+                            <p>Let's have these examples. So I have here seven examples of different numbers with different significant figures. So you have to identify how many significant figures there are per example.</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-caption">Significant Figures Examples</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Number</th>
+                                                <th>Significant Figures</th>
+                                                <th>Reason</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><code>10</code></td>
+                                                <td><strong>1</strong></td>
+                                                <td>Trailing zeros are significant only if the digits have a decimal point. This time, there is no decimal point in the first example.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>10.</code></td>
+                                                <td><strong>2</strong></td>
+                                                <td>Trailing zeros are significant if the digits have a decimal point.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>10.0</code></td>
+                                                <td><strong>3</strong></td>
+                                                <td>We have here a decimal point and we have here a trailing zero after the decimal point.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>35</code></td>
+                                                <td><strong>2</strong></td>
+                                                <td>All non zero digits are significant.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>0.35</code></td>
+                                                <td><strong>2</strong></td>
+                                                <td>Leading zeros are not significant.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>0.0035</code></td>
+                                                <td><strong>2</strong></td>
+                                                <td>These are all leading zeros.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>0.00350</code></td>
+                                                <td><strong>3</strong></td>
+                                                <td>We have two non zero digits and then we have one trailing zero. And this trailing zero is significant because the digits have this decimal point.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><code>73.04</code></td>
+                                                <td><strong>4</strong></td>
+                                                <td>We have this non zero digits and we have this zero. This zero is significant because this is considered as a <strong>captive zero</strong>, a zero between non zero digits.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Mathematical Operations -->
+                    <section id="math-operations" class="content-section" aria-labelledby="heading-math">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">04</div>
+                            <h2 id="heading-math" class="section-title">Mathematical Operations</h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Let's now apply the rules of significant figures to mathematical operations.</p>
+                            
+                            <h3 id="multiplication-division">Multiplication and Division</h3>
+                            <p>For multiplication and division, the answer must have the same number of <strong>significant figures</strong> as the starting value with the <strong>least number</strong> of significant figures.</p>
+                            
+                            <aside class="callout callout--tip" role="note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">✨</span>
+                                    <span class="callout-title">Rule</span>
+                                </div>
+                                <div class="callout-content">
+                                    <p>So let's say you are multiplying or dividing numbers with different amount of significant figures. So the amount of significant figures on your answer must be based on the starting value with the lowest amount of significant figures.</p>
+                                </div>
+                            </aside>
+
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Example</span>
+                                </div>
+                                <pre class="code-block"><code>2.5 × 0.5250 = 1.3125</code></pre>
+                            </div>
+
+                            <p>So you have to remember the rules of significant figures when we are multiplying or dividing numbers. So based on our rule, we need to take note of the number of significant figures.</p>
+                            
+                            <p>So your answer must be rounded off to a value with the same number of significant figures to the starting value with the lowest or fewest number of significant figures.</p>
+                            
+                            <p>So the starting value with the fewest significant figures in this example is <strong>2.5</strong> because it has two significant figures. Whereas your <strong>0.5250</strong> has four significant figures. So our answer will be <strong>1.3</strong>.</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="addition-subtraction">Addition and Subtraction</h3>
+                            <p>For addition and subtraction, the answer must have the same number of <strong>decimal places</strong> as the starting value with the <strong>fewest number</strong> of decimal places.</p>
+                            
+                            <p>So this time, when you add and when you subtract, you have to take note of the <strong>decimal places</strong>.</p>
+                            
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Example</span>
+                                </div>
+                                <pre class="code-block"><code>15.5 mL + 25.92 mL = 41.42 mL</code></pre>
+                            </div>
+
+                            <p>So what does a rule in addition and subtraction say? So in addition and in subtraction, what we are looking for are the number of decimal places.</p>
+                            
+                            <p>So our rule states that decimal places should be the same with the decimal place of the starting value with the lowest or fewest decimal place.</p>
+                            
+                            <p>So in this case, the <strong>15.5</strong> has the fewest decimal place. As compared to your <strong>25.92</strong>. So our final answer must be <strong>41.4 mL</strong>. Because again your final answer should follow the decimal place of a starting value with the fewest number of decimal place.</p>
+                        </div>
+                    </section>
+
+                    <!-- Exponential Notation -->
+                    <section id="exponential-notation" class="content-section" aria-labelledby="heading-exponential">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">05</div>
+                            <h2 id="heading-exponential" class="section-title">Exponential Notation</h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Let's have now our exponential notation. So sometimes, we are dealing with very high and very low numbers in which if we have to write them as a whole figure, it will be very lengthy. That is why we have exponential notation for these instances.</p>
+                            
+                            <h3 id="positive-exponent">Positive Exponent</h3>
+                            <p>Example, if we have $10^2$. That means we have multiplied our value with 10 twice. So whatever the exponent above a digit signifies the number of times you have multiplied it to a certain value.</p>
+                            
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Example</span>
+                                </div>
+                                <pre class="code-block"><code>2.5 × 10² = 2.5 × 10 × 10 = 250</code></pre>
+                            </div>
+
+                            <p>So to make it more simple, we just have to move the decimal points to two digits to the right. Since the exponent is positive.</p>
+                            <p>So that means if we have <strong>2.5</strong> and we move the digits to the right two times, so it would give us <strong>250</strong> as an answer.</p>
+
+                            <h3 id="negative-exponent">Negative Exponent</h3>
+                            <p>If the exponential value is negative such as this one ($10^{-2}$), that means we have to divide the number depending on the value of your exponent.</p>
+                            
+                            <div class="code-block-wrapper">
+                                <div class="code-block-header">
+                                    <span class="code-language">Example</span>
+                                </div>
+                                <pre class="code-block"><code>2.5 × 10⁻² = 2.5 ÷ 10 ÷ 10 = .025</code></pre>
+                            </div>
+
+                            <p>So to make it simple also, we just have to move to two decimal places to the left. Since this is a negative value. So that gives us <strong>.025</strong>.</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="exponents-operations">Examples in Mathematical Operations</h3>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <div class="list-content">
+                                        <p><strong>In multiplication, the exponents are added.</strong></p>
+                                        <div class="equation">
+                                            $$(3 \times 10^4)(5 \times 10^5) = 15 \times 10^9$$
+                                        </div>
+                                        <p>Because the main numbers, they are multiplied. So 3 times 5 would give us 15. And then we have to add the exponents. So that would give us 4 plus 5 is 9. So that will be our answer.</p>
+                                    </div>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <div class="list-content">
+                                        <p><strong>In division, the exponents are subtracted.</strong></p>
+                                        <div class="equation">
+                                            $$\frac{(4 \times 10^3)}{(2 \times 10^5)} = 2 \times 10^{-2}$$
+                                        </div>
+                                        <p>So we have first to divide the main number, so 4 divided by 2 would give us 2. And then of course we have to subtract the exponent. So 3 minus 5 would give us -2.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Key Points -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Significant figures</strong> deal with accuracy and precision of numbers.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Multiplication/Division:</strong> The answer must have the same number of <strong>significant figures</strong> as the starting value with the <strong>least number</strong> of significant figures.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Addition/Subtraction:</strong> The answer must have the same number of <strong>decimal places</strong> as the starting value with the <strong>fewest number</strong> of decimal places.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </div>
+
+                <!-- Bottom Navigation -->
+                <nav class="document-nav document-nav--bottom" role="navigation" aria-label="Document navigation">
+                    <div class="nav-container">
+                        <span class="nav-button nav-button--prev nav-button--large disabled" aria-disabled="true">
+                            <span class="nav-icon">←</span>
+                            <div class="nav-content">
+                                <span class="nav-label">Previous</span>
+                                <span class="nav-title">Course Index</span>
+                            </div>
+                        </span>
+                        
+                        <a href="../index.html" class="nav-button nav-button--toc">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">All Topics</span>
+                        </a>
+                        
+                        <a href="02-units-and-conversions.html" class="nav-button nav-button--next nav-button--large">
+                            <div class="nav-content">
+                                <span class="nav-label">Next</span>
+                                <span class="nav-title">Units of Measurement</span>
+                            </div>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                </nav>
+            </article>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>
