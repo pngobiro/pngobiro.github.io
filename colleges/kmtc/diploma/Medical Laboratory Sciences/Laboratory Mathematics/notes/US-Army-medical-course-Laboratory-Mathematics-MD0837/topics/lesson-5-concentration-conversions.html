@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 5: Conversion of Concentration Units | Laboratory Mathematics</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        svg: { fontCache: 'global' },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container" aria-hidden="true">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="page-wrapper">
+        <!-- Floating Mini-TOC -->
+        <aside class="floating-toc" id="floating-toc" aria-label="On this page">
+            <div class="floating-toc-header">
+                <span class="floating-toc-icon">📑</span>
+                <span>On this page</span>
+            </div>
+            <nav class="floating-toc-nav">
+                <ul class="floating-toc-list">
+                    <!-- Populated by JS -->
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="container">
+            <article class="document-article" role="main" id="main-content">
+                <!-- Top Navigation -->
+                <nav class="document-nav" role="navigation" aria-label="Document navigation">
+                    <div class="nav-container">
+                        <a href="../index.html" class="nav-button nav-button--toc" aria-label="Table of Contents">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">Contents</span>
+                        </a>
+                        
+                        <a href="lesson-4-equivalent-solutions.html" class="nav-button nav-button--prev" aria-label="Previous section">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Prev</span>
+                        </a>
+                        
+                        <div class="document-progress">
+                            <div class="progress-indicator">
+                                <span class="progress-current">05</span>
+                                <span class="progress-separator">/</span>
+                                <span class="progress-total">09</span>
+                            </div>
+                            <div class="progress-bar-container" aria-hidden="true">
+                                <div class="progress-bar-fill" style="width: 55%;"></div>
+                            </div>
+                            <span class="progress-label">Conversion of Units</span>
+                        </div>
+                        
+                        <a href="lesson-6-dilutions.html" class="nav-button nav-button--next" aria-label="Next section">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <ol class="breadcrumb-list">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Lesson 5: Conversion of Concentration Units</li>
+                    </ol>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span class="badge-icon">📖</span>
+                        <span class="badge-text">Lesson 5</span>
+                    </div>
+                    <h1 class="document-title">Conversion of Concentration Units</h1>
+                    <div class="title-meta">
+                        <span class="meta-item">
+                            <span class="meta-icon">📄</span>
+                            <span>4 Sections</span>
+                        </span>
+                        <span class="meta-item">
+                            <span class="meta-icon">🔢</span>
+                            <span>Paragraphs 5-1 through 5-4</span>
+                        </span>
+                    </div>
+                </header>
+
+                <!-- Main Content Area -->
+                <div class="content-wrapper">
+                    
+                    <!-- Lesson Objectives -->
+                    <section class="content-section" id="lesson-objectives">
+                        <div class="callout callout--note">
+                            <div class="callout-header">
+                                <span class="callout-icon">🎯</span>
+                                <span class="callout-title">Lesson Objectives</span>
+                            </div>
+                            <div class="callout-content">
+                                <p>After completing this lesson, you should be able to:</p>
+                                <ul class="enhanced-list">
+                                    <li class="list-item">
+                                        <span class="list-marker"></span>
+                                        <span class="list-content">5-1. Calculate conversions from mol/L to g/dL and from g/dL to mol/L.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="list-marker"></span>
+                                        <span class="list-content">5-2. Calculate conversions from Eq/L to g/dL and from g/dL to Eq/L.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="list-marker"></span>
+                                        <span class="list-content">5-3. Calculate conversions from mol/L to Eq/L and from Eq/L to mol/L.</span>
+                                    </li>
+                                </ul>
+                                <p><em>After completing the assignment, complete the exercises of this lesson. These exercises will help you to achieve the lesson objectives.</em></p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- START: Section 5-1 -->
+                    <section id="section-5-1" class="content-section" aria-labelledby="heading-5-1">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">01</div>
+                            <h2 id="heading-5-1" class="section-title">
+                                <span class="title-icon">💬</span>
+                                Discussion
+                            </h2>
+                        </div>
+                        
+                        <div class="content-card">
+                            <h3 id="5-1">5-1. Discussion</h3>
+                            <p>At times, units of concentration will be given, but another unit of concentration will be required to perform calculations. In this lesson, we will discuss methods for conversion from one unit of concentration to another.</p>
+                        </div>
+                    </section>
+
+                    <!-- START: Section 5-2 -->
+                    <section id="section-5-2" class="content-section" aria-labelledby="heading-5-2">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">02</div>
+                            <h2 id="heading-5-2" class="section-title">
+                                <span class="title-icon">🔄</span>
+                                Conversion: mol/L ↔ g/dL
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="5-2">5-2. Conversion from mol/L to g/dL and from g/dL to mol/L</h3>
+                            <p>Before discussing the methods for converting the above units, let's review the definition for each unit.</p>
+                            
+                            <h4 id="equiv-expressions">Equivalent Ways of Expressing Concentration (No Numerical Conversion Necessary)</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">g/dL = parts of solute per 100 parts</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">g/L = parts of solute per 1000 parts</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">molarity = moles per liter</span>
+                                </li>
+                            </ul>
+                            <p>The g/dL concentration is defined as parts of solute per 100 parts total solution. The molarity of a solution is defined as the number of moles per liter of solution (mol/L).</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-caption">Conversions</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Action</th>
+                                                <th>Concentration Expressed In</th>
+                                                <th>By</th>
+                                                <th>In Units</th>
+                                                <th>To Get Concentration Expressed In</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Multiply</td>
+                                                <td>mol/L</td>
+                                                <td>GMW</td>
+                                                <td>g/mol</td>
+                                                <td>g/L or parts solute per 1000 parts</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Multiply</td>
+                                                <td>g/dL</td>
+                                                <td>10</td>
+                                                <td>dL/L</td>
+                                                <td>g/L or parts solute per 1000 parts</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Multiply</td>
+                                                <td>g/dL</td>
+                                                <td>$\frac{10}{\text{GMW}}$</td>
+                                                <td>$\frac{\text{dL mol}}{\text{L g}}$</td>
+                                                <td>mol/L</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <p>First, let us consider the mol/L concentration. Note that mol/L times the gram molecular weight (g/mol) yields g/L (mol/L X g/mol = g/L). Thus, g/L can also be referred to as parts solute per 1000 total solution. And the g/dL concentration times 10 dL/1L yields parts per 1000. Equivalently, the g/dL concentration times 10 equals the molar concentration times the gram molecular weight.</p>
+
+                            <div class="collapsible-section">
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">a. Example 1. What is the molarity of a 4.0 g/dL NaCl solution?</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> Read the problem carefully and determine the desired unit of concentration.</p>
+                                        <p>Molarity (mol/L).</p>
+                                        <p>Comparable to problems encountered before that involved molarity, calculating the gram molecular weight is a good place to start.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            \text{NaCl} & \\
+                                            \text{Na} \quad & 23.0 \\
+                                            \text{Cl} \quad & \underline{+35.5} \\
+                                            & 58.5 \text{ g/mol}
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>Now that the number of grams per mole has been determined, use it as an appropriate factor along with the conversion factor that will convert deciliters to liters.</p>
+                                        <div class="equation">
+                                            $$\frac{4.0 \text{ g}}{\text{dL}} \times \frac{1 \text{ mol}}{58.5 \text{ g}} \times \frac{10 \text{ dL}}{1 \text{ L}} = \underline{0.68 \text{ mol/L}}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">b. Example 2. You are directed to prepare 500 mL of a 5.0 mol/L $\text{FeSO}_4$ solution. What is the percent concentration of the solution?</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> Read the problem carefully and determine the desired unit of concentration.</p>
+                                        <p>Percent concentration (%).</p>
+                                        <p>Calculate the GMW of the compound.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            \text{FeSO}_4 & \\
+                                            \text{Fe} \quad 55.8 \times 1 &= 55.8 \\
+                                            \text{S} \quad 32.1 \times 1 &= 32.1 \\
+                                            \text{O} \quad 16.0 \times 4 &= \underline{+64.0} \\
+                                            & 151.9 \text{ g/mol}
+                                            \end{aligned}$$
+                                        </div>
+                                        <aside class="callout callout--note">
+                                            <div class="callout-header">
+                                                <span class="callout-icon">💡</span>
+                                                <span class="callout-title">Note</span>
+                                            </div>
+                                            <div class="callout-content">
+                                                <p>The given volume is a distracter. It is not needed to solve this problem.</p>
+                                            </div>
+                                        </aside>
+                                        <p>Use the GMW and an appropriate volume conversion factor to express the concentration in g/dL.</p>
+                                        <div class="equation">
+                                            $$\frac{5.0 \text{ mol}}{\text{L}} \times \frac{151.9 \text{ g}}{\text{mol}} \times \frac{1 \text{ L}}{10 \text{ dL}} = \underline{76 \text{ g/dL}}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- START: Section 5-3 -->
+                    <section id="section-5-3" class="content-section" aria-labelledby="heading-5-3">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">03</div>
+                            <h2 id="heading-5-3" class="section-title">
+                                <span class="title-icon">⚖️</span>
+                                Conversion: Eq/L ↔ g/dL
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="5-3">5-3. Conversion from Eq/L to g/dL and from g/dL to Eq/L</h3>
+                            <p>In solving this type of conversion problem, the method is similar to the one used to solve for mol/L to g/dL. The g/dL concentration is, as previously stated, defined as parts of solute per 100 parts of total solution. The normality of a solution is defined as the number of equivalents per liter of solution (Eq/L).</p>
+                            
+                            <div class="collapsible-section">
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">a. Example 1. What is the g/dL concentration of a 1.5 Eq/L NaOH solution?</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> Read the problem carefully and determine the desired unit of concentration.</p>
+                                        <p>Percent concentration (g/dL).</p>
+                                        <p>Comparable to problems encountered before that involved normality, calculating the gram equivalent weight is a good place to start.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            \text{NaOH} & \\
+                                            \text{Na} \quad & 23.0 \\
+                                            \text{O} \quad & 16.0 \\
+                                            \text{H} \quad & \underline{+1.0} \\
+                                            & 40.0 \text{ g/mol}
+                                            \end{aligned}$$
+                                        </div>
+                                        <div class="equation">
+                                            $$\frac{40.0 \text{ g}}{\text{mol}} \times \frac{1 \text{ mol}}{1 \text{ Eq}} = 40.0 \text{ g/Eq}$$
+                                        </div>
+                                        <p>Use the GEW and the appropriate volume conversion factor to express the concentration as g/dL.</p>
+                                        <div class="equation">
+                                            $$\frac{1.5 \text{ Eq}}{\text{L}} \times \frac{40.0 \text{ g}}{\text{Eq}} \times \frac{1 \text{ L}}{10 \text{ dL}} = \underline{6.0 \text{ g/dL}}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">b. Example 2. What is the Eq/L concentration of a 5.0 g/dL $\text{CaCO}_3$ solution?</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> Read the problem carefully and determine the desired unit of concentration.</p>
+                                        <p>Normality (Eq/L).</p>
+                                        <p>Determine the GEW of the compound.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            \text{CaCO}_3 & \\
+                                            \text{Ca} \quad 40.1 \times 1 &= 40.1 \\
+                                            \text{C} \quad 12.0 \times 1 &= 12.0 \\
+                                            \text{O} \quad 16.0 \times 3 &= \underline{+48.0} \\
+                                            & 100.1 \text{ g/mol}
+                                            \end{aligned}$$
+                                        </div>
+                                        <div class="equation">
+                                            $$\frac{100.1 \text{ g}}{\text{mol}} \times \frac{1 \text{ mol}}{2 \text{ Eq}} = 50.05 \text{ g/Eq}$$
+                                        </div>
+                                        <p>Use the GEW and the appropriate volume conversion factor to express the Eq/L concentration.</p>
+                                        <div class="equation">
+                                            $$\frac{5.0 \text{ g}}{\text{dL}} \times \frac{1 \text{ Eq}}{50.05 \text{ g}} \times \frac{10 \text{ dL}}{1 \text{ L}} = \underline{1.0 \text{ Eq/L}}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- START: Section 5-4 -->
+                    <section id="section-5-4" class="content-section" aria-labelledby="heading-5-4">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">04</div>
+                            <h2 id="heading-5-4" class="section-title">
+                                <span class="title-icon">⚗️</span>
+                                Conversion: mol/L ↔ Eq/L
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="5-4">5-4. Converting from mol/L to Eq/L and from Eq/L to mol/L</h3>
+                            <p>The conversion is based on the use of TPIV expressed as Eq/mol and used as an appropriate factor.</p>
+                            
+                            <div class="collapsible-section">
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">a. Example 1. What is the mol/L concentration of a 4 Eq/L $\text{Ba}(\text{OH})_2$ solution?</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> Read the problem carefully and determine the desired unit of concentration.</p>
+                                        <p>Molarity (mol/L).</p>
+                                        <p>Determine the number of equivalents per mole of compound and use it as an appropriate conversion factor to express the solution in the desired units.</p>
+                                        <div class="equation">
+                                            $$\frac{4.0 \text{ Eq}}{\text{L}} \times \frac{1 \text{ mol}}{2 \text{ Eq}} = \underline{2.0 \text{ mol/L}}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">b. Example 2. What is the Eq/L concentration of a 1 mol/L $\text{AlPO}_4$ solution?</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> Read the problem carefully and determine the desired unit of concentration.</p>
+                                        <p>Normality (Eq/L)</p>
+                                        <p>Determine the number of equivalents per mole of compound and use the appropriate conversion factor to express the solution in the desired units.</p>
+                                        <div class="equation">
+                                            $$\frac{1 \text{ mol}}{\text{L}} \times \frac{3 \text{ Eq}}{1 \text{ mol}} = \underline{3 \text{ Eq/L}}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Exercises -->
+                    <section id="exercises" class="content-section" aria-labelledby="heading-exercises">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">05</div>
+                            <h2 id="heading-exercises" class="section-title">
+                                <span class="title-icon">✍️</span>
+                                Exercises, Lesson 5
+                            </h2>
+                        </div>
+                        
+                        <div class="content-card">
+                            <p><em>INSTRUCTIONS: Answer the following exercises by writing the answer in the space provided at the end of the question. After you have completed all the exercises, turn to "Solutions to Exercises" at the end of the lesson and check your answers. For each exercise answered incorrectly, reread the material referenced with the solution.</em></p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker">1.</span>
+                                    <span class="list-content">Find the Eq/L concentration of a 4.0 mol/L $\text{Fe}_2(\text{SO}_4)_3$ solution.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">2.</span>
+                                    <span class="list-content">What is the g/dL concentration of a 2.0 Eq/L $\text{NH}_4\text{NO}_3$ solution?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">3.</span>
+                                    <span class="list-content">Calculate the mEq/L concentration of a 0.10 g/dL $\text{Na}_2\text{SO}_4$ solution.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">4.</span>
+                                    <span class="list-content">A 1-liter flask contains 500 mL of a 0.75 Eq/L $\text{CuWO}_4$ solution. Calculate the mol/L concentration of the $\text{CuWO}_4$ solution.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">5.</span>
+                                    <span class="list-content">Determine the mol/L concentration of a 20 g/dL $\text{CaCO}_3$ solution.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">6.</span>
+                                    <span class="list-content">A $\text{NaNO}_3$ solution has a 300 mg/dL concentration. What is the mol/L concentration of the solution?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">7.</span>
+                                    <span class="list-content">What is the Eq/L concentration of 100 mL of a 2.0 mol/L $\text{H}_2\text{SO}_4$?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">8.</span>
+                                    <span class="list-content">Find the mg/dL concentration of a 800 mEq/L $(\text{NH}_4)_2\text{SO}_4$ solution.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">9.</span>
+                                    <span class="list-content">What is the mol/L concentration of a 200 mEq/L $\text{Cu}_2\text{CO}_3 \cdot 5\text{H}_2\text{O}$ solution?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">10.</span>
+                                    <span class="list-content">What is the Eq/L concentration of a 745 mg/dL KCl solution?</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Solutions -->
+                    <section id="solutions" class="content-section" aria-labelledby="heading-solutions">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">06</div>
+                            <h2 id="heading-solutions" class="section-title">
+                                <span class="title-icon">✅</span>
+                                Solutions to Exercises, Lesson 5
+                            </h2>
+                        </div>
+                        
+                        <div class="content-card">
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker">1.</span><span class="list-content">24 Eq/L (para 5-4)</span></li>
+                                <li class="list-item"><span class="list-marker">2.</span><span class="list-content">16 g/dL (para 5-3)</span></li>
+                                <li class="list-item"><span class="list-marker">3.</span><span class="list-content">14.1 mEq/L (para 5-3)</span></li>
+                                <li class="list-item"><span class="list-marker">4.</span><span class="list-content">0.38 mol/L (para 5-4)</span></li>
+                                <li class="list-item"><span class="list-marker">5.</span><span class="list-content">2.0 mol/L (para 5-2)</span></li>
+                                <li class="list-item"><span class="list-marker">6.</span><span class="list-content">0.0353 mol/L (para 5-2)</span></li>
+                                <li class="list-item"><span class="list-marker">7.</span><span class="list-content">4.0 Eq/L (para 5-4)</span></li>
+                                <li class="list-item"><span class="list-marker">8.</span><span class="list-content">5280 mg/dL (para 5-3)</span></li>
+                                <li class="list-item"><span class="list-marker">9.</span><span class="list-content">0.100 mol/L (para 5-4)</span></li>
+                                <li class="list-item"><span class="list-marker">10.</span><span class="list-content">0.0999 Eq/L (para 5-3)</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- Bottom Navigation -->
+                <nav class="document-nav document-nav--bottom" role="navigation" aria-label="Document navigation">
+                    <div class="nav-container">
+                        <a href="lesson-4-equivalent-solutions.html" class="nav-button nav-button--prev nav-button--large">
+                            <span class="nav-icon">←</span>
+                            <div class="nav-content">
+                                <span class="nav-label">Previous</span>
+                                <span class="nav-title">Lesson 4: Equivalent Solutions</span>
+                            </div>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button nav-button--toc">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">All Topics</span>
+                        </a>
+                        
+                        <a href="lesson-6-dilutions.html" class="nav-button nav-button--next nav-button--large">
+                            <div class="nav-content">
+                                <span class="nav-label">Next</span>
+                                <span class="nav-title">Lesson 6: Dilutions</span>
+                            </div>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                </nav>
+            </article>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>
