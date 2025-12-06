@@ -1,0 +1,1052 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lesson 9: pH and Buffers | Laboratory Mathematics</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+    
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true
+        },
+        svg: { fontCache: 'global' },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container" aria-hidden="true">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="page-wrapper">
+        <!-- Floating Mini-TOC -->
+        <aside class="floating-toc" id="floating-toc" aria-label="On this page">
+            <div class="floating-toc-header">
+                <span class="floating-toc-icon">📑</span>
+                <span>On this page</span>
+            </div>
+            <nav class="floating-toc-nav">
+                <ul class="floating-toc-list">
+                    <!-- Populated by JS -->
+                </ul>
+            </nav>
+        </aside>
+
+        <div class="container">
+            <article class="document-article" role="main" id="main-content">
+                <!-- Top Navigation -->
+                <nav class="document-nav" role="navigation" aria-label="Document navigation">
+                    <div class="nav-container">
+                        <a href="../index.html" class="nav-button nav-button--toc" aria-label="Table of Contents">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">Contents</span>
+                        </a>
+                        
+                        <a href="lesson-8-acids-bases.html" class="nav-button nav-button--prev" aria-label="Previous section">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Prev</span>
+                        </a>
+                        
+                        <div class="document-progress">
+                            <div class="progress-indicator">
+                                <span class="progress-current">09</span>
+                                <span class="progress-separator">/</span>
+                                <span class="progress-total">09</span>
+                            </div>
+                            <div class="progress-bar-container" aria-hidden="true">
+                                <div class="progress-bar-fill" style="width: 100%;"></div>
+                            </div>
+                            <span class="progress-label">pH and Buffers</span>
+                        </div>
+                        
+                        <a href="appendices.html" class="nav-button nav-button--next" aria-label="Next section">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                </nav>
+
+                <!-- Breadcrumb -->
+                <nav class="breadcrumb" aria-label="Breadcrumb">
+                    <ol class="breadcrumb-list">
+                        <li class="breadcrumb-item"><a href="../index.html">Home</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Lesson 9: pH and Buffers</li>
+                    </ol>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span class="badge-icon">📖</span>
+                        <span class="badge-text">Lesson 9</span>
+                    </div>
+                    <h1 class="document-title">pH and Buffers</h1>
+                    <div class="title-meta">
+                        <span class="meta-item">
+                            <span class="meta-icon">📄</span>
+                            <span>6 Sections</span>
+                        </span>
+                        <span class="meta-item">
+                            <span class="meta-icon">🔢</span>
+                            <span>Paragraphs 9-1 through 9-23</span>
+                        </span>
+                    </div>
+                </header>
+
+                <!-- Main Content Area -->
+                <div class="content-wrapper">
+                    
+                    <!-- Lesson Objectives -->
+                    <section class="content-section" id="lesson-objectives">
+                        <div class="callout callout--note">
+                            <div class="callout-header">
+                                <span class="callout-icon">🎯</span>
+                                <span class="callout-title">Lesson Objectives</span>
+                            </div>
+                            <div class="callout-content">
+                                <p>After completing this lesson, you should be able to:</p>
+                                <ul class="enhanced-list">
+                                    <li class="list-item">
+                                        <span class="list-marker"></span>
+                                        <span class="list-content">9-1. Calculate the pH and pOH of a molar acid or base concentration.</span>
+                                    </li>
+                                    <li class="list-item">
+                                        <span class="list-marker"></span>
+                                        <span class="list-content">9-2. Calculate buffers problems.</span>
+                                    </li>
+                                </ul>
+                                <p><em>After studying the assignment, complete the exercises of this lesson. These exercises will help you to achieve the lesson objectives.</em></p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- START: Section I -->
+                    <section id="section-i" class="content-section" aria-labelledby="heading-section-i">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">01</div>
+                            <h2 id="heading-section-i" class="section-title">
+                                <span class="title-icon">🧪</span>
+                                Introduction to Ions
+                            </h2>
+                        </div>
+                        
+                        <!-- 9-1 Discussion -->
+                        <div class="content-card">
+                            <h3 id="9-1">9-1. Discussion</h3>
+                            <p><strong>a.</strong> The interaction of charged particles in which the total number of protons do not equal the number of electrons is responsible for many chemical reactions. These charged particles are called ions. A <dfn class="term-definition" data-definition="An ion in which the protons are more numerous than the electrons (+ charge).">cation</dfn> is an ion in which the protons are more numerous than the electrons (+ charge), and <dfn class="term-definition" data-definition="An ion in which the electrons outnumber the protons (- charge).">anions</dfn> are ions in which the electrons outnumber the protons (- charge). These oppositely charged ions are attracted to each other and form bonds called ionic bonds. When ionically bound compounds are dissolved in a solvent, the ions separate. This separation is known as dissociation or ionization. The only way in which most ions can undergo chemical reaction is to be in this dissociated state.</p>
+                            <p><strong>b.</strong> Three general types of ionic compounds exist: acids, bases, and salts. Simply and incompletely stated, acids are compounds that contribute hydrogen ions to a solution, bases are compounds that contribute hydroxide ions to the solution, and salts yield neither hydrogen nor hydroxide ions to the solution. The concentration of the hydrogen and hydroxide ions will determine the degree of acidity or alkalinity of a solution, and thus have an effect on the kinds of reactions and the speed of the reactions that will occur. It is important, therefore, to know the relative concentrations of the hydrogen and hydroxide ions in a solution.</p>
+                            <p><strong>c.</strong> Before discussing hydrogen and hydroxide ion concentration further, it will be important to consider in greater detail the definition of an acid and a base. There are several definitions of the terms acid and base. We will examine two of the definitions that will aid you in further course work.</p>
+                        </div>
+
+                        <!-- 9-2 Arrhenius Concept -->
+                        <div class="content-card">
+                            <h3 id="9-2">9-2. Arrhenius Concept</h3>
+                            <p>An acid is a substance that will produce hydrogen ions ($\text{H}^+$) in an aqueous solution, and a base is a substance that will produce hydroxide ion ($\text{OH}^-$) in an aqueous solution. It is important to note that hydrogen ions do not exist as such in an aqueous solution. Each hydrogen ion is associated with one molecule of water to produce a hydronium ion, $\text{H}_3\text{O}^+$.</p>
+                            <div class="equation">
+                                $$\text{H}^+ + \text{H}_2\text{O} \leftrightarrow \text{H}_3\text{O}^+$$
+                            </div>
+                            <p>When hydrochloric acid (HCl), which exists in its pure state as a gas, is dissolved in water, the following reaction takes place:</p>
+                            <div class="equation">
+                                $$\text{HCl} + \text{H}_2\text{O} \leftrightarrow \text{H}_3\text{O}^+ + \text{Cl}^-$$
+                            </div>
+                            <p>The hydronium ion can easily react with other groups as a proton donor. The hydrogen ion itself is made up of one proton.</p>
+                            <aside class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <span class="callout-title">Note</span>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The terms hydronium ion, hydrogen ion, and proton donor may be used interchangeably. However, we will simply refer to the hydrogen ion in future course work, but you should understand that this actually implies the presence of the hydronium ion.</p>
+                                </div>
+                            </aside>
+                            <p>One of the primary drawbacks of the Arrhenius concept is that it defines only aqueous solutions as acids and bases. Other theories allow for nonaqueous solutions.</p>
+                            
+                            <h4 id="arrhenius-examples">a. Examples of Arrhenius Acids.</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">HCl -- hydrochloric acid.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$\text{H}_2\text{SO}_4$ -- sulfuric acid.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$\text{H}_3\text{PO}_4$ -- phosphoric acid.</span></li>
+                            </ul>
+
+                            <h4 id="arrhenius-bases">b. Examples of Arrhenius Bases.</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">NaOH -- sodium hydroxide.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$\text{Ca}(\text{OH})_2$ -- calcium hydroxide.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">KOH -- potassium hydroxide.</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- 9-3 Bronsted-Lowry Theory -->
+                        <div class="content-card">
+                            <h3 id="9-3">9-3. Bronsted-Lowry Theory</h3>
+                            <p>The Bronsted-Lowry theory presents a broader definition of the terms acid and base. An acid is a proton donor and a base is a proton acceptor. Hydrochloric acid in solution is a Bronsted-Lowry use it forms hydrogen ions but because it is able to give up that hydrogen ion to another substance, such as to a molecule of water to form hydronium ions. For HCl, the difference between the two definitions seems minor. However, it becomes important when the solvent is not water. For example, when HCl reacts with $\text{NH}_3$ (ammonia), the proton is given up by the HCl and accepted by the $\text{NH}_3$, making the HCl an acid and $\text{NH}_3$ a base.</p>
+                            <div class="equation">
+                                $$\text{HCl} + \text{NH}_3 \leftrightarrow \text{NH}_4^+ + \text{Cl}^-$$
+                                <div style="text-align: center; font-size: 0.9em; margin-top: 5px;">acid &nbsp;&nbsp;&nbsp;&nbsp; base &nbsp;&nbsp;&nbsp;&nbsp; acid &nbsp;&nbsp;&nbsp;&nbsp; base</div>
+                            </div>
+
+                            <h4 id="bronsted-acids">a. Examples of Bronsted-Lowry Acids.</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$\text{NH}_4^+$ -- ammonium ion.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$\text{HC}_2\text{H}_3\text{O}_2$ -- acetic acid.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$\text{H}_2\text{CO}_3$ -- carbonic acid.</span></li>
+                            </ul>
+
+                            <h4 id="bronsted-bases">b. Examples of Bronsted-Lowry Bases.</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$\text{Cl}^-$ -- chloride ion.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$\text{NH}_3$ -- ammonia.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$\text{Fe}(\text{OH})_2$ -- iron (II) hydroxide.</span></li>
+                            </ul>
+                        </div>
+
+                        <!-- 9-4 Weak vs Strong -->
+                        <div class="content-card">
+                            <h3 id="9-4">9-4. Weak Acids/Bases Versus Strong Acids/Bases</h3>
+                            <p>As discussed previously, we stated that acids, bases, and salts are ionic compounds. Substances that break up into ions in solution are termed electrolytes because the solution has the ability to conduct electrical current. A strong electrolyte (acid or base) is a substance that exhibits a high degree of ionization, and a weak electrolyte is a substance that only partially ionizes.</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>a.</strong> Hydrochloric (HCl), sulfuric ($\text{H}_2\text{SO}_4$), and nitric ($\text{HNO}_3$) acids are strong acids because they exhibit a high degree of ionization in aqueous solutions. Hydrobromic (HBr), hydroiodic (HI), and perchloric ($\text{HClO}_4$) acids are also considered strong acids. All others are weak.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>b.</strong> The alkaline metal (Group IA, i.e., lithium, sodium, potassium) hydroxides and the alkaline earth (Group IIA, that is, magnesium, calcium, strontium,...) hydroxides are strong bases. Other bases are weak ones.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>c.</strong> Hydrogen and hydroxide only affect pH or pOH when in the ionized form.</span></li>
+                            </ul>
+                        </div>
+                    </section>
+                    <!-- END: Section I -->
+
+                    <!-- START: Section II -->
+                    <section id="section-ii" class="content-section" aria-labelledby="heading-section-ii">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">02</div>
+                            <h2 id="heading-section-ii" class="section-title">
+                                <span class="title-icon">⚖️</span>
+                                Dynamic Equilibrium
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-5">9-5. Discussion</h3>
+                            <p>When an acid ionizes, an equilibrium is established between the unionized acid and its ions. This is indicated by double arrows or a doubled-headed arrow in an equation, showing that the two reactions occur simultaneously. HA is used to represent any acid made up of hydrogen and some anion.</p>
+                            <div class="equation">
+                                $$\text{HA} \leftrightarrow \text{H}^+ + \text{A}^-$$
+                            </div>
+                            <p>At the same time, the acid molecule is dissociating, a certain percentage of the ions are reassociating to reform the acid. When the acid is first placed in water, a high degree of dissociation occurs, and the rate of the forward reaction is greater. Gradually, as more ions are formed, the rate of the reverse reaction increases. Eventually, a state of equilibrium is reached in which molecules are being ionized and reassociated at a given rate. Equilibrium exists when the rates, not the number of molecules or concentrations, of the opposing reactions are equal. This is a dynamic, constant process and continues until a force is added to change this equilibrium. For example, if the temperature is increased, the rates of the reaction are increased, and a new equilibrium state is reached. Removing one of the ions or tying them up with another reaction will also shift the equilibrium.</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-6">9-6. Law of Mass Action</h3>
+                            
+                            <h4 id="law-mass-action">a. Law.</h4>
+                            <p>The law of mass action states that the rate of reaction is proportional to the product of the molar concentrations of the reactants.</p>
+                            <div class="equation">
+                                $$\text{A} + \text{B} \leftrightarrow \text{C} + \text{D}$$
+                            </div>
+                            <p>For this reaction, A and B are the reactants, and C and D are the products. The rate at which C and D are formed is proportional to the concentration of A and B.</p>
+                            <div class="equation">
+                                $$\text{rate} = K_1[\text{A}][\text{B}]$$
+                            </div>
+                            <p>where $K_1$ is a proportionality constant, and the brackets denote mol/L concentration of the enclosed substance.</p>
+                            <p>The rate for the reverse reaction is:</p>
+                            <div class="equation">
+                                $$\text{rate} = K_2[\text{C}][\text{D}]$$
+                            </div>
+
+                            <h4 id="equilibrium-constant">b. Equilibrium Constant ($K_{eq}$).</h4>
+                            <p>The constants $K_1$ and $K_2$ are different. The ratio of the constants is known as the equilibrium constant ($K_{eq}$), dissociation constant, or ionization constant.</p>
+                            <div class="equation">
+                                $$K_{eq} = \frac{K_1}{K_2}$$
+                            </div>
+                            <p><strong>(1) At equilibrium, the rates of the forward and reverse reactions are equal.</strong></p>
+                            <div class="equation">
+                                $$\begin{aligned}
+                                \text{rate}_f &= \text{rate}_r \\
+                                \text{rate}_f &= K_1[\text{A}][\text{B}] \\
+                                \text{rate}_r &= K_2[\text{C}][\text{D}] \\
+                                K_1[\text{A}][\text{B}] &= K_2[\text{C}][\text{D}] \\
+                                \frac{K_1}{K_2} &= \frac{[\text{C}][\text{D}]}{[\text{A}][\text{B}]} \\
+                                \frac{K_1}{K_2} &= K_{eq}
+                                \end{aligned}$$
+                            </div>
+                            <p>(2) Simply, the ionization (equilibrium) constant is equal to the product of the mol/L concentrations of the products formed in the reaction divided by the product of the concentrations of the reactants.</p>
+                            <p>(3) The equilibrium constant for an acid is called the $K_a$ and for a base the $K_b$.</p>
+                            <p>(4) $K_a$ and $K_b$ are determined for weak acids and bases only. If the $K_a$ or $K_b$ of a strong acid or base, respectively, were determined it would be an infinitely large number.</p>
+                            <p>(5) Values of equilibrium constants are interpreted as follows: (a) The constant indicates the strength of a weak electrolyte. (b) The smaller the value of the $K_a$ or $K_b$, the weaker the acid or base respectively.</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-7">9-7. Example</h3>
+                            <p>What is the $[\text{H}^+]$ of a 0.100 mol/L solution of acetic acid if the $K_a$ for $\text{HC}_2\text{H}_3\text{O}_2$ is $1.75 \times 10^{-5}$?</p>
+                            
+                            <div class="collapsible-section">
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">Solution</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>Determine the equation for the dissociation of the weak acid.</p>
+                                        <div class="equation">
+                                            $$\text{HC}_2\text{H}_3\text{O}_2 \leftrightarrow \text{H}^+ + \text{C}_2\text{H}_3\text{O}_2^-$$
+                                        </div>
+                                        <p>Write the equilibrium expression.</p>
+                                        <div class="equation">
+                                            $$K_a = \frac{[\text{H}^+][\text{C}_2\text{H}_3\text{O}_2^-]}{[\text{HC}_2\text{H}_3\text{O}_2]}$$
+                                        </div>
+                                        <p>Substitute the given information, and solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$1.75 \times 10^{-5} \text{ mol/L} = \frac{[\text{H}^+][\text{C}_2\text{H}_3\text{O}_2^-]}{0.100 \text{ mol/L}}$$
+                                        </div>
+                                        <p><em>NOTE: Although the actual concentration of the acetic acid is less than 0.100 mol/L after ionization, it is a negligible amount (less than 5%). Therefore, for your future course work, the amount of ionized acid or base in this type of problem should be considered to be a negligible amount.</em></p>
+                                        <p>Substitute the variable $x$ for $\text{H}^+$ and $\text{C}_2\text{H}_3\text{O}_2^-$ since for every dissociated molecule of $\text{HC}_2\text{H}_3\text{O}_2$, one hydrogen ion and one acetate radical are produced.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            x^2 &= (1.75 \times 10^{-5} \text{ mol/L})(0.100 \text{ mol/L}) = 1.75 \times 10^{-6} \text{ mol}^2/\text{L}^2 \\
+                                            x &= [\text{H}^+] = \underline{1.32 \times 10^{-3} \text{ mol/L}}
+                                            \end{aligned}$$
+                                        </div>
+                                        <p><em>NOTE: By convention, the equilibrium constants of weak electrolytes are written without units. However, they do have units.</em></p>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- END: Section II -->
+
+                    <!-- START: Section III -->
+                    <section id="section-iii" class="content-section" aria-labelledby="heading-section-iii">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">03</div>
+                            <h2 id="heading-section-iii" class="section-title">
+                                <span class="title-icon">💧</span>
+                                Dissociation of Water
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-8">9-8. Discussion</h3>
+                            <p>Although water is not an electrolyte, its molecules do have a limited tendency to dissociate into $\text{H}^+$ and $\text{OH}^-$ ions.</p>
+                            <div class="equation">
+                                $$\text{HOH} \leftrightarrow \text{H}^+ + \text{OH}^-$$
+                            </div>
+                            <p>It can be shown that the tendency of water to dissociate is given by:</p>
+                            <div class="equation">
+                                $$K = \frac{[\text{H}^+][\text{OH}^-]}{[\text{HOH}]}$$
+                            </div>
+                            <p>At 25°C, the value of K is $1.8 \times 10^{-16}$.</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-9">9-9. Ion Product of Water</h3>
+                            <p><strong>a.</strong> Since undissociated water is present in great excess, its concentration is virtually constant at 55.6 mol/L.</p>
+                            <p><em>NOTE: The gram molecular weight of water is 18.0; therefore, in 1.00 L (approximately 1000 grams), there are:</em></p>
+                            <div class="equation">
+                                $$\frac{(1000 \text{ g})/(18.0 \text{ g/mol})}{1 \text{ L}} = 55.6 \text{ mol/L}$$
+                            </div>
+                            <p><strong>b.</strong> This constant value for the concentration of water can be incorporated into the dissociation constant to give a new constant, the ion product of water, or $K_w$.</p>
+                            <div class="equation">
+                                $$\begin{aligned}
+                                1.8 \times 10^{-16} &= \frac{[\text{H}^+][\text{OH}^-]}{[55.6]} \\
+                                [\text{H}^+][\text{OH}^-] &= 1.0 \times 10^{-14}
+                                \end{aligned}$$
+                            </div>
+                            <p>Therefore, in pure water,</p>
+                            <div class="equation">
+                                $$\begin{aligned}
+                                [\text{H}^+] &= 1.0 \times 10^{-7} \text{ mol/L} \\
+                                [\text{HO}^-] &= 1.0 \times 10^{-7} \text{ mol/L} \\
+                                K_w &= [\text{H}^+][\text{HO}^-] = 1.0 \times 10^{-14}
+                                \end{aligned}$$
+                            </div>
+                            <p><strong>c.</strong> It is important to realize that the ion product of water, $[\text{H}^+][\text{OH}^-]$, is constant for all aqueous solutions, even those that contain dissolved acids or bases.</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">(1) If a large number of $\text{H}^+$ ions are added to pure water, the concentration of $\text{OH}^-$ ions must decrease in order that the product of $[\text{H}^+][\text{OH}^-]$ remains the same.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">(2) Conversely, if a large number of hydroxyl ions are added, the $[\text{H}^+]$ will have to decrease.</span></li>
+                            </ul>
+                        </div>
+                    </section>
+                    <!-- END: Section III -->
+
+                    <!-- START: Section IV -->
+                    <section id="section-iv" class="content-section" aria-labelledby="heading-section-iv">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">04</div>
+                            <h2 id="heading-section-iv" class="section-title">
+                                <span class="title-icon">📊</span>
+                                pH and pOH
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-10">9-10. Concept of pH</h3>
+                            <p>Pure water contains an equal concentration of hydrogen and hydroxide ion. Thus, it is a neutral substance, neither acidic nor basic. If a solution has an excess of hydrogen ions, the solution will be acidic. If a solution has an excess of hydroxide ions, the solution will be alkaline. It is customary to use the hydrogen ion concentration (pH) as a measure of the acidity or alkalinity of a solution. pH is a unit of concentration that allows the technician to work with very dilute concentrations of hydrogen and hydroxide ion in a convenient form. This scale permits the representation of the enormous range of the possible $[\text{H}^+]$ concentrations from a $1.0 \text{ mol/L} [\text{H}^+]$ to a $1.0 \times 10^{-14} \text{ mol/L} [\text{H}^+]$.</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-11">9-11. Application of Concept of pH</h3>
+                            <p>The notation p denotes "negative log of." Logarithms are discussed in lesson 1, and there is a four-place logarithm table in Appendix B. pH is mathematically defined as:</p>
+                            <div class="equation">
+                                $$-\log[\text{H}^+] \text{ or } \log 1/[\text{H}^+]$$
+                            </div>
+                            
+                            <div class="collapsible-section">
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">a. Example 1. What is the pH of a 0.133 mol/L HCl solution?</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> Select the expression that allows you to solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$\text{pH} = -\log[\text{H}^+]$$
+                                        </div>
+                                        <p>Substitute the given information, and solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            \text{pH} &= -\log 0.133 = -\log[1.33 \times 10^{-1}] = -(0.1239 - 1) \\
+                                            \text{pH} &= -(-0.876) \\
+                                            \text{pH} &= \underline{0.876}
+                                            \end{aligned}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">b. Example 2. What is the pH of a 0.020 mol/L acid solution that is ionized 1.8 percent?</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> From previous discussion, hydrogen or hydroxide does not contribute to the acidity or alkalinity of a solution unless ionized. So in this problem consider only that hydrogen ion that is ionized.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            \text{pH} &= -\log[\text{H}^+] \\
+                                            \text{pH} &= -\log[(0.020 \text{ mol/L})(0.018)] = -\log[3.6 \times 10^{-4}] = -(.5563 - 4) \\
+                                            \text{pH} &= \underline{3.4}
+                                            \end{aligned}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">c. Example 3. Determine the pH of a 0.0100 mol/L $\text{HC}_2\text{H}_3\text{O}_2$ solution. The $K_a$ of the acid is $1.75 \times 10^{-5}$.</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> In determining the pH of a solution of weak electrolyte, you must first calculate the hydrogen ion concentration. Acetic acid ionizes as follows:</p>
+                                        <div class="equation">
+                                            $$\text{HC}_2\text{H}_3\text{O}_2 \leftrightarrow \text{H}^+ + \text{C}_2\text{H}_3\text{O}_2^-$$
+                                        </div>
+                                        <p>Write the equilibrium expression:</p>
+                                        <div class="equation">
+                                            $$K_a = \frac{[\text{H}^+][\text{C}_2\text{H}_3\text{O}_2^-]}{[\text{HC}_2\text{H}_3\text{O}_2]}$$
+                                        </div>
+                                        <p>Substitute the given information, and solve for the hydrogen ion concentration.</p>
+                                        <div class="equation">
+                                            $$1.75 \times 10^{-5} \text{ mol/L} = \frac{[\text{H}^+][\text{C}_2\text{H}_3\text{O}_2^-]}{0.0100 \text{ mol/L}}$$
+                                        </div>
+                                        <p>Substitute the variable $x$ for $\text{H}^+$ and $\text{C}_2\text{H}_3\text{O}_2^-$, since one hydrogen ion and one acetate ion are produced for every dissociated molecule of $\text{HC}_2\text{H}_3\text{O}_2$.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            [\text{H}^+][\text{C}_2\text{H}_3\text{O}_2^-] &= (1.75 \times 10^{-5})(0.0100 \text{ mol/L}) \\
+                                            x^2 &= (1.75 \times 10^{-5} \text{ mol/L})(0.0100 \text{ mol/L}) \\
+                                            x^2 &= 1.75 \times 10^{-7} \text{ mol}^2/\text{L}^2 \\
+                                            x &= [\text{H}^+] = 4.18 \times 10^{-4} \text{ mol/L}
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>Using the calculated value for the hydrogen ion concentration, determine the pH of the solution.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            \text{pH} &= -\log[\text{H}^+] \\
+                                            \text{pH} &= -\log[4.18 \times 10^{-4} \text{ mol/L}] = -(.6212 - 4) \\
+                                            \text{pH} &= -(-3.38) \\
+                                            \text{pH} &= \underline{3.38}
+                                            \end{aligned}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-12">9-12. pOH</h3>
+                            <p>pOH is mathematically defined as:</p>
+                            <div class="equation">
+                                $$-\log[\text{OH}^-] \text{ or } \log 1/[\text{OH}^-]$$
+                            </div>
+                            <p><em>NOTE: pH and pOH have no unit of report.</em></p>
+                        </div>
+
+                        <!-- Scales -->
+                        <div class="content-card">
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-6);">
+                                <div>
+                                    <h3 id="9-13">9-13. pH Scale</h3>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>a.</strong> pH range: 0-14</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>b.</strong> Neutral: pH 7</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>c.</strong> Acidic: less than pH 7</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>d.</strong> Basic: greater than pH 7</span></li>
+                                    </ul>
+                                    <div style="background: linear-gradient(to right, #ff9999, white, #9999ff); padding: 10px; border-radius: 8px; text-align: center; margin-top: 10px;">
+                                        <span>0 (Acidic)</span> <span style="margin: 0 10px;">&larr; 7 (Neutral) &rarr;</span> <span>14 (Basic)</span>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 id="9-14">9-14. pOH Scale</h3>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>a.</strong> pOH range: 0-14</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>b.</strong> Neutral: pOH 7</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>c.</strong> Acidic: greater than pOH 7</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>d.</strong> Basic: less than pOH 7</span></li>
+                                    </ul>
+                                    <div style="background: linear-gradient(to right, #9999ff, white, #ff9999); padding: 10px; border-radius: 8px; text-align: center; margin-top: 10px;">
+                                        <span>0 (Basic)</span> <span style="margin: 0 10px;">&larr; 7 (Neutral) &rarr;</span> <span>14 (Acidic)</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="margin-top: 20px;">In examining the definition of pH, we find that there is an inverse relationship between hydrogen ion concentration and pH. As $[\text{H}^+]$ increases, pH decreases and vice versa. Also, notice that each increase of one unit on the pH scale corresponds to a tenfold decrease in $[\text{H}^+]$, and each decrease of one unit on the pH scale corresponds to a tenfold increase in $[\text{H}^+]$. If this is true, then as the $[\text{H}^+]$ increases, $[\text{HO}^-]$ decreases, and as $[\text{H}^+]$ decreases, $[\text{OH}^-]$ increases.</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-15">9-15. Relationship Between pH and pOH</h3>
+                            <div class="equation">
+                                $$\begin{aligned}
+                                K_w &= [\text{H}^+][\text{OH}^-] = 1.0 \times 10^{-14} \\
+                                pK_w &= \text{pH} + \text{pOH} \\
+                                14 &= \text{pH} + \text{pOH}
+                                \end{aligned}$$
+                            </div>
+                            
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">a. Example 1. What is the pOH of a $\text{H}_2\text{SO}_4$ solution that has a pH of 4.3?</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> Select the expression that allows you to solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$14 = \text{pH} + \text{pOH}$$
+                                        </div>
+                                        <p>Substitute the given information, and solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$14 = 4.3 + \text{pOH}$$
+                                            $$\text{pOH} = 14 - 4.3$$
+                                            $$\text{pOH} = \underline{9.7}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">b. Example 2. What is the pH of a 0.010 mol/L NaOH solution?</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p><strong>Solution.</strong> In solving this problem, it is necessary to first determine the pOH of the solution before solving for the pH.</p>
+                                        <div class="equation">
+                                            $$\text{pOH} = \log \frac{1}{0.010} = 2.00$$
+                                        </div>
+                                        <p>Now, utilize the expression that relates pH to pOH by substituting the given information and solving for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$14 = \text{pH} + \text{pOH}$$
+                                            $$14 = \text{pH} + 2.00$$
+                                            $$\text{pH} = 14 - 2.00$$
+                                            $$\text{pH} = \underline{12.00}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- END: Section IV -->
+
+                    <!-- START: Section V -->
+                    <section id="section-v" class="content-section" aria-labelledby="heading-section-v">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">05</div>
+                            <h2 id="heading-section-v" class="section-title">
+                                <span class="title-icon">⚗️</span>
+                                Hydrolysis of Salts
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-16">9-16. Discussion</h3>
+                            <p>If you were to place a salt in water and then perform a pH determination, you would be surprised to find that some salts would have an acidic pH, some would be basic, and others would be neutral. Most salts are formed by the reaction of acids with bases. The anion (-) of the acid and the cation (+) of the base are the component parts of a salt molecule. The term <dfn class="term-definition" data-definition="A reaction with water.">hydrolysis</dfn> refers to a reaction with water. A salt when placed in water will ionize and depending on the type of salt, will undergo hydrolysis (remember water itself ionizes to a small degree). There are three types of salts we will consider: salts that are composed of the ions of a weak acid and a strong base, salts of a strong acid and a weak base, and salts of a weak acid and a weak base. Anions that form a strong acid ($\text{NO}_3^-$, $\text{Cl}^-$, $\text{ClO}_4^-$, $\text{Br}^-$ and $\text{I}^-$) and cations that form strong bases (Group IA and IIA) do not undergo hydrolysis but simply dissociate into ions: (i.e., NaCl does not hydrolyze in water). This information will help in understanding the action of buffers.</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-17">9-17. Hydrolysis of the Salt of a Weak Acid and a Strong Base</h3>
+                            <p>This salt will hydrolyze to form a basic solution. The salt sodium acetate will ionize into sodium ions and acetate ions. The sodium ion does not undergo hydrolysis but the acetate ion will react with free hydrogen ions forming acetic acid.</p>
+                            <div class="equation">
+                                $$\text{Na}^+ + \text{C}_2\text{H}_3\text{O}_2^- + \text{HOH} \leftrightarrow \text{HC}_2\text{H}_3\text{O}_2 + \text{Na}^+ + \text{OH}^-$$
+                            </div>
+                            <p>This reaction causes a shift in the $[\text{H}^+]/[\text{OH}^-]$ by removing $[\text{H}^+]$. This salt is classified as a basic salt because the acetate ion, by definition, is a weak Bronsted-Lowry base (proton acceptor).</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-18">9-18. Hydrolysis of the Salt of a Strong Acid and a Weak Base</h3>
+                            <p>The ions of this type of salt will hydrolyze to form an acidic solution. The salt ammonium chloride reacts as follows:</p>
+                            <div class="equation">
+                                $$\text{NH}_4^+ + \text{Cl}^- + \text{HOH} \leftrightarrow \text{NH}_3 + \text{H}_3\text{O}^+ + \text{Cl}^-$$
+                            </div>
+                            <p>In this case, the ammonium cation is a Bronsted-Lowry acid (proton donor). This salt is classified as an acidic salt.</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-19">9-19. Hydrolysis of the Salt of a Weak Acid and a Weak Base</h3>
+                            <p>The ions of this type of salt will hydrolyze to form a solution that may be acidic, basic, or neutral, depending on the strength (ionization constant) of the weak acid and weak base that formed the salt. If the ionization constant of the weak acid is greater than the ionization constant of the weak base, the solution will be acidic. If the constant is greater for the weak base, the solution will be basic. If the constants are equal, the resulting solution will be neutral.</p>
+                        </div>
+                    </section>
+                    <!-- END: Section V -->
+
+                    <!-- START: Section VI -->
+                    <section id="section-vi" class="content-section" aria-labelledby="heading-section-vi">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">06</div>
+                            <h2 id="heading-section-vi" class="section-title">
+                                <span class="title-icon">⚖️</span>
+                                Buffers
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-20">9-20. Discussion</h3>
+                            <p>Buffer systems are commonly used in the laboratory to help maintain a constant pH in a reaction mixture. A <dfn class="term-definition" data-definition="A solution that acts to resist a change in pH.">buffer</dfn> solution acts to resist a change in pH. A buffer is composed of either a weak acid and its salt or a weak base and its salt. Buffers made up of a weak acid and it's salt are called acidic buffers and function from pH 0 to 7. Basic buffers consist of a weak base and its salt and function from pH 7 to 14.</p>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-21">9-21. Mechanism of Action</h3>
+                            <p><strong>a. Addition of a Strong Acid.</strong> A common buffer used in the laboratory is the acetic acid/acetate buffer. As acid is added $[\text{H}^+]$ into the solution, it will react with the acetate anion from the salt (proton acceptor) forming acetic acid. Since acid is added, a shift in the equilibrium of the solution will occur, but the amount of free hydrogen ions in solution will be controlled by the ionization constant of the acetic acid formed and only a slight change in $[\text{H}^+]$ takes place.</p>
+                            <p>Buffer system: $\text{HC}_2\text{H}_3\text{O}_2 / \text{NaC}_2\text{H}_3\text{O}_2$ (Acetic acid/sodium acetate)</p>
+                            <p>Buffer system with HCl added:</p>
+                            <div class="equation">
+                                $$\text{H}^+ + \text{Cl}^- + \text{Na}^+ + \text{C}_2\text{H}_3\text{O}_2^- \leftrightarrow \text{HC}_2\text{H}_3\text{O}_2 + \text{Cl}^- + \text{Na}^+$$
+                            </div>
+
+                            <p><strong>b. Addition of a Strong Base.</strong> As base is added to this buffer, acetic acid reacts with the base to form salt (acetate ions) and water. Once again a shift in the equilibrium of the solution occurs but with a minimal change in pH.</p>
+                            <p>NaOH added:</p>
+                            <div class="equation">
+                                $$\text{Na}^+ + \text{OH}^- + \text{HC}_2\text{H}_3\text{O}_2 \leftrightarrow \text{Na}^+ + \text{C}_2\text{H}_3\text{O}_2^- + \text{H}_2\text{O}$$
+                            </div>
+
+                            <p><strong>c. Notes.</strong></p>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">(1) A buffer's ability to resist changes in pH is limited to the concentration of either the weak acid of base and its salt. The addition of an excessive amount of either acid or base will "exhaust" the buffering capacity of the buffer.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">(2) The closer the pH of the buffer to the $pK_a$ or $pK_b$ of the weak acid or base respectively the greater the buffering capacity.</span></li>
+                            </ul>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-22">9-22. The Henderson-Hasselbalch Equation</h3>
+                            <p>The preparation of laboratory buffers can be accomplished by using the Henderson-Hasselbalch equation. The equation is derived from the ionization constant of weak acids and bases.</p>
+                            <div class="equation">
+                                $$K = \frac{[\text{H}^+][\text{A}^-]}{[\text{HA}]}$$
+                            </div>
+                            <p>The hydrogen ion concentration can be calculated by rearranging the equation.</p>
+                            <div class="equation">
+                                $$[\text{H}^+] = \frac{K_a \times [\text{HA}]}{[\text{A}^-]}$$
+                            </div>
+                            <p>Because $[\text{H}^+]$ is usually expressed as pH, it is usually more convenient to express all concentration in this equation in logarithmic form.</p>
+                            <div class="equation">
+                                $$\log[\text{H}^+] = \log K_a + \log \frac{[\text{HA}]}{[\text{A}^-]}$$
+                            </div>
+                            <p>Since $\text{pH} = -\log[\text{H}^+]$ multiply both sides of the equation by -1.</p>
+                            <div class="equation">
+                                $$-\log[\text{H}^+] = -\log K_a - \log \frac{[\text{HA}]}{[\text{A}^-]}$$
+                            </div>
+                            <p>Restated:</p>
+                            <div class="equation">
+                                $$\begin{aligned}
+                                -\log[\text{H}^+] &= -\log K_a + \log \frac{[\text{A}^-]}{[\text{HA}]} \\
+                                \text{pH} &= pK_a + \log \frac{[\text{salt}]}{[\text{acid}]}
+                                \end{aligned}$$
+                            </div>
+                            <p>The expression relating pOH to the components of a buffer may be developed similarly.</p>
+                            <div class="equation">
+                                $$\text{pOH} = pK_b + \log \frac{[\text{salt}]}{[\text{base}]}$$
+                            </div>
+                        </div>
+
+                        <div class="content-card">
+                            <h3 id="9-23">9-23. Solving Buffer Problems</h3>
+                            <p>The most important consideration when preparing a buffer is determining whether an acidic or basic buffer is being prepared. Examine the components of the buffer. If a weak acid and its salt are the components, use the expression for acidic buffers. If a weak base and its salt are used, select the expression for basic buffers.</p>
+                            
+                            <div class="collapsible-section">
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">a. Example 1. Acidic Buffer.</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>Calculate the pH of a buffer solution that contains 0.010 mol/L acetic acid and 0.020 mol/L sodium acetate. The $K_a$ for acetic acid is $1.75 \times 10^{-5}$.</p>
+                                        <p><strong>Solution.</strong> Read the problem carefully, and select the expression that allows you to solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$\text{pH} = pK_a + \log \frac{[\text{salt}]}{[\text{acid}]}$$
+                                        </div>
+                                        <p>Make any necessary conversions.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            pK_a &= -\log K_a \\
+                                            pK_a &= -\log (1.75 \times 10^{-5}) \\
+                                            pK_a &= 4.76
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>Substitute the given information, and solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            \text{pH} &= 4.76 + \log \frac{0.020 \text{ mol/L}}{0.010 \text{ mol/L}} \\
+                                            \text{pH} &= 4.76 + 0.301 \\
+                                            \text{pH} &= \underline{5.06}
+                                            \end{aligned}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">b. Example 2. Basic Buffer.</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>What is the pH of a buffer solution that contains $1.50 \times 10^{-3} \text{ mol/L NH}_4\text{Cl}$ and $2.00 \times 10^{-4} \text{ mol/L NH}_4\text{OH}$? The $pK_b$ for ammonium hydroxide is 4.75.</p>
+                                        <p><strong>Solution.</strong> Read the problem carefully, and select the expression that allows you to solve for the unknown quantity. Note that you are dealing with a basic buffer from which you must determine pH.</p>
+                                        <div class="equation">
+                                            $$\text{pOH} = pK_b + \log \frac{[\text{salt}]}{[\text{base}]}$$
+                                        </div>
+                                        <p>Substitute the given information, and solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            \text{pOH} &= 4.75 + \log \frac{1.50 \times 10^{-3} \text{ mol/L}}{2.00 \times 10^{-4} \text{ mol/L}} \\
+                                            \text{pOH} &= 4.75 + 0.8751 \\
+                                            \text{pOH} &= 5.63
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>Now that you have determined the pOH, using the appropriate expression, determine the pH of the buffer.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            14 &= \text{pH} + \text{pOH} \\
+                                            \text{pH} &= 14 - \text{pOH} \\
+                                            \text{pH} &= 14 - 5.63 \\
+                                            \text{pH} &= \underline{8.37}
+                                            \end{aligned}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">c. Example 3. Preparing an Acetate Buffer.</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>What amount of salt/acid is required to prepare a 0.100 mol/L acetate buffer at a pH of 5.50? The $pK_a$ of acetic acid is 4.76.</p>
+                                        <p><strong>Solution.</strong> At times, the pK of the acid/base of a buffer and the total concentration of the buffer is known, and the amount of salt and acid/base required to prepare a buffer must be calculated.</p>
+                                        <p>After reading the problem carefully, select the expression that allows you to solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$\text{pH} = pK_a + \log \frac{[\text{salt}]}{[\text{acid}]}$$
+                                        </div>
+                                        <p>Substitute the given information, and solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            5.50 &= 4.76 + \log \frac{[\text{salt}]}{[\text{acid}]} \\
+                                            5.50 - 4.76 &= \log \frac{[\text{salt}]}{[\text{acid}]} \\
+                                            0.74 &= \log \frac{[\text{salt}]}{[\text{acid}]} \\
+                                            \text{antilog } 0.74 &= \frac{[\text{salt}]}{[\text{acid}]} \\
+                                            5.5 &= \frac{[\text{salt}]}{[\text{acid}]} = \frac{5.5 \text{ mol/L}}{1 \text{ mol/L}}
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>You have now established the proper ratio of salt and acid that will yield the desired pH. However, the problem states that a molar concentration of 0.100 mol/L for the buffer is desired. This mol/L concentration is the sum of the mol/L concentrations of the salt and the acid. The mol/L concentration of the buffer, based on your calculations so far, is 6.5 mol/L. The following method is one of several that you may employ to determine the concentrations necessary to yield the proper mol/L concentration of the buffer while maintaining the proper ratio.</p>
+                                        <p>Express the desired mol/L concentration of the buffer as an equality.</p>
+                                        <div class="equation">
+                                            $$[\text{salt}] + [\text{acid}] = 0.100 \text{ mol/L}$$
+                                        </div>
+                                        <p>Solve the equality for either [salt] or [acid].</p>
+                                        <div class="equation">
+                                            $$[\text{salt}] = 0.100 \text{ mol/L} - [\text{acid}]$$
+                                        </div>
+                                        <p>Now based on the substitution property, you are able to express the [salt] in terms of [acid], and in effect, derive an equation in one variable instead of the two, in the original expression.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            5.5 &= \frac{[\text{salt}]}{[\text{acid}]} \\
+                                            5.5 &= \frac{0.100 \text{ mol/L} - [\text{acid}]}{[\text{acid}]}
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>Simplify the expression by clearing the fraction.</p>
+                                        <div class="equation">
+                                            $$5.5 [\text{acid}] = 0.100 \text{ mol/L} - [\text{acid}]$$
+                                        </div>
+                                        <p>Solve the expression for [acid].</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            5.5 [\text{acid}] + [\text{acid}] &= 0.100 \text{ mol/L} \\
+                                            6.5 [\text{acid}] &= 0.100 \text{ mol/L} \\
+                                            [\text{acid}] &= \frac{0.100 \text{ mol/L}}{6.5} \\
+                                            [\text{acid}] &= 0.0154 \text{ mol/L} \text{ or equivalently, } 1.54 \times 10^{-2} \text{ mol/L}
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>To determine the amount of salt required, substitute the calculated value of the acid concentration in the expression relating the salt and acid concentration to the desired mol/L concentration of the buffer.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            [\text{salt}] &= 0.100 \text{ mol/L} - [\text{acid}] \\
+                                            [\text{salt}] &= 0.100 \text{ mol/L} - 0.0154 \text{ mol/L} \\
+                                            [\text{salt}] &= 0.0846 \text{ mol/L} \text{ or equivalently, } 8.46 \times 10^{-2} \text{ mol/L}
+                                            \end{aligned}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <span class="trigger-text">d. Example 4. Preparing an Ammonia Buffer.</span>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>What amount of salt/base is required to prepare a 0.100 mol/L ammonia buffer at a pH of 9.8? The $pK_b$ for ammonium hydroxide is 4.75.</p>
+                                        <p><strong>Solution.</strong> After reading the problem carefully, note that you are to prepare a basic buffer of a certain pH. Select an expression that will allow you to solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$\text{pOH} = pK_b + \log \frac{[\text{salt}]}{[\text{base}]}$$
+                                        </div>
+                                        <p>Convert pH to pOH.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            14 &= \text{pH} + \text{pOH} \\
+                                            \text{pOH} &= 14 - \text{pH} \\
+                                            \text{pOH} &= 14 - 9.8 \\
+                                            \text{pOH} &= 4.2
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>Substitute the given values, and solve for the unknown quantity.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            4.2 &= 4.75 + \log \frac{[\text{salt}]}{[\text{base}]} \\
+                                            4.2 - 4.75 &= \log \frac{[\text{salt}]}{[\text{base}]} \\
+                                            -0.6 &= \log \frac{[\text{salt}]}{[\text{base}]} \\
+                                            \text{antilog}(-0.6) &= \frac{[\text{salt}]}{[\text{base}]} \\
+                                            0.3 &= \frac{[\text{salt}]}{[\text{base}]}
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>Express the desired mol/L concentration of the buffer as an equality.</p>
+                                        <div class="equation">
+                                            $$[\text{salt}] + [\text{base}] = 0.100 \text{ mol/L}$$
+                                        </div>
+                                        <p>Solve the equality for either [salt] or [base].</p>
+                                        <div class="equation">
+                                            $$[\text{salt}] = 0.100 \text{ mol/L} - [\text{base}]$$
+                                        </div>
+                                        <p>Now, based on the substitution property, you are able to express the [salt] in terms of [base], and in effect derive an equation in one variable instead of the two in the original expression.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            0.3 &= \frac{[\text{salt}]}{[\text{base}]} \\
+                                            0.3 &= \frac{0.100 \text{ mol/L} - [\text{base}]}{[\text{base}]}
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>Simplify the expression by clearing the fraction.</p>
+                                        <div class="equation">
+                                            $$0.3 [\text{base}] = 0.100 \text{ mol/L} - [\text{base}]$$
+                                        </div>
+                                        <p>Solve the expression for [base].</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            0.3 [\text{base}] + [\text{base}] &= 0.100 \text{ mol/L} \\
+                                            1.3 [\text{base}] &= 0.100 \text{ mol/L} \\
+                                            [\text{base}] &= \frac{0.100 \text{ mol/L}}{1.3} \\
+                                            [\text{base}] &= 0.077 \text{ mol/L} \text{ or equivalently, } 7.7 \times 10^{-2} \text{ mol/L}
+                                            \end{aligned}$$
+                                        </div>
+                                        <p>To determine the amount of salt required, substitute the calculated value of the base concentration in the expression relating the salt and base concentration to the desired mol/L concentration of the buffer.</p>
+                                        <div class="equation">
+                                            $$\begin{aligned}
+                                            [\text{salt}] &= 0.100 \text{ mol/L} - [\text{base}] \\
+                                            [\text{salt}] &= 0.100 \text{ mol/L} - 0.077 \text{ mol/L} \\
+                                            [\text{salt}] &= \underline{0.023 \text{ mol/L}} \text{ or equivalently, } 2.3 \times 10^{-2} \text{ mol/L}
+                                            \end{aligned}$$
+                                        </div>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </section>
+                    <!-- END: Section VI -->
+
+                    <!-- Exercises -->
+                    <section id="exercises" class="content-section" aria-labelledby="heading-exercises">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">07</div>
+                            <h2 id="heading-exercises" class="section-title">
+                                <span class="title-icon">✍️</span>
+                                Exercises, Lesson 9
+                            </h2>
+                        </div>
+                        
+                        <div class="content-card">
+                            <p><em>INSTRUCTIONS: Answer the following exercises by writing the answer in the space provided at the end of the question. After you have completed all the exercises, turn to "Solutions to Exercises" at the end of the lesson and check your answers. For each exercise answered incorrectly, reread the material referenced with the solution.</em></p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker">1.</span>
+                                    <span class="list-content">What is the pH of a $4.00 \times 10^{-4} \text{ mol/L HCl}$ solution?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">2.</span>
+                                    <span class="list-content">What is the pH of a $0.100 \text{ mol/L HC}_2\text{H}_3\text{O}_2$ that ionizes 1.3%?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">3.</span>
+                                    <span class="list-content">What is the pOH of a $0.250 \text{ mol/L H}_2\text{SO}_4$ solution? (NOTE: Use the given concentration for pH and pOH calculations that involve polyprotic acids, that is, acids with more than one hydrogen.)</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">4.</span>
+                                    <span class="list-content">What is the pH of a $1.40 \times 10^{-2} \text{ mol/L Ca}(\text{OH})_2$ solution? (NOTE: To determine the actual hydroxide concentration of this and like compounds, multiply the given concentration by the number of hydroxide ions per molecule.)</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">5.</span>
+                                    <span class="list-content">What is the pH of a buffer prepared by adding $1.20 \times 10^{-3} \text{ mol/L NaC}_2\text{H}_3\text{O}_2$ and $1.20 \times 10^{-2} \text{ mol/L HC}_2\text{H}_3\text{O}_2$? The $K_a$ for acetic acid is $1.75 \times 10^{-5}$.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">6.</span>
+                                    <span class="list-content">What is the pOH of a buffer prepared by adding $3.50 \times 10^{-5} \text{ mol/L NH}_4\text{OH}$ and $2.50 \times 10^{-4} \text{ mol/L NH}_4\text{Cl}$? The $pK_b$ for $\text{NH}_4\text{OH}$ is 4.75.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">7.</span>
+                                    <span class="list-content">What is the pH of the buffer in exercise 6?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">8.</span>
+                                    <span class="list-content">An acetate buffer, pH 5.20, was prepared using $0.100 \text{ mol/L}$ acetic acid. The $pK_a$ for acetic acid is 4.76. What concentration of salt is needed?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">9.</span>
+                                    <span class="list-content">A $0.050 \text{ mol/L}$ bicarbonate buffer with a pH of 5.60 is to be prepared. The $pK_a$ of carbonic acid is 6.12. What concentration of sodium bicarbonate and carbonic acid are needed to prepare the buffer?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">10.</span>
+                                    <div class="list-content">
+                                        <p>A $0.0670 \text{ mol/L}$ buffer, pH 7.10 is to be prepared. The $pK_a$ of $\text{KH}_2\text{PO}_4$ is 4.71. A volume of 1.00 liter is needed.</p>
+                                        <ul style="list-style-type: lower-alpha; margin-left: 20px;">
+                                            <li>What concentration of $\text{KH}_2\text{PO}_4$ and $\text{Na}_2\text{HPO}_4$ is required?</li>
+                                            <li>What weight of each constituent is needed to prepare the buffer?</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">11.</span>
+                                    <div class="list-content">
+                                        <p>An ammonia buffer pH 7.60 with a concentration of $1.20 \times 10^{-2} \text{ mol/L}$ is required. The $K_b$ for $\text{NH}_4\text{OH}$ is $1.79 \times 10^{-5}$. The desired volume is 500 mL.</p>
+                                        <ul style="list-style-type: lower-alpha; margin-left: 20px;">
+                                            <li>What concentration of $\text{NH}_4\text{OH}$ and $\text{NH}_4\text{Cl}$ are required?</li>
+                                            <li>What weight of $\text{NH}_4\text{Cl}$ is needed?</li>
+                                            <li>How many milliliters of $\text{NH}_4\text{OH}$ with a S.G. 0.950 and percent purity of 28.0%?</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Solutions -->
+                    <section id="solutions" class="content-section" aria-labelledby="heading-solutions">
+                        <div class="section-header">
+                            <div class="section-number" aria-hidden="true">08</div>
+                            <h2 id="heading-solutions" class="section-title">
+                                <span class="title-icon">✅</span>
+                                Solutions to Exercises, Lesson 9
+                            </h2>
+                        </div>
+                        
+                        <div class="content-card">
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker">1.</span><span class="list-content">$\text{pH} = 3.40$ (para 9-11)</span></li>
+                                <li class="list-item"><span class="list-marker">2.</span><span class="list-content">$\text{pH} = 2.9$ (para 9-11)</span></li>
+                                <li class="list-item"><span class="list-marker">3.</span><span class="list-content">$\text{pOH} = 13.7$ (para 9-12)</span></li>
+                                <li class="list-item"><span class="list-marker">4.</span><span class="list-content">$\text{pH} = 12.4$ (para 9-15)</span></li>
+                                <li class="list-item"><span class="list-marker">5.</span><span class="list-content">$\text{pH} = 3.76$ (para 9-23)</span></li>
+                                <li class="list-item"><span class="list-marker">6.</span><span class="list-content">$\text{pOH} = 5.60$ (para 9-23)</span></li>
+                                <li class="list-item"><span class="list-marker">7.</span><span class="list-content">$\text{pH} = 8.40$ (para 9-23)</span></li>
+                                <li class="list-item"><span class="list-marker">8.</span><span class="list-content">$[\text{salt}] = 0.275 \text{ mol/L}$ (para 9-23)</span></li>
+                                <li class="list-item"><span class="list-marker">9.</span><span class="list-content">$[\text{salt}] = 0.012 \text{ mol/L}$, $[\text{acid}] = 0.038 \text{ mol/L}$ (para 9-23)</span></li>
+                                <li class="list-item"><span class="list-marker">10.</span><span class="list-content">a. $[\text{acid}] = 0.000272 \text{ mol/L}$, $[\text{salt}] = 0.0667 \text{ mol/L}$ (para 9-23); b. Acid = 0.0370 g, Salt = 9.47 g (lesson 3)</span></li>
+                                <li class="list-item"><span class="list-marker">11.</span><span class="list-content">a. $[\text{base}] = 0.000261 \text{ mol/L}$, $[\text{salt}] = 0.0117 \text{ mol/L}$ (para 9-23); b. 0.313 g (lesson 3); c. 0.0172 mL (para 9-23 and lesson 8)</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </div>
+
+                <!-- Bottom Navigation -->
+                <nav class="document-nav document-nav--bottom" role="navigation" aria-label="Document navigation">
+                    <div class="nav-container">
+                        <a href="lesson-8-acids-bases.html" class="nav-button nav-button--prev nav-button--large">
+                            <span class="nav-icon">←</span>
+                            <div class="nav-content">
+                                <span class="nav-label">Previous</span>
+                                <span class="nav-title">Lesson 8: Acids and Bases</span>
+                            </div>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button nav-button--toc">
+                            <span class="nav-icon">📚</span>
+                            <span class="nav-text">All Topics</span>
+                        </a>
+                        
+                        <a href="appendices.html" class="nav-button nav-button--next nav-button--large">
+                            <div class="nav-content">
+                                <span class="nav-label">Next</span>
+                                <span class="nav-title">Appendices</span>
+                            </div>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                </nav>
+            </article>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>
