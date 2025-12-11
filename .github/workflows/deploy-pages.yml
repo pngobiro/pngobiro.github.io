@@ -1,0 +1,77 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      
+      - name: Create deployment directory
+        run: |
+          mkdir -p _site
+          
+      - name: Copy files excluding large source files
+        run: |
+          rsync -av \
+            --exclude='*.mmd' \
+            --exclude='*.txt' \
+            --exclude='*.md' \
+            --exclude='.git' \
+            --exclude='_site' \
+            --exclude='*.pdf' \
+            --exclude='*.doc' \
+            --exclude='*.docx' \
+            --exclude='*.ppt' \
+            --exclude='*.pptx' \
+            --exclude='*.mp4' \
+            --exclude='*.mpg' \
+            --exclude='*.avi' \
+            --exclude='*.mov' \
+            --exclude='*.wmv' \
+            --exclude='*.flv' \
+            --exclude='*.elp' \
+            --exclude='*.crdownload' \
+            --exclude='*.backup' \
+            --exclude='folder_structure.json' \
+            --exclude='node_modules' \
+            --exclude='cleanup-git-history.sh' \
+            --exclude='test_site' \
+            ./ _site/
+      
+      - name: Check artifact size
+        run: |
+          echo "Deployment artifact size:"
+          du -sh _site
+          echo ""
+          echo "File count:"
+          find _site -type f | wc -l
+      
+      - name: Setup Pages
+        uses: actions/configure-pages@v4
+      
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+      
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
