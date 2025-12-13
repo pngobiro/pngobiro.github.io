@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clinical Methods | Course Index</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <style>
+        /* Specific Styles for Index Page Hero & Cards */
+        .hero-section {
+            background: linear-gradient(135deg, var(--primary-light) 0%, var(--bg-secondary) 100%);
+            padding: var(--space-12) var(--space-6);
+            border-radius: 0 0 var(--radius-2xl) var(--radius-2xl);
+            margin-bottom: var(--space-10);
+            text-align: center;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        [data-theme="dark"] .hero-section {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--bg-secondary) 100%);
+        }
+
+        .hero-title {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--text-primary);
+            margin-bottom: var(--space-4);
+            letter-spacing: -0.02em;
+        }
+
+        .hero-subtitle {
+            font-size: var(--font-size-xl);
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .toc-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+            padding: 0 var(--space-6) var(--space-12);
+            max-width: var(--container-width);
+            margin: 0 auto;
+        }
+
+        .toc-card {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius-lg);
+            padding: var(--space-6);
+            transition: all var(--transition-base);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .toc-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+            border-color: var(--primary-color);
+        }
+
+        .card-badge {
+            display: inline-flex;
+            align-items: center;
+            padding: var(--space-1) var(--space-3);
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-xs);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: var(--space-4);
+            width: fit-content;
+        }
+
+        [data-theme="dark"] .card-badge {
+            background: rgba(59, 130, 246, 0.2);
+            color: var(--primary-light);
+        }
+
+        .card-title {
+            font-size: var(--font-size-xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-3);
+            color: var(--text-primary);
+        }
+
+        .card-description {
+            color: var(--text-secondary);
+            font-size: var(--font-size-sm);
+            margin-bottom: var(--space-6);
+            line-height: 1.6;
+            flex-grow: 1;
+        }
+
+        .card-meta {
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            margin-bottom: var(--space-6);
+            color: var(--text-tertiary);
+            font-size: var(--font-size-xs);
+        }
+
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-1);
+        }
+
+        .card-action {
+            margin-top: auto;
+        }
+
+        .card-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+            padding: var(--space-3);
+            background: var(--primary-color);
+            color: white;
+            border-radius: var(--radius-md);
+            font-weight: var(--font-weight-medium);
+            text-decoration: none;
+            transition: background var(--transition-fast);
+        }
+
+        .card-button:hover {
+            background: var(--primary-dark);
+        }
+        
+        /* Section Divider */
+        .section-label {
+            max-width: var(--container-width);
+            margin: var(--space-8) auto var(--space-4);
+            padding: 0 var(--space-6);
+            font-size: var(--font-size-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-tertiary);
+            font-weight: var(--font-weight-bold);
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+        }
+        
+        .section-label::after {
+            content: '';
+            height: 1px;
+            background: var(--border-color);
+            flex-grow: 1;
+        }
+    </style>
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <!-- Theme Toggle (Fixed Position) -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" title="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="page-wrapper">
+        <header class="hero-section">
+            <div class="container">
+                <div class="header-badge">
+                    <span class="badge-icon">👨‍⚕️</span>
+                    <span class="badge-text">Medical Education Series</span>
+                </div>
+                <h1 class="hero-title">Clinical Methods</h1>
+                <p class="hero-subtitle">Comprehensive guide to history taking, physical examination, and diagnostic reasoning for medical students.</p>
+            </div>
+        </header>
+
+        <main id="main-content">
+            <div class="section-label">Core Modules</div>
+            
+            <div class="toc-grid">
+                <!-- Topic 01: History Taking & General Examination -->
+                <article class="toc-card">
+                    <div class="card-badge">Module 01</div>
+                    <h2 class="card-title">History Taking & General Examination</h2>
+                    <p class="card-description">
+                        Master the art of patient interviews, establishing doctor-patient relationships, and conducting a thorough general physical examination. Covers symptom analysis, review of systems, and general parameters like pallor and jaundice.
+                    </p>
+                    <div class="card-meta">
+                        <span class="meta-item">
+                            <span class="meta-icon">⏱️</span>
+                            <span>45 min read</span>
+                        </span>
+                        <span class="meta-item">
+                            <span class="meta-icon">📄</span>
+                            <span>6 Sections</span>
+                        </span>
+                    </div>
+                    <div class="card-action">
+                        <a href="topics/clinical-methods.html" class="card-button">
+                            Start Module <span style="margin-left: 8px">→</span>
+                        </a>
+                    </div>
+                </article>
+
+                <!-- Placeholder for future topics if needed -->
+                <!-- 
+                <article class="toc-card" style="opacity: 0.7; border-style: dashed;">
+                    <div class="card-badge" style="background: var(--bg-secondary); color: var(--text-secondary);">Coming Soon</div>
+                    <h2 class="card-title">Systemic Examination</h2>
+                    <p class="card-description">
+                        Detailed examination guides for Cardiovascular, Respiratory, Gastrointestinal, and Nervous systems.
+                    </p>
+                    <div class="card-action">
+                        <span class="card-button" style="background: var(--bg-secondary); color: var(--text-tertiary); cursor: not-allowed;">
+                            Available Soon
+                        </span>
+                    </div>
+                </article> 
+                -->
+            </div>
+        </main>
+
+        <footer style="text-align: center; padding: var(--space-8); color: var(--text-tertiary); border-top: 1px solid var(--border-color); margin-top: auto;">
+            <p>Clinical Methods Lecture Notes</p>
+        </footer>
+    </div>
+
+    <!-- JavaScript Dependencies -->
+    <script src="js/theme.js"></script>
+    <script>
+        // Simple interactions for the index page if strictly necessary, 
+        // mainly theme toggle which is handled by theme.js
+    </script>
+</body>
+</html>
