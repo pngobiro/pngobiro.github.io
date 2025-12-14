@@ -1,285 +1,1252 @@
 <!DOCTYPE html>
 <html lang="en" data-theme="light">
+
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Essentials of Medical Pharmacology - Study Guide</title>
-    
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Essentials of Medical Pharmacology | Study Dashboard</title>
 
-<link rel="stylesheet" href="styles/main.css">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+        rel="stylesheet">
 
-  
+    <!-- Main Styles -->
+    <link rel="stylesheet" href="styles/main.css">
 
+    <style>
+        /* --- Color Palette Definitions --- */
+        :root {
+            /* Section 1: General (Blue) */
+            --s1-color: #3b82f6;
+            --s1-bg: #eff6ff;
+            /* Section 2: ANS (Violet) */
+            --s2-color: #8b5cf6;
+            --s2-bg: #f5f3ff;
+            /* Section 3: Autacoids (Pink) */
+            --s3-color: #ec4899;
+            --s3-bg: #fdf2f8;
+            /* Section 4: Respiratory (Cyan) */
+            --s4-color: #06b6d4;
+            --s4-bg: #ecfeff;
+            /* Section 5: Hormones (Amber) */
+            --s5-color: #f59e0b;
+            --s5-bg: #fffbeb;
+            /* Section 6: Peripheral Nerve (Teal) */
+            --s6-color: #14b8a6;
+            --s6-bg: #f0fdfa;
+            /* Section 7: CNS (Indigo) */
+            --s7-color: #6366f1;
+            --s7-bg: #eef2ff;
+            /* Section 8: CVS (Red) */
+            --s8-color: #ef4444;
+            --s8-bg: #fef2f2;
+            /* Section 9: Kidney (Yellow) */
+            --s9-color: #eab308;
+            --s9-bg: #fefce8;
+            /* Section 10: Blood (Rose) */
+            --s10-color: #f43f5e;
+            --s10-bg: #fff1f2;
+            /* Section 11: GI (Green) */
+            --s11-color: #22c55e;
+            --s11-bg: #f0fdf4;
+            /* Section 12: Antimicrobials (Emerald) */
+            --s12-color: #10b981;
+            --s12-bg: #ecfdf5;
+            /* Section 13: Neoplastic (Slate) */
+            --s13-color: #64748b;
+            --s13-bg: #f8fafc;
+            /* Section 14: Misc (Orange) */
+            --s14-color: #f97316;
+            --s14-bg: #fff7ed;
+        }
+
+        /* --- Layout & Navbar --- */
+        .index-navbar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 0.8rem 2rem;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--color-border);
+            z-index: 1000;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        [data-theme="dark"] .index-navbar {
+            background: rgba(15, 23, 42, 0.85);
+        }
+
+        .nav-brand {
+            font-family: var(--font-family-serif);
+            font-weight: 800;
+            font-size: 1.4rem;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        /* --- Hero Section --- */
+        .index-hero {
+            padding-top: 8rem;
+            padding-bottom: 4rem;
+        }
+
+        .hero-search input {
+            width: 100%;
+            padding: 1rem 1.5rem 1rem 3rem;
+            border-radius: 12px;
+            border: 2px solid var(--color-border);
+            background: var(--color-surface);
+            font-size: 1rem;
+            color: var(--color-text-primary);
+            transition: all 0.2s;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .hero-search input:focus {
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+            outline: none;
+        }
+
+        /* --- Section Dividers --- */
+        .section-divider {
+            position: sticky;
+            top: 72px;
+            /* Height of navbar */
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(8px);
+            padding: 1rem 0.5rem;
+            margin: 2.5rem 0 1.5rem;
+            border-bottom: 1px solid var(--color-border);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: background 0.3s;
+        }
+
+        [data-theme="dark"] .section-divider {
+            background: rgba(15, 23, 42, 0.95);
+        }
+
+        .section-tag {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 0.35rem 0.85rem;
+            border-radius: 6px;
+            font-weight: 700;
+            color: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            font-family: var(--font-family-serif);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-text-primary);
+        }
+
+        /* --- Topic Cards --- */
+        .topic-card {
+            border-top: 4px solid transparent;
+            /* Colored top border */
+            transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+        }
+
+        .topic-card .card-number {
+            font-weight: 800;
+            opacity: 0.15;
+            font-size: 2.5rem;
+            position: absolute;
+            right: 1rem;
+            top: 0.5rem;
+            transition: color 0.2s;
+        }
+
+        .topic-card .card-content h3 {
+            margin-right: 2rem;
+            /* Make space for number */
+        }
+
+        .topic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 24px -8px rgba(0, 0, 0, 0.15);
+        }
+
+        /* --- Section Specific Coloring --- */
+        /* Section 1 */
+        .sec-1 .section-tag {
+            background: var(--s1-color);
+        }
+
+        .card-s1 {
+            border-top-color: var(--s1-color);
+        }
+
+        .card-s1:hover {
+            box-shadow: 0 12px 24px -8px rgba(59, 130, 246, 0.25);
+        }
+
+        .card-s1 .card-number {
+            color: var(--s1-color);
+        }
+
+        /* Section 2 */
+        .sec-2 .section-tag {
+            background: var(--s2-color);
+        }
+
+        .card-s2 {
+            border-top-color: var(--s2-color);
+        }
+
+        .card-s2:hover {
+            box-shadow: 0 12px 24px -8px rgba(139, 92, 246, 0.25);
+        }
+
+        .card-s2 .card-number {
+            color: var(--s2-color);
+        }
+
+        /* Section 3 */
+        .sec-3 .section-tag {
+            background: var(--s3-color);
+        }
+
+        .card-s3 {
+            border-top-color: var(--s3-color);
+        }
+
+        .card-s3:hover {
+            box-shadow: 0 12px 24px -8px rgba(236, 72, 153, 0.25);
+        }
+
+        .card-s3 .card-number {
+            color: var(--s3-color);
+        }
+
+        /* Section 4 */
+        .sec-4 .section-tag {
+            background: var(--s4-color);
+        }
+
+        .card-s4 {
+            border-top-color: var(--s4-color);
+        }
+
+        .card-s4:hover {
+            box-shadow: 0 12px 24px -8px rgba(6, 182, 212, 0.25);
+        }
+
+        .card-s4 .card-number {
+            color: var(--s4-color);
+        }
+
+        /* Section 5 */
+        .sec-5 .section-tag {
+            background: var(--s5-color);
+        }
+
+        .card-s5 {
+            border-top-color: var(--s5-color);
+        }
+
+        .card-s5:hover {
+            box-shadow: 0 12px 24px -8px rgba(245, 158, 11, 0.25);
+        }
+
+        .card-s5 .card-number {
+            color: var(--s5-color);
+        }
+
+        /* Section 6 */
+        .sec-6 .section-tag {
+            background: var(--s6-color);
+        }
+
+        .card-s6 {
+            border-top-color: var(--s6-color);
+        }
+
+        .card-s6:hover {
+            box-shadow: 0 12px 24px -8px rgba(20, 184, 166, 0.25);
+        }
+
+        .card-s6 .card-number {
+            color: var(--s6-color);
+        }
+
+        /* Section 7 */
+        .sec-7 .section-tag {
+            background: var(--s7-color);
+        }
+
+        .card-s7 {
+            border-top-color: var(--s7-color);
+        }
+
+        .card-s7:hover {
+            box-shadow: 0 12px 24px -8px rgba(99, 102, 241, 0.25);
+        }
+
+        .card-s7 .card-number {
+            color: var(--s7-color);
+        }
+
+        /* Section 8 */
+        .sec-8 .section-tag {
+            background: var(--s8-color);
+        }
+
+        .card-s8 {
+            border-top-color: var(--s8-color);
+        }
+
+        .card-s8:hover {
+            box-shadow: 0 12px 24px -8px rgba(239, 68, 68, 0.25);
+        }
+
+        .card-s8 .card-number {
+            color: var(--s8-color);
+        }
+
+        /* Section 9 */
+        .sec-9 .section-tag {
+            background: var(--s9-color);
+        }
+
+        .card-s9 {
+            border-top-color: var(--s9-color);
+        }
+
+        .card-s9:hover {
+            box-shadow: 0 12px 24px -8px rgba(234, 179, 8, 0.25);
+        }
+
+        .card-s9 .card-number {
+            color: var(--s9-color);
+        }
+
+        /* Section 10 */
+        .sec-10 .section-tag {
+            background: var(--s10-color);
+        }
+
+        .card-s10 {
+            border-top-color: var(--s10-color);
+        }
+
+        .card-s10:hover {
+            box-shadow: 0 12px 24px -8px rgba(244, 63, 94, 0.25);
+        }
+
+        .card-s10 .card-number {
+            color: var(--s10-color);
+        }
+
+        /* Section 11 */
+        .sec-11 .section-tag {
+            background: var(--s11-color);
+        }
+
+        .card-s11 {
+            border-top-color: var(--s11-color);
+        }
+
+        .card-s11:hover {
+            box-shadow: 0 12px 24px -8px rgba(34, 197, 94, 0.25);
+        }
+
+        .card-s11 .card-number {
+            color: var(--s11-color);
+        }
+
+        /* Section 12 */
+        .sec-12 .section-tag {
+            background: var(--s12-color);
+        }
+
+        .card-s12 {
+            border-top-color: var(--s12-color);
+        }
+
+        .card-s12:hover {
+            box-shadow: 0 12px 24px -8px rgba(16, 185, 129, 0.25);
+        }
+
+        .card-s12 .card-number {
+            color: var(--s12-color);
+        }
+
+        /* Section 13 */
+        .sec-13 .section-tag {
+            background: var(--s13-color);
+        }
+
+        .card-s13 {
+            border-top-color: var(--s13-color);
+        }
+
+        .card-s13:hover {
+            box-shadow: 0 12px 24px -8px rgba(100, 116, 139, 0.25);
+        }
+
+        .card-s13 .card-number {
+            color: var(--s13-color);
+        }
+
+        /* Section 14 */
+        .sec-14 .section-tag {
+            background: var(--s14-color);
+        }
+
+        .card-s14 {
+            border-top-color: var(--s14-color);
+        }
+
+        .card-s14:hover {
+            box-shadow: 0 12px 24px -8px rgba(249, 115, 22, 0.25);
+        }
+
+        .card-s14 .card-number {
+            color: var(--s14-color);
+        }
+
+        /* Course Stats */
+        .course-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+            max-width: 600px;
+            margin: 2.5rem auto 0;
+        }
+
+        .stat-card {
+            background: var(--color-surface);
+            padding: 1.25rem;
+            border-radius: 16px;
+            text-align: center;
+            border: 1px solid var(--color-border);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: 800;
+            color: var(--color-primary);
+            display: block;
+            line-height: 1.2;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--color-text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+    </style>
 </head>
+
 <body>
-<a href="#main-content" class="skip-link">Skip to main content</a>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
 
+    <!-- Sticky Navbar -->
+    <nav class="index-navbar">
+        <div class="nav-brand">
+            <span>💊</span> PharmaGuide
+        </div>
+        <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode" style="position: static;">
+            <span class="theme-toggle-icon light-icon">☀️</span>
+            <span class="theme-toggle-icon dark-icon">🌙</span>
+        </button>
+    </nav>
 
- <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-    <span class="theme-toggle-icon light-icon">☀️</span>
-    <span class="theme-toggle-icon dark-icon">🌙</span>
-</button>
+    <div class="page-wrapper">
+        <div class="container">
+            <main class="index-main" id="main-content">
 
-<div class="page-wrapper">
-    <div class="container">
-        <main class="index-main" id="main-content">
-            <!-- Hero Section -->
-            <header class="index-hero">
-                <div class="hero-content">
-                    <div class="hero-badge">
-                        <span class="badge-icon">💊</span>
-                        <span class="badge-text">Medical Study Guide</span>
+                <!-- Hero Section -->
+                <header class="index-hero">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <span class="badge-icon">🎓</span>
+                            <span class="badge-text">8th Edition Companion</span>
+                        </div>
+                        <h1 class="hero-title">Essentials of Medical Pharmacology</h1>
+                        <p class="hero-subtitle">Master drug mechanisms, kinetics, and clinical applications with this
+                            comprehensive, color-coded study system.</p>
+
+                        <div class="hero-search">
+                            <input type="text" placeholder="Find a drug, mechanism, or topic..."
+                                aria-label="Search topics">
+                            <span class="search-icon">🔍</span>
+                        </div>
+
+                        <div class="course-stats">
+                            <div class="stat-card">
+                                <span class="stat-value">14</span>
+                                <span class="stat-label">Sections</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value">72</span>
+                                <span class="stat-label">Topics</span>
+                            </div>
+                            <div class="stat-card">
+                                <span class="stat-value">25h</span>
+                                <span class="stat-label">Content</span>
+                            </div>
+                        </div>
                     </div>
-                    <h1 class="hero-title">Essentials of Medical Pharmacology</h1>
-                    <p class="hero-subtitle">Comprehensive guide covering general principles, autonomic nervous system drugs, and autacoids based on the 8th Edition.</p>
-                    <div class="hero-meta">
-                        <span class="meta-item">
-                            <span class="meta-icon">📄</span>
-                            <span>13 Topics</span>
-                        </span>
-                        <span class="meta-item">
-                            <span class="meta-icon">⏱️</span>
-                            <span>~4 Hours Total Read</span>
-                        </span>
+                </header>
+
+                <!-- Topics Grid -->
+                <section class="topics-section" aria-labelledby="topics-heading">
+                    <h2 id="topics-heading" class="visually-hidden">Course Modules</h2>
+
+                    <div class="topics-grid">
+
+                        <!-- SECTION 1 (Blue) -->
+                        <div class="section-divider sec-1" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 1</span>
+                            <span class="section-title">General Principles</span>
+                        </div>
+
+                        <a href="topics/topic-01-introduction.html" class="topic-card card-s1">
+                            <div class="card-number">01</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Introduction &amp; Routes</h3>
+                                <p class="card-description">Pharmacology basics, drug nature, and administration routes.
+                                </p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Ch 1</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <a href="topics/topic-02-pharmacokinetics-absorption.html" class="topic-card card-s1">
+                            <div class="card-number">02</div>
+                            <div class="card-content">
+                                <h3 class="card-title">PK: Absorption</h3>
+                                <p class="card-description">Membrane transport, bioavailability, and distribution.</p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Ch 2</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <a href="topics/topic-03-pharmacokinetics-metabolism.html" class="topic-card card-s1">
+                            <div class="card-number">03</div>
+                            <div class="card-content">
+                                <h3 class="card-title">PK: Metabolism</h3>
+                                <p class="card-description">Biotransformation, excretion, and elimination kinetics.</p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Ch 3</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <a href="topics/topic-04-pharmacodynamics.html" class="topic-card card-s1">
+                            <div class="card-number">04</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Pharmacodynamics</h3>
+                                <p class="card-description">Receptors, transducers, and dose-response relationships.</p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Ch 4</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <a href="topics/topic-05-pharmacotherapy.html" class="topic-card card-s1">
+                            <div class="card-number">05</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Pharmacotherapy</h3>
+                                <p class="card-description">Clinical pharmacology, drug development, and prescribing.
+                                </p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Ch 5</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <a href="topics/topic-06-adverse-effects.html" class="topic-card card-s1">
+                            <div class="card-number">06</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Adverse Effects</h3>
+                                <p class="card-description">Toxicity, allergy, teratogenicity, and pharmacovigilance.
+                                </p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Ch 6</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 2 (Violet) -->
+                        <div class="section-divider sec-2" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 2</span>
+                            <span class="section-title">Autonomic Nervous System</span>
+                        </div>
+
+                        <a href="topics/topic-07-ans-general.html" class="topic-card card-s2">
+                            <div class="card-number">07</div>
+                            <div class="card-content">
+                                <h3 class="card-title">ANS Overview</h3>
+                                <p class="card-description">Organization and neurohumoral transmission.</p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Intro</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <a href="topics/topic-08-cholinergic.html" class="topic-card card-s2">
+                            <div class="card-number">08</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Cholinergic System</h3>
+                                <p class="card-description">Cholinomimetics and anticholinesterases.</p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Ch 7</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <a href="topics/topic-09-anticholinergic.html" class="topic-card card-s2">
+                            <div class="card-number">09</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Anticholinergics</h3>
+                                <p class="card-description">Atropine, substitutes, and ganglionic blockers.</p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Ch 8</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <a href="topics/topic-10-adrenergic.html" class="topic-card card-s2">
+                            <div class="card-number">10</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Adrenergic System</h3>
+                                <p class="card-description">Catecholamines and sympathomimetics.</p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Ch 9</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <a href="topics/topic-11-antiadrenergic.html" class="topic-card card-s2">
+                            <div class="card-number">11</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antiadrenergics</h3>
+                                <p class="card-description">Alpha/Beta blockers and glaucoma drugs.</p>
+                            </div>
+                            <div class="card-meta"><span class="meta-item"><span>Ch 10</span></span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 3 (Pink) -->
+                        <div class="section-divider sec-3" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 3</span>
+                            <span class="section-title">Autacoids</span>
+                        </div>
+
+                        <a href="topics/topic-12-histamine.html" class="topic-card card-s3">
+                            <div class="card-number">12</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Histamine</h3>
+                                <p class="card-description">Receptors and Antihistaminics.</p>
+                            </div>
+                            <div class="card-meta"><span>Ch 11</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-13-serotonin.html" class="topic-card card-s3">
+                            <div class="card-number">13</div>
+                            <div class="card-content">
+                                <h3 class="card-title">5-HT &amp; Migraine</h3>
+                                <p class="card-description">Serotonin antagonists and Ergot.</p>
+                            </div>
+                            <div class="card-meta"><span>Ch 12</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-14-prostaglandins.html" class="topic-card card-s3">
+                            <div class="card-number">14</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Eicosanoids</h3>
+                                <p class="card-description">Prostaglandins, Leukotrienes, PAF.</p>
+                            </div>
+                            <div class="card-meta"><span>Ch 13</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-15-nsaids.html" class="topic-card card-s3">
+                            <div class="card-number">15</div>
+                            <div class="card-content">
+                                <h3 class="card-title">NSAIDs</h3>
+                                <p class="card-description">Aspirin, Paracetamol, COX-2 inhibitors.</p>
+                            </div>
+                            <div class="card-meta"><span>Ch 14</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-16-rheumatoid-gout.html" class="topic-card card-s3">
+                            <div class="card-number">16</div>
+                            <div class="card-content">
+                                <h3 class="card-title">RA &amp; Gout</h3>
+                                <p class="card-description">DMARDs and Antigout drugs.</p>
+                            </div>
+                            <div class="card-meta"><span>Ch 15</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 4 (Cyan) -->
+                        <div class="section-divider sec-4" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 4</span>
+                            <span class="section-title">Respiratory System</span>
+                        </div>
+                        <a href="topics/topic-17-respiratory.html" class="topic-card card-s4">
+                            <div class="card-number">17</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Respiratory Drugs</h3>
+                                <p class="card-description">Asthma, COPD, and Cough.</p>
+                            </div>
+                            <div class="card-meta"><span>Ch 16</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 5 (Amber) -->
+                        <div class="section-divider sec-5" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 5</span>
+                            <span class="section-title">Hormones &amp; Endocrine</span>
+                        </div>
+                        <a href="topics/topic-18-pituitary.html" class="topic-card card-s5">
+                            <div class="card-number">18</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Pituitary</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 17</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-19-thyroid.html" class="topic-card card-s5">
+                            <div class="card-number">19</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Thyroid</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 18</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-20-insulin.html" class="topic-card card-s5">
+                            <div class="card-number">20</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Diabetes</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 19</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-21-corticosteroids.html" class="topic-card card-s5">
+                            <div class="card-number">21</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Corticosteroids</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 20</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-22-androgens.html" class="topic-card card-s5">
+                            <div class="card-number">22</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Androgens</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 21</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-23-estrogens.html" class="topic-card card-s5">
+                            <div class="card-number">23</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Estrogens</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 22</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-24-uterine.html" class="topic-card card-s5">
+                            <div class="card-number">24</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Uterine Drugs</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 23</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-25-calcium.html" class="topic-card card-s5">
+                            <div class="card-number">25</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Calcium Balance</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 24</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 6 (Teal) -->
+                        <div class="section-divider sec-6" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 6</span>
+                            <span class="section-title">Peripheral Nerve</span>
+                        </div>
+                        <a href="topics/topic-26-muscle-relaxants.html" class="topic-card card-s6">
+                            <div class="card-number">26</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Muscle Relaxants</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 25</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-27-local-anaesthetics.html" class="topic-card card-s6">
+                            <div class="card-number">27</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Local Anaesthetics</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 26</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 7 (Indigo) -->
+                        <div class="section-divider sec-7" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 7</span>
+                            <span class="section-title">Central Nervous System</span>
+                        </div>
+                        <a href="topics/topic-28-general-anaesthetics.html" class="topic-card card-s7">
+                            <div class="card-number">28</div>
+                            <div class="card-content">
+                                <h3 class="card-title">General Anaesthesia</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 27</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-29-alcohols.html" class="topic-card card-s7">
+                            <div class="card-number">29</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Alcohols</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 28</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-30-sedative-hypnotics.html" class="topic-card card-s7">
+                            <div class="card-number">30</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Sedative-Hypnotics</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 29</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-31-antiepileptics.html" class="topic-card card-s7">
+                            <div class="card-number">31</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antiepileptics</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 30</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-32-antiparkinsonian.html" class="topic-card card-s7">
+                            <div class="card-number">32</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Parkinsonism</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 31</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-33-antipsychotics.html" class="topic-card card-s7">
+                            <div class="card-number">33</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Psychosis</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 32</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-34-antidepressants.html" class="topic-card card-s7">
+                            <div class="card-number">34</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Depression</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 33</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-35-opioids.html" class="topic-card card-s7">
+                            <div class="card-number">35</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Opioids</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 34</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-36-cns-stimulants.html" class="topic-card card-s7">
+                            <div class="card-number">36</div>
+                            <div class="card-content">
+                                <h3 class="card-title">CNS Stimulants</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 35</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 8 (Red) -->
+                        <div class="section-divider sec-8" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 8</span>
+                            <span class="section-title">Cardiovascular System</span>
+                        </div>
+                        <a href="topics/topic-37-renin-angiotensin.html" class="topic-card card-s8">
+                            <div class="card-number">37</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Renin-Angiotensin</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 36</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-38-nitric-oxide.html" class="topic-card card-s8">
+                            <div class="card-number">38</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Nitric Oxide</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 37</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-39-cardiac-glycosides.html" class="topic-card card-s8">
+                            <div class="card-number">39</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Heart Failure</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 38</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-40-antiarrhythmics.html" class="topic-card card-s8">
+                            <div class="card-number">40</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antiarrhythmics</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 39</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-41-antianginal.html" class="topic-card card-s8">
+                            <div class="card-number">41</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antianginal</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 40</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-42-antihypertensives.html" class="topic-card card-s8">
+                            <div class="card-number">42</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antihypertensives</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 41</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 9 (Yellow) -->
+                        <div class="section-divider sec-9" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 9</span>
+                            <span class="section-title">Kidney</span>
+                        </div>
+                        <a href="topics/topic-43-diuretics.html" class="topic-card card-s9">
+                            <div class="card-number">43</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Diuretics</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 42</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-44-antidiuretics.html" class="topic-card card-s9">
+                            <div class="card-number">44</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antidiuretics</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 43</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 10 (Rose) -->
+                        <div class="section-divider sec-10" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 10</span>
+                            <span class="section-title">Blood</span>
+                        </div>
+                        <a href="topics/topic-45-haematinics.html" class="topic-card card-s10">
+                            <div class="card-number">45</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Haematinics</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 44</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-46-coagulation.html" class="topic-card card-s10">
+                            <div class="card-number">46</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Coagulation</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 45</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-47-hypolipidaemics.html" class="topic-card card-s10">
+                            <div class="card-number">47</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Lipids</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 46</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 11 (Green) -->
+                        <div class="section-divider sec-11" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 11</span>
+                            <span class="section-title">Gastrointestinal</span>
+                        </div>
+                        <a href="topics/topic-48-peptic-ulcer.html" class="topic-card card-s11">
+                            <div class="card-number">48</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Peptic Ulcer</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 47</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-49-antiemetics.html" class="topic-card card-s11">
+                            <div class="card-number">49</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antiemetics</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 48</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-50-constipation-diarrhoea.html" class="topic-card card-s11">
+                            <div class="card-number">50</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Gut Motility</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 49</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 12 (Emerald) -->
+                        <div class="section-divider sec-12" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 12</span>
+                            <span class="section-title">Antimicrobials</span>
+                        </div>
+                        <a href="topics/topic-51-antimicrobial-general.html" class="topic-card card-s12">
+                            <div class="card-number">51</div>
+                            <div class="card-content">
+                                <h3 class="card-title">General Principles</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 50</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-52-sulfonamides.html" class="topic-card card-s12">
+                            <div class="card-number">52</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Sulfonamides</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 51</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-53-beta-lactams.html" class="topic-card card-s12">
+                            <div class="card-number">53</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Beta-Lactams</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 52</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-54-tetracyclines.html" class="topic-card card-s12">
+                            <div class="card-number">54</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Tetracyclines</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 53</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-55-aminoglycosides.html" class="topic-card card-s12">
+                            <div class="card-number">55</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Aminoglycosides</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 54</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-56-macrolides.html" class="topic-card card-s12">
+                            <div class="card-number">56</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Macrolides</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 55</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-57-antitubercular.html" class="topic-card card-s12">
+                            <div class="card-number">57</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Tuberculosis</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 56</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-58-antileprotic.html" class="topic-card card-s12">
+                            <div class="card-number">58</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Leprosy</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 57</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-59-antifungal.html" class="topic-card card-s12">
+                            <div class="card-number">59</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antifungal</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 58</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-60-antiviral.html" class="topic-card card-s12">
+                            <div class="card-number">60</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antiviral</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 59</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-61-antiretroviral.html" class="topic-card card-s12">
+                            <div class="card-number">61</div>
+                            <div class="card-content">
+                                <h3 class="card-title">HIV/AIDS</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 60</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-62-antimalarial.html" class="topic-card card-s12">
+                            <div class="card-number">62</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Malaria</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 61</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-63-antiprotozoal.html" class="topic-card card-s12">
+                            <div class="card-number">63</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antiprotozoal</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 62</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-64-anthelmintic.html" class="topic-card card-s12">
+                            <div class="card-number">64</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Anthelmintic</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 63</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 13 (Slate) -->
+                        <div class="section-divider sec-13" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 13</span>
+                            <span class="section-title">Neoplastic Diseases</span>
+                        </div>
+                        <a href="topics/topic-65-anticancer.html" class="topic-card card-s13">
+                            <div class="card-number">65</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Anticancer Drugs</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 64</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- SECTION 14 (Orange) -->
+                        <div class="section-divider sec-14" style="grid-column: 1/-1;">
+                            <span class="section-tag">Section 14</span>
+                            <span class="section-title">Miscellaneous</span>
+                        </div>
+                        <a href="topics/topic-66-immunosuppressants.html" class="topic-card card-s14">
+                            <div class="card-number">66</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Immunosuppressants</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 65</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-67-skin-mucous.html" class="topic-card card-s14">
+                            <div class="card-number">67</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Dermatological</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 66</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-68-antiseptics.html" class="topic-card card-s14">
+                            <div class="card-number">68</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antiseptics</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 67</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-69-chelating-agents.html" class="topic-card card-s14">
+                            <div class="card-number">69</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Chelating Agents</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 68</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-70-vitamins.html" class="topic-card card-s14">
+                            <div class="card-number">70</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Vitamins</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 69</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-71-vaccines.html" class="topic-card card-s14">
+                            <div class="card-number">71</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Vaccines &amp; Sera</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 70</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+                        <a href="topics/topic-72-drug-interactions.html" class="topic-card card-s14">
+                            <div class="card-number">72</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Drug Interactions</h3>
+                            </div>
+                            <div class="card-meta"><span>Ch 71</span></div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
                     </div>
-                </div>
-                <div class="hero-decoration" aria-hidden="true"></div>
-            </header>
+                </section>
+            </main>
 
-            <!-- Topics Grid -->
-            <section class="topics-section" aria-labelledby="topics-heading">
-                <h2 id="topics-heading" class="section-heading">
-                    <span class="heading-icon">📑</span>
-                    <span>Table of Contents</span>
-                </h2>
-                
-                <div class="topics-grid">
-                    <!-- SECTION 1: GENERAL PRINCIPLES -->
-                    
-                    <!-- Topic 01 -->
-                    <a href="topics/topic-01-introduction.html" class="topic-card">
-                        <div class="card-number">01</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Introduction &amp; Routes of Administration</h3>
-                            <p class="card-description">Definitions of pharmacology, drug nomenclature, dosage forms, and detailed analysis of enteral and parenteral routes.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 1</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-                    
-                    <!-- Topic 02 -->
-                    <a href="topics/topic-02-pharmacokinetics-absorption.html" class="topic-card">
-                        <div class="card-number">02</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Pharmacokinetics: Membrane Transport</h3>
-                            <p class="card-description">Mechanisms of drug movement across biological membranes, absorption factors, bioavailability, and volume of distribution.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 2</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- Topic 03 -->
-                    <a href="topics/topic-03-pharmacokinetics-metabolism.html" class="topic-card">
-                        <div class="card-number">03</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Pharmacokinetics: Metabolism &amp; Excretion</h3>
-                            <p class="card-description">Biotransformation pathways (Phase I & II), renal excretion, kinetics of elimination, and loading/maintenance doses.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 3</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- Topic 04 -->
-                    <a href="topics/topic-04-pharmacodynamics.html" class="topic-card">
-                        <div class="card-number">04</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Pharmacodynamics</h3>
-                            <p class="card-description">Mechanisms of drug action, receptor pharmacology, transducers, dose-response relationships, and therapeutic efficacy.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 4</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- Topic 05 -->
-                    <a href="topics/topic-05-pharmacotherapy.html" class="topic-card">
-                        <div class="card-number">05</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Aspects of Pharmacotherapy</h3>
-                            <p class="card-description">Drug dosage calculations, fixed-dose combinations, factors modifying drug action, pharmacogenetics, and rational prescribing.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 5</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- Topic 06 -->
-                    <a href="topics/topic-06-adverse-effects.html" class="topic-card">
-                        <div class="card-number">06</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Adverse Drug Effects</h3>
-                            <p class="card-description">Classification of adverse reactions, drug allergy, toxicity, teratogenicity, and principles of pharmacovigilance.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 6</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- SECTION 2: ANS -->
-
-                    <!-- Topic 07 -->
-                    <a href="topics/topic-07-ans-general.html" class="topic-card">
-                        <div class="card-number">07</div>
-                        <div class="card-content">
-                            <h3 class="card-title">ANS: General Considerations</h3>
-                            <p class="card-description">Organization of the autonomic nervous system, differences between sympathetic and parasympathetic divisions, and neurohumoral transmission.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Section 2 Intro</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- Topic 08 -->
-                    <a href="topics/topic-08-cholinergic.html" class="topic-card">
-                        <div class="card-number">08</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Cholinergic Transmission &amp; Drugs</h3>
-                            <p class="card-description">Acetylcholine synthesis and release, cholinergic receptors, cholinomimetic alkaloids, and anticholinesterases.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 7</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- Topic 09 -->
-                    <a href="topics/topic-09-anticholinergic.html" class="topic-card">
-                        <div class="card-number">09</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Anticholinergic Drugs</h3>
-                            <p class="card-description">Muscarinic receptor antagonists (Atropine), atropine substitutes, and drugs acting on autonomic ganglia.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 8</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- Topic 10 -->
-                    <a href="topics/topic-10-adrenergic.html" class="topic-card">
-                        <div class="card-number">10</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Adrenergic Transmission &amp; Drugs</h3>
-                            <p class="card-description">Catecholamine synthesis and metabolism, adrenergic receptors, and pharmacology of sympathomimetic drugs.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 9</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- Topic 11 -->
-                    <a href="topics/topic-11-antiadrenergic.html" class="topic-card">
-                        <div class="card-number">11</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Antiadrenergic Drugs</h3>
-                            <p class="card-description">Alpha and Beta adrenergic blockers, their pharmacological profiles, and drugs used for glaucoma.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 10</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- SECTION 3: AUTACOIDS -->
-
-                    <!-- Topic 12 -->
-                    <a href="topics/topic-12-histamine.html" class="topic-card">
-                        <div class="card-number">12</div>
-                        <div class="card-content">
-                            <h3 class="card-title">Histamine &amp; Antihistaminics</h3>
-                            <p class="card-description">Histamine synthesis, receptors, pathological roles, and pharmacology of H1 antagonists (first and second generation).</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 11</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-
-                    <!-- Topic 13 -->
-                    <a href="topics/topic-13-serotonin.html" class="topic-card">
-                        <div class="card-number">13</div>
-                        <div class="card-content">
-                            <h3 class="card-title">5-HT &amp; Migraine</h3>
-                            <p class="card-description">5-Hydroxytryptamine (Serotonin), its receptors, antagonists, and drug therapy for migraine.</p>
-                        </div>
-                        <div class="card-meta">
-                            <span class="meta-item">
-                                <span class="meta-icon">📖</span>
-                                <span>Chapter 12</span>
-                            </span>
-                        </div>
-                        <div class="card-arrow">→</div>
-                    </a>
-                    
-                </div>
-            </section>
-        </main>
+            <footer
+                style="text-align: center; padding: 3rem 0; color: var(--color-text-tertiary); font-size: 0.875rem;">
+                <p>Based on <strong>Essentials of Medical Pharmacology, 8th Edition</strong></p>
+                <p style="margin-top: 0.5rem; opacity: 0.7;">Study Guide Generated for Educational Purposes</p>
+            </footer>
+        </div>
     </div>
-</div>
 
-<script src="js/theme.js"></script>
+    <script src="js/theme.js"></script>
+    <script>
+        // Simple search functionality
+        const searchInput = document.querySelector('.hero-search input');
+        const cards = document.querySelectorAll('.topic-card');
+        const sections = document.querySelectorAll('.section-divider');
 
-  
+        searchInput.addEventListener('input', (e) => {
+            const term = e.target.value.toLowerCase();
 
+            cards.forEach(card => {
+                const title = card.querySelector('.card-title').textContent.toLowerCase();
+                const desc = card.querySelector('.card-description')?.textContent.toLowerCase() || '';
+                const isMatch = title.includes(term) || desc.includes(term);
+
+                card.style.display = isMatch ? 'flex' : 'none';
+            });
+
+            // Hide sections if active search
+            sections.forEach(section => {
+                section.style.display = term ? 'none' : 'flex';
+            });
+        });
+    </script>
 </body>
-</html> 
+
+</html>
