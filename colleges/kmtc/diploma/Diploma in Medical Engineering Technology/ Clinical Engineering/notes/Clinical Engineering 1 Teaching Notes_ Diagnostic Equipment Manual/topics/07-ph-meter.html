@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>pH Meter - Clinical Engineering</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="06-incubators.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="08-water-bath.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 77%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 7 of 9</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>⚗️</span>
+                        <span>Topic 07</span>
+                    </div>
+                    <h1 class="document-title">pH Meter</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Potentiometry & Electrodes</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>15 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧪</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The pH meter is a device used for determining the concentration of hydrogen ions [H+] in a solution. This equipment, provided it is carefully used and calibrated, measures the acidity of an aqueous solution. pH meters are sometimes called pH analyzers, pH monitors or potentiometers.</p>
+                            
+                            <p>The pH meter is commonly used in any field of science related to aqueous solutions. It is used in areas such as agriculture, water treatment and purification, in industrial processes such as petrochemicals, paper manufacture, foods, pharmaceuticals, research and development, metal mechanics, etc.</p>
+
+                            <p>In the health laboratory, its applications are related to the control of culture mediums and to the measurement of the alkalinity or acidity of broths and buffers.</p>
+
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">🩸</span>
+                                    <h4 class="callout-title">Clinical Significance</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>In specialized laboratories, diagnostic equipment microelectrodes are used to measure the pH of liquid blood components. The plasma pH allows the patient's health to be evaluated. It normally measures between 7.35 and 7.45. This value relates to the patient's metabolism in which a multitude of reactions occurs where acids and bases are normally kept in balance.</p>
+                                </div>
+                            </div>
+
+                            <h3>Typical pH Values of Bodily Fluids</h3>
+                            <div class="table-responsive">
+                                <table class="content-table content-table--compact">
+                                    <thead>
+                                        <tr>
+                                            <th>Fluid</th>
+                                            <th>pH Value</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Bile</td>
+                                            <td>7.8 – 8.6</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Saliva</td>
+                                            <td>6.4 – 6.8</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Urine</td>
+                                            <td>5.5 – 7.0</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Gastric Juice</td>
+                                            <td>1.5 – 1.8</td>
+                                        </tr>
+                                        <tr>
+                                            <td class="table-cell--highlight"><strong>Blood</strong></td>
+                                            <td class="table-cell--highlight"><strong>7.35 – 7.45</strong></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Components & Construction -->
+                    <section class="content-section" id="components">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚙️</span>
+                                Components & Construction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>General Components</h3>
+                            <p>A pH meter generally has the following components:</p>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>The body of the instrument:</strong> Containing the circuits, controls, connectors, display screens and measuring scales. Important controls include:
+                                        <ul class="enhanced-list">
+                                            <li class="list-item"><span class="list-content"><strong>ON/OFF switch:</strong> Allows connection to electrical outlet.</span></li>
+                                            <li class="list-item"><span class="list-content"><strong>Temperature control:</strong> Adjusts according to the temperature of the solution measured.</span></li>
+                                            <li class="list-item"><span class="list-content"><strong>Calibration controls:</strong> Buttons or dials (Cal 1 and Cal 2) for one-point or two-point calibration.</span></li>
+                                            <li class="list-item"><span class="list-content">
+                                                <strong>Mode selector:</strong>
+                                                <ul class="enhanced-list">
+                                                    <li class="list-item"><span class="list-content"><em>Standby mode (0):</em> Protects electrodes during storage.</span></li>
+                                                    <li class="list-item"><span class="list-content"><em>pH mode:</em> Takes pH measurements.</span></li>
+                                                    <li class="list-item"><span class="list-content"><em>Millivolt mode (mV):</em> Performs millivoltage readings.</span></li>
+                                                    <li class="list-item"><span class="list-content"><em>ATC mode:</em> Automatic Temperature Control for varying solution temperatures.</span></li>
+                                                </ul>
+                                            </span></li>
+                                        </ul>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>A combined electrode or probe:</strong> Must be stored in distilled water. It integrates a reference electrode (Calomel) and an internal electrode into the same body.</span>
+                                </li>
+                            </ol>
+
+                            <h3>Construction of pH meter (combined electrode)</h3>
+                            <p>The pH probe of modern pH meter is a combined type, in which glass and reference electrode are placed into a rod like structure. The combined electrode consists of following parts:</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251216-a2049a4d.jpeg" 
+                                         alt="Diagram of a combined pH electrode" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1: Combined pH Electrode Structure</figcaption>
+                            </figure>
+
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="list-content"><strong>Glass bulb:</strong> It is a sensor that senses the H+ ion concentration and it is made from special type of glass and membrane. The glass bulb consists of 0.1M HCL.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Internal electrode:</strong> It is the silver chloride electrode.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Internal solution:</strong> The silver chloride electrode is dipped in buffer solution of 0.1 mol/L KCL of pH 7.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Reference Electrode:</strong> It is also the silver chloride electrode.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Internal Solution:</strong> The reference electrode is also dipped in buffer solution of 0.1 mol/L KCL of pH 7.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Junction:</strong> It is made from ceramic junction also called as diaphragm that allows the contact of sample solution and reference electrolyte. It does not disturb the electric connection between both the electrodes.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Filling hole:</strong> It is used for refilling the electrolyte.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Electrode body:</strong> the body is from non-conductive glass or plastic.</span></li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Working Principle -->
+                    <section class="content-section" id="principle">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚡</span>
+                                Working Principle
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>pH electrode is constructed of two half cells, which develop an electrical potential when connected together. Reference electrode maintains a constant potential and is bathed in KCl. Glass electrode (Sanz electrode) develops an electrical potential that is proportional to the amount of H+ present.</p>
+                            
+                            <p>The working principle of the pH meter relies on the ions exchange from the sample solution to the inner solution (pH 7 buffer) of the glass electrode via the glass membrane. When the probe is submerged in a sample solution to measure the pH, hydrogen ions build up around the bulb and take the place of the metal ions. Similarly, some metal ions transfer from the glass (sensor) electrode to the sample solution.</p>
+                            
+                            <p>Because of low sensitivity to pH changes or complete insensitivity to pH changes, the reference electrode potential offers a constant voltage. This generates some electricity captured by the silver wire by generating potential difference (hydrogen-ion activity). The pH meter converts the voltage of this electric flow into pH value by comparing the generated voltage to the reference electrode.</p>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">🧮</span>
+                                    <h4 class="callout-title">Nernst Equation</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The pH meter measures the potential difference at both the electrodes and calculate the pH as per the Nernst equation:</p>
+                                    
+                                    <h5>General Form:</h5>
+                                    <div class="equation">
+                                        $$E = E^0 - \frac{RT}{zF} \ln Q$$
+                                    </div>
+                                    
+                                    <h5>For pH Measurement (at 25°C):</h5>
+                                    <div class="equation">
+                                        $$E = E^0 - \frac{0.0592}{z} \log [H^+]$$
+                                    </div>
+                                    
+                                    <p>Since pH = -log[H⁺], this becomes:</p>
+                                    <div class="equation">
+                                        $$E = E^0 + 0.0592 \times pH$$
+                                    </div>
+                                    
+                                    <h5>Variable Definitions:</h5>
+                                    <ul>
+                                        <li><strong>E</strong> = measured potential (volts)</li>
+                                        <li><strong>E⁰</strong> = standard electrode potential (volts)</li>
+                                        <li><strong>R</strong> = universal gas constant (8.314 J/mol·K)</li>
+                                        <li><strong>T</strong> = absolute temperature (Kelvin)</li>
+                                        <li><strong>z</strong> = number of electrons transferred (for H⁺, z = 1)</li>
+                                        <li><strong>F</strong> = Faraday constant (96,485 C/mol)</li>
+                                        <li><strong>Q</strong> = reaction quotient</li>
+                                        <li><strong>[H⁺]</strong> = hydrogen ion concentration (mol/L)</li>
+                                    </ul>
+                                    
+                                    <p><strong>Key Point:</strong> At 25°C, the theoretical slope is 59.2 mV per pH unit, meaning the electrode potential changes by approximately 59.2 millivolts for each unit change in pH.</p>
+                                </div>
+                            </div>
+
+                            <p>Increasing the solution's acidity results in a higher concentration of hydrogen ions, which raises the voltage. The pH measurement on the pH meter decreases due to the increased voltage.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Operation -->
+                    <section class="content-section" id="operation">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📝</span>
+                                Operating Procedure
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Let all the samples get to the same temperature since pH readings rely on temperature. It is advised to compensate for temperature if the samples are not at 25 °C.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Uncover the sample beakers and prepare the samples.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Rinse the pH electrode in the sample beaker after rinsing it with deionized water beforehand. Rinse over a waste beaker to prevent contamination.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">The electrode should be inserted into the first sample measurement beaker with the electrode tip and junction completely submerged. The sample should then be stirred moderately and uniformly.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Set the meter to begin taking a reading.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Record the pH and temperature of the sample after waiting at least 1 to 2 minutes for a stable reading in the sample.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">If more samples are needed, repeat steps 3 through 6. After measuring, clean the electrode with deionized water and put it in a pH electrode storage solution.</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Types & Applications -->
+                    <section class="content-section" id="types">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔢</span>
+                                Types & Applications
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Types of pH meters</h3>
+                            
+                            <h4>A. Based on Portability</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-content"><strong>Pen testers:</strong> Portable, inexpensive, compact. Used in hydroponics, food production, pools.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Handheld meters:</strong> More robust, interchangeable electrodes. Used in field research, aquaculture, agriculture.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Benchtop pH meters:</strong> Largest, most accurate. Used in laboratories, environmental monitoring, food processing.</span></li>
+                            </ul>
+
+                            <h4>B. Based on Usage</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-content"><strong>Laboratory pH meter:</strong> Large measuring range, highly accurate, versatile.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Industrial pH meter:</strong> Exceptional stability, environmental flexibility, anti-interference capabilities.</span></li>
+                            </ul>
+
+                            <h4>C. Based on Reading</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-content"><strong>Analog pH meter:</strong> Uses a pointer to show pH level. Requires care to obtain accurate findings.</span></li>
+                                <li class="list-item"><span class="list-content"><strong>Digital pH meter:</strong> Shows a number representing pH level. Simpler to obtain accurate results.</span></li>
+                            </ul>
+
+                            <h3>Applications</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-content">Agriculture: assessing soil pH for crops.</span></li>
+                                <li class="list-item"><span class="list-content">Water treatment: monitoring pH in facilities and RO purifiers.</span></li>
+                                <li class="list-item"><span class="list-content">Chemical industries: neutralizing wastewater.</span></li>
+                                <li class="list-item"><span class="list-content">Food industry: ensuring quality/safety, especially dairy.</span></li>
+                                <li class="list-item"><span class="list-content">Biological fluids: blood, urine, gastric acid analysis.</span></li>
+                                <li class="list-item"><span class="list-content">Detergent manufacturing.</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 6: Advantages, Limitations & Precautions -->
+                    <section class="content-section" id="analysis">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚠️</span>
+                                Analysis & Precautions
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Advantages</h4>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="list-content">Continuous automatic recording/control.</span></li>
+                                        <li class="list-item"><span class="list-content">Rapid and reproducible measurements.</span></li>
+                                        <li class="list-item"><span class="list-content">Simple control and operation.</span></li>
+                                        <li class="list-item"><span class="list-content">Does not affect solution under examination.</span></li>
+                                        <li class="list-item"><span class="list-content">Suitable for colloidal/turbid/colorful solutions.</span></li>
+                                        <li class="list-item"><span class="list-content">Accurate and precise.</span></li>
+                                    </ul>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Limitations</h4>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="list-content">Regular cleaning required to avoid contamination.</span></li>
+                                        <li class="list-item"><span class="list-content">Glass tip is fragile and can break.</span></li>
+                                        <li class="list-item"><span class="list-content">Temperature impacts readings.</span></li>
+                                        <li class="list-item"><span class="list-content">Must be calibrated before use.</span></li>
+                                        <li class="list-item"><span class="list-content">Deposits on electrode membranes affect process.</span></li>
+                                        <li class="list-item"><span class="list-content">Special buffer solution needed for calibration.</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Precautions</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">pH electrodes are sensitive and fragile; do not use as a stirring rod.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Calibrate daily before use with standard buffer solutions.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Do not expose to sunlight (temperature sensitive).</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Clean all glassware with distilled water before use.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Use fresh solutions for measurement.</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="06-incubators.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="08-water-bath.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 77%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 7 of 9</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>
