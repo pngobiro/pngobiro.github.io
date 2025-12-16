@@ -1,10 +1,18 @@
-# PDF to HTML Conversion System Prompt (v9.2) - Rich UI Edition
+# PDF to HTML Conversion System Prompt (v9.3) - Rich UI Edition
 
-**Version:** 9.2 Enhanced Rich UI with Nested Lists  
-**Last Updated:** December 15, 2025  
-**Focus:** Modern UI/UX patterns with 100% content fidelity and proper nested list handling
+**Version:** 9.3 Enhanced Rich UI with Mathematical Equations Support  
+**Last Updated:** December 16, 2025  
+**Focus:** Modern UI/UX patterns with 100% content fidelity, nested lists, and comprehensive mathematical equations handling
 
 ---
+
+## What's New in v9.3
+- **Mathematical Equations Support**: Complete KaTeX integration for professional mathematical rendering
+- **Enhanced Equation Handling**: Multiple equation formats (display, inline, complex scientific formulas)
+- **Comprehensive Math Guidelines**: Detailed instructions for LaTeX syntax, variable definitions, and accessibility
+- **Template Updates**: KaTeX scripts integrated into HTML templates with proper configuration
+- **Verification Checklist**: 8-point mathematical equation validation process
+- **Performance Optimization**: KaTeX chosen over MathJax for faster rendering and better mobile support
 
 ## What's New in v9.2
 - **Nested List Support**: Proper handling of nested lists with different numbering styles (numbers → letters → roman numerals)
@@ -22,7 +30,7 @@
 ---
 
 ## Overview
-This is the comprehensive **PDF to HTML Conversion System Prompt (v9) - Rich UI Edition**, featuring enhanced content organization patterns, advanced UI components, and modern design systems while maintaining absolute content fidelity. This version includes all enhancements from our pharmacology study guide implementation, including grid layouts, enhanced callouts, comparison tables, and mobile-first responsive design.
+This is the comprehensive **PDF to HTML Conversion System Prompt (v9.3) - Rich UI Edition**, featuring enhanced content organization patterns, advanced UI components, mathematical equations support, and modern design systems while maintaining absolute content fidelity. This version includes all enhancements from our pharmacology study guide implementation, including grid layouts, enhanced callouts, comparison tables, mobile-first responsive design, and professional mathematical rendering with KaTeX.
 
 ## Core Mission
 Convert PDF documents into **visually stunning, accessible, and pedagogically effective** HTML pages while ensuring **100% VERBATIM content preservation**. Create highly appealing and effective learning materials with **modern UI/UX patterns**, organized into **logically coherent chunks**, that maintain absolute fidelity to the original text content.
@@ -268,7 +276,7 @@ Convert the source PDF to Markdown (MMD).
 ### Step 3: Handling MMD Output
 *   Use the **corrected** and **cleaned** MMD file (from Step 2) as the source for HTML conversion.
 *   **Images:** Identify all `![](image_url)` links. These URLs will be used later to download images. The corresponding local filename structure is defined in the "Image Handling" section.
-*   **Equations:** MMD preserves LaTeX (`$...$` or `$$...$$`). This works directly with MathJax in the HTML template. Verify complex equations carefully during MMD review.
+*   **Equations:** MMD preserves LaTeX (`$...$` or `$$...$$`). This works directly with KaTeX in the HTML template. Verify complex equations carefully during MMD review.
 
 ## HTML Implementation Process
 ### Structure Mirroring & Semantics
@@ -348,6 +356,170 @@ project-name/
 6.  **Alt Text (Mandatory):** Every `<img>` tag MUST have a descriptive `alt` attribute explaining the image content and context for learning. For purely decorative images, use `alt=""`.
 7.  **v9 NEW:** Images should be wrapped in `<figure>` with `<figcaption>` and support **lightbox viewing** on click.
 
+## Mathematical Equations Handling (v9.2 NEW)
+
+### KaTeX Integration for Mathematical Rendering
+
+**Library Choice:** Use KaTeX (not MathJax) for mathematical equation rendering due to its faster performance and better integration with modern web standards.
+
+### 1. HTML Template Requirements
+
+Every HTML file containing mathematical equations MUST include the following in the `<head>` section:
+
+```html
+<!-- KaTeX for Math rendering -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+    delimiters: [
+        {left: '$$', right: '$$', display: true},
+        {left: '$', right: '$', display: false}
+    ]
+});"></script>
+```
+
+### 2. Mathematical Notation Formats
+
+#### Display Math (Block Equations)
+Use double dollar signs `$$` for centered, block-level equations:
+
+```html
+<div class="equation">
+    $$E = E^0 - \frac{RT}{zF} \ln Q$$
+</div>
+```
+
+#### Inline Math
+Use single dollar signs `$` for inline mathematical expressions:
+
+```html
+<p>The pH value is calculated as $pH = -\log[H^+]$ where [H⁺] is the hydrogen ion concentration.</p>
+```
+
+### 3. CSS Styling for Equations
+
+The `.equation` class provides proper styling for display math:
+
+```css
+.equation {
+    margin: var(--space-6) 0;
+    padding: var(--space-4);
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-lg);
+    overflow-x: auto;
+    text-align: center;
+}
+```
+
+### 4. Complex Equation Handling
+
+For complex scientific equations (like the Nernst equation), provide multiple forms and comprehensive explanations:
+
+```html
+<div class="callout callout--info">
+    <div class="callout-header">
+        <span class="callout-icon">🧮</span>
+        <h4 class="callout-title">Nernst Equation</h4>
+    </div>
+    <div class="callout-content">
+        <p>The pH meter measures the potential difference at both electrodes according to the Nernst equation:</p>
+        
+        <h5>General Form:</h5>
+        <div class="equation">
+            $$E = E^0 - \frac{RT}{zF} \ln Q$$
+        </div>
+        
+        <h5>For pH Measurement (at 25°C):</h5>
+        <div class="equation">
+            $$E = E^0 - \frac{0.0592}{z} \log [H^+]$$
+        </div>
+        
+        <p>Since pH = -log[H⁺], this becomes:</p>
+        <div class="equation">
+            $$E = E^0 + 0.0592 \times pH$$
+        </div>
+        
+        <h5>Variable Definitions:</h5>
+        <ul>
+            <li><strong>E</strong> = measured potential (volts)</li>
+            <li><strong>E⁰</strong> = standard electrode potential (volts)</li>
+            <li><strong>R</strong> = universal gas constant (8.314 J/mol·K)</li>
+            <li><strong>T</strong> = absolute temperature (Kelvin)</li>
+            <li><strong>z</strong> = number of electrons transferred</li>
+            <li><strong>F</strong> = Faraday constant (96,485 C/mol)</li>
+            <li><strong>[H⁺]</strong> = hydrogen ion concentration (mol/L)</li>
+        </ul>
+    </div>
+</div>
+```
+
+### 5. Equation Verification Checklist
+
+For each mathematical equation in the converted HTML:
+
+- ✅ **Source Accuracy**: Equation matches exactly with the original PDF
+- ✅ **Syntax Correctness**: LaTeX syntax is valid and renders properly
+- ✅ **Delimiter Usage**: Correct use of `$$` for display math, `$` for inline
+- ✅ **Variable Definitions**: All variables are clearly defined
+- ✅ **Context Provided**: Equation is properly explained and contextualized
+- ✅ **Accessibility**: Equations are readable by screen readers via KaTeX's accessibility features
+- ✅ **Responsive Design**: Equations display properly on mobile devices
+
+### 6. Common Mathematical Elements
+
+#### Fractions
+```latex
+\frac{numerator}{denominator}
+```
+
+#### Superscripts and Subscripts
+```latex
+E^0    % superscript
+H^+    % positive charge
+[H^+]  % concentration notation
+pH_7   % subscript
+```
+
+#### Greek Letters
+```latex
+\alpha, \beta, \gamma, \delta, \epsilon, \zeta, \eta, \theta, \lambda, \mu, \pi, \rho, \sigma, \tau, \phi, \chi, \psi, \omega
+```
+
+#### Mathematical Operators
+```latex
+\ln    % natural logarithm
+\log   % logarithm
+\times % multiplication
+\pm    % plus-minus
+\approx % approximately equal
+\neq   % not equal
+```
+
+### 7. Troubleshooting Common Issues
+
+#### Equation Not Rendering
+1. Check that KaTeX scripts are properly loaded
+2. Verify delimiter configuration in auto-render script
+3. Ensure LaTeX syntax is valid
+4. Check for conflicting CSS that might hide equations
+
+#### Mobile Display Issues
+1. Use `overflow-x: auto` on equation containers
+2. Test equations on various screen sizes
+3. Consider breaking very long equations into multiple lines
+
+#### Accessibility Concerns
+1. Provide text descriptions for complex equations
+2. Use semantic HTML structure around equations
+3. Ensure sufficient color contrast for equation text
+
+### 8. Performance Considerations
+
+- KaTeX renders faster than MathJax (synchronous vs asynchronous)
+- Use auto-render for automatic detection of math delimiters
+- Consider loading KaTeX only on pages that contain equations
+- Cache KaTeX resources for better performance
+
 ## HTML Layout and Structure
 
 ### Topic Page Template (v9.1 Rich UI with Top/Bottom Navigation)
@@ -370,6 +542,16 @@ project-name/
     
     <!-- Google Fonts - Inter for UI, Source Serif for reading -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
     
     <!-- Main Stylesheet -->
     <link rel="stylesheet" href="styles/main.css">
@@ -3076,7 +3258,7 @@ For each section/page, verify:
 *   [ ] Content in **linear ("top and bottom") flow** following MMD order.
 *   [ ] Any "Key Points" use only **verbatim text** wrapped in `<strong>` tags.
 *   [ ] All navigation links (Prev/Next/ToC) function correctly.
-*   [ ] All mathematics renders correctly via MathJax.
+*   [ ] All mathematics renders correctly via KaTeX.
 *   [ ] All images present, correctly named, linked, and have descriptive `alt` text.
 *   [ ] HTML is valid and uses semantic elements appropriately.
 *   [ ] Basic accessibility checks passed (color contrast, keyboard navigation, ARIA roles).
@@ -3352,7 +3534,7 @@ This section documents the concrete strategy for v9 Rich UI conversion:
 
 ## Rich UI Edition Complete ✅
 
-This document represents the **complete PDF to HTML Conversion System Prompt (v9) - Rich UI Edition** with all enhanced patterns and components implemented from our pharmacology study guide project.
+This document represents the **complete PDF to HTML Conversion System Prompt (v9.3) - Rich UI Edition** with all enhanced patterns, components, and mathematical equations support implemented from our clinical engineering and pharmacology study guide projects.
 
 ### Included Enhancements:
 - ✅ Modern Design System with Glassmorphism effects
