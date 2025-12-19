@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electron Microscope: Maintenance & Safety - Microscopy Notes</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-04-electron-microscope-basics.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-06-comparison.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 71%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 5 of 7</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🛠️</span>
+                        <span>Topic 05</span>
+                    </div>
+                    <h1 class="document-title">Electron Microscope: Maintenance & Safety</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Troubleshooting, Care, and Safety Protocols</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>10 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Section 1: Common Faults -->
+                    <section class="content-section" id="common-faults">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔧</span>
+                                Common Faults, Causes, and Remedies
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="table-responsive">
+                                <table class="content-table content-table--bordered">
+                                    <thead>
+                                        <tr>
+                                            <th>Fault</th>
+                                            <th>Possible Cause</th>
+                                            <th>Remedy</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td rowspan="2"><strong>No image or blank screen</strong></td>
+                                            <td>Electron gun filament burnt out</td>
+                                            <td>Replace the filament</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vacuum system failure</td>
+                                            <td>Check vacuum pumps, repair leaks</td>
+                                        </tr>
+                                        <tr>
+                                            <td rowspan="2"><strong>Poor image resolution</strong></td>
+                                            <td>Dirty or contaminated lenses or specimen stage</td>
+                                            <td>Clean lenses and specimen stage carefully</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Incorrect focusing or lens alignment</td>
+                                            <td>Recalibrate lenses and refocus</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Image drift or instability</strong></td>
+                                            <td>Mechanical vibrations or electromagnetic interference</td>
+                                            <td>Isolate microscope from vibrations and EMI sources</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Electrical power failure</strong></td>
+                                            <td>Faulty power supply or switch</td>
+                                            <td>Check and repair power components</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Specimen charging (SEM)</strong></td>
+                                            <td>Specimen not properly coated with conductive material</td>
+                                            <td>Coat specimen with conductive coating (e.g., gold)</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Beam instability</strong></td>
+                                            <td>Fluctuations in electron source or vacuum</td>
+                                            <td>Stabilize power supply and vacuum system</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Vacuum loss</strong></td>
+                                            <td>Leak in vacuum chamber</td>
+                                            <td>Locate and seal leaks, service vacuum system</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Summary of Typical Remedies</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Replace worn or damaged components (e.g., electron filament).</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Perform regular cleaning of lenses and specimen holders.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Ensure proper vacuum maintenance to maintain electron beam quality.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Calibrate lenses and focus controls regularly.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Reduce environmental disturbances (vibrations, EMI).</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Prepare specimens properly to avoid charging in SEM.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Maintenance Procedures -->
+                    <section class="content-section" id="maintenance">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧹</span>
+                                Maintenance Procedures
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Regular Cleaning</strong>
+                                        <ul class="enhanced-list" style="margin-top: 0.5rem;">
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Lenses and Specimen Stage:</strong> Clean lenses and specimen holders carefully using appropriate cleaning agents and tools to avoid contamination and maintain image clarity.</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Electron Gun Filament:</strong> Avoid touching the filament. Clean or replace it as per manufacturer’s guidelines to ensure stable electron emission.</span>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Vacuum System Maintenance</strong>
+                                        <ul class="enhanced-list" style="margin-top: 0.5rem;">
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Check Vacuum Pumps:</strong> Regularly inspect and service vacuum pumps to ensure they maintain the necessary vacuum levels inside the microscope.</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Leak Detection:</strong> Periodically check the vacuum chamber for leaks using leak detection methods and seal any leaks promptly to avoid vacuum loss.</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Vacuum Gauges:</strong> Monitor vacuum gauges to ensure the system maintains the required vacuum pressure during operation.</span>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Calibration and Alignment</strong>
+                                        <ul class="enhanced-list" style="margin-top: 0.5rem;">
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Lens Calibration:</strong> Regularly calibrate electromagnetic lenses to ensure correct focusing and magnification.</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Beam Alignment:</strong> Align the electron beam path precisely to avoid image distortion and improve resolution.</span>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Electrical System Checks</strong>
+                                        <ul class="enhanced-list" style="margin-top: 0.5rem;">
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Power Supply:</strong> Inspect and maintain the power supply and electrical components to ensure consistent voltage and current to the electron gun.</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Connections:</strong> Check all electrical connections for wear or damage and replace as necessary.</span>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Environmental Control</strong>
+                                        <ul class="enhanced-list" style="margin-top: 0.5rem;">
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Vibration Isolation:</strong> Ensure the microscope is mounted on vibration isolation tables or in a vibration-free environment.</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Electromagnetic Shielding:</strong> Minimize electromagnetic interference by keeping the microscope away from strong magnetic fields or installing shielding.</span>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Specimen Preparation and Handling</strong>
+                                        <ul class="enhanced-list" style="margin-top: 0.5rem;">
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Proper Coating (SEM):</strong> Ensure specimens are properly coated with conductive materials to prevent charging.</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Specimen Cleaning:</strong> Handle specimens in a way that minimizes contamination or damage.</span>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Routine Operation Checks</strong>
+                                        <ul class="enhanced-list" style="margin-top: 0.5rem;">
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content">Perform daily startup and shutdown procedures as recommended.</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content">Monitor the stability of the electron beam and image quality regularly.</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content">Report any irregularities immediately for maintenance action.</span>
+                                            </li>
+                                        </ul>
+                                    </span>
+                                </li>
+                            </ol>
+
+                            <h3>Summary Table</h3>
+                            <div class="table-responsive">
+                                <table class="content-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Maintenance Aspect</th>
+                                            <th>Procedure</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Cleaning</td>
+                                            <td>Clean lenses, stage, and electron gun carefully</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Vacuum System</td>
+                                            <td>Service pumps, check for leaks, monitor vacuum levels</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Calibration</td>
+                                            <td>Align and calibrate lenses and electron beam</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Electrical</td>
+                                            <td>Inspect power supply and connections</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Environment</td>
+                                            <td>Ensure vibration isolation and electromagnetic shielding</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Specimen Handling</td>
+                                            <td>Prepare and coat specimens properly</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Routine Checks</td>
+                                            <td>Perform daily inspections and monitor performance</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Safety Precautions -->
+                    <section class="content-section" id="safety">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🦺</span>
+                                Safety Precautions
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Handling Safety Precautions</h3>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Handle with Care:</strong><br>
+                                        Electron microscopes are delicate and expensive instruments. Always handle the microscope gently to avoid mechanical damage.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Avoid Sudden Movements and Vibrations:</strong><br>
+                                        Do not bump or shake the microscope. Vibrations can misalign lenses or damage sensitive components.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Use Proper Lifting Techniques:</strong><br>
+                                        When moving the microscope, use at least two people and lift it carefully by the base and arm to prevent dropping.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Avoid Exposure to Strong Magnetic Fields:</strong><br>
+                                        Keep the microscope away from strong electromagnetic fields, which can interfere with electron beam alignment.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Electrical Safety:</strong><br>
+                                        Always ensure the microscope is switched off and unplugged before performing any maintenance or adjustments to avoid electrical hazards.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Follow Manufacturer's Guidelines:</strong><br>
+                                        Only trained personnel should operate or handle the microscope according to the manufacturer's instructions.
+                                    </span>
+                                </li>
+                            </ol>
+
+                            <hr>
+
+                            <h3>Storage Safety Precautions</h3>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Cover the Microscope:</strong><br>
+                                        Use a dust cover or protective case when the microscope is not in use to prevent dust and moisture contamination.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Store in a Stable, Vibration-Free Environment:</strong><br>
+                                        Place the microscope on a sturdy, vibration-isolated table in a low-traffic area to avoid accidental bumps or vibrations.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Control Environmental Conditions:</strong><br>
+                                        Store the microscope in a dry, temperature-controlled room to prevent moisture buildup, corrosion, and fungal growth.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Protect Electrical Components:</strong><br>
+                                        Ensure the microscope is unplugged during storage and that electrical cords are neatly coiled and undamaged.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Regular Inspections:</strong><br>
+                                        Conduct periodic checks during storage to ensure no dust accumulation or damage has occurred.
+                                    </span>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <!-- Summary Table -->
+                        <div class="content-card">
+                            <h3>Summary Table</h3>
+                            <div class="table-responsive">
+                                <table class="content-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Handling Precautions</th>
+                                            <th>Storage Precautions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>Handle gently and avoid shocks</td>
+                                            <td>Cover with dust cover</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Avoid vibrations and magnetic fields</td>
+                                            <td>Store on vibration-isolated stable surface</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Use proper lifting techniques</td>
+                                            <td>Control temperature and humidity</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Switch off and unplug before maintenance</td>
+                                            <td>Unplug and store cords properly</td>
+                                        </tr>
+                                        <tr>
+                                            <td>Follow manufacturer's instructions</td>
+                                            <td>Regularly inspect during storage</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-04-electron-microscope-basics.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-06-comparison.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 71%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 5 of 7</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>
