@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: RNA - Molecular Diagnostics</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <!-- Floating Table of Contents -->
+        <nav class="floating-toc" id="floating-toc">
+            <div class="floating-toc-header">
+                <span>📑</span> Table of Contents
+            </div>
+            <ul class="floating-toc-list">
+                <!-- Links will be populated by JS -->
+            </ul>
+        </nav>
+
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="chapter-01-dna.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="chapter-03-proteins.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 12.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 2 of 16</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🧬</span>
+                        <span>Topic 02</span>
+                    </div>
+                    <h1 class="document-title">RNA</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Fundamentals of Nucleic Acid Biochemistry</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>40 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="content-card">
+                            <p>Ribonucleic acid (RNA) is a polymer of nucleotides similar to DNA. It differs from DNA in the sugar moieties, having ribose instead of deoxyribose and, in one nitrogen base component, having uracil instead of thymine (thymine is 5-methyl uracil; Fig. 2-1). Furthermore, RNA is synthesized as a single strand rather than as a double helix. Although RNA strands do not have complementary partner strands, they are not completely single-stranded. Through internal homologies, RNA species fold and loop upon themselves to take on as much of a double-stranded character as possible. RNA can also pair with complementary single strands of DNA or RNA and form a double helix.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <div class="grid grid-2">
+                                        <img src="../assets/images/image-20251222-41bf6575.jpeg" alt="Thymine structure" class="figure-image">
+                                        <img src="../assets/images/image-20251222-8fcc16f1.jpeg" alt="Uracil structure" class="figure-image">
+                                    </div>
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-1 Uracil (U), the nucleotide base that replaces thymine in RNA, has the purine ring structure of thymine (dT) minus the methyl group. Uracil forms hydrogen bonds with adenine.</figcaption>
+                            </figure>
+
+                            <p>There are several types of RNAs found in the cell. Ribosomal RNA, messenger RNA, transfer RNA, and small nuclear RNAs have distinct cellular functions. RNA is copied, or transcribed, from DNA.</p>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Advanced Concept: RNA Evolution</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Evolutionary theory places RNA as the original genetic material from which DNA has evolved. In most organisms, RNA is an intermediate between the storage system of DNA and the proteins responsible for phenotype. One family of RNA viruses, the retroviruses, which include leukemia viruses and the human immunodeficiency virus, have RNA genomes and, in order to replicate using host cell machinery, must first make a DNA copy of their genome by reverse transcription.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Transcription -->
+                    <section class="content-section" id="transcription">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📝</span>
+                                Transcription
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>DNA can only store information. In order for this information to be utilized, it must be transcribed and then translated into protein, a process called gene expression. A specific type of RNA, messenger RNA (mRNA), carries the information in DNA to the ribosomes where it is translated into protein.</p>
+                            
+                            <p>Transcription is the copying of one strand of DNA into RNA by a process similar to that of DNA replication. This activity occurs mostly in interphase nuclei. Evidence suggests that transcription takes place at discreet stations of the nucleus into which the DNA molecules move. One of these sites, the nucleolus, is the location of ribosomal RNA synthesis.</p>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">🧬</span>
+                                    <h4 class="callout-title">Advanced Concept: Transcription Initiation</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>DNA must be released locally from histones and the helix unwound in order for transcription to occur. These processes involve the participation of numerous factors, including DNA binding proteins, transcription factors, histone modification enzymes, and RNA polymerase.</p>
+                                </div>
+                            </div>
+
+                            <p>The polymerization of RNA from a DNA template is catalyzed by RNA polymerase. After binding to its start site in DNA, a specific sequence of bases called the promoter, RNA polymerase and its supporting accessory proteins synthesize RNA using the base sequence of one strand of the double helix (the antisense strand) as a guide (Fig. 2-2). The sense strand of the DNA template has a sequence identical to that of the RNA product (except for the U for T substitution in RNA), but it does not serve as the template for the RNA.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-847e89bf.jpeg" alt="RNA Polymerase Action" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-2 RNA polymerase uses one strand of the double helix (the antisense strand) as a template for synthesis of RNA. About 10 base pairs of DNA are unwound or opened to allow the polymerase to work.</figcaption>
+                            </figure>
+
+                            <p>Compared with sites of initiation of DNA replication, there are many more sites for initiation of transcription (RNA synthesis) in both prokaryotes and eukaryotes. There are also many more molecules of RNA polymerase than DNA polymerase in the cell. RNA polymerases work more slowly than DNA polymerases (50–100 bases/sec for RNA synthesis vs. 1000 bases/sec for DNA replication) and with less fidelity.</p>
+
+                            <p>Unlike DNA synthesis, RNA synthesis does not require a primer. Upon initiation of RNA synthesis, the first ribonucleoside triphosphate retains all of its phosphate groups as the RNA is polymerized in the $5^{\prime}$ to $3^{\prime}$ direction. Subsequent ribonucleoside triphosphates retain only the alpha phosphate, the one closest to the ribose sugar. The other two phosphate groups are released as orthophosphate during the synthesis reaction.</p>
+
+                            <p>RNA synthesis proceeds along the DNA template until the polyadenylation signal is encountered. At this point the process of termination of transcription is activated. There is no consensus sequence in DNA that specifies termination of transcription. This might be explained by recent descriptions of termination by specific exonuclease activity. As the polymerase proceeds past the polyA site, the nascent mRNA is released by an endonuclease associated with the carboxy terminal end of the polymerase. RNA synthesized beyond the site trails out of the RNA polymerase and is bound by another exonuclease that begins to degrade the RNA $5^{\prime}$ to $3^{\prime}$ toward the RNA polymerase. When the exonuclease catches up with the polymerase, transcription stops.</p>
+
+                            <p>Gene expression is the fundamental process for cell regulation, differentiation, and development. Signal transduction pathways that are the targets of several therapeutic strategies funnel internal and external signals to the nucleus where transcription factors bind to specific sequences in DNA and initiate or turn off transcription.</p>
+                        </div>
+                    </section>
+
+                    <!-- Types/Structures -->
+                    <section class="content-section" id="types-structures">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧩</span>
+                                Types & Structures
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Ribosomal RNA</h3>
+                            <p>The largest component of cellular RNA is ribosomal RNA (rRNA), comprising 80%–90% of the total cellular RNA. The various types of ribosomal RNAs are named for their sedimentation coefficient (S) in density gradient centrifugation. rRNA is an important structural and functional part of the ribosomes, cellular organelles where proteins are synthesized (Fig. 2-3).</p>
+
+                            <p>In prokaryotes, there are three rRNA species, the 16S found in the ribosome small subunit, and the 23S and 5S, found in the ribosome large subunit, all synthesized from the same gene. In eukaryotes, rRNA is synthesized from highly repeated gene clusters. Eukaryotic rRNA is copied from DNA as a single 45S precursor RNA (preribosomal RNA) that is subsequently processed into 18S of the ribosome small subunit and 5.8S and 28S species of the large subunit. Another rRNA species, 5S, found in the large ribosome subunit in eukaryotes, is synthesized separately.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-bc634173.jpeg" alt="Ribosomal subunits" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-3 Prokaryote and eukaryote ribosomal subunits are of similar structure but different size. Ribosomal RNAs (left) are assembled with 52 or 82 ribosomal proteins (center) to make the subunits that will form the complete ribosome in association with mRNA.</figcaption>
+                            </figure>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Advanced Concept: rRNA Structure</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The secondary structure of rRNA is important for the integrity and function of the ribosome. Not only is it important for ribosomal structure, it is also involved in the correct positioning of the ribosome on the mRNA and with the transfer RNA during protein synthesis.</p>
+                                </div>
+                            </div>
+
+                            <h3>Messenger RNA</h3>
+                            <p>Messenger RNA (mRNA) is the initial connection between the information stored in DNA and the translation apparatus that will ultimately produce the protein products responsible for the phenotype dictated by the chromosome. In prokaryotes, mRNA is synthesized even as it is being translated into protein. Prokaryotic mRNA is sometimes polycistronic; that is, coding for more than one protein on the same mRNA. Eukaryotic mRNA, in contrast, is monocistronic, having only one protein per mRNA. Eukaryotes can, however, produce different proteins from the same DNA sequences by starting the RNA synthesis in different places or by processing the mRNA differently. In eukaryotes, copying of RNA from DNA and protein synthesis from the RNA are separated by the nuclear membrane barrier. Eukaryotic mRNA undergoes a series of post-transcriptional processing events before it is translated into protein (Fig. 2-4).</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-0e9d3158.jpeg" alt="RNA processing" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-4 DNA (top) and heteronuclear RNA (middle) contain intervening (intron) and expressed (exon) sequences. The introns are removed and the mature RNA is capped and polyadenylated during processing (bottom).</figcaption>
+                            </figure>
+
+                            <h4>Messenger RNA Processing</h4>
+                            <p><strong>Polyadenylation:</strong> Study of mRNA in eukaryotes was facilitated by the discovery that most messengers carry a sequence of polyadenylic acid at the $3^{\prime}$ terminus, the poly(A) tail. The run of adenines was first discovered by hydrogen bonding of mRNA to polydeoxythymine on poly(dT) cellulose. Polyuridine or polythymine residues covalently attached to cellulose or sepharose substrates are often used to specifically isolate mRNA in the laboratory.</p>
+
+                            <p>The poly(A) tail is not coded in genomic DNA. It is added to the RNA after synthesis of the pre-mRNA. A protein complex recognizes the RNA sequence, AAUAAA, and cleaves the RNA chain 11–30 bases $3^{\prime}$ to that site. The enzyme polyadenylate polymerase is responsible for adding the adenines to the end of the transcript. A run of up to 200 nucleotides of poly(A) is typically found on mRNA in mammalian cells.</p>
+
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📜</span>
+                                    <h4 class="callout-title">Historical Highlight: cDNA and Introns</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>A DNA copy (complementary DNA, copy DNA [cDNA]) of mature mRNA can be made by reverse transcription of mRNA. Compared with the original gene on the chromosome, the cDNA version of eukaryotic genes is smaller than the chromosomal version. Restriction enzyme mapping can be used to confirm that this is not due to premature termination of the genomic transcript. The entire functional gene is present in the shorter sequence because cDNA versions of eukaryotic genes can be expressed into complete proteins. The larger chromosomal version of the gene must, therefore, have extra sequences, and these sequences must be inserted between the protein coding sequences. Direct location and size of these intervening sequences were first demonstrated by electron microscopy of hybrids between mRNA and cDNA using the method of R loop mapping.</p>
+                                </div>
+                            </div>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Advanced Concept: Poly(A)- mRNA</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>About 30% of the mRNAs, notably histone mRNAs, are not polyadenylated. The function of the poly(A) tail, or functional differences between poly(A)+ and poly(A)- mRNA, is not clear. The polyA tail may be involved in movement of the mRNA from the nucleus to the cytoplasm, association with other cell components, maintenance of secondary structure, or proper stability of the message.</p>
+                                </div>
+                            </div>
+
+                            <p><strong>Capping:</strong> Eukaryotic mRNA is blocked at the $5^{\prime}$ terminus by an unusual $5^{\prime}$-$5^{\prime}$ pyrophosphate bridge to a methylated guanosine. The structure is called a cap. The cap is a $5^{\prime}$-$5^{\prime}$ pyrophosphate linkage of 7-methyl guanosine to either $2^{\prime}$ O-methyl guanine or $2^{\prime}$ O-methyl adenine of the mRNA.</p>
+                            
+                            <p>The cap confers a protective function as well as serves as a recognition signal for the translational apparatus. Caps differ with respect to the methylation of the end nucleotide of the mRNA.</p>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Advanced Concept: Capping</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Caps are present on all eukaryotic mRNA bound for translation, except for some mRNA transcribed from mitochondrial DNA. Capping occurs after initiation of transcription, catalyzed by the enzyme guanylyl transferase. This enzyme links a guanosine monophosphate provided by guanosine triphosphate to the $5^{\prime}$ phosphate terminus of the RNA with the release of pyrophosphate. Caps of mRNA are recognized by ribosomes just before translation.</p>
+                                </div>
+                            </div>
+
+                            <p><strong>Splicing:</strong> Prokaryotic structural genes contain uninterrupted lengths of open reading frame, sequences that code for amino acids. In contrast, eukaryotic coding regions are interrupted with long stretches of noncoding DNA sequences called introns. Newly transcribed mRNA, heteronuclear RNA (hnRNA), is much larger than mature mRNA because it still contains the intervening sequences. Introns are removed from hnRNA by splicing (Fig. 2-5). The remaining sequences that code for the protein product are exons.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-21c7f2c4.jpeg" alt="RNA Splicing" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-5 RNA splicing at the $5^{\prime}$ splice site, branch, and $3^{\prime}$ splice site consensus sequences. The intron (light gray) is removed through a transesterification reaction involving a guanine nucleotide of the $5^{\prime}$ site and an adenine in the branch sequence. The product of this reaction is the discarded intron in a lariat structure.</figcaption>
+                            </figure>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Advanced Concept: Intron Types</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>There are four types of introns: group I, group II, nuclear, and tRNA, depending on the mechanism of their removal. Group I and II introns are found in mitochondrial and chloroplast genes. Nuclear introns are removed by specialized RNA-protein complexes (small nucleoprotein particles) containing small nuclear RNAs U1, U2, U4, U5, and U6. Although removal of all nuclear introns requires protein catalysts, some introns are removed without the participation of protein factors in a self-splicing reaction. The discovery of self-splicing was the first demonstration that RNA could act as an enzyme.</p>
+                                </div>
+                            </div>
+
+                            <p>Splicing may be important for timing of translation of mRNA in the cytoplasm. Introns may have evolved as a means of increasing recombination frequency within genes as well as between genes. The discontinuous nature of eukaryotic genes may also protect the coding regions from genetic damage by toxins or radiation.</p>
+                            
+                            <p><strong>Alternative splicing</strong> can modify products of genes by alternate insertion of different exons. For example, the production of calcitonin in the thyroid or calcitonin gene-related peptide in the brain depends on the exons included in the mature mRNA in these tissues. Alternative splicing has been found in about 40 different genes.</p>
+
+                            <h3>Small Nuclear RNA</h3>
+                            <p>Another type of cellular RNA is the small nuclear RNA (snRNA), which functions in splicing (removal of introns from freshly transcribed RNA) in eukaryotes. Small nuclear RNA stays in the nucleus after its transcription by RNA polymerase I or III.</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-title">Table 2.1 Small Nuclear RNA Isolated From HeLa and Novikoff Hepatoma Cells</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Species (HeLa)</th>
+                                                <th>Species (Novikoff)</th>
+                                                <th>Approximate Length (Bases)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>SnA</td><td>U5</td><td>180</td></tr>
+                                            <tr><td>SnB</td><td></td><td>210</td></tr>
+                                            <tr><td>SnC</td><td>U2</td><td>196</td></tr>
+                                            <tr><td>SnD</td><td>U1B</td><td>171</td></tr>
+                                            <tr><td>SnE/ScE (5.8S rRNA)</td><td>5.8S</td><td></td></tr>
+                                            <tr><td>SnF</td><td>U1A</td><td>125</td></tr>
+                                            <tr><td>SnG/ScG (5S rRNA)</td><td>5S I and II</td><td></td></tr>
+                                            <tr><td>SnG'</td><td>5S III</td><td>120</td></tr>
+                                            <tr><td>SnH</td><td>4.5S I, II and III</td><td>96</td></tr>
+                                            <tr><td>SnI (tRNA)</td><td></td><td></td></tr>
+                                            <tr><td>SnK</td><td></td><td>260</td></tr>
+                                            <tr><td>SnP</td><td></td><td>130</td></tr>
+                                            <tr><td>ScL (viral 7S)</td><td></td><td>260</td></tr>
+                                            <tr><td>ScM</td><td></td><td>180</td></tr>
+                                            <tr><td>ScD</td><td></td><td>180</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <h3>Small Interfering RNA</h3>
+                            <p>Small interfering RNAs (siRNA) are the functional intermediates of RNA interference (RNAi), a defense in eukaryotic cells against viral invasion. Double-stranded RNA (dsRNA) species are believed to originate from transcription of inverted repeats or by the activity of cellular or viral RNA-directed RNA polymerases. These 21–22 nucleotide dsRNAs are derived from successive cleavage of dsRNAs 500 or more nucleotide base pairs in length. The ribonuclease III enzyme, <strong>dicer</strong>, is responsible for the generation of siRNA and another small RNA, micro RNA, from dsRNA precursors.</p>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Advanced Concept: Directed RNAi</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The first demonstration of directed RNAi in the laboratory occurred in experiments with <em>C. elegans</em>. Investigators injected dsRNA into worms and observed dramatic inhibition of the genes that generated the RNA. Since then, siRNAs have been introduced into plants and animals, including human cells growing in culture. These genetic tools have potential applications in identifying genes involved in disease and as treatment for diseases like cancer where overexpression of specific genes is part of the tumor phenotype.</p>
+                                </div>
+                            </div>
+
+                            <h3>Transfer RNA</h3>
+                            <p>Translation of information from nucleic acid to protein requires reading of the mRNA by ribosomes, using adaptor molecules or transfer RNA (tRNA). Transfer RNAs are relatively short single-stranded polynucleotides of 73–93 bases in length. There is at least one tRNA for each amino acid.</p>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Advanced Concept: tRNA Splicing</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The tRNA genes contain 14–20 extra nucleotides in the sequences coding for the anticodon loop that are transcribed into the tRNA. Enzymes that recognize other tRNA modifications remove these sequences (introns) by a cleavage-ligation process. Intron removal, addition of CCA to the $3^{\prime}$ end, and nucleotide modifications all occur following tRNA transcription.</p>
+                                </div>
+                            </div>
+
+                            <p>Eight or more of the nucleotide bases in all tRNAs are modified, usually methylated, after the tRNA synthesis. Most tRNAs have a guanylic residue at the $5^{\prime}$ end and the sequence C-C-A at the $3^{\prime}$ end. With maximum intrastrand hybridization, tRNAs take on a cruciform structure of double-stranded stems and single-stranded loops (Fig. 2-6).</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-f0037ce1.jpeg" alt="tRNA structure" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-6 Alanine tRNA is an example of the general structure of tRNA, which is often depicted in a cruciform structure (left). The inverted "L" (right) is more accurate of the structure formed by intrastrand hydrogen bonding.</figcaption>
+                            </figure>
+
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📜</span>
+                                    <h4 class="callout-title">Historical Highlight: tRNA Sequence</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>In 1964 Robert Holley and colleagues at Cornell University solved the first tRNA sequence. The sequence was that of alanine tRNA of yeast. Yeast tRNA<sup>ala</sup> is 76 bases long; 10 of these bases are modified.</p>
+                                </div>
+                            </div>
+
+                            <h3>Micro RNAs</h3>
+                            <p>Micro RNAs (miRNA) are tiny regulatory RNAs, 21–25 nt in length, derived from endogenous RNA hairpin structures. Micro RNAs were discovered in the worm <em>Caenorhabditis elegans</em>. Like siRNAs, these evolutionarily conserved RNAs are involved in control of gene expression. Unlike siRNAs that destroy mRNA, miRNAs pair with partially complementary sequences in mRNAs and inhibit translation. So far, over 100 miRNAs have been identified in eukaryotic cells and viruses.</p>
+
+                            <h3>Other Small RNAs</h3>
+                            <p>Since the late 1990s a growing variety of small RNAs (sRNA) have been described in prokaryotes and eukaryotes, including tiny noncoding RNAs (tncRNA, 20–22 b), small modulatory RNA (smRNA, 21–23b), small nucleolar RNAs (snoRNA), tmRNA, and others. These small untranslated RNA molecules have been termed sRNAs in bacteria and noncoding RNAs (ncRNAs) in eukaryotes.</p>
+                        </div>
+                    </section>
+
+                    <!-- RNA Polymerases -->
+                    <section class="content-section" id="rna-polymerases">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧪</span>
+                                RNA Polymerases
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>RNA synthesis is catalyzed by RNA polymerase enzymes. One multi-subunit prokaryotic enzyme is responsible for the synthesis of all types of RNA in the prokaryotic cell. Eukaryotes have three different RNA polymerase enzymes. DNA-dependent RNA polymerases require a DNA template. RNA-dependent RNA polymerases require an RNA template.</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-title">Table 2.2 RNA Polymerases</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Enzyme</th>
+                                                <th>Template</th>
+                                                <th>Product</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>E. coli RNA polymerase II</td><td>DNA</td><td>mRNA</td></tr>
+                                            <tr><td>RNA polymerase I</td><td>DNA</td><td>rRNA</td></tr>
+                                            <tr><td>RNA polymerase II</td><td>DNA</td><td>mRNA</td></tr>
+                                            <tr><td>RNA polymerase III</td><td>DNA</td><td>tRNA, snRNA</td></tr>
+                                            <tr><td>Mitochondrial RNA polymerase</td><td>DNA</td><td>mRNA</td></tr>
+                                            <tr><td>Mammalian DNA polymerase α</td><td>DNA</td><td>primers</td></tr>
+                                            <tr><td>HCV RNA polymerase</td><td>RNA</td><td>Viral genome</td></tr>
+                                            <tr><td>Dengue virus RNA polymerase</td><td>RNA</td><td>Viral genome</td></tr>
+                                            <tr><td>PolyA polymerase</td><td>None</td><td>PolyA tails</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <p>In prokaryotes, all types of RNA are synthesized by a single RNA polymerase. Bacterial RNA polymerase consists of five subunits, two $\alpha$ and one of each $\beta$, $\beta'$ and $\sigma^{27}$ (Fig. 2-7).</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-f47ad007.jpeg" alt="Prokaryotic RNA Polymerase" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-7 Prokaryotic RNA polymerase is made up of separate proteins. The four subunits that make up the core enzyme have the capacity to synthesize RNA. The sigma cofactor aids in accurate initiation of RNA synthesis. The rho cofactor aids in termination of RNA synthesis.</figcaption>
+                            </figure>
+
+                            <p>In eukaryotes, there are three multisubunit nuclear DNA-dependent RNA polymerases, RNA polymerase I, II, and III. The three RNA polymerases in eukaryotic cells were first distinguished by their locations in the cell and their differential sensitivity to the toxin $\alpha$-amanitin.</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-title">Table 2.3 Cellular Location and Activity of RNA pol I, II, and III in Eukaryotes</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th>Location</th>
+                                                <th>Products</th>
+                                                <th>$\alpha$-Amanitin Sensitivity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>I</td><td>Nucleolus</td><td>18s, 5.8s, 28s rRNA</td><td>Insensitive</td></tr>
+                                            <tr><td>II</td><td>Nucleus</td><td>mRNA, snRNA</td><td>Inhibited</td></tr>
+                                            <tr><td>III</td><td>Nucleus</td><td>tRNA, 5s rRNA</td><td>Inhibited by high concentration</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <p>RNA viruses carry their own RNA-dependent RNA polymerases. Hepatitis C virus and Dengue virus carry this type of polymerase to replicate their RNA genomes. PolyA polymerase is a template-independent RNA polymerase. This enzyme adds adenine nucleotides to the $3^{\prime}$ end of mRNA.</p>
+                        </div>
+                    </section>
+
+                    <!-- Other RNA-Metabolizing Enzymes -->
+                    <section class="content-section" id="metabolizing-enzymes">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔧</span>
+                                Other RNA-Metabolizing Enzymes
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Ribonucleases</h3>
+                            <p>Ribonucleases degrade RNA in a manner similar to the degradation of DNA by deoxyribonucleases (Table 2.4). An endoribonuclease, cleavage and polyadenylation specific factor (CPSF) is required for proper termination of RNA synthesis.</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-title">Table 2.4 RNases Used in Laboratory Procedures</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Enzyme</th>
+                                                <th>Source</th>
+                                                <th>Type</th>
+                                                <th>Substrate</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>RNAse A</td><td>Bovine</td><td>Endoribonuclease</td><td>Single-stranded RNA 3' to pyrimidine residues</td></tr>
+                                            <tr><td>RNAse T1</td><td>Aspergillus</td><td>Endoribonuclease</td><td>3' Phosphate groups of guanines</td></tr>
+                                            <tr><td>RNAse H</td><td>E. coli</td><td>Exoribonuclease</td><td>RNA hybridized to DNA</td></tr>
+                                            <tr><td>RNAse CL3</td><td>Gallus</td><td>Endoribonuclease</td><td>RNA next to cytidylic acid</td></tr>
+                                            <tr><td>Cereus RNAse</td><td>Physarum</td><td>Endoribonuclease</td><td>Cytosine and uracil residues in RNA</td></tr>
+                                            <tr><td>RNAse Phy M</td><td>Physarum</td><td>Endoribonuclease</td><td>Uracil, adenine, and guanine residues in RNA</td></tr>
+                                            <tr><td>RNAse U2</td><td>Ustilago</td><td>Endoribonuclease</td><td>3' Phosphodiester bonds next to purines</td></tr>
+                                            <tr><td>RNAse T2</td><td>Aspergillus</td><td>Endoribonuclease</td><td>All phosphodiester bonds, preferably next to adenines</td></tr>
+                                            <tr><td>S1 nuclease</td><td>Aspergillus</td><td>Exoribonuclease</td><td>RNA or single-stranded DNA</td></tr>
+                                            <tr><td>Mung bean nuclease</td><td>Mung bean sprouts</td><td>Exoribonuclease</td><td>RNA or single-stranded DNA</td></tr>
+                                            <tr><td>RNAse Phy I</td><td>Physarum</td><td>Exoribonuclease</td><td>Guanine, adenine, or uracil residues in RNA</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <h3>RNA Helicases</h3>
+                            <p>RNA helicases catalyze the unwinding of double-stranded RNA. RNA synthesis and processing require the activity of helicases. These enzymes have been characterized in prokaryotic and eukaryotic organisms. Some RNA helicases work exclusively on RNA. Others can work on DNA:RNA heteroduplexes and DNA substrates.</p>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Advanced Concept: Helicase Groups</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>There are two major groups of RNA helicases defined by the amino acid sequence of their conserved regions. DEAD-box helicases (asp-glu-ala-asp) are typified by the yeast translation initiation factor e1F4A. The DEAH-box helicases (asp-glu-ala-his) resemble DNA helicases. They act on mRNA and snRNA during splicing. In addition to RNA unwinding, protein dissociation, splicing, and translation, RNA helicases also participate in RNA turnover and chromatin remodeling.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Regulation of Transcription -->
+                    <section class="content-section" id="regulation">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚙️</span>
+                                Regulation of Transcription
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Gene expression is a key determinant of phenotype. Gene expression is tightly regulated throughout the life of a cell. Two types of factors are responsible for regulation of RNA synthesis: cis factors and trans factors (Fig. 2-8). cis factors are DNA sequences that mark places on the DNA involved in the initiation and control of RNA synthesis. Trans factors are proteins that bind to the cis sequences and direct the assembly of transcription complexes at the proper gene.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-03726263.jpeg" alt="Cis and Trans Factors" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-8 cis factors or cis elements (top) are DNA sequences recognized by transcription factors, or trans factors, or DNA binding proteins (bottom).</figcaption>
+                            </figure>
+
+                            <p>An operon is a series of structural genes transcribed together on one mRNA and subsequently separated into individual proteins. In organisms with small genomes such as bacteria and viruses, operons bring about coordinate expression of proteins required at the same time. The lactose operon contains three structural genes, LacZ, LacY, and LacA, which are all required for the metabolism of lactose.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-8dc3243e.jpeg" alt="Lac Operon Structure" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-9 General structure of the lac operon. The regulator or repressor gene codes for the repressor protein trans factor that binds to the operator.</figcaption>
+                            </figure>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-d286ce6d.jpeg" alt="Lac Operon Regulation" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-10 Two states of the lac operon. (A) The repressor protein (R) binds to the operator cis element (O) preventing transcription of the operon from the promoter (P). (B) In the presence of the inducer lactose, the inducer binds to the repressor, changing its conformation, decreasing its affinity for the operator, allowing transcription to occur.</figcaption>
+                            </figure>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-a8d48f9f.jpeg" alt="Prokaryotic Regulation" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-11 Modes of regulation in prokaryotes include induction as found in the lac operon (A), repression as found in the arg operon (B), and activation as in the mal operon (C).</figcaption>
+                            </figure>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-da4260bb.jpeg" alt="Cis element locations" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-12 cis regulatory elements in prokaryotes are located close to the structural genes they control in the vicinity of the promoter. In eukaryotes, distal elements can be located thousands of base pairs away from the genes they control.</figcaption>
+                            </figure>
+
+                            <h3>Epigenetics</h3>
+                            <p>Gene activity (transcription) can be altered in ways other than by cis elements and transcription factors. Histone modification, DNA methylation, and gene silencing by double-stranded or antisense RNA regulate gene expression. These types of gene regulation are called epigenetic regulation.</p>
+
+                            <p><strong>Histone Modification:</strong> Chromatin is nuclear DNA that is compacted onto nucleosomes. Histones are not only structural proteins but can also regulate access of trans factors and RNA polymerase to the DNA helix. Modification of histone proteins affects the activity of chromatin-associated proteins and transcription factors that increase or decrease gene expression. Different types of DNA modifications, including methylation, phosphorylation, ubiquitination, and acetylation, establish a complex system of control.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-b5ccc403.jpeg" alt="Histone Modification" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-13 Interaction of transcription factors and nucleosome acetylation at the regulatory region of a gene (top) induce assembly of protein factors and RNA polymerase at the promoter (bottom).</figcaption>
+                            </figure>
+
+                            <p><strong>DNA Modification:</strong> DNA methylation is another type of epigenetic regulation of gene expression in eukaryotes and prokaryotes. In vertebrates, methylation occurs in cytosine-guanine-rich sequences in the DNA (CpG islands) (Fig. 2-14). CpG islands are found around the first exons, promoter regions, and sometimes toward the $3^{\prime}$ ends of genes. Methylation of DNA is the main mechanism of genomic imprinting, the gamete-specific silencing of genes.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-f8c5b058.jpeg" alt="CpG Islands" class="figure-image"> <!-- Placeholder: Generated an image name as no direct image was provided for CpG islands in the extracted text stream above, but referenced in text. Using a descriptive name. Wait, the extracted text *does* have a text representation of Fig 2-14, let's use that or a placeholder if image file missing. The extracted text had `Figure 2-14 CpG islands are sequences of DNA rich in the C-G dinucleotides.` -->
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-14 CpG islands are sequences of DNA rich in the C-G dinucleotides. These structures have no specific sequence other than a higher than expected occurrence of CpG.</figcaption>
+                            </figure>
+
+                            <p><strong>RNAi:</strong> Another phenomenon that affects transcription is RNAi. RNAi is mediated siRNAs. The siRNAs and other proteins assemble into an enzyme complex, called the RNA induced silencing complex (RISC) (Fig. 2-15). The RISC uses the associated siRNA to bind and degrade mRNA with sequences complementary to the siRNA. In this way translation of specific genes can be inhibited.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-cf031146.jpeg" alt="RNAi Mechanism" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 2-15 Trigger double-stranded RNA is cleaved into siRNAs that become part of the RISC. Led by the complementary siRNA sequences, RISC binds to the target RNA and begins RNA cleavage.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Key Points -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>RNA differs from DNA in having a ribose sugar, uracil instead of thymine, and being generally single-stranded.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Major types of RNA include rRNA (ribosomal), mRNA (messenger), tRNA (transfer), snRNA (small nuclear), and siRNA/miRNA (regulatory).</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Eukaryotic mRNA processing includes capping at the 5' end, polyadenylation at the 3' end, and splicing to remove introns.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Transcription is catalyzed by RNA polymerases (Pol I, II, III in eukaryotes) reading the DNA template 3' to 5' and synthesizing RNA 5' to 3'.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Gene expression is regulated by cis elements (DNA sequences) and trans factors (proteins), as well as epigenetic mechanisms like methylation and histone modification.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <!-- Study Questions -->
+                    <section class="content-section" id="study-questions">
+                        <div class="section-header">
+                            <div class="section-number">?</div>
+                            <h2 class="section-title">Study Questions</h2>
+                        </div>
+                        <div class="content-card">
+                            <h3>RNA Secondary Structure</h3>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Draw the secondary structure of the following RNA. The complementary sequences (inverted repeat) are underlined.<br>
+                                    5'CAUGUUCAGCUCAUGUGAACGCU $3^{\prime}$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Underline the rest of the two inverted repeats in the following RNA, then draw the secondary structure.<br>
+                                    5'CUGAACUUCAGUCAAGCAUGCACUGAUGCUU 3'</span>
+                                </li>
+                            </ol>
+
+                            <h3>The Lac Operon</h3>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Using the depiction of the lac operon in Figures 2-9 and 2-10, indicate whether gene expression (transcription) would be on or off under the following conditions:<br>
+                                    (P = promoter; O = operator; R = repressor)<br>
+                                    a. P + O + R+, no inducer present<br>
+                                    b. P + O + R+, inducer present<br>
+                                    c. P - O + R+, no inducer present<br>
+                                    d. P - O + R+, inducer present<br>
+                                    e. P + O - R+, no inducer present<br>
+                                    f. P + O - R+, inducer present<br>
+                                    g. P + O + R-, no inducer present<br>
+                                    h. P + O + R-, inducer present<br>
+                                    i. P - O - R+, no inducer present<br>
+                                    j. P - O - R+, inducer present<br>
+                                    k. P - O + R-, no inducer present<br>
+                                    l. P - O + R-, inducer present<br>
+                                    m. P + O - R-, no inducer present<br>
+                                    n. P + O - R-, inducer present<br>
+                                    o. P - O - R-, no inducer present<br>
+                                    p. P - O - R-, inducer present</span>
+                                </li>
+                            </ol>
+
+                            <h3>Epigenetics</h3>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Indicate whether the following events would increase or decrease expression of a gene:<br>
+                                    a. Methylation of cytosine bases 5' to the gene<br>
+                                    b. Histone acetylation close to the gene<br>
+                                    c. siRNAs complementary to the gene transcript</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="chapter-01-dna.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="chapter-03-proteins.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 12.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 2 of 16</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>
