@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10: DNA Sequencing - Molecular Diagnostics</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <!-- Floating Table of Contents -->
+        <nav class="floating-toc" id="floating-toc">
+            <div class="floating-toc-header">
+                <span>📑</span> Table of Contents
+            </div>
+            <ul class="floating-toc-list">
+                <!-- Links will be populated by JS -->
+            </ul>
+        </nav>
+
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="chapter-09-gene-mutations.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="chapter-11-polymorphisms.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 62.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 10 of 16</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🧬</span>
+                        <span>Topic 10</span>
+                    </div>
+                    <h1 class="document-title">DNA Sequencing</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Common Techniques in Molecular Biology</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>50 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="content-card">
+                            <p>Direct determination of the order, or sequence, of nucleotides in a DNA polymer is the most specific and direct method for identifying genetic lesions (mutations) or polymorphisms. Molecular techniques, from Southern blot to mutation detection methods, often rely on knowing the nucleotide sequence of the targeted areas. Without this knowledge, results from many methods would be difficult to interpret. DNA sequencing is the most definitive molecular method to identify genetic lesions.</p>
+                        </div>
+                    </section>
+
+                    <!-- Direct Sequencing -->
+                    <section class="content-section" id="direct-sequencing">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧪</span>
+                                Direct Sequencing
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Manual Sequencing</h3>
+                            <p>Two types of sequencing methods have been used most extensively: the Maxam-Gilbert method and the Sanger method.</p>
+
+                            <h4>Chemical (Maxam-Gilbert) Sequencing</h4>
+                            <p>Developed in the late 1970s, Maxam-Gilbert sequencing requires a single- or double-stranded DNA fragment labeled at one end (usually with ${}^{32}\text{P}$). The fragment is chemically treated to break the DNA chain at specific bases (G, G+A, T+C, C). The resulting fragments are separated on a denaturing polyacrylamide gel.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-32a59d8f.jpeg" alt="Maxam-Gilbert Sequencing Diagram" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 10-1 Chemical sequencing proceeds in four separate reactions in which the labeled DNA fragment is selectively broken at specific nucleotides. (DMS, dimethylsulphate; FA, formic acid; H, hydrazine; H+S, hydrazine+salt).</figcaption>
+                            </figure>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-title">Table 10.1 Specific Base Reactions in Maxam-Gilbert Sequencing</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Chain breaks at:</th>
+                                                <th>Base Modifier</th>
+                                                <th>Reaction</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>G</td><td>Dimethylsulphate</td><td>Methylates G</td></tr>
+                                            <tr><td>G + A</td><td>Formic acid</td><td>Protonates purines</td></tr>
+                                            <tr><td>T + C</td><td>Hydrazine</td><td>Splits pyrimidine rings</td></tr>
+                                            <tr><td>C</td><td>Hydrazine + salt</td><td>Splits only C rings</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <p>Although efficient for short runs, Maxam-Gilbert sequencing uses hazardous chemicals (hydrazine, piperidine) and is not practical for high-throughput applications. It has largely been replaced by the dideoxy chain termination method.</p>
+
+                            <h4>Dideoxy (Sanger) Sequencing</h4>
+                            <p>Dideoxy chain termination sequencing is a modification of the DNA replication process. A short, synthetic single-stranded DNA primer complementary to sequences just $5^{\prime}$ to the region of interest is used to prime the reaction.</p>
+                            
+                            <p>The key to this method is the use of <strong>dideoxynucleotides (ddNTPs)</strong>. Unlike normal deoxynucleotides (dNTPs) which have a $3^{\prime}$ hydroxyl group necessary for chain extension, ddNTPs lack this hydroxyl group. Incorporation of a ddNTP into the growing DNA chain prevents the formation of a phosphodiester bond with the next nucleotide, thus terminating the chain.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-6073dd08.jpeg" alt="Chain Termination Mechanism" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 10-6 DNA replication (left) is terminated by the absence of the $3^{\prime}$ hydroxyl group on the dideoxyguanosine nucleotide (ddG, right). The resulting fragment ends in ddG.</figcaption>
+                            </figure>
+
+                            <p>In manual Sanger sequencing, four separate reactions are set up. Each contains the template, primer, DNA polymerase, and all four dNTPs. A different ddNTP (ddATP, ddCTP, ddGTP, or ddTTP) is added to each of the four tubes. The ratio of ddNTP to dNTP is critical; it must be low enough to allow some extension but high enough to generate a population of fragments terminated at every possible position.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-052fec4a.jpeg" alt="Manual Dideoxy Sequencing Schematic" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 10-4 Manual dideoxy sequencing requires a single-stranded template and a primer. The sequence is determined by extension of the primer in the presence of dideoxynucleotides.</figcaption>
+                            </figure>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-a16f8014.jpeg" alt="Sequencing Reactions" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 10-7 Components required for DNA synthesis are mixed with a different ddNTP in each of four tubes. The newly synthesized strands terminate at each opportunity to incorporate a ddNTP, creating a sequencing ladder.</figcaption>
+                            </figure>
+
+                            <p>The reaction products are separated on a denaturing polyacrylamide gel. The "sequencing ladder" is read from the bottom (smallest fragments, $5^{\prime}$ end) to the top (largest fragments, $3^{\prime}$ end).</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-ba3794ad.jpeg" alt="Reading a Sequencing Gel" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 10-8 A sequencing ladder is read from the bottom to the top. In this example, the smallest fragment is in lane A, so the sequence begins with A. The next is in G, then C, reading AGC...</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Automated Sequencing -->
+                    <section class="content-section" id="automated-sequencing">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">💻</span>
+                                Automated Fluorescent Sequencing
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Automated sequencing uses fluorescent dyes to label the DNA fragments, allowing all four reactions to be run in a single lane (or capillary) and read by a laser detector. The output is an <strong>electropherogram</strong>, where peaks of different colors represent the four nucleotides.</p>
+
+                            <h3>Approaches</h3>
+                            <p>There are two main chemistries for automated sequencing:</p>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Dye Primer Sequencing:</strong> The primer is labeled with four different fluorescent dyes (one for each reaction tube). Four separate reactions are performed, then pooled and run together.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Dye Terminator Sequencing:</strong> The ddNTPs themselves are labeled with different fluorescent dyes. All four reactions can be performed in a <strong>single tube</strong>. This is the most common method today.</span>
+                                </li>
+                            </ol>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-0f6d6ea6.jpeg" alt="Dye Primer vs Dye Terminator" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 10-10 Fluorescent sequencing chemistries. (A) Dye primer sequencing uses labeled primers. (B) Dye terminator sequencing uses labeled dideoxynucleotides, allowing a single reaction tube.</figcaption>
+                            </figure>
+
+                            <p>Fragments migrate through a gel or capillary. Capillary electrophoresis is faster and provides better resolution. The instrument reads the fluorescence as fragments pass the detector.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-3fd1b2d6.jpeg" alt="Capillary Electrophoresis Sequencing" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 10-9 Instead of four gel lanes (left), fluorescent fragments can be run in a single capillary (right). The sequence is read by color.</figcaption>
+                            </figure>
+
+                            <div class="callout callout--warning">
+                                <div class="callout-header">
+                                    <span class="callout-icon">⚠️</span>
+                                    <h4 class="callout-title">Sequence Quality</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The quality of the electropherogram depends on the template quality and the cleanup of the reaction. "Dye blobs" (excess dye terminators) can obscure the sequence. A clean baseline with distinct, non-overlapping peaks indicates a good sequence.</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251222-4f179884.jpeg" alt="Dye Blob Example" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                                <span class="overlay-text">Click to enlarge</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 10-11 Electropherogram showing a dye blob at positions 9-15.</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251222-21d2ffc3.jpeg" alt="Good vs Poor Sequence" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                                <span class="overlay-text">Click to enlarge</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 10-12 Examples of good sequence quality (left) vs. poor quality (right).</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Pyrosequencing -->
+                    <section class="content-section" id="pyrosequencing">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔥</span>
+                                Pyrosequencing
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Pyrosequencing determines DNA sequence without making a sequencing ladder. It relies on the generation of light (luminescence) when nucleotides are added to a growing strand of DNA. It is useful for short-read sequencing and SNP detection.</p>
+                            
+                            <p><strong>Mechanism:</strong></p>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker">1</span>
+                                    <span class="list-content">Nucleotides (dNTPs) are added sequentially. If complementary, polymerase adds the base, releasing pyrophosphate (PPi).</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">2</span>
+                                    <span class="list-content">Sulfurylase converts PPi to ATP.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">3</span>
+                                    <span class="list-content">Luciferase uses ATP to convert luciferin to oxyluciferin, emitting light.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">4</span>
+                                    <span class="list-content">Apyrase degrades excess nucleotides before the next addition.</span>
+                                </li>
+                            </ol>
+
+                            <div class="equation">
+                                $$(\text{DNA})_n + \text{dNTP} \xrightarrow{\text{Polymerase}} (\text{DNA})_{n+1} + \text{PPi}$$
+                                $$\text{PPi} + \text{APS} \xrightarrow{\text{Sulfurylase}} \text{ATP} + \text{Sulfate}$$
+                                $$\text{Luciferin} + \text{ATP} \xrightarrow{\text{Luciferase}} \text{Oxyluciferin} + \text{Light}$$
+                            </div>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-663f7295.jpeg" alt="Pyrosequencing Diagram" class="figure-image"> <!-- Placeholder for Pyrosequencing mechanism image, using the one found near the text in source -->
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 10-15 Pyrosequencing mechanism. The release of pyrophosphate (PPi) triggers a cascade producing light. The amount of light is proportional to the number of nucleotides incorporated.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Bisulfite Sequencing -->
+                    <section class="content-section" id="bisulfite-sequencing">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧪</span>
+                                Bisulfite DNA Sequencing
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Bisulfite sequencing is used to detect methylated nucleotides. Methylation of cytosine residues (CpG islands) is an important epigenetic regulation mechanism. In this method, DNA is treated with bisulfite, which deaminates cytosine, converting it to uracil. However, <strong>5-methyl cytosine</strong> is resistant to this modification and remains as cytosine.</p>
+                            
+                            <p>After PCR amplification (where uracils are converted to thymines), the sequence is compared to the original. Unmethylated cytosines appear as thymines, while methylated cytosines remain as cytosines.</p>
+
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📝</span>
+                                    <h4 class="callout-title">Example</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p><strong>Original:</strong> ...GTC<span style="color:red">Me</span>AGC<span style="color:red">Me</span>TATCTATC<span style="color:red">Me</span>GTGCA...</p>
+                                    <p><strong>Bisulfite Treated:</strong> ...GTC<span style="color:red">Me</span>AGC<span style="color:red">Me</span>TATUTATC<span style="color:red">Me</span>GTGUA...</p>
+                                    <p><strong>After PCR/Sequencing:</strong> Methylated C stays C; Unmethylated C becomes T.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Bioinformatics -->
+                    <section class="content-section" id="bioinformatics">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">💻</span>
+                                Bioinformatics
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Bioinformatics is the merger of biology with information technology. It involves the storage, organization, and analysis of large amounts of biological data (in silico analysis).</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-title">Common Bioinformatics Terms</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Term</th>
+                                                <th>Definition</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td><strong>GenBank</strong></td><td>Genetic sequence database sponsored by NIH.</td></tr>
+                                            <tr><td><strong>BLAST</strong></td><td>Basic Local Alignment Search Tool; compares input sequence with database.</td></tr>
+                                            <tr><td><strong>Alignment</strong></td><td>Lining up sequences to search for identity or homology.</td></tr>
+                                            <tr><td><strong>Consensus Sequence</strong></td><td>A sequence derived from alignment of related sequences, showing the most frequent base at each position.</td></tr>
+                                            <tr><td><strong>Contig</strong></td><td>A set of overlapping DNA segments that together represent a consensus region of DNA.</td></tr>
+                                            <tr><td><strong>Query</strong></td><td>The sequence presented for comparison.</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Human Genome Project -->
+                    <section class="content-section" id="human-genome-project">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🌍</span>
+                                The Human Genome Project
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The Human Genome Project (HGP) was a massive international effort to sequence the entire human genome. It officially began in 1990 and a rough draft was completed in 2000. Two competing approaches were used:</p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Hierarchical Shotgun Sequencing (NIH):</strong> Start with known regions (BAC clones), map them, and then sequence small fragments. Systematic and orderly.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Whole-Genome Shotgun Sequencing (Celera):</strong> Shred the entire genome into small fragments, sequence them randomly, and use powerful computers to assemble the overlaps. Faster but computationally demanding.</span>
+                                </li>
+                            </ul>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <div class="grid grid-2">
+                                        <img src="../assets/images/image-20251222-7770eb86.jpeg" alt="Hierarchical Shotgun" class="figure-image">
+                                        <img src="../assets/images/image-20251222-42de2a76.jpeg" alt="Whole-genome Shotgun" class="figure-image">
+                                    </div>
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 10-17 Comparison of Hierarchical (left) vs Whole-genome (right) shotgun sequencing strategies.</figcaption>
+                            </figure>
+
+                            <p><strong>Key Findings:</strong></p>
+                            <ul>
+                                <li>The human genome contains ~2.9 billion base pairs.</li>
+                                <li>There are only ~20,000–25,000 protein-coding genes (much fewer than expected).</li>
+                                <li>Less than 2% of the genome codes for protein.</li>
+                                <li>Over 50% of the genome consists of repeated sequences.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Key Points -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Sanger sequencing uses dideoxynucleotides (ddNTPs) to terminate DNA chain extension at specific bases.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Automated sequencing utilizes fluorescent dyes (dye primer or dye terminator) to allow single-lane or capillary detection.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Pyrosequencing detects light generated by pyrophosphate release during nucleotide incorporation.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Bisulfite sequencing allows for the detection of methylated cytosines in epigenetic analysis.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Bioinformatics tools (BLAST, GenBank) are essential for analyzing and storing sequence data.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <!-- Study Questions -->
+                    <section class="content-section" id="study-questions">
+                        <div class="section-header">
+                            <div class="section-number">?</div>
+                            <h2 class="section-title">Study Questions</h2>
+                        </div>
+                        <div class="content-card">
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Read 5′ to 3′ the first 20 bases of the sequence in the gel on the right in Figure 10-8.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">After an automated dye primer sequencing run, the electropherogram displays consecutive peaks of the following colors: red, red, black, green, green, blue, black, red, green, black, blue, blue, blue. If green=A, blue=C, black=G, red=T, what is the sequence?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">In a manual sequencing reaction, the DNA ladder is very bright at the bottom but faint at the top. What is the most likely cause and how might it be corrected?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">A sequence, TTGCTGCGCTAAA, may be methylated. After bisulfite sequencing, the results are: Treated: TTGCTGTGCTAAA; Untreated: TTGCTGCGCTAAA. Write the sequence showing methylated cytosines as $C^{m}$.</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="chapter-09-gene-mutations.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="chapter-11-polymorphisms.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 62.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 10 of 16</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

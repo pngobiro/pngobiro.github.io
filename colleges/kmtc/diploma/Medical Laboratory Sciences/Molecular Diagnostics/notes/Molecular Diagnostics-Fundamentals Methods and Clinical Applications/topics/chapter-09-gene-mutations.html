@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Gene Mutations - Molecular Diagnostics</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <!-- Floating Table of Contents -->
+        <nav class="floating-toc" id="floating-toc">
+            <div class="floating-toc-header">
+                <span>📑</span> Table of Contents
+            </div>
+            <ul class="floating-toc-list">
+                <!-- Links will be populated by JS -->
+            </ul>
+        </nav>
+
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="chapter-08-chromosomes.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="chapter-10-sequencing.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 56.25%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 9 of 16</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🧬</span>
+                        <span>Topic 09</span>
+                    </div>
+                    <h1 class="document-title">Gene Mutations</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Common Techniques in Molecular Biology</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>55 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Introduction -->
+                    <section class="content-section" id="introduction">
+                        <p>Gene mutations include deletions, insertions, inversions, translocations, and other changes that can affect one base pair to hundreds or thousands of base pairs. Alterations of a single or a few base pairs, or <strong>point mutations</strong>, will have a range of effects on protein sequence and phenotype. Detection of these mutations requires specialized molecular methods, as they are often too small to be seen by karyotyping.</p>
+                    </section>
+
+                    <!-- Types of Mutations -->
+                    <section class="content-section" id="types">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔄</span>
+                                Types of Gene Mutations
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Because the genetic code is redundant, DNA sequence changes do not necessarily change the amino acid sequence.</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-title">Table 9.1 Types of Point Mutations</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Type</th>
+                                                <th>Description</th>
+                                                <th>Example Effect</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Silent</strong></td>
+                                                <td>Nucleotide change does not alter amino acid.</td>
+                                                <td>No phenotype change.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Conservative</strong></td>
+                                                <td>Amino acid changes, but to one with similar biochemical properties.</td>
+                                                <td>Function may not be significantly affected (e.g., Leu $\to$ Val).</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Nonconservative</strong></td>
+                                                <td>Amino acid changes to one with different properties.</td>
+                                                <td>Biochemical nature changes (e.g., Pro $\to$ Gln).</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Nonsense</strong></td>
+                                                <td>Nucleotide substitution produces a stop codon.</td>
+                                                <td>Premature termination of protein.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Frameshift</strong></td>
+                                                <td>Insertion/deletion of non-triplet nucleotides.</td>
+                                                <td>Shifts triplet reading frame; often leads to premature stop.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Hybridization-Based Methods -->
+                    <section class="content-section" id="hybridization-methods">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧬</span>
+                                Hybridization-Based Methods
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Single-Strand Conformation Polymorphism (SSCP)</h3>
+                            <p>SSCP is based on the preference of single-stranded DNA to fold into a specific three-dimensional shape (conformer) determined by its sequence. A single base difference can cause the conformer to fold differently, altering its migration speed in a non-denaturing polyacrylamide gel.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-f4ec317e.jpeg" alt="SSCP Diagram" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 9-1 SSCP Analysis. Denatured single strands form conformers. Mutant sequences fold differently and migrate at different speeds than normal sequences.</figcaption>
+                            </figure>
+
+                            <h3>Denaturing Gradient Gel Electrophoresis (DGGE)</h3>
+                            <p>DGGE exploits differences in denaturation (melting) between normal and mutant DNA helices. Double-stranded DNA fragments are separated on a polyacrylamide gel containing a gradient of denaturants (urea and formamide). As the fragment moves into higher denaturant concentration, it begins to melt. A single nucleotide difference changes the melting behavior, shifting the band position.</p>
+                            
+                            <p><strong>Variations:</strong></p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>CDGE:</strong> Constant Denaturant Gel Electrophoresis (constant concentration).</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>TTGE:</strong> Temporal Temperature Gradient Gel Electrophoresis (temperature increases over time).</span>
+                                </li>
+                            </ul>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <div class="grid grid-2">
+                                        <img src="../assets/images/image-20251222-41d370cf.jpeg" alt="Perpendicular DGGE" class="figure-image">
+                                        <img src="../assets/images/image-20251222-421477c6.jpeg" alt="Parallel DGGE" class="figure-image">
+                                    </div>
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 9-2 DGGE formats. Perpendicular (left) establishes melting curve; Parallel (right) separates mutants.</figcaption>
+                            </figure>
+
+                            <h3>Allele-Specific Oligomer Hybridization (ASO)</h3>
+                            <p>ASO uses short probes (oligomers) that bind only to perfectly matched sequences under stringent conditions. A probe for the normal sequence will not bind to a mutant sequence, and vice versa. This is often performed as a dot blot or reverse dot blot.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-aacf1658.jpeg" alt="ASO Dot Blot" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 9-3 ASO Hybridization. Specific probes discriminate between normal (+), homozygous mutant (m/m), and heterozygous (m/+) samples.</figcaption>
+                            </figure>
+
+                            <h3>Melt Curve Analysis (MCA)</h3>
+                            <p>Used post-PCR with fluorescent dyes (like SYBR Green). The temperature is raised, and the point at which the DNA denatures ($T_m$) is monitored. Sequence differences result in different $T_m$ peaks. <strong>High Resolution Melt (HRM)</strong> analysis offers greater sensitivity.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-321156a2.jpeg" alt="Melt Curve Analysis" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 9-5 Melt curve analysis distinguishes homozygous mutant, heterozygous, and normal products by their dissociation temperatures.</figcaption>
+                            </figure>
+
+                            <h3>Array Technology</h3>
+                            <p><strong>High-density oligonucleotide arrays</strong> use thousands of probes to screen for mutations or single nucleotide polymorphisms (SNPs). <strong>Bead arrays</strong> use color-coded beads with specific probes for high-throughput analysis.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-715ca15d.jpeg" alt="Array Analysis" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 9-11 Mutation analysis using high-density arrays. Sequence is determined by which specific probe (sense or antisense) binds the target.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Sequencing-Based Methods -->
+                    <section class="content-section" id="sequencing-methods">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧪</span>
+                                Polymerization-Based Methods
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Sequence-Specific PCR (SSP-PCR)</h3>
+                            <p>Primers are designed such that the $3^{\prime}$ end matches the specific allele (normal or mutant). Extension occurs only if the $3^{\prime}$ end is perfectly matched. Also known as Amplification Refractory Mutation System (ARMS).</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-fa105717.jpeg" alt="SSP-PCR Principle" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 9-12 Sequence-specific primer amplification. Extension fails if the 3' end does not match.</figcaption>
+                            </figure>
+
+                            <h3>Allelic Discrimination</h3>
+                            <p>Uses fluorescently labeled probes (e.g., TaqMan) specific for each allele in a real-time PCR reaction. Different fluorophores (e.g., FAM and VIC) indicate which allele is present.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-cb0ee1b2.jpeg" alt="Allelic Discrimination" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 9-16 Allelic discrimination using fluorogenic probes. High signal from one dye indicates homozygosity; both signals indicate heterozygosity.</figcaption>
+                            </figure>
+
+                            <h3>Protein Truncation Test (PTT)</h3>
+                            <p>Detects nonsense or frameshift mutations that cause premature stop codons. The gene region is amplified, transcribed, and translated in vitro. The resulting protein is analyzed by gel electrophoresis; smaller proteins indicate a truncation mutation.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-aae1cafb.jpeg" alt="Protein Truncation Test" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 9-20 PTT detects shortened protein products caused by frameshift or nonsense mutations.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Cleavage Methods -->
+                    <section class="content-section" id="cleavage-methods">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">✂️</span>
+                                Cleavage Methods
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>PCR-RFLP</h3>
+                            <p>Amplifies a region containing a potential mutation that alters a restriction enzyme site. Digestion of the amplicon reveals the mutation by changing the band pattern.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-54381f50.jpeg" alt="PCR-RFLP" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 9-21 PCR-RFLP. A mutation creates or destroys a restriction site, altering fragment sizes.</figcaption>
+                            </figure>
+
+                            <h3>Invader Assay</h3>
+                            <p>Uses a proprietary enzyme (Cleavase) that recognizes a specific structure formed by the overlap of two probes (Invader and Signal) on the target. Cleavage releases a flap that triggers a secondary reaction producing fluorescence. It does not require PCR amplification.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-b56c8af4.jpeg" alt="Invader Assay" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 9-26 Invader assay mechanism involving structure-specific cleavage.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Nomenclature -->
+                    <section class="content-section" id="nomenclature">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📝</span>
+                                Gene Mutation Nomenclature
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Standard nomenclature describes mutations consistently. Prefixes indicate the reference sequence: <strong>g.</strong> (genomic), <strong>c.</strong> (coding DNA), <strong>p.</strong> (protein), <strong>r.</strong> (RNA).</p>
+
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">DNA Nomenclature</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p><strong>Position +1:</strong> The A of the ATG initiation codon.</p>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><strong>Substitution:</strong> $76A>T$ (A at position 76 changed to T)</li>
+                                        <li class="list-item"><strong>Deletion:</strong> $76delA$ or $76\_78delACT$</li>
+                                        <li class="list-item"><strong>Insertion:</strong> $76\_77insG$</li>
+                                        <li class="list-item"><strong>Intron:</strong> $IVS2+1G>A$ (First base of intron 2 changed G to A)</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">🧬</span>
+                                    <h4 class="callout-title">Protein Nomenclature</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Uses single or three-letter amino acid codes.</p>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><strong>Substitution:</strong> $R506Q$ (Arginine at 506 changed to Glutamine)</li>
+                                        <li class="list-item"><strong>Nonsense:</strong> $W32X$ (Tryptophan at 32 changed to Stop)</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Key Points -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Mutations range from single nucleotide polymorphisms (SNPs) to large structural changes.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Hybridization methods (SSCP, DGGE, ASO) exploit differences in binding or folding stability caused by sequence changes.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Sequencing methods (SSP-PCR, Pyrosequencing, Dye Terminator) directly determine the identity of the nucleotide.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Cleavage methods (RFLP, Invader) use enzymes that recognize specific structures or sequences altered by mutations.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Standardized nomenclature is essential for accurately reporting and communicating genetic variations.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <!-- Study Questions -->
+                    <section class="content-section" id="study-questions">
+                        <div class="section-header">
+                            <div class="section-number">?</div>
+                            <h2 class="section-title">Study Questions</h2>
+                        </div>
+                        <div class="content-card">
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Name three assays by which the factor V Leiden R506Q mutation can be detected.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">What is the phenotypic consequence of changing a codon sequence from TCT to TCC?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Which of the following methods would be practical to use to screen a large gene for mutations?<br>
+                                    a. SSP-PCR<br>
+                                    b. SSCP<br>
+                                    c. PCR-RFLP<br>
+                                    d. DGGE<br>
+                                    e. FP-TDI</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Express the following mutation using accepted nomenclature: An A to G substitution at position 1691 in the coding DNA.</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="chapter-08-chromosomes.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="chapter-10-sequencing.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 56.25%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 9 of 16</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

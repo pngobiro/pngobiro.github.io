@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Nucleic Acid Amplification - Molecular Diagnostics</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <!-- Floating Table of Contents -->
+        <nav class="floating-toc" id="floating-toc">
+            <div class="floating-toc-header">
+                <span>📑</span> Table of Contents
+            </div>
+            <ul class="floating-toc-list">
+                <!-- Links will be populated by JS -->
+            </ul>
+        </nav>
+
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="chapter-06-analysis.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="chapter-08-chromosomes.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 43.75%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 7 of 16</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🧬</span>
+                        <span>Topic 07</span>
+                    </div>
+                    <h1 class="document-title">Nucleic Acid Amplification</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Common Techniques in Molecular Biology</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>60 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Introduction -->
+                    <section class="content-section" id="introduction">
+                        <p>The ability to amplify a specific DNA sequence opened the possibility to analyze at the nucleotide level virtually any piece of DNA in nature. The first specific amplification method was the polymerase chain reaction (PCR). Other methods have been developed based on modifications of PCR. These methods can be divided into three groups based on what is amplified: the <strong>target</strong> nucleic acid itself, a <strong>probe</strong> specific for the target, or the <strong>signal</strong> used to detect the target.</p>
+                    </section>
+
+                    <!-- Target Amplification -->
+                    <section class="content-section" id="target-amplification">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🎯</span>
+                                Target Amplification
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Polymerase Chain Reaction (PCR)</h3>
+                            <p>Target amplification involves making millions of copies of a target sequence so it can be detected in vitro. PCR, conceived by Kary Mullis in 1983, essentially duplicates the in vivo replication of DNA in a test tube.</p>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📜</span>
+                                    <h4 class="callout-title">Historical Highlight</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Kary Mullis conceived PCR while driving in California. He realized that by using two oligonucleotides, DNA polymerase, and nucleoside triphosphates, he could double a DNA target repeatedly. "I confirmed that two to the tenth power was about a thousand... and that two to the thirtieth power was around a billion... Once I had cycled this reaction thirty times I would be able to [copy] the sequence of a sample with an immense signal and almost no background."</p>
+                                </div>
+                            </div>
+
+                            <h4>Basic Procedure</h4>
+                            <p>PCR requires specific components to replicate DNA in vitro (Table 7.1). The process consists of cycles of three steps: denaturation, annealing, and extension.</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-title">Table 7.1 Components of a Typical PCR Reaction</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Component</th>
+                                                <th>Purpose</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Primers</td><td>Directs synthesis to the desired region</td></tr>
+                                            <tr><td>dNTPs (dATP, dCTP, dGTP, dTTP)</td><td>Building blocks that extend the primers</td></tr>
+                                            <tr><td>KCl</td><td>Monovalent cation for optimal hybridization</td></tr>
+                                            <tr><td>Tris Buffer (pH 8.4)</td><td>Maintains optimal pH</td></tr>
+                                            <tr><td>$\text{MgCl}_2$</td><td>Divalent cation required by the polymerase</td></tr>
+                                            <tr><td>Polymerase (Taq)</td><td>Extends the primers</td></tr>
+                                            <tr><td>Template DNA</td><td>Sample to be copied</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">🔄</span>
+                                    <span class="table-title">Table 7.2 Elements of a PCR Cycle</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Step</th>
+                                                <th>Temperature</th>
+                                                <th>Time</th>
+                                                <th>Activity</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr><td>Denaturation</td><td>$90\text{–}96^\circ\text{C}$</td><td>20–60 sec</td><td>dsDNA separates into ssDNA</td></tr>
+                                            <tr><td>Annealing</td><td>$50\text{–}70^\circ\text{C}$</td><td>20–90 sec</td><td>Primers hybridize to specific sequences</td></tr>
+                                            <tr><td>Extension</td><td>$68\text{–}75^\circ\text{C}$</td><td>10–60 sec</td><td>Polymerase synthesizes new DNA strands</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-19ef4e4c.jpeg" alt="PCR Overview" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 7-1 PCR Overview: Primers flank the target region, and polymerase extends them to create copies.</figcaption>
+                            </figure>
+
+                            <h4>Reaction Components</h4>
+                            <p><strong>Primers:</strong> Single-stranded DNA fragments (20–30 bases) that determine the specificity of the PCR. They must flank the region to be amplified. Forward primers bind to the antisense strand, and reverse primers bind to the sense strand.</p>
+                            
+                            <p><strong>DNA Polymerase:</strong> <em>Taq</em> polymerase, isolated from the thermophile <em>Thermus aquaticus</em>, is heat-stable and survives the denaturation steps. It extends primers in the $5' \rightarrow 3'$ direction.</p>
+                            
+                            <p><strong>Buffer:</strong> Contains magnesium ($Mg^{2+}$), which is critical for enzyme activity and primer annealing. Too little $Mg^{2+}$ lowers yield; too much increases nonspecific products.</p>
+
+                            <h4>Controls and Contamination</h4>
+                            <p>Contamination is a major concern. "Amplicon carryover" from previous reactions can cause false positives. Controls are essential:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Positive Control:</strong> Ensures reagents and cycler are working.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Negative Control (No Template):</strong> Checks for contamination.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Amplification Control (Internal):</strong> Detects inhibitors in the sample (avoids false negatives).</span>
+                                </li>
+                            </ul>
+
+                            <p><strong>Contamination Control:</strong></p>
+                            <ul>
+                                <li>Physical separation of Pre-PCR and Post-PCR areas.</li>
+                                <li><strong>dUTP-UNG System:</strong> Use dUTP instead of dTTP in the mix. Treat with Uracil-N-Glycosylase (UNG) before cycling to degrade any uracil-containing DNA (contaminants from previous runs).</li>
+                                <li><strong>Hot-Start PCR:</strong> Prevents mispriming at room temperature by sequestering the polymerase (e.g., via antibody or wax barrier) until the first heat denaturation step.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- PCR Modifications -->
+                    <section class="content-section" id="pcr-modifications">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧬</span>
+                                PCR Modifications
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Multiplex PCR</h3>
+                            <p>Simultaneous amplification of multiple targets using multiple primer pairs in a single reaction. Used for pathogen typing and forensic identification.</p>
+
+                            <h3>Reverse Transcriptase PCR (RT-PCR)</h3>
+                            <p>Amplifies RNA targets (e.g., HIV, HCV). Reverse transcriptase (RT) converts RNA to cDNA, which is then amplified by PCR. Can be one-step (RT and PCR in same tube) or two-step.</p>
+
+                            <h3>Nested PCR</h3>
+                            <p>Increases sensitivity and specificity. Two rounds of PCR are performed. The second pair of primers binds inside the region amplified by the first pair.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-500d341a.jpeg" alt="Nested PCR" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 7-14 Nested PCR. The second round amplification targets a sequence within the first product.</figcaption>
+                            </figure>
+
+                            <h3>Real-Time (Quantitative) PCR (qPCR)</h3>
+                            <p>Monitors the accumulation of PCR products as they are made (in real time), allowing for accurate quantitation of the starting template. Analysis is done during the exponential phase.</p>
+
+                            <p><strong>Threshold Cycle ($C_T$):</strong> The cycle number at which the fluorescent signal crosses a set threshold. $C_T$ is inversely proportional to the amount of starting template.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-3dbeaf21.jpeg" alt="Real Time PCR Curve" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 7-15 Real-time PCR amplification plot. High template loads (solid line) cross the threshold at earlier cycles (lower $C_T$) than low loads.</figcaption>
+                            </figure>
+
+                            <h4>Detection Systems for qPCR</h4>
+                            
+                            <p><strong>1. SYBR Green:</strong> A dye that binds specificially to double-stranded DNA. It fluoresces when bound. Non-specific (binds any dsDNA).</p>
+                            
+                            <p><strong>2. TaqMan (Hydrolysis Probes):</strong> A probe with a $5'$ reporter dye and $3'$ quencher. When intact, the quencher stops the reporter from fluorescing. During extension, the $5' \rightarrow 3'$ exonuclease activity of <em>Taq</em> digests the probe, releasing the reporter.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-08adcdd8.jpeg" alt="TaqMan Probe" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 7-17 TaqMan probe structure with Reporter (R) and Quencher (Q).</figcaption>
+                            </figure>
+
+                            <p><strong>3. Molecular Beacons:</strong> Hairpin probes with a reporter and quencher. When bound to the target, the hairpin opens, separating R and Q, causing fluorescence.</p>
+
+                            <p><strong>4. FRET Probes:</strong> Two probes bind adjacent to each other. Energy transfers from a donor fluorophore on one probe to an acceptor on the other, causing fluorescence.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-734e608a.jpeg" alt="FRET Probes" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 7-22 FRET probes generate signal when Donor (D) and Reporter (R) are brought close together by binding to the target.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Transcription-Based Amplification -->
+                    <section class="content-section" id="transcription-based">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔄</span>
+                                Transcription-Based Amplification
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Systems like <strong>NASBA</strong> (Nucleic Acid Sequence-Based Amplification) and <strong>TMA</strong> (Transcription-Mediated Amplification) amplify RNA targets isothermally (at one temperature). They use Reverse Transcriptase to make a cDNA copy with a promoter sequence, and T7 RNA Polymerase to transcribe millions of RNA copies from that cDNA.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-fe65adcc.jpeg" alt="NASBA Mechanism" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 7-25 NASBA/TMA mechanism. RNA polymerase transcribes multiple RNA copies from the cDNA template, which then serve as new templates.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Probe Amplification -->
+                    <section class="content-section" id="probe-amplification">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔍</span>
+                                Probe Amplification
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>These methods amplify the probe molecule itself rather than the target.</p>
+                            
+                            <p><strong>Ligase Chain Reaction (LCR):</strong> Uses two pairs of probes that cover the target sequence. If they match perfectly, Ligase joins them. The ligated probes become templates for more probes.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-9059e36d.jpeg" alt="LCR Mechanism" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 7-26 Ligase Chain Reaction. Ligated probes are amplified.</figcaption>
+                            </figure>
+
+                            <p><strong>Strand Displacement Amplification (SDA):</strong> An isothermal process using a restriction enzyme and a DNA polymerase. The polymerase displaces the downstream strand while extending a nick created by the restriction enzyme.</p>
+
+                            <p><strong>Q$\beta$ Replicase:</strong> Uses an RNA-dependent RNA polymerase from bacteriophage Q$\beta$ to replicate a specific probe sequence bound to the target.</p>
+                        </div>
+                    </section>
+
+                    <!-- Signal Amplification -->
+                    <section class="content-section" id="signal-amplification">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📡</span>
+                                Signal Amplification
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>These methods increase the signal strength without increasing the number of target molecules. Useful for quantification.</p>
+
+                            <p><strong>Branched DNA (bDNA):</strong> Uses a series of hybridization probes (capture, extender, and amplifier probes). The "Christmas tree" structure of the amplifier probe binds many alkaline phosphatase molecules, generating a strong signal.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-c7b68195.jpeg" alt="Branched DNA" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 7-30 Branched DNA (bDNA) amplification. Amplifier probes create a scaffold for multiple reporter molecules.</figcaption>
+                            </figure>
+
+                            <p><strong>Hybrid Capture:</strong> RNA probes bind to DNA targets. The RNA:DNA hybrids are captured by antibodies and detected with chemiluminescence.</p>
+
+                            <p><strong>Cycling Probe:</strong> Uses a DNA-RNA-DNA probe. When bound to a DNA target, RNase H cuts the RNA part, releasing the fragments and allowing new probe to bind.</p>
+                        </div>
+                    </section>
+
+                    <!-- Key Points -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>PCR amplifies specific DNA sequences using denaturation, annealing, and extension cycles with a thermostable polymerase.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Real-time PCR (qPCR) quantifies target DNA by detecting fluorescence during the exponential phase of amplification.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Transcription-based methods (NASBA, TMA) amplify RNA isothermally using reverse transcriptase and RNA polymerase.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Signal amplification methods (bDNA, Hybrid Capture) amplify the detection signal rather than the target sequence, making them excellent for quantification.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Contamination control (physical separation, dUTP-UNG) is critical in amplification laboratories to prevent false positives.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <!-- Study Questions -->
+                    <section class="content-section" id="study-questions">
+                        <div class="section-header">
+                            <div class="section-number">?</div>
+                            <h2 class="section-title">Study Questions</h2>
+                        </div>
+                        <div class="content-card">
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">The final concentration of Taq polymerase is to be 0.01 units/µL in a 50 µL PCR. If the enzyme is supplied as 5 units/µL, how much enzyme would you add to the reaction?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Primer dimers result from:<br>
+                                    a. High primer concentrations<br>
+                                    b. Low primer concentrations<br>
+                                    c. High GC content in the primer sequences<br>
+                                    d. 3′ complementarity in the primer sequences</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Which control is run to detect contamination?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">How many copies of a target are made after 30 cycles of PCR?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">In real-time PCR, fluorescence is not generated by which of the following?<br>
+                                    a. FRET probes<br>
+                                    b. TaqMan probes<br>
+                                    c. SYBR green<br>
+                                    d. Tth polymerase</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="chapter-06-analysis.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="chapter-08-chromosomes.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 43.75%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 7 of 16</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>
