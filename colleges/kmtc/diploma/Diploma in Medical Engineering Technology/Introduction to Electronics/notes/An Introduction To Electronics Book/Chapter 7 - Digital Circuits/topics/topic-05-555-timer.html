@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>555 Timer IC - Digital Circuits Study Guide</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-04-finite-state-machines.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-06-schmitt-trigger.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 62.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 5 of 8</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>⏱️</span>
+                        <span>Topic 05</span>
+                    </div>
+                    <h1 class="document-title">555 Timer IC</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Integrated Circuits</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>12 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📘</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The 555 timer IC is an integrated circuit (chip) used in a variety of timer, pulse generation, and oscillator applications. The 555 can be used to provide time delays, as an oscillator, and as a flip-flop element. Derivatives provide up to four timing circuits in one package.</p>
+                            
+                            <p>Introduced in 1971 by Signetics, the 555 is still in widespread use due to its ease of use, low price, and stability. It is now made by many companies in the original bipolar and also in low-power CMOS types. As of 2003, it was estimated that 1 billion units are manufactured every year.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Design -->
+                    <section class="content-section" id="design">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Design
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-c2a9082d.jpeg" alt="Internal schematic of 555 timer" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Internal schematic (Bipolar version)</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-f464635f.jpeg" alt="Internal schematic CMOS version" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Internal schematic (CMOS version)</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <p>The IC was designed in 1971 by Hans Camenzind under contract to Signetics, which was later acquired by Philips (now NXP).</p>
+                            
+                            <p>Depending on the manufacturer, the standard 555 package includes 25 transistors, 2 diodes and 15 resistors on a silicon chip installed in an 8-pin mini dual-in-line package (DIP-8). Variants available include the 556 (a 14-pin DIP combining two 555s on one chip), and the two 558 & 559s (both a 16-pin DIP combining four slightly modified 555s with DIS & THR connected internally, and TR is falling edge sensitive instead of level sensitive).</p>
+                            
+                            <p>The NE555 parts were commercial temperature range, $0^{\circ}\mathrm{C}$ to $+70^{\circ}\mathrm{C}$, and the SE555 part number designated the military temperature range, $-55^{\circ}\mathrm{C}$ to $+125^{\circ}\mathrm{C}$. These were available in both high-reliability metal can (T package) and inexpensive epoxy plastic (V package) packages. It has been hypothesized that the 555 got its name from the three 5 kΩ resistors used within, but Hans Camenzind has stated that the number was arbitrary.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-cce97ed8.jpeg" alt="555 Pinout Diagram" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Pinout diagram for DIP package</figcaption>
+                            </figure>
+
+                            <p>Low-power versions of the 555 are also available, such as the 7555 and CMOS TLC555. The 7555 is designed to cause less supply noise than the classic 555 and the manufacturer claims that it usually does not require a "control" capacitor and in many cases does not require a decoupling capacitor on the power supply. Those parts should generally be included, however, because noise produced by the timer or variation in power supply voltage might interfere with other parts of a circuit or influence its threshold voltages.</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📋</span>
+                                    <span class="table-title">Pin Definitions</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Pin</th>
+                                                <th>Name</th>
+                                                <th>Purpose</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>GND</td>
+                                                <td>Ground reference voltage, low level (0 V)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2</td>
+                                                <td>TRIG</td>
+                                                <td>The OUT pin goes high and a timing interval starts when this input falls below 1/3 VCC.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3</td>
+                                                <td>OUT</td>
+                                                <td>This output is driven to approximately 1.7 V below +VCC or GND.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4</td>
+                                                <td>RESET</td>
+                                                <td>A timing interval may be reset by driving this input to GND, but the timing does not begin again until RESET rises above approximately 0.7 V. Overrides TRIG which overrides THR.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>CTRL</td>
+                                                <td>Provides "control" access to the internal voltage divider (by default, 2/3 VCC).</td>
+                                            </tr>
+                                            <tr>
+                                                <td>6</td>
+                                                <td>THR</td>
+                                                <td>The timing (OUT high) interval ends when the voltage at THR is greater than the control voltage (2/3 VCC).</td>
+                                            </tr>
+                                            <tr>
+                                                <td>7</td>
+                                                <td>DIS</td>
+                                                <td>Open collector output which may discharge a capacitor between intervals. In phase with output.</td>
+                                            </tr>
+                                            <tr>
+                                                <td>8</td>
+                                                <td>VCC</td>
+                                                <td>Positive supply voltage, which is usually between 3 and 15 V depending on the variation.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">ℹ️</span>
+                                    <h4 class="callout-title">Control Voltage</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Pin 5 is also sometimes called the CONTROL VOLTAGE pin. By applying a voltage to the CONTROL VOLTAGE input one can alter the timing characteristics of the device. In most applications, the CONTROL VOLTAGE input is not used. It is usual to connect a 10 nF capacitor between pin 5 and 0 V to prevent interference. The CONTROL VOLTAGE input can be used to build an astable multivibrator with a frequency modulated output.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Modes -->
+                    <section class="content-section" id="modes">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚙️</span>
+                                Operating Modes
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The 555 has three operating modes:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Monostable mode:</strong> In this mode, the 555 functions as a "one-shot" pulse generator. Applications include timers, missing pulse detection, bounce-free switches, touch switches, frequency divider, capacitance measurement, pulse-width modulation (PWM) and so on.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Astable (free-running) mode:</strong> The 555 can operate as an oscillator. Uses include LED and lamp flashers, pulse generation, logic clocks, tone generation, security alarms, pulse position modulation and so on. The 555 can be used as a simple ADC, converting an analog value to a pulse length. E.g. selecting a thermistor as timing resistor allows the use of the 555 in a temperature sensor: the period of the output pulse is determined by the temperature.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Bistable mode or Schmitt trigger:</strong> The 555 can operate as a flip-flop, if the DIS pin is not connected and no capacitor is used. Uses include bounce-free latched switches.</span>
+                                </li>
+                            </ul>
+
+                            <hr>
+
+                            <h3>Monostable Mode</h3>
+                            <p>In the monostable mode, the 555 timer acts as a "one-shot" pulse generator. The pulse begins when the 555 timer receives a signal at the trigger input that falls below a third of the voltage supply. The width of the output pulse is determined by the time constant of an RC network, which consists of a capacitor (C) and a resistor (R). The output pulse ends when the voltage on the capacitor equals $2/3$ of the supply voltage. The output pulse width can be lengthened or shortened to the need of the specific application by adjusting the values of R and C.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-121b53a9.jpeg" alt="Schematic of a 555 in monostable mode" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Schematic of a 555 in monostable mode</figcaption>
+                            </figure>
+
+                            <p>The output pulse width of time $t$, which is the time it takes to charge C to 2/3 of the supply voltage, is given by:</p>
+                            
+                            <div class="equation">
+                                $$t = R C \ln (3) \approx 1.1 R C$$
+                            </div>
+                            
+                            <p>where $t$ is in seconds, $R$ is in ohms (resistance) and $C$ is in farads (capacitance).</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-373f95dc.jpeg" alt="Monostable waveforms" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">The relationships of the trigger signal, the voltage on $C$ and the pulse width in monostable mode</figcaption>
+                            </figure>
+
+                            <div class="callout callout--warning">
+                                <div class="callout-header">
+                                    <span class="callout-icon">⚠️</span>
+                                    <h4 class="callout-title">Timing Constraint</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>While using the timer IC in monostable mode, the main disadvantage is that the time span between any two triggering pulses must be greater than the RC time constant.</p>
+                                </div>
+                            </div>
+
+                            <hr>
+
+                            <h3>Bistable Mode (Schmitt Trigger)</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-7c098657.jpeg" alt="Schematic of a 555 in bistable mode" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Schematic of a 555 in bistable mode</figcaption>
+                            </figure>
+
+                            <p>In bistable mode, the 555 timer acts as a basic flip-flop. The trigger and reset inputs (pins 2 and 4 respectively on a 555) are held high via pull-up resistors while the threshold input (pin 6) is simply floating. Thus configured, pulling the trigger momentarily to ground acts as a 'set' and transitions the output pin (pin 3) to Vcc (high state). Pulling the reset input to ground acts as a 'reset' and transitions the output pin to ground (low state). No timing capacitors are required in a bistable configuration. Pin 5 (control voltage) is connected to ground via a small-value capacitor (usually 0.01 to $0.1\mathrm{uF}$); pin 7 (discharge) is left floating.</p>
+
+                            <hr>
+
+                            <h3>Astable Mode</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-6ad2fbf4.jpeg" alt="Standard 555 astable circuit" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Standard 555 astable circuit</figcaption>
+                            </figure>
+
+                            <p>In astable mode, the 555 timer puts out a continuous stream of rectangular pulses having a specified frequency. Resistor $\mathbf{R}_1$ is connected between VCC and the discharge pin (pin 7) and another resistor $(\mathbf{R}_2)$ is connected between the discharge pin (pin 7), and the trigger (pin 2) and threshold (pin 6) pins that share a common node. Hence the capacitor is charged through $\mathbf{R}_1$ and $\mathbf{R}_2$, and discharged only through $\mathbf{R}_2$, since pin 7 has low impedance to ground during output low intervals of the cycle.</p>
+                            
+                            <p>In the astable mode, the frequency of the pulse stream depends on the values of $\mathbf{R}_1$, $\mathbf{R}_2$ and $\mathbf{C}$:</p>
+                            
+                            <div class="equation">
+                                $$f = \frac {1}{\ln (2) \cdot C \cdot \left(R _ {1} + 2 R _ {2}\right)}$$
+                            </div>
+
+                            <p>The high time from each pulse is given by:</p>
+                            <div class="equation">
+                                $$\operatorname {high} = \ln (2) \cdot \left(R _ {1} + R _ {2}\right) \cdot C$$
+                            </div>
+
+                            <p>and the low time from each pulse is given by:</p>
+                            <div class="equation">
+                                $$\operatorname {low} = \ln (2) \cdot R _ {2} \cdot C$$
+                            </div>
+                            
+                            <p>where $\mathbf{R}_1$ and $\mathbf{R}_2$ are the values of the resistors in ohms and C is the value of the capacitor in farads.</p>
+
+                            <div class="callout callout--warning">
+                                <div class="callout-header">
+                                    <span class="callout-icon">⚡</span>
+                                    <h4 class="callout-title">Power Capability</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The power capability of $\mathbf{R}_1$ must be greater than $\frac{V_{cc}^2}{R_1}$.</p>
+                                    <p>Particularly with bipolar 555s, low values of $R_{1}$ must be avoided so that the output stays saturated near zero volts during discharge. Otherwise the output low time will be greater than calculated.</p>
+                                </div>
+                            </div>
+
+                            <h4>Duty Cycle Adjustment</h4>
+                            <p>To achieve a duty cycle of less than 50% a small diode (that is fast enough for the application) can be placed in parallel with R₂, with the cathode on the capacitor side. This bypasses R₂ during the high part of the cycle so that the high interval depends approximately only on R₁ and C.</p>
+                            
+                            <p>With a diode, the high time is:</p>
+                            <div class="equation">
+                                $$\operatorname {high} = R _ {1} C \cdot \ln \left(\frac {2 V _ {\mathrm {c c}} - 3 V _ {\mathrm {d i o d e}}}{V _ {\mathrm {c c}} - 3 V _ {\mathrm {d i o d e}}}\right)$$
+                            </div>
+                            
+                            <p>where $V_{diode}$ is the voltage drop across the diode. The equation reduces to the expected $0.693 R_1C$ if $V_{diode} = 0$.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Derivatives -->
+                    <section class="content-section" id="derivatives">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧬</span>
+                                Derivatives
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Many pin-compatible variants, including CMOS versions, have been built by various companies. Bigger packages also exist with two or four timers on the same chip.</p>
+
+                            <div class="grid grid-3">
+                                <div class="grid-item">
+                                    <h4>556 Dual Timer</h4>
+                                    <p>The dual version is called 556. It features two complete 555s in a 14 pin DIL package.</p>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>558 Quad Timer</h4>
+                                    <p>The quad version is called 558 and has 16 pins. To fit four 555s into a 16 pin package the power, control voltage, and reset lines are shared by all four modules. Each module's discharge and threshold circuits are wired together internally.</p>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>XTR650/651</h4>
+                                    <p>Extended functionality hirel hitemp (-60°C to 250+ °C). This version includes non-overlapped complementary outputs, coarse temperature sensor and on-chip 200pF timing capacitance.</p>
+                                </div>
+                            </div>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-63934f3b.jpeg" alt="Die of a 556 dual timer" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Die of a 556 dual timer manufactured by STMicroelectronics.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Applications -->
+                    <section class="content-section" id="applications">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🕹️</span>
+                                Example Applications
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Joystick interface circuit using the 558 quad timer</h3>
+                            <p>The Apple II microcomputer used a quad timer 558 in monostable (or "one-shot") mode to interface up to four "game paddles" or two joysticks to the host computer. It also used a single 555 for flashing the display cursor.</p>
+                            
+                            <p>A similar circuit was used in the IBM PC. In the joystick interface circuit of the IBM PC, the capacitor (C) of the RC network was generally a 10 nF capacitor. The resistor (R) of the RC network consisted of the potentiometer inside the joystick along with an external resistor of 2.2 kilohms. The joystick potentiometer acted as a variable resistor. By moving the joystick, the resistance of the joystick increased from a small value up to about 100 kilohms. The joystick operated at 5 V.</p>
+                            
+                            <p>Software running in the host computer started the process of determining the joystick position by writing to a special address (ISA bus I/O address 201h). This would result in a trigger signal to the quad timer, which would cause the capacitor (C) of the RC network to begin charging and cause the quad timer to output a pulse. The width of the pulse was determined by how long it took the C to charge up to 2/3 of 5 V, which was in turn determined by the joystick position. The software then measured the pulse width to determine the joystick position. A wide pulse represented the full-right joystick position, for example, while a narrow pulse represented the full-left joystick position.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 6: See Also & References -->
+                    <section class="content-section" id="references">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📚</span>
+                                References & Further Reading
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>See Also</h4>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">Counter</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">OpAmp</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">Oscillator</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">RC circuit</span></li>
+                                    </ul>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>IC Datasheets</h4>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">NE555, Single Bipolar Timer, Texas Instruments</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">NE556, Dual Bipolar Timer, Texas Instruments</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">NE558, Quad Bipolar Timer, NXP</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">LMC555, Single CMOS Timer, Texas Instruments</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">ICM755x, Single / Dual CMOS Timer, Intersil</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Key Points Summary -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>The 555 timer IC is used in a variety of timer, pulse generation, and oscillator applications.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Three operating modes: Monostable (one-shot), Astable (oscillator), and Bistable (flip-flop).</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Monostable pulse width: $t \approx 1.1 RC$.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Astable frequency: $f = \frac{1}{\ln(2) \cdot C \cdot (R_1 + 2R_2)}$.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Available in Bipolar (NE555) and low-power CMOS (TLC555, 7555) versions.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-04-finite-state-machines.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-06-schmitt-trigger.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 62.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 5 of 8</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop" data-close-lightbox></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" data-close-lightbox aria-label="Close image viewer">&times;</button>
+            <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

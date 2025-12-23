@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shift Register - Digital Circuits Study Guide</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-06-schmitt-trigger.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-08-flip-flop.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 87.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 7 of 8</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>➡️</span>
+                        <span>Topic 07</span>
+                    </div>
+                    <h1 class="document-title">Shift Register</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Sequential Logic</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>8 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">💡</span>
+                                Overview
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>In digital circuits, a shift register is a cascade of flip flops, sharing the same clock, in which the output of each flip-flop is connected to the "data" input of the next flip-flop in the chain, resulting in a circuit that shifts by one position the "bit array" stored in it, shifting in the data present at its input and shifting out the last bit in the array, at each transition of the clock input.</p>
+                            
+                            <p>More generally, a shift register may be multidimensional, such that its "data in" and stage outputs are themselves bit arrays: this is implemented simply by running several shift registers of the same bit-length in parallel.</p>
+                            
+                            <p>Shift registers can have both parallel and serial inputs and outputs. These are often configured as 'serial-in, parallel-out' (SIPO) or as 'parallel-in, serial-out' (PISO). There are also types that have both serial and parallel input and types with serial and parallel output. There are also 'bidirectional' shift registers which allow shifting in both directions: $\mathrm{L} \rightarrow \mathrm{R}$ or $\mathrm{R} \rightarrow \mathrm{L}$. The serial input and last output of a shift register can also be connected to create a 'circular shift register'.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: SISO -->
+                    <section class="content-section" id="siso">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">〰️</span>
+                                Serial-in and serial-out (SISO)
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Destructive readout</h3>
+                            <p>These are the simplest kind of shift registers. The data string is presented at 'Data In', and is shifted right one stage each time 'Data Advance' is brought high. At each advance, the bit on the far left (i.e. 'Data In') is shifted into the first flip-flop's output. The bit on the far right (i.e. 'Data Out') is shifted out and lost.</p>
+                            
+                            <p>The data are stored after each flip-flop on the 'Q' output, so there are four storage 'slots' available in this arrangement, hence it is a 4-bit Register. To give an idea of the shifting pattern, imagine that the register holds 0000 (so all storage slots are empty). As 'Data In' presents 1,0,1,1,0,0,0,0 (in that order, with a pulse at 'Data Advance' each time—this is called clocking or strobing) to the register, this is the result. The left hand column corresponds to the left-most flip-flop's output pin, and so on.</p>
+                            
+                            <p>So the serial output of the entire register is 10110000. It can be seen that if data were to be continued to input, it would get exactly what was put in, but offset by four 'Data Advance' cycles. This arrangement is the hardware equivalent of a queue. Also, at any time, the whole register can be set to zero by bringing the reset (R) pins high.</p>
+                            
+                            <div class="callout callout--warning">
+                                <div class="callout-header">
+                                    <span class="callout-icon">⚠️</span>
+                                    <h4 class="callout-title">Destructive Readout</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>This arrangement performs destructive readout - each datum is lost once it has been shifted out of the right-most bit.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: SIPO -->
+                    <section class="content-section" id="sipo">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⤵️</span>
+                                Serial-in, parallel-out (SIPO)
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-8038eee4.jpeg" alt="SIPO Shift Register" class="figure-image">
+                                </div>
+                            </figure>
+
+                            <p>This configuration allows conversion from serial to parallel format. Data is input serially, as described in the SISO section above. Once the data has been clocked in, it may be either read off at each output simultaneously, or it can be shifted out and replaced.</p>
+                            
+                            <p>In cases where the parallel outputs should not change during the serial loading process, it is desirable to use a latched or buffered output. In a latched shift register (such as the 74595) the serial data is first loaded into an internal buffer register, then upon receipt of a load signal the state of the buffer register is copied into a set of output registers. In general, the practical application of the serial-in/parallel-out shift register is to convert data from serial format on a single wire to parallel format on multiple wires.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: PISO -->
+                    <section class="content-section" id="piso">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⤴️</span>
+                                Parallel-in, Serial-out (PISO)
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>This configuration has the data input on lines D1 through D4 in parallel format, being D1 the MSB. To write the data to the register, the Write/Shift control line must be held LOW. To shift the data, the W/S control line is brought HIGH and the registers are clocked. The arrangement now acts as a SISO shift register, with D1 as the Data Input. However, as long as number of clock cycles is not more than the length of the data-string, the Data Output, Q, will be the parallel data read off in order.</p>
+                            
+                            <p>The animation below shows the write/shift sequence, including the internal state of the shift register.</p>
+                            
+                            <!-- Note: Source mentions animation "below", presenting available images -->
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-399bea45.jpeg" alt="4-Bit PISO Shift Register" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">4-Bit PISO Shift Register</figcaption>
+                            </figure>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-4e024215.jpeg" alt="Shift Register Operation" class="figure-image">
+                                </div>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Uses -->
+                    <section class="content-section" id="uses">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🛠️</span>
+                                Uses
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>One of the most common uses of a shift register is to convert between serial and parallel interfaces. This is useful as many circuits work on groups of bits in parallel, but serial interfaces are simpler to construct. Shift registers can be used as simple delay circuits. Several bidirectional shift registers could also be connected in parallel for a hardware implementation of a stack.</p>
+                            
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>SIPO Registers</h4>
+                                    <p>SIPO registers are commonly attached to the output of microprocessors when more General Purpose Input/Output pins are required than are available. This allows several binary devices to be controlled using only two or three pins, but slower than parallel I/O - the devices in question are attached to the parallel outputs of the shift register, then the desired state of all those devices can be sent out of the microprocessor using a single serial connection.</p>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>PISO Registers</h4>
+                                    <p>Similarly, PISO configurations are commonly used to add more binary inputs to a microprocessor than are available - each binary input (i.e. a button or more complicated circuitry) is attached to a parallel input of the shift register, then the data is sent back via serial to the microprocessor using several fewer lines than originally required.</p>
+                                </div>
+                            </div>
+                            
+                            <p>Shift registers can also be used as pulse extenders. Compared to monostable multivibrators, the timing has no dependency on component values, however it requires external clock and the timing accuracy is limited by a granularity of this clock. Example: Ronja Twister, where five 74164 shift registers create the core of the timing logic this way (schematic).</p>
+                            
+                            <p>In early computers, shift registers were used to handle data processing: two numbers to be added were stored in two shift registers and clocked out into an arithmetic and logic unit (ALU) with the result being fed back to the input of one of the shift registers (the accumulator) which was one bit longer since binary addition can only result in an answer that is the same size or one bit longer.</p>
+                            
+                            <p>Many computer languages include instructions to 'shift right' and 'shift left' the data in a register, effectively dividing by two or multiplying by two for each place shifted.</p>
+                            
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💾</span>
+                                    <h4 class="callout-title">Historical Use</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Very large serial-in serial-out shift registers (thousands of bits in size) were used in a similar manner to the earlier delay line memory in some devices built in the early 1970s. Such memories were sometimes called circulating memory. For example, the Datapoint 3300 terminal stored its display of 25 rows of 72 columns of uppercase characters using fifty-four 200-bit shift registers, arranged in six tracks of nine packs each, providing storage for 1800 six-bit characters. The shift register design meant that scrolling the terminal display could be accomplished by simply pausing the display output to skip one line of characters.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 6: History -->
+                    <section class="content-section" id="history">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📜</span>
+                                History
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>One of the first known examples of a shift register was in the Colossus, a code-breaking machine of the 1940s. It was a five-stage device built of vacuum tubes and thyratrons. A shift register was also used in the IAS machine, built by John von Neumann and others at the Institute for Advanced Study in the late 1940s.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 7: References -->
+                    <section class="content-section" id="references">
+                        <div class="section-header">
+                            <div class="section-number">07</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔗</span>
+                                See Also & References
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>See Also</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Delay line memory</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Linear feedback shift register (LFSR)</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Ring counter</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Serial Peripheral Interface Bus</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Shift register lookup table (SRL)</span></li>
+                            </ul>
+
+                            <h3>References</h3>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">bitsavers.org, DataPoint 3300 Maintenance Manual, December 1976.</span></li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- Key Points Summary -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>A shift register is a cascade of flip flops, sharing the same clock, in which the output of each flip-flop is connected to the "data" input of the next.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Main configurations include Serial-in/Serial-out (SISO), Serial-in/Parallel-out (SIPO), and Parallel-in/Serial-out (PISO).</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>One of the most common uses of a shift register is to convert between serial and parallel interfaces.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>SISO registers perform destructive readout - each datum is lost once it has been shifted out of the right-most bit.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-06-schmitt-trigger.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-08-flip-flop.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 87.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 7 of 8</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop" data-close-lightbox></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" data-close-lightbox aria-label="Close image viewer">&times;</button>
+            <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>
