@@ -1,0 +1,549 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lines and Lettering - Engineering Drawing</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Inline styles for specific tab customization if needed -->
+    <style>
+        .tabs-container {
+            margin: var(--space-6) 0;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2);
+        }
+        .tabs-header {
+            display: flex;
+            gap: var(--space-2);
+            overflow-x: auto;
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .tab-btn {
+            padding: var(--space-3) var(--space-6);
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-medium);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+        .tab-btn:hover {
+            color: var(--color-primary);
+            background: var(--color-surface-hover);
+        }
+        .tab-btn.active {
+            background: var(--color-surface);
+            color: var(--color-primary);
+            box-shadow: var(--shadow-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+        .tab-content {
+            padding: var(--space-6);
+            display: none;
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-2);
+            animation: fadeIn var(--transition-base);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-02.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-04.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 23%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 13</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🖊️</span>
+                        <span>Topic 03</span>
+                    </div>
+                    <h1 class="document-title">Line & Lettering</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Module 1: Lines, lettering and scales</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>25 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Engineering Drawing Grammar
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Every language has its own rules of grammar. Engineering drawing also has certain rules.</p>
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Core Rules</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Rules of grammar: Lines, lettering, and dimensioning</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Line Conventions -->
+                    <section class="content-section" id="line-conventions">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📏</span>
+                                Line Conventions
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Different types of lines are used to represent different features of an object. Explore the types below:</p>
+
+                            <!-- Interactive Tabs for Line Types -->
+                            <div class="tabs-container">
+                                <div class="tabs-header" role="tablist">
+                                    <button class="tab-btn active" data-tab="outlines" role="tab" aria-selected="true">Outlines & Hidden</button>
+                                    <button class="tab-btn" data-tab="dimension" role="tab" aria-selected="false">Dimensioning</button>
+                                    <button class="tab-btn" data-tab="center" role="tab" aria-selected="false">Center & Cutting</button>
+                                </div>
+                                
+                                <div class="tabs-content">
+                                    <div class="tab-content active" id="outlines" role="tabpanel">
+                                        <h4>Visible Object Lines</h4>
+                                        <p>Lines drawn to represent visible edges and surface boundaries of objects are called outlines. These are <strong>continuous thick lines</strong>.</p>
+                                        
+                                        <h4>Hidden or Dotted Lines</h4>
+                                        <p>Interior or hidden edges and surfaces are shown by hidden lines. These are <strong>thin lines</strong>.</p>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="dimension" role="tabpanel">
+                                        <h4>Dimension Lines</h4>
+                                        <p>These are <strong>continuous thin lines</strong>. They are terminated at the outer ends by pointed arrowheads touching the extension lines.</p>
+                                        
+                                        <h4>Extension Lines</h4>
+                                        <p>Solid thin lines showing point or line to which dimension applies. They extend by about 3 mm beyond the dimension lines.</p>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="center" role="tabpanel">
+                                        <h4>Centre Line</h4>
+                                        <p>Centre lines are drawn to indicate the axes of cylindrical, conical object and also show the centre of circles and arcs.</p>
+                                        
+                                        <h4>Cutting-Plane and Viewing-Plane Lines</h4>
+                                        <p>Indicate location of cutting planes for sectional views and the viewing position for removed partial views.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3>Sketching Line Types Summary</h3>
+                            <div class="table-wrapper">
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Line Type</th>
+                                                <th>Thickness</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>VISIBLE OBJECT LINES</strong></td>
+                                                <td>THICK</td>
+                                                <td>Approx width: 0.6mm</td>
+                                            </tr>
+                                            <tr>
+                                                <td>HIDDEN LINE</td>
+                                                <td>THIN</td>
+                                                <td>Approx width: 0.3mm</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SECTION LINE</td>
+                                                <td>THIN</td>
+                                                <td>Hatching lines</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CENTERLINE</td>
+                                                <td>THIN</td>
+                                                <td>Long dash - short dash</td>
+                                            </tr>
+                                            <tr>
+                                                <td>DIMENSION & EXTENSION</td>
+                                                <td>THIN</td>
+                                                <td>Continuous thin</td>
+                                            </tr>
+                                            <tr>
+                                                <td>CUTTING-PLANE LINE</td>
+                                                <td>THICK</td>
+                                                <td>Long dash - two short dashes</td>
+                                            </tr>
+                                            <tr>
+                                                <td>BREAK LINE</td>
+                                                <td>THIN</td>
+                                                <td>Short/Long breaks (zig-zag)</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-cdf2ba92.jpeg" alt="Centerline Convention Examples" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Centerline Conventions</figcaption>
+                            </figure>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-dbfce745.jpeg" alt="Line Types Diagram" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Summary of Line Types</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Precedence & Practice -->
+                    <section class="content-section" id="line-practice">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚖️</span>
+                                Precedence & Practice
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Precedence of Lines</h3>
+                            <p>When lines coincide, there is a strict order of importance (Order of precedence):</p>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker">1</span>
+                                    <span class="list-content"><strong>Visible line</strong> (Highest priority)</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">2</span>
+                                    <span class="list-content">Hidden line</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">3</span>
+                                    <span class="list-content">Center line (Lowest priority)</span>
+                                </li>
+                            </ol>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-d42951f0.jpeg" alt="Precedence of lines example" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                            </figure>
+
+                            <h3>Hidden Line Practice</h3>
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Rule 1: Joining</h4>
+                                    <p>Hidden line should join a visible line, except when it extends from the visible line.</p>
+                                    <figure class="content-figure" style="margin: var(--space-4) 0;">
+                                        <img src="../assets/images/image-20251222-38795c29.jpeg" alt="Hidden line joining rule" class="figure-image">
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Rule 2: Corners</h4>
+                                    <p>Hidden lines should intersect to form L and T corners clearly.</p>
+                                    <figure class="content-figure" style="margin: var(--space-4) 0;">
+                                        <img src="../assets/images/image-20251222-7bc716b8.jpeg" alt="Hidden line corners rule" class="figure-image">
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Lettering -->
+                    <section class="content-section" id="lettering">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔤</span>
+                                Lettering
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Writing of titles, dimensions, notes and other important particulars on a drawing is called lettering. Lettering should be done properly in clear and uniform style.</p>
+                            
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">✍️</span>
+                                    <h4 class="callout-title">Single Stroke Letter</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The word "single stroke" should not be taken to mean that the letter should be made in one stroke without lifting the pencil. It actually means that the thickness of the line of the letter should be obtained in <strong>one stroke of the pencil</strong>.</p>
+                                </div>
+                            </div>
+
+                            <h3>General Letter Sizes</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Main titles:</strong> 6 to 8 mm</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Sub titles:</strong> 3 to 6 mm</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Notes/dimensions figures:</strong> 3 to 5 mm</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Space between letters:</strong> $H/5$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Space between words:</strong> $6H/5$</span>
+                                </li>
+                            </ul>
+
+                            <h3>Lettering Proportions</h3>
+                            <div class="table-wrapper">
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Characteristic</th>
+                                                <th>Ratio</th>
+                                                <th colspan="3">Dimensions (mm)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Lettering height ($h$)</td>
+                                                <td>$(10/10)h$</td>
+                                                <td>5</td>
+                                                <td>7</td>
+                                                <td>10</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Height of lower case ($c_1$)</td>
+                                                <td>$(7/10)h$</td>
+                                                <td>3.5</td>
+                                                <td>5</td>
+                                                <td>7</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Spacing between characters ($a$)</td>
+                                                <td>$(2/10)h$</td>
+                                                <td>1</td>
+                                                <td>1.4</td>
+                                                <td>2</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Min. spacing between baselines ($b_1$)</td>
+                                                <td>$(15/10)h$</td>
+                                                <td>7.5</td>
+                                                <td>10.5</td>
+                                                <td>15</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Line width ($d$)</td>
+                                                <td>$(1/10)h$</td>
+                                                <td>0.5</td>
+                                                <td>0.7</td>
+                                                <td>1</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-355b2a6f.jpeg" alt="Dimensions and Spacing of Letters" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Dimensions and Spacing of Letters</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Title Block -->
+                    <section class="content-section" id="title-block">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📋</span>
+                                Title Block Layout
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A standard title block layout typically includes the following fields:</p>
+                            <div class="table-wrapper">
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <tbody>
+                                            <tr>
+                                                <td>INSTITUTION NAME</td>
+                                                <td>DRAWING TITLE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>NAME</td>
+                                                <td>ROLL NO</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SEMESTER</td>
+                                                <td>DATE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>SCALE</td>
+                                                <td>DRG NO.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-2e03e24a.jpeg" alt="Title Block Example" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Standard Title Block Example</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-02.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-04.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 23%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 13</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+    <script src="../js/tabs.js"></script>
+</body>
+</html>

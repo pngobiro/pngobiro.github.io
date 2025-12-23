@@ -1,0 +1,473 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dimensioning Technique - Engineering Drawing</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+    
+    <!-- Tab Styles -->
+    <style>
+        .tabs-container {
+            margin: var(--space-6) 0;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2);
+        }
+        .tabs-header {
+            display: flex;
+            gap: var(--space-2);
+            overflow-x: auto;
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .tab-btn {
+            padding: var(--space-3) var(--space-6);
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-medium);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+        .tab-btn:hover {
+            color: var(--color-primary);
+            background: var(--color-surface-hover);
+        }
+        .tab-btn.active {
+            background: var(--color-surface);
+            color: var(--color-primary);
+            box-shadow: var(--shadow-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+        .tab-content {
+            padding: var(--space-6);
+            display: none;
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-2);
+            animation: fadeIn var(--transition-base);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-03.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-05.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 4 of 13</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>📏</span>
+                        <span>Topic 04</span>
+                    </div>
+                    <h1 class="document-title">Dimensioning Technique</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Module 2: Projections</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>15 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Definition & Elements
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p><strong>Dimensioning</strong> is a specification of the size and shape of a part or assembly. Every drawing showing the true shape of an object must supply its exact length, breadth, height, sizes and positions of holes, grooves etc. supplying this information on a drawing is called dimensioning.</p>
+                            
+                            <h3>Key Elements</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Dimension line:</strong> A thin continuous line terminated by arrowheads touching the outlines.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Extension line:</strong> A thin continuous line drawn in extension of an outline.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Arrowhead:</strong> Placed at each end of a dimension line. Its pointed end touches an outline or extension line. The size should be proportional to the thickness of the outline.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Leader:</strong> One end terminates in an arrowhead (touching outer line) or dot (within outer line). The other end terminates in a horizontal line. Drawn at an angle not less than $30^{\circ}$.
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-7eb73cc3.jpeg" alt="Proportions of an Arrow Head" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Proportions of an Arrow Head</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Systems of Dimensioning -->
+                    <section class="content-section" id="systems">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔄</span>
+                                Systems of Dimensioning
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>There are two primary systems for placing dimensions on a drawing.</p>
+
+                            <!-- Tabs for Systems -->
+                            <div class="tabs-container">
+                                <div class="tabs-header" role="tablist">
+                                    <button class="tab-btn active" data-tab="aligned" role="tab" aria-selected="true">Aligned System</button>
+                                    <button class="tab-btn" data-tab="unidirectional" role="tab" aria-selected="false">Unidirectional System</button>
+                                </div>
+                                
+                                <div class="tabs-content">
+                                    <div class="tab-content active" id="aligned" role="tabpanel">
+                                        <h4>Aligned Dimensioning System</h4>
+                                        <p>The dimension is placed perpendicular to the dimension line in such a way that it may be read from the <strong>bottom edge</strong> or the <strong>right hand edge</strong> of the drawing sheet. The dimension should be placed near the middle and above.</p>
+                                        <figure class="content-figure">
+                                            <img src="../assets/images/image-20251222-cfa1138f.jpeg" alt="Aligned Dimensioning System Example" class="figure-image">
+                                        </figure>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="unidirectional" role="tabpanel">
+                                        <h4>Unidirectional Dimensioning System</h4>
+                                        <p>In this system, all dimensions are so placed that they can be read from the <strong>bottom</strong> of the drawing sheet. The dimension lines are broken near the middle for inserting the dimensions. This system is mainly used for large drawings.</p>
+                                        <figure class="content-figure">
+                                            <img src="../assets/images/image-20251222-06d0bf08.jpeg" alt="Unidirectional Dimensioning System Example" class="figure-image">
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Arrangements & Specifics -->
+                    <section class="content-section" id="arrangements">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📑</span>
+                                Arrangements & Specifics
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Progressive or Parallel Dimensioning</h3>
+                            <p>All dimensions are shown from a common base line. Smaller dimensions should be placed nearer the view and larger further away so that extension lines do not cross dimension lines.</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-19c746e0.jpeg" alt="Parallel Dimensioning Example" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Parallel Dimensioning</figcaption>
+                            </figure>
+
+                            <hr>
+
+                            <h3>Specific Notations</h3>
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Square Sections</h4>
+                                    <p>Letter <strong>SQ</strong> should precede the dimension for a rod of square cross-section.</p>
+                                    <img src="../assets/images/image-20251222-7b8f4487.jpeg" alt="Square Section Dimensioning" class="figure-image" style="margin-top: 10px;">
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Spherical Parts</h4>
+                                    <p>The word <strong>SPHERE</strong> should be placed before the dimension of a spherical part.</p>
+                                    <img src="../assets/images/image-20251222-6b540d20.jpeg" alt="Spherical Part Dimensioning" class="figure-image" style="margin-top: 10px;">
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Symbols -->
+                    <section class="content-section" id="symbols">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔣</span>
+                                Standard Symbols
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="table-wrapper">
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Symbol</th>
+                                                <th>Abbreviation</th>
+                                                <th>Parameter</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>$\phi$</td>
+                                                <td>DIA</td>
+                                                <td>DIAMETER</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$S\phi$</td>
+                                                <td>SPHER DIA</td>
+                                                <td>SPHERICAL DIAMETER</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$R$</td>
+                                                <td>R</td>
+                                                <td>RADIUS</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$CR$</td>
+                                                <td>CR</td>
+                                                <td>CONTROLLED RADIUS</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$SR$</td>
+                                                <td>SR</td>
+                                                <td>SPHERICAL RADIUS</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$\cup$</td>
+                                                <td>CBORE</td>
+                                                <td>COUNTERBORE / SPOTFACE</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$\lor$</td>
+                                                <td>CSK</td>
+                                                <td>COUNTERSINK</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$\nabla$</td>
+                                                <td>DP</td>
+                                                <td>DEEP</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$\square$</td>
+                                                <td>SQ</td>
+                                                <td>SQUARE</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Circles & Arcs -->
+                    <section class="content-section" id="circles-arcs">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⭕</span>
+                                Circles & Arcs
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Dimensioning Circles</h3>
+                            <p>Various methods exist for dimensioning different sizes of circles.</p>
+                            <div class="grid grid-2">
+                                <figure class="content-figure">
+                                    <img src="../assets/images/image-20251222-fdf5499f.jpeg" alt="Dimensioning Circles Method 1" class="figure-image">
+                                </figure>
+                                <figure class="content-figure">
+                                    <img src="../assets/images/image-20251222-5377d6c3.jpeg" alt="Dimensioning Circles Method 2" class="figure-image">
+                                </figure>
+                            </div>
+
+                            <h3>Dimensioning Arcs</h3>
+                            <p>Dimension line for the radius should pass through the centre of the arc. Dimension an arc by its radius.</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-d6c8e93a.jpeg" alt="Arc Dimensioning" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Arc Dimensions</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Key Points -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">General Rules of Dimensioning</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Dimensioning should be done completely that further calculation of any dimension or direct measurement from the drawing is not necessary.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Dimension should be outside the view.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Dimension should be placed on the view where its use is shown more clearly.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Do not dimension to hidden lines.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Dimension lines should not cross any other line of the drawing.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>An outline or a centre line should never be used as a dimension line.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Aligned system of dimensioning is recommended.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-03.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-05.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 30%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 4 of 13</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+    <script src="../js/tabs.js"></script>
+</body>
+</html>
