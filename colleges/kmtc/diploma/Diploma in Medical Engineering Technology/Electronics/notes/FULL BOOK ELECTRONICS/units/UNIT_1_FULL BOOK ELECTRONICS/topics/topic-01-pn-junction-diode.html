@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P-N Junction Diode - Basic Electronics</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="#" class="nav-button nav-button--previous disabled" aria-disabled="true">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-02-zener-diode.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 1 of 5</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>⚡</span>
+                        <span>Topic 01</span>
+                    </div>
+                    <h1 class="document-title">P-N Junction Diode</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Semiconductor Physics & Devices</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>20 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Objectives Callout -->
+                    <div class="callout callout--note">
+                        <div class="callout-header">
+                            <span class="callout-icon">🎯</span>
+                            <h4 class="callout-title">Unit Objectives</h4>
+                        </div>
+                        <div class="callout-content">
+                            <p>In this Unit we will study semiconductor diode, the basic active component used in electronic circuits to control and rectify the current, and its applications.</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">To Study p-n junction diode, its characteristics, parameters, and approximations.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">To analyze DC load line and Temperature dependence of p-n diode characteristics, and AC equivalent circuits.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- 1.1 INTRODUCTION -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">1.1</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📖</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Electronics is the branch of Physics deals with the study of generation, motion, manipulation, control and detection of electrons in vacuum and semiconductors under applied electric or magnetic field. The branch is originated after invention of vacuum tube diode which is a two element electronic rectifying device by J. A. Fleming (U.K.) in the year 1904. In 1906, Lee De Forest added a third element, called the control grid, to the vacuum diode, resulting in the first amplifier, the triode. In the early 1930s the four-element tetrode and five-element pentode gained prominence in the electron-tube industry. The era of semiconductor electronics is started after invention of semiconductor diode in 1926, by L.O. Grondahl and P.H. Geiger (USA). They found rectifying properties in a (semiconducting) copper oxide-copper junction and by 1938 W. Schottky (Germany) developed a theoretical explanation for it. The p-n-diode finally was described by W. Schockley (USA) in 1949, even after J. Bardeen, W.H. Brattain and W. Schockley had invented the transistor in 1947.</p>
+                        </div>
+                    </section>
+
+                    <!-- 1.1.1 P-N Junction Diode -->
+                    <section class="content-section" id="pn-junction-diode">
+                        <div class="section-header">
+                            <div class="section-number">1.1.1</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚛️</span>
+                                P-N Junction Diode
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>P-type semiconductor can be fabricated by doping small amount of trivalent atoms to tetravalent materials like Silicon (Si) or Germanium (Ge). Similarly, N-type semiconductor can be fabricated by doping small amount of pentavalent atoms to Silicon or Germanium. Due to the process of doping, P-type semiconductor has more number of holes in valance band than number of electrons in conduction band and hence has holes as majority charge carriers. Similarly, N-type semiconductor has more number of electrons in conduction band than number of holes in valance band and hence has electrons as majority charge carriers. Thus a P-type semiconductor consists of positive charged holes as majority charge carriers, negative charged immobile impurity ions (acceptor ions) and neutral immobile Si atoms in its crystal structure. Similarly, an N-type semiconductor consists of negatively charged electrons as majority charge carriers, positively charged immobile impurity ions (donor ions) and neutral immobile Si atoms in its crystal structure. Additionally, due to the room temperature, P-type semiconductor has small amount of free electrons and N-type semiconductor has small amount of holes as minority charge carriers.</p>
+                        </div>
+                    </section>
+
+                    <!-- 1.1.2 Construction -->
+                    <section class="content-section" id="construction">
+                        <div class="section-header">
+                            <div class="section-number">1.1.2</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🏗️</span>
+                                Construction of P-N Junction Diode
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A P-N junction is formed by joining a piece of P-type semiconductor to a piece of N-type semiconductor such that the crystal structure remains continuous at the boundary as shown in Fig. 1.1. Such a device which has one P-N junction is called a semiconductor diode.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-80cc281c.jpeg" alt="P-N junction" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.1 P-N junction</figcaption>
+                            </figure>
+
+                            <p>It should be noted that a PN junction can not be formed by simply joining or welding the two pieces together, because it would produce a discontinuous crystal structure. Special fabrication techniques are used to prepare P-N junctions.</p>
+
+                            <p>While fabricating a P-N junction, the following processes takes place:</p>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">The holes from P-region diffuse to N-region, where they combine with free electrons.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">The free electrons from N-region diffuse to P-region, where they combine with the holes.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">The diffusion of holes (from P-region to N-region) and free electrons from N-region to P-region takes place due to the reason that there is a difference of concentrations in the two regions. This difference in concentration creates a concentration gradient across the junction. It results in the diffusion of mobile charge carriers across the junction. Moreover, the electrons and holes move at random in all directions due to thermal energy. In doing so, some carriers manage to cross over the junction.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">The diffusion of holes and free electrons across the junction takes place for a short time. After a few recombination of holes and free electrons in the vicinity of the junction, a retraining force is automatically set up. This force is produced due to depletion region, which exists on either side of the junction. As a result of this, further diffusion of holes and free electrons from one region to the other is stopped by this depletion layer. The formation of this depletion region is due to availability of uncovered negative acceptor ions in P-region and positive donor ions in N-region in the junction, as shown in Fig. 1.2. The additional holes trying to diffuse to the N-region are repelled by the uncovered positive charge of the donor ions. Similarly, the electrons trying to diffuse into P-region, are repelled by the uncovered negative charge of the acceptor ions. Hence, the further diffusion of free electrons and holes across the junction is stopped.</span>
+                                </li>
+                            </ol>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-3f2d0833.jpeg" alt="Formation of depletion region in PN junction" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.2 Formation of depletion region in PN junction</figcaption>
+                            </figure>
+
+                            <p>Thus the region containing the uncovered acceptor and uncovered donor ions in the vicinity of the P-N junction is called depletion region. Since the depletion region contains immobile ions, which are electrically charged, the depletion region is also called space-charge region. Due to the presence of only immobile ions, the depletion region behaves as insulator. This space-charge region establishes a potential difference across the junction (designated as $\mathrm{V_p}$), even when the junction is not connected across any external voltage source as shown in Fig. 1.3. This electric potential $(\mathrm{V_p})$ is called junction potential or barrier potential. At room temperature, the junction potential or barrier voltage is $0.7\mathrm{V}$ for Si diode and $0.3\mathrm{V}$ for Ge diode.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-7fdbfbc1.jpeg" alt="Junction potential or barrier voltage of a P-N junction diode" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.3 Junction potential or barrier voltage of a $P-N$ junction diode</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- 1.1.3 Biasing -->
+                    <section class="content-section" id="biasing">
+                        <div class="section-header">
+                            <div class="section-number">1.1.3</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔌</span>
+                                Biasing of P-N Junction Diode
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A P-N junction connected to an external voltage source is called a biased P-N junction. Such a P-N junction finds variety of applications in electronics. By applying an external voltage, the width of the depletion region and hence the current flowing through the P-N junction can be controlled.</p>
+
+                            <p>There are two ways of connecting the external voltage source across the P-N junction diode. They are :</p>
+
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Forward Bias:</strong> In forward bias, the positive terminal of external voltage source (battery) is connected to P-type region and the negative terminal of the voltage source is connected to N-type region of Diode as shown in Fig. 1.4. This configuration reduces the width of depletion region (which results reduced $\mathrm{V_p}$) and large amount of current flows through the junction. In practice, to forward bias a P-N junction and to conduct current, the external applied potential should be greater than barrier potential of the diode.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Reverse Bias:</strong> In reverse bias, the positive terminal of external voltage source (battery) is connected to N-type region and the negative terminal of the voltage source is connected to P-type region of Diode as shown in Fig. 1.5. This configuration increases the width of depletion region (which results increased $\mathrm{V_p}$) and no current flows through the junction. However, at room temperature, a small amount of current (in nano Amperes) flows through the reverse biased junction due to availability of minority charge carriers. This current is called reverse saturation current and is increases with increase in temperature.</span>
+                                </li>
+                            </ol>
+
+                            <div class="grid grid-2">
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-7e9e26e5.jpeg" alt="P-N junction with forward bias" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                            <span class="overlay-text">Click to enlarge</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">Figure 1.4 P-N junction with forward bias</figcaption>
+                                </figure>
+
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-92c75d8c.jpeg" alt="P-N junction with reverse bias" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                            <span class="overlay-text">Click to enlarge</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">Figure 1.5 P-N junction with reverse bias</figcaption>
+                                </figure>
+                            </div>
+
+                            <p>If we increase the reverse bias to a larger value by increasing the applied reverse voltage, the depletion region breakdown abruptly and large amount of reverse current starts flowing through the junction. The applied voltage at which such abrupt current flow occurs is known as break-down voltage $(\mathbf{V}_{\mathrm{bx}})$.</p>
+                        </div>
+                    </section>
+
+                    <!-- 1.1.4 Characteristics and Parameters -->
+                    <section class="content-section" id="characteristics">
+                        <div class="section-header">
+                            <div class="section-number">1.1.4</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📈</span>
+                                Characteristics and Parameters
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Diode Characteristics</h3>
+                            <p>Figure 1.6 shows the static voltage-current characteristics for a low-power P-N junction diode.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-f1976bfd.jpeg" alt="Voltage-current (V-I) characteristics for a P-N junction diode" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.6 Voltage-current (V-I) characteristics for a P-N junction diode</figcaption>
+                            </figure>
+
+                            <div class="collapsible-section">
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <strong>(i) Forward Characteristic</strong>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>When the diode is forward-biased and the applied voltage is increased from zero, hardly any current flows through the diode in the beginning. It is so because the external voltage is being opposed by the internal barrier voltage $V_{\mathrm{B}}$ whose value is $0.7\mathrm{V}$ for Si and $0.3\mathrm{V}$ for Ge. As soon as $V_{\mathrm{B}}$ is neutralized, current through the diode increases rapidly with increasing applied battery voltage. It is found that a small voltage of $1.0\mathrm{V}$ produces a forward current of about $50\mathrm{mA}$. The diode will burn and fail to function if forward voltage is increased beyond a certain safe limit. The forward voltage at which the current $I_{\mathrm{B}}$ starts to flow is called knee voltage or Cut-in voltage (or Cut-off voltage or off-set voltage).</p>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <strong>(ii) Reverse Characteristic</strong>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>When the diode is reverse-biased, majority carriers are blocked and only a small current (due to minority charge carriers) flows through the diode. As the reverse voltage increases from zero, the reverse current very quickly reaches its maximum or saturation value $\mathrm{I}_{\mathrm{C}}$, which is also known as leakage current or reverse saturation current. It is of the order of nanoamperes (nA) for Si and microamperes (μA) for Ge. As seen from Fig. 1.6, when reverse voltage exceeds a certain value called breakdown voltage $\mathrm{V}_{\mathrm{BR}}$, the leakage current suddenly and sharply increases. The curve indicates zero resistance at this point.</p>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <h3>Diode Parameters</h3>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(1) Bulk resistance $(\mathbf{r}_{\mathrm{B}})$:</strong> It is the resistance offered by the diode in forward direction above the knee voltage. Obviously, it is the sum of the resistance values of the $P$-type and N-type semiconductor materials of which the diode is made of.
+                                        <div class="equation">
+                                            $$\mathrm {r} _ {\mathrm {B}} = \mathrm {r} _ {\mathrm {F}} + \mathrm {r} _ {\mathrm {n}}$$
+                                        </div>
+                                        Usually, it is very small. It is given by
+                                        <div class="equation">
+                                            $$r _ {B} = \frac {V - V _ {B}}{I _ {F}}$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(2) Junction resistance $(\mathbf{r}_{\mathrm{j}})$:</strong> Its value for forward-biased junction depends on the magnitude of forward dc current. Obviously, it is a variable resistance.
+                                        <div class="equation">
+                                            $$\mathrm {r} _ {\mathrm {j}} = 2 5 \mathrm {m V} / \mathrm {I} _ {\mathrm {F}} \mathrm {m A} \quad \text {for Germanium diode}$$
+                                        </div>
+                                        <div class="equation">
+                                            $$\mathrm {r} _ {\mathrm {j}} = 5 0 \mathrm {m V / I _ {F} m A} \quad \text {for Silicon diode}$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(3) Dynamic or a.c. resistance:</strong>
+                                        <div class="equation">
+                                            $$\mathrm {r} _ {\mathrm {s c}} = \mathrm {r} _ {\mathrm {d}} = \mathrm {r} _ {\mathrm {B}} + \mathrm {r} _ {\mathrm {j}}$$
+                                        </div>
+                                        For large values of forward current, $\mathrm{I}_{\mathrm{F}}$, $\mathbf{r}_{\mathrm{j}}$ is negligible. Hence, $\mathbf{r}_{\mathrm{sc}} = \mathbf{r}_{\mathrm{B}}$.
+                                        For small values of $\mathrm{I}_{\mathrm{F}}$, $\mathbf{r}_{\mathrm{B}}$ is negligible as compared to $\mathbf{r}_{\mathrm{j}}$.
+                                        Therefore, $\mathbf{r}_{\mathrm{sc}} = \mathbf{r}_{\mathrm{j}}$
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(4) Forward voltage Drop:</strong> It is given by the relation
+                                        <div class="equation">
+                                            $$\text{forward voltage drop} = \frac{\text{power dissipated}}{\text{forward dc current}}$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(5) Reverse Saturation Current $(\mathbf{I}_{\mathrm{O}})$:</strong> When the P-N junction is reverse biased, at room temperature, a small amount of current (in nano Amperes) flows through the reverse biased junction due to availability of minority charge carriers. This current is called reverse saturation current and is increases with increase in temperature.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(6) Reverse Breakdown voltage $\mathbf{V}_{\mathrm{BR}}$:</strong> If we increase the reverse bias to a larger value by increasing the applied reverse voltage, then the depletion region breakdown abruptly and large amount of reverse current starts flowing through the junction. The applied voltage at which such abrupt current flow occurs is known as break-down voltage $(\mathbf{V}_{\mathrm{BR}})$.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(7) Reverse dc resistance $(\mathbf{R}_{\mathrm{R}})$:</strong>
+                                        <div class="equation">
+                                            $$R_{\mathrm{R}} = \frac{\text{reverse voltage}}{\text{reverse current}}$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(8) Equation of Diode current:</strong> The analytical equation which describes both the forward and reverse characteristics is called the Boltzmann's diode equation given by:
+                                        <div class="equation">
+                                            $$I = I_{\mathrm{O}} \left(e^{\frac{qV}{\eta kT}} - 1\right)$$
+                                        </div>
+                                        where,
+                                        <ul class="enhanced-list">
+                                            <li>I = The net current flowing through the diode</li>
+                                            <li>$I_{\mathrm{O}}$ = "Reverse saturation current", the diode leakage current density in the absence of light</li>
+                                            <li>V = Applied voltage across the terminals of the diode</li>
+                                            <li>q = Absolute value of electron charge</li>
+                                            <li>k = Boltzmann's constant; and</li>
+                                            <li>T = Absolute temperature (K)</li>
+                                        </ul>
+                                        $\eta$ = ideality factor, a number between 1 and 2 which typically increases as the current decreases. At low current, $\eta = 1$ for germanium diode and $\eta = 2$ for silicon diode.
+                                        
+                                        After simplification we can write,
+                                        <div class="equation">
+                                            $$I = I_{\mathrm{S}} \left(e^{40V} - 1\right)$$
+                                            $$= I_{\mathrm{S}} \left(e^{40V}\right) \quad \text{if } V > 1 \text{ volt} \quad \text{for germanium diode}$$
+                                        </div>
+                                        <div class="equation">
+                                            $$I = I_{0} \left(e^{20V} - 1\right)$$
+                                            $$= I_{0} \left(e^{20V}\right) \quad \text{if } V > 1 \text{ volt} \quad \text{for silicon diode}$$
+                                        </div>
+                                    </span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- 1.1.5 Diode Approximations -->
+                    <section class="content-section" id="approximations">
+                        <div class="section-header">
+                            <div class="section-number">1.1.5</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Diode Approximations
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>(1) First Approximation: Ideal Diode Model</h3>
+                            <p>An ideal diode acts like a perfect conductor (zero offset voltage) during forward bias and perfect insulator(zero diode current) during reverse bias. Hence it acts like a short circuited switch during forward bias and open circuited switch during reverse bias as shown in Fig. 1.7.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-5e3af11d.jpeg" alt="Ideal diode equivalent and its characteristics" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.7 (a) Ideal diode equivalent (b) its characteristics</figcaption>
+                            </figure>
+
+                            <h3>(2) Second Approximation: Based on Offset Voltage</h3>
+                            <p>In second approximation, the off-set voltage of the diode is taken into account. Usually this model is used when the source voltage is small. In this approximation, a practical diode (made of Si) is equated to an ideal diode in series with a battery of $0.7\mathrm{V}$, as shown in Fig. 1.8. If the source voltage is greater than $0.7\mathrm{V}$, the switch closes and the diode voltage is $0.7\mathrm{V}$. If the source voltage is less than $0.7\mathrm{V}$ or if the source voltage is negative, the switch is open.</p>
+
+                            <div class="grid grid-2">
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-58a32c5f.jpeg" alt="Switch and battery equivalent circuit" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                            <span class="overlay-text">Click to enlarge</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">Figure 1.8 (a) Switch and battery equivalent circuit</figcaption>
+                                </figure>
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-549f9f6c.jpeg" alt="Second approximation model" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                            <span class="overlay-text">Click to enlarge</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">Figure 1.8 (b) Second approximation model</figcaption>
+                                </figure>
+                            </div>
+
+                            <h3>(3) Third Approximation: Piece wise linear Model</h3>
+                            <p>The equivalent circuit for the third approximation is a switch in series with a battery of $0.7\mathrm{V}$ and a resistance of $\mathbb{R}_{\mathrm{B}}$ as shown in Fig. 1.9 (a). After the external circuit has overcome the barrier potential, the diode current produces an IR drop across the bulk resistance. Therefore, the total voltage across the silicon diode becomes, $\mathrm{V}_{\mathrm{F}} = 0.7 + \mathrm{I}_{\mathrm{F}}\cdot \mathrm{R}_{\mathrm{B}}$</p>
+
+                            <div class="grid grid-2">
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-e908b478.jpeg" alt="Piece wise linear equivalent circuit" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                            <span class="overlay-text">Click to enlarge</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">Figure 1.9 (a) Piece wise linear equivalent circuit</figcaption>
+                                </figure>
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-5462abec.jpeg" alt="Piece wise model of diode" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                            <span class="overlay-text">Click to enlarge</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">Figure 1.9 (b) Piece wise model of diode</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 1.1.6 DC Load Line -->
+                    <section class="content-section" id="dc-load-line">
+                        <div class="section-header">
+                            <div class="section-number">1.1.6</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📊</span>
+                                DC Load Line
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The load line is a tool used to find the exact value of diode current and voltage. To draw the DC load line for a diode, connect it as shown in Fig. 1.10. Here, $\mathrm{V}_{\mathrm{S}}$ is the source voltage, and $\mathrm{R}_{\mathrm{S}}$ is the current limiting resistor. The diode is forward biased and the voltage drop across it due to barrier potential is $\mathrm{V}_{\mathrm{B}}$ volts.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-75df68e0.jpeg" alt="Circuit for drawing DC load line" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.10 Circuit for drawing DC load line</figcaption>
+                            </figure>
+
+                            <p>The current flowing through the circuit is $\mathrm{I} = (\mathrm{V}_{\mathrm{S}} - \mathrm{V}_{\mathrm{B}}) / \mathrm{R}_{\mathrm{S}}$ ...(1.1)</p>
+                            <p>For example, if $\mathrm{V}_{\mathrm{S}} = 2 \mathrm{~V}$, and $\mathrm{R}_{\mathrm{S}} = 100 \Omega$, then $\mathrm{I} = (2 - \mathrm{V}_{\mathrm{B}}) / 100 = (2 - 0) / 100 = 20 \mathrm{~mA}$</p>
+                            <p>Plotting this graph $(\mathrm{V} = 0 \text{ volt}, \mathrm{I} = 20\mathrm{mA})$ gives the point on the vertical axis of Fig. 1.11. This point is called saturation point because it represents maximum current.</p>
+                            <p>Let $\mathrm{V_B} = 2\mathrm{V}$, then Eqn (1.1) becomes $\mathrm{I} = (2\mathrm{V} - 2\mathrm{V}) / 100\Omega = 0$.</p>
+                            <p>Plotting this plot $(\mathrm{V}_{\mathrm{B}} = 2\mathrm{V},\mathrm{I} = 0)$, gives the point on the horizontal axis of Fig. 1.11. This point is called cut-off point because it represents minimum current.</p>
+                            <p>By selecting other voltages, we can calculate and plot additional points. Because the Eqn. (1.1) represents a linear equation, all points will lie on the straight line as shown in Fig. 1.11. This straight line is called the DC load line.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-2e041118.jpeg" alt="DC load line and operating point" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.11 DC load line and operating point of $P-N$ junction diode</figcaption>
+                            </figure>
+
+                            <p>When we superimpose the diode characteristic curve on DC load line, the point of intersection is called Quiescent Point (Q-point) or operating point because it represents the voltage across the diode at a given current flow through the diode.</p>
+                            <p>In the Fig. 1.11, the current is maximum for $V = 0$, the Eqn. (1.1) gives $I = V_{S} / R_{S} \Rightarrow$ Saturation point of DC load line. Similarly, when $I = 0$, $V = V_{S} \Rightarrow$ Cut-off point of DC load line.</p>
+                        </div>
+                    </section>
+
+                    <!-- 1.1.7 Temperature Dependence -->
+                    <section class="content-section" id="temperature-dependence">
+                        <div class="section-header">
+                            <div class="section-number">1.1.7</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🌡️</span>
+                                Temperature Dependence of p-n Junction Characteristics
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The barrier voltage of a P-N junction depends upon three factors namely density, electronic charge and temperature. For a given PN junction, the first two factors are constant, thus making the value of barrier voltage $V_{\mathrm{B}}$ dependent only on temperature. It has been observed that for both germanium and silicon, the value of $V_{\mathrm{B}}$ decreases by $2\mathrm{mV} / {}^{\circ}\mathrm{C}$. Mathematically, the decrease in barrier voltage, $\Delta V_{\mathrm{B}} = -0.002\times \Delta t$, where $\Delta t$ is the increase in temperature in $^\circ \mathrm{C}$.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-35431fd9.jpeg" alt="Effect of temperature on the diode characteristic" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.12 Effect of temperature on the diode characteristic</figcaption>
+                            </figure>
+
+                            <p>As shown in Fig. 1.12, in the reverse bias region, the breakdown voltage $(\mathrm{V_{BR}})$ is increasing with the increase in temperature and the reverse saturation current $(\mathrm{I_C})$ is increasing to almost double in magnitude for every $10^{\circ}\mathrm{C}$ increase in temperature.</p>
+                        </div>
+                    </section>
+
+                    <!-- 1.1.8 AC Equivalent Circuits -->
+                    <section class="content-section" id="ac-equivalent">
+                        <div class="section-header">
+                            <div class="section-number">1.1.8</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚡</span>
+                                AC Equivalent Circuits
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>When we apply ac signal to a P-N junction, it becomes periodically forward and reverse biased. When a forward biased junction is suddenly reverse biased, a reverse current flows which is large initially but gradually decreases to the level of saturation current $(\mathrm{I_C})$. This effect can be equated as it is a discharging capacitor and represented by a capacitance called diffusion capacitance $(\mathrm{C_D})$. Similarly, a reverse biased P-N junction behaves like a junction capacitor (parallel plate capacitor) with depletion region acts like dielectric medium between P-type and N-type plates. This junction capacitance is called transition capacitance $(\mathrm{C_T})$.</p>
+
+                            <p>For ac signal, a forward biased junction offers ac resistance $\mathbf{r}_{\mathrm{ac}}$ along with barrier voltage $(\mathrm{V_B})$ and a parallel diffusion capacitance $(\mathrm{C_D})$. Similarly, a reverse biased junction offers a reverse resistance $\mathbf{R}_{\mathrm{R}}$ connected in parallel with the transition capacitance $(\mathrm{C_T})$. Thus an ac equivalent circuit of P-N junction diode during forward bias is shown in Fig. 1.13 (a) and during reverse bias is shown in Fig. 1.13 (b).</p>
+
+                            <div class="grid grid-2">
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-11dcf399.jpeg" alt="AC equivalent circuit for forward bias" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                            <span class="overlay-text">Click to enlarge</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">Figure 1.13 (a) AC equivalent circuit for forward bias</figcaption>
+                                </figure>
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-c97f6713.jpeg" alt="AC equivalent circuit for reverse bias" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                            <span class="overlay-text">Click to enlarge</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">Figure 1.13 (b) AC equivalent circuit for reverse bias</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="#" class="nav-button nav-button--previous disabled" aria-disabled="true">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-02-zener-diode.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 1 of 5</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

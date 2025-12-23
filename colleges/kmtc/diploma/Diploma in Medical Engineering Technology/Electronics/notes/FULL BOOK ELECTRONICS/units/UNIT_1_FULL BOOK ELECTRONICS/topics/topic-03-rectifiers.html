@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diode Rectifiers - Basic Electronics</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-02-zener-diode.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-04-filters-and-power-supplies.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 5</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>⚡</span>
+                        <span>Topic 03</span>
+                    </div>
+                    <h1 class="document-title">Diode Rectifiers</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Rectification Circuits</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>25 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- 1.3 HALF-WAVE DIODE RECTIFIER -->
+                    <section class="content-section" id="half-wave-rectifier">
+                        <div class="section-header">
+                            <div class="section-number">1.3</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">〰️</span>
+                                Half-Wave Diode Rectifier
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>1.3.1 Principle</h3>
+                            <p>A half-wave rectifier is a circuit, which uses one P-N junction diode to convert a.c. voltage into pulsating d.c. voltage. Half-wave rectifier functions using the principle of unidirectional conduction of semiconductor junction diode.</p>
+
+                            <h3>1.3.2 Circuit</h3>
+                            <p>The circuit of half-wave rectifier consists of a single diode in series with a load resistor as shown in Fig. 1.16 (b). The input to the half-wave rectifier is supplied from the $50\mathrm{Hz}$ a.c. supply, whose waveform is shown in Fig. 1.16 (a).</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-df8f3457.jpeg" alt="Half-wave rectifier circuit and waveforms" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.16 (a) Input waveform, (b) Half-wave rectifier circuit, (c) Output waveform</figcaption>
+                            </figure>
+
+                            <h3>1.3.3 Working</h3>
+                            <p>The working of a half-wave rectifier circuit may be studied by considering the positive and negative half cycles of the a.c. input voltage separately.</p>
+                            
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Positive Half Cycle:</strong> During the positive half cycle of the a.c. input voltage, the diode is forward biased and conducts for all instantaneous voltages greater than the offset voltage (0.7 V for silicon and 0.3 V for germanium diodes). However, for all practical purposes, we assume that the diode is forward biased, whenever the a.c. input voltage goes above zero. While conducting, the diode acts as a short-circuit, so that the circuit current flows and produces a voltage across the load resistor $(\mathbb{R}_{\mathrm{L}})$. The voltage produced across the load resistor has the same shape as that of the positive input half cycle of a.c. input voltage as shown in Fig. 1.16 (c). The waveform of diode current (which is equal to the load current) is also shown in Fig. 1.16 (c).
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Negative Half Cycle:</strong> During the negative half-cycle of the a.c. input voltage, the diode is reverse biased and hence it does not conduct. Thus there is no current flow or voltage drop across load resistor $\mathbf{R}_{\mathrm{L}}$ i.e., $\mathrm{i_D} = 0$ and $\mathrm{V}_{\mathrm{O}} = 0$. The net result is that only the positive half cycle of the a.c. input voltage appears across $\mathbf{R}_{\mathrm{L}}$. It means that only the positive half cycle of the a.c. input voltage is utilized for delivering a.c. power.
+                                    </span>
+                                </li>
+                            </ol>
+                            
+                            <p>It is evident that the output voltage $(\mathrm{V}_{\mathrm{O}})$ is not a steady d.c. but it is a pulsating d.c. wave having a ripple frequency equal to the input voltage frequency. It will be interesting to know that we can see the waveform of output voltage on an oscilloscope connected across $\mathbf{R}_{\mathrm{L}}$. If we measure the output voltage (or output current) by a d.c. meter, it will indicate some average positive value for both voltage and current.</p>
+
+                            <h3>1.3.4 Output Waveform</h3>
+                            <p>Fig. 1.17 shows the output waveform of the half-wave rectifier. The circuit generates only one-half cycle of the a.c. input voltage at output, therefore it is popularly known as a half-wave rectifier.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-ad89f889.jpeg" alt="Input and output waveforms of half-wave rectifier" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.17 Input and output waveforms of half-wave rectifier</figcaption>
+                            </figure>
+
+                            <h3>1.3.5 Device Parameters</h3>
+                            
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📊</span>
+                                    <h4 class="callout-title">Average Values of Output Voltage and Load Current</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The instantaneous value of the sinusoidal a.c. input voltage is given by the relation,</p>
+                                    <div class="equation">
+                                        $$v = V_{m} \sin \omega t = V_{m} \sin \theta$$
+                                    </div>
+                                    <p>Now let $\mathrm{I}_{\mathrm{m}} =$ Maximum value of diode current or load current. It is the current through the resistor $\mathbf{R}_{\mathrm{L}}$.</p>
+                                    <p>$\mathrm{V_{dc}} =$ Average or d.c. value of output (or load) voltage across the load resistor, and</p>
+                                    <p>$\mathrm{I}_{\mathrm{dc}} =$ Average or d.c. value of load current.</p>
+                                    
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-5dd6ca97.jpeg" alt="Average values of output voltage and load current" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 1.18 Average values of output voltage and load current in a half-wave rectifier</figcaption>
+                                    </figure>
+
+                                    <p>The average or d.c. value of the output voltage is given by the relation,</p>
+                                    <div class="equation">
+                                        $$V_{dc} = \frac{V_{m}}{\pi} = 0.318 \, V_{m} \tag{1.3}$$
+                                    </div>
+                                    <p>The above expression indicates that the average or d.c. value of the output voltage is 31.8 per cent of the maximum a.c. input voltage.</p>
+                                    <p>Mathematically, the average or d.c. value of load current is given by,</p>
+                                    <div class="equation">
+                                        $$I_{dc} = \frac{V_{dc}}{R_L} = \frac{V_m}{\pi R_L} = \frac{I_m}{\pi} = 0.318 \, I_m \tag{1.4}$$
+                                    </div>
+                                </div>
+                            </div>
+
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(ii) Form Factor (F):</strong> It is the ratio of rms value of maximum load current to average value of maximum load current.
+                                        <div class="equation">
+                                            $$F = (\text{rms value of } I_m) / (\text{average value of } I_m) = 0.5 \, I_m / 0.318 \, I_m = 1.57$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(iii) Peak Inverse Voltage:</strong> It is the maximum voltage across the diode in the reverse direction. Its value in present case is $V_m$.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(iv) Efficiency:</strong> It is the ratio of output power to total input power supplied to the circuit.
+                                        <div class="equation">
+                                            $$\eta = P_{out} / P_{in}$$
+                                        </div>
+                                        <div class="equation">
+                                            $$\eta\% = \left[(I_{dc}^2 R_L) / I_{rms}^2 (R_d + R_L)\right] \times 100$$
+                                        </div>
+                                        By neglecting $\mathbf{r}_{\mathrm{d}}$, $\eta = 40.6\%$. Hence, the maximum possible efficiency of half-wave rectifier is $40.6\%$.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(v) Ripple factor $(\gamma)$:</strong> It is the ratio of voltage (or ripple current) in output to d.c. voltage component in output (or current).
+                                        <div class="equation">
+                                            $$\gamma = \sqrt{\left(\frac{I_{\mathrm{m}} / 2}{I_{\mathrm{m}} / \pi}\right)^{2} - 1} = 1.21$$
+                                        </div>
+                                        Thus the ripple factor of half-wave rectifier is 1.21.
+                                    </span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- 1.4 FULL-WAVE DIODE RECTIFIER -->
+                    <section class="content-section" id="full-wave-rectifier">
+                        <div class="section-header">
+                            <div class="section-number">1.4</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔄</span>
+                                Full-Wave Diode Rectifier
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>1.4.1 Principle</h3>
+                            <p>A full-wave rectifier is a circuit, which allows a unidirectional current to flow through the load during the entire input cycle as shown in Fig. 1.19. The result of full-wave rectification is a d.c. output voltage that pulsates every half-cycle of the input.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-fb64d7dd.jpeg" alt="Full wave rectifier, with input and output voltage waveforms" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.19 Full wave rectifier, with input and output voltage waveforms</figcaption>
+                            </figure>
+
+                            <h3>1.4.2 Circuit</h3>
+                            <p>The circuit diagram of a full wave rectifier is shown in Fig. 1.20. The input ac signal $\mathrm{V}_{\mathrm{ac}}$ is taken by a transformer of primary voltage $\mathrm{V}_{\mathrm{I}}$ and secondary voltage $\mathrm{V}_{\mathrm{S}}$. The center-tap on the secondary winding of a transformer is, usually, taken as the ground or zero voltage reference point. The voltage between the center-tap and either end of the secondary winding is half of the secondary voltage, i.e., $\mathrm{V}_{\mathrm{S}} = \mathrm{V}_{\mathrm{S}} / 2$.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-c0956be4.jpeg" alt="Center-tapped full-wave rectifier" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.20 Center-tapped full-wave rectifier</figcaption>
+                            </figure>
+
+                            <h3>1.4.3 Working</h3>
+                            <p>The working of a center-tapped full-wave rectifier circuit may be discussed as follows:</p>
+                            
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>(i) Positive Half-Cycle</h4>
+                                    <p>During the positive input half-cycle, the polarities of the secondary voltage are as shown in Fig. 1.21 (a). This forward biases the diode $\mathrm{D}_1$ and reverse-biases the diode $\mathrm{D}_2$. As a result of this, the diode $\mathrm{D}_1$ conducts some current whereas the diode $\mathrm{D}_2$ is OFF.</p>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-479c1107.jpeg" alt="Function of full-wave rectifier during positive half-cycle" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 1.21 (a)</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>(ii) Negative Half-Cycle</h4>
+                                    <p>During the negative input half-cycle, the polarities of the secondary voltage are as shown in Fig. 1.21 (b). This reverse-biases the diode $\mathrm{D}_1$ and forward-biases the diode, $\mathrm{D}_2$. As a result of this, the diode $\mathrm{D}_1$ is OFF and the diode $\mathrm{D}_2$ conducts some current.</p>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-fa0f9088.jpeg" alt="Function of full-wave rectifier during negative half-cycle" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 1.21 (b)</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <p>Thus, it may be noted that current through the load flows in the same direction, during both the positive and negative half-cycle of input signal. Therefore, the output voltage developed across load $R_{\mathrm{L}}$ is full-wave rectified d.c. voltage as shown in Fig. 1.22.</p>
+
+                            <h3>1.4.4 Output Waveform</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-f1cd5f13.jpeg" alt="Input and output waveforms of full-wave rectifier" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.22 Input and output waveforms of full-wave rectifier</figcaption>
+                            </figure>
+
+                            <h3>1.4.5 Device Parameters</h3>
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📊</span>
+                                    <h4 class="callout-title">Average Values</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>We know that the equation for the voltage across each half of the secondary winding, $\mathrm{V}_{\mathrm{S}} = \mathrm{V}_{\mathrm{m}}\sin \omega t = \mathrm{V}_{\mathrm{m}}\sin \theta$.</p>
+                                    
+                                    <p>From the above relation it is noted that the average value of a full-wave rectifier is $0.636\mathrm{V}_{\mathrm{m}}$ and is as shown in Fig. 1.23 (a), and this value is twice that of a half-wave rectifier.</p>
+
+                                    <div class="equation">
+                                        $$I _ {\mathrm {d c}} = \frac {V _ {\mathrm {d c}}}{R _ {\mathrm {L}}} = \frac {2 V _ {\mathrm {m}}}{\pi . R _ {\mathrm {L}}} = \frac {2 I _ {\mathrm {m}}}{\pi} = 0. 6 3 6 I _ {\mathrm {m}} \tag {1.8}$$
+                                    </div>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-3f0fa981.jpeg" alt="Average values of output voltage and load current" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 1.23 Average values in full-wave rectifier</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(ii) Peak Inverse Voltage of a Diode:</strong> At a given half-cycle, two diodes are reverse biased and have a maximum reverse voltage equal to the maximum secondary voltage $(\mathrm{V}_{\mathrm{m}})$. The total reverse voltage across the diode $\mathrm{D}_2$ is: $= V_{\mathrm{m}} - (-V_{\mathrm{m}}) = 2V_{\mathrm{m}}$. Therefore, Peak-inverse voltage of each diode in a center-tapped full-wave rectifier,
+                                        <div class="equation">
+                                            $$\mathrm {P I V} = 2 \mathrm {V} _ {\mathrm {m}}$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(iii) Efficiency:</strong>
+                                        <div class="equation">
+                                            $$\eta = \frac {0 . 8 1 2}{1 + \frac {R _ {\mathrm {d}}}{R _ {\mathrm {L}}}} \tag {1.9}$$
+                                        </div>
+                                        Efficiency will be maximum if $R_L \gg R_d$. Thus $\eta_{\max} = 0.812$ or $81.2\%$. From the above, it is evident that maximum efficiency of a full-wave rectifier is twice that of half-wave rectifier.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(iv) Ripple factor:</strong>
+                                        <div class="equation">
+                                            $$\gamma = \sqrt {\left(\frac {I _ {m w}}{I _ {d c}}\right) ^ {2} - 1} = \sqrt {\left(\frac {I _ {m} / \sqrt {2}}{2 I _ {m} / \pi}\right) ^ {2} - 1} = 0. 4 8 2 \tag {1.10}$$
+                                        </div>
+                                        From the above result it is evident that ripple factor of a full-wave rectifier is 0.482 and is much smaller than that of a half-wave rectifier. Because of this reason, full-wave rectifier is used more commonly in actual practice.
+                                    </span>
+                                </li>
+                            </ol>
+
+                            <h3>1.4.6 Advantages and Disadvantages of Center-tapped Full-wave Rectifier</h3>
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Advantages</h4>
+                                    <ol class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">The d.c. output voltage and load current values are twice than those of a half-wave rectifier.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">The ripple factor is much less (0.482) than that of half-wave rectifier (1.21).</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">The efficiency is twice that of half-wave rectifier. For a full-wave rectifier, the maximum possible value of efficiency is 81.2%, while that of half-wave rectifier is 40.6%.</span>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Disadvantages</h4>
+                                    <ol class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">The output voltage is half of the secondary voltage.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">The peak-inverse voltage (PIV) of a diode is twice that of the diode used in the half-wave rectifier.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">It is expensive to manufacture a center-tapped transformer, which produces equal voltages on each half of the secondary winding.</span>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 1.5 OTHER FULL-WAVE CIRCUITS -->
+                    <section class="content-section" id="bridge-rectifier">
+                        <div class="section-header">
+                            <div class="section-number">1.5</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🌉</span>
+                                Other Full-Wave Circuits (Bridge Rectifier)
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>1.5.1 Bridge Rectifier</h3>
+                            <p>It is most frequently used rectifier circuit for electronic dc power supplies. It uses four diodes connected across the main supply.</p>
+
+                            <h4>(1) Circuit Diagram</h4>
+                            <p>The circuit diagram of bridge rectifier is shown in Fig. 1.24.</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-0b88c34d.jpeg" alt="Circuit diagram of bridge rectifier" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.24 Circuit diagram of bridge rectifier</figcaption>
+                            </figure>
+
+                            <h4>(2) Working</h4>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Positive Half-Cycle:</strong> During positive half-cycle of input voltage, as shown in Fig. 1.25 (a), the diodes $\mathrm{D}_1$ and $\mathrm{D}_2$ are forward biased and conduct some current in the direction as indicated in the figure. A voltage is developed across the resistor $\mathbf{R}_{\mathrm{L}}$ due to the current flow through it. The voltage waveform looks like the positive half of the input cycle. At this time the diodes $\mathrm{D}_3$ and $\mathrm{D}_4$ are reverse biased.
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <div class="figure-image-wrapper">
+                                                <img src="../assets/images/image-20251223-46fc3950.jpeg" alt="Working of bridge rectifier during positive cycle" class="figure-image">
+                                            </div>
+                                            <figcaption class="figure-caption">Figure 1.25 (a)</figcaption>
+                                        </figure>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Negative Half-Cycle:</strong> When the input voltage is negative as shown in Fig. 1.25 (b), the diodes $\mathrm{D}_3$ and $\mathrm{D}_4$ are forward biased and conduct some current in the same direction through $\mathbf{R}_{\mathrm{L}}$ as during the positive half-cycle. During this time, the diodes $\mathrm{D}_1$ and $\mathrm{D}_2$ are reverse biased. As a result of this action, a full-wave rectified output voltage is developed across the resistance $\mathbf{R}_{\mathrm{L}}$.
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <div class="figure-image-wrapper">
+                                                <img src="../assets/images/image-20251223-cbf44326.jpeg" alt="Working of bridge rectifier during negative cycle" class="figure-image">
+                                            </div>
+                                            <figcaption class="figure-caption">Figure 1.25 (b)</figcaption>
+                                        </figure>
+                                    </span>
+                                </li>
+                            </ol>
+
+                            <h4>(3) Device parameters</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(i) Average Values:</strong>
+                                        <div class="equation">
+                                            $$V _ {d c} = \frac {2 V _ {m}}{\pi} \text { and } I _ {d c} = \frac {2 I _ {m}}{\pi} = \frac {2 V _ {m}}{\pi \cdot R _ {L}} \tag {1.11}$$
+                                        </div>
+                                        where $V_{m} =$ Maximum value of secondary voltage.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(ii) Peak Inverse Voltage of a Diode:</strong> At a given half-cycle, two diodes are reverse biased and have a maximum reverse voltage equal to the maximum secondary voltage $(\mathrm{V}_{\mathrm{m}})$. Thus, peak-inverse voltage of a diode in a bridge rectifier, is
+                                        <div class="equation">
+                                            $$\mathrm{PIV} = \mathrm{V}_{\mathrm{m}}$$
+                                        </div>
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <h4>(4) Advantages and Disadvantages of Bridge Rectifier</h4>
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Advantages</h4>
+                                    <ol class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">It can be used in applications allowing floating output terminals i.e., no output terminal is grounded.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">The transformer is less costly as it is required to provide only half the voltage of an equivalent center-tapped transformer used in a full wave rectifier circuit.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">No center-tap is required on the transformer.</span></li>
+                                    </ol>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Disadvantages</h4>
+                                    <p>It has only one disadvantage that it uses four diodes as compared to two diodes for center-tapped full-wave rectifier. But ready availability of low cost silicon diodes have made it more economical despite its requirement of four diodes. Besides this, PIV rating required of the diodes, in a bridge rectifier, is only half of that for a center-tapped full-wave rectifier. This is a great advantage, which offsets the disadvantage of using four diode instead of two in a full-wave rectifier circuit.</p>
+                                </div>
+                            </div>
+
+                            <h3>1.5.2 Comparison of Rectifiers</h3>
+                            <div class="table-wrapper">
+                                <div class="table-container">
+                                    <table class="content-table content-table--comparison">
+                                        <thead>
+                                            <tr>
+                                                <th>S. No.</th>
+                                                <th>Item</th>
+                                                <th>Half-wave</th>
+                                                <th>Center-tapped Full-wave</th>
+                                                <th>Bridge Full-wave</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>1.</td>
+                                                <td>Number of diodes</td>
+                                                <td>1</td>
+                                                <td>2</td>
+                                                <td>4</td>
+                                            </tr>
+                                            <tr>
+                                                <td>2.</td>
+                                                <td>Peak-inverse voltage of diode</td>
+                                                <td>Vin</td>
+                                                <td>2 Vin</td>
+                                                <td>Vin</td>
+                                            </tr>
+                                            <tr>
+                                                <td>3.</td>
+                                                <td>D.C. Output voltage</td>
+                                                <td>0.318 Vin</td>
+                                                <td>0.636 Vin</td>
+                                                <td>0.636 Vin</td>
+                                            </tr>
+                                            <tr>
+                                                <td>4.</td>
+                                                <td>Ripple factor</td>
+                                                <td>1.21</td>
+                                                <td>0.482</td>
+                                                <td>0.482</td>
+                                            </tr>
+                                            <tr>
+                                                <td>5</td>
+                                                <td>Efficiency (%)</td>
+                                                <td>40.6%</td>
+                                                <td>81.2%</td>
+                                                <td>81.2%</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-02-zener-diode.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-04-filters-and-power-supplies.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 5</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>
