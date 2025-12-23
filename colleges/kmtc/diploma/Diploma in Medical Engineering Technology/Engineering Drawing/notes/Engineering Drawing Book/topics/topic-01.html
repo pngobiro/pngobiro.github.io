@@ -1,0 +1,502 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manual Drafting Tools - Engineering Drawing</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Custom Tab Styles -->
+    <style>
+        .tabs-container {
+            margin: var(--space-6) 0;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2);
+        }
+        .tabs-header {
+            display: flex;
+            gap: var(--space-2);
+            overflow-x: auto;
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .tab-btn {
+            padding: var(--space-3) var(--space-6);
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-medium);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+        .tab-btn:hover {
+            color: var(--color-primary);
+            background: var(--color-surface-hover);
+        }
+        .tab-btn.active {
+            background: var(--color-surface);
+            color: var(--color-primary);
+            box-shadow: var(--shadow-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+        .tab-content {
+            padding: var(--space-6);
+            display: none;
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-2);
+            animation: fadeIn var(--transition-base);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="#" class="nav-button nav-button--previous disabled" aria-disabled="true">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-02.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 7%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 1 of 13</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>📐</span>
+                        <span>Topic 01</span>
+                    </div>
+                    <h1 class="document-title">Manual Drafting Tools for Engineering Drawing</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Module 1: Lines, lettering and scales</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>15 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🛠️</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Engineering Drawing is a language of engineers. Like every language has its own rules of grammar, Engineering drawing also has certain rules.</p>
+                            
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Rules of Grammar</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Rules of grammar: Lines, lettering, and dimensioning</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Drawing Board -->
+                    <section class="content-section" id="drawing-board">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📋</span>
+                                Drawing Board
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">One edges is used as the working edges.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Normally made of hard and durable wood.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Board is placed on the table such that the working edge comes to the left side of the draft man.</span>
+                                </li>
+                            </ul>
+
+                            <h3>Size of drawing board</h3>
+                            <div class="table-wrapper">
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Designation</th>
+                                                <th>Size (mm)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>$B_0$</td>
+                                                <td>1500 x 1000 mm</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$B_1$</td>
+                                                <td>1000 x 700 mm</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$B_2$</td>
+                                                <td>700 x 500 mm</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$B_3$</td>
+                                                <td>500 x 350 mm</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Drawing Sheet -->
+                    <section class="content-section" id="drawing-sheet">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📄</span>
+                                Drawing Sheet
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Sizes of drawing sheets are given below.</p>
+                            
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📏</span>
+                                    <span class="table-title">Standard Sheet Sizes</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Sheet designation</th>
+                                                <th>Width (mm)</th>
+                                                <th>Length (mm)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>$A_0$</td>
+                                                <td>841</td>
+                                                <td>1189</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$A_1$</td>
+                                                <td>594</td>
+                                                <td>841</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$A_2$</td>
+                                                <td>420</td>
+                                                <td>594</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$A_3$</td>
+                                                <td>297</td>
+                                                <td>420</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$A_4$</td>
+                                                <td>210</td>
+                                                <td>297</td>
+                                            </tr>
+                                            <tr>
+                                                <td>$A_5$</td>
+                                                <td>148</td>
+                                                <td>210</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-b0d7f001.jpeg" alt="Standard Drawing Sheet Sizes Diagram" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Standard Drawing Sheet Sizes</figcaption>
+                            </figure>
+
+                            <div class="callout callout--tip">
+                                <div class="callout-header">
+                                    <span class="callout-icon">🎓</span>
+                                    <h4 class="callout-title">Classroom Standard</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>For class work, $A_2$ size of drawing sheets is preferred.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Drafting Instruments -->
+                    <section class="content-section" id="drafting-instruments">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Drafting Instruments
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Set-squares</h3>
+                            <p>Normally two in number:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">$30^{\circ}$ - $60^{\circ}$ set-square</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">$45^{\circ}$ set-square</span>
+                                </li>
+                            </ul>
+                            <p>Used to draw lines inclined with the horizontal. With the help of two set-square and a T-square angle of $15^{\circ}$, $30^{\circ}$, $45^{\circ}$, $60^{\circ}$, $75^{\circ}$, $90^{\circ}$, $105^{\circ}$, etc with the horizontal may be drawn. Circle can be divided into different parts.</p>
+
+                            <hr>
+
+                            <h3>Protractor</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Used for measuring and laying off angle.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">It is usually semi-circular in shape and made of either metal or transparent plastic.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Line joining $0^{\circ}$-$180^{\circ}$ is called the base of the protractor.</span>
+                                </li>
+                            </ul>
+
+                            <hr>
+
+                            <h3>Mini drafter</h3>
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Functionality</h4>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Mini drafter serves the purpose of T-square, set-square, protractor and scale.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Two blade are accurately set at right angle to each other.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true" style="margin: 0;">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251222-8be290bc.jpeg" alt="Mini Drafter Instrument" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Pencils -->
+                    <section class="content-section" id="pencils">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">✏️</span>
+                                Pencil Grades and Eraser
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Select the pencil grade to understand its usage in technical drawing.</p>
+                            
+                            <!-- Interactive Tabs for Pencils -->
+                            <div class="tabs-container">
+                                <div class="tabs-header" role="tablist">
+                                    <button class="tab-btn active" data-tab="hard" role="tab" aria-selected="true">HARD Grades</button>
+                                    <button class="tab-btn" data-tab="medium" role="tab" aria-selected="false">MEDIUM Grades</button>
+                                    <button class="tab-btn" data-tab="soft" role="tab" aria-selected="false">SOFT Grades</button>
+                                </div>
+                                
+                                <div class="tabs-content">
+                                    <div class="tab-content active" id="hard" role="tabpanel">
+                                        <div class="callout callout--info">
+                                            <div class="callout-header">
+                                                <span class="callout-icon">📏</span>
+                                                <h4 class="callout-title">HARD (4H, 5H, 6H, 9H)</h4>
+                                            </div>
+                                            <div class="callout-content">
+                                                <p>The hard leads are used for <strong>construction lines</strong> on technical drawings.</p>
+                                                <figure class="content-figure">
+                                                    <img src="../assets/images/image-20251222-fa51dc5b.jpeg" alt="Hard pencil grades chart" class="figure-image">
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="medium" role="tabpanel">
+                                        <div class="callout callout--note">
+                                            <div class="callout-header">
+                                                <span class="callout-icon">📝</span>
+                                                <h4 class="callout-title">MEDIUM (H, F, HB, B)</h4>
+                                            </div>
+                                            <div class="callout-content">
+                                                <p>The medium grades are used for <strong>general use</strong> on technical drawings. The harder grades are for instrument drawings and the softer for sketching.</p>
+                                                <figure class="content-figure">
+                                                    <img src="../assets/images/image-20251222-9e55027f.jpeg" alt="Medium pencil grades chart" class="figure-image">
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="soft" role="tabpanel">
+                                        <div class="callout callout--warning">
+                                            <div class="callout-header">
+                                                <span class="callout-icon">🎨</span>
+                                                <h4 class="callout-title">SOFT (2B, 3B, 4B, 7B)</h4>
+                                            </div>
+                                            <div class="callout-content">
+                                                <p>Soft leads are used for <strong>technical sketching and artwork</strong> but are too soft for instrument drawings.</p>
+                                                <figure class="content-figure">
+                                                    <img src="../assets/images/image-20251222-10cb8edc.jpeg" alt="Soft pencil grades chart" class="figure-image">
+                                                </figure>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="#" class="nav-button nav-button--previous disabled" aria-disabled="true">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-02.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 7%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 1 of 13</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+    <script src="../js/tabs.js"></script>
+</body>
+</html>
