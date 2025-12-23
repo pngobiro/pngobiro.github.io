@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amplifiers - Basic Electronic Devices</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="02-bipolar-junction-transistor.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="04-operational-amplifier.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 4</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🔊</span>
+                        <span>Topic 03</span>
+                    </div>
+                    <h1 class="document-title">Amplifiers</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Basic Electronic Devices</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>20 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Floating Table of Contents -->
+                    <nav class="floating-toc" id="floating-toc">
+                        <div class="floating-toc-header">Contents</div>
+                        <ul class="floating-toc-list">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </nav>
+
+                    <!-- Section 5.3: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📢</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>An electronic amplifier, amplifier, or (informally) amp is an electronic device that increases the power of a signal.</p>
+                            
+                            <p>It does this by taking energy from a power supply and controlling the output to match the input signal shape but with a larger amplitude. In this sense, an amplifier modulates the output of the power supply to make the output signal stronger than the input signal.</p>
+                            
+                            <p>The four basic types of electronic amplifiers are voltage amplifiers, current amplifiers, transconductance amplifiers, and transresistance amplifiers. A further distinction is whether the output is a linear or nonlinear representation of the input. Amplifiers can also be categorized by their physical placement in the signal chain.[1]</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-57464991.jpeg" 
+                                         alt="A practical bipolar transistor amplifier circuit" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">A practical bipolar transistor amplifier circuit</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.3.1: Figures of merit -->
+                    <section class="content-section" id="figures-of-merit">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📈</span>
+                                Figures of merit
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Amplifier quality is characterized by a list of specifications that includes:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Gain:</strong> the ratio between the magnitude of output and input signals</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Bandwidth:</strong> the width of the useful frequency range</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Efficiency:</strong> the ratio between the power of the output and total power consumption</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Linearity:</strong> the degree of proportionality between input and output</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Noise:</strong> a measure of undesired noise mixed into the output</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Output dynamic range:</strong> the ratio of the largest and the smallest useful output levels</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Slew rate:</strong> the maximum rate of change of the output</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Rise time, settling time, ringing and overshoot:</strong> that characterize the step response</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Stability:</strong> the ability to avoid self-oscillation</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.3.2: Amplifier types -->
+                    <section class="content-section" id="amplifier-types">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🎛️</span>
+                                Amplifier types
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Amplifiers are described according to their input and output properties. [2] They exhibit the property of gain, or multiplication factor that relates the magnitude of the output signal to the input signal. The gain may be specified as the ratio of output voltage to input voltage (voltage gain), output power to input power (power gain), or some combination of current, voltage, and power. In many cases, with input and output in the same unit, gain is unitless (though often expressed in decibels (dB)).</p>
+                            
+                            <p>The four basic types of amplifiers are as follows: [1]</p>
+                            
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>1. Voltage amplifier</h4>
+                                    <p>This is the most common type of amplifier. An input voltage is amplified to a larger output voltage. The amplifier's input impedance is high and the output impedance is low.</p>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>2. Current amplifier</h4>
+                                    <p>This amplifier changes an input current to a larger output current. The amplifier's input impedance is low and the output impedance is high.</p>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>3. Transconductance amplifier</h4>
+                                    <p>This amplifier responds to a changing input voltage by delivering a related changing output current.</p>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>4. Transresistance amplifier</h4>
+                                    <p>This amplifier responds to a changing input current by delivering a related changing output voltage. Other names for the device are transimpedance amplifier and current-to-voltage converter.</p>
+                                </div>
+                            </div>
+
+                            <h3>Power amplifier</h3>
+                            <p>The term power amplifier is a relative term with respect to the amount of power delivered to the load and/or provided by the power supply circuit. In general the power amplifier is the last 'amplifier' or actual circuit in a signal chain (the output stage) and is the amplifier stage that requires attention to power efficiency. Efficiency considerations lead to the various classes of power amplifier based on the biasing of the output transistors or tubes.</p>
+
+                            <h4>Power amplifiers by application</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Audio power amplifiers</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">RF power amplifier, such as for transmitter final stages (see also: Linear amplifier).</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Servo motor controllers, where linearity is not important.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Piezoelectric audio amplifier includes a DC-to-DC converter to generate the high voltage output required to drive piezoelectric speakers. [3]</span></li>
+                            </ul>
+
+                            <h3>Vacuum-tube (valve) amplifiers</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-6a574c0d.jpeg" 
+                                         alt="An ECC83 tube glowing inside a preamp" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">An ECC83 tube glowing inside a preamp</figcaption>
+                            </figure>
+                            
+                            <p>According to Symons, while semiconductor amplifiers have largely displaced valve amplifiers for low power applications, valve amplifiers are much more cost effective in high power applications such as "radar, countermeasures equipment, or communications equipment" (p. 56). Many microwave amplifiers are specially designed valves, such as the klystron, gyrotron, traveling wave tube, and crossed-field amplifier, and these microwave valves provide much greater single-device power output at microwave frequencies than solid-state devices (p. 59).[4]</p>
+
+                            <h3>Operational amplifiers (op-amps)</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-cddb27b9.jpeg" 
+                                         alt="An LM741 general purpose op-amp" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">An LM741 general purpose op-amp</figcaption>
+                            </figure>
+                            <p>An operational amplifier is an amplifier circuit with very high open loop gain and differential inputs that employs external feedback to control its transfer function, or gain. Though the term today commonly applies to integrated circuits, the original operational amplifier design used valves.</p>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">ℹ️</span>
+                                    <h4 class="callout-title">Specialized Amplifier Types</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Video amplifiers:</strong> Deal with video signals and have varying bandwidths depending on whether the video signal is for SDTV, EDTV, HDTV 720p or 1080i/p etc.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Oscilloscope vertical amplifiers:</strong> Deal with video signals that drive an oscilloscope display tube, and can have bandwidths of about $500\mathrm{MHz}$.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Distributed amplifiers:</strong> Use transmission lines to temporally split the signal and amplify each portion separately to achieve higher bandwidth than possible from a single amplifier.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Switched mode amplifiers:</strong> These nonlinear amplifiers have much higher efficiencies than linear amps, and are used where the power saving justifies the extra complexity.</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.3.3: Classification -->
+                    <section class="content-section" id="classification">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🗂️</span>
+                                Classification
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Many alternative classifications address different aspects of amplifier designs, and they all express some particular perspective relating the design parameters to the objectives of the circuit.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-cb115a2a.jpeg" 
+                                         alt="The four types of dependent source—control variable on left, output variable on right" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">The four types of dependent source—control variable on left, output variable on right</figcaption>
+                            </figure>
+
+                            <h3>Common terminal</h3>
+                            <p>One set of classifications for amplifiers is based on which device terminal is common to both the input and the output circuit. In the case of bipolar junction transistors, the three classes are common emitter, common base, and common collector. For field-effect transistors, the corresponding configurations are common source, common gate, and common drain; for triode vacuum devices, common cathode, common grid, and common plate.</p>
+
+                            <h3>Unilateral or bilateral</h3>
+                            <p>When an amplifier has an output that exhibits no feedback to its input side, it is called 'unilateral'. If feedback connects part of the output back to the input of the amplifier it is called a 'bilateral' amplifier.</p>
+
+                            <h3>Inverting or non-inverting</h3>
+                            <p>Another way to classify amplifiers is by the phase relationship of the input signal to the output signal. An 'inverting' amplifier produces an output 180 degrees out of phase with the input signal. A 'non-inverting' amplifier maintains the phase of the input signal waveforms.</p>
+
+                            <h3>Interstage coupling method</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Resistive-capacitive (RC) coupled:</strong> Uses a network of resistors and capacitors. Cannot amplify DC signals as the capacitors block the DC component.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Inductive-capacitive (LC) coupled:</strong> Uses a network of inductors and capacitors. Most often used in selective radio-frequency circuits.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Transformer coupled:</strong> Uses a transformer to match impedances or to decouple parts of the circuits.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Direct coupled:</strong> Uses no impedance and bias matching components. Can amplify down to DC.</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.3.4: Power amplifier classes -->
+                    <section class="content-section" id="power-amplifier-classes">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🅰️</span>
+                                Power amplifier classes
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Power amplifier circuits (output stages) are classified as A, B, AB and C for analog designs, and class D and E for switching designs based on the proportion of each input cycle (conduction angle), during which an amplifying device is passing current.</p>
+
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-title">Conduction Angle Classes</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Class</th>
+                                                <th>Conduction Angle ($\Theta$)</th>
+                                                <th>Description</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>Class A</strong></td>
+                                                <td>360°</td>
+                                                <td>100% of the input signal is used. The active element remains conducting all of the time.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Class B</strong></td>
+                                                <td>180°</td>
+                                                <td>50% of the input signal is used; the active element carries current half of each cycle.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Class AB</strong></td>
+                                                <td>180° < $\Theta$ < 360°</td>
+                                                <td>Intermediate between class A and B, the two active elements conduct more than half of the time.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Class C</strong></td>
+                                                <td>< 180°</td>
+                                                <td>Less than 50% of the input signal is used.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Class D</strong></td>
+                                                <td>Pulse Width</td>
+                                                <td>Uses pulse-width modulation to control the output devices; switching elements are either on or off.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <h3>Class A</h3>
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <figure class="content-figure" style="margin: 0;" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-e01d821b.jpeg" alt="Class-A amplifier" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Class-A amplifier</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <p>Amplifying devices operating in class A conduct over the entire range of the input cycle. Class-A amplifiers are inefficient. A theoretical efficiency of $50\%$ is obtainable with transformer output coupling and only $25\%$ with capacitive coupling.</p>
+                                </div>
+                            </div>
+
+                            <h3>Class B</h3>
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <figure class="content-figure" style="margin: 0;" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-d77a3a55.jpeg" alt="Class-B amplifier" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Class-B amplifier</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" style="margin: 0;" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-841f470f.jpeg" alt="Class-B push-pull amplifier" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Class-B push-pull amplifier</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                            <p>Class-B amplifiers only amplify half of the input wave cycle, thus creating a large amount of distortion, but their efficiency is greatly improved. Class B has a maximum theoretical efficiency of $\pi/4$ ($\approx 78.5\%$).</p>
+
+                            <h3>Class C</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-b95a2a8a.jpeg" 
+                                         alt="Class-C amplifier" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Class-C amplifier</figcaption>
+                            </figure>
+                            <p>Class-C amplifiers conduct less than $50\%$ of the input signal and the distortion at the output is high, but high efficiencies (up to $90\%$) are possible. The usual application for class-C amplifiers is in RF transmitters operating at a single fixed carrier frequency, where the distortion is controlled by a tuned load on the amplifier.</p>
+
+                            <h3>Class D</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-3283e0b6.jpeg" 
+                                         alt="Block diagram of a basic switching or PWM (class-D) amplifier" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Block diagram of a basic switching or PWM (class-D) amplifier.</figcaption>
+                            </figure>
+                            <p>In the class-D amplifier the active devices (transistors) function as electronic switches instead of linear gain devices; they are either on or off. The analog signal is converted to a stream of pulses that represents the signal by pulse width modulation.</p>
+
+                            <h3>Additional classes</h3>
+                            <p><strong>Class E:</strong> The class-E/F amplifier is a highly efficient switching power amplifier, typically used at such high frequencies that the switching time becomes comparable to the duty time.</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-029d655e.jpeg" 
+                                         alt="Class-E amplifier" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Class-E amplifier</figcaption>
+                            </figure>
+
+                            <p><strong>Classes G and H:</strong> There are a variety of amplifier designs that enhance class-AB output stages with more efficient techniques to achieve greater efficiencies with low distortion. Class-G amplifiers use "rail switching" to decrease power consumption. Class-H amplifiers take the idea of class G one step further creating an infinitely variable supply rail.</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-005f8a96.jpeg" 
+                                         alt="Basic schematic of a class-H configuration" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Basic schematic of a class-H configuration</figcaption>
+                            </figure>
+
+                            <h3>Doherty amplifiers</h3>
+                            <p>The Doherty amplifier consists of a class-B primary or carrier stages in parallel with a class-C auxiliary or peak stage. The efficiency of previous AM transmitter designs was proportional to modulation but, with average modulation typically around $20\%$, transmitters were limited to less than $50\%$ efficiency. In Doherty's design, even with zero modulation, a transmitter could achieve at least $60\%$ efficiency.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.3.5: Implementation -->
+                    <section class="content-section" id="implementation">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚙️</span>
+                                Implementation
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Amplifiers are implemented using active elements of different kinds:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">The first active elements were relays.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">For transmitting audio, carbon microphones were used as the active element.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Amplifiers used vacuum tubes exclusively until the 1960s.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">In the 1960s, the transistor started to take over.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Beginning in the 1970s, more and more transistors were connected on a single chip therefore creating the integrated circuit.</span></li>
+                            </ul>
+
+                            <h3>Amplifier circuit</h3>
+                            <p>The practical amplifier circuit below could be the basis for a moderate-power audio amplifier. It features a typical (though substantially simplified) design as found in modern amplifiers, with a class-AB push-pull output stage, and uses some overall negative feedback.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-d1a2f958.jpeg" 
+                                         alt="A practical amplifier circuit showing differential input, gain stage, and class-AB output" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">A practical amplifier circuit</figcaption>
+                            </figure>
+
+                            <p>The input signal is coupled through capacitor C1 to the base of transistor Q1. Q1 and Q2 form a differential amplifier, in an arrangement known as a long-tailed pair. This arrangement is used to conveniently allow the use of negative feedback, which is fed from the output to Q2 via R7 and R8.</p>
+                            
+                            <p>The negative feedback into the difference amplifier allows the amplifier to compare the input to the actual output. The amplified signal from Q1 is directly fed to the second stage, Q3, which is a common emitter stage that provides further amplification of the signal and the DC bias for the output stages, Q4 and Q5. The output pair are arranged in class-AB push-pull, also called a complementary pair. They provide the majority of the current amplification and directly drive the load, connected via DC-blocking capacitor C2.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.3.6: See also & References -->
+                    <section class="content-section" id="references">
+                        <div class="section-header">
+                            <div class="section-number">07</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📚</span>
+                                References & See Also
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>See also</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Negative feedback amplifier</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Operational amplifier</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">RF power amplifier</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Valve audio amplifier</span></li>
+                            </ul>
+
+                            <h3>References</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">[1] Patronis, Gene (1987). “Amplifiers”. In Glen Ballou. Handbook for Sound Engineers: The New Audio Cyclopedia. Howard W. Sams & Co. p. 493. ISBN 0-672-21983-2.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">[2] Robert Boylestad and Louis Nashelsky (1996). <em>Electronic Devices and Circuit Theory</em>, 7th Edition. Prentice Hall College Division. ISBN 978-0-13-375734-7.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">[4] Robert S. Symons (1998). “Tubes: Still vital after all these years”. <em>IEEE Spectrum</em> 35 (4): 52–63. doi:10.1109/6.666962.</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="02-bipolar-junction-transistor.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button nav-button--home">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="04-operational-amplifier.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 4</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop" data-close-lightbox></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" data-close-lightbox aria-label="Close image viewer">&times;</button>
+            <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

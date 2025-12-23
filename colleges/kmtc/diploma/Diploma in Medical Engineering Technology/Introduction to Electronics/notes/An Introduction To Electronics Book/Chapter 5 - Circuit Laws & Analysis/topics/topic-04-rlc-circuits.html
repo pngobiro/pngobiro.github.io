@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RLC Circuits - Circuit Laws & Analysis</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-03-ac-analysis-phasors.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-05-electronic-filters.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 4 of 5</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>⚡</span>
+                        <span>Topic 04</span>
+                    </div>
+                    <h1 class="document-title">RLC Circuits</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Resonance & Transients</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>15 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Section: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔌</span>
+                                Introduction to RLC Circuits
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-70c54ace.jpeg" 
+                                         alt="A series RLC circuit: a resistor, inductor, and a capacitor" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">A series RLC circuit: a resistor, inductor, and a capacitor</figcaption>
+                            </figure>
+
+                            <p>An RLC circuit (the letters R, L and C can be in other orders) is an electrical circuit consisting of a resistor, an inductor, and a capacitor, connected in series or in parallel. The RLC part of the name is due to those letters being the usual electrical symbols for resistance, inductance and capacitance respectively. The circuit forms a harmonic oscillator for current and will resonate in a similar way as an LC circuit will. The main difference that the presence of the resistor makes is that any oscillation induced in the circuit will die away over time if it is not kept going by a source. This effect of the resistor is called damping. The presence of the resistance also reduces the peak resonant frequency somewhat. Some resistance is unavoidable in real circuits, even if a resistor is not specifically included as a component. An ideal, pure LC circuit is an abstraction for the purpose of theory.</p>
+                            
+                            <p>There are many applications for this circuit. They are used in many different types of oscillator circuits. Another important application is for tuning, such as in radio receivers or television sets, where they are used to select a narrow range of frequencies from the ambient radio waves. In this role the circuit is often referred to as a tuned circuit. An RLC circuit can be used as a band-pass filter, band-stop filter, low-pass filter or high-pass filter. The tuning application, for instance, is an example of band-pass filtering. The RLC filter is described as a second-order circuit, meaning that any voltage or current in the circuit can be described by a second-order differential equation in circuit analysis.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-2d144512.jpeg" 
+                                         alt="Animation illustrating the operation of an LC circuit" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Animation illustrating the operation of an LC circuit, an RLC circuit with no resistance. Charge flows back and forth between the capacitor plates through the inductance. The energy oscillates back and forth between the capacitor's electric field (E) and the inductor's magnetic field (B).</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section: Basic Concepts -->
+                    <section class="content-section" id="basic-concepts">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Basic Concepts
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Resonance</h3>
+                            <p>An important property of this circuit is its ability to resonate at a specific frequency, the resonance frequency, $f_0$. Frequencies are measured in units of hertz. In this article, however, angular frequency, $\omega_0$, is used which is more mathematically convenient. This is measured in radians per second. They are related to each other by a simple proportion,</p>
+                            <div class="equation">
+                                $$\omega_0 = 2\pi f_0$$
+                            </div>
+                            <p>Resonance occurs because energy is stored in two different ways: in an electric field as the capacitor is charged and in a magnetic field as current flows through the inductor. Energy can be transferred from one to the other within the circuit and this can be oscillatory. A mechanical analogy is a weight suspended on a spring which will oscillate up and down when released.</p>
+
+                            <h4>Natural frequency</h4>
+                            <p>The driven resonance frequency in a series or parallel resonant circuit has the value:</p>
+                            <div class="equation">
+                                $$\omega_0 = \frac{1}{\sqrt{LC}}$$
+                            </div>
+                            <p>This is exactly the same as the resonance frequency of an LC circuit, that is, one with no resistor present. The resonant frequency for an RLC circuit is the same as a circuit in which there is no damping, hence undamped resonance frequency. The peak resonance frequency, on the other hand, depends on the value of the resistor and is described as the damped resonant frequency.</p>
+
+                            <h4>Damping</h4>
+                            <p>Damping is caused by the resistance in the circuit. It determines whether or not the circuit will resonate naturally (that is, without a driving source). Circuits which will resonate in this way are described as underdamped and those that will not are overdamped. Damping attenuation (symbol $\alpha$) is measured in nepers per second. However, the unitless damping factor (symbol $\zeta$, zeta) is often a more useful measure, which is related to $\alpha$ by</p>
+                            <div class="equation">
+                                $$\zeta = \frac{\alpha}{\omega_0}$$
+                            </div>
+                            <p>The special case of $\zeta = 1$ is called critical damping and represents the case of a circuit that is just on the border of oscillation. It is the minimum damping that can be applied without causing oscillation.</p>
+
+                            <h4>Bandwidth</h4>
+                            <p>The resonance effect can be used for filtering. A key parameter in filter design is bandwidth. The bandwidth is measured between the 3dB-points, that is, the frequencies at which the power passed through the circuit has fallen to half the value passed at resonance.</p>
+                            <div class="equation">
+                                $$\Delta \omega = \omega_2 - \omega_1$$
+                            </div>
+                            <p>where $\Delta \omega$ is the bandwidth, $\omega_1$ is the lower half-power frequency and $\omega_2$ is the upper half-power frequency. The bandwidth is related to attenuation by:</p>
+                            <div class="equation">
+                                $$\Delta \omega = 2\alpha$$
+                            </div>
+
+                            <h4>Q factor</h4>
+                            <p>The Q factor is a widespread measure used to characterise resonators. It is defined as the peak energy stored in the circuit divided by the average energy dissipated in it per radian at resonance. Low $Q$ circuits are therefore damped and lossy and high $Q$ circuits are underdamped. $Q$ is related to bandwidth; low $Q$ circuits are wide band and high $Q$ circuits are narrow band. In fact, it happens that $Q$ is the inverse of fractional bandwidth.</p>
+                            <div class="equation">
+                                $$Q = \frac{1}{F_b} = \frac{\omega_0}{\Delta \omega}$$
+                            </div>
+                            <p>For a series resonant circuit, the Q factor can be calculated as follows:</p>
+                            <div class="equation">
+                                $$Q = \frac{1}{\omega_0 RC} = \frac{\omega_0 L}{R}$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Series RLC Circuit -->
+                    <section class="content-section" id="series-rlc">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔗</span>
+                                Series RLC Circuit
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-477f53e2.jpeg" 
+                                         alt="Figure 1: RLC series circuit. V – voltage source, I – current, R – resistance, L – inductance, C – capacitance" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1: RLC series circuit</figcaption>
+                            </figure>
+
+                            <p>In this circuit, the three components are all in series with the voltage source. The governing differential equation can be found by substituting into Kirchhoff's voltage law (KVL) the constitutive equation for each of the three elements.</p>
+                            <div class="equation">
+                                $$v_R + v_L + v_C = v(t)$$
+                            </div>
+                            <div class="equation">
+                                $$Ri(t) + L\frac{di}{dt} + \frac{1}{C} \int_{-\infty}^{\tau=t} i(\tau)d\tau = v(t)$$
+                            </div>
+                            <p>For the case where the source is an unchanging voltage, differentiating and dividing by L leads to the second order differential equation:</p>
+                            <div class="equation">
+                                $$\frac{d^2i(t)}{dt^2} + \frac{R}{L}\frac{di(t)}{dt} + \frac{1}{LC}i(t) = 0$$
+                            </div>
+                            <p>This can usefully be expressed in a more generally applicable form:</p>
+                            <div class="equation">
+                                $$\frac{d^2i(t)}{dt^2} + 2\alpha\frac{di(t)}{dt} + \omega_0^2i(t) = 0$$
+                            </div>
+
+                            <p>For the case of the series RLC circuit these two parameters are given by:</p>
+                            <div class="equation">
+                                $$\alpha = \frac{R}{2L} \quad \text{and} \quad \omega_0 = \frac{1}{\sqrt{LC}}$$
+                            </div>
+
+                            <h3>Transient Response</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-4d646014.jpeg" 
+                                         alt="Plot showing underdamped and overdamped responses of a series RLC circuit" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Plot showing underdamped, critically damped (red), and overdamped responses.</figcaption>
+                            </figure>
+
+                            <p>The differential equation has the characteristic equation:</p>
+                            <div class="equation">
+                                $$s^2 + 2\alpha s + \omega_0^2 = 0$$
+                            </div>
+                            <p>The roots of the equation in $s$ are:</p>
+                            <div class="equation">
+                                $$s_1 = -\alpha + \sqrt{\alpha^2 - \omega_0^2}$$
+                                $$s_2 = -\alpha - \sqrt{\alpha^2 - \omega_0^2}$$
+                            </div>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📊</span>
+                                    <h4 class="callout-title">Response Types</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content"><strong>Overdamped ($\zeta > 1$):</strong> Decay without oscillation.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content"><strong>Underdamped ($\zeta < 1$):</strong> Decaying oscillation at frequency $\omega_d = \sqrt{\omega_0^2 - \alpha^2}$.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content"><strong>Critically Damped ($\zeta = 1$):</strong> Fastest decay without oscillation.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Laplace Domain Analysis</h3>
+                            <p>The series RLC can be analyzed for both transient and steady AC state behavior using the Laplace transform. KVL can be applied in the Laplace domain:</p>
+                            <div class="equation">
+                                $$V(s) = I(s)\left(R + Ls + \frac{1}{Cs}\right)$$
+                            </div>
+                            <p>Solving for I(s):</p>
+                            <div class="equation">
+                                $$I(s) = \frac{1}{R + Ls + \frac{1}{Cs}}V(s) = \frac{s}{L(s^2 + \frac{R}{L}s + \frac{1}{LC})}V(s)$$
+                            </div>
+                            <p>Rearranging in terms of $\alpha$ and $\omega_0$:</p>
+                            <div class="equation">
+                                $$Y(s) = \frac{I(s)}{V(s)} = \frac{s}{L(s^2 + 2\alpha s + \omega_0^2)}$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Parallel RLC Circuit -->
+                    <section class="content-section" id="parallel-rlc">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⛓️</span>
+                                Parallel RLC Circuit
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-3bb7e708.jpeg" 
+                                         alt="Figure 5. RLC parallel circuit" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 5: RLC parallel circuit</figcaption>
+                            </figure>
+
+                            <p>The properties of the parallel RLC circuit can be obtained from the duality relationship of electrical circuits and considering that the parallel RLC is the dual impedance of a series RLC.</p>
+                            <p>For the parallel circuit, the attenuation $\alpha$ is given by:</p>
+                            <div class="equation">
+                                $$\alpha = \frac{1}{2RC}$$
+                            </div>
+                            <p>and the damping factor is consequently:</p>
+                            <div class="equation">
+                                $$\zeta = \frac{1}{2R}\sqrt{\frac{L}{C}}$$
+                            </div>
+                            <p>The change from a series arrangement to a parallel arrangement results in the circuit having a peak in impedance at resonance rather than a minimum, so the circuit is an antiresonator.</p>
+                            
+                            <p>The $Q$ and fractional bandwidth of the parallel circuit are given by:</p>
+                            <div class="equation">
+                                $$Q = R\sqrt{\frac{C}{L}} \quad \text{and} \quad F_b = \frac{1}{R}\sqrt{\frac{L}{C}}$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Other Configurations -->
+                    <section class="content-section" id="other-configurations">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔀</span>
+                                Other Configurations
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-96479ce0.jpeg" 
+                                                 alt="Fig. 7. RLC parallel circuit with resistance in series with the inductor" 
+                                                 class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Fig. 7: RLC parallel circuit with resistance in series with the inductor</figcaption>
+                                    </figure>
+                                    <p>A series resistor with the inductor in a parallel LC circuit is commonly encountered where there is a need to take into account the resistance of the coil winding.</p>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-b8332d68.jpeg" 
+                                                 alt="Fig. 8. RLC series circuit with resistance in parallel with the capacitor" 
+                                                 class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Fig. 8: RLC series circuit with resistance in parallel with the capacitor</figcaption>
+                                    </figure>
+                                    <p>A resistor in parallel with the capacitor in a series LC circuit can be used to represent a capacitor with a lossy dielectric.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Applications -->
+                    <section class="content-section" id="applications">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚙️</span>
+                                Applications
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Variable tuned circuits:</strong> Used in the tuning circuits of analogue radios. Adjustable tuning is commonly achieved with a parallel plate variable capacitor.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Filters:</strong> RLC circuits can be used to form Low-pass, High-pass, Band-pass, and Band-stop filters.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Oscillators:</strong> It is generally desirable to make the attenuation as small as possible ($\alpha \ll \omega_0$).</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Voltage multiplier:</strong> In a series RLC circuit at resonance, the current is limited only by the resistance. If R is small, the voltage across the inductor can be several times the input voltage ($V_L = \frac{V}{R}\omega_0 L$).</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Pulse discharge circuit:</strong> An overdamped series RLC circuit can be used to produce specific waveforms.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Key Points -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Resonance occurs when the impedances of the inductor and capacitor are equal in magnitude but opposite in sign.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>The undamped resonance frequency is $\omega_0 = \frac{1}{\sqrt{LC}}$.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Damping determines transient behavior: Underdamped (oscillates), Overdamped (no oscillation), Critically Damped (fastest decay without oscillation).</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Series RLC circuits have minimum impedance at resonance; Parallel RLC circuits have maximum impedance (antiresonance).</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-03-ac-analysis-phasors.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-05-electronic-filters.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 4 of 5</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

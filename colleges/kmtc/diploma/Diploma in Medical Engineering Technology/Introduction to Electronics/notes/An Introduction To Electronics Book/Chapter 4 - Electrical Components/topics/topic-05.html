@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Electrical Impedance - Electrical Components</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts - Inter for UI, Source Serif for reading -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Theme Toggle (Fixed Position) -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <!-- Floating Table of Contents -->
+    <nav class="floating-toc" id="floating-toc">
+        <div class="floating-toc-header">
+            <span>On this page</span>
+        </div>
+        <ul class="floating-toc-list">
+            <!-- Populated by JS -->
+        </ul>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-04.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Prev: Inductor</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="#" class="nav-button nav-button--next disabled" aria-disabled="true">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 5 of 5</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>Ω</span>
+                        <span>Topic 05</span>
+                    </div>
+                    <h1 class="document-title">Electrical Impedance</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Electrical Components</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>8 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section: Overview -->
+                    <section class="content-section" id="overview">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">👁️</span>
+                                Definition & Concept
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Electrical impedance is the measure of the opposition that a circuit presents to a current when a voltage is applied.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-31350ea4.jpeg" 
+                                         alt="A graphical representation of the complex impedance plane" 
+                                         class="figure-image"
+                                         loading="lazy">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">A graphical representation of the complex impedance plane</figcaption>
+                            </figure>
+
+                            <p>In quantitative terms, it is the complex ratio of the voltage to the current in an alternating current (AC) circuit. Impedance extends the concept of resistance to AC circuits, and possesses both magnitude and phase, unlike resistance, which has only magnitude. When a circuit is driven with direct current (DC), there is no distinction between impedance and resistance; the latter can be thought of as impedance with zero phase angle.</p>
+                            
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">ℹ️</span>
+                                    <h4 class="callout-title">Why Impedance?</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>It is necessary to introduce the concept of impedance in AC circuits because there are two additional impeding mechanisms to be taken into account besides the normal resistance of DC circuits:</p>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span> <strong>Inductance:</strong> the induction of voltages in conductors self-induced by the magnetic fields of currents.</li>
+                                        <li class="list-item"><span class="list-marker"></span> <strong>Capacitance:</strong> the electrostatic storage of charge induced by voltages between conductors.</li>
+                                    </ul>
+                                    <p>The impedance caused by these two effects is collectively referred to as <strong>reactance</strong> and forms the imaginary part of complex impedance whereas resistance forms the real part.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Complex Impedance -->
+                    <section class="content-section" id="complex-impedance">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Complex Impedance
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Impedance is represented as a complex quantity $Z$ and the term complex impedance may be used interchangeably. The polar form conveniently captures both magnitude and phase characteristics:</p>
+                            
+                            <div class="equation">
+                                $$Z = | Z | e ^ {j \arg (Z)}$$
+                            </div>
+
+                            <p>where the magnitude $|Z|$ represents the ratio of the voltage difference amplitude to the current amplitude, while the argument $\arg (Z)$ (commonly given the symbol $\theta$) gives the phase difference between voltage and current. $j$ is the imaginary unit, and is used instead of $i$ in this context to avoid confusion with the symbol for electric current.</p>
+                            
+                            <p>In Cartesian form:</p>
+                            <div class="equation">
+                                $$Z = R + j X$$
+                            </div>
+                            
+                            <p>where the real part of impedance is the resistance $R$ and the imaginary part is the reactance $X$.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section: Ohm's Law -->
+                    <section class="content-section" id="ohms-law">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚖️</span>
+                                Ohm's Law & Phasors
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The meaning of electrical impedance can be understood by substituting it into Ohm's law:</p>
+                            <div class="equation">
+                                $$V = I Z = I | Z | e ^ {j \arg (Z)}$$
+                            </div>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-d6293b80.jpeg" 
+                                         alt="An AC supply applying a voltage V across a load Z" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">An AC supply applying a voltage $V$, across a load $Z$, driving a current $I$.</figcaption>
+                            </figure>
+
+                            <p>The magnitude of the impedance $|Z|$ acts just like resistance, giving the drop in voltage amplitude across an impedance $Z$ for a given current $I$. The phase factor tells us that the current lags the voltage by a phase of $\theta = \arg (Z)$.</p>
+
+                            <h3>Phasors</h3>
+                            <p>A phasor is a constant complex number, usually expressed in exponential form, representing the complex amplitude (magnitude and phase) of a sinusoidal function of time. The impedance of a circuit element can be defined as the ratio of the phasor voltage across the element to the phasor current through the element.</p>
+                            
+                            <div class="equation">
+                                $$Z = \frac{V}{I}$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Device Examples -->
+                    <section class="content-section" id="devices">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧱</span>
+                                Device Impedances
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Below is the derivation of impedance for the three basic circuit elements.</p>
+
+                            <div class="collapsible-section" open>
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▼</span>
+                                        <strong>Resistor</strong>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>The impedance of an ideal resistor is purely real and is referred to as a resistive impedance:</p>
+                                        <div class="equation">
+                                            $$Z _ {R} = R$$
+                                        </div>
+                                        <p>In this case, the voltage and current waveforms are proportional and in phase.</p>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section" open>
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▼</span>
+                                        <strong>Inductor</strong>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>For an inductor, the impedance increases as frequency increases:</p>
+                                        <div class="equation">
+                                            $$Z _ {L} = j \omega L$$
+                                        </div>
+                                        <p>Or in polar form:</p>
+                                        <div class="equation">
+                                            $$Z_{\mathrm{inductor}}=\omega Le^{j\frac{\pi}{2}}$$
+                                        </div>
+                                        <p>This says that the AC voltage leads the AC current across an inductor by 90 degrees ($\pi/2$).</p>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section" open>
+                                <details open>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▼</span>
+                                        <strong>Capacitor</strong>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>For a capacitor, the impedance decreases as frequency increases:</p>
+                                        <div class="equation">
+                                            $$Z _ {C} = \frac {1}{j \omega C}$$
+                                        </div>
+                                        <p>Or in polar form:</p>
+                                        <div class="equation">
+                                            $$Z_{\mathrm{capacitor}}=\frac{1}{\omega C}e^{-j\frac{\pi}{2}}$$
+                                        </div>
+                                        <p>This says that the AC voltage lags the AC current across a capacitor by 90 degrees.</p>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Generalised s-plane -->
+                    <section class="content-section" id="s-plane">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🌐</span>
+                                Generalised s-plane impedance
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Impedance defined in terms of $j\omega$ can strictly only be applied to circuits which are driven with a steady-state AC signal. The concept of impedance can be extended to a circuit energised with any arbitrary signal by using complex frequency $s$.</p>
+                            
+                            <table class="content-table">
+                                <thead>
+                                    <tr>
+                                        <th>Component</th>
+                                        <th>Impedance Expression</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Resistor</td>
+                                        <td>$R$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Inductor</td>
+                                        <td>$sL$</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Capacitor</td>
+                                        <td>$1 / sC$</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            
+                            <p>For a steady-state sinusoidal AC signal, $s = j\omega$.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section: Resistance vs Reactance -->
+                    <section class="content-section" id="reactance">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📊</span>
+                                Resistance vs Reactance
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Resistance and reactance together determine the magnitude and phase of the impedance through the following relations:</p>
+                            <div class="equation">
+                                $$|Z|=\sqrt{ZZ^{*}}=\sqrt{R^{2}+X^{2}}$$
+                            </div>
+                            <div class="equation">
+                                $$\theta=\arctan\left(\frac{X}{R}\right)$$
+                            </div>
+
+                            <h3>Resistance ($R$)</h3>
+                            <p>Resistance is the real part of impedance; a device with a purely resistive impedance exhibits no phase shift between the voltage and current.</p>
+                            <div class="equation">
+                                $$R=|Z|\cos\theta$$
+                            </div>
+
+                            <h3>Reactance ($X$)</h3>
+                            <p>Reactance is the imaginary part of the impedance; a component with a finite reactance induces a phase shift $\theta$ between the voltage across it and the current through it.</p>
+                            <div class="equation">
+                                $$X=|Z|\sin\theta$$
+                            </div>
+                            
+                            <p><strong>Capacitive reactance:</strong> $X_{C}=(\omega C)^{-1}=(2\pi fC)^{-1}$</p>
+                            <p><strong>Inductive reactance:</strong> $X_{L}=\omega L=2\pi fL$</p>
+                            
+                            <p>The total reactance is given by $X = X_{L} - X_{C}$.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section: Combining Impedances -->
+                    <section class="content-section" id="combining">
+                        <div class="section-header">
+                            <div class="section-number">07</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔗</span>
+                                Combining Impedances
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The total impedance of many simple networks of components can be calculated using the rules for combining impedances in series and parallel. The rules are identical to those used for combining resistances, except that the numbers in general will be complex numbers.</p>
+
+                            <h3>Series combination</h3>
+                            <p>For components connected in series, the current through each circuit element is the same; the total impedance is the sum of the component impedances.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-7a75a3ce.jpeg" 
+                                         alt="Series Impedance" 
+                                         class="figure-image"
+                                         loading="lazy">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                            </figure>
+
+                            <div class="equation">
+                                $$Z _ {\mathrm {e q}} = Z _ {1} + Z _ {2} + \dots + Z _ {n}$$
+                            </div>
+
+                            <h3>Parallel combination</h3>
+                            <p>For components connected in parallel, the voltage across each circuit element is the same; the ratio of currents through any two elements is the inverse ratio of their impedances.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-bf946fd5.jpeg" 
+                                         alt="Parallel Impedance" 
+                                         class="figure-image"
+                                         loading="lazy">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                            </figure>
+
+                            <div class="equation">
+                                $$\frac {1}{Z _ {\mathrm {e q}}} = \frac {1}{Z _ {1}} + \frac {1}{Z _ {2}} + \dots + \frac {1}{Z _ {n}}$$
+                            </div>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-04.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Prev: Inductor</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="#" class="nav-button nav-button--next disabled" aria-disabled="true">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 5 of 5</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

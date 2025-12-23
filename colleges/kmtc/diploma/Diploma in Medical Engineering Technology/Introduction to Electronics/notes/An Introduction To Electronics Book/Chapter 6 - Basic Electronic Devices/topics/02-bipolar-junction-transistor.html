@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bipolar Junction Transistor (BJT) - Basic Electronic Devices</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="01-pn-junction.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="03-amplifier.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 50%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 2 of 4</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>⚡</span>
+                        <span>Topic 02</span>
+                    </div>
+                    <h1 class="document-title">Bipolar Junction Transistor</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Basic Electronic Devices</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>25 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Floating Table of Contents -->
+                    <nav class="floating-toc" id="floating-toc">
+                        <div class="floating-toc-header">Contents</div>
+                        <ul class="floating-toc-list">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </nav>
+
+                    <!-- Section 5.2: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🟦</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A bipolar junction transistor (BJT or bipolar transistor) is a type of transistor that relies on the contact of two types of semiconductor for its operation. BJTs can be used as amplifiers, switches, or in oscillators. BJTs can be found either as individual discrete components, or in large numbers as parts of integrated circuits.</p>
+                            
+                            <p>Bipolar transistors are so named because their operation involves both electrons and holes. These two kinds of charge carriers are characteristic of the two kinds of doped semiconductor material; electrons are majority charge carriers in n-type semiconductors, whereas holes are majority charge carriers in p-type semiconductors. In contrast, unipolar transistors such as the field-effect transistors have only one kind of charge carrier.</p>
+                            
+                            <p>Charge flow in a BJT is due to diffusion of charge carriers across a junction between two regions of different charge concentrations. The regions of a BJT are called emitter, collector, and base. A discrete transistor has three leads for connection to these regions. Typically, the emitter region is heavily doped compared to the other two layers, whereas the majority charge carrier concentrations in base and collector layers are about the same. By design, most of the BJT collector current is due to the flow of charges injected from a high-concentration emitter into the base where there are minority carriers that diffuse toward the collector, and so BJTs are classified as minority-carrier devices.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-f021604c.jpeg" 
+                                         alt="NPN BJT with forward-biased E-B junction and reverse-biased B-C junction" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">NPN BJT with forward-biased $E-B$ junction and reverse-biased $B-C$ junction</figcaption>
+                            </figure>
+
+                            <p>BJTs come in two types, or polarities, known as PNP and NPN based on the doping types of the three main terminal regions. An NPN transistor comprises two semiconductor junctions that share a thin p-doped anode region, and a PNP transistor comprises two semiconductor junctions that share a thin n-doped cathode region.</p>
+                            
+                            <p>In typical operation, the base-emitter junction is forward biased, which means that the p-doped side of the junction is at a more positive potential than the n-doped side, and the base-collector junction is reverse biased. In an NPN transistor, when positive bias is applied to the base-emitter junction, the equilibrium is disturbed between the thermally generated carriers and the repelling electric field of the n-doped emitter depletion region. This allows thermally excited electrons to inject from the emitter into the base region. These electrons diffuse through the base from the region of high concentration near the emitter towards the region of low concentration near the collector. The electrons in the base are called minority carriers because the base is doped p-type, which makes holes the majority carrier in the base.</p>
+                            
+                            <p>To minimize the percentage of carriers that recombine before reaching the collector-base junction, the transistor's base region must be thin enough that carriers can diffuse across it in much less time than the semiconductor's minority carrier lifetime. In particular, the thickness of the base must be much less than the diffusion length of the electrons. The collector-base junction is reverse-biased, and so little electron injection occurs from the collector to the base, but electrons that diffuse through the base towards the collector are swept into the collector by the electric field in the depletion region of the collector–base junction. The thin shared base and asymmetric collector–emitter doping is what differentiates a bipolar transistor from two separate and oppositely biased diodes connected in series.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.2.2: Structure -->
+                    <section class="content-section" id="structure">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🏗️</span>
+                                Structure
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A BJT consists of three differently doped semiconductor regions, the emitter region, the base region and the collector region. These regions are, respectively, p type, n type and p type in a PNP transistor, and n type, p type and n type in an NPN transistor. Each semiconductor region is connected to a terminal, appropriately labeled: emitter (E), base (B) and collector (C).</p>
+                            
+                            <p>The base is physically located between the emitter and the collector and is made from lightly doped, high resistivity material. The collector surrounds the emitter region, making it almost impossible for the electrons injected into the base region to escape without being collected, thus making the resulting value of $\alpha$ very close to unity, and so, giving the transistor a large $\beta$. A cross section view of a BJT indicates that the collector-base junction has a much larger area than the emitter-base junction.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-fa80eeda.jpeg" 
+                                         alt="Simplified cross section of a planar NPN bipolar junction transistor" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Simplified cross section of a planar NPN bipolar junction transistor</figcaption>
+                            </figure>
+
+                            <p>The bipolar junction transistor, unlike other transistors, is usually not a symmetrical device. This means that interchanging the collector and the emitter makes the transistor leave the forward active mode and start to operate in reverse mode. Because the transistor's internal structure is usually optimized for forward-mode operation, interchanging the collector and the emitter makes the values of $\alpha$ and $\beta$ in reverse operation much smaller than those in forward operation; often the $\alpha$ of the reverse mode is lower than 0.5. The lack of symmetry is primarily due to the doping ratios of the emitter and the collector. The emitter is heavily doped, while the collector is lightly doped, allowing a large reverse bias voltage to be applied before the collector-base junction breaks down. The collector-base junction is reverse biased in normal operation. The reason the emitter is heavily doped is to increase the emitter injection efficiency: the ratio of carriers injected by the emitter to those injected by the base. For high current gain, most of the carriers injected into the emitter-base junction must come from the emitter.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-52305ce2.jpeg" 
+                                         alt="Die of a KSY34 high-frequency NPN transistor" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Die of a KSY34 high-frequency NPN transistor, base and emitter connected via bonded wires</figcaption>
+                            </figure>
+
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <figure class="content-figure" style="margin: 0;">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-0fb20b46.jpeg" alt="NPN Symbol" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">NPN BJT Symbol</figcaption>
+                                    </figure>
+                                    <div class="callout callout--tip">
+                                        <div class="callout-header">
+                                            <span class="callout-icon">💡</span>
+                                            <h4 class="callout-title">NPN Mnemonic</h4>
+                                        </div>
+                                        <div class="callout-content">
+                                            <p><strong>N</strong>ot <strong>P</strong>ointing <strong>I</strong>n<br>The arrow points outward.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" style="margin: 0;">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-c63324f1.jpeg" alt="PNP Symbol" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">PNP BJT Symbol</figcaption>
+                                    </figure>
+                                    <div class="callout callout--tip">
+                                        <div class="callout-header">
+                                            <span class="callout-icon">💡</span>
+                                            <h4 class="callout-title">PNP Mnemonic</h4>
+                                        </div>
+                                        <div class="callout-content">
+                                            <p><strong>P</strong>ointing <strong>I</strong>n (Proudly/Permanently)<br>The arrow points inward.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3>Heterojunction bipolar transistor</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-fb44cda7.jpeg" 
+                                         alt="Bands in graded heterojunction NPN bipolar transistor" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Bands in graded heterojunction NPN bipolar transistor. Barriers indicated for electrons to move from emitter to base, and for holes to be injected backward from base to emitter; Also, grading of bandgap in base assists electron transport in base region; Light colors indicate depleted regions</figcaption>
+                            </figure>
+
+                            <p>The heterojunction bipolar transistor (HBT) is an improvement of the BJT that can handle signals of very high frequencies up to several hundred GHz. It is common in modern ultrafast circuits, mostly RF systems.[7][8] Heterojunction transistors have different semiconductors for the elements of the transistor. Usually the emitter is composed of a larger bandgap material than the base. The figure shows that this difference in bandgap allows the barrier for holes to inject backward from the base into the emitter, denoted in the figure as $\Delta \varphi_{\mathrm{p}}$, to be made large, while the barrier for electrons to inject into the base $\Delta \varphi_{\mathrm{n}}$ is made low. This barrier arrangement helps reduce minority carrier injection from the base when the emitter-base junction is under forward bias, and thus reduces base current and increases emitter injection efficiency.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.2.3: Regions of operation -->
+                    <section class="content-section" id="regions-of-operation">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📊</span>
+                                Regions of operation
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-4b3af2de.jpeg" 
+                                         alt="Relationship between IC, UCE and IB" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">The relationship between $I_{C}$, $U_{CE}$ and $I_{B}$.</figcaption>
+                            </figure>
+
+                            <p>Bipolar transistors have five distinct regions of operation, defined by BJT junction biases.</p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Forward-active (or simply, active):</strong> The base-emitter junction is forward biased and the base-collector junction is reverse biased. Most bipolar transistors are designed to afford the greatest common-emitter current gain, $\beta \mathrm{F}$, in forward-active mode. If this is the case, the collector-emitter current is approximately proportional to the base current, but many times larger, for small base current variations.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Reverse-active (or inverse-active or inverted):</strong> By reversing the biasing conditions of the forward-active region, a bipolar transistor goes into reverse-active mode. In this mode, the emitter and collector regions switch roles. Because most BJTs are designed to maximize current gain in forward-active mode, the $\beta \mathrm{F}$ in inverted mode is several times smaller (2-3 times for the ordinary germanium transistor). This transistor mode is seldom used, usually being considered only for failsafe conditions and some types of bipolar logic. The reverse bias breakdown voltage to the base may be an order of magnitude lower in this region.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Saturation:</strong> With both junctions forward-biased, a BJT is in saturation mode and facilitates high current conduction from the emitter to the collector (or the other direction in the case of NPN, with negatively charged carriers flowing from emitter to collector). This mode corresponds to a logical "on", or a closed switch.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Cutoff:</strong> In cutoff, biasing conditions opposite of saturation (both junctions reverse biased) are present. There is very little current, which corresponds to a logical "off", or an open switch.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Avalanche breakdown region</strong>
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <h3>Active-mode NPN transistors in circuits</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-91005b5b.jpeg" 
+                                         alt="Structure and use of NPN transistor" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Structure and use of NPN transistor. Arrow according to schematic.</figcaption>
+                            </figure>
+
+                            <p>The diagram shows a schematic representation of an NPN transistor connected to two voltage sources. To make the transistor conduct appreciable current (on the order of $1\mathrm{mA}$) from C to E, $V_{BE}$ must be above a minimum value sometimes referred to as the cut-in voltage. The cut-in voltage is usually about $650\mathrm{mV}$ for silicon BJTs at room temperature but can be different depending on the type of transistor and its biasing. This applied voltage causes the lower P-N junction to 'turn on', allowing a flow of electrons from the emitter into the base. In active mode, the electric field existing between base and collector (caused by $V_{CE}$) will cause the majority of these electrons to cross the upper P-N junction into the collector to form the collector current $I_{C}$. The remainder of the electrons recombine with holes, the majority carriers in the base, making a current through the base connection to form the base current, $I_{B}$. As shown in the diagram, the emitter current, $I_{E}$, is the total transistor current, which is the sum of the other terminal currents, (i.e., $I_{E} = I_{B} + I_{C}$).</p>
+
+                            <h3>Active-mode PNP transistors in circuits</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-985d9a36.jpeg" 
+                                         alt="Structure and use of PNP transistor" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Structure and use of PNP transistor.</figcaption>
+                            </figure>
+
+                            <p>The diagram shows a schematic representation of a PNP transistor connected to two voltage sources. To make the transistor conduct appreciable current (on the order of 1 mA) from E to C, $V_{\mathrm{EB}}$ must be above a minimum value sometimes referred to as the cut-in voltage. The cut-in voltage is usually about $650\mathrm{mV}$ for silicon BJTs at room temperature but can be different depending on the type of transistor and its biasing.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.2.4: History -->
+                    <section class="content-section" id="history">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📜</span>
+                                History
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The bipolar point-contact transistor was invented in December 1947 at the Bell Telephone Laboratories by John Bardeen and Walter Brattain under the direction of William Shockley. The junction version known as the bipolar junction transistor, invented by Shockley in 1948, enjoyed three decades as the device of choice in the design of discrete and integrated circuits. Nowadays, the use of the BJT has declined in favor of CMOS technology in the design of digital integrated circuits. The incidental low performance BJTs inherent in CMOS ICs, however, are often utilized as bandgap voltage reference, silicon bandgap temperature sensor and to handle electrostatic discharge.</p>
+                            
+                            <h3>Germanium transistors</h3>
+                            <p>The germanium transistor was more common in the 1950s and 1960s, and while it exhibits a lower "cut off" voltage, typically around $0.2\mathrm{V}$, making it more suitable for some applications, it also has a greater tendency to exhibit thermal runaway.</p>
+
+                            <h3>Early manufacturing techniques</h3>
+                            <h4>Bipolar transistors</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Point-contact transistor - first transistor ever constructed (December 1947), a bipolar transistor, limited commercial use due to high cost and noise.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Tetrode point-contact transistor - Point-contact transistor having two emitters. It became obsolete in the middle 1950s.</span></li>
+                            </ul>
+
+                            <h4>Junction transistors</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Grown-junction transistor - first bipolar junction transistor made.[11] Invented by William Shockley at Bell Labs. Invented on June 23, 1948.[12] Patent filed on June 26, 1948.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Alloy-junction transistor - emitter and collector alloy beads fused to base. Developed at General Electric and RCA[13] in 1951.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Micro-alloy transistor (MAT) - high speed type of alloy junction transistor. Developed at Philco.[14]</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Micro-alloy diffused transistor (MADT) - high speed type of alloy junction transistor, speedier than MAT, a diffused-base transistor. Developed at Philco.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Post-alloy diffused transistor (PADT) - high speed type of alloy junction transistor, speedier than MAT, a diffused-base transistor. Developed at Philips.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Tetrode transistor - high speed variant of grown-junction transistor[15] or alloy junction transistor[16] with two connections to base.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Surface-barrier transistor - high speed metal barrier junction transistor. Developed at Philco[17] in 1953.[18]</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Drift-field transistor - high speed bipolar junction transistor. Invented by Herbert Kroemer[19][20] at the Central Bureau of Telecommunications Technology of the German Postal Service, in 1953.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Spacistor - circa 1957.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Diffusion transistor - modern type bipolar junction transistor. Prototypes[21] developed at Bell Labs in 1954.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Diffused-base transistor - first implementation of diffusion transistor.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Mesa transistor - Developed at Texas Instruments in 1957.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Planar transistor - the bipolar junction transistor that made mass-produced monolithic integrated circuits possible. Developed by Dr. Jean Hoerni[22] at Fairchild in 1959.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Epitaxial transistor - a bipolar junction transistor made using vapor phase deposition. See epitaxy. Allows very precise control of doping levels and gradients.</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.2.5: Theory and modeling -->
+                    <section class="content-section" id="theory-and-modeling">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Theory and modeling
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-4f009f85.jpeg" 
+                                         alt="Band diagram for NPN transistor at equilibrium" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Band diagram for NPN transistor at equilibrium.</figcaption>
+                            </figure>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-cb0d0407.jpeg" 
+                                         alt="Band diagram for NPN transistor in active mode" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Band diagram for NPN transistor in active mode, showing injection of electrons from emitter to base, and their overshoot into the collector.</figcaption>
+                            </figure>
+
+                            <p>Transistors can be thought of as two diodes (P-N junctions) sharing a common region that minority carriers can move through. A PNP BJT will function like two diodes that share an N-type cathode region, and the NPN like two diodes sharing a P-type anode region. Connecting two diodes with wires will not make a transistor, since minority carriers will not be able to get from one P-N junction to the other through the wire.</p>
+
+                            <h3>Large-signal models</h3>
+                            <p>In 1954 Jewell James Ebers and John L. Moll introduced their mathematical model of transistor currents:[23]</p>
+
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <figure class="content-figure" style="margin: 0;" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-9b8cd9f3.jpeg" alt="Ebers-Moll Model for an NPN transistor" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Ebers-Moll Model for an NPN transistor.[24]</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" style="margin: 0;" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-a4200e4f.jpeg" alt="Ebers-Moll Model for a PNP transistor" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Ebers-Moll Model for a PNP transistor.</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <h4>Ebers-Moll model</h4>
+                            <p>The DC emitter and collector currents in active mode are well modeled by an approximation to the Ebers-Moll model:</p>
+                            
+                            <div class="equation">
+                                $$ I _ {\mathrm {E}} = I _ {\mathrm {E S}} \left(e ^ {\frac {V _ {\mathrm {B E}}}{V _ {\mathrm {T}}}} - 1\right) $$
+                            </div>
+                            
+                            <div class="equation">
+                                $$ I _ {\mathrm {C}} = \alpha_ {F} I _ {\mathrm {E}} $$
+                            </div>
+                            
+                            <div class="equation">
+                                $$ I _ {\mathrm {B}} = \left(1 - \alpha_ {F}\right) I _ {\mathrm {E}} $$
+                            </div>
+                            
+                            <p>The base internal current is mainly by diffusion (see Fick's law) and</p>
+                            
+                            <div class="equation">
+                                $$ J _ {n (\text {b a s e})} = \frac {q D _ {n} n _ {b o}}{W} e ^ {\frac {V _ {\mathrm {E B}}}{V _ {\mathrm {T}}}} $$
+                            </div>
+
+                            <p>The unapproximated Ebers-Moll equations used to describe the three currents in any operating region are given below. These equations are based on the transport model for a bipolar junction transistor.[25]</p>
+                            
+                            <div class="equation">
+                                $$ i _ {\mathrm {C}} = I _ {\mathrm {S}} \left(e ^ {\frac {V _ {\mathrm {B E}}}{V _ {\mathrm {T}}}} - e ^ {\frac {V _ {\mathrm {B C}}}{V _ {\mathrm {T}}}}\right) - \frac {I _ {\mathrm {S}}}{\beta_ {R}} \left(e ^ {\frac {V _ {\mathrm {B C}}}{V _ {\mathrm {T}}}} - 1\right) $$
+                            </div>
+                            
+                            <div class="equation">
+                                $$ i _ {\mathrm {B}} = \frac {I _ {\mathrm {S}}}{\beta_ {F}} \left(e ^ {\frac {V _ {\mathrm {B E}}}{V _ {\mathrm {T}}}} - 1\right) + \frac {I _ {\mathrm {S}}}{\beta_ {R}} \left(e ^ {\frac {V _ {\mathrm {B C}}}{V _ {\mathrm {T}}}} - 1\right) $$
+                            </div>
+                            
+                            <div class="equation">
+                                $$ i _ {\mathrm {E}} = I _ {\mathrm {S}} \left(e ^ {\frac {V _ {\mathrm {B E}}}{V _ {\mathrm {T}}}} - e ^ {\frac {V _ {\mathrm {B C}}}{V _ {\mathrm {T}}}}\right) + \frac {I _ {\mathrm {S}}}{\beta_ {F}} \left(e ^ {\frac {V _ {\mathrm {B E}}}{V _ {\mathrm {T}}}} - 1\right) $$
+                            </div>
+
+                            <h3>Small-signal models</h3>
+                            
+                            <h4>Hybrid-pi model</h4>
+                            <p>Main article: hybrid-pi model</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-2900db9c.jpeg" 
+                                         alt="Hybrid-pi model" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Hybrid-pi model</figcaption>
+                            </figure>
+                            <p>The hybrid-pi model is a popular circuit model used for analyzing the small signal behavior of bipolar junction and field effect transistors. Sometimes it is also called Giacoleto model because it was introduced by L.J. Giacoleto in 1969. The model can be quite accurate for low-frequency circuits and can easily be adapted for higher frequency circuits with the addition of appropriate inter-electrode capacitances and other parasitic elements.</p>
+
+                            <h4>h-parameter model</h4>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-8076be3d.jpeg" 
+                                         alt="Generalized h-parameter model of an NPN BJT" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Generalized $h$-parameter model of an NPN BJT. Replace $\mathbf{x}$ with $\mathbf{e}$, $\mathbf{b}$ or $\mathbf{c}$ for CE, CB and CC topologies respectively.</figcaption>
+                            </figure>
+                            
+                            <p>Another model commonly used to analyze BJT circuits is the "h-parameter" model, closely related to the hybrid-pi model and the y-parameter two-port, but using input current and output voltage as independent variables, rather than input and output voltages. This two-port network is particularly suited to BJTs as it lends itself easily to the analysis of circuit behaviour, and may be used to develop further accurate models.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.2.6: Applications -->
+                    <section class="content-section" id="applications">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🛠️</span>
+                                Applications
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The BJT remains a device that excels in some applications, such as discrete circuit design, due to the very wide selection of BJT types available, and because of its high transconductance and output resistance compared to MOSFETs. The BJT is also the choice for demanding analog circuits, especially for very-high-frequency applications, such as radio-frequency circuits for wireless systems. Bipolar transistors can be combined with MOSFETs in an integrated circuit by using a BiCMOS process of wafer fabrication to create circuits that take advantage of the application strengths of both types of transistor.</p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Amplifiers:</strong> The three main BJT amplifier topologies are Common emitter, Common base, and Common collector.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Temperature sensors:</strong> Because of the known temperature and current dependence of the forward-biased base–emitter junction voltage, the BJT can be used to measure temperature by subtracting two voltages at two different bias currents in a known ratio.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Logarithmic converters:</strong> Because base–emitter voltage varies as the log of the base–emitter and collector–emitter currents, a BJT can also be used to compute logarithms and anti-logarithms.
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.2.7: Vulnerabilities -->
+                    <section class="content-section" id="vulnerabilities">
+                        <div class="section-header">
+                            <div class="section-number">07</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚠️</span>
+                                Vulnerabilities
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Exposure of the transistor to ionizing radiation causes radiation damage. Radiation causes a buildup of ’defects’ in the base region that act as recombination centers. The resulting reduction in minority carrier lifetime causes gradual loss of gain of the transistor.</p>
+                            
+                            <div class="callout callout--danger">
+                                <div class="callout-header">
+                                    <span class="callout-icon">🔥</span>
+                                    <h4 class="callout-title">Secondary Breakdown</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Power BJTs are subject to a failure mode called secondary breakdown, in which excessive current and normal imperfections in the silicon die cause portions of the silicon inside the device to become disproportionately hotter than the others. The doped silicon has a negative temperature coefficient, meaning that it conducts more current at higher temperatures. Thus, the hottest part of the die conducts the most current, causing its conductivity to increase, which then causes it to become progressively hotter again, until the device fails internally. The thermal runaway process associated with secondary breakdown, once triggered, occurs almost instantly and may catastrophically damage the transistor package.</p>
+                                </div>
+                            </div>
+                            
+                            <p>If the emitter-base junction is reverse biased into avalanche or Zener mode and current flows for a short period of time, the current gain of the BJT will be permanently degraded.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.2.8: See also -->
+                    <section class="content-section" id="see-also">
+                        <div class="section-header">
+                            <div class="section-number">08</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔗</span>
+                                See also
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Bipolar transistor biasing</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Gummel plot</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Technology CAD (TCAD)</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="01-pn-junction.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button nav-button--home">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="03-amplifier.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 50%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 2 of 4</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop" data-close-lightbox></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" data-close-lightbox aria-label="Close image viewer">&times;</button>
+            <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

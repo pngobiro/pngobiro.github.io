@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>An Introduction To Electronics - Main Index</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            padding: 40px;
+            margin-top: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .subtitle {
+            color: #7f8c8d;
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+        }
+
+        .chapters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .chapter-card {
+            background: linear-gradient(135deg, #3498db 0%, #2980b9 100%);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chapter-card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+        }
+
+        .chapter-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .chapter-card:hover::before {
+            top: -30%;
+            left: -30%;
+        }
+
+        .chapter-card:active {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (hover: none) {
+            .chapter-card:hover {
+                transform: none;
+                box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            }
+
+            .chapter-card:active {
+                transform: scale(0.98);
+                box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            }
+        }
+
+        .chapter-card:nth-child(1) {
+            background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+        }
+
+        .chapter-card:nth-child(2) {
+            background: linear-gradient(135deg, #f39c12 0%, #d68910 100%);
+        }
+
+        .chapter-card:nth-child(3) {
+            background: linear-gradient(135deg, #27ae60 0%, #229954 100%);
+        }
+
+        .chapter-card:nth-child(4) {
+            background: linear-gradient(135deg, #8e44ad 0%, #7d3c98 100%);
+        }
+
+        .chapter-card:nth-child(5) {
+            background: linear-gradient(135deg, #16a085 0%, #138d75 100%);
+        }
+
+        .chapter-number {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        .chapter-title {
+            color: white;
+            font-size: 1.4rem;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+        }
+
+        .chapter-link {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.9);
+            color: #2c3e50;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .chapter-link:hover {
+            background: white;
+            transform: scale(1.05);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .intro-text {
+            text-align: center;
+            color: #34495e;
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 40px;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 1200px) {
+            .container {
+                max-width: 95%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+            }
+
+            .container {
+                padding: 20px;
+                border-radius: 15px;
+                margin-top: 10px;
+            }
+
+            header {
+                margin-bottom: 30px;
+            }
+
+            h1 {
+                font-size: 1.8rem;
+                margin-bottom: 8px;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                margin-bottom: 15px;
+            }
+
+            .intro-text {
+                font-size: 1rem;
+                margin-bottom: 30px;
+                padding: 0 10px;
+            }
+
+            .chapters-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+                margin-top: 30px;
+            }
+
+            .chapter-card {
+                padding: 25px 20px;
+                border-radius: 12px;
+            }
+
+            .chapter-title {
+                font-size: 1.2rem;
+                margin-bottom: 15px;
+            }
+
+            .chapter-number {
+                font-size: 0.8rem;
+                padding: 4px 12px;
+                margin-bottom: 12px;
+            }
+
+            .chapter-link {
+                padding: 14px 28px;
+                font-size: 0.95rem;
+                min-height: 44px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+
+            .footer {
+                margin-top: 30px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+
+            .container {
+                padding: 15px;
+                border-radius: 10px;
+            }
+
+            h1 {
+                font-size: 1.5rem;
+            }
+
+            .subtitle {
+                font-size: 0.9rem;
+            }
+
+            .intro-text {
+                font-size: 0.95rem;
+                padding: 0 5px;
+            }
+
+            .chapter-card {
+                padding: 20px 15px;
+            }
+
+            .chapter-title {
+                font-size: 1.1rem;
+                margin-bottom: 12px;
+                line-height: 1.3;
+            }
+
+            .chapter-link {
+                padding: 12px 24px;
+                font-size: 0.9rem;
+                width: 100%;
+            }
+
+            .footer {
+                font-size: 0.8rem;
+                margin-top: 25px;
+            }
+        }
+
+        @media (max-width: 360px) {
+            .container {
+                padding: 12px;
+            }
+
+            h1 {
+                font-size: 1.3rem;
+            }
+
+            .chapter-card {
+                padding: 18px 12px;
+            }
+
+            .chapter-title {
+                font-size: 1rem;
+            }
+
+            .chapter-link {
+                padding: 10px 20px;
+                font-size: 0.85rem;
+            }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: #7f8c8d;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>An Introduction To Electronics</h1>
+            <p class="subtitle">Diploma in Medical Engineering Technology</p>
+        </header>
+
+        <main>
+            <p class="intro-text">
+                Welcome to the comprehensive electronics course for Medical Engineering Technology. 
+                This course covers fundamental concepts from basic electronics to advanced digital circuits, 
+                providing the essential knowledge needed for medical device engineering.
+            </p>
+
+            <div class="chapters-grid">
+                <div class="chapter-card">
+                    <span class="chapter-number">Chapters 1-3</span>
+                    <h2 class="chapter-title">Basic Electronics Fundamentals</h2>
+                    <a href="Chapters 1-3 - Basic Electronics Fundamentals/index.html" class="chapter-link">
+                        View Chapter
+                    </a>
+                </div>
+
+                <div class="chapter-card">
+                    <span class="chapter-number">Chapter 4</span>
+                    <h2 class="chapter-title">Electrical Components</h2>
+                    <a href="Chapter 4 - Electrical Components/index.html" class="chapter-link">
+                        View Chapter
+                    </a>
+                </div>
+
+                <div class="chapter-card">
+                    <span class="chapter-number">Chapter 5</span>
+                    <h2 class="chapter-title">Circuit Laws & Analysis</h2>
+                    <a href="Chapter 5 - Circuit Laws & Analysis/index.html" class="chapter-link">
+                        View Chapter
+                    </a>
+                </div>
+
+                <div class="chapter-card">
+                    <span class="chapter-number">Chapter 6</span>
+                    <h2 class="chapter-title">Basic Electronic Devices</h2>
+                    <a href="Chapter 6 - Basic Electronic Devices/index.html" class="chapter-link">
+                        View Chapter
+                    </a>
+                </div>
+
+                <div class="chapter-card">
+                    <span class="chapter-number">Chapter 7</span>
+                    <h2 class="chapter-title">Digital Circuits</h2>
+                    <a href="Chapter 7 - Digital Circuits/index.html" class="chapter-link">
+                        View Chapter
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer class="footer">
+            <p>&copy; 2025 KMTC - Diploma in Medical Engineering Technology</p>
+        </footer>
+    </div>
+</body>
+</html>
