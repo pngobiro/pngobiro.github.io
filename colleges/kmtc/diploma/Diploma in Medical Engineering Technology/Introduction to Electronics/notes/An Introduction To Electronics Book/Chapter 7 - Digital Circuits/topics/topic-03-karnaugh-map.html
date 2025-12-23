@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Karnaugh Map - Digital Circuits Study Guide</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-02-logic-gates.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-04-finite-state-machines.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 37.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 8</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🗺️</span>
+                        <span>Topic 03</span>
+                    </div>
+                    <h1 class="document-title">Karnaugh Map</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Digital Electronics</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>10 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">💡</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-b5f189b1.jpeg" alt="Example Karnaugh Map" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">An example Karnaugh map. Note that this image actually shows two Karnaugh maps: for the function $f$, using minterms (colored rectangles) and for its complement, using maxterms (gray rectangles). In the image, $E()$ signifies a sum of minterms, denoted in the article as $\sum m_i$.</figcaption>
+                            </figure>
+
+                            <p>The Karnaugh map, also known as the K-map, is a method to simplify boolean algebra expressions. Maurice Karnaugh introduced it in 1953 as a refinement of Edward Veitch's 1952 Veitch diagram. The Karnaugh map reduces the need for extensive calculations by taking advantage of humans' pattern-recognition capability. It also permits the rapid identification and elimination of potential race conditions.</p>
+                            
+                            <p>The required boolean results are transferred from a truth table onto a two-dimensional grid where the cells are ordered in Gray code, and each cell position represents one combination of input conditions, while each cell value represents the corresponding output value. Optimal groups of 1s or 0s are identified, which represent the terms of a canonical form of the logic in the original truth table. These terms can be used to write a minimal boolean expression representing the required logic.</p>
+                            
+                            <p>Karnaugh maps are used to simplify real-world logic requirements so that they can be implemented using a minimum number of physical logic gates. A sum-of-products expression can always be implemented using AND gates feeding into an OR gate, and a product-of-sums expression leads to OR gates feeding an AND gate. Karnaugh maps can also be used to simplify logic expressions in software design. Boolean conditions, as used for example in conditional statements, can get very complicated, which makes the code difficult to read and to maintain. Once minimised, canonical sum-of-products and product-of-sums expressions can be implemented directly using AND and OR logic operators.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Example -->
+                    <section class="content-section" id="example">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📝</span>
+                                Example
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Karnaugh maps are used to facilitate the simplification of Boolean algebra functions. Take the Boolean function described by the following truth table.</p>
+                            
+                            <p>Following are two different notations describing the same function in unsimplified Boolean algebra, using the Boolean variables $A$, $B$, $C$, $D$, and their inverses.</p>
+                            
+                            <div class="equation">
+                                $$f(A, B, C, D) = \sum m_i, i \in \{6, 8, 9, 10, 11, 12, 13, 14\}$$
+                            </div>
+                            <p>where $m_i$ are the minterms to map (i.e., rows that have output 1 in the truth table).</p>
+                            
+                            <div class="equation">
+                                $$f(A, B, C, D) = \prod M_i, i \in \{0, 1, 2, 3, 4, 5, 7, 15\}$$
+                            </div>
+                            <p>where $M_i$ are the maxterms to map (i.e., rows that have output 0 in the truth table).</p>
+
+                            <h3>Karnaugh map</h3>
+                            <p>In the example above, the four input variables can be combined in 16 different ways, so the truth table has 16 rows, and the Karnaugh map has 16 positions. The Karnaugh map is therefore arranged in a $4 \times 4$ grid.</p>
+                            
+                            <p>The row and column indices (shown across the top, and down the left side of the Karnaugh map) are ordered in Gray code rather than binary numerical order. Gray code ensures that only one variable changes between each pair of adjacent cells. Each cell of the completed Karnaugh map contains a binary digit representing the function's output for that combination of inputs.</p>
+                            
+                            <p>After the Karnaugh map has been constructed, it is used to find one of the simplest possible forms — a canonical form — for the information in the truth table. Adjacent 1s in the Karnaugh map represent opportunities to simplify the expression. The minterms ('minimal terms') for the final expression are found by encircling groups of 1s in the map. Minterm groups must be rectangular and must have an area that is a power of two (i.e., 1, 2, 4, 8...). Minterm rectangles should be as large as possible without containing any 0s. Groups may overlap in order to make each one larger. The optimal groupings in the example below are marked by the green, red and blue lines, and the red and green groups overlap. The red group is a $2 \times 2$ square, the green group is a $4 \times 1$ rectangle, and the overlap area is indicated in brown.</p>
+                            
+                            <p>The cells are often denoted by a shorthand which describes the logical value of the inputs that the cell covers. For example, $AD$ would mean a cell which covers the 2x2 area where $A$ and $D$ are true, i.e. the cells numbered 13, 9, 15, 11 in the diagram above. On the other hand, $A\overline{D}$ would mean the cells where $A$ is true and $D$ is false (that is, $\overline{D}$ is true).</p>
+                            
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">🔄</span>
+                                    <h4 class="callout-title">Toroidal Connection</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The grid is toroidally connected, which means that rectangular groups can wrap across the edges (see picture). Cells on the extreme right are actually 'adjacent' to those on the far left; similarly, so are those at the very top and those at the bottom. Therefore $A\overline{D}$ can be a valid term—it includes cells 12 and 8 at the top, and wraps to the bottom to include cells 10 and 14—as is $\overline{B}\overline{D}$, which includes the four corners.</p>
+                                </div>
+                            </div>
+
+                            <h3>Solution</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-9b4a18e0.jpeg" alt="K-map Solution Diagram" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Diagram showing K-map for $f(A, B, C, D)$.</figcaption>
+                            </figure>
+
+                            <p>Once the Karnaugh map has been constructed and the adjacent 1s linked by rectangular and square boxes, the algebraic minterms can be found by examining which variables stay the same within each box.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-49e6ffc3.jpeg" alt="Detailed K-map" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Diagram showing two K-maps. The K-map for the function $f(A, B, C, D)$ is shown as colored rectangles which correspond to minterms. The brown region is an overlap of the red $2 \times 2$ square and the green $4 \times 1$ rectangle. The K-map for the inverse of $f$ is shown as gray rectangles, which correspond to maxterms.</figcaption>
+                            </figure>
+
+                            <p>For the red grouping:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">$A$ is the same and is equal to 1 throughout the box, therefore it should be included in the algebraic representation of the red minterm.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">$B$ does not maintain the same state (it shifts from 1 to 0), and should therefore be excluded.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">$C$ does not change. It is always 0, so its complement, NOT-C, should be included. Thus, $\overline{C}$ should be included.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">$D$ changes, so it is excluded.</span>
+                                </li>
+                            </ul>
+                            
+                            <p>Thus the first minterm in the Boolean sum-of-products expression is $A\overline{C}$.</p>
+                            
+                            <p>For the green grouping, $A$ and $B$ maintain the same state, while $D$ and $C$ change. $B$ is 0 and has to be negated before it can be included. The second term is therefore $A\overline{B}$. Note it is fine that the green grouping overlaps with the red one.</p>
+                            
+                            <p>In the same way, the blue grouping gives the term $BC\overline{D}$.</p>
+                            
+                            <p>The solutions of each grouping are combined: the normal form of the circuit is $A\overline{C} + A\overline{B} + BC\overline{D}$.</p>
+                            
+                            <p>Thus the Karnaugh map has guided a simplification.</p>
+                            
+                            <p>It would also have been possible to derive this simplification by carefully applying the axioms of boolean algebra, but the time it takes to do that grows exponentially with the number of terms.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Inverse -->
+                    <section class="content-section" id="inverse">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">↩️</span>
+                                Inverse
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The inverse of a function is solved in the same way by grouping the 0s instead.</p>
+                            
+                            <p>The three terms to cover the inverse are all shown with grey boxes with different colored borders:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">brown: $\overline{A}\overline{B}$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">gold: $\overline{A}\overline{C}$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">blue: $BCD$</span>
+                                </li>
+                            </ul>
+                            
+                            <p>This yields the inverse:</p>
+                            <div class="equation">
+                                $$\overline {{f (A , B , C , D)}} = \overline {{A}} \overline {{B}} + \overline {{A}} \overline {{C}} + B C D$$
+                            </div>
+                            
+                            <p>Through the use of De Morgan's laws, the product of sums can be determined:</p>
+                            <div class="equation">
+                                $$ \begin{array}{l} \overline {{f (A , B , C , D)}} = \overline {{A}} \overline {{B}} + \overline {{A}} \overline {{C}} + B C D \\ f (A, B, C, D) = \overline {{A}} \overline {{B}} + \overline {{A}} \overline {{C}} + B C D \\ f (A, B, C, D) = (A + B) (A + C) (\overline {{B}} + \overline {{C}} + \overline {{D}}) \\ \end{array} $$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Don't Cares -->
+                    <section class="content-section" id="dont-cares">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🤷</span>
+                                Don't Cares
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Karnaugh maps also allow easy minimizations of functions whose truth tables include "don't care" conditions. A "don't care" condition is a combination of inputs for which the designer doesn't care what the output is. Therefore "don't care" conditions can either be included in or excluded from any rectangular group, whichever makes it larger. They are usually indicated on the map with a dash or X.</p>
+                            
+                            <p>The example on the right is the same as the example above but with the value of $f(1, 1, 1, 1)$ replaced by a "don't care". This allows the red term to expand all the way down and, thus, removes the green term completely.</p>
+                            
+                            <p>This yields the new minimum equation:</p>
+                            <div class="equation">
+                                $$f (A, B, C, D) = A + B C \overline {{D}}$$
+                            </div>
+                            
+                            <p>Note that the first term is just $A$, not $A\overline{C}$. In this case, the don't care has dropped a term (the green rectangle); simplified another (the red one); and removed the race hazard (removing the yellow term as shown in the following section on race hazards).</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-0fca2048.jpeg" alt="Don't Care Example" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">The value of $\mathrm{f(A,B,C,D)}$ for $\mathrm{ABCD} = 1111$ is replaced by a "don't care". This removes the green term completely and allows the red term to be larger. It also allows blue inverse term to shift and become larger.</figcaption>
+                            </figure>
+                            
+                            <p>The inverse case is simplified as follows:</p>
+                            <div class="equation">
+                                $$\overline {{f (A , B , C , D)}} = \overline {{A}} \overline {{B}} + \overline {{A}} \overline {{C}} + \overline {{A}} D$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Race Hazards -->
+                    <section class="content-section" id="race-hazards">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚠️</span>
+                                Race Hazards
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Elimination</h3>
+                            <p>Karnaugh maps are useful for detecting and eliminating race hazards. Race hazards are very easy to spot using a Karnaugh map, because a race condition may exist when moving between any pair of adjacent, but disjoint, regions circumscribed on the map. However, because of the nature of Gray coding, adjacent has a special definition explained above - we're in fact moving on a torus, rather than a rectangle, wrapping around the top, bottom, and the sides.</p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">In the example above, a potential race condition exists when $C$ is 1 and $D$ is 0, $A$ is 1, and $B$ changes from 1 to 0 (moving from the blue state to the green state). For this case, the output is defined to remain unchanged at 1, but because this transition is not covered by a specific term in the equation, a potential for a glitch (a momentary transition of the output to 0) exists.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">There is a second potential glitch in the same example that is more difficult to spot: when $D$ is 0 and $A$ and $B$ are both 1, with $C$ changing from 1 to 0 (moving from the blue state to the red state).</span>
+                                </li>
+                            </ul>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-693a92f7.jpeg" alt="Race Hazards Diagram" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Race hazards are present in this diagram.</figcaption>
+                            </figure>
+
+                            <p>Whether these glitches will actually occur depends on the physical nature of the implementation, and whether we need to worry about it depends on the application. In clocked logic, it is enough that the logic settles on the desired value in time to meet the timing deadline. In our example, we are not considering clocked logic.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-d8d24d26.jpeg" alt="Consensus Terms Diagram" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Above diagram with consensus terms added to avoid race hazards.</figcaption>
+                            </figure>
+
+                            <p>In our case, an additional term of $A\overline{D}$ would eliminate the potential race hazard, bridging between the green and blue output states or blue and red output states: this is shown as the yellow region (which wraps around from the bottom to the top of the right half) in the diagram to the right.</p>
+                            
+                            <p>The term is redundant in terms of the static logic of the system, but such redundant, or consensus terms, are often needed to assure race-free dynamic performance.</p>
+                            
+                            <p>Similarly, an additional term of $\overline{A}D$ must be added to the inverse to eliminate another potential race hazard. Applying De Morgan's laws creates another product of sums expression for $f$, but with a new factor of $\left(A+\overline{D}\right)$.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 6: 2-Variable Map Examples -->
+                    <section class="content-section" id="two-variable-examples">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔢</span>
+                                2-Variable Map Examples
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The following are all the possible 2-variable, $2\times 2$ Karnaugh maps. Listed with each is the minterms as a function of $\sum m()$ and the race hazard free (see previous section) minimum equation.</p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(0); $K=0$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(1); $K=A'B'$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(2); $K=AB'$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(3); $K=A'B$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(4); $K=AB$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(1,2); $K=B'$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(1,3); $K=A'$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(1,4); $K=A'B'+AB$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(2,3); $K=AB'+A'B$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(2,4); $K=A$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(3,4); $K=B$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(1,2,3); $K=A'+B'$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(1,2,4); $K=A+B'$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(1,3,4); $K=A'+B$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(2,3,4); $K=A+B$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">m(1,2,3,4); $K=1$</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 7: See Also & References -->
+                    <section class="content-section" id="references">
+                        <div class="section-header">
+                            <div class="section-number">07</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔗</span>
+                                See Also & References
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>See Also</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Circuit minimization</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Espresso heuristic logic minimizer</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">List of boolean algebra topics</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Quine–McCluskey algorithm</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Venn diagram</span></li>
+                            </ul>
+
+                            <h3>References</h3>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">"Karnaugh Maps – Rules of Simplification". Retrieved 2009-05-30.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">"Simplifying Logic Circuits with Karnaugh Maps". The University of Texas at Dallas. Retrieved 7 October 2012.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Cook, Aaron. "Using Karnaugh Maps to Simplify Code". Quantum Rarity. Retrieved 7 October 2012.</span></li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- Key Points Summary -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>The Karnaugh map, also known as the K-map, is a method to simplify boolean algebra expressions.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>The Karnaugh map reduces the need for extensive calculations by taking advantage of humans' pattern-recognition capability.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Optimal groups of 1s or 0s are identified, which represent the terms of a canonical form of the logic in the original truth table.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>The grid is toroidally connected, which means that rectangular groups can wrap across the edges.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Karnaugh maps are useful for detecting and eliminating race hazards... because a race condition may exist when moving between any pair of adjacent, but disjoint, regions circumscribed on the map.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-02-logic-gates.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-04-finite-state-machines.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 37.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 8</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop" data-close-lightbox></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" data-close-lightbox aria-label="Close image viewer">&times;</button>
+            <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>
