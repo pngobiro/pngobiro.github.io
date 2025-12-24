@@ -7,6 +7,18 @@
 (function () {
     'use strict';
 
+    const quizRegistry = new Map();
+
+    /**
+     * Global function to register a quiz
+     * @param {string} id - Unique quiz identifier
+     * @param {Object} data - Quiz data object
+     */
+    window.registerQuiz = function (id, data) {
+        quizRegistry.set(id, data);
+        window.dispatchEvent(new CustomEvent('quizRegistered', { detail: { id, data } }));
+    };
+
     // Quiz State Management
     class QuizEngine {
         constructor(container) {
@@ -27,15 +39,27 @@
 
         async init() {
             const quizSrc = this.container.dataset.quizSrc;
+            const quizId = this.container.dataset.quizId;
+
             if (!quizSrc) {
                 this.showError('No quiz source specified');
                 return;
             }
 
             try {
-                const response = await fetch(quizSrc);
-                if (!response.ok) throw new Error('Failed to load quiz');
-                this.quizData = await response.json();
+                if (quizSrc.endsWith('.js')) {
+                    if (quizRegistry.has(quizId)) {
+                        this.quizData = quizRegistry.get(quizId);
+                    } else {
+                        await this.loadQuizScript(quizSrc);
+                        this.quizData = await this.waitForQuizData(quizId);
+                    }
+                } else {
+                    const response = await fetch(quizSrc);
+                    if (!response.ok) throw new Error('Failed to load quiz');
+                    this.quizData = await response.json();
+                }
+
                 this.validateSchema();
                 this.startTime = Date.now();
                 this.render();
@@ -43,7 +67,7 @@
                 let message = `Error loading quiz: ${error.message}`;
 
                 // Special handling for file:// protocol security restrictions
-                if (window.location.protocol === 'file:') {
+                if (window.location.protocol === 'file:' && !quizSrc.endsWith('.js')) {
                     message = `
                         <strong>Security Restriction:</strong> Browser security blocks loading local JSON files via <code>file://</code>.<br><br>
                         To fix this, please run a local web server:<br>
@@ -55,6 +79,42 @@
 
                 this.showError(message);
             }
+        }
+
+        loadQuizScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.async = true;
+                script.onload = resolve;
+                script.onerror = () => reject(new Error(`Failed to load script: ${src}`));
+                document.head.appendChild(script);
+            });
+        }
+
+        waitForQuizData(id) {
+            return new Promise((resolve, reject) => {
+                // Check if already registered (in case script loaded instantly)
+                if (quizRegistry.has(id)) {
+                    resolve(quizRegistry.get(id));
+                    return;
+                }
+
+                const timeout = setTimeout(() => {
+                    window.removeEventListener('quizRegistered', onRegister);
+                    reject(new Error(`Quiz loading timed out for ID: ${id}`));
+                }, 5000);
+
+                const onRegister = (event) => {
+                    if (event.detail.id === id) {
+                        clearTimeout(timeout);
+                        window.removeEventListener('quizRegistered', onRegister);
+                        resolve(event.detail.data);
+                    }
+                };
+
+                window.addEventListener('quizRegistered', onRegister);
+            });
         }
 
         validateSchema() {

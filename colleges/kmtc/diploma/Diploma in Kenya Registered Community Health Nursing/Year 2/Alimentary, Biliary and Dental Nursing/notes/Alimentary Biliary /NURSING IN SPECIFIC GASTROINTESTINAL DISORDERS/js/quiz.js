@@ -9,14 +9,14 @@
  * 3. Fetch API - requires web server (http/https)
  */
 
-(function() {
+(function () {
     'use strict';
 
     // Global quiz registry for JSONP loading
     window.QuizRegistry = window.QuizRegistry || {};
-    
+
     // JSONP callback - called by external quiz JS files
-    window.registerQuiz = function(quizId, quizData) {
+    window.registerQuiz = function (quizId, quizData) {
         window.QuizRegistry[quizId] = quizData;
         // Trigger any waiting quiz containers
         document.querySelectorAll(`.quiz-container[data-quiz-id="${quizId}"]`).forEach(container => {
@@ -36,10 +36,10 @@
             this.score = 0;
             this.isSubmitted = false;
             this.startTime = null;
-            
+
             // Store reference for JSONP callback
             container._quizEngine = this;
-            
+
             this.elements = {
                 loading: container.querySelector('.quiz-loading'),
                 content: container.querySelector('.quiz-content'),
@@ -49,7 +49,7 @@
 
         async init() {
             const quizId = this.container.dataset.quizId;
-            
+
             try {
                 // Method 1: Check embedded JSON
                 const embeddedScript = document.getElementById(`quiz-data-${quizId}`);
@@ -91,7 +91,7 @@
             script.src = src;
             script.onerror = () => this.showError('Failed to load quiz file.');
             document.head.appendChild(script);
-            
+
             // Set timeout for loading
             setTimeout(() => {
                 if (!this.quizData) {
@@ -139,10 +139,10 @@
         render() {
             this.elements.loading.hidden = true;
             this.elements.content.hidden = false;
-            
+
             const { metadata, settings, questions } = this.quizData;
-            const shuffledQuestions = settings?.shuffleQuestions 
-                ? this.shuffle([...questions]) 
+            const shuffledQuestions = settings?.shuffleQuestions
+                ? this.shuffle([...questions])
                 : questions;
 
             this.elements.content.innerHTML = `
@@ -185,10 +185,10 @@
         renderQuestion(question, index, settings) {
             const questionNum = index + 1;
             const shuffleOptions = settings?.shuffleOptions ?? false;
-            
+
             // Show topic badge for comprehensive exams
-            const topicBadge = question.topicName 
-                ? `<span class="question-topic-badge" data-topic="${question.topicId}">${question.topicName}</span>` 
+            const topicBadge = question.topicName
+                ? `<span class="question-topic-badge" data-topic="${question.topicId}">${question.topicName}</span>`
                 : '';
 
             return `
@@ -222,7 +222,7 @@
 
         renderMedia(media) {
             if (!media) return '';
-            
+
             switch (media.type) {
                 case 'image':
                     return `
@@ -301,7 +301,7 @@
                 case 'short-answer':
                     return this.renderShortAnswer(question);
                 case 'image-based':
-                    return this.renderImageBased(question);
+                    return this.renderImageBased(question, shuffleOptions);
                 default:
                     return '<p>Unknown question type</p>';
             }
@@ -311,7 +311,7 @@
             const options = shuffle ? this.shuffle([...question.options]) : question.options;
             const hasImageOptions = options.some(opt => opt.image);
             const optionsClass = hasImageOptions ? 'quiz-options quiz-options--images' : 'quiz-options';
-            
+
             return `
                 <div class="${optionsClass}" role="radiogroup" aria-label="Answer options">
                     ${options.map(opt => `
@@ -333,7 +333,7 @@
             const options = shuffle ? this.shuffle([...question.options]) : question.options;
             const hasImageOptions = options.some(opt => opt.image);
             const optionsClass = hasImageOptions ? 'quiz-options quiz-options--images' : 'quiz-options';
-            
+
             return `
                 <p class="select-instruction">Select all that apply:</p>
                 <div class="${optionsClass}" role="group" aria-label="Answer options">
@@ -368,7 +368,7 @@
         renderFillBlank(question) {
             let text = question.question;
             question.blanks.forEach((blank, i) => {
-                text = text.replace(`__${blank.id}__`, 
+                text = text.replace(`__${blank.id}__`,
                     `<input type="text" 
                             class="blank-input" 
                             id="blank-${question.id}-${blank.id}"
@@ -440,12 +440,20 @@
             `;
         }
 
-        renderImageBased(question) {
+        renderImageBased(question, shuffle) {
+            // If question has options, treat it as multiple choice with image
+            if (question.options) {
+                return this.renderMultipleChoice(question, shuffle);
+            }
+
+            // Otherwise treat as hotspot
+            if (!question.hotspots) return '<p>Invalid image question configuration</p>';
+
             return `
                 <div class="image-question-container">
                     <p class="image-instruction">Click on the correct location:</p>
                     <div class="image-question-wrapper" data-question="${question.id}">
-                        <img src="${question.imageUrl}" alt="${question.imageAlt}" loading="lazy">
+                        <img src="${question.imageUrl || question.media?.url}" alt="${question.imageAlt || question.media?.alt || ''}" loading="lazy">
                         ${question.hotspots.map(hs => `
                             <button type="button" 
                                     class="hotspot" 
@@ -463,7 +471,7 @@
 
         bindEvents() {
             const form = this.elements.content.querySelector('.quiz-form');
-            
+
             // Form submission
             form.addEventListener('submit', (e) => {
                 e.preventDefault();
@@ -484,7 +492,7 @@
                     const qId = e.target.dataset.question;
                     const value = e.target.dataset.value;
                     document.getElementById(`tf-input-${qId}`).value = value;
-                    
+
                     // Update visual state
                     e.target.parentElement.querySelectorAll('.tf-button').forEach(b => b.classList.remove('selected'));
                     e.target.classList.add('selected');
@@ -498,7 +506,7 @@
                     const qId = e.target.dataset.question;
                     const hsId = e.target.dataset.hotspotId;
                     document.getElementById(`hs-input-${qId}`).value = hsId;
-                    
+
                     // Update visual state
                     e.target.closest('.image-question-wrapper').querySelectorAll('.hotspot').forEach(h => h.classList.remove('selected'));
                     e.target.classList.add('selected');
@@ -532,7 +540,7 @@
 
         initDragAndDrop() {
             const containers = this.elements.content.querySelectorAll('.ordering-container');
-            
+
             containers.forEach(container => {
                 let draggedItem = null;
 
@@ -560,7 +568,7 @@
                             const allItems = [...container.querySelectorAll('.ordering-item')];
                             const draggedIdx = allItems.indexOf(draggedItem);
                             const targetIdx = allItems.indexOf(item);
-                            
+
                             if (draggedIdx < targetIdx) {
                                 item.after(draggedItem);
                             } else {
@@ -589,19 +597,19 @@
             const percentage = (answered / questions.length) * 100;
             const progressFill = this.elements.content.querySelector('.quiz-progress-fill');
             const progressText = this.elements.content.querySelector('.quiz-progress-text');
-            
+
             if (progressFill) progressFill.style.width = `${percentage}%`;
             if (progressText) progressText.textContent = `${answered} of ${questions.length} answered`;
         }
 
         isQuestionAnswered(question) {
             const form = this.elements.content.querySelector('.quiz-form');
-            
+
             switch (question.type) {
                 case 'multiple-choice':
                 case 'true-false':
                     return form.querySelector(`input[name="q-${question.id}"]:checked`) !== null ||
-                           form.querySelector(`input[name="q-${question.id}"]`)?.value;
+                        form.querySelector(`input[name="q-${question.id}"]`)?.value;
                 case 'multiple-select':
                     return form.querySelectorAll(`input[name="q-${question.id}"]:checked`).length > 0;
                 case 'fill-blank':
@@ -611,6 +619,9 @@
                 case 'short-answer':
                     return form.querySelector(`textarea[name="q-${question.id}"]`)?.value.trim();
                 case 'image-based':
+                    if (question.options) {
+                        return form.querySelector(`input[name="q-${question.id}"]:checked`) !== null;
+                    }
                     return form.querySelector(`input[name="q-${question.id}"]`)?.value;
                 case 'ordering':
                     return true; // Always considered answered since items are always in some order
@@ -627,14 +638,14 @@
             let totalScore = 0;
             let maxScore = 0;
             let correctCount = 0;
-            
+
             // Track per-topic scores for comprehensive exams
             const topicScores = {};
 
             this.quizData.questions.forEach(question => {
                 maxScore += question.points;
                 const result = this.gradeQuestion(question, form);
-                
+
                 let earnedPoints = 0;
                 if (result.correct) {
                     correctCount++;
@@ -695,7 +706,7 @@
         gradeMultipleChoice(question, form) {
             const selected = form.querySelector(`input[name="q-${question.id}"]:checked`)?.value;
             const correctOption = question.options.find(o => o.isCorrect);
-            return { 
+            return {
                 correct: selected === correctOption?.id,
                 selectedId: selected,
                 correctId: correctOption?.id
@@ -705,19 +716,19 @@
         gradeMultipleSelect(question, form) {
             const selected = [...form.querySelectorAll(`input[name="q-${question.id}"]:checked`)].map(i => i.value);
             const correctIds = question.options.filter(o => o.isCorrect).map(o => o.id);
-            
+
             const correctSelected = selected.filter(s => correctIds.includes(s)).length;
             const incorrectSelected = selected.filter(s => !correctIds.includes(s)).length;
-            
+
             const isFullyCorrect = correctSelected === correctIds.length && incorrectSelected === 0;
-            
+
             let partialScore = 0;
             if (question.partialCredit && !isFullyCorrect) {
                 partialScore = Math.max(0, (correctSelected - incorrectSelected) / correctIds.length * question.points);
             }
 
-            return { 
-                correct: isFullyCorrect, 
+            return {
+                correct: isFullyCorrect,
                 partialScore,
                 selected,
                 correctIds
@@ -726,7 +737,7 @@
 
         gradeTrueFalse(question, form) {
             const selected = form.querySelector(`input[name="q-${question.id}"]`)?.value;
-            return { 
+            return {
                 correct: selected === String(question.correctAnswer),
                 selected,
                 correctAnswer: question.correctAnswer
@@ -740,7 +751,7 @@
             question.blanks.forEach(blank => {
                 const input = form.querySelector(`input[name="blank-${question.id}-${blank.id}"]`);
                 const userAnswer = input?.value.trim() || '';
-                
+
                 const isCorrect = blank.acceptedAnswers.some(accepted => {
                     if (blank.caseSensitive) {
                         return userAnswer === accepted;
@@ -763,12 +774,12 @@
                 const select = form.querySelector(`select[name="match-${question.id}-${pair.id}"]`);
                 const selected = select?.value;
                 const isCorrect = selected === pair.id;
-                
+
                 results.push({ pairId: pair.id, selected, isCorrect });
                 if (isCorrect) correctCount++;
             });
 
-            return { 
+            return {
                 correct: correctCount === question.pairs.length,
                 partialScore: (correctCount / question.pairs.length) * question.points,
                 matches: results
@@ -778,7 +789,7 @@
         gradeOrdering(question, form) {
             const container = form.querySelector(`.ordering-container[data-question="${question.id}"]`);
             const items = [...container.querySelectorAll('.ordering-item')];
-            
+
             let correctCount = 0;
             items.forEach((item, index) => {
                 const itemId = item.dataset.itemId;
@@ -788,7 +799,7 @@
                 }
             });
 
-            return { 
+            return {
                 correct: correctCount === question.items.length,
                 partialScore: (correctCount / question.items.length) * question.points,
                 correctCount
@@ -798,15 +809,15 @@
         gradeShortAnswer(question, form) {
             const textarea = form.querySelector(`textarea[name="q-${question.id}"]`);
             const answer = textarea?.value.trim().toLowerCase() || '';
-            
-            const foundKeywords = question.keywords.filter(kw => 
+
+            const foundKeywords = question.keywords.filter(kw =>
                 answer.includes(kw.toLowerCase())
             );
 
             const meetsMinimum = foundKeywords.length >= (question.minKeywords || 1);
             const score = (foundKeywords.length / question.keywords.length) * question.points;
 
-            return { 
+            return {
                 correct: meetsMinimum,
                 partialScore: score,
                 foundKeywords,
@@ -815,10 +826,14 @@
         }
 
         gradeImageBased(question, form) {
+            if (question.options) {
+                return this.gradeMultipleChoice(question, form);
+            }
+
             const selected = form.querySelector(`input[name="q-${question.id}"]`)?.value;
-            const correctHotspot = question.hotspots.find(h => h.isCorrect);
-            
-            return { 
+            const correctHotspot = question.hotspots?.find(h => h.isCorrect);
+
+            return {
                 correct: selected === correctHotspot?.id,
                 selectedId: selected,
                 correctId: correctHotspot?.id
@@ -828,9 +843,9 @@
         showQuestionFeedback(question, result) {
             const questionEl = this.elements.content.querySelector(`[data-question-id="${question.id}"]`);
             const feedbackEl = document.getElementById(`feedback-${question.id}`);
-            
+
             questionEl.classList.add(result.correct ? 'correct' : 'incorrect');
-            
+
             // Show correct/incorrect indicators on options
             if (question.type === 'multiple-choice' || question.type === 'multiple-select') {
                 question.options.forEach(opt => {
@@ -891,7 +906,7 @@
             const timeTaken = Math.round((Date.now() - this.startTime) / 1000);
             const minutes = Math.floor(timeTaken / 60);
             const seconds = timeTaken % 60;
-            
+
             // Check if this is a comprehensive exam with topic scores
             const hasTopicScores = Object.keys(this.topicScores || {}).length > 0;
 
@@ -905,10 +920,10 @@
                 <div class="results-score">${percentage}%</div>
                 
                 <p class="results-message">
-                    ${passed 
-                        ? `You passed! You scored ${score} out of ${maxScore} points.`
-                        : `You scored ${score} out of ${maxScore} points. ${this.quizData.metadata.passingScore || 70}% required to pass.`
-                    }
+                    ${passed
+                    ? `You passed! You scored ${score} out of ${maxScore} points.`
+                    : `You scored ${score} out of ${maxScore} points. ${this.quizData.metadata.passingScore || 70}% required to pass.`
+                }
                 </p>
                 
                 <div class="results-breakdown">
@@ -942,12 +957,12 @@
 
             // Bind retry button
             this.elements.results.querySelector('#quiz-retry')?.addEventListener('click', () => this.resetQuiz());
-            
+
             // Record progress to Quiz Hub
             if (window.QuizHubManager) {
                 window.QuizHubManager.recordQuizResult(this.quizData.quizId, percentage, passed);
             }
-            
+
             // Scroll to results
             this.elements.results.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }
@@ -955,15 +970,15 @@
         renderTopicBreakdown() {
             const topics = Object.entries(this.topicScores);
             if (topics.length === 0) return '';
-            
+
             return `
                 <div class="topic-breakdown">
                     <h4 class="topic-breakdown-title">📊 Performance by Topic</h4>
                     <div class="topic-breakdown-list">
                         ${topics.map(([topicId, data]) => {
-                            const topicPercent = Math.round((data.earned / data.max) * 100);
-                            const statusClass = topicPercent >= 70 ? 'good' : topicPercent >= 50 ? 'fair' : 'needs-work';
-                            return `
+                const topicPercent = Math.round((data.earned / data.max) * 100);
+                const statusClass = topicPercent >= 70 ? 'good' : topicPercent >= 50 ? 'fair' : 'needs-work';
+                return `
                                 <div class="topic-breakdown-item ${statusClass}">
                                     <div class="topic-breakdown-header">
                                         <span class="topic-name">${data.topicName}</span>
@@ -977,7 +992,7 @@
                                     </div>
                                 </div>
                             `;
-                        }).join('')}
+            }).join('')}
                     </div>
                 </div>
             `;
