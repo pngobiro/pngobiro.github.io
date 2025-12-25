@@ -1,6 +1,6 @@
-# PDF to HTML Conversion System Prompt (v9.4.1) - Rich UI Edition
+# PDF to HTML Conversion System Prompt (v9.4.2) - Rich UI Edition
 
-**Version:** 9.4.1  
+**Version:** 9.4.2  
 **Last Updated:** December 25, 2025  
 **Focus:** Modern UI/UX patterns with 100% content fidelity, nested lists, mathematical equations, and comprehensive interactive quiz system
 
@@ -93,6 +93,8 @@ Binary choice questions for quick knowledge checks.
 Text input questions with exact or fuzzy matching.
 - **Use Case**: Testing terminology, formulas, key terms
 - **Features**: Case-insensitive matching, multiple acceptable answers, hint system
+- **CRITICAL**: Question text MUST include `__id__` placeholders (e.g., `__b1__`, `__b2__`) where input fields should appear
+- **Example**: `"The liver converts ammonia into __b1__."` with blank ID `"b1"`
 
 #### 5. Matching
 Pair items from two columns (drag-and-drop or dropdown).
@@ -308,14 +310,16 @@ project-name/
         {
           "if": { "properties": { "type": { "const": "fill-blank" } } },
           "then": {
+            "description": "⚠️ CRITICAL: The 'question' field MUST contain __id__ placeholders (e.g., __b1__, __b2__) that match the blank IDs. Example: 'The liver converts ammonia into __b1__.' with blank id='b1'",
             "properties": {
               "blanks": {
                 "type": "array",
+                "description": "Array of blank definitions. Each blank.id must have a matching __id__ placeholder in the question text.",
                 "items": {
                   "type": "object",
                   "properties": {
-                    "id": { "type": "string" },
-                    "acceptedAnswers": { "type": "array", "items": { "type": "string" } },
+                    "id": { "type": "string", "description": "Blank identifier (e.g., 'b1', '1', 'answer1'). Must match placeholder in question." },
+                    "acceptedAnswers": { "type": "array", "items": { "type": "string" }, "description": "List of acceptable answers" },
                     "caseSensitive": { "type": "boolean", "default": false }
                   }
                 }
@@ -719,6 +723,96 @@ project-name/
   ]
 }
 ```
+
+#### Example 5: Fill-Blank Question - Correct vs Incorrect Usage
+
+**⚠️ CRITICAL REQUIREMENT**: The question text MUST include `__id__` placeholders that match the blank IDs.
+
+##### ✅ CORRECT - Single Blank
+
+```json
+{
+  "id": "q1",
+  "type": "fill-blank",
+  "question": "The accumulation of serous fluid in the peritoneal cavity seen in cirrhosis is called __b1__.",
+  "points": 10,
+  "blanks": [
+    { "id": "b1", "acceptedAnswers": ["ascites"], "caseSensitive": false }
+  ],
+  "explanation": "Ascites is the accumulation of fluid in the peritoneal cavity."
+}
+```
+
+##### ✅ CORRECT - Multiple Blanks
+
+```json
+{
+  "id": "q2",
+  "type": "fill-blank",
+  "question": "The liver converts ammonia into __b1__, which is then excreted by the __b2__.",
+  "points": 15,
+  "blanks": [
+    { "id": "b1", "acceptedAnswers": ["urea"], "caseSensitive": false },
+    { "id": "b2", "acceptedAnswers": ["kidneys", "kidney"], "caseSensitive": false }
+  ],
+  "explanation": "Ammonia is converted to urea by the liver and excreted by the kidneys."
+}
+```
+
+##### ✅ CORRECT - Numeric IDs
+
+```json
+{
+  "id": "q3",
+  "type": "fill-blank",
+  "question": "The heart has __1__ chambers: two __2__ and two __3__.",
+  "points": 15,
+  "blanks": [
+    { "id": "1", "acceptedAnswers": ["four", "4"], "caseSensitive": false },
+    { "id": "2", "acceptedAnswers": ["atria", "atriums"], "caseSensitive": false },
+    { "id": "3", "acceptedAnswers": ["ventricles"], "caseSensitive": false }
+  ]
+}
+```
+
+##### ❌ INCORRECT - Missing Placeholder
+
+```json
+{
+  "id": "q_wrong",
+  "type": "fill-blank",
+  "question": "The accumulation of serous fluid in the peritoneal cavity is called _______.",
+  "points": 10,
+  "blanks": [
+    { "id": "b1", "acceptedAnswers": ["ascites"], "caseSensitive": false }
+  ]
+}
+```
+**Problem**: Uses `_______` instead of `__b1__`. The quiz engine won't render an input field!
+
+##### ❌ INCORRECT - Mismatched IDs
+
+```json
+{
+  "id": "q_wrong2",
+  "type": "fill-blank",
+  "question": "The liver converts ammonia into __answer__.",
+  "points": 10,
+  "blanks": [
+    { "id": "b1", "acceptedAnswers": ["urea"], "caseSensitive": false }
+  ]
+}
+```
+**Problem**: Question uses `__answer__` but blank ID is `b1`. They must match exactly!
+
+##### Key Rules for Fill-Blank Questions:
+1. **Placeholder Format**: Use double underscores: `__id__` (not single `_id_` or dashes `---`)
+2. **ID Matching**: Placeholder `__b1__` must match blank `"id": "b1"` exactly
+3. **Multiple Blanks**: Each blank needs its own unique ID and placeholder
+4. **Accepted Answers**: Provide multiple acceptable variations (e.g., `["urea", "Urea"]`)
+5. **Case Sensitivity**: Set `caseSensitive: false` for most medical terminology
+
+
 
 ### Quiz Loading Methods
 

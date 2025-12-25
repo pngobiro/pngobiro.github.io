@@ -3,23 +3,20 @@ registerQuiz("comprehensive-exam", {
   "quizId": "comprehensive-exam",
   "metadata": {
     "title": "Comprehensive Final Exam",
-    "description": "Comprehensive assessment covering Anatomy, Oral Disorders, Gastritis, Peptic Ulcers, Obstruction, Appendicitis, Peritonitis, Colorectal Disorders, and Hepatic Cirrhosis.",
+    "description": "Assessment covering Physiology, Hepatitis, Cirrhosis, Liver Cancer, and Biliary Disorders.",
     "examType": "comprehensive",
     "topicsCovered": [
-      "topic-01-anatomy",
-      "topic-02-oral-disorders",
-      "topic-03-gastritis",
-      "topic-04-peptic-ulcer",
-      "topic-05-obstruction-appendicitis",
-      "topic-06-peritonitis",
-      "topic-07-colorectal",
-      "topic-08-hepatic"
+      "topic-01-physiology",
+      "topic-02-hepatitis",
+      "topic-03-cirrhosis",
+      "topic-04-cancer-transplant",
+      "topic-05-biliary"
     ],
     "difficulty": "advanced",
-    "estimatedTime": 60,
+    "estimatedTime": 45,
     "passingScore": 75,
-    "createdAt": "2025-12-25T00:00:00Z",
-    "tags": ["final", "comprehensive", "all-topics", "git", "nursing"]
+    "createdAt": "2025-12-25T10:00:00Z",
+    "tags": ["final", "comprehensive", "nursing", "hepatic", "biliary"]
   },
   "settings": {
     "shuffleQuestions": true,
@@ -27,398 +24,249 @@ registerQuiz("comprehensive-exam", {
     "showFeedback": "end",
     "allowRetry": true,
     "showCorrectAnswers": true,
-    "timeLimit": 3600
+    "timeLimit": 2700
   },
   "questions": [
-    // TOPIC 1: ANATOMY
+    // TOPIC 1: PHYSIOLOGY & ASSESSMENT
     {
-      "id": "anat-q1",
+      "id": "comp-q1",
       "type": "multiple-choice",
-      "question": "What is the approximate length of the gastrointestinal tract (GIT)?",
-      "points": 1,
-      "topicId": "topic-01-anatomy",
-      "topicName": "Anatomy of the GIT",
+      "question": "Which type of jaundice results from an increased breakdown of red blood cells, causing an increase in unconjugated bilirubin?",
+      "points": 10,
+      "topicId": "topic-01-physiology",
+      "topicName": "Physiology & Assessment",
       "options": [
-        { "id": "a", "text": "10 – 12 feet (3m – 3.6m)", "isCorrect": false },
-        { "id": "b", "text": "23 – 26 feet (7m – 7.9m)", "isCorrect": true },
-        { "id": "c", "text": "15 – 18 feet (4.5m – 5.5m)", "isCorrect": false },
-        { "id": "d", "text": "30 – 35 feet (9m – 10.5m)", "isCorrect": false }
+        { "id": "a", "text": "Obstructive jaundice", "isCorrect": false },
+        { "id": "b", "text": "Hepatocellular jaundice", "isCorrect": false },
+        { "id": "c", "text": "Hemolytic jaundice", "isCorrect": true },
+        { "id": "d", "text": "Physiologic jaundice", "isCorrect": false }
       ],
-      "explanation": "The GIT is approximately 23 – 26 feet long (7m – 7.9m), extending from the mouth to the anus."
+      "explanation": "Hemolytic jaundice occurs with an increase in the breakdown of red blood cells (hemolysis), which causes an increase in the amount of unconjugated bilirubin in the blood."
     },
     {
-      "id": "anat-q2",
-      "type": "multiple-select",
-      "question": "Which of the following are functions of saliva? (Select all that apply)",
-      "points": 1,
-      "topicId": "topic-01-anatomy",
-      "topicName": "Anatomy of the GIT",
+      "id": "comp-q2",
+      "type": "multiple-choice",
+      "question": "Clients with liver disease frequently develop jaundice. What is the physiologic cause of this finding?",
+      "points": 10,
+      "topicId": "topic-01-physiology",
+      "topicName": "Physiology & Assessment",
       "options": [
-        { "id": "a", "text": "Lubricating mucous membranes", "isCorrect": true },
-        { "id": "b", "text": "Digesting proteins via pepsin", "isCorrect": false },
-        { "id": "c", "text": "Cleaning effect by washing away debris", "isCorrect": true },
-        { "id": "d", "text": "Antibacterial effect", "isCorrect": true },
-        { "id": "e", "text": "Absorption of Vitamin B12", "isCorrect": false }
+        { "id": "a", "text": "Increased levels of ammonia", "isCorrect": false },
+        { "id": "b", "text": "Increased alanine aminotransferase (ALT) level", "isCorrect": false },
+        { "id": "c", "text": "Bilirubin levels above 2 mg/dL", "isCorrect": true },
+        { "id": "d", "text": "Decreased red blood cell breakdown", "isCorrect": false }
       ],
-      "explanation": "Saliva lubricates, cleans, has antibacterial effects, and contains amylase for carbohydrate digestion. Pepsin is gastric, and B12 absorption requires intrinsic factor in the stomach/ileum."
+      "explanation": "Jaundice is a yellowish discoloration of the skin caused by increased levels of bilirubin. Serum bilirubin levels must generally exceed 2 mg/dL for jaundice to become visible."
     },
     {
-      "id": "anat-q3",
+      "id": "comp-q3",
       "type": "matching",
-      "question": "Match the part of the GIT with its primary function or feature:",
-      "points": 1,
-      "topicId": "topic-01-anatomy",
-      "topicName": "Anatomy of the GIT",
+      "question": "Match the laboratory test with its significance in liver assessment:",
+      "points": 15,
+      "topicId": "topic-01-physiology",
+      "topicName": "Physiology & Assessment",
       "pairs": [
-        { "id": "p1", "left": "Stomach", "right": "Secretes Intrinsic Factor & HCl" },
-        { "id": "p2", "left": "Small Intestine", "right": "Major site of nutrient absorption" },
-        { "id": "p3", "left": "Ileocecal Valve", "right": "Prevents reflux of bacteria into small intestine" },
-        { "id": "p4", "left": "Oesophagus", "right": "Transports bolus via peristalsis" }
-      ]
+        { "id": "p1", "left": "Serum Ammonia", "right": "Elevated when liver cannot convert it to urea" },
+        { "id": "p2", "left": "Serum Albumin", "right": "Decreased levels lead to edema/ascites" },
+        { "id": "p3", "left": "Prothrombin Time", "right": "Prolonged when clotting factors are not synthesized" },
+        { "id": "p4", "left": "ALT/AST", "right": "Elevated with liver cell damage" }
+      ],
+      "explanation": "Ammonia builds up when the liver fails to convert it to urea. Albumin maintains oncotic pressure. The liver synthesizes clotting factors (affecting PT). Enzymes (ALT/AST) release when cells are damaged."
     },
 
-    // TOPIC 2: ORAL DISORDERS
+    // TOPIC 2: HEPATITIS
     {
-      "id": "oral-q1",
+      "id": "comp-q4",
       "type": "multiple-choice",
-      "question": "Which microorganism is primarily responsible for Oral Thrush?",
-      "points": 1,
-      "topicId": "topic-02-oral-disorders",
-      "topicName": "Oral & Dental Disorders",
+      "question": "The nurse is caring for a client with chronic hepatitis B (HBV). What should be included in the discharge teaching plan?",
+      "points": 10,
+      "topicId": "topic-02-hepatitis",
+      "topicName": "Hepatitis",
       "options": [
-        { "id": "a", "text": "Streptococcus mutans", "isCorrect": false },
-        { "id": "b", "text": "Candida albicans", "isCorrect": true },
-        { "id": "c", "text": "Helicobacter pylori", "isCorrect": false },
-        { "id": "d", "text": "Herpes simplex", "isCorrect": false }
+        { "id": "a", "text": "Avoid sexual activity until antibodies are present", "isCorrect": true },
+        { "id": "b", "text": "Report any clay-colored stools immediately", "isCorrect": false },
+        { "id": "c", "text": "Eat a high-fat diet", "isCorrect": false },
+        { "id": "d", "text": "Perform daily urine bilirubin checks", "isCorrect": false }
       ],
-      "explanation": "Oral thrush is a fungal infection caused by the accumulation of Candida albicans."
+      "explanation": "Clients with hepatitis B should avoid intimate and sexual contact until antibodies to the HBsAg are present and the client is no longer contagious."
     },
     {
-      "id": "oral-q2",
-      "type": "true-false",
-      "question": "Gingivitis is a destructive periodontal disease that inevitably leads to bone loss.",
-      "points": 1,
-      "topicId": "topic-02-oral-disorders",
-      "topicName": "Oral & Dental Disorders",
-      "correctAnswer": false,
-      "explanation": "Gingivitis is inflammation of the gums and is non-destructive. However, if untreated, it can progress to Periodontitis, which involves bone loss."
-    },
-    {
-      "id": "oral-q3",
-      "type": "matching",
-      "question": "Match the stomatitis type to its description:",
-      "points": 1,
-      "topicId": "topic-02-oral-disorders",
-      "topicName": "Oral & Dental Disorders",
-      "pairs": [
-        { "id": "p1", "left": "Canker Sore", "right": "Single pale ulcer with red outer ring" },
-        { "id": "p2", "left": "Cold Sore", "right": "Fluid-filled blisters, often associated with flu symptoms" },
-        { "id": "p3", "left": "Gingivitis", "right": "Red, puffy gums that bleed easily" },
-        { "id": "p4", "left": "Periapical Abscess", "right": "Collection of pus at the root of a tooth" }
-      ]
-    },
-
-    // TOPIC 3: GASTRITIS
-    {
-      "id": "gas-q1",
-      "type": "multiple-select",
-      "question": "Which of the following are common causes of Chronic Gastritis? (Select all that apply)",
-      "points": 1,
-      "topicId": "topic-03-gastritis",
-      "topicName": "Gastritis",
-      "options": [
-        { "id": "a", "text": "Helicobacter pylori infection", "isCorrect": true },
-        { "id": "b", "text": "Pernicious anaemia (Autoimmune)", "isCorrect": true },
-        { "id": "c", "text": "Ingestion of strong alkali (Corrosive)", "isCorrect": false },
-        { "id": "d", "text": "Chronic reflux of pancreatic secretions", "isCorrect": true }
-      ],
-      "explanation": "Ingestion of strong corrosive agents typically causes acute gastritis. H. pylori, autoimmunity, and chronic reflux are causes of chronic gastritis."
-    },
-    {
-      "id": "gas-q2",
+      "id": "comp-q5",
       "type": "multiple-choice",
-      "question": "In the surgical management of gastric disorders, what is a Billroth I procedure?",
-      "points": 1,
-      "topicId": "topic-03-gastritis",
-      "topicName": "Gastritis",
+      "question": "Which of the following analgesic medications would be appropriate for a client with Hepatitis B complaining of a headache?",
+      "points": 10,
+      "topicId": "topic-02-hepatitis",
+      "topicName": "Hepatitis",
       "options": [
-        { "id": "a", "text": "Anastomosis of stomach remnant to the jejunum", "isCorrect": false },
-        { "id": "b", "text": "Anastomosis of stomach remnant to the duodenum", "isCorrect": true },
-        { "id": "c", "text": "Total removal of the stomach", "isCorrect": false },
-        { "id": "d", "text": "Cutting the vagus nerve only", "isCorrect": false }
+        { "id": "a", "text": "Acetaminophen (Tylenol)", "isCorrect": false },
+        { "id": "b", "text": "Ibuprofen (Motrin)", "isCorrect": true },
+        { "id": "c", "text": "Aspirin", "isCorrect": false },
+        { "id": "d", "text": "Percocet", "isCorrect": false }
       ],
-      "explanation": "Billroth I (Gastroduodenostomy) involves connecting the gastric remnant to the duodenum. Billroth II connects to the jejunum."
+      "explanation": "Acetaminophen is hepatotoxic and should be avoided or used with extreme caution in liver disease. Ibuprofen is generally safer for the liver, though bleeding risk should be assessed."
     },
     {
-      "id": "gas-q3",
+      "id": "comp-q6",
       "type": "fill-blank",
-      "question": "Chronic gastritis may lead to the malabsorption of Vitamin __1__, resulting in pernicious anaemia.",
-      "points": 1,
-      "topicId": "topic-03-gastritis",
-      "topicName": "Gastritis",
+      "question": "Hepatitis A is primarily transmitted via the _______-oral route.",
+      "points": 10,
+      "topicId": "topic-02-hepatitis",
+      "topicName": "Hepatitis",
       "blanks": [
-        { "id": "1", "acceptedAnswers": ["B12", "B-12", "b12"], "caseSensitive": false }
+        { "id": "b1", "acceptedAnswers": ["fecal", "faecal"], "caseSensitive": false }
       ],
-      "explanation": "Loss of parietal cells in chronic gastritis reduces Intrinsic Factor, which is necessary for Vitamin B12 absorption."
+      "explanation": "Hepatitis A (HAV) is primarily transmitted via the fecal-oral route, often through contaminated food, water, or poor hygiene."
     },
 
-    // TOPIC 4: PEPTIC ULCER
+    // TOPIC 3: CIRRHOSIS
     {
-      "id": "pud-q1",
-      "type": "true-false",
-      "question": "Pain from a duodenal ulcer is usually relieved by eating.",
-      "points": 1,
-      "topicId": "topic-04-peptic-ulcer",
-      "topicName": "Peptic Ulcer Disease",
-      "correctAnswer": true,
-      "explanation": "Duodenal ulcer pain is typically relieved by food because food neutralizes the acid. The pain often returns 2-3 hours later when the stomach empties."
+      "id": "comp-q7",
+      "type": "multiple-choice",
+      "question": "What is the primary purpose of administering lactulose to a client with advanced liver disease and encephalopathy?",
+      "points": 10,
+      "topicId": "topic-03-cirrhosis",
+      "topicName": "Hepatic Cirrhosis",
+      "options": [
+        { "id": "a", "text": "To ensure regular bowel movements", "isCorrect": false },
+        { "id": "b", "text": "To prevent bowel obstruction", "isCorrect": false },
+        { "id": "c", "text": "To decrease ammonia levels in the blood", "isCorrect": true },
+        { "id": "d", "text": "To promote clotting", "isCorrect": false }
+      ],
+      "explanation": "Lactulose is used to reduce the amount of ammonia in the blood by drawing ammonia from the blood into the colon where it is excreted."
     },
     {
-      "id": "pud-q2",
+      "id": "comp-q8",
       "type": "multiple-choice",
-      "question": "What is the classic presentation of Zollinger-Ellison Syndrome (ZES)?",
-      "points": 1,
-      "topicId": "topic-04-peptic-ulcer",
-      "topicName": "Peptic Ulcer Disease",
+      "question": "A client with cirrhosis receives neomycin sulfate. The nurse understands this medication is given to:",
+      "points": 10,
+      "topicId": "topic-03-cirrhosis",
+      "topicName": "Hepatic Cirrhosis",
       "options": [
-        { "id": "a", "text": "Hyposecretion of acid and gastric atrophy", "isCorrect": false },
-        { "id": "b", "text": "Severe peptic ulcers, extreme hyperacidity, and gastrin-secreting tumors", "isCorrect": true },
-        { "id": "c", "text": "Acute mucosal ulceration following burns", "isCorrect": false },
-        { "id": "d", "text": "Autoimmune destruction of parietal cells", "isCorrect": false }
+        { "id": "a", "text": "Decrease gastric acidity", "isCorrect": false },
+        { "id": "b", "text": "Acidify feces and trap ammonia", "isCorrect": false },
+        { "id": "c", "text": "Decrease bacterial flora in the intestine", "isCorrect": true },
+        { "id": "d", "text": "Reduce portal hypertension", "isCorrect": false }
       ],
-      "explanation": "ZES involves gastrinomas (usually in pancreas) secreting excess gastrin, causing extreme hyperacidity and intractable ulcers."
+      "explanation": "Neomycin is a nonabsorbable antibiotic that decreases the normal flora in the intestines, thereby reducing bacterial action on protein which produces ammonia."
     },
     {
-      "id": "pud-q3",
+      "id": "comp-q9",
       "type": "multiple-choice",
-      "question": "Which triple therapy regimen is commonly used to treat H. pylori?",
-      "points": 1,
-      "topicId": "topic-04-peptic-ulcer",
-      "topicName": "Peptic Ulcer Disease",
+      "question": "The nurse observes a client with liver disease unable to hold their hands out steady, exhibiting a 'flapping' tremor. This finding is documented as:",
+      "points": 10,
+      "topicId": "topic-03-cirrhosis",
+      "topicName": "Hepatic Cirrhosis",
       "options": [
-        { "id": "a", "text": "PPI + Metronidazole + Tetracycline", "isCorrect": false },
-        { "id": "b", "text": "PPI + Clarithromycin + Amoxicillin (or Metronidazole)", "isCorrect": true },
-        { "id": "c", "text": "H2 Blocker + Antacid + Sucralfate", "isCorrect": false },
-        { "id": "d", "text": "Bismuth + Tetracycline + Metronidazole", "isCorrect": false }
+        { "id": "a", "text": "Apraxia", "isCorrect": false },
+        { "id": "b", "text": "Asterixis", "isCorrect": true },
+        { "id": "c", "text": "Fetor hepaticus", "isCorrect": false },
+        { "id": "d", "text": "Ascites", "isCorrect": false }
       ],
-      "explanation": "Standard triple therapy consists of a PPI and two antibiotics, typically Clarithromycin and Amoxicillin (or Metronidazole)."
+      "explanation": "Asterixis, or 'liver flap', is a flapping tremor of the hands often seen in hepatic encephalopathy."
+    },
+    {
+      "id": "comp-q10",
+      "type": "multiple-choice",
+      "question": "After administering diuretics to a client with ascites, which nursing action best ensures safe care?",
+      "points": 10,
+      "topicId": "topic-03-cirrhosis",
+      "topicName": "Hepatic Cirrhosis",
+      "options": [
+        { "id": "a", "text": "Monitoring serum potassium for hyperkalemia", "isCorrect": false },
+        { "id": "b", "text": "Weighing the client weekly", "isCorrect": false },
+        { "id": "c", "text": "Monitoring fluid status for hypovolemia", "isCorrect": true },
+        { "id": "d", "text": "Restricting protein intake", "isCorrect": false }
+      ],
+      "explanation": "Diuretics can cause rapid fluid shifts. Monitoring for hypovolemia (and electrolyte imbalances like hypokalemia, not hyperkalemia unless spironolactone is used alone) is critical."
     },
 
-    // TOPIC 5: OBSTRUCTION & APPENDICITIS
+    // TOPIC 4: CANCER & TRANSPLANT
     {
-      "id": "obs-q1",
-      "type": "matching",
-      "question": "Classify the following causes of intestinal obstruction:",
-      "points": 1,
-      "topicId": "topic-05-obstruction-appendicitis",
-      "topicName": "Obstruction & Appendicitis",
-      "pairs": [
-        { "id": "p1", "left": "Adhesions", "right": "Mechanical Obstruction" },
-        { "id": "p2", "left": "Hernia", "right": "Mechanical Obstruction" },
-        { "id": "p3", "left": "Amyloidosis/Muscular Dystrophy", "right": "Functional Obstruction" },
-        { "id": "p4", "left": "Intussusception", "right": "Mechanical Obstruction" }
-      ]
-    },
-    {
-      "id": "obs-q2",
-      "type": "multiple-choice",
-      "question": "Where is McBurney's point located?",
-      "points": 1,
-      "topicId": "topic-05-obstruction-appendicitis",
-      "topicName": "Obstruction & Appendicitis",
-      "options": [
-        { "id": "a", "text": "Left Lower Quadrant", "isCorrect": false },
-        { "id": "b", "text": "Right Upper Quadrant", "isCorrect": false },
-        { "id": "c", "text": "Right Lower Quadrant", "isCorrect": true },
-        { "id": "d", "text": "Epigastric Region", "isCorrect": false }
-      ],
-      "explanation": "McBurney's point is in the Right Lower Quadrant (RLQ) and is the classic site of tenderness in appendicitis."
-    },
-    {
-      "id": "obs-q3",
-      "type": "multiple-select",
-      "question": "Which of the following are signs of a perforated appendix? (Select all that apply)",
-      "points": 1,
-      "topicId": "topic-05-obstruction-appendicitis",
-      "topicName": "Obstruction & Appendicitis",
-      "options": [
-        { "id": "a", "text": "Toxic appearance", "isCorrect": true },
-        { "id": "b", "text": "Fever ≥ 37.7°C (100°F)", "isCorrect": true },
-        { "id": "c", "text": "Sudden relief of pain followed by increased pain", "isCorrect": true },
-        { "id": "d", "text": "Hyperactive bowel sounds", "isCorrect": false }
-      ],
-      "explanation": "Perforation typically presents with fever, toxicity, and peritonitis. Bowel sounds are usually diminished or absent (paralytic ileus) rather than hyperactive."
-    },
-    {
-      "id": "obs-q4",
+      "id": "comp-q11",
       "type": "true-false",
-      "question": "Laxatives or enemas should be administered to relieve constipation in a patient with suspected appendicitis.",
-      "points": 1,
-      "topicId": "topic-05-obstruction-appendicitis",
-      "topicName": "Obstruction & Appendicitis",
+      "question": "Primary liver cancer is more common than metastatic liver cancer.",
+      "points": 5,
+      "topicId": "topic-04-cancer-transplant",
+      "topicName": "Liver Cancer & Transplant",
       "correctAnswer": false,
-      "explanation": "Laxatives and enemas are CONTRAINDICATED as they may cause perforation of the inflamed appendix."
+      "explanation": "Primary cancer of the liver is rare. Metastatic cancer is much more common because of the liver's high blood flow and capillary network."
+    },
+    {
+      "id": "comp-q12",
+      "type": "multiple-choice",
+      "question": "What is a critical nursing assessment for a client in the first 2 months following a liver transplant?",
+      "points": 10,
+      "topicId": "topic-04-cancer-transplant",
+      "topicName": "Liver Cancer & Transplant",
+      "options": [
+        { "id": "a", "text": "Monitoring for severe rejection, which is very common", "isCorrect": false },
+        { "id": "b", "text": "Monitoring for infection, as fever may be the only sign", "isCorrect": true },
+        { "id": "c", "text": "Checking for hypoglycemia", "isCorrect": false },
+        { "id": "d", "text": "Assessing for rapid weight loss", "isCorrect": false }
+      ],
+      "explanation": "It is critical to monitor for infection in the first 2 months post-transplant due to immunosuppression; fever may be the only clinical sign."
     },
 
-    // TOPIC 6: PERITONITIS
+    // TOPIC 5: BILIARY DISORDERS
     {
-      "id": "peri-q1",
+      "id": "comp-q13",
       "type": "multiple-choice",
-      "question": "Which of the following is a classic sign of peritonitis?",
-      "points": 1,
-      "topicId": "topic-06-peritonitis",
-      "topicName": "Peritonitis",
+      "question": "A client returns to the room after a liver biopsy. How should the nurse position the client?",
+      "points": 10,
+      "topicId": "topic-05-biliary",
+      "topicName": "Biliary Tract Disorders",
       "options": [
-        { "id": "a", "text": "Soft, non-tender abdomen", "isCorrect": false },
-        { "id": "b", "text": "Rigid, board-like abdomen", "isCorrect": true },
-        { "id": "c", "text": "Bradycardia", "isCorrect": false },
-        { "id": "d", "text": "Polyuria", "isCorrect": false }
+        { "id": "a", "text": "On the left side to promote drainage", "isCorrect": false },
+        { "id": "b", "text": "Supine with legs elevated", "isCorrect": false },
+        { "id": "c", "text": "On the right side with a pillow under the costal margin", "isCorrect": true },
+        { "id": "d", "text": "High Fowler's position", "isCorrect": false }
       ],
-      "explanation": "A rigid, board-like abdomen is a hallmark sign of peritonitis due to muscle spasm guarding the inflamed peritoneum."
+      "explanation": "The client should be positioned on the right side for 2 hours post-procedure to apply pressure to the liver site and decrease the risk for hemorrhage."
     },
     {
-      "id": "peri-q2",
+      "id": "comp-q14",
       "type": "multiple-choice",
-      "question": "What is the major cause of death from peritonitis?",
-      "points": 1,
-      "topicId": "topic-06-peritonitis",
-      "topicName": "Peritonitis",
+      "question": "A client who underwent a cholecystectomy 3 days ago has a T-tube that has stopped draining. What is the best nursing action?",
+      "points": 10,
+      "topicId": "topic-05-biliary",
+      "topicName": "Biliary Tract Disorders",
       "options": [
-        { "id": "a", "text": "Dehydration", "isCorrect": false },
-        { "id": "b", "text": "Sepsis", "isCorrect": true },
-        { "id": "c", "text": "Pain", "isCorrect": false },
-        { "id": "d", "text": "Adhesions", "isCorrect": false }
+        { "id": "a", "text": "Flush the tube with 5 mL of normal saline", "isCorrect": false },
+        { "id": "b", "text": "Assess for tube placement and kinks", "isCorrect": true },
+        { "id": "c", "text": "Clamp the tube immediately", "isCorrect": false },
+        { "id": "d", "text": "Raise the drainage bag above the waist", "isCorrect": false }
       ],
-      "explanation": "Sepsis (septicemia) is the major cause of death, often leading to septic shock."
+      "explanation": "The nurse should observe for kinks or assess placement. One should NOT irrigate or clamp the tube without a specific order."
     },
     {
-      "id": "peri-q3",
+      "id": "comp-q15",
       "type": "multiple-choice",
-      "question": "Which position is recommended for a patient with peritonitis to decrease tension on abdominal organs?",
-      "points": 1,
-      "topicId": "topic-06-peritonitis",
-      "topicName": "Peritonitis",
+      "question": "Why is Vitamin K often prescribed before surgery for biliary obstruction?",
+      "points": 10,
+      "topicId": "topic-05-biliary",
+      "topicName": "Biliary Tract Disorders",
       "options": [
-        { "id": "a", "text": "Supine with legs extended", "isCorrect": false },
-        { "id": "b", "text": "Side-lying with knees flexed", "isCorrect": true },
-        { "id": "c", "text": "Prone", "isCorrect": false },
-        { "id": "d", "text": "Trendelenburg", "isCorrect": false }
+        { "id": "a", "text": "To increase digestion of fats", "isCorrect": false },
+        { "id": "b", "text": "To aid in emptying the gallbladder", "isCorrect": false },
+        { "id": "c", "text": "To facilitate coagulation activities of the blood", "isCorrect": true },
+        { "id": "d", "text": "To reduce risk of infection", "isCorrect": false }
       ],
-      "explanation": "Placing the patient on the side with knees flexed helps relax the abdominal muscles and reduce tension/pain."
+      "explanation": "Vitamin K is necessary for the synthesis of prothrombin. In biliary obstruction, Vitamin K absorption is impaired, leading to bleeding risks."
     },
-
-    // TOPIC 7: COLORECTAL
     {
-      "id": "col-q1",
+      "id": "comp-q16",
       "type": "multiple-choice",
-      "question": "Which symptom is most commonly associated with rectal cancer lesions?",
-      "points": 1,
-      "topicId": "topic-07-colorectal",
-      "topicName": "Colorectal Disorders",
+      "question": "Following a laparoscopic cholecystectomy, a client complains of shoulder pain. The nurse recognizes this is likely caused by:",
+      "points": 10,
+      "topicId": "topic-05-biliary",
+      "topicName": "Biliary Tract Disorders",
       "options": [
-        { "id": "a", "text": "Melena (black tarry stools)", "isCorrect": false },
-        { "id": "b", "text": "Tenesmus (ineffective painful straining)", "isCorrect": true },
-        { "id": "c", "text": "Dull abdominal pain", "isCorrect": false },
-        { "id": "d", "text": "Nausea and vomiting", "isCorrect": false }
+        { "id": "a", "text": "Surgical injury to the shoulder", "isCorrect": false },
+        { "id": "b", "text": "Referred pain from CO2 gas irritating the diaphragm", "isCorrect": true },
+        { "id": "c", "text": "Poor positioning during surgery", "isCorrect": false },
+        { "id": "d", "text": "Cardiac complications", "isCorrect": false }
       ],
-      "explanation": "Tenesmus, rectal pain, and a feeling of incomplete evacuation are classic symptoms of rectal lesions."
-    },
-    {
-      "id": "col-q2",
-      "type": "matching",
-      "question": "Match the type of haemorrhoid with its characteristics:",
-      "points": 1,
-      "topicId": "topic-07-colorectal",
-      "topicName": "Colorectal Disorders",
-      "pairs": [
-        { "id": "p1", "left": "Internal Haemorrhoid", "right": "Usually painless until they bleed or prolapse" },
-        { "id": "p2", "left": "External Haemorrhoid", "right": "Associated with severe pain, inflammation, and thrombosis" }
-      ]
-    },
-    {
-      "id": "col-q3",
-      "type": "multiple-select",
-      "question": "Which of the following are risk factors for Colorectal Cancer? (Select all that apply)",
-      "points": 1,
-      "topicId": "topic-07-colorectal",
-      "topicName": "Colorectal Disorders",
-      "options": [
-        { "id": "a", "text": "High alcohol consumption", "isCorrect": true },
-        { "id": "b", "text": "History of Inflammatory Bowel Disease (IBD)", "isCorrect": true },
-        { "id": "c", "text": "High-fiber diet", "isCorrect": false },
-        { "id": "d", "text": "Family history of polyps", "isCorrect": true }
-      ],
-      "explanation": "Alcohol, IBD, family history, and low-fiber/high-fat diets are risk factors. A high-fiber diet is protective."
-    },
-
-    // TOPIC 8: HEPATIC
-    {
-      "id": "hep-q1",
-      "type": "matching",
-      "question": "Match the type of Cirrhosis with its primary cause:",
-      "points": 1,
-      "topicId": "topic-08-hepatic",
-      "topicName": "Hepatic Cirrhosis",
-      "pairs": [
-        { "id": "p1", "left": "Alcoholic Cirrhosis", "right": "Chronic alcohol abuse" },
-        { "id": "p2", "left": "Post-necrotic Cirrhosis", "right": "Late result of acute viral hepatitis" },
-        { "id": "p3", "left": "Biliary Cirrhosis", "right": "Chronic biliary obstruction/infection" }
-      ]
-    },
-    {
-      "id": "hep-q2",
-      "type": "multiple-choice",
-      "question": "What is the primary cause of Portal Hypertension?",
-      "points": 1,
-      "topicId": "topic-08-hepatic",
-      "topicName": "Hepatic Cirrhosis",
-      "options": [
-        { "id": "a", "text": "Kidney failure", "isCorrect": false },
-        { "id": "b", "text": "Blockage of blood flow through the liver (e.g., Cirrhosis)", "isCorrect": true },
-        { "id": "c", "text": "Low blood pressure", "isCorrect": false },
-        { "id": "d", "text": "Gallstones", "isCorrect": false }
-      ],
-      "explanation": "Scar tissue in cirrhosis blocks blood flow through the liver, increasing pressure in the portal vein."
-    },
-    {
-      "id": "hep-q3",
-      "type": "multiple-select",
-      "question": "Which of the following are signs of Decompensated Cirrhosis? (Select all that apply)",
-      "points": 1,
-      "topicId": "topic-08-hepatic",
-      "topicName": "Hepatic Cirrhosis",
-      "options": [
-        { "id": "a", "text": "Ascites", "isCorrect": true },
-        { "id": "b", "text": "Jaundice", "isCorrect": true },
-        { "id": "c", "text": "Vague morning indigestion", "isCorrect": false },
-        { "id": "d", "text": "Muscle wasting", "isCorrect": true }
-      ],
-      "explanation": "Ascites, jaundice, and muscle wasting are signs of decompensation (liver failure). Vague indigestion is more common in compensated cirrhosis."
-    },
-    {
-      "id": "hep-q4",
-      "type": "true-false",
-      "question": "Protein intake should be restricted in all patients with cirrhosis.",
-      "points": 1,
-      "topicId": "topic-08-hepatic",
-      "topicName": "Hepatic Cirrhosis",
-      "correctAnswer": false,
-      "explanation": "Protein restriction is typically required ONLY if the patient exhibits signs of encephalopathy (confusion) to reduce ammonia production."
-    },
-    {
-      "id": "hep-q5",
-      "type": "multiple-choice",
-      "question": "Which procedure involves placing a stent in the liver to connect the portal vein to the hepatic vein, reducing portal hypertension?",
-      "points": 1,
-      "topicId": "topic-08-hepatic",
-      "topicName": "Hepatic Cirrhosis",
-      "options": [
-        { "id": "a", "text": "Sclerotherapy", "isCorrect": false },
-        { "id": "b", "text": "TIPS (Transjugular Intrahepatic Portosystemic Shunt)", "isCorrect": true },
-        { "id": "c", "text": "Paracentesis", "isCorrect": false },
-        { "id": "d", "text": "Banding", "isCorrect": false }
-      ],
-      "explanation": "TIPS is a radiological procedure that creates a shunt within the liver to bypass the blockage and lower portal pressure."
+      "explanation": "A common post-op problem is referred pain to the shoulder due to CO2 used during surgery that was not released, irritating the phrenic nerve and diaphragm."
     }
   ]
 });
