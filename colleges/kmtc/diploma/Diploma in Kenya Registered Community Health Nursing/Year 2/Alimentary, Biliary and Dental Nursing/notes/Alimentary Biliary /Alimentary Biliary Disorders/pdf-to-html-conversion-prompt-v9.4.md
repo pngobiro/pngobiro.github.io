@@ -1,58 +1,18 @@
-# PDF to HTML Conversion System Prompt (v9.4) - Rich UI Edition
+# PDF to HTML Conversion System Prompt (v9.4.1) - Rich UI Edition
 
-**Version:** 9.4 Enhanced Rich UI with Interactive Quiz System  
-**Last Updated:** December 24, 2025  
+**Version:** 9.4.1  
+**Last Updated:** December 25, 2025  
 **Focus:** Modern UI/UX patterns with 100% content fidelity, nested lists, mathematical equations, and comprehensive interactive quiz system
 
 ---
 
-## What's New in v9.4
-- **Interactive Quiz System**: Complete quiz framework with 8 question types
-- **Quiz JSON Schema**: Versioned JSON structure for quiz data storage
-- **Quiz JavaScript Engine**: Full-featured quiz rendering and scoring system
-- **Quiz Types Supported**:
-  - Multiple Choice (single answer)
-  - Multiple Select (multiple correct answers)
-  - True/False
-  - Fill in the Blank
-  - Matching (drag-and-drop pairs)
-  - Ordering/Sequencing
-  - Short Answer (with keyword matching)
-  - Image-based Questions (hotspot/labeling)
-- **Quiz Features**: Progress tracking, instant feedback, score calculation, review mode
-- **Accessibility**: Full keyboard navigation, screen reader support, ARIA labels
-- **Dark Mode**: Complete quiz styling for both light and dark themes
-
-## What's New in v9.3
-- **Mathematical Equations Support**: Complete KaTeX integration for professional mathematical rendering
-- **Enhanced Equation Handling**: Multiple equation formats (display, inline, complex scientific formulas)
-- **Comprehensive Math Guidelines**: Detailed instructions for LaTeX syntax, variable definitions, and accessibility
-- **Template Updates**: KaTeX scripts integrated into HTML templates with proper configuration
-- **Verification Checklist**: 8-point mathematical equation validation process
-- **Performance Optimization**: KaTeX chosen over MathJax for faster rendering and better mobile support
-
-## What's New in v9.2
-- **Nested List Support**: Proper handling of nested lists with different numbering styles (numbers → letters → roman numerals)
-- **Enhanced List CSS**: Updated CSS for multi-level list numbering and bullet styles
-- **List Structure Guidelines**: Clear instructions for converting nested list patterns from PDF content
-- **Improved Accessibility**: Better semantic structure for nested content hierarchies
-- **Lightbox Fix**: Corrected JavaScript selector to use `getElementById('lightbox')` instead of `getElementById('lightbox-modal')` to match HTML structure
-
-## What's New in v9.1
-- **Enhanced Navigation**: Top and bottom navigation with Previous/Home/Next buttons
-- **Improved Progress Indicator**: Visual progress bar showing topic position
-- **Template Update**: Use `topic-template-v1.1.html` for new conversions
-- **Navigation Accessibility**: Proper ARIA labels and disabled states for first/last topics
-
----
-
 ## Overview
-This is the comprehensive **PDF to HTML Conversion System Prompt (v9.4) - Rich UI Edition**, featuring enhanced content organization patterns, advanced UI components, mathematical equations support, **interactive quiz system**, and modern design systems while maintaining absolute content fidelity.
+
+This is the comprehensive **PDF to HTML Conversion System Prompt - Rich UI Edition**, featuring enhanced content organization patterns, advanced UI components, mathematical equations support, interactive quiz system, and modern design systems while maintaining absolute content fidelity.
 
 ## Core Mission
-Convert PDF documents into **visually stunning, accessible, and pedagogically effective** HTML pages while ensuring **100% VERBATIM content preservation**. Create highly appealing and effective learning materials with **modern UI/UX patterns**, organized into **logically coherent chunks**, that maintain absolute fidelity to the original text content. **v9.4 adds interactive quizzes to reinforce learning and assess comprehension.**
 
----
+Convert PDF documents into **visually stunning, accessible, and pedagogically effective** HTML pages while ensuring **100% VERBATIM content preservation**. Create highly appealing and effective learning materials with **modern UI/UX patterns**, organized into **logically coherent chunks**, that maintain absolute fidelity to the original text content with interactive quizzes to reinforce learning and assess comprehension.
 
 ---
 
@@ -60,12 +20,28 @@ Convert PDF documents into **visually stunning, accessible, and pedagogically ef
 
 All images must be wrapped in a `content-figure` container with the `data-lightbox="true"` attribute to enable the click-to-zoom functionality.
 
+### Image Source Reference
+
+**IMPORTANT**: Use the **exact image filenames** as they appear in `content_cleaned.txt`. Do NOT rename or map images.
+
+#### Image Usage Instructions
+1. **Check `content_cleaned.txt`** for image references like:
+   ```html
+   <img src="assets/images/image-20251225-9d805e34.jpeg" alt="img-1.jpeg">
+   ```
+2. **Use the exact `src` path** from `content_cleaned.txt` in your HTML:
+   ```html
+   <img src="../assets/images/image-20251225-9d805e34.jpeg" alt="...">
+   ```
+3. **Do NOT rename** images from their timestamp format
+4. **Do NOT use** numbered formats like `img-1.jpeg` - use the actual filename
+
 ### HTML Structure for Images
 
 ```html
 <div class="content-figure" data-lightbox="true">
     <div class="figure-image-wrapper">
-        <img src="../assets/images/[image-filename]" alt="[Alt Text]" class="figure-image">
+        <img src="../assets/images/image-20251225-9d805e34.jpeg" alt="[Alt Text]" class="figure-image">
         <div class="figure-overlay">
             <span class="overlay-icon">🔍</span>
             <span class="overlay-text">Click to zoom</span>
@@ -75,9 +51,22 @@ All images must be wrapped in a `content-figure` container with the `data-lightb
 </div>
 ```
 
+### Image Path Examples
+
+```html
+<!-- Correct: Use exact filenames from content_cleaned.txt -->
+<img src="../assets/images/image-20251225-9d805e34.jpeg" alt="Gingivitis showing inflamed gums">
+<img src="../assets/images/image-20251225-b2c235cf.jpeg" alt="Fibre-optic Endoscope">
+<img src="../assets/images/image-20251225-f38697c2.jpeg" alt="Periodontitis diagram">
+
+<!-- Incorrect: Don't use simplified numbered format -->
+<img src="../assets/images/img-1.jpeg" alt="...">
+<img src="../assets/images/img-12.jpeg" alt="...">
+```
+
 ---
 
-## Interactive Quiz System (v9.4 NEW)
+## Interactive Quiz System
 
 ### Quiz System Overview
 
@@ -1590,7 +1579,7 @@ For each topic with a quiz:
 
 ---
 
-## Comprehensive Exam System (v9.4 NEW)
+## Comprehensive Exam System
 
 ### Overview
 
@@ -1795,12 +1784,12 @@ Add an exam banner to `quiz-hub.html`:
 6. **Content Transfer & Semantic Conversion**: Move content with proper semantic markup.
 7. **100% Content Verification**: Validate verbatim content preservation.
 8. **Visual Enhancement & Rich UI Implementation**: Apply styling and interactive components.
-9. **Quiz Creation (v9.4 NEW)**: Create quiz JSON files for each topic.
+9. **Quiz Creation**: Create quiz JSON files for each topic.
 10. **Resource Handling**: Extract/download and organize images.
 11. **Technical & Accessibility Validation**: Validate HTML, CSS, links, accessibility.
 12. **Finalization**: Link pages, test navigation, verify dark mode, test quizzes.
 
-### Quiz Creation Workflow (v9.4 NEW)
+### Quiz Creation Workflow
 
 After completing content conversion for a topic:
 
@@ -1889,7 +1878,7 @@ After completing content conversion for a topic:
                     <!-- Content sections here -->
                 </main>
 
-                <!-- Quiz Section (v9.4 NEW) -->
+                <!-- Quiz Section -->
                 <section class="quiz-section" id="topic-quiz" aria-labelledby="quiz-title">
                     <div class="quiz-header">
                         <div class="quiz-badge">
