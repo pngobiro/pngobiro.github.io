@@ -90,6 +90,26 @@
             const script = document.createElement('script');
             script.src = src;
             script.onerror = () => this.showError('Failed to load quiz file.');
+            script.onload = () => {
+                // Check if quiz is now in registry after script loads
+                if (window.QuizRegistry[quizId]) {
+                    this.loadFromRegistry(quizId);
+                } else {
+                    // Poll for a short time in case registerQuiz is called asynchronously
+                    let attempts = 0;
+                    const maxAttempts = 10;
+                    const checkInterval = setInterval(() => {
+                        attempts++;
+                        if (window.QuizRegistry[quizId]) {
+                            clearInterval(checkInterval);
+                            this.loadFromRegistry(quizId);
+                        } else if (attempts >= maxAttempts) {
+                            clearInterval(checkInterval);
+                            this.showError('Failed to load quiz file.');
+                        }
+                    }, 100);
+                }
+            };
             document.head.appendChild(script);
 
             // Set timeout for loading
