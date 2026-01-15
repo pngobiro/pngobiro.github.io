@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regression Analysis - Statistics for Diploma</title>
+    <meta name="description" content="Understanding Regression Analysis in Statistics">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html#correlation" class="nav-button">
+                        <span class="nav-icon">←</span> 
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="correlation-coefficients.html" class="nav-button">
+                        <span class="nav-icon">←</span> 
+                        <span class="nav-text">Previous: Correlation Coefficients</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">Regression Analysis</span>
+                    </div>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Regression Analysis</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <section class="content-section">
+                    <div class="introduction-card">
+                        <h3>Basic Concepts</h3>
+                        <p>Regression is a concept that refers to the changes which occur in the dependent variable as a result of changes in the independent variable. This analysis helps us:</p>
+                        <ul>
+                            <li>Understand relationships between variables</li>
+                            <li>Predict values of one variable based on another</li>
+                            <li>Analyze the nature and strength of relationships</li>
+                            <li>Make informed business decisions</li>
+                        </ul>
+                    </div>
+
+                    <div class="business-applications-card">
+                        <h3>Business Applications</h3>
+                        <p>Knowledge of regression is particularly valuable in business statistics where:</p>
+                        <ul>
+                            <li>We need to analyze how changes in independent variables affect dependent variables</li>
+                            <li>Most business activities involve relationships between multiple variables</li>
+                            <li>Predictions of dependent variables are needed for decision making</li>
+                            <li>Example: Predicting expenditure based on income levels</li>
+                        </ul>
+                    </div>
+
+                    <div class="comparison-card">
+                        <h3>Correlation vs. Regression Analysis</h3>
+                        <div class="comparison-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Correlation</th>
+                                        <th>Regression</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>Measures degree of relationship between variables</td>
+                                        <td>Studies nature of relationship between variables</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Tool for measuring relationship strength</td>
+                                        <td>Shows cause and effect relationships</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="regression-equation-card">
+                        <h3>Simple Regression Equation</h3>
+                        <div class="formula-section">
+                            <h4>General Form:</h4>
+                            <div class="math-formula">
+                                <p>y = a + bx</p>
+                                <p>Where:</p>
+                                <ul>
+                                    <li>y = Dependent variable</li>
+                                    <li>a = y-intercept (constant)</li>
+                                    <li>b = Slope of the line</li>
+                                    <li>x = Independent variable</li>
+                                </ul>
+                            </div>
+                            <p class="note">This equation is determined using the "method of least squares" technique</p>
+                        </div>
+
+                        <div class="visual-representation">
+                            <h4>Line of Best Fit</h4>
+                            <p>The regression line represents the best-fitting straight line through the data points, minimizing the distance between the actual y-values and the predicted values.</p>
+                        </div>
+                    </div>
+
+                    <div class="normal-equations-card">
+                        <h3>Normal Equations for Regression</h3>
+                        <div class="formula-section">
+                            <h4>Equations Used to Determine Regression Line:</h4>
+                            <div class="math-formula">
+                                <p>∑y = an + b∑x</p>
+                                <p>∑xy = a∑x + b∑x²</p>
+                                <p>Where:</p>
+                                <ul>
+                                    <li>∑y = Sum of y values</li>
+                                    <li>∑xy = Sum of the product of x and y</li>
+                                    <li>∑x = Sum of x values</li>
+                                    <li>∑x² = Sum of squares of x values</li>
+                                    <li>a = y-intercept</li>
+                                    <li>b = Slope of the line</li>
+                                    <li>n = Number of observations</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="important-notes">
+                            <h4>Important Notes:</h4>
+                            <ul>
+                                <li>Regression lines can only be used one way (regression paradox)</li>
+                                <li>They are not ordinary mathematical line graphs</li>
+                                <li>Cannot estimate x and y values simultaneously</li>
+                                <li>Separate equations needed for x on y and y on x predictions</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="example-card">
+                        <h3>Example: Land Investment Analysis</h3>
+                        <p>An investment company's data on land pieces, showing relationship between acreage and cost:</p>
+
+                        <div class="data-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Piece</th>
+                                        <th>Acreage (x) Hectares</th>
+                                        <th>Cost (y) £000</th>
+                                        <th>xy</th>
+                                        <th>x²</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>A</td><td>2.3</td><td>230</td><td>529</td><td>5.29</td></tr>
+                                    <tr><td>B</td><td>1.7</td><td>150</td><td>255</td><td>2.89</td></tr>
+                                    <tr><td>C</td><td>4.2</td><td>450</td><td>1,890</td><td>17.64</td></tr>
+                                    <tr><td>D</td><td>3.3</td><td>310</td><td>1,023</td><td>10.89</td></tr>
+                                    <tr><td>E</td><td>5.2</td><td>550</td><td>2,860</td><td>27.04</td></tr>
+                                    <tr><td>F</td><td>6.0</td><td>590</td><td>3,540</td><td>36.00</td></tr>
+                                    <tr><td>G</td><td>7.3</td><td>740</td><td>5,402</td><td>53.29</td></tr>
+                                    <tr><td>H</td><td>8.4</td><td>850</td><td>7,140</td><td>70.56</td></tr>
+                                    <tr><td>J</td><td>5.6</td><td>530</td><td>2,969</td><td>31.36</td></tr>
+                                    <tr class="totals">
+                                        <td>Total</td>
+                                        <td>∑x=44.0</td>
+                                        <td>∑y=4,400</td>
+                                        <td>∑xy=25,607</td>
+                                        <td>∑x²=254.96</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="objectives">
+                            <h4>Required:</h4>
+                            <ol>
+                                <li>Determine regression equation of y on x and estimate cost for 4.5 hectares</li>
+                                <li>Estimate expected average acreage for land costing £900,000</li>
+                            </ol>
+                        </div>
+
+                        <div class="solution">
+                            <h4>Solution:</h4>
+                            <ol>
+                                <li>Using normal equations:
+                                    <pre>
+4400 = 9a + 44b .... (i)
+25607 = 44a + 254.96b .... (ii)
+
+Multiply (i) by 44 and (ii) by 9:
+193600 = 396a + 1936b .... (iii)
+230463 = 396a + 2294.64b .... (iv)
+
+Subtract (iii) from (iv):
+36863 = 358.64b
+b = 102.78
+
+Substitute b in equation (i):
+4400 = 9a + 44(102.78)
+4400 - 4522.32 = 9a
+a = -13.59
+                                    </pre>
+                                </li>
+                                <li>Regression equation: Y = -13.59 + 102.78x</li>
+                                <li>For 4.5 hectares:
+                                    <pre>
+Y = -13.59 + (102.78 × 4.5)
+Y = 448.92
+Cost = £448,920
+                                    </pre>
+                                </li>
+                            </ol>
+                        </div>
+                    </div>
+
+                    <div class="alternative-formulas-card">
+                        <h3>Alternative Formulas</h3>
+                        <div class="formula-section">
+                            <h4>Simplified Formulas for Linear Regression:</h4>
+                            <div class="math-formula">
+                                <p>Intercept (a) = (∑y - b∑x)/n</p>
+                                <p>Slope (b) = [n∑xy - ∑x∑y]/[n∑x² - (∑x)²]</p>
+                                <p>Where n is the sample size</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="distance-time-example">
+                        <h3>Example: Distance and Time Relationship</h3>
+                        <p>Analysis of distance traveled and time taken:</p>
+
+                        <div class="data-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Distance (x) miles</th>
+                                        <th>Time (y) mins</th>
+                                        <th>xy</th>
+                                        <th>x²</th>
+                                        <th>y²</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>3.5</td><td>16</td><td>56.0</td><td>12.25</td><td>256</td></tr>
+                                    <tr><td>2.4</td><td>13</td><td>31.0</td><td>5.76</td><td>169</td></tr>
+                                    <tr><td>4.9</td><td>19</td><td>93.1</td><td>24.01</td><td>361</td></tr>
+                                    <tr><td>4.2</td><td>18</td><td>75.6</td><td>17.64</td><td>324</td></tr>
+                                    <tr><td>3.0</td><td>12</td><td>36.0</td><td>9.0</td><td>144</td></tr>
+                                    <tr><td>1.3</td><td>11</td><td>14.3</td><td>1.69</td><td>121</td></tr>
+                                    <tr><td>1.0</td><td>8</td><td>8.0</td><td>1.0</td><td>64</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="additional-data">
+                            <table>
+                                <tbody>
+                                    <tr><td>3.0</td><td>14</td><td>42.0</td><td>9.0</td><td>196</td></tr>
+                                    <tr><td>1.5</td><td>9</td><td>13.5</td><td>2.25</td><td>81</td></tr>
+                                    <tr><td>4.1</td><td>16</td><td>65.6</td><td>16.81</td><td>256</td></tr>
+                                    <tr class="totals">
+                                        <td>∑x=28.9</td><td>∑y=136</td><td>∑xy=435.3</td><td>∑x²=99.41</td><td>∑y²=1972</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="solution">
+                            <h4>Solution:</h4>
+                            <ol>
+                                <li>Calculate slope:
+                                    <pre>
+b = [10(435.3) - (28.9)(136)]/[10(99.41) - (28.9)²]
+b = 422.6/158.9
+b = 2.66
+                                    </pre>
+                                </li>
+                                <li>Calculate intercept:
+                                    <pre>
+a = [136 - 2.66(28.9)]/10
+a = 5.91
+                                    </pre>
+                                </li>
+                                <li>Regression equation:
+                                    <pre>
+y = 5.91 + 2.66x
+or
+Delivery time (mins) = 5.91 + 2.66(delivery distance in miles)
+                                    </pre>
+                                </li>
+                            </ol>
+                            
+                            <div class="interpretation">
+                                <h4>Interpretation:</h4>
+                                <ul>
+                                    <li>Slope (2.66): Estimated minutes needed per mile for delivery</li>
+                                    <li>Intercept (5.91): Estimated preparation time (non-travel time) for each journey</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="prediction-card">
+                        <h3>Prediction Within Sample Data Range</h3>
+                        <p>The linear regression model can be used to predict the mean of dependent variable for any given value of independent variable.</p>
+                        
+                        <div class="example">
+                            <h4>Example Prediction:</h4>
+                            <p>Using the equation: Time (min) = 5.91 + 2.66(distance in miles)</p>
+                            <p>For a distance of 4.0 miles:</p>
+                            <pre>Ý = 5.91 + 2.66 × 4.0 = 16.6 minutes</pre>
+                        </div>
+                    </div>
+
+                    <div class="multiple-regression-card">
+                        <h3>Multiple Linear Regression Models</h3>
+                        <p>Sometimes more than one factor influences the dependent variable.</p>
+
+                        <div class="example">
+                            <h4>Example: Production Cost Factors</h4>
+                            <p>Cost of production per week in a department depends on multiple factors:</p>
+                            <ul>
+                                <li>Total number of hours worked</li>
+                                <li>Raw material used during the week</li>
+                                <li>Total number of items produced</li>
+                                <li>Number of hours spent on repair and maintenance</li>
+                            </ul>
+                        </div>
+
+                        <div class="important-notes">
+                            <p>Key Points:</p>
+                            <ul>
+                                <li>Multiple factors should be used for accurate cost prediction</li>
+                                <li>Simple scatter diagrams cannot show relationships between multiple factors</li>
+                                <li>More complex models needed for multiple variable analysis</li>
+                            </ul>
+                        </div>
+
+                        <div class="multiple-regression-formula">
+                            <h4>Multiple Regression Equation:</h4>
+                            <div class="math-formula">
+                                <p>y = α + b₁x₁ + b₂x₂ + ... + bₙxₙ</p>
+                                <p>Where:</p>
+                                <ul>
+                                    <li>y = Dependent variable</li>
+                                    <li>α = y-intercept</li>
+                                    <li>b₁, b₂, ..., bₙ = Regression coefficients</li>
+                                    <li>x₁, x₂, ..., xₙ = Independent variables</li>
+                                </ul>
+                            </div>
+                            
+                            <div class="model-evaluation">
+                                <h4>Evaluating Multiple Regression Models:</h4>
+                                <ul>
+                                    <li>Examine multiple correlation coefficient (r)</li>
+                                    <li>Check standard deviation of residuals (α)</li>
+                                    <li>Good model has r close to ±1</li>
+                                    <li>Good model has small α value</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="power-costs-example">
+                        <h3>Example: Power Costs Analysis</h3>
+                        <p>Odino Chemicals Limited's power costs analysis over six months:</p>
+
+                        <div class="data-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Month</th>
+                                        <th>Output (standard units)</th>
+                                        <th>Total Power Costs (£000)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>1</td><td>12</td><td>6.2</td></tr>
+                                    <tr><td>2</td><td>18</td><td>8.0</td></tr>
+                                    <tr><td>3</td><td>19</td><td>8.6</td></tr>
+                                    <tr><td>4</td><td>20</td><td>10.4</td></tr>
+                                    <tr><td>5</td><td>24</td><td>10.2</td></tr>
+                                    <tr><td>6</td><td>30</td><td>12.4</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="analysis-requirements">
+                            <h4>Required Analysis:</h4>
+                            <ol>
+                                <li>Determine linear relationship between power costs and output using least squares</li>
+                                <li>Compare with multiple regression model:
+                                    <pre>Power costs = 4.42 + (0.82)output + (0.10)month</pre>
+                                    <ul>
+                                        <li>Regression coefficients t-values: 2.64 and 0.60</li>
+                                        <li>Multiple correlation coefficient: 0.976</li>
+                                    </ul>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="calculations">
+                            <h4>Calculations for Simple Regression:</h4>
+                            <div class="data-table">
+                                <table>
+                                    <thead>
+                                        <tr>
+                                            <th>Output (x)</th>
+                                            <th>Power Costs (y)</th>
+                                            <th>x²</th>
+                                            <th>y²</th>
+                                            <th>xy</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr><td>12</td><td>6.2</td><td>144</td><td>38.44</td><td>74.40</td></tr>
+                                        <tr><td>18</td><td>8.0</td><td>324</td><td>64.00</td><td>144.00</td></tr>
+                                        <tr><td>19</td><td>8.6</td><td>361</td><td>73.96</td><td>163.40</td></tr>
+                                        <tr><td>20</td><td>10.4</td><td>400</td><td>108.16</td><td>208.00</td></tr>
+                                        <tr><td>24</td><td>10.2</td><td>576</td><td>104.04</td><td>244.80</td></tr>
+                                        <tr><td>30</td><td>12.4</td><td>900</td><td>153.76</td><td>372.00</td></tr>
+                                        <tr class="totals">
+                                            <td>∑x=123</td>
+                                            <td>∑y=55.8</td>
+                                            <td>∑x²=2,705</td>
+                                            <td>∑y²=542.36</td>
+                                            <td>∑xy=1,206.60</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="simple-regression-solution">
+                                <h4>Simple Regression Calculations:</h4>
+                                <ol>
+                                    <li>Calculate slope (b):
+                                        <pre>
+b = [6(1206.6) - (123)(55.8)]/[6(2705) - (123)²]
+b = 376.2/1101
+b = 0.342
+                                        </pre>
+                                    </li>
+                                    <li>Calculate intercept (a):
+                                        <pre>
+a = (1/6)(55.8 - 0.342 × 123)
+a = 2.29
+                                        </pre>
+                                    </li>
+                                    <li>Simple regression equation:
+                                        <pre>Power costs = 2.29 + 0.342(output)</pre>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <div class="correlation-calculation">
+                                <h4>Correlation Coefficient:</h4>
+                                <pre>
+r = 376.2/√(1101 × 140.52)
+r = 0.96
+                                </pre>
+                                <p>This shows a strong correlation between power cost and output.</p>
+                            </div>
+
+                            <div class="model-comparison">
+                                <h4>Comparing Simple vs Multiple Regression:</h4>
+                                <ol>
+                                    <li>Simple Regression:
+                                        <ul>
+                                            <li>Correlation coefficient: 0.96</li>
+                                            <li>Only uses output as predictor</li>
+                                            <li>Simpler model</li>
+                                        </ul>
+                                    </li>
+                                    <li>Multiple Regression:
+                                        <ul>
+                                            <li>Multiple correlation coefficient: 0.976</li>
+                                            <li>Uses both output and time</li>
+                                            <li>Time variable t-value (0.60) is insignificant compared to output t-value (2.64)</li>
+                                        </ul>
+                                    </li>
+                                </ol>
+                            </div>
+
+                            <div class="conclusion">
+                                <h4>Analysis Conclusion:</h4>
+                                <ul>
+                                    <li>Very small increase in correlation (0.96 to 0.976) when adding time variable</li>
+                                    <li>Time variable doesn't significantly improve the model</li>
+                                    <li>Simple regression model is sufficient due to:
+                                        <ul>
+                                            <li>High correlation with output alone</li>
+                                            <li>Insignificant t-value for time variable</li>
+                                            <li>Principle of parsimony (simpler model preferred)</li>
+                                        </ul>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="forecasting-example">
+                                <h4>Forecasting Example:</h4>
+                                <ol>
+                                    <li>First find relationship between output and month:
+                                        <div class="data-table">
+                                            <table>
+                                                <tr><th>Month</th><th>Output</th></tr>
+                                                <tr><td>1</td><td>12</td></tr>
+                                                <tr><td>2</td><td>18</td></tr>
+                                                <tr><td>3</td><td>19</td></tr>
+                                                <tr><td>4</td><td>20</td></tr>
+                                                <tr><td>5</td><td>24</td></tr>
+                                                <tr><td>6</td><td>30</td></tr>
+                                            </table>
+                                        </div>
+                                        <pre>Output = 9.6 + 3.11 × month</pre>
+                                    </li>
+                                    <li>Forecast output for month 7:
+                                        <pre>
+Output = 9.6 + 3.11 × 7
+       = 9.6 + 21.77
+       = 31.37 units
+                                        </pre>
+                                    </li>
+                                    <li>Use output to forecast power costs:
+                                        <pre>
+Power costs = 2.29 + 0.34 × 31.37
+            = 2.29 + 10.67
+            = 12.96
+Forecasted power costs = £12,960
+                                        </pre>
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="non-linear-relationships-card">
+                        <h3>Non-Linear Relationships</h3>
+                        <p>When scatter diagrams and correlation coefficients don't indicate linear relationships, consider non-linear models.</p>
+
+                        <div class="common-models">
+                            <h4>Two Common Non-Linear Models:</h4>
+                            <ol>
+                                <li>Exponential Model:
+                                    <div class="math-formula">
+                                        <p>y = abˣ</p>
+                                        <p>Linearization:</p>
+                                        <ul>
+                                            <li>Take log of both sides: log y = log a + x log b</li>
+                                            <li>Let Y = log y, A = log a, B = log b</li>
+                                            <li>Results in linear form: Y = A + Bx</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                                <li>Geometric Model:
+                                    <div class="math-formula">
+                                        <p>y = axᵇ</p>
+                                        <p>Linearization:</p>
+                                        <ul>
+                                            <li>Take log of both sides: log y = log a + b log x</li>
+                                            <li>Let Y = log y, A = log a, X = log x</li>
+                                            <li>Results in linear form: Y = A + bX</li>
+                                        </ul>
+                                    </div>
+                                </li>
+                            </ol>
+                        </div>
+
+                        <div class="application-note">
+                            <p>After transforming to linear form, use standard linear regression techniques (method of least squares) to determine coefficients.</p>
+                        </div>
+                    </div>
+
+                    <div class="key-points-section">
+                        <div class="key-points-container">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">📝</span>
+                                <h3 class="key-points-title">Chapter Overview</h3>
+                            </div>
+                            <div class="key-points-content">
+                                <ul class="key-points-list">
+                                    <li>Understanding dependent and independent variables</li>
+                                    <li>Linear regression models</li>
+                                    <li>Regression equations and their applications</li>
+                                    <li>Making predictions using regression</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="correlation-coefficients.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous: Correlation Coefficients</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+</body>
+</html>

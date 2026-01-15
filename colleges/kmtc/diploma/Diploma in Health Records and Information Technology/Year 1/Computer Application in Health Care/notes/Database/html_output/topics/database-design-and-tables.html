@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Database Design & Tables</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            tags: 'ams' // Use AMS numbering of equations
+        },
+        svg: { fontCache: 'global' },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="database-introduction.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 40%;"></div>
+                        </div>
+                       <span class="progress-text">Lecture 2 of 5</span>
+                    </div>
+                    <a href="database-relationships-and-data.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Database Design and Tables</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: design-thinking -->
+                <section id="design-thinking" class="content-section" aria-labelledby="section-heading-1">
+                    <h2 id="section-heading-1" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">Thinking about Database Design</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>Introduction</h3>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-14-2.jpg" alt="A person contemplating a flowchart, symbolizing the planning process of database design." class="content-image">
+                        <p>The first step in creating a database is to think about why you need it—what is its purpose? Once you know the answer, you can begin designing your own database. Ask yourself questions like What kinds of information will it store? How will I have to break down this information so it can be stored in my database? How will I use the data once it's in there?</p>
+                        <p>In this lesson, we'll walk you through the steps of database design using a bookstore scenario. You will determine the purpose of the database and plan the tables and fields you will need for a simple bookstore database.</p>
+                        
+                        <h3>Designing a database: The Ready-2-Read bookstore scenario</h3>
+                        <p>The best way to learn about designing a database is to jump right in to the process. Let's pretend we work for the Ready-2-Read bookstore, and we need to build a database for the store to use. Let's think about what we might need the database to do for us.</p>
+                        <p>The following diagram shows that we have customers and sell books via orders, both in the store and online.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-15-1.jpg" alt="A diagram showing the relationship between customers, orders, and books in a bookstore." class="content-image">
+                        <p>The store needs a way to keep track of these things.</p>
+
+                        <h3>Determine the purpose of the database</h3>
+                        <p>The first step of designing a database is to determine the purpose of the database. What do we need it to do?</p>
+                        <p>At Ready-2-Read, our customers will place orders for books. At the very least, we will want our database to track the books we sell, the customers we sell them to, and the date of each of the orders.</p>
+                        <aside class="callout note">
+                            <h4 class="callout-title">Purpose</h4>
+                            <p>Keep track of customers, orders, and books.</p>
+                        </aside>
+                        <p>The database will also be able to tell us where our customers live when we need to send them books. Additionally, we can use it to track our sales or to make a bestseller list to post in the store.</p>
+                        
+                        <h3>Plan database tables</h3>
+                        <p>Once we've established its purpose, we can begin brainstorming about how to break up the information into the tables the database will need to store data. Recall that a table is a collection of records, and each record is broken up into the smallest pieces of needed information, called fields.</p>
+                        <p>Because we're planning a database to track our customers, the books we have, and the orders our customers place, we will need a table for each one of these.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-16-1.jpg" alt="Three tables labeled Customers, Orders, and Books, representing the main entities of the bookstore database." class="content-image">
+                        <p><strong>TIP:</strong> Keep your database usable to others by giving your tables simple, easy-to-understand names.</p>
+                        
+                        <h3>Plan table fields</h3>
+                        <p>Once you know what tables you need, the next step is deciding what fields belong in each table. Remember that fields are the smallest chunk of information in any record.</p>
+                        <p>Let's look at our Ready-2-Read bookstore example again. There will be several fields in our Customers table. We'll obviously want each customer's first name and last name. We'll also need an address if we need to send a customer his order. Email will be necessary if we need to contact the customer if there is an issue with the order.</p>
+                        <pre class="code-block"><code>Customers
+First Name
+Last Name
+Street
+City
+State
+Zip Code
+Email</code></pre>
+                        <p>We will also need several fields in the Books table. Title and Author make sense for books. We'll need a Price for each book. Category will help us know what type of books sell the best so we can order more books that fit into this category.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-17-1.jpg" alt="A list of fields for the Books table: Title, Author, Price, Category." class="content-image" style="max-width: 440px;">
+                        <p>The Orders table will have fewer fields. We'll need this table to track the Customer who is placing the order, the Book the customer is ordering, and the Date the order is placed.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-18-1.jpg" alt="A list of fields for the Orders table: Customer, Book, Order Date." class="content-image" style="max-width: 430px;">
+                        <p>Don't worry if your plan doesn't include every possible field you may need. Access lets you add fields to tables whenever you need another one!</p>
+                        
+                        <aside class="callout note" role="note">
+                             <h4 class="callout-title"><span class="callout-icon"> </span> Challenge!</h4>
+                             <p>Let's imagine that you want to use a database at your new coffee shop. Plan your database by answering the following questions:</p>
+                             <ul>
+                                 <li>What would you want to track with your database?</li>
+                                 <li>What database tables would you need?</li>
+                                 <li>What fields will be in each database table?</li>
+                             </ul>
+                        </aside>
+                    </div>
+                </section>
+                <!-- END: design-thinking -->
+
+                <!-- START: building-database -->
+                <section id="building-database" class="content-section" aria-labelledby="section-heading-2">
+                    <h2 id="section-heading-2" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">Building the Database: Setting up Tables and Fields</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>Introduction</h3>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-19-1.jpg" alt="Illustration of tools like a hammer and wrench, symbolizing the construction of a database." class="content-image">
+                        <p>Now that we have a handle on what the database should look like, we need to work on setting up our tables and the fields within these tables.</p>
+                        <p>In this lesson, we'll walk you through the steps of setting up a database in Access 2007. You'll be setting up tables according to the plan for our bookstore scenario. You'll also be setting up the fields for each table, including establishing what data types can be entered in a given field.</p>
+                        
+                        <h3>Creating a new database with Access</h3>
+                        <p>When you launch Access 2007, you will see the Getting Started window. In the left pane, the template categories—including the featured local templates—are listed, as well as the categories on Office Online. Templates are prebuilt databases focused on a specific task that you can download and use immediately.</p>
+                        <p>You will also see the New Blank Database option, which allows you to build your own database from scratch.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-20-1.jpg" alt="The Access 2007 Getting Started screen with the 'Blank Database' option highlighted." class="content-image">
+                        <p>When you choose the New Blank Database option at the top of the window, you will be prompted to rename the database from the default name, which is Database1.accdb. Rename the database whatever you want. In the example below, we named the database Ready2Read because it's the name of the store in our scenario.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-20-2.jpg" alt="Naming the new blank database in Access. The file name 'Ready2Read' is being entered." class="content-image">
+                        <p>Click Create to finish naming the database.</p>
+                        
+                        <h3>Setting up tables</h3>
+                        <p>The new database opens with one table showing as a default. It also defaults to naming this table Table1 in both the navigation pane and the Table tab itself. You will want to name your tables based on your database design plan.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-21-1.jpg" alt="A new blank database in Access, showing the default 'Table1' open in Datasheet view." class="content-image">
+                        
+                        <h4>Naming a table</h4>
+                        <p>To give the table a unique name, you must first click on the Microsoft Office button in the upper-left corner of the application.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-21-2.jpg" alt="The Microsoft Office Button menu with the 'Save' command highlighted." class="content-image">
+                        <p>Next, select Save from the menu. The Save As dialog box will appear to let you save the table whatever name you want.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-22-1.jpg" alt="The 'Save As' dialog box, prompting the user to enter a name for the table." class="content-image">
+                        <p>The new table names appear in both the navigation pane and the Table tab itself, as you can see in the picture below.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-22-2.jpg" alt="The Access interface showing the renamed table 'Customers' in the navigation pane and as a tab." class="content-image">
+                        <p><strong>TIP:</strong> Give your tables logical, easy-to-understand names.</p>
+                        
+                        <h4>To rename a table:</h4>
+                        <p>With the table closed, right-click the Table you want to rename in the navigation pane. Select the Rename option that appears in the menu.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-22-3.jpg" alt="Right-clicking a table in the navigation pane and selecting the 'Rename' option from the context menu." class="content-image">
+                        <p>The table name will be highlighted and a cursor will appear, which means you can now type the new name right there. Left-click anywhere outside of the table name to make the change.</p>
+                        
+                        <h4>To close a table:</h4>
+                        <p>There are several ways to close an active table. You can right-click the Table tab and choose Close from the menu.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-23-1.jpg" alt="Right-clicking the table tab and selecting 'Close' from the menu." class="content-image">
+                        <p>A more common method is to click the X that appears in the top-right corner of the active database object window.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-23-2.jpg" alt="The 'X' button to close the active table window in Access." class="content-image">
+                        
+                        <h4>To open a table:</h4>
+                        <p>To open a table, right-click the Table name of the table you want to open in the navigation pane, then choose Open from the menu.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-23-3.jpg" alt="Right-clicking a table in the navigation pane and selecting 'Open'." class="content-image">
+                        <p>A more common method is to double-click the table name in the navigation pane. The selected table will open in the active database object window.</p>
+                        
+                        <h3>Adding more tables to the database</h3>
+                        <p>By default, Access 2007 starts out with one table. To add more tables to the database, click the Create tab on the Ribbon.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-24-1.jpg" alt="The 'Create' tab on the Access Ribbon with the 'Table' command highlighted." class="content-image">
+                        <p>Next, select Table from the Tables command group. A new table will open in the active database object window. You must name your table using the Save command from Microsoft Office menu.</p>
+                        <p><strong>TIP:</strong> You can tell which table you are currently in by seeing which table tab is highlighted.</p>
+                        
+                        <h3>Adding fields to a table</h3>
+                        <p>Access 2007 allows you to add fields to tables when you are:</p>
+                        <ul>
+                            <li>Working in Datasheet view, which looks like a spreadsheet</li>
+                            <li>Working in Design view, where you are able to set more controls for your fields</li>
+                        </ul>
+                        <p>Either way, you need to know how to switch between the two views.</p>
+                        
+                        <h4>To switch views:</h4>
+                        <p>Select the Views command group from either the Home tab (seen below) or the Datasheet tab on the Ribbon. Select the view option you want from the menu.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-25-1.jpg" alt="The 'View' dropdown menu in Access, showing options for Datasheet View and Design View." class="content-image">
+                        
+                        <h3>Adding fields in Datasheet view</h3>
+                        <p>By default, Access 2007 creates one field in each new table: the ID field. This field auto-numbers to give each record in the table a unique number identifier. Recall that records are the rows in a table.</p>
+                        <p><strong>TIP:</strong> You may want to rename the ID field with a unique name because the ID field appears automatically in every table you create. While this is not necessary, it may help avoid confusion when setting up table relationships.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-25-2.jpg" alt="Datasheet view with the 'ID' field, which auto-numbers records." class="content-image">
+                        <p>To add more fields to a table in Datasheet view, double-click the Add New Field header.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-25-3.jpg" alt="The 'Add New Field' column header in Datasheet view." class="content-image">
+                        <p>The Add New Field text will disappear from the header. Name the field by typing the name directly into the header. Press the Tab key on your keyboard to move to the next field.</p>
+                        
+                        <h3>Adding fields in Design view</h3>
+                        <p>In Design view, the field names are along the lefthand column instead of across the top like in Datasheet view, as seen below.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-26-1.jpg" alt="Design view in Access, showing field names in a list with columns for Data Type and Description." class="content-image">
+                        <p>To add a new field to a table in Design view, click in the cell where you want the new field and type the field name. When you switch back to Datasheet view, your new field appears as its own column, as seen below.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-26-2.jpg" alt="Datasheet view showing the newly added 'First Name' field as a column." class="content-image">
+                        <p>In Design view, you have several field property options you can set to ensure data can only be entered in certain formats. Setting these options is a good idea if you want to make sure the data you have in your database is good, strong data.</p>
+                        
+                        <h3>Moving and Deleting fields</h3>
+                        <p>If you want to rearrange the order in which your fields appear in a table, Access 2007 lets you easily move them around. To move a field in Datasheet view, you can drag and drop the field to the location you want.</p>
+                        <p>To delete a field in Datasheet view, click the field header, then select Delete from the Field & Column command group. This is found on the Datasheet tab on the Ribbon.</p>
+                        <aside class="callout warning" role="alert">
+                             <h4 class="callout-title">Warning</h4>
+                             <p>You should not delete any field in a table without first knowing what impact the deletion may have on the rest of the database!</p>
+                        </aside>
+                        
+                        <h3>Setting the data type for a field</h3>
+                        <p>Access 2007 lets you control how data can be entered in each table field within your database. This is done using Data Type. The default data type is text for every field after the ID field, which was set to auto-number. You can change the Data Type setting in two ways:</p>
+                        
+                        <h4>To change data type from the Ribbon:</h4>
+                        <p>Click the field header, then select the data type you want from the drop-down menu next to the Data Type command.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-27-1.jpg" alt="Changing the data type of a field using the dropdown menu in the Ribbon." class="content-image">
+                        
+                        <h4>To change data type in Design view:</h4>
+                        <p>Click the field name, then press the Tab key on your keyboard. From the drop-down menu under the Data Type column, select the format you want.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-28-1.jpg" alt="Changing a field's data type from the dropdown list in the Data Type column of Design view." class="content-image">
+                        <p>The data type is more noticeable when the database is being populated with records. It will cause data to be formatted for currency, text, number, and date and time just like it does in Microsoft Excel.</p>
+                        
+                        <aside class="callout note" role="note">
+                            <h4 class="callout-title"><span class="callout-icon"> </span> Challenge!</h4>
+                            <p>Open Access 2007 and build your own database. Then do the following:</p>
+                            <ul>
+                                <li>Give Table1 a new name.</li>
+                                <li>Add a new table.</li>
+                                <li>Add fields to a table.</li>
+                                <li>Set the data type for a field in a table.</li>
+                                <li>Open and close the tables.</li>
+                                <li>Move a field in a table.</li>
+                                <li>Delete a field in a table.</li>
+                            </ul>
+                        </aside>
+                    </div>
+                </section>
+                <!-- END: building-database -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+             <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="database-introduction.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 40%;"></div>
+                        </div>
+                       <span class="progress-text">Lecture 2 of 5</span>
+                    </div>
+                    <a href="database-relationships-and-data.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

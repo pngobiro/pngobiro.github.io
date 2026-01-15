@@ -1,0 +1,606 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loci - Engineering Drawing & Design I</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-03-3d-views.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-05-cams.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 44%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 4 of 9</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>➰</span>
+                        <span>Topic 04</span>
+                    </div>
+                    <h1 class="document-title">Loci</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Geometric Construction & Mechanisms</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>20 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section 4.1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">4.1</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🎯</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The <dfn class="term-definition" data-definition="The path traced by a point moving under given conditions.">locus</dfn> of a point is the path traced by that point when moving under given conditions. Many curves can be classified as loci; ellipse, parabola, hyperbola, hypocycloid, cycloid, trochoid, involute, etc. The study of loci is especially important in machine design where it is often necessary to determine the space requirements for a linkage or the envelope of a mechanism for the provision of effective guards.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 4.2: Involute -->
+                    <section class="content-section" id="involute">
+                        <div class="section-header">
+                            <div class="section-number">4.2</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧶</span>
+                                Involute
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>An involute is the path traced by a point on a string as it unwinds from a line, a polygon, or a circle. The involute of a circle is the most important of these curves as it finds applications in the construction of involute gear teeth. The involute may be generated by points on a straight line which is rolled on a fixed circle. This can be done as follows:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">set off equal distances 0-1, 1-2, 2-3 ... along the circumference of the circle.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">draw a tangent at each division point</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">set off along each tangent, the length of the corresponding circular arc.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">draw the required curve through the points set off on the several tangents A, B, C, D, ...</span>
+                                </li>
+                            </ul>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-e8f6bb9d.jpeg" alt="Figure 4.1: involute curve" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 4.1: Involute curve construction</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 4.3: Cycloids -->
+                    <section class="content-section" id="cycloids">
+                        <div class="section-header">
+                            <div class="section-number">4.3</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🎡</span>
+                                Cycloids
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A cycloid is the locus of points generated by a fixed point on the circumference of a circle as the circle rolls along a straight line. This curve can be obtained as follows:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Given the generating circle and the straight line AB tangent to it, make the distances CA and CB equal to half the circumference of the circle.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Divide these distances and each semicircle into 6 equal parts and number them consecutively as shown.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Suppose the circle rolls to the left, point 1 on the circumference move to point 1' on the line, the center will be at D and the generating point 6 will be at the same distance from line AB as point 5 is when the circle is i the home position.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">To find point $p$ draw a line through point 5 parallel to line AB and intersect it with an arc drawn from center D with radius equal to that of the circle.</span>
+                                </li>
+                            </ul>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-82e82e29.jpeg" alt="Figure 4.2: cycloidal curve" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 4.2: Cycloidal curve construction</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 4.4: Trochoids -->
+                    <section class="content-section" id="trochoids">
+                        <div class="section-header">
+                            <div class="section-number">4.4</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🌀</span>
+                                Trochoids
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A trochoid is the locus of a point $\mathrm{P}$ at distance $\mathrm{b}$ from the center of a circle (of radius $\mathrm{r}$) as the circle rolls along a straight line, where $b \neq r$.</p>
+
+                            <!-- Interactive Exercise 1 -->
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">✍️</span>
+                                    <h4 class="callout-title">Assignment 2(a)</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Plot the locus of a point $p$ shown in figure 4.3 as the circle rolls along line AB for one complete revolution of the circle.</p>
+                                    
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-0b42c240.jpeg" alt="Figure 4.3: assignment" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                                <span class="overlay-text">Click to enlarge</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 4.3: Assignment</figcaption>
+                                    </figure>
+
+                                    <!-- Collapsible Solution -->
+                                    <details class="collapsible-section" style="margin-top: 1rem; border-color: var(--color-info);">
+                                        <summary class="collapsible-trigger" style="background: rgba(59, 130, 246, 0.1);">
+                                            <span class="trigger-icon">👁️</span>
+                                            <span class="trigger-text">Reveal Solution</span>
+                                        </summary>
+                                        <div class="collapsible-content">
+                                            <p>Figure 4.4 shows the locus in ass 2(a).</p>
+                                            <figure class="content-figure" data-lightbox="true" style="margin: 0;">
+                                                <div class="figure-image-wrapper">
+                                                    <img src="../assets/images/image-20251223-738d24a4.jpeg" alt="Figure 4.4: Answer to figure 4.3" class="figure-image">
+                                                    <div class="figure-overlay">
+                                                        <span class="overlay-icon">🔍</span>
+                                                        <span class="overlay-text">Click to enlarge</span>
+                                                    </div>
+                                                </div>
+                                                <figcaption class="figure-caption">Figure 4.4: Answer to figure 4.3</figcaption>
+                                            </figure>
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+
+                            <p>Trochoidal curves find application in the construction of the fillet gear tooth profiles.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 4.5: Parabola -->
+                    <section class="content-section" id="parabola">
+                        <div class="section-header">
+                            <div class="section-number">4.5</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🏹</span>
+                                Parabola
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A parabola is the curve traced by a set of points in a plane, that are equidistant from a point (focus) and a line (directrix). The parabola can be developed in various ways:</p>
+
+                            <h4 id="method-1-focus-directrix">i. Focus and Directrix Method</h4>
+                            <p>Given the focus and directrix AB, draw a line perpendicular to AB to cut AB at C. Divide this line into a number of equal parts. Draw lines parallel to AB through the division points, Z. With center at F and radius C-Z (division points), strike arcs to intersect the parallel line in the points Q and R which are points on the parabola.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-f71eda70.jpeg" alt="Figure 4.5: parabola construction given focus and directrix" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 4.5: Parabola construction given focus and directrix</figcaption>
+                            </figure>
+
+                            <h4 id="method-2-rectangle">ii. Rectangle or Parallelogram Method</h4>
+                            <p>Given a rectangle or parallelogram ABCD. Divide BC into any even number of equal parts and divide the sides AB and CD into half as many parts and draw lines as shown. The intersection of like-numbered lines are points on the parabola. A perpendicular bisector of a line OP tangent to the parabola and intersecting the axis, intersects the axis at the focus.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-afc8f22a.jpeg" alt="Figure 4.6: parabola construction given rectangle" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 4.6: Parabola construction given rectangle</figcaption>
+                            </figure>
+
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Practical Applications</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">The parabola is used for reflecting surfaces for light and sound</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Curves of cables for suspension bridges</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">to show bending moment at any point on a uniformly loaded beam</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">To obtain the displacement diagram for uniformly accelerating motion.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 4.6: Ellipse -->
+                    <section class="content-section" id="ellipse">
+                        <div class="section-header">
+                            <div class="section-number">4.6</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🥚</span>
+                                Ellipse
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>An ellipse is the curve generated by a point moving so that the sum of its distances from two points (the foci) is constant and equal to the major axis. Ellipse construction:</p>
+
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker">1</span>
+                                    <span class="list-content">
+                                        Given the major and minor axis, draw concentric circles with the major and minor diameters. Divide the circles into a number of equal sectors. Draw horizontal lines from the division points on the minor circle to intersect a vertical line from a corresponding division point on the major circle. The point of intersection is a point on the ellipse. To find the foci F1 and F2, strike arcs with radius equal to half the major axis and with centers at the ends of the minor axis.
+                                        
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <div class="figure-image-wrapper">
+                                                <img src="../assets/images/image-20251223-cea66b93.jpeg" alt="Figure 4.7: ellipse construction given the major and minor diameters" class="figure-image">
+                                                <div class="figure-overlay">
+                                                    <span class="overlay-icon">🔍</span>
+                                                    <span class="overlay-text">Click to enlarge</span>
+                                                </div>
+                                            </div>
+                                            <figcaption class="figure-caption">Figure 4.7: Ellipse construction given the major and minor diameters</figcaption>
+                                        </figure>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker">2</span>
+                                    <span class="list-content">
+                                        Given major and minor axis, or the conjugate diameters AB and CD, draw a rectangle or parallelogram with sides parallel to the axes respectively. Divide AO and AJ into the same number of equal parts and draw lines through these points. The intersection of like-numbered lines will be points on the ellipse.
+                                        
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <div class="figure-image-wrapper">
+                                                <img src="../assets/images/image-20251223-ba3f67d0.jpeg" alt="Figure 4.8a: ellipse construction" class="figure-image">
+                                                <img src="../assets/images/image-20251223-46ecd9aa.jpeg" alt="Figure 4.8b: ellipse construction" class="figure-image">
+                                                <div class="figure-overlay">
+                                                    <span class="overlay-icon">🔍</span>
+                                                    <span class="overlay-text">Click to enlarge</span>
+                                                </div>
+                                            </div>
+                                            <figcaption class="figure-caption">Figure 4.8: Ellipse construction given major or minor diameters</figcaption>
+                                        </figure>
+                                    </span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- Section 4.7: Locus of a point on a mechanism -->
+                    <section class="content-section" id="locus-mechanism">
+                        <div class="section-header">
+                            <div class="section-number">4.7</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚙️</span>
+                                Locus of a point on a mechanism
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Mechanism are used for power transmission in machines. It is sometimes necessary to plot the locus of a point on a mechanism for construction of suitable guards or for motion analysis. The usual method of drawing the locus of a point on a mechanism is to construct the outline or or skeleton drawings of the mechanism in a number of positions, plotting the point in each position and then drawing a smooth curve (the locus) through the points obtained.</p>
+
+                            <div class="grid grid-3">
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-2184d6e5.jpeg" alt="Trunnion joint" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Trunnion: Oscillates and moves in a straight line.</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-c17a127e.jpeg" alt="Pinned joint" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Pinned joint: (a) Crank - rotates full revolution (b) Rocker - Oscillates about a fixed point</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-046955ef.jpeg" alt="Slider joint" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Slider joint: Constrained to move in a straight line</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                            <p style="text-align: center; font-size: var(--font-size-sm); color: var(--color-text-secondary); margin-top: -10px;">Figure 4.9: Common joints in mechanisms</p>
+
+                            <h3 id="example-1">Example 1</h3>
+                            <p>Figure 4.10 shows a slider crank mechanism. Plot the locus of point C for one complete revolution of the crank OA.</p>
+
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-3041be36.jpeg" alt="Figure 4.10: Slider crank mechanism" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 4.10: Slider crank mechanism</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-d542d484.jpeg" alt="Figure 4.11: Locus of figure 4.10" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 4.11: Locus of figure 4.10</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <h3 id="example-2">Example 2</h3>
+                            
+                            <!-- Part A Question -->
+                            <div class="callout callout--warning">
+                                <div class="callout-header">
+                                    <span class="callout-icon">✍️</span>
+                                    <h4 class="callout-title">Question (a)</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Draw the locus traced by a point P which moves so that it is equidistant from a line and a point, 40 mm apart. The maximum distance between P the line should be 80 mm. Name and state one application the curve produced.</p>
+                                    
+                                    <!-- Collapsible Solution A -->
+                                    <details class="collapsible-section" style="margin-top: 1rem;">
+                                        <summary class="collapsible-trigger">
+                                            <span class="trigger-icon">👁️</span>
+                                            <span class="trigger-text">Reveal Solution (a)</span>
+                                        </summary>
+                                        <div class="collapsible-content">
+                                            <figure class="content-figure" data-lightbox="true">
+                                                <div class="figure-image-wrapper">
+                                                    <img src="../assets/images/image-20251223-c82257d0.jpeg" alt="Figure 4.13: Question (a) solution" class="figure-image">
+                                                    <div class="figure-overlay">
+                                                        <span class="overlay-icon">🔍</span>
+                                                    </div>
+                                                </div>
+                                                <figcaption class="figure-caption">Figure 4.13: Question (a)</figcaption>
+                                            </figure>
+                                            <p><strong>Marks Distribution:</strong></p>
+                                            <ul class="enhanced-list">
+                                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Division: 3 mks</span></li>
+                                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Construction work: 4 mks</span></li>
+                                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Curve (Locus): 3 mks</span></li>
+                                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Linework & Neatness: 2 mks</span></li>
+                                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Total: 12 mks</strong></span></li>
+                                            </ul>
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+
+                            <!-- Part B Question -->
+                            <div class="callout callout--warning">
+                                <div class="callout-header">
+                                    <span class="callout-icon">✍️</span>
+                                    <h4 class="callout-title">Question (b)</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The mechanism given in Figure 4.12 consists of crank OA which rotates about centre O, link BC which oscillates about centre C and the coupler, AB. Plot the locus traced by the mid-point P of the coupler for one complete revolution of crank OA.</p>
+                                    
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-8e190c8d.jpeg" alt="Figure 4.12: Mechanism problem" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 4.12</figcaption>
+                                    </figure>
+
+                                    <!-- Collapsible Solution B -->
+                                    <details class="collapsible-section" style="margin-top: 1rem;">
+                                        <summary class="collapsible-trigger">
+                                            <span class="trigger-icon">👁️</span>
+                                            <span class="trigger-text">Reveal Solution (b)</span>
+                                        </summary>
+                                        <div class="collapsible-content">
+                                            <figure class="content-figure" data-lightbox="true">
+                                                <div class="figure-image-wrapper">
+                                                    <img src="../assets/images/image-20251223-c00554a0.jpeg" alt="Figure 4.14: Question (b) solution" class="figure-image">
+                                                    <div class="figure-overlay">
+                                                        <span class="overlay-icon">🔍</span>
+                                                    </div>
+                                                </div>
+                                                <figcaption class="figure-caption">Figure 4.14: Question (b)</figcaption>
+                                            </figure>
+                                        </div>
+                                    </details>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Key Points Summary -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Takeaways</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p>The <strong>locus</strong> is the path traced by a point moving under specific conditions.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p>An <strong>involute</strong> finds application in gear tooth construction.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p>A <strong>parabola</strong> is equidistant from a focus and a directrix; used in reflectors and bridge cables.</p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p>Loci of points on mechanisms (like slider cranks) are determined by plotting the mechanism in multiple positions.</p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-03-3d-views.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-05-cams.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 44%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 4 of 9</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

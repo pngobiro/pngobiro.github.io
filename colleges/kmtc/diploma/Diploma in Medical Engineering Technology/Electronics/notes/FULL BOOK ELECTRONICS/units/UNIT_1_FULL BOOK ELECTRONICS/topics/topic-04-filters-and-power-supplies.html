@@ -1,0 +1,571 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Filters & Power Supplies - Basic Electronics</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-03-rectifiers.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-05-exercises.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 4 of 5</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>⚡</span>
+                        <span>Topic 04</span>
+                    </div>
+                    <h1 class="document-title">Filters & Power Supplies</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Smoothing & Regulation</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>20 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- 1.6 FILTERS -->
+                    <section class="content-section" id="filters">
+                        <div class="section-header">
+                            <div class="section-number">1.6</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🌊</span>
+                                Filters
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Filter is an electronic circuit used to minimize the ripple content in rectified output of a rectifier. The output of various rectifier circuits is pulsating. It has a dc value and some ac variations called ripples. This type of output is not useful for driving sophisticated electronic circuits / devices. The sophisticated circuits require a very steady dc output that approaches the smoothness of the output of the battery. A circuit that converts a pulsating output from a rectifier into a steady dc level is known as filter because it filters out the pulsations in the signal.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-81a681d5.jpeg" alt="Idea of basic filter" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.26 Idea of basic filter.</figcaption>
+                            </figure>
+
+                            <p>There are different types of filters popularly used in practice. They are :</p>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Series inductor filter</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Shunt capacitor filter</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">LC filter (or L-type filter)</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$\pi$-filter</span></li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- 1.6.1 Shunt Capacitor Filter -->
+                    <section class="content-section" id="shunt-capacitor-filter">
+                        <div class="section-header">
+                            <div class="section-number">1.6.1</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔋</span>
+                                Shunt Capacitor Filter
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>In this circuit, a suitable single capacitor C is connected across the rectifier and in parallel with the load $R_{\mathrm{L}}$ to achieve filtering action. This type of filter is known as capacitor input filter. This filter circuit depends for its operation on the property of a capacitor to charge up (i.e., store energy) when conducting and to discharge (i.e., deliver energy) during the non-conduction cycle. In simple words, a capacitor opposes any change in voltage. When connected across a pulsating dc voltage, it tends to smoothen out or filter out the voltage pulsations (or ripples).</p>
+                            
+                            <p>The filtering action of the simple capacitor filter when used in a half-wave rectifier is shown in Fig. 1.27.</p>
+
+                            <div class="grid grid-3">
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-cdd742c1.jpeg" alt="Circuit diagram of capacitor filter" class="figure-image">
+                                    </div>
+                                    <figcaption class="figure-caption">(a) Circuit</figcaption>
+                                </figure>
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-309e2aec.jpeg" alt="Output without filter" class="figure-image">
+                                    </div>
+                                    <figcaption class="figure-caption">(b) Output without filter</figcaption>
+                                </figure>
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251223-7ab56adc.jpeg" alt="Output with filter" class="figure-image">
+                                    </div>
+                                    <figcaption class="figure-caption">(c) Output with filter</figcaption>
+                                </figure>
+                            </div>
+                            <p class="figure-caption" style="text-align: center;">Figure 1.27 Simple capacitor filter</p>
+                        </div>
+                    </section>
+
+                    <!-- 1.6.2 Approximate Analysis -->
+                    <section class="content-section" id="analysis-capacitor-filter">
+                        <div class="section-header">
+                            <div class="section-number">1.6.2</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📉</span>
+                                Approximate Analysis of Capacitor Filter
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>When positive half-cycle of the ac input is applied, the diode is forward-biased and hence is turned ON. This allows C to quickly charge up to $\mathrm{V}_{\mathrm{in}}$ [point b in Fig. 1.27 (c)] because charging time constant is almost zero. It is so because there is no resistance in the charging path except diode forward resistance which is negligible. Hence, capacitor follows the charging voltage as shown. After being fully charged, the capacitor holds the charge even if the input ac supply to the rectifier goes negative.</p>
+
+                            <p>During the negative half-cycle, the capacitor attempts to discharge. However, it cannot discharge through D which, being now reverse-biased is OFF. Hence, it discharges through $\mathbf{R}_{\mathrm{L}}$ from point b to c in Fig. 1.27 (c) and its voltage decreases small amount. The discharging time constant $(= \mathrm{CR}_{\mathrm{L}})$ is usually 100 times more than the charging time. Hence, C does not have sufficient time to discharge appreciably. It is seen that even during negative half-cycle of the input supply, the capacitor maintains large voltage across $\mathbf{R}_{\mathrm{L}}$.</p>
+
+                            <p>During the next positive half-cycle, when rectifier voltage exceeds the capacitor voltage represented by point c in Fig. 1.27 (c), C is again charged quickly to $\mathrm{V}_{\mathrm{in}}$ as represented by point d. Once more, input voltage goes negative, opening the diode, and forcing C to discharge through $\mathbf{R}_{\mathrm{L}}$ during the interval d to e. In this way, $\mathbf{R}_{\mathrm{L}}$ sees nearly constant dc voltage across it at all times.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-5f419263.jpeg" alt="Output of a capacitor filter in full-wave rectifier" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.28 Output of a capacitor filter in full-wave rectifier</figcaption>
+                            </figure>
+
+                            <p>The filtering action of this simple capacitor filter on a full-wave rectifier is shown in Fig. 1.28. It is seen that as compared to a HW rectifier</p>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">dc load voltage increases slightly towards $\mathrm{V}_{\mathrm{m}}$</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">ripple voltage has been reduced by half.</span></li>
+                            </ol>
+                            <p>This decreased ripple is because of shorter discharge time before the capacitor is re-energised by another pulse of current.</p>
+                        </div>
+                    </section>
+
+                    <!-- 1.6.3 Device Parameters -->
+                    <section class="content-section" id="filter-parameters">
+                        <div class="section-header">
+                            <div class="section-number">1.6.3</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📏</span>
+                                Device Parameters
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📋</span>
+                                    <h4 class="callout-title">Key Filter Formulas</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p><strong>(1) Load Current:</strong> The load current has the same waveshape as $\mathrm{V}_{\mathrm{R}}$ because load is purely resistive.</p>
+                                    
+                                    <p><strong>(2) PIV:</strong> When diode is reverse-biased, the voltage across it is the sum of capacitor voltage (approx $\mathrm{V}_{\mathrm{m}}$) and secondary voltage ($\mathrm{V}_{\mathrm{m}}$). Hence, PIV is $2\mathrm{V}_{\mathrm{m}}$.</p>
+                                    
+                                    <p><strong>(3) Ripple Factor ($\gamma$):</strong> Its value is given by the formula</p>
+                                    <div class="equation">
+                                        $$\gamma = \frac{1}{4\sqrt{3}fCR_L}$$
+                                    </div>
+                                    Also,
+                                    <div class="equation">
+                                        $$\gamma = \frac{2890}{CR_L} \tag{1.12}$$
+                                    </div>
+                                    where $f = 50 \, \text{Hz}$, $C$ is in $\mu\text{F}$ and $R_L$ in ohms.
+                                </div>
+                            </div>
+
+                            <h3>Effect of Increasing Filter Capacitance</h3>
+                            <p>A capacitor has the basic property of opposing changes in voltage. Hence, a bigger capacitor would tend to reduce the ripple magnitude. It has been found that increasing the capacitor size has following effect:</p>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">increases $V_{\mathrm{dc}}$ towards the limiting value $V_{\mathrm{m}}$.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">reduces the magnitude of ripple voltage.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">reduces the time of flow of current pulse through the diode.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">increases the peak current in the diode.</span></li>
+                            </ol>
+
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Advantages of Capacitor Filter</h4>
+                                    <ol class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">The circuit has less number of components.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">The ripple voltage is low because the circuit has low ripple factor.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">Capacitor filter is suitable for high voltage at small value of load currents.</span></li>
+                                    </ol>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Disadvantages of Capacitor Filter</h4>
+                                    <ol class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">Voltage regulation is very poor.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">Ripple factor depends on load resistance.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">Ripple content increases with decrease in load resistance.</span></li>
+                                    </ol>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 1.6.4 Voltage Regulation -->
+                    <section class="content-section" id="voltage-regulation-intro">
+                        <div class="section-header">
+                            <div class="section-number">1.6.4</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚖️</span>
+                                Voltage Regulation
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>In an unregulated power supply, output voltage changes whenever input supply voltage or load resistance changes. It is never constant. The change in voltage from no-load to full-load condition is called voltage regulation. The aim of a voltage regulator circuit is to reduce these variations to zero or, at least, to the minimum possible value. Voltage regulation is the next stage of filter.</p>
+                            
+                            <p>The percentage regulation or simply, regulation of a power supply is given by</p>
+                            <div class="equation">
+                                $$\% \text{ regulation} = \frac{V_{\max} - V_{\min}}{V_{\max}} \times 100 \tag{1.13}$$
+                            </div>
+                            <p>where</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$V_{\max}$ = maximum dc output voltage</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$V_{\min}$ = minimum dc output voltage</span></li>
+                            </ul>
+                            
+                            <p>In general,</p>
+                            <div class="equation">
+                                $$\% \text{ regulation} = \frac{V_{\mathrm{NL}} - V_{\mathrm{FL}}}{V_{\mathrm{NL}}} \times 100 \tag{1.14}$$
+                            </div>
+                            <p>where</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$V_{\mathrm{NL}}$ = no-load or open-circuit terminal voltage of the supply</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">$V_{\mathrm{FL}}$ = full-load terminal voltage of the supply</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- 1.7 POWER SUPPLIES -->
+                    <section class="content-section" id="power-supplies">
+                        <div class="section-header">
+                            <div class="section-number">1.7</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔌</span>
+                                Power Supplies
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>1.7.1 Principle</h3>
+                            <p>A regulated power supply is an electronic circuit designed to keep the output voltage nearly constant under varying input voltage conditions and varying load conditions. A dc regulated power supply consists of various stages as shown in Fig. 1.29.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-fb98e3e1.jpeg" alt="Regulated dc power supply block diagram" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.29 Regulated dc power supply</figcaption>
+                            </figure>
+
+                            <p>In regulated power supply, an ac voltage (of $230\mathrm{V}$, $50\mathrm{Hz}$) is step downed by means of a suitable transformer and converted into pulsating voltage by means of a rectifier circuit. To remove the ripple content of the signal, a filter circuit is used. The output of the filter circuit is a smooth dc voltage but unregulated. By means of a voltage regulator circuit as the last stage, the power supply provides constant dc voltage at the output. Presently, the complete regulator circuit is available in IC (Integrated Circuit) form.</p>
+                        </div>
+                    </section>
+
+                    <!-- 1.7.2 Power Supply Performance Parameters -->
+                    <section class="content-section" id="performance-parameters">
+                        <div class="section-header">
+                            <div class="section-number">1.7.2</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📊</span>
+                                Power Supply Performance Parameters
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(1) Source Effect:</strong> Source regulation (SR) is defined as the change in regulated dc load voltage for a specified range of line voltage typically $230\mathrm{V}\pm 10\%$.
+                                        <div class="equation">
+                                            $$\mathrm {S R} = \mathrm {V} _ {\mathrm {H L}} - \mathrm {V} _ {\mathrm {L L}}$$
+                                        </div>
+                                        The percentage of load voltage is defined as
+                                        <div class="equation">
+                                            $$\% \mathrm {SR} = \frac {\mathrm {SR}}{\mathrm {V} _ {\text {nom}}} \times 100 \tag{1.15}$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(2) Load Effect:</strong> The load regulation is the change in regulated output voltage when the load current is changed from minimum to maximum.
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <div class="figure-image-wrapper">
+                                                <img src="../assets/images/image-20251223-26cc4aae.jpeg" alt="Load regulation in power supply" class="figure-image">
+                                            </div>
+                                            <figcaption class="figure-caption">Figure 1.30 Load regulation in power supply</figcaption>
+                                        </figure>
+                                        The load regulation (LR) is expressed as
+                                        <div class="equation">
+                                            $$\mathrm {L R} = \mathrm {V} _ {\mathrm {N L}} - \mathrm {V} _ {\mathrm {F L}}$$
+                                        </div>
+                                        It can be expressed in percentage as follows:
+                                        <div class="equation">
+                                            $$\% \mathrm {LR} = \frac {V _ {\mathrm {NL}} - V _ {\mathrm {FL}}}{V _ {\mathrm {FL}}} \times 100 \tag{1.16}$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(3) Output Resistance:</strong> It is defined as change in output dc voltage for corresponding change in load current when input ac voltage and the temperature of the system are constant.
+                                        <div class="equation">
+                                            $$\mathrm {R} _ {\text {out}} = \frac {\Delta V _ {\text {out}}}{\Delta I _ {L}} \left| _ {V _ {\mathrm {m}} \text { and temperature constant}} \right. \tag{1.17}$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(4) Voltage Stability Factor $(S_{\mathrm{V}})$:</strong> It is defined as change in output dc voltage for corresponding change in input ac voltage when load current and the temperature of the system are constant.
+                                        <div class="equation">
+                                            $$S _ {V} = \frac {\Delta V _ {\text {out}}}{\Delta V _ {\text {in}}} \mid_ {I _ {L} \text { and temperature constant}} \tag {1.18}$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(5) Temperature Stability Factor:</strong>
+                                        <div class="equation">
+                                            $$S _ {T} = \frac {\Delta V _ {\text {out}}}{\Delta T} \mid_ {V _ {in} \text { and } I _ {L} \text { constant}} \tag {1.19}$$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>(6) Ripple Rejection (RR):</strong> It is a factor which indicates how effectively the regulator circuit rejects the ripples and attenuates it from input to output.
+                                        <div class="equation">
+                                            $$\mathrm {RR} = \frac {\text {Ripple content in output}}{\text {Ripple content in input}} = \frac {\mathrm {V} _ {\mathrm {R (out)}}}{\mathrm {V} _ {\mathrm {R (in)}}}$$
+                                        </div>
+                                        In decibels it is written as:
+                                        <div class="equation">
+                                            $$\mathrm {RR'} = 20 \log_{10} \mathrm{RR} \, dB \tag {1.20}$$
+                                        </div>
+                                    </span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- 1.7.3 Zener Diode Voltage Regulators -->
+                    <section class="content-section" id="zener-regulators">
+                        <div class="section-header">
+                            <div class="section-number">1.7.3</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🛡️</span>
+                                Zener Diode Voltage Regulators
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Principle</h3>
+                            <p>A voltage regulator provides constant output voltage irrespective of small variations in input voltage. Zener diode is specially designed to operate in breakdown region called Zener breakdown, where current is limited only by external resistance and the power dissipation of the diode. i.e., once the applied voltage under reverse bias is equal to breakdown voltage, the current increases very rapidly and the diode voltage $(V_{Z})$ stays essentially constant. This property of Zener diode can be used for voltage regulation.</p>
+
+                            <h3>Circuit</h3>
+                            <p>Fig. 1.31 shows a circuit of Zener diode shunt regulator. Since the Zener is connected in parallel (or shunt) with the load, therefore the circuit is known as shunt regulator. A resistance, $(R_{S})$ is connected in series with the Zener to limit current in the circuit. Therefore, the resistance $R_{S}$ is also known as series current limiting resistor. The output voltage $(V_{L})$ is taken across the load resistance $(R_{S})$. For proper operation, the input voltage $(V_{S})$ must be greater than the Zener voltage $(V_{Z})$. This ensures that Zener operates in the reverse breakdown region.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-df88f30f.jpeg" alt="Circuit diagram of Zener diode voltage regulator" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 1.31 Circuit diagram of Zener diode voltage regulator</figcaption>
+                            </figure>
+
+                            <p>The input current (i.e., current through the limiting resistor) is given by</p>
+                            <div class="equation">
+                                $$I _ {S} = \frac {V _ {S} - V _ {Z}}{R _ {S}}$$
+                            </div>
+                            <p>where $V_{S}$ is the dc input voltage to the regulator and $V_{Z}$ is the Zener voltage.</p>
+                            
+                            <p>If the reverse resistance of Zener diode is $r_Z$, then there is a voltage drop across it which is equal to $I_Z \cdot r_Z$. Therefore, the voltage across the terminals of the Zener diode is</p>
+                            <div class="equation">
+                                $$V _ {L} = V _ {Z} + I _ {Z} \cdot r _ {Z} \tag {1.21}$$
+                            </div>
+                            <p>If the Zener resistance is negligible, then the load voltage, $V_L = V_Z$ and the current through the load resistance is given by the relation,</p>
+                            <div class="equation">
+                                $$I _ {L} = \frac {V _ {L}}{R _ {L}} \quad \text{and} \quad I _ {Z} = I _ {S} - I _ {L} \tag {1.22}$$
+                            </div>
+
+                            <h3>Working</h3>
+                            <p>The working of Zener diode regulator may be discussed under the two heads, namely regulation with varying input voltage and regulation with varying load resistance.</p>
+
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>(1) Regulation with varying input voltage</h4>
+                                    <p>Consider the regulator circuit as shown in Fig. 1.32 (a). Here the load resistance $(R_L)$ is kept fixed and the input voltage $(V_S)$ varies within the limits.</p>
+                                    <p>(i) If the input voltage increases, the input current $(I_S)$ also increases. This increases the current through Zener diode, without affecting the load current $(I_L)$. The increase in input current will also increase the voltage drop across series resistance $(R_S)$, thereby keeping the load voltage $(V_L)$ as constant.</p>
+                                    <p>(ii) On the other hand, if the input voltage decreases, the input current $(I_S)$ also decreases. As a result, the current through Zener $(I_Z)$ will also decrease. Consequently, the voltage drop across series resistance $(R_S)$ will be reduced. Thus the load voltage $(V_L)$ and load current $(I_L)$ remains constant.</p>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-91ceee06.jpeg" alt="Zener regulation with varying input voltage" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 1.32 (a)</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>(2) Regulation with varying load resistance</h4>
+                                    <p>Consider the regulator circuit as shown in Fig. 1.32 (b). Here the input voltage $(\mathrm{V}_{\mathrm{S}})$ is kept fixed and the load resistance $(\mathbb{R}_1)$ varies. The variation of load resistance changes the load current $(\mathrm{I_L})$ through it, thereby changing load voltage $(\mathrm{V}_{\mathrm{L}})$ across it.</p>
+                                    <p>(i) When the load resistance $(\mathbb{R}_1)$ decreases, the load current $(\mathrm{I_L})$ increases. This causes the Zener current $(\mathrm{I_Z})$ to decrease. As a result of this, the input current and the voltage drop across series resistance $(\mathbb{R}_S)$ remains constant. Thus the load voltage $(\mathrm{V_L})$ remains constant.</p>
+                                    <p>(ii) On the other hand, if the load resistance increases, the load current decreases. As a result, the Zener current increases. This again keeps the values of input current and voltage drop across series resistance $(\mathbb{R}_S)$ as constant. Thus the load voltage $(\mathrm{V_L})$ remains constant.</p>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-916dc054.jpeg" alt="Zener regulation with varying load resistance" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">Figure 1.32 (b)</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <h3>Optimum Value of Current Limiting Resistor $(R_{S})$</h3>
+                            <p>The value of current limiting resistor must be properly selected to fulfill the following two requirements:</p>
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">When the input voltage is minimum and the load current is maximum, sufficient current must be supplied to keep the Zener diode within its breakdown region (or regulating region).</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">When the input voltage is maximum and the load current is minimum, the Zener current must not increase the maximum rated value.</span></li>
+                            </ol>
+                            
+                            <p>The optimum value of current limiting Resistor $(\mathbb{R}_S)$ can be determined by using the following two equations for maximum and minimum values of Zener current:</p>
+                            <div class="equation">
+                                $$I _ {Z (\max)} = \frac {V _ {S (\max)} - V _ {Z}}{R _ {S}} - I _ {L (\min)} \tag {i}$$
+                            </div>
+                            <div class="equation">
+                                $$I _ {Z (\min)} = \frac {V _ {S (\min)} - V _ {Z}}{R _ {S}} - I _ {L (\max)} \tag {ii}$$
+                            </div>
+                            <p>From equation (i), we find that the minimum value of current limiting resistor,</p>
+                            <div class="equation">
+                                $$R _ {S (m i n)} = \frac {V _ {S (m a x)} - V _ {Z}}{I _ {Z (m a x)} + I _ {L (m i n)}} \tag {1.23}$$
+                            </div>
+                            <p>and from equation (ii), the maximum value of current limiting resistor,</p>
+                            <div class="equation">
+                                $$R _ {S (\max )} = \frac {V _ {S (m i n)} - V _ {Z}}{I _ {Z (m i n)} + I _ {L (m a x)}} \tag {1.24}$$
+                            </div>
+                            <p>The value of current limiting resistor $(\mathbb{R}_S)$ should be chosen in such a way that its value should be between $\mathbb{R}_S(\max)$ and $\mathbb{R}_S(\min)$ i.e.,</p>
+                            <div class="equation">
+                                $$\mathrm {R} _ {\mathrm {S}} (\min) < \mathrm {R} _ {\mathrm {S}} < \mathrm {R} _ {\mathrm {S}} (\max)$$
+                            </div>
+
+                            <div class="callout callout--warning">
+                                <div class="callout-header">
+                                    <span class="callout-icon">⚠️</span>
+                                    <h4 class="callout-title">Disadvantages of Zener-diode Shunt Regulator</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">The maximum load current, which can be supplied to load resistor $(\mathbb{R}_L)$ is limited to $\mathrm{I_Z}$ (max) - $\mathrm{I_Z}$ (min) which is usually of few milli amperes.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">A large amount of power is wasted in the Zener-diode and the series resistance $(\mathbb{R}_S)$ in comparison with the load power.</span></li>
+                                        <li class="list-item"><span class="list-marker"></span><span class="list-content">The regulation factor and the output resistance are not very low.</span></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-03-rectifiers.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-05-exercises.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 80%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 4 of 5</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

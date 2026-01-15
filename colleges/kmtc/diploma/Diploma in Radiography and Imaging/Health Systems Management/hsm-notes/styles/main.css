@@ -1,0 +1,531 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --border-color: #dcdde1;
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Navigation container */
+.document-nav {
+    margin: 2rem 0;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Navigation buttons with distinct colors */
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* Table of Contents link */
+.nav-button[href*="index.html"] {
+    color: #2980b9;
+    border-color: #2980b9;
+}
+
+.nav-button[href*="index.html"]:hover {
+    background: #eef7fc;
+}
+
+/* Previous Section link */
+.nav-links .nav-button:nth-child(2) { /* Adjust if structure changes */
+    color: #e67e22;
+    border-color: #e67e22;
+}
+
+.nav-links .nav-button:nth-child(2):hover { /* Adjust if structure changes */
+    background: #fef5ec;
+}
+
+/* Next Section link */
+.nav-links .nav-button:last-child {
+    color: #27ae60;
+    border-color: #27ae60;
+}
+
+.nav-links .nav-button:last-child:hover {
+    background: #eefaf3;
+}
+
+/* Disabled states */
+.nav-button.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.nav-button.disabled[href="#"] {
+    opacity: 0.7;
+    background: #fafafa;
+}
+
+/* Progress Bar (Optional) */
+.document-progress {
+    flex-grow: 1;
+    text-align: center;
+    padding: 0 1rem;
+}
+
+.progress-bar {
+    height: 8px;
+    background-color: #e0e0e0;
+    border-radius: 4px;
+    overflow: hidden;
+    margin-bottom: 0.25rem;
+}
+
+.progress-fill {
+    height: 100%;
+    background-color: var(--accent-color);
+    width: 0%; /* Dynamically set this width */
+    transition: width 0.3s ease;
+}
+
+.progress-text {
+    font-size: 0.8rem;
+    color: #7f8c8d;
+}
+
+
+/* Table of Contents Styling */
+.toc-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.toc-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+.toc-title {
+    font-size: 2.5em;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.toc-subtitle {
+    font-size: 1.2em;
+    color: #7f8c8d;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+}
+
+.toc-chapter {
+    margin-bottom: 25px;
+    border-left: 3px solid #3498db;
+    padding-left: 15px;
+}
+
+.toc-chapter-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.toc-section-list {
+    list-style: none;
+    padding-left: 10px; /* Indent sections */
+}
+
+.toc-section-item {
+    margin-bottom: 5px;
+}
+
+.toc-link {
+    text-decoration: none;
+    color: #2980b9;
+    font-size: 1.1em;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: block;
+    padding: 5px 0;
+}
+
+.toc-link:hover {
+    color: #1abc9c;
+    padding-left: 5px;
+}
+
+.toc-link::before {
+    content: '➔ ';
+    color: #bdc3c7;
+    margin-right: 8px;
+    font-size: 0.9em;
+}
+
+/* Content Styling */
+.document-section {
+    /* Optional: Add padding/margin if needed */
+}
+
+.section-header {
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.section-title {
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.title-underline {
+    width: 80px;
+    height: 4px;
+    background-color: var(--accent-color);
+    margin: 0 auto;
+    border-radius: 2px;
+}
+
+.section-content {
+    /* Styles for the main content area */
+}
+
+/* Content sections */
+.content-section {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem; /* Increased padding */
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+.content-card {
+    padding: 1rem; /* Padding inside the card */
+}
+
+/* Headings */
+.section-heading {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem; /* Increased gap */
+    margin-bottom: 1.5rem; /* Increased margin */
+    color: var(--primary-color);
+    font-size: 1.7rem; /* Increased size */
+    font-weight: 600;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
+}
+
+.heading-icon {
+    font-size: 1.5rem; /* Adjust icon size */
+}
+
+.subsection-heading {
+    color: var(--secondary-color);
+    font-size: 1.4rem; /* Increased size */
+    margin-top: 2rem; /* Increased margin */
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1rem;
+    color: var(--text-color); /* Ensure consistent text color */
+}
+
+/* Tables */
+.table-container {
+    margin: 1.5rem 0;
+    overflow-x: auto;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0; /* Remove margin as container has it */
+    background: white;
+}
+
+.content-table caption {
+    caption-side: top;
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid var(--border-color);
+    text-align: left;
+}
+
+.content-table th,
+.content-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top; /* Align content top */
+}
+
+.content-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.content-table tr:nth-child(even) {
+    background-color: #fdfdfd; /* Subtle striping */
+}
+
+/* Mathematical expressions */
+.math-inline {
+    font-family: 'Times New Roman', serif; /* Ensure MathJax font */
+    padding: 0 0.2em;
+    background-color: #f0f0f0; /* Slight background for inline math */
+    border-radius: 3px;
+}
+
+.equation {
+    font-family: 'Times New Roman', serif; /* Ensure MathJax font */
+    margin: 1.5rem 0;
+    text-align: center;
+    overflow-x: auto;
+    padding: 1rem; /* Add padding around block equations */
+    background-color: #f9f9f9; /* Background for block equations */
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* Lists and Images */
+/* Enhanced lists */
+.enhanced-list {
+    list-style: none;
+    padding-left: 1rem; /* Indent list */
+    margin-bottom: 1rem;
+}
+
+.list-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem; /* Increased gap */
+    margin-bottom: 0.75rem; /* Increased spacing */
+    line-height: 1.5; /* Improve readability */
+}
+
+.item-icon {
+    color: var(--accent-color);
+    font-weight: bold;
+    font-size: 1.1em; /* Slightly larger icon */
+}
+
+/* Images */
+.content-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 1.5rem auto; /* Center images with margin */
+    display: block; /* Ensure block display for centering */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Subtle shadow */
+    border: 1px solid var(--border-color); /* Optional border */
+}
+
+/* Code Blocks */
+.code-block {
+    background-color: #f4f4f4;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 1rem;
+    overflow-x: auto;
+    font-family: 'Courier New', Courier, monospace;
+    font-size: 0.9em;
+    margin: 1.5rem 0;
+}
+
+.code-block code {
+    /* Specific language styling can be added here if using a highlighter */
+}
+
+/* Key Points Section */
+.key-points-section {
+    background-color: #eaf2f8; /* Light blue background */
+    border: 1px solid #aed6f1;
+    border-radius: 8px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+}
+
+.key-points-container {
+    /* Container styles if needed */
+}
+
+.key-points-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #aed6f1;
+}
+
+.key-points-icon {
+    font-size: 1.5rem;
+    color: #3498db; /* Accent color */
+}
+
+.key-points-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.key-points-content {
+    /* Content area styles */
+}
+
+.key-points-list {
+    list-style: none;
+    padding: 0;
+}
+
+.key-point-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.point-marker {
+    color: #3498db; /* Accent color */
+    font-weight: bold;
+}
+
+.key-point-item p {
+    margin: 0; /* Remove default paragraph margin */
+}
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .toc-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .toc-title {
+        font-size: 2em;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-heading {
+        font-size: 1.5rem;
+    }
+
+    .subsection-heading {
+        font-size: 1.2rem;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-button {
+        justify-content: center;
+    }
+
+    .document-progress {
+        order: -1; /* Move progress bar up on smaller screens */
+        width: 100%;
+        margin-bottom: 1rem;
+    }
+
+    .content-table {
+        font-size: 0.9em;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        font-size: 15px; /* Adjust base font size for mobile */
+    }
+
+    .toc-title {
+        font-size: 1.8em;
+    }
+
+    .toc-chapter-title {
+        font-size: 1.4em;
+    }
+
+    .toc-link {
+        font-size: 1em;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .section-heading {
+        font-size: 1.3rem;
+    }
+
+    .subsection-heading {
+        font-size: 1.1rem;
+    }
+
+    .nav-button {
+        padding: 0.4rem 0.8rem;
+        font-size: 0.9rem;
+    }
+
+    .content-section {
+        padding: 1rem;
+    }
+}

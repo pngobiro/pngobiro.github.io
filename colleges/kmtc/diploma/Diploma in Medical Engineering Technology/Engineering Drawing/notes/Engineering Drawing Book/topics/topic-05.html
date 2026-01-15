@@ -1,0 +1,491 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Orthographic Projections - Engineering Drawing</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+    
+    <!-- Tab Styles -->
+    <style>
+        .tabs-container {
+            margin: var(--space-6) 0;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2);
+        }
+        .tabs-header {
+            display: flex;
+            gap: var(--space-2);
+            overflow-x: auto;
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .tab-btn {
+            padding: var(--space-3) var(--space-6);
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-medium);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+        .tab-btn:hover {
+            color: var(--color-primary);
+            background: var(--color-surface-hover);
+        }
+        .tab-btn.active {
+            background: var(--color-surface);
+            color: var(--color-primary);
+            box-shadow: var(--shadow-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+        .tab-content {
+            padding: var(--space-6);
+            display: none;
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-2);
+            animation: fadeIn var(--transition-base);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-04.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-06.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 38%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 5 of 13</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>📐</span>
+                        <span>Topic 05</span>
+                    </div>
+                    <h1 class="document-title">Orthographic Projections</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Module 2: Projections</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>40 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Section 1: Important Terms -->
+                    <section class="content-section" id="terms">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📌</span>
+                                Important Terms & Planes
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Understanding the planes of projection is fundamental to orthographic drawing.</p>
+
+                            <!-- Tabs for Planes -->
+                            <div class="tabs-container">
+                                <div class="tabs-header" role="tablist">
+                                    <button class="tab-btn active" data-tab="horizontal" role="tab" aria-selected="true">Horizontal Plane</button>
+                                    <button class="tab-btn" data-tab="vertical" role="tab" aria-selected="false">Vertical Plane</button>
+                                    <button class="tab-btn" data-tab="auxiliary" role="tab" aria-selected="false">Auxiliary Vertical Plane</button>
+                                </div>
+                                
+                                <div class="tabs-content">
+                                    <div class="tab-content active" id="horizontal" role="tabpanel">
+                                        <h4>Horizontal Plane (HP)</h4>
+                                        <p>A plane parallel to the floor is known as the horizontal plane. Orthographic projection of an object on the horizontal plane is known as <strong>Top View</strong> (Plan).</p>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="vertical" role="tabpanel">
+                                        <h4>Vertical Plane (VP)</h4>
+                                        <p>One plane conveniently selected out of the planes perpendicular to the horizontal plane is known as the vertical plane. The projection on this plane is known as <strong>Front View</strong> (Elevation).</p>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="auxiliary" role="tabpanel">
+                                        <h4>Auxiliary Vertical Plane (AVP)</h4>
+                                        <p>A plane perpendicular to both the horizontal plane and vertical plane is known as the auxiliary vertical plane. Orthographic projection on A.V.P. is known as <strong>End View</strong> or <strong>Side View</strong>.</p>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3>Projection Definitions</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Projection:</strong> If straight lines are drawn from various points on the contour of an object to meet a plane, the object is said to be projected at that plane. The figure formed by joining in correct sequence the points at which the lines meet the plane is called a projection of the object.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Projectors:</strong> The lines from the object to the plane are called projectors.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Plane of projection:</strong> The plane on which the projectors meet is known as the plane of projection.
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Orthographic projection:</strong> When the projectors are parallel to each other and also perpendicular to the projection plane, the projection is called orthographic projection.
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Comparison of Angles -->
+                    <section class="content-section" id="angles-comparison">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔄</span>
+                                First vs. Third Angle Projection
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="table-responsive">
+                                <table class="comparison-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Characteristic</th>
+                                            <th>First Angle Projection</th>
+                                            <th>Third Angle Projection</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>Object Position</strong></td>
+                                            <td>Object is kept in the first quadrant.</td>
+                                            <td>Object is assumed to be kept in the third quadrant.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Relationship</strong></td>
+                                            <td>The object lies between the observer and the plane of projection.</td>
+                                            <td>The plane of projection lies between the observer and the object.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Plane Transparency</strong></td>
+                                            <td>Plane is assumed to be non-transparent.</td>
+                                            <td>Plane is assumed to be transparent.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>View Arrangement</strong></td>
+                                            <td>Plan comes below the elevation and left side view is drawn to the right of elevation.</td>
+                                            <td>Plan comes above the elevation and left side view is drawn to the left side of the elevation.</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>Usage</strong></td>
+                                            <td>Now recommended in India.</td>
+                                            <td>Used in USA and other countries.</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <h3>Projection Symbols</h3>
+                            <div class="grid grid-2">
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251222-2a3a54eb.jpeg" alt="First Angle Projection Symbol" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">(a) First-Angle Projection</figcaption>
+                                </figure>
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251222-5eb9f0ba.jpeg" alt="Third Angle Projection Symbol" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">(b) Third-Angle Projection</figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Multiview Projection -->
+                    <section class="content-section" id="multiview">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧊</span>
+                                Multiview Projection
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Multiview projection represents three dimensional objects in three separate views arranged in a standard manner. Each view represents only two dimensions.</p>
+                            
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">The Glass Box Concept</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Imagine the object suspended inside a glass box. The views are projected onto the sides of the box.</p>
+                                </div>
+                            </div>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-25143faa.jpeg" alt="Glass Box Concept - Rear View" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to explore glass box</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">The Glass Box Concept</figcaption>
+                            </figure>
+
+                            <h3>Opening the Box</h3>
+                            <p>To obtain multiviews on a flat sheet of paper, the glass box is "unfolded".</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-a5d9a077.jpeg" alt="Opening the Glass Box" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Unfolding the projection planes</figcaption>
+                            </figure>
+
+                            <h3>The Six Basic Views</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-ddfa5127.jpeg" alt="The Six Basic Views" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">The Six Basic Views</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Object Features -->
+                    <section class="content-section" id="features">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🏗️</span>
+                                Object Features
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Recognizing how different features appear in orthographic views is essential.</p>
+
+                            <!-- Tabs for Features -->
+                            <div class="tabs-container">
+                                <div class="tabs-header" role="tablist">
+                                    <button class="tab-btn active" data-tab="edges" role="tab" aria-selected="true">Edges & Corners</button>
+                                    <button class="tab-btn" data-tab="surfaces" role="tab" aria-selected="false">Surfaces</button>
+                                    <button class="tab-btn" data-tab="limiting" role="tab" aria-selected="false">Limiting Elements</button>
+                                </div>
+                                
+                                <div class="tabs-content">
+                                    <div class="tab-content active" id="edges" role="tabpanel">
+                                        <h4>Edges</h4>
+                                        <p>Lines that represent the boundary between two faces.</p>
+                                        <h4>Corners</h4>
+                                        <p>Represent the intersection of two or more edges.</p>
+                                        <figure class="content-figure" style="margin-top: 1rem;">
+                                            <img src="../assets/images/image-20251222-7c8a5212.jpeg" alt="Edges and Corners" class="figure-image">
+                                        </figure>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="surfaces" role="tabpanel">
+                                        <h4>Surfaces</h4>
+                                        <p>Areas that are bounded by edges or limiting elements.</p>
+                                        <figure class="content-figure" style="margin-top: 1rem;">
+                                            <img src="../assets/images/image-20251222-79310a2c.jpeg" alt="Object Surfaces" class="figure-image">
+                                        </figure>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="limiting" role="tabpanel">
+                                        <h4>Limiting Element</h4>
+                                        <p>A line that represents the last visible part of a curve surface.</p>
+                                        <figure class="content-figure" style="margin-top: 1rem;">
+                                            <img src="../assets/images/image-20251222-eec41aa0.jpeg" alt="Limiting Elements" class="figure-image">
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Exercise -->
+                    <section class="content-section" id="exercise">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">✏️</span>
+                                Exercise
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="callout callout--warning">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📝</span>
+                                    <h4 class="callout-title">Practice Problem</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Complete three orthographic views of the object below. Include visible, hidden, and center lines where appropriate.</p>
+                                </div>
+                            </div>
+
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Problem Object</h4>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251222-fb067522.jpeg" alt="Exercise Object" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Solution</h4>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251222-70d3dddf.jpeg" alt="Exercise Solution" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                                <span class="overlay-text">Reveal Solution</span>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-04.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-06.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 38%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 5 of 13</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+    <script src="../js/tabs.js"></script>
+</body>
+</html>

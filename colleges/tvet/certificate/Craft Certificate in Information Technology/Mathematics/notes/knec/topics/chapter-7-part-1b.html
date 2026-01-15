@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Data Structures (I) (Part 1b) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-1a.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 7 (Part 1b)</span>
+                    </div>
+                    <a href="chapter-7-part-1c.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">Chapter 7 : Data Structures (I) (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-7-unit-vector-multiplication -->
+                <section id="section-7-2-1" class="content-section">
+                    <h3 class="subsection-heading">7.2.1 Types of Multiplication with Unit Vectors</h3>
+                    <div class="content-card">
+                        <ul class="enhanced-list">
+                            <li class="list-item">Pre-Multiplication with Row Vector.</li>
+                            <li class="list-item">Post-Multiplication with a Column Vector.</li>
+                        </ul>
+
+                        <p><strong>Multiplication of a Matrix with a Row Vector</strong></p>
+                        <p>(Pre-Multiplication of a Matrix with a unit vector)</p>
+                        <div class="equation">$$ \vec{u} \cdot A = \vec{r} $$</div>
+                        <p>To sum up all the people "Vertically" under the respective category (i.e. from A to F) multiply by a row vector [1 1 1 1].</p>
+                        <div class="equation">$$ \begin{bmatrix} 1 & 1 & 1 & 1 \end{bmatrix} \cdot \begin{bmatrix} 0 & 2 & 5 & 16 & 0 & 0 \\ 2 & 12 & 15 & 27 & 5 & 1 \\ 0 & 0 & 24 & 15 & 3 & 2 \\ 0 & 0 & 10 & 9 & 2 & 1 \end{bmatrix} = \begin{bmatrix} 2 & 14 & 54 & 67 & 10 & 4 \end{bmatrix} $$</div>
+                        <p>Result: Total staff in each category (A to F) for Andover.</p>
+                        <p>Question: Can the Andover matrix be Pre-Multiply by a column vector?</p>
+                        <p>Answer: No, matrix dimensions (1x4) and (4x6) are compatible for pre-multiplication, but a column vector (e.g., 4x1) cannot pre-multiply a 4x6 matrix.</p>
+
+                        <p><strong>Multiplication with Column Vector</strong></p>
+                        <p>(Post-multiplication of matrix A with a unit vector.)</p>
+                        <p>To sum up all elements "horizontally" across (i.e., total staff in each grade), the matrix is Post-Multiplied by a column vector.</p>
+                         <div class="equation">$$ \begin{bmatrix} 0 & 2 & 5 & 16 & 0 & 0 \\ 2 & 12 & 15 & 27 & 5 & 1 \\ 0 & 0 & 24 & 15 & 3 & 2 \\ 0 & 0 & 10 & 9 & 2 & 1 \end{bmatrix} \cdot \begin{bmatrix} 1 \\ 1 \\ 1 \\ 1 \\ 1 \\ 1 \end{bmatrix} = \begin{bmatrix} 23 \\ 62 \\ 44 \\ 22 \end{bmatrix} $$</div>
+                        <p>Result: Total staff in each grade (1 to 4) for Andover.</p>
+                        <p>Question: Can you Post-Multiply by a row-vector?</p>
+                        <p>Answer: No, matrix dimensions (4x6) and (e.g., 1x6) are not compatible for post-multiplication.</p>
+
+                        <p><strong>Calculating the Total Wage Bill</strong></p>
+                        <p>The total wage bill for grade 2 and 3 in category C to E, is obtained by Pre-Multiply by the appropriate row vector and Post-Multiply by the appropriate column vector.</p>
+                        <p>(Note: the one's and zero's in the row and column vector select the desired elements.)</p>
+                        <p>Wage Matrix (W):</p>
+                         <div class="equation">$$ W = \begin{bmatrix} 3 & 5 & 8 & 10 & 12 & 15 \\ 4 & 6 & 10 & 12 & 15 & 18 \\ 5 & 8 & 12 & 15 & 18 & 20 \\ 6 & 10 & 15 & 18 & 20 & 24 \end{bmatrix} $$</div>
+                         <p>Total Staff Matrix (T = A+B):</p>
+                         <div class="equation">$$ T = \begin{bmatrix} 0 & 5 & 23 & 16 & 0 & 1 \\ 3 & 16 & 27 & 45 & 7 & 2 \\ 0 & 0 & 40 & 29 & 8 & 3 \\ 0 & 0 & 18 & 15 & 3 & 1 \end{bmatrix} $$</div>
+                         <p>To get total wage bill, we need element-wise multiplication (Hadamard product) of T and W, then sum selected elements.</p>
+                         <p>Let TW be the element-wise product T * W.</p>
+                         <p>Select Grades 2 & 3, Categories C, D, E:</p>
+                         <div class="equation">$$ \begin{bmatrix} 0 & 1 & 1 & 0 \end{bmatrix} \cdot TW \cdot \begin{bmatrix} 0 \\ 0 \\ 1 \\ 1 \\ 1 \\ 0 \end{bmatrix} $$</div>
+                         <p>Question: Can you understand the meaning of the multiplication above?</p>
+                         <p>Answer: The row vector selects grades 2 and 3. The column vector selects categories C, D, and E. The matrix multiplication sums the wage bill for the selected staff.</p>
+
+                        <p><strong>Increasing/Decreasing by Matrix Method</strong></p>
+                        <p>To increase the wages by 5%, 6%, 4%, 8% for the respective grade (1, 2, 3, 4), set up the diagonal matrix 'I' below and pre-multiply the Wage matrix W.</p>
+                        <div class="equation">$$ I = \begin{bmatrix} 1.05 & 0 & 0 & 0 \\ 0 & 1.06 & 0 & 0 \\ 0 & 0 & 1.04 & 0 \\ 0 & 0 & 0 & 1.08 \end{bmatrix} $$</div>
+                        <p>New Wage Matrix W_new = I * W</p>
+                        <p>Question: Can you understand the logic of matrix I?</p>
+                        <p>Answer: Matrix I is a diagonal matrix where each diagonal element represents the multiplier (1 + percentage increase) for the corresponding grade's wages.</p>
+
+                        <p><strong>NCC QM DEC. 9 - Part Question</strong></p>
+                        <p><strong>Question 8</strong></p>
+                        <p>a. A family buys Milk, Bread and Eggs at unit price of 42, 74 and 12 cents respectively the following quantities:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th></th><th>Milk</th><th>Bread</th><th>Eggs</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Monday</td><td>2</td><td>0</td><td>6</td></tr>
+                                    <tr><td>Tuesday</td><td>1</td><td>1</td><td>12</td></tr>
+                                    <tr><td>Wednesday</td><td>0</td><td>2</td><td>0</td></tr>
+                                    <tr><td>Thursday</td><td>3</td><td>3</td><td>12</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>b. Show the quantities as a 4x3 matrix, N, and the prices as a 3x1 matrix P.</p>
+                        <div class="equation">$$ N = \begin{bmatrix} 2 & 0 & 6 \\ 1 & 1 & 12 \\ 0 & 2 & 0 \\ 3 & 3 & 12 \end{bmatrix}, \quad P = \begin{bmatrix} 42 \\ 74 \\ 12 \end{bmatrix} $$</div>
+                        <p>c. Calculate each of the following and state what the result means:</p>
+                        <ol type="i">
+                            <li>A = N * P (3)</li>
+                            <li>B = [1 1 1 1] * A (2)</li>
+                            <li>C = [1 1 1 1] * N (2)</li>
+                            <li>D = C * P (2)</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-7-unit-vector-multiplication -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-7-part-1a.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 7 (Part 1b)</span>
+                    </div>
+                    <a href="chapter-7-part-1c.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

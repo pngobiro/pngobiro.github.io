@@ -1,0 +1,282 @@
+      
+<!-- module/module4.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 4: Digital-to-Analog Conversion, Multiplexing, and Transmission Media - Data Communication and Networking</title>
+    <meta name="description" content="Discover digital-to-analog conversion techniques, multiplexing methods like FDM, WDM, TDM, and an introduction to transmission media.">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <article class="learning-module" data-module="4">
+        <nav class="module-nav">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="module3.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module 4 of 9</span>
+                </div>
+                <a href="module5.html" class="nav-button">
+                    Next <span>→</span>
+                </a>
+            </div>
+        </nav>
+
+        <header class="module-header">
+            <h1>Module 4: Digital-to-Analog Conversion, Multiplexing, and Transmission Media</h1>
+            <section class="module-objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Explain the process of Digital-to-Analog Conversion.</li>
+                    <li>Understand Amplitude Shift Keying (ASK), Frequency Shift Keying (FSK), and Phase Shift Keying (PSK).</li>
+                    <li>Define Multiplexing and its benefits.</li>
+                    <li>Describe Frequency-Division Multiplexing (FDM), Wavelength-Division Multiplexing (WDM), and Time-Division Multiplexing (TDM).</li>
+                    <li>Introduce Transmission Media and Guided Media.</li>
+                    <li>Explain Twisted-Pair Cable and Coaxial Cable, including their applications.</li>
+                </ul>
+            </section>
+        </header>
+
+        <main class="module-content">
+            <section class="content-section">
+                <h2>📚 DIGITAL-TO-ANALOG CONVERSION</h2>
+                <div class="content-block">
+                    <p>Digital-to-analog conversion is the process of changing one of the characteristics of an analog signal based on the information in digital data. Figure 5.1 shows the relationship between the digital information, the digital-to-analog modulating process, and the resultant analog signal.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/digital_to_analog_conversion.png"
+                             alt="Diagram illustrating Digital-to-analog conversion process."
+                             width="600" height="300">
+                        <figcaption>Figure 5.1 Digital-to-analog conversion</figcaption>
+                    </figure>
+                    <p>A sine wave is defined by three characteristics: amplitude, frequency, and phase. When we vary anyone of these characteristics, we create a different version of that wave. So, by changing one characteristic of a simple electric signal, we can use it to represent digital data. Any of the three characteristics can be altered in this way, giving us at least three mechanisms for modulating digital data into an analog signal: amplitude shift keying (ASK), frequency shift keying (FSK), and phase shift keying (PSK).</p>
+                    <h3>Aspects of Digital-to-Analog Conversion</h3>
+                    <p>Before we discuss specific methods of digital-to-analog modulation, two basic issues must be reviewed: bit and baud rates and the carrier signal.</p>
+                    <h4>Data Element Versus Signal Element</h4>
+                    <p>Data element as the smallest piece of information to be exchanged, the bit. We also defined a signal element as the smallest unit of a signal that is constant.</p>
+                    <h4>Data Rate Versus Signal Rate</h4>
+                    <p>We can define the data rate (bit rate) and the signal rate (baud rate). The relationship between them is</p>
+                    <p>S= N/r baud</p>
+                    <p>where N is the data rate (bps) and r is the number of data elements carried in one signal element. The value of r in analog transmission is r =log<sub>2</sub> L, where L is the type of signal element, not the level.</p>
+                    <h4>Carrier Signal</h4>
+                    <p>In analog transmission, the sending device produces a high-frequency signal that acts as a base for the information signal. This base signal is called the carrier signal or carrier frequency. The receiving device is tuned to the frequency of the carrier signal that it expects from the sender. Digital information then changes the carrier signal by modifying one or more of its characteristics (amplitude, frequency, or phase). This kind of modification is called modulation (shift keying).</p>
+
+                    <h3>1. Amplitude Shift Keying (ASK)</h3>
+                    <p>In amplitude shift keying, the amplitude of the carrier signal is varied to create signal elements. Both frequency and phase remain constant while the amplitude changes. Although we can have several levels (kinds) of signal elements, each with a different amplitude, ASK is normally implemented using only two levels. This is referred to as binary amplitude shift keying or on-off keying (OOK). The peak amplitude of one signal level is 0; the other is the same as the amplitude of the carrier frequency. Figure 5.3 gives a conceptual view of binary ASK.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/amplitude_shift_keying.png"
+                             alt="Diagram illustrating Binary amplitude shift keying."
+                             width="600" height="300">
+                        <figcaption>Figure 5.3 Binary amplitude shift keying</figcaption>
+                    </figure>
+
+                    <h3>2. Frequency Shift Keying (FSK)</h3>
+                    <p>In frequency shift keying, the frequency of the carrier signal is varied to represent data. The frequency of the modulated signal is constant for the duration of one signal element, but changes for the next signal element if the data element changes. Both peak amplitude and phase remain constant for all signal elements.</p>
+                    <p>One way to think about binary FSK (or BFSK) is to consider two carrier frequencies. In Figure 5.6, we have selected two carrier frequencies,f1 andf2. We use the first carrier if the data element is 0; we use the second if the data element is 1. However, note that this is an unrealistic example used only for demonstration purposes. Normally the carrier frequencies are very high, and the difference between them is very small.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/frequency_shift_keying.png"
+                             alt="Diagram illustrating Binary frequency shift keying."
+                             width="600" height="300">
+                        <figcaption>Figure 5.6 Binary frequency shift keying</figcaption>
+                    </figure>
+
+                    <h3>3. Phase Shift Keying (PSK)</h3>
+                    <p>In phase shift keying, the phase of the carrier is varied to represent two or more different signal elements. Both peak amplitude and frequency remain constant as the phase changes. Today, PSK is more common than ASK or FSK. The simplest PSK is binary PSK, in which we have only two signal elements, one with a phase of 0°, and the other with a phase of 180°. Figure 5.9 gives a conceptual view of PSK.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/phase_shift_keying.png"
+                             alt="Diagram illustrating Binary phase shift keying."
+                             width="600" height="300">
+                        <figcaption>Figure 5.9 Binary phase shift keying</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 MULTIPLEXING</h2>
+                <div class="content-block">
+                    <p>Whenever the bandwidth of a medium linking two devices is greater than the bandwidth needs of the devices, the link can be shared. Multiplexing is the set of techniques that allows the simultaneous transmission of multiple signals across a single data link.</p>
+                    <p>In a multiplexed system, n lines share the bandwidth of one link. Figure 6.1 shows the basic format of a multiplexed system. The lines on the left direct their transmission streams to a multiplexer (MUX), which combines them into a single stream (many-to-one). At the receiving end, that stream is fed into a demultiplexer (DEMUX), which separates the stream back into its component transmissions (one-to-many) and directs them to their corresponding lines. In the figure, the word link refers to the physical path. The word channel refers to the portion of a link that carries a transmission between a given pair of lines. One link can have many (n) channels.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/multiplexing_channels.png"
+                             alt="Diagram illustrating Dividing a link into channels for multiplexing."
+                             width="600" height="300">
+                        <figcaption>Figure 6.1 Dividing a link into channels</figcaption>
+                    </figure>
+                    <p>There are three basic multiplexing techniques: frequency-division multiplexing, wavelength-division multiplexing, and time-division multiplexing. The first two are techniques designed for analog signals, the third, for digital signals.</p>
+
+                    <h3>1. Frequency-Division Multiplexing</h3>
+                    <p>Frequency-division multiplexing (FDM) is an analog technique that can be applied when the bandwidth of a link (in hertz) is greater than the combined bandwidths of the signals to be transmitted. In FDM, signals generated by each sending device modulate different carrier frequencies. These modulated signals are then combined into a single composite signal that can be transported by the link. Carrier frequencies are separated by sufficient bandwidth to accommodate the modulated signal. These bandwidth ranges are the channels through which the various signals travel. Channels can be separated by strips of unused bandwidth-guard bands-to prevent signals from overlapping. In addition, carrier frequencies must not interfere with the original data frequencies.</p>
+                    <h4>Multiplexing Process</h4>
+                    <p>Figure 6.4 is a conceptual illustration of the multiplexing process. Each source generates a signal of a similar frequency range. Inside the multiplexer, these similar signals modulates different carrier frequencies. The resulting modulated signals are then combined into a single composite signal that is sent out over a media link that has enough bandwidth to accommodate it.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/fdm_process.png"
+                             alt="Diagram illustrating Frequency Division Multiplexing (FDM) process."
+                             width="600" height="300">
+                        <figcaption>Figure 6.4 FDM process</figcaption>
+                    </figure>
+                    <h4>Demultiplexing Process</h4>
+                    <p>The demultiplexer uses a series of filters to decompose the multiplexed signal into its constituent component signals. The individual signals are then passed to a demodulator that separates them from their carriers and passes them to the output lines. Figure 6.5 is a conceptual illustration of demultiplexing process.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/fdm_demultiplexing.png"
+                             alt="Diagram illustrating FDM demultiplexing example."
+                             width="600" height="300">
+                        <figcaption>Figure 6.5 FDM demultiplexing example</figcaption>
+                    </figure>
+
+                    <h3>2. Wavelength-Division Multiplexing</h3>
+                    <p>Wavelength-division multiplexing (WDM) is designed to use the high-data-rate capability of fiber-optic cable. The optical fiber data rate is higher than the data rate of metallic transmission cable. Using a fiber-optic cable for one single line wastes the available bandwidth. Multiplexing allows us to combine several lines into one. WDM is conceptually the same as FDM, except that the multiplexing and demultiplexing involve optical signals transmitted through fiber-optic channels. The idea is the same: We are combining different signals of different frequencies. The difference is that the frequencies are very high. Figure 6.10 gives a conceptual view of a WDM multiplexer and demultiplexer. Very narrow bands of light from different sources are combined to make a wider band of light. At the receiver, the signals are separated by the demultiplexer.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/wavelength_division_multiplexing.png"
+                             alt="Diagram illustrating Wavelength Division Multiplexing (WDM)."
+                             width="600" height="300">
+                        <figcaption>Figure 6.10 Wavelength-division multiplexing</figcaption>
+                    </figure>
+                    <p>WDM is an analog multiplexing technique to combine optical signals.</p>
+                    <p>Although WDM technology is very complex, the basic idea is very simple. We want to combine multiple light sources into one single light at the multiplexer and do the reverse at the demultiplexer. The combining and splitting of light sources are easily handled by a prism.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/wdm_prisms.png"
+                             alt="Diagram illustrating Prisms in wavelength-division multiplexing and demultiplexing."
+                             width="600" height="300">
+                        <figcaption>Figure 6.11 Prisms in wavelength-division multiplexing and demultiplexing</figcaption>
+                    </figure>
+
+                    <h3>3. Time-Division Multiplexing</h3>
+                    <p>Time-division multiplexing (TDM) is a digital process that allows several connections to share the high bandwidth of a linle Instead of sharing a portion of the bandwidth as in FDM, time is shared. Each connection occupies a portion of time in the link. Figure 6.12 gives a conceptual view of TDM. Note that the same link is used as in FDM; here, however, the link is shown sectioned by time rather than by frequency. In the figure, portions of signals 1,2,3, and 4 occupy the link sequentially.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/time_division_multiplexing.png"
+                             alt="Diagram illustrating Time Division Multiplexing (TDM)."
+                             width="600" height="300">
+                        <figcaption>Figure 6.12 TDM</figcaption>
+                    </figure>
+                    <p>Note that in Figure 6.12 we are concerned with only multiplexing, not switching. This means that all the data in a message from source 1 always go to one specific destination, be it 1, 2, 3, or 4. The delivery is fixed and unvarying, unlike switching.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 TRANSMISSION MEDIA</h2>
+                <div class="content-block">
+                    <p>A <i>transmission medium</i> can be broadly defined as anything that can carry information from a source to a destination. For example, the transmission medium for two people having a dinner conversation is the air. The air can also be used to convey the message in a smoke signal or semaphore. For a written message, the transmission medium might be a mail carrier, a truck, or an airplane.</p>
+                    <p>In data communications the definition of the information and the transmission medium is more specific. The transmission medium is usually free space, metallic cable, or fiber-optic cable. The information is usually a signal that is the result of a conversion of data from another form.</p>
+                    <h3>Guided Media</h3>
+                    <p>Guided media, which are those that provide a conduit from one device to another, include twisted-pair cable, coaxial cable, and fiber-optic cable. A signal traveling along any of these media is directed and contained by the physical limits of the medium. Twisted-pair and coaxial cable use metallic (copper) conductors that accept and transport signals in the form of electric current. Optical fiber is a cable that accepts and transports signals in the form of light.</p>
+
+                    <h3>1. Twisted-Pair Cable</h3>
+                    <p>A twisted pair consists of two conductors (normally copper), each with its own plastic insulation, twisted together, as shown in Figure 7.3.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/twisted_pair_cable.png"
+                             alt="Diagram illustrating Twisted-pair cable structure."
+                             width="600" height="300">
+                        <figcaption>Figure 7.3 Twisted-pair cable</figcaption>
+                    </figure>
+                    <p>One of the wires is used to carry signals to the receiver, and the other is used only as a ground reference. The receiver uses the difference between the two. In addition to the signal sent by the sender on one of the wires, interference (noise) and crosstalk may affect both wires and create unwanted signals. If the two wires are parallel, the effect of these unwanted signals is not the same in both wires because they are at different locations relative to the noise or crosstalk sources (e,g., one is closer and the other is farther). This results in a difference at the receiver. By twisting the pairs, a balance is maintained. For example, suppose in one twist, one wire is closer to the noise source and the other is farther; in the next twist, the reverse is true. Twisting makes it probable that both wires are equally affected by external influences (noise or crosstalk). This means that the receiver, which calculates the difference between the two, receives no unwanted signals. The unwanted signals are mostly canceled out. From the above discussion, it is clear that the number of twists per unit of length (e.g., inch) has some effect on the quality of the cable.</p>
+                    <h4>Applications</h4>
+                    <p>Twisted-pair cables are used in telephone lines to provide voice and data channels. The local loop-the line that connects subscribers to the central telephone office-commonly consists of unshielded twisted-pair cables. The DSL lines that are used by the telephone companies to provide high-data-rate connections also use the high-bandwidth capability of unshielded twisted-pair cables. Local-area networks, such as lOBase-T and lOOBase-T, also use twisted-pair cables.</p>
+
+                    <h3>2. Coaxial Cable</h3>
+                    <p>Coaxial cable (or coax) carries signals of higher frequency ranges than those in twisted pair cable, in part because the two media are constructed quite differently. Instead of having two wires, coax has a central core conductor of solid or stranded wire (usually copper) enclosed in an insulating sheath, which is, in turn, encased in an outer conductor of metal foil, braid, or a combination of the two. The outer metallic wrapping serves both as a shield against noise and as the second conductor, which completes the circuit. This outer conductor is also enclosed in an insulating sheath, and the whole cable is protected by a plastic cover (see Figure 7.7).</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/coaxial_cable.png"
+                             alt="Diagram illustrating Coaxial cable structure."
+                             width="600" height="300">
+                        <figcaption>Figure 7.7 Coaxial cable</figcaption>
+                    </figure>
+                    <h4>Applications</h4>
+                    <p>Coaxial cable was widely used in analog telephone networks where a single coaxial network could carry 10,000 voice signals. Later it was used in digital telephone networks where a single coaxial cable could carry digital data up to 600 Mbps. However, coaxial cable in telephone networks has largely been replaced today with fiber-optic cable. Cable TV networks also use coaxial cables. In the traditional cable TV network, the entire network used coaxial cable. Later, however, cable TV providers replaced most of the media with fiber-optic cable; hybrid networks use coaxial cable only at the network boundaries, near the consumer premises. Cable TV uses RG-59 coaxial cable. Another common application of coaxial cable is in traditional Ethernet LANs. Because of its high bandwidth, and consequently high data rate, coaxial cable was chosen for digital transmission in early Ethernet LANs.</p>
+                </div>
+            </section>
+
+
+        </main>
+
+        <footer class="module-footer">
+            <section class="key-takeaways">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Digital-to-Analog Conversion methods include ASK, FSK, and PSK.</li>
+                    <li>Multiplexing allows sharing a link's bandwidth and includes FDM, WDM, and TDM.</li>
+                    <li>Guided transmission media provide a physical conduit for signals.</li>
+                    <li>Twisted-pair cables are common in telephone lines and LANs, balancing noise through twisting.</li>
+                    <li>Coaxial cables offer higher bandwidth than twisted-pair and are used in cable TV and Ethernet LANs.</li>
+                </ul>
+            </section>
+
+            <section class="knowledge-check">
+                <h2>⚡ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <p><strong>Question 1:</strong> Name three digital-to-analog conversion techniques.</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <ol>
+                                <li>Amplitude Shift Keying (ASK)</li>
+                                <li>Frequency Shift Keying (FSK)</li>
+                                <li>Phase Shift Keying (PSK)</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 2:</strong> What is the primary benefit of multiplexing?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Allows simultaneous transmission of multiple signals across a single data link, efficiently utilizing bandwidth.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 3:</strong> What are the three main types of multiplexing techniques discussed?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <ol>
+                                <li>Frequency-Division Multiplexing (FDM)</li>
+                                <li>Wavelength-Division Multiplexing (WDM)</li>
+                                <li>Time-Division Multiplexing (TDM)</li>
+                            </ol>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 4:</strong> What is a key advantage of twisted-pair cable design?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Twisting the pairs balances the effect of noise and crosstalk, reducing unwanted signals.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 5:</strong> In which applications is coaxial cable commonly used?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Cable TV networks and traditional Ethernet LANs.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="module3.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module 4 of 9</span>
+                    </div>
+                    <a href="module5.html" class="nav-button">
+                        Next <span>→</span>
+                    </a>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</body>
+</html>
+
+    

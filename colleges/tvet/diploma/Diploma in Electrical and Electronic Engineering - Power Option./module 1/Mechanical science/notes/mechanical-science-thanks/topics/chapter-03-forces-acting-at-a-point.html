@@ -1,0 +1,963 @@
+html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Forces acting at a point</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-text">Home</span>
+                    </a>
+                    <a href="../index.html" class="nav-button"> <!-- Disabled if first chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: calc(100/13 * 1)%;"></div> <!-- Set percentage dynamically -->
+                        </div>
+                        <span class="progress-text">Section 1 of 13</span> <!-- Update text -->
+                    </div>
+                    <a href="chapter-09-torque.html" class="nav-button"> <!-- Add 'disabled' class if last chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Mechanical science - Forces acting at a point</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-03-forces-acting-at-a-point -->
+                <section id="chapter-03-forces-acting-at-a-point" class="content-section" aria-labelledby="chapter-03-forces-acting-at-a-point-heading">
+                    <h2 id="chapter-03-forces-acting-at-a-point-heading" class="section-heading">
+                        <span class="heading-icon">🎯</span> <!-- Placeholder icon -->
+                        <span class="heading-text">Forces acting at a point</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the end of this chapter you should be able to:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">distinguish between scalar and vector quantities</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">define 'centre of gravity' of an object</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">define 'equilibrium' of an object</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">understand the terms 'coplanar' and 'concurrent'</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">determine the resultant of two coplanar forces using</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon"></span>
+                                <span class="item-text">(a) the triangle of forces method</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon"></span>
+                                <span class="item-text">(b) the parallelogram of forces method</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">calculate the resultant of two coplanar forces using</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon"></span>
+                                <span class="item-text">(a) the cosine and sine rules</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon"></span>
+                                <span class="item-text">(b) resolution of forces</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">determine the resultant of more than two coplanar forces using</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon"></span>
+                                <span class="item-text">(a) the polygon of forces method</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon"></span>
+                                <span class="item-text">(b) calculation by resolution of forces</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">determine unknown forces when three or more coplanar forces are in equilibrium</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-03-forces-acting-at-a-point -->
+
+                <!-- START: chapter-03-scalar-and-vector-quantities -->
+                <section id="chapter-03-scalar-and-vector-quantities" class="content-section" aria-labelledby="chapter-03-scalar-and-vector-quantities-heading">
+                    <h3 id="chapter-03-scalar-and-vector-quantities-heading" class="subsection-heading">3.1 Scalar and vector quantities</h3>
+                    <div class="content-card">
+                        <p>Quantities used in engineering and science can be divided into two groups:</p>
+                        <p>(a) Scalar quantities have a size (or magnitude) only and need no other information to specify them. Thus, 10 centimetres, 50 seconds, 7 litres and 3 kilograms are all examples of scalar quantities.</p>
+                        <p>(b) Vector quantities have both a size or magnitude and a direction, called the line of action of the quantity. Thus, a velocity of 50 kilometres per hour due east, an acceleration of 9.81 metres per second squared vertically downwards and a force of 15 Newtons at an angle of 30 degrees are all examples of vector quantities.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-03-scalar-and-vector-quantities -->
+
+                 <!-- START: chapter-03-centre-of-gravity-and-equilibrium -->
+                <section id="chapter-03-centre-of-gravity-and-equilibrium" class="content-section" aria-labelledby="chapter-03-centre-of-gravity-and-equilibrium-heading">
+                    <h3 id="chapter-03-centre-of-gravity-and-equilibrium-heading" class="subsection-heading">3.2 Centre of gravity and equilibrium</h3>
+                    <div class="content-card">
+                         <p>The centre of gravity of an object is a point where the resultant gravitational force acting on the body may be taken to act. For objects of uniform thickness lying in a horizontal plane, the centre of gravity is vertically in line with the point of balance of the object. For a thin uniform rod the point of balance and hence the centre of gravity is halfway along the rod as shown in Figure 3.1(a).</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-002-1.jpg" alt="Figure 3.1: Centre of gravity of a rod, rectangle, and circle." class="content-image">
+                         <p>Figure 3.1</p>
+                         <p>A thin flat sheet of a material of uniform thickness is called a lamina and the centre of gravity of a rectangular lamina lies at the point of intersection of its diagonals, as shown in Figure 3.1(b). The centre of gravity of a circular lamina is at the centre of the circle, as shown in Figure 3.1(c).</p>
+                         <p>An object is in equilibrium when the forces acting on the object are such that there is no tendency for the object to move. The state of equilibrium of an object can be divided into three groups.</p>
+                         <p>(i) If an object is in stable equilibrium and it is slightly disturbed by pushing or pulling (i.e. a disturbing force is applied), the centre of gravity is raised and when the disturbing force is removed, the object returns to its original position. Thus a ball bearing in a hemispherical cup is in stable equilibrium, as shown in Figure 3.2(a).</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-003-1.jpg" alt="Figure 3.2(a): Stable equilibrium example (ball in cup)." class="content-image">
+                         <p>(a)</p>
+                         <p>Stable equilibrium</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-003-2.jpg" alt="Figure 3.2(b): Unstable equilibrium example (ball on top of cup)." class="content-image">
+                         <p>Unstable equilibrium</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-003-3.jpg" alt="Figure 3.2(c): Neutral equilibrium example (ball on flat surface)." class="content-image">
+                         <p>(c)</p>
+                         <p>Neutral equilibrium</p>
+                         <p>Figure 3.2</p>
+                         <p>(ii) An object is in unstable equilibrium if, when a disturbing force is applied, the centre of gravity is lowered and the object moves away from its original position. Thus, a ball bearing balanced on top of a hemispherical cup is in unstable equilibrium, as shown in Figure 3.2(b).</p>
+                         <p>(iii) When an object in neutral equilibrium has a disturbing force applied, the centre of gravity remains at the same height and the object does not move when the disturbing force is removed. Thus, a ball bearing on a flat horizontal surface is in neutral equilibrium, as shown in Figure 3.2(c).</p>
+                    </div>
+                </section>
+                <!-- END: chapter-03-centre-of-gravity-and-equilibrium -->
+
+                <!-- START: chapter-03-forces -->
+                <section id="chapter-03-forces" class="content-section" aria-labelledby="chapter-03-forces-heading">
+                    <h3 id="chapter-03-forces-heading" class="subsection-heading">3.3 Forces</h3>
+                    <div class="content-card">
+                         <p>When forces are all acting in the same plane, they are called coplanar. When forces act at the same time and at the same point, they are called concurrent forces.</p>
+                         <p>Force is a vector quantity and thus has both a magnitude and a direction. A vector can be represented graphically by a line drawn to scale in the direction of the line of action of the force.</p>
+                         <p>To distinguish between vector and scalar quantities, various ways are used. These include:</p>
+                         <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">bold print,</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">two capital letters with an arrow above them to denote the sense of direction, e.g. $\overrightarrow{A B}$, where $A$ is the starting point and $B$ the end point of the vector,</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">a line over the top of letters, e.g. $\overline{A B}$ or $\bar{a}$</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">letters with an arrow above, e.g. $\vec{a}, \vec{A}$</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">underlined letters, e.g. $\underline{a}$</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">•</span>
+                                 <span class="item-text">$x i+y j$, where $i$ and $j$ are axes at right-angles to each other; for example, $3 i+4 j$ means 3 units in the $i$ direction and 4 units in the $j$ direction, as shown in Figure 3.3</span>
+                            </li>
+                         </ul>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-003-4.jpg" alt="Figure 3.3: Vector OA represented by 3i + 4j." class="content-image">
+                         <p>Figure 3.3</p>
+                         <ul class="enhanced-list">
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">a column matrix $\binom{a}{b}$; for example, the vector $\boldsymbol{O A}$ shown in Figure 3.3 could be represented by $\binom{3}{4}$</span>
+                             </li>
+                         </ul>
+                         <p>Thus, in Figure 3.3, $\boldsymbol{O A} \equiv \overrightarrow{O A} \equiv \overline{O A}$</p>
+                         <div class="equation">
+                            $$\equiv 3 i+4 j \equiv\binom{3}{4}$$
+                        </div>
+                        <p>The method adopted in this text is to denote vector quantities in bold print. Thus, $\boldsymbol{a} \boldsymbol{b}$ in Figure 3.4 represents a force of 5 Newton's acting in a direction due east.</p>
+                        <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-003-5.jpg" alt="Figure 3.4: Vector ab representing 5 Newtons due east." class="content-image">
+                        <p>Figure 3.4</p>
+                    </div>
+                </section>
+                <!-- END: chapter-03-forces -->
+
+                 <!-- START: chapter-03-resultant-two-coplanar-forces -->
+                <section id="chapter-03-resultant-two-coplanar-forces" class="content-section" aria-labelledby="chapter-03-resultant-two-coplanar-forces-heading">
+                    <h3 id="chapter-03-resultant-two-coplanar-forces-heading" class="subsection-heading">3.4 The resultant of two coplanar forces</h3>
+                    <div class="content-card">
+                         <p>For two forces acting at a point, there are three possibilities.</p>
+                         <p>(a) For forces acting in the same direction and having the same line of action, the single force having the same effect as both of the forces, called the resultant force or just the resultant, is the arithmetic sum of the separate forces. Forces of $F_{1}$ and $F_{2}$ acting at point $P$, as shown in Figure 3.5(a), have exactly the same effect on point $P$ as force $F$ shown in Figure 3.5(b), where $F=F_{1}+F_{2}$ and acts in the same direction as $F_{1}$ and $F_{2}$. Thus $F$ is the resultant of $F_{1}$ and $F_{2}$</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-004-1.jpg" alt="Figure 3.5: Forces F1 and F2 acting in the same direction at point P, and their resultant F." class="content-image">
+                         <p>Figure 3.5</p>
+                         <p>(b) For forces acting in opposite directions along the same line of action, the resultant force is the arithmetic difference between the two forces. Forces of $F_{1}$ and $F_{2}$ acting at point $P$ as shown in Figure 3.6(a) have exactly the same effect on point $P$ as force $F$ shown in Figure 3.6(b), where $F=F_{2}-F_{1}$ and acts in the direction of $F_{2}$, since $F_{2}$ is greater than $F_{1}$. Thus $F$ is the resultant of $F_{1}$ and $F_{2}$</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-004-2.jpg" alt="Figure 3.6: Forces F1 and F2 acting in opposite directions at point P, and their resultant F." class="content-image">
+                         <p>Figure 3.6</p>
+                         <p>(c) When two forces do not have the same line of action, the magnitude and direction of the resultant force may be found by a procedure called vector addition of forces. There are two graphical methods of performing vector addition, known as the triangle of forces method (see Section 3.5) and the parallelogram of forces method (see Section 3.6)</p>
+                         <p><b>Problem 1.</b> Determine the resultant force of two forces of 5 kN and 8 kN , (a) acting in the same direction and having the same line of action, (b) acting in opposite directions but having the same line of action.</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-004-3.jpg" alt="Figure 3.7: Vector diagrams for forces acting in the same and opposite directions." class="content-image">
+                         <p>Figure 3.7</p>
+                         <p>(a) The vector diagram of the two forces acting in the same direction is shown in Figure 3.7(a), which assumes that the line of action is horizontal, although since it is not specified, could be in any direction. From above, the resultant force $F$ is given by:</p>
+                         <div class="equation">
+                             $$\begin{aligned} \quad F & =F_{1}+F_{2}, \\ \text { i.e. } \quad \boldsymbol{F} & =(5+8) \mathrm{kN}=\mathbf{1 3} \mathbf{~ k N} \end{aligned}$$
+                         </div>
+                         <p>in the direction of the original forces.</p>
+                         <p>(b) The vector diagram of the two forces acting in opposite directions is shown in Figure 3.7(b), again assuming that the line of action is in a horizontal direction. From above, the resultant force $F$ is given by:</p>
+                         <div class="equation">
+                             $$\begin{aligned} F & =F_{2}-F_{1}, \text { i.e. } \boldsymbol{F}=(8-5) \mathrm{kN} \\ & =\mathbf{3} \mathbf{~ k N} \end{aligned}$$
+                         </div>
+                         <p>in the direction of the 8 kN force.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-03-resultant-two-coplanar-forces -->
+
+                <!-- START: chapter-03-triangle-of-forces-method -->
+                <section id="chapter-03-triangle-of-forces-method" class="content-section" aria-labelledby="chapter-03-triangle-of-forces-method-heading">
+                    <h3 id="chapter-03-triangle-of-forces-method-heading" class="subsection-heading">3.5 Triangle of forces method</h3>
+                    <div class="content-card">
+                         <p>A simple procedure for the triangle of forces method of vector addition is as follows:</p>
+                         <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Draw a vector representing one of the forces, using an appropriate scale and in the direction of its line of action.</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">From the nose of this vector and using the same scale, draw a vector representing the second force in the direction of its line of action.</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">The resultant vector is represented in both magnitude and direction by the vector drawn from the tail of the first vector to the nose of the second vector.</span>
+                             </li>
+                         </ul>
+                         <p><b>Problem 2.</b> Determine the magnitude and direction of the resultant of a force of 15 N acting horizontally to the right and a force of 20 N , inclined at an angle of $60^{\circ}$ to the 15 N force. Use the triangle of forces method.</p>
+                         <p>Using the procedure given above and with reference to Figure 3.8:</p>
+                         <p>(i) $\boldsymbol{a b}$ is drawn 15 units long horizontally</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-005-1.jpg" alt="Figure 3.8: Triangle of forces method for two forces." class="content-image">
+                         <p>Figure 3.8</p>
+                         <p>(ii) From $b, \boldsymbol{b} \boldsymbol{c}$ is drawn 20 units long, inclined at an angle of $60^{\circ}$ to $a b$. (Note, in angular measure, an angle of $60^{\circ}$ from $a b$ means $60^{\circ}$ in an anticlockwise direction)</p>
+                         <p>(iii) By measurement, the resultant $\boldsymbol{a c}$ is 30.5 units long inclined at an angle of $35^{\circ}$ to $a b$. That is, the resultant force is $\mathbf{30.5 ~ N}$, inclined at an angle of $\mathbf{35}^{\circ}$ to the 15 N force.</p>
+                         <p><b>Problem 3.</b> Find the magnitude and direction of the two forces given, using the triangle of forces method. First force: 1.5 kN acting at an angle of $30^{\circ}$. Second force: 3.7 kN acting at an angle of $-45^{\circ}$</p>
+                         <p>Scale</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-005-2.jpg" alt="Figure 3.9: Triangle of forces method for two forces with different angles." class="content-image">
+                         <p>Figure 3.9</p>
+                         <p>From the above procedure and with reference to Figure 3.9:</p>
+                         <p>(i) $\boldsymbol{a b}$ is drawn at an angle of $30^{\circ}$ and 1.5 units in length.</p>
+                         <p>(ii) From $b, \boldsymbol{b} \boldsymbol{c}$ is drawn at an angle of $-45^{\circ}$ and 3.7 units in length. (Note, an angle of $-45^{\circ}$ means a clockwise rotation of $45^{\circ}$ from a line drawn horizontally to the right)</p>
+                         <p>(iii) By measurement, the resultant ac is 4.3 units long at an angle of $-25^{\circ}$. That is, the resultant force is $\mathbf{4.3} \mathbf{~ k N}$ at an angle of $\mathbf{- 2 5}^{\circ}$</p>
+                         <p>Now try the following exercise</p>
+                         <h4 class="subsubsection-heading">Exercise 12 Further problems on the triangle of forces method</h4>
+                         <p>In questions 1 to 5, use the triangle of forces method to determine the magnitude and direction of the resultant of the forces given.</p>
+                         <ol class="enhanced-list">
+                              <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text">1.3 kN and 2.7 kN , having the same line of action and acting in the same direction. [ 4.0 kN in the direction of the forces]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text">470 N and 538 N having the same line of action but acting in opposite directions. [68 N in the direction of the 538 N force]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text">13 N at $0^{\circ}$ and 25 N at $30^{\circ}$ [36.8 N at $20^{\circ}$ ]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text">5 N at $60^{\circ}$ and 8 N at $90^{\circ}$ [12.6 N at $79^{\circ}$ ]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">5.</span>
+                                <span class="item-text">1.3 kN at $45^{\circ}$ and 2.8 kN at $-30^{\circ}$ [ 3.4 kN at $-8^{\circ}$ ]</span>
+                             </li>
+                         </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-03-triangle-of-forces-method -->
+
+                <!-- START: chapter-03-parallelogram-of-forces-method -->
+                <section id="chapter-03-parallelogram-of-forces-method" class="content-section" aria-labelledby="chapter-03-parallelogram-of-forces-method-heading">
+                    <h3 id="chapter-03-parallelogram-of-forces-method-heading" class="subsection-heading">3.6 The parallelogram of forces method</h3>
+                    <div class="content-card">
+                         <p>A simple procedure for the parallelogram of forces method of vector addition is as follows:</p>
+                         <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Draw a vector representing one of the forces, using an appropriate scale and in the direction of its line of action.</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">From the tail of this vector and using the same scale draw a vector representing the second force in the direction of its line of action.</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Complete the parallelogram using the two vectors drawn in (i) and (ii) as two sides of the parallelogram.</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">The resultant force is represented in both magnitude and direction by the vector corresponding to the diagonal of the parallelogram drawn from the tail of the vectors in (i) and (ii).</span>
+                             </li>
+                         </ul>
+                         <p><b>Problem 4.</b> Use the parallelogram of forces method to find the magnitude and direction of the resultant of a force of 250 N acting at an angle of $135^{\circ}$ and a force of 400 N acting at an angle of $-120^{\circ}$.</p>
+                         <p>From the procedure given above and with reference to Figure 3.10:</p>
+                         <p>(i) $\boldsymbol{a} \boldsymbol{b}$ is drawn at an angle of $135^{\circ}$ and 250 units in length</p>
+                         <p>(ii) $\boldsymbol{a} \boldsymbol{c}$ is drawn at an angle of $-120^{\circ}$ and 400 units in length</p>
+                         <p>(iii) bd and cd are drawn to complete the parallelogram</p>
+                         <p>(iv) ad is drawn. By measurement, ad is 413 units long at an angle of $-156^{\circ}$.</p>
+                         <p>That is, the resultant force is $\mathbf{413 ~ N}$ at an angle of $-156^{\circ}$</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-006-1.jpg" alt="Figure 3.10: Parallelogram of forces method." class="content-image">
+                         <p>Figure 3.10</p>
+                         <p>Now try the following exercise</p>
+                          <h4 class="subsubsection-heading">Exercise 13 Further problems on the parallelogram of forces method</h4>
+                          <p>In questions 1 to 5, use the parallelogram of forces method to determine the magnitude and direction of the resultant of the forces given.</p>
+                          <ol class="enhanced-list">
+                               <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text">1.7 N at $45^{\circ}$ and 2.4 N at $-60^{\circ}$ [2.6 N at $-20^{\circ}$ ]</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text">9 N at $126^{\circ}$ and 14 N at $223^{\circ}$ [15.7 N at $-172^{\circ}$ ]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text">23.8 N at $-50^{\circ}$ and 14.4 N at $215^{\circ}$ [26.7 N at $-82^{\circ}$ ]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text">0.7 kN at $147^{\circ}$ and 1.3 kN at $-71^{\circ}$ [ 0.86 kN at $-101^{\circ}$ ]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">5.</span>
+                                <span class="item-text">47 N at $79^{\circ}$ and 58 N at $247^{\circ}$ [15.5 N at $-152^{\circ}$ ]</span>
+                             </li>
+                          </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-03-parallelogram-of-forces-method -->
+
+                <!-- START: chapter-03-resultant-coplanar-forces-calculation -->
+                <section id="chapter-03-resultant-coplanar-forces-calculation" class="content-section" aria-labelledby="chapter-03-resultant-coplanar-forces-calculation-heading">
+                    <h3 id="chapter-03-resultant-coplanar-forces-calculation-heading" class="subsection-heading">3.7 Resultant of coplanar forces by calculation</h3>
+                    <div class="content-card">
+                         <p>An alternative to the graphical methods of determining the resultant of two coplanar forces is by calculation. This can be achieved by trigonometry using the cosine rule and the sine rule, as shown in Problem 5 following, or by resolution of forces (see Section 3.10).</p>
+                         <p><b>Problem 5.</b> Use the cosine and sine rules to determine the magnitude and direction of the resultant of a force of 8 kN acting at an angle of $50^{\circ}$ to the horizontal and a force of 5 kN acting at an angle of $-30^{\circ}$ to the horizontal.</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-007-1.jpg" alt="Figure 3.11: Space and vector diagram for calculating resultant forces." class="content-image">
+                         <p>Figure 3.11</p>
+                         <p>The space diagram is shown in Figure 3.11(a). A sketch is made of the vector diagram, oa representing the 8 kN force in magnitude and direction and $\boldsymbol{a} \boldsymbol{b}$ representing the 5 kN force in magnitude and direction. The resultant is given by length ob. By the cosine rule,</p>
+                         <div class="equation">
+                            $$\begin{aligned} & o b^{2}=o a^{2}+a b^{2}-2(o a)(a b) \cos \angle o a b \\ &=8^{2}+5^{2}-2(8)(5) \cos 100^{\circ} \\ &\left(\text { since } \angle o a b=180^{\circ}-50^{\circ}-30^{\circ}=100^{\circ}\right) \\ &=64+25-(-13.892)=102.892 \end{aligned}$$
+                         </div>
+                         <div class="equation">
+                             $$ \text { Hence } \quad o b = \sqrt { 102.892 } = \mathbf { 1 0 . 1 4 ~ k N } $$
+                         </div>
+                         <p>By the sine rule, $\frac{5}{\sin \angle a o b}=\frac{10.14}{\sin 100^{\circ}}$</p>
+                         <p>from which, $\quad \sin \angle a o b=\frac{5 \sin 100^{\circ}}{10.14}=0.4856$</p>
+                         <p>Hence $\angle$ aob $=\sin ^{-1}(0.4856)=29.05^{\circ}$. Thus angle $\phi$ in Figure 3.11(b) is $50^{\circ}-29.05^{\circ}=20.95^{\circ}$</p>
+                         <p>Hence the resultant of the two forces is 10.14 kN acting at an angle of $20.95^{\circ}$ to the horizontal</p>
+                         <p>Now try the following exercise</p>
+                          <h4 class="subsubsection-heading">Exercise 14 Further problems on the resultant of coplanar forces by calculation</h4>
+                          <ol class="enhanced-list">
+                              <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text">Forces of 7.6 kN at $32^{\circ}$ and 11.8 kN at $143^{\circ}$ act at a point. Use the cosine and sine rules to calculate the magnitude and direction of their resultant. [11.52 kN at $105^{\circ}$ ]</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text">13 N at $0^{\circ}$ and 25 N at $30^{\circ}$ [ 36.8 N at $20^{\circ}$ ]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text">1.3 kN at $45^{\circ}$ and 2.8 kN at $-30^{\circ}$ [ 3.4 kN at $-8^{\circ}$ ]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text">9 N at $126^{\circ}$ and 14 N at $223^{\circ}$ [15.7 N at $-172^{\circ}$ ]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">5.</span>
+                                <span class="item-text">0.7 kN at $147^{\circ}$ and 1.3 kN at $-71^{\circ}$ [ 0.86 kN at $-101^{\circ}$ ]</span>
+                             </li>
+                          </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-03-resultant-coplanar-forces-calculation -->
+
+                <!-- START: chapter-03-resultant-more-than-two-coplanar-forces -->
+                <section id="chapter-03-resultant-more-than-two-coplanar-forces" class="content-section" aria-labelledby="chapter-03-resultant-more-than-two-coplanar-forces-heading">
+                    <h3 id="chapter-03-resultant-more-than-two-coplanar-forces-heading" class="subsection-heading">3.8 Resultant of more than two coplanar forces</h3>
+                    <div class="content-card">
+                         <p>For the three coplanar forces $F_{1}, F_{2}$ and $F_{3}$ acting at a point as shown in Figure 3.12, the vector diagram is drawn using the nose-to-tail method of Section 3.5. The procedure is:</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-007-2.jpg" alt="Figure 3.12: Space diagram for three coplanar forces." class="content-image">
+                         <p>Figure 3.12</p>
+                         <ul class="enhanced-list">
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Draw oa to scale to represent force $F_{1}$ in both magnitude and direction (see Figure 3.13)</span>
+                             </li>
+                         </ul>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-007-3.jpg" alt="Figure 3.13: Polygon of forces method for three coplanar forces." class="content-image">
+                         <p>Figure 3.13</p>
+                         <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">From the nose of oa, draw $\boldsymbol{a b}$ to represent force $F_{2}$</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">From the nose of $\boldsymbol{a} \boldsymbol{b}$, draw $\boldsymbol{b} \boldsymbol{c}$ to represent force $F_{3}$</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">The resultant vector is given by length oc in Figure 3.13. The direction of resultant oc is from where we started, i.e. point $o$, to where we finished, i.e. point $c$. When acting by itself, the resultant force, given by oc, has the same effect on the point as forces $F_{1}, F_{2}$ and $F_{3}$ have when acting together. The resulting vector diagram of Figure 3.13 is called the polygon of forces.</span>
+                             </li>
+                         </ul>
+                         <p><b>Problem 6.</b> Determine graphically the magnitude and direction of the resultant of these three coplanar forces, which may be considered as acting at a point: Force $A, 12 \mathrm{~N}$ acting horizontally to the right; force $B, 7 \mathrm{~N}$ inclined at $60^{\circ}$ to force $A$; force $C, 15 \mathrm{~N}$ inclined at $150^{\circ}$ to force $A$</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-008-1.jpg" alt="Figure 3.14: Space diagram for three coplanar forces A, B, C." class="content-image">
+                         <p>Figure 3.14</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-008-2.jpg" alt="Figure 3.15: Vector diagram showing polygon of forces for A, B, C." class="content-image">
+                         <p>Figure 3.15</p>
+                         <p>The space diagram is shown in Figure 3.14. The vector diagram shown in Figure 3.15, is produced as follows:</p>
+                         <p>(i) oa represents the 12 N force in magnitude and direction</p>
+                         <p>(ii) From the nose of $\boldsymbol{o} \boldsymbol{a}, \boldsymbol{a} \boldsymbol{b}$ is drawn inclined at $60^{\circ}$ to $\boldsymbol{o} \boldsymbol{a}$ and 7 units long</p>
+                         <p>(iii) From the nose of $\boldsymbol{a} \boldsymbol{b}, \boldsymbol{b} \boldsymbol{c}$ is drawn 15 units long inclined at $150^{\circ}$ to oa (i.e. $150^{\circ}$ to the horizontal)</p>
+                         <p>(iv) oc represents the resultant; by measurement, the resultant is 13.8 N inclined at $\boldsymbol{\phi}=80^{\circ}$ to the horizontal.</p>
+                         <p>Thus the resultant of the three forces, $F_{A}, F_{B}$ and $F_{C}$ is a force of 13.8 N at $80^{\circ}$ to the horizontal.</p>
+                         <p><b>Problem 7.</b> The following coplanar forces are acting at a point, the given angles being measured from the horizontal: 100 N at $30^{\circ}$, 200 N at $80^{\circ}, 40 \mathrm{~N}$ at $-150^{\circ}, 120 \mathrm{~N}$ at $-100^{\circ}$ and 70 N at $-60^{\circ}$. Determine graphically the magnitude and direction of the resultant of the five forces.</p>
+                         <p>The five forces are shown in the space diagram of Figure 3.16. Since the 200 N and 120 N forces have the same line of action but are in opposite sense, they can be represented by a single force of $200-120$, i.e. 80 N acting at $80^{\circ}$ to the horizontal. Similarly, the 100 N and 40 N forces can be represented by a force of $100-40$, i.e. 60 N acting at $30^{\circ}$ to the horizontal. Hence the space diagram of Figure 3.16 may be represented by the space diagram of Figure 3.17. Such a simplification of the vectors is not essential but it is easier to construct the vector diagram from a space diagram having three forces, than one with five.</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-008-3.jpg" alt="Figure 3.16: Space diagram for five coplanar forces." class="content-image">
+                         <p>Figure 3.16</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-009-1.jpg" alt="Figure 3.17: Simplified space diagram for three equivalent forces." class="content-image">
+                         <p>Figure 3.17</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-009-2.jpg" alt="Figure 3.18: Polygon of forces for the simplified system." class="content-image">
+                         <p>Figure 3.18</p>
+                         <p>The vector diagram is shown in Figure 3.18, oa representing the 60 N force, $\boldsymbol{a b}$ representing the 80 N force and $\boldsymbol{b} \boldsymbol{c}$ the 70 N force. The resultant, $\boldsymbol{o c}$, is found by measurement to represent a force of 112 N and angle $\boldsymbol{\phi}$ is $25^{\circ}$.</p>
+                         <p>Thus, the five forces shown in Figure 3.16 may be represented by a single force of 112 N at $25^{\circ}$ to the horizontal.</p>
+                         <p>Now try the following exercise</p>
+                          <h4 class="subsubsection-heading">Exercise 15 Further problems on the resultant of more than two coplanar forces</h4>
+                          <p>In questions 1 to 3 , determine graphically the magnitude and direction of the resultant of the coplanar forces given which are acting at a point.</p>
+                          <ol class="enhanced-list">
+                              <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text">Force $A, 12 \mathrm{~N}$ acting horizontally to the right, force $B, 20 \mathrm{~N}$ acting at $140^{\circ}$ to force $A$, force $C, 16 \mathrm{~N}$ acting $290^{\circ}$ to force $A$. $\quad\left[3.06 \mathrm{~N}\right.$ at $-45^{\circ}$ to force $\left.A\right]$</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text">Force $1,23 \mathrm{kN}$ acting at $80^{\circ}$ to the horizontal, force $2,30 \mathrm{kN}$ acting at $37^{\circ}$ to force 1 , force $3,15 \mathrm{kN}$ acting at $70^{\circ}$ to force 2 . [ 53.5 kN at $37^{\circ}$ to force 1 (i.e. $117^{\circ}$ to the horizontal)]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text">Force $P, 50 \mathrm{kN}$ acting horizontally to the right, force $Q, 20 \mathrm{kN}$ at $70^{\circ}$ to force $P$, force $R, 40 \mathrm{kN}$ at $170^{\circ}$ to force $P$, force $S, 80 \mathrm{kN}$ at $300^{\circ}$ to force $P$. $\left[72 \mathrm{kN}$ at $-37^{\circ}$ to force $\left.P\right]$</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text">Four horizontal wires are attached to a telephone pole and exert tensions of 30 N to the south, 20 N to the east, 50 N to the north-east and 40 N to the north-west. Determine the resultant force on the pole and its direction. [43.18 N at $38.82^{\circ}$ east of north]</span>
+                             </li>
+                          </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-03-resultant-more-than-two-coplanar-forces -->
+
+                <!-- START: chapter-03-coplanar-forces-in-equilibrium -->
+                <section id="chapter-03-coplanar-forces-in-equilibrium" class="content-section" aria-labelledby="chapter-03-coplanar-forces-in-equilibrium-heading">
+                    <h3 id="chapter-03-coplanar-forces-in-equilibrium-heading" class="subsection-heading">3.9 Coplanar forces in equilibrium</h3>
+                    <div class="content-card">
+                         <p>When three or more coplanar forces are acting at a point and the vector diagram closes, there is no resultant. The forces acting at the point are in equilibrium.</p>
+                         <p><b>Problem 8.</b> A load of 200 N is lifted by two ropes connected to the same point on the load, making angles of $40^{\circ}$ and $35^{\circ}$ with the vertical. Determine graphically the tensions in each rope when the system is in equilibrium.</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-009-3.jpg" alt="Figure 3.19: Space diagram for a load lifted by two ropes." class="content-image">
+                         <p>Figure 3.19</p>
+                         <p>The space diagram is shown in Figure 3.19. Since the system is in equilibrium, the vector diagram must close. The vector diagram, shown in Figure 3.20, is drawn as follows:</p>
+                         <p>(i) The load of 200 N is drawn vertically as shown by oa</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-010-1.jpg" alt="Figure 3.20: Vector diagram (triangle of forces) for forces in equilibrium." class="content-image">
+                         <p>Figure 3.20</p>
+                         <p>(ii) The direction only of force $F_{1}$ is known, so from point $a, \boldsymbol{a d}$ is drawn at $40^{\circ}$ to the vertical</p>
+                         <p>(iii) The direction only of force $F_{2}$ is known, so from point $o, \boldsymbol{o c}$ is drawn at $35^{\circ}$ to the vertical</p>
+                         <p>(iv) Lines ad and oc cross at point $b$; hence the vector diagram is given by triangle $o a b$. By measurement, $\boldsymbol{a} \boldsymbol{b}$ is 119 N and $\boldsymbol{o} \boldsymbol{b}$ is 133 N .</p>
+                         <p>Thus the tensions in the ropes are $F_{1}=119 \mathrm{~N}$ and $F_{2}=133 \mathrm{~N}$.</p>
+                         <p><b>Problem 9.</b> Five coplanar forces are acting on a body and the body is in equilibrium. The forces are: 12 kN acting horizontally to the right, 18 kN acting at an angle of $75^{\circ}, 7 \mathrm{kN}$ acting at an angle of $165^{\circ}$, 16 kN acting from the nose of the 7 kN force, and 15 kN acting from the nose of the 16 kN force. Determine the directions of the 16 kN and 15 kN forces relative to the 12 kN force.</p>
+                         <p>With reference to Figure 3.21, oa is drawn 12 units long horizontally to the right. From point $\boldsymbol{a}, \boldsymbol{a} \boldsymbol{b}$ is drawn 18 units long at an angle of $75^{\circ}$. From $b, \boldsymbol{b} \boldsymbol{c}$ is drawn 7 units long at an angle of $165^{\circ}$.</p>
+                         <p>The direction of the 16 kN force is not known, thus arc $p q$ is drawn with a compass, with centre at $c$, radius 16 units. Since the forces are at equilibrium, the polygon of forces must close. Using a compass with centre at 0 , arc $r s$ is drawn having a radius 15 units. The point where the arcs intersect is at $d$.</p>
+                         <p>By measurement, angle $\quad \boldsymbol{\phi}=198^{\circ}$ and $\alpha=291^{\circ}$</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-010-2.jpg" alt="Figure 3.21: Polygon of forces diagram for forces in equilibrium with unknown directions." class="content-image">
+                         <p>Figure 3.21</p>
+                         <p>Thus the 16 kN force acts at an angle of $198^{\circ}$ (or $-162^{\circ}$ ) to the 12 kN force, and the 15 kN force acts at an angle of $291^{\circ}$ (or $-69^{\circ}$ ) to the 12 kN force.</p>
+                         <p>Now try the following exercise</p>
+                          <h4 class="subsubsection-heading">Exercise 16 Further problems on coplanar forces in equilibrium</h4>
+                          <ol class="enhanced-list">
+                              <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text">A load of 12.5 N is lifted by two strings connected to the same point on the load, making angles of $22^{\circ}$ and $31^{\circ}$ on opposite sides of the vertical. Determine the tensions in the strings. [5.86 N, 8.06 N]</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                 <span class="item-text">A two-legged sling and hoist chain used for lifting machine parts is shown in Figure 3.22. Determine the forces in each leg of the sling if parts exerting a downward force of 15 kN are lifted. $[9.96 \mathrm{kN}, 7.77 \mathrm{kN}]$</span>
+                            </li>
+                         </ol>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-011-1.jpg" alt="Figure 3.22: Diagram of a two-legged sling lifting a machine part." class="content-image">
+                         <p>Figure 3.22</p>
+                         <ol class="enhanced-list" start="3">
+                              <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text">Four coplanar forces acting on a body are such that it is in equilibrium. The vector diagram for the forces is such that the 60 N force acts vertically upwards, the 40 N force acts at $65^{\circ}$ to the 60 N force, the 100 N force acts from the nose of the 60 N force and the 90 N force acts from the nose of the 100 N force. Determine the direction of the 100 N and 90 N forces relative to the 60 N force. [ 100 N force at $263^{\circ}$ to the 60 N force, 90 N force at $132^{\circ}$ to the 60 N force]</span>
+                             </li>
+                         </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-03-coplanar-forces-in-equilibrium -->
+
+                <!-- START: chapter-03-resolution-of-forces -->
+                <section id="chapter-03-resolution-of-forces" class="content-section" aria-labelledby="chapter-03-resolution-of-forces-heading">
+                    <h3 id="chapter-03-resolution-of-forces-heading" class="subsection-heading">3.10 Resolution of forces</h3>
+                    <div class="content-card">
+                         <p>A vector quantity may be expressed in terms of its horizontal and vertical components. For example, a vector representing a force of 10 N at an angle of $60^{\circ}$ to the horizontal is shown in Figure 3.23. If the horizontal line $\boldsymbol{o} \boldsymbol{a}$ and the vertical line $\boldsymbol{a} \boldsymbol{b}$ are constructed as shown, then $\boldsymbol{o} \boldsymbol{a}$ is called the horizontal component of the 10 N force, and $\boldsymbol{a} \boldsymbol{b}$ the vertical component of the 10 N force.</p>
+                         <p>By trigonometry,</p>
+                         <div class="equation">
+                             $$\cos 60^{\circ}=\frac{o a}{o b},$$
+                         </div>
+                         <p>hence the horizontal component,</p>
+                         <div class="equation">
+                              $$oa=10 \cos 60^{\circ}$$
+                         </div>
+                         <p>Also, $\quad \sin 60^{\circ}=\frac{a b}{o b}$,</p>
+                         <p>hence the vertical component, $a b=10 \sin 60^{\circ}$</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-011-2.jpg" alt="Figure 3.23: Resolution of a force into horizontal and vertical components." class="content-image">
+                         <p>Figure 3.23</p>
+                         <p>This process is called finding the horizontal and vertical components of a vector or the resolution of a vector, and can be used as an alternative to graphical methods for calculating the resultant of two or more coplanar forces acting at a point.</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-011-3.jpg" alt="Figure 3.24: Space diagram showing two forces at different angles for resolution." class="content-image">
+                         <p>Figure 3.24</p>
+                         <p>For example, to calculate the resultant of a 10 N force acting at $60^{\circ}$ to the horizontal and a 20 N force acting at $-30^{\circ}$ to the horizontal (see Figure 3.24) the procedure is as follows:</p>
+                         <p>(i) Determine the horizontal and vertical components of the 10 N force, i.e.</p>
+                         <div class="equation">
+                             $$\text { horizontal component, } \begin{aligned} oa & =10 \cos 60^{\circ} \\ &=5.0 \mathrm{~N}, \text { and } \\ \text { vertical component, } a b & =10 \sin 60^{\circ} \\ &=8.66 \mathrm{~N} \end{aligned}$$
+                         </div>
+                         <p>(ii) Determine the horizontal and vertical components of the 20 N force, i.e.</p>
+                         <div class="equation">
+                              $$\text { horizontal component, } \begin{aligned} od & =20 \cos \left(-30^{\circ}\right) \\ &=17.32 \mathrm{~N}, \text { and } \\ \text { vertical component, } c d & =20 \sin \left(-30^{\circ}\right) \\ &=-10.0 \mathrm{~N} \end{aligned}$$
+                         </div>
+                         <p>(iii) Determine the total horizontal component, i.e.</p>
+                         <div class="equation">
+                             $$oa+od=5.0+17.32=22.32 \mathrm{~N}$$
+                         </div>
+                         <p>(iv) Determine the total vertical component, i.e.</p>
+                         <div class="equation">
+                             $$ab+cd=8.66+(-10.0)=-1.34 \mathrm{~N}$$
+                         </div>
+                         <p>$0 \xrightarrow[\text { Resultant }]{\text { Total horizontal component }=22.32} \xrightarrow{\text { ta }}$ Total vertical</p>
+                         <p>Figure 3.25</p>
+                         <p>(v) Sketch the total horizontal and vertical components as shown in Figure 3.25. The resultant of the two components is given by length or and, by Pythagoras' theorem,</p>
+                         <div class="equation">
+                             $$\begin{aligned} \text { or } & =\sqrt{22.32^{2}+1.34^{2}} \\ &=22.36 \mathrm{~N} \end{aligned}$$
+                         </div>
+                         <p>and using trigonometry, angle</p>
+                         <div class="equation">
+                              $$\begin{aligned} \boldsymbol{\phi} & =\tan ^{-1} \frac{1.34}{22.32} \\ &=3.44^{\circ} \end{aligned}$$
+                         </div>
+                         <p>Hence the resultant of the 10 N and 20 N forces shown in Figure 3.24 is $\mathbf{2 2 . 3 6 ~ N}$ at an angle of $\mathbf{- 3 . 4 4}{ }^{\circ}$ to the horizontal.</p>
+                         <p><b>Problem 10.</b> Forces of 5.0 N at $25^{\circ}$ and 8.0 N at $112^{\circ}$ act at a point. By resolving these forces into horizontal and vertical components, determine their resultant.</p>
+                         <p>The space diagram is shown in Figure 3.26.</p>
+                         <p>(i) The horizontal component of the 5.0 N force,</p>
+                         <div class="equation">
+                              $$oa=5.0 \cos 25^{\circ}=4.532$$
+                         </div>
+                         <p>and the vertical component of the 5.0 N force,</p>
+                         <div class="equation">
+                              $$ab=5.0 \sin 25^{\circ}=2.113$$
+                         </div>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-012-1.jpg" alt="Figure 3.26: Space diagram for two forces at different angles." class="content-image">
+                         <p>Figure 3.26</p>
+                         <p>(ii) The horizontal component of the 8.0 N force,</p>
+                         <div class="equation">
+                              $$oc=8.0 \cos 112^{\circ}=-2.997$$
+                         </div>
+                         <p>The vertical component of the 8.0 N force,</p>
+                         <div class="equation">
+                              $$cd=8.0 \sin 112^{\circ}=7.417$$
+                         </div>
+                         <p>(iii) Total horizontal component</p>
+                         <div class="equation">
+                              $$\begin{aligned} & =oa+oc=4.532+(-2.997) \\ &=+1.535 \end{aligned}$$
+                         </div>
+                         <p>(iv) Total vertical component</p>
+                         <div class="equation">
+                              $$\begin{aligned} & =ab+cd=2.113+7.417 \\ &=+9.530 \end{aligned}$$
+                         </div>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-012-2.jpg" alt="Figure 3.27: Total horizontal and vertical components of forces." class="content-image">
+                         <p>Figure 3.27</p>
+                         <p>(v) The components are shown sketched in Figure 3.27.</p>
+                         <p>By Pythagoras' theorem,</p>
+                         <div class="equation">
+                              $$\begin{aligned} r & =\sqrt{1.535^{2}+9.530^{2}} \\ &=9.653 \end{aligned}$$
+                         </div>
+                         <p>and by trigonometry, angle</p>
+                         <div class="equation">
+                             $$\phi=\tan ^{-1} \frac{9.530}{1.535}=80.85^{\circ}$$
+                         </div>
+                         <p>Hence the resultant of the two forces shown in Figure 3.26 is a force of 9.653 N acting at $80.85^{\circ}$ to the horizontal.</p>
+                         <p>Problems 9 and 10 demonstrate the use of resolution of forces for calculating the resultant of two coplanar forces acting at a point. However the method may be used for more than two forces acting at a point, as shown in Problem 11.</p>
+                         <p><b>Problem 11.</b> Determine by resolution of forces the resultant of the following three coplanar forces acting at a point: 200 N acting at $20^{\circ}$ to the horizontal; 400 N acting at $165^{\circ}$ to the horizontal; 500 N acting at $250^{\circ}$ to the horizontal.</p>
+                         <p>A tabular approach using a calculator may be made as shown below:</p>
+                         <h4 class="subsubsection-heading">Horizontal component</h4>
+                         <div class="table-container">
+                              <table class="content-table">
+                                 <tbody>
+                                     <tr>
+                                         <td>Force 1 $\quad 200 \cos 20^{\circ}$</td>
+                                         <td>$=187.94$</td>
+                                     </tr>
+                                     <tr>
+                                         <td>Force 2 $\quad 400 \cos 165^{\circ}$</td>
+                                         <td>$=-386.37$</td>
+                                     </tr>
+                                     <tr>
+                                         <td>Force 3 $\quad 500 \cos 250^{\circ}$</td>
+                                         <td>$=-171.01$</td>
+                                     </tr>
+                                      <tr>
+                                         <td>Total horizontal component</td>
+                                         <td>$=-369.44$</td>
+                                     </tr>
+                                 </tbody>
+                              </table>
+                         </div>
+
+                         <h4 class="subsubsection-heading">Vertical component</h4>
+                          <div class="table-container">
+                              <table class="content-table">
+                                 <tbody>
+                                     <tr>
+                                         <td>Force 1 $\quad 200 \sin 20^{\circ}$</td>
+                                         <td>$=$</td>
+                                         <td>68.40</td>
+                                     </tr>
+                                     <tr>
+                                         <td>Force 2 $\quad 400 \sin 165^{\circ}$</td>
+                                         <td>$=$</td>
+                                         <td>103.53</td>
+                                     </tr>
+                                     <tr>
+                                         <td>Force 3 $\quad 500 \sin 250^{\circ}$</td>
+                                         <td>$=$</td>
+                                         <td>-469.85</td>
+                                     </tr>
+                                      <tr>
+                                         <td colspan="2">Total vertical component</td>
+                                         <td>$=-297.92</td>
+                                     </tr>
+                                 </tbody>
+                              </table>
+                          </div>
+
+                         <p>The total horizontal and vertical components are shown in Figure 3.28.</p>
+                         <h4 class="subsubsection-heading">Resultant</h4>
+                         <div class="equation">
+                             $$\begin{aligned} r & =\sqrt{369.44^{2}+297.92^{2}} \\ &=474.60 \end{aligned}$$
+                         </div>
+                         <p>and angle</p>
+                         <div class="equation">
+                              $$\phi=\tan ^{-1} \frac{297.92}{369.44}=38.88^{\circ},$$
+                         </div>
+                         <p>from which, $\quad \alpha=180^{\circ}-38.88^{\circ}=141.12^{\circ}$</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-013-1.jpg" alt="Figure 3.28: Total horizontal and vertical components for three forces." class="content-image">
+                         <p>Figure 3.28</p>
+                         <p>Thus the resultant of the three forces given is 474.6 N acting at an angle of $-141.12^{\circ}$ (or $+218.88^{\circ}$ ) to the horizontal.</p>
+                         <p>Now try the following exercise</p>
+                         <h4 class="subsubsection-heading">Exercise 17 Further problems on resolution of forces</h4>
+                          <ol class="enhanced-list">
+                              <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text">Resolve a force of 23.0 N at an angle of $64^{\circ}$ into its horizontal and vertical components. [10.08 N, 20.67 N]</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text">Forces of 5 N at $21^{\circ}$ and 9 N at $126^{\circ}$ act at a point. By resolving these forces into horizontal and vertical components, determine their resultant. [9.09 N at $93.92^{\circ}$ ]</span>
+                             </li>
+                          </ol>
+                           <p>In questions 3 and 4, determine the magnitude and direction of the resultant of the coplanar forces given, which are acting at a point, by resolution of forces.</p>
+                          <ol class="enhanced-list" start="3">
+                             <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text">Force $A, 12 \mathrm{~N}$ acting horizontally to the right, force $B, 20 \mathrm{~N}$ acting at $140^{\circ}$ to force $A$, force $C, 16 \mathrm{~N}$ acting $290^{\circ}$ to force $A$. $\quad\left[3.1 \mathrm{~N}\right.$ at $-45^{\circ}$ to force $\left.A\right]$</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text">Force $1,23 \mathrm{kN}$ acting at $80^{\circ}$ to the horizontal, force $2,30 \mathrm{kN}$ acting at $37^{\circ}$ to force 1 , force $3,15 \mathrm{kN}$ acting at $70^{\circ}$ to force 2. [53.5 kN at $37^{\circ}$ to force 1 (i.e. $117^{\circ}$ to the horizontal)]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">5.</span>
+                                <span class="item-text">Determine, by resolution of forces, the resultant of the following three coplanar forces acting at a point: 10 kN acting at $32^{\circ}$ to the horizontal, 15 kN acting at $170^{\circ}$ to the horizontal; 20 kN acting at $240^{\circ}$ to the horizontal. [18.82 kN at $210.03^{\circ}$ to the horizontal]</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">6.</span>
+                                <span class="item-text">The following coplanar forces act at a point: force $A, 15 \mathrm{~N}$ acting horizontally to the right, force $B, 23 \mathrm{~N}$ at $81^{\circ}$ to the horizontal, force $C, 7 \mathrm{~N}$ at $210^{\circ}$ to the horizontal, force $D, 9 \mathrm{~N}$ at $265^{\circ}$ to the horizontal, and force $E, 28 \mathrm{~N}$ at $324^{\circ}$ to the horizontal. Determine the resultant of the five forces by resolution of the forces. [34.96 N at $-10.23^{\circ}$ to the horizontal]</span>
+                             </li>
+                          </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-03-resolution-of-forces -->
+
+                <!-- START: chapter-03-summary -->
+                <section id="chapter-03-summary" class="content-section" aria-labelledby="chapter-03-summary-heading">
+                    <h3 id="chapter-03-summary-heading" class="subsection-heading">3.11 Summary</h3>
+                    <div class="content-card">
+                         <p>(a) To determine the resultant of two coplanar forces acting at a point, four methods are commonly used. They are:</p>
+                         <p>by drawing:</p>
+                         <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">(1)</span>
+                                <span class="item-text">triangle of forces method, and</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">(2)</span>
+                                <span class="item-text">parallelogram of forces method, and by calculation:</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">(3)</span>
+                                <span class="item-text">use of cosine and sine rules, and</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">(4)</span>
+                                <span class="item-text">resolution of forces</span>
+                             </li>
+                         </ul>
+                         <p>(b) To determine the resultant of more than two coplanar forces acting at a point, two methods are commonly used. They are:</p>
+                         <p>by drawing:</p>
+                         <ul class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">(1)</span>
+                                <span class="item-text">polygon of forces method, and by calculation:</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">(2)</span>
+                                <span class="item-text">resolution of forces</span>
+                             </li>
+                         </ul>
+                         <p>Now try the following exercise</p>
+                         <h4 class="subsubsection-heading">Exercise 18 Short answer questions on forces acting at a point</h4>
+                         <ol class="enhanced-list">
+                              <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text">Give one example of a scalar quantity and one example of a vector quantity</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text">Explain the difference between a scalar and a vector quantity</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text">What is meant by the centre of gravity of an object?</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text">Where is the centre of gravity of a rectangular lamina?</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">5.</span>
+                                <span class="item-text">What is meant by neutral equilibrium?</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">6.</span>
+                                <span class="item-text">State the meaning of the term 'coplanar'</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">7.</span>
+                                <span class="item-text">What is a concurrent force?</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">8.</span>
+                                <span class="item-text">State what is meant by a triangle of forces</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">9.</span>
+                                <span class="item-text">State what is meant by a parallelogram of forces</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">10.</span>
+                                <span class="item-text">State what is meant by a polygon of forces</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">11.</span>
+                                <span class="item-text">When a vector diagram is drawn representing coplanar forces acting at a point, and there is no resultant, the forces are in $\qquad$</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">12.</span>
+                                <span class="item-text">Two forces of 6 N and 9 N act horizontally to the right. The resultant is . . . . . N acting $\qquad$</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">13.</span>
+                                <span class="item-text">A force of 10 N acts at an angle of $50^{\circ}$ and another force of 20 N acts at an angle of $230^{\circ}$. The resultant is a force $\ldots \ldots \mathrm{N}$ acting at an angle of .... ${ }^{\circ}$</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">14.</span>
+                                <span class="item-text">What is meant by 'resolution of forces'?</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">15.</span>
+                                <span class="item-text">A coplanar force system comprises a 20 kN force acting horizontally to the right, 30 kN at $45^{\circ}, 20 \mathrm{kN}$ at $180^{\circ}$ and 25 kN at $225^{\circ}$. The resultant is a force of $\qquad$ N acting at an angle of .... ${ }^{\circ}$ to the horizontal</span>
+                             </li>
+                         </ol>
+                         <h4 class="subsubsection-heading">Exercise 19 Multi-choice questions on forces acting at a point (Answers on page 284)</h4>
+                         <ol class="enhanced-list">
+                             <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text">A physical quantity which has direction as well as magnitude is known as a: (a) force (b) vector (c) scalar (d) weight</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text">Which of the following is not a scalar quantity? (a) velocity (b) potential energy (c) work (d) kinetic energy</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text">Which of the following is not a vector quantity? (a) displacement (b) density (c) velocity (d) acceleration</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text">Which of the following statements is false? (a) Scalar quantities have size or magnitude only (b) Vector quantities have both magnitude and direction (c) Mass, length and time are all scalar quantities (d) Distance, velocity and acceleration are all vector quantities</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">5.</span>
+                                 <span class="item-text">If the centre of gravity of an object which is slightly disturbed is raised and the object returns to its original position when the disturbing force is removed, the object is said to be in (a) neutral equilibrium (b) stable equilibrium (c) static equilibrium (d) unstable equilibrium</span>
+                            </li>
+                              <li class="list-item">
+                                <span class="item-icon">6.</span>
+                                 <span class="item-text">Which of the following statements is false? (a) The centre of gravity of a lamina is at its point of balance. (b) The centre of gravity of a circular lamina is at its centre. (c) The centre of gravity of a rectangular lamina is at the point of intersection of its two sides. (d) The centre of gravity of a thin uniform rod is halfway along the rod.</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">7.</span>
+                                <span class="item-text">The magnitude of the resultant of the vectors shown in Figure 3.29 is:</span>
+                            </li>
+                         </ol>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-015-1.jpg" alt="Figure 3.29: Two vectors in opposite directions." class="content-image">
+                         <p>Figure 3.29</p>
+                         <ol class="enhanced-list" start="7">
+                             <li class="list-item">
+                                <span class="item-icon"></span>
+                                <span class="item-text">(a) 2 N (b) 12 N (c) 35 N (d) -2 N</span>
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">8.</span>
+                                <span class="item-text">The magnitude of the resultant of the vectors shown in Figure 3.30 is: (a) 7 N (b) 5 N (c) 1 N (d) 12 N</span>
+                            </li>
+                         </ol>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-015-2.jpg" alt="Figure 3.30: Two perpendicular vectors." class="content-image">
+                         <p>Figure 3.30</p>
+                         <ol class="enhanced-list" start="9">
+                              <li class="list-item">
+                                <span class="item-icon">9.</span>
+                                 <span class="item-text">Which of the following statements is false? (a) There is always a resultant vector required to close a vector diagram representing a system of coplanar forces acting at a point, which are not in equilibrium. (b) A vector quantity has both magnitude and direction. (c) A vector diagram representing a system of coplanar forces acting at a point when in equilibrium does not close. (d) Concurrent forces are those which act at the same time at the same point.</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">10.</span>
+                                 <span class="item-text">Which of the following statements is false? (a) The resultant of coplanar forces of $1 \mathrm{~N}, 2 \mathrm{~N}$ and 3 N acting at a point can be 4 N . (b) The resultant of forces of 6 N and 3 N acting in the same line of action but opposite in sense is 3 N . (c) The resultant of forces of 6 N and 3 N acting in the same sense and having the same line of action is 9 N . (d) The resultant of coplanar forces of 4 N at $0^{\circ}, 3 \mathrm{~N}$ at $90^{\circ}$ and 8 N at $180^{\circ}$ is 15 N .</span>
+                            </li>
+                             <li class="list-item">
+                                <span class="item-icon">11.</span>
+                                 <span class="item-text">A space diagram of a force system is shown in Figure 3.31. Which of the vector diagrams in Figure 3.32 does not represent this force system?</span>
+                            </li>
+                         </ol>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-016-1.jpg" alt="Figure 3.31: Space diagram of a force system with three forces." class="content-image">
+                         <p>Figure 3.31</p>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-016-2.jpg" alt="Figure 3.32: Four different vector diagrams." class="content-image">
+                         <p>Figure 3.32</p>
+                         <ol class="enhanced-list" start="11">
+                             <li class="list-item">
+                                <span class="item-icon"></span>
+                                <span class="item-text">(figure options related to Figure 3.32)</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">12.</span>
+                                <span class="item-text">With reference to Figure 3.33, which of the following statements is false?</span>
+                            </li>
+                         </ol>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-016-3.jpg" alt="Figure 3.33: Four forces FA, FB, FC, FD with their magnitudes and angles." class="content-image">
+                         <p>Figure 3.33</p>
+                         <ol class="enhanced-list" start="12">
+                              <li class="list-item">
+                                <span class="item-icon"></span>
+                                <span class="item-text">(a) The horizontal component of $F_{A}$ is 8.66 N (b) The vertical component of $F_{B}$ is 10 N (c) The horizontal component of $F_{C}$ is 0 (d) The vertical component of $F_{D}$ is 4 N</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">13.</span>
+                                <span class="item-text">The resultant of two forces of 3 N and 4 N can never be equal to: (a) 2.5 N (b) 4.5 N (c) 6.5 N (d) 7.5 N</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">14.</span>
+                                <span class="item-text">The magnitude of the resultant of the vectors shown in Figure 3.34 is: (a) 5 N (b) 13 N (c) 1 N (d) 63 N</span>
+                            </li>
+                         </ol>
+                         <img src="../assets/images/2025_05_11_7875928bbf712b5261e7g-016-4.jpg" alt="Figure 3.34: Two vectors at an angle." class="content-image">
+                         <p>Figure 3.34</p>
+                    </div>
+                </section>
+                <!-- END: chapter-03-summary -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <!-- Repeat exact same links as top navigation -->
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="../index.html" class="nav-button"> <!-- Disabled if first chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: calc(100/13 * 1)%;"></div>
+                        </div>
+                        <span class="progress-text">Section 1 of 13</span>
+                    </div>
+                    <a href="chapter-09-torque.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

@@ -1,0 +1,472 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sectional Views - Engineering Drawing</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+    
+    <!-- Tab Styles -->
+    <style>
+        .tabs-container {
+            margin: var(--space-6) 0;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2);
+        }
+        .tabs-header {
+            display: flex;
+            gap: var(--space-2);
+            overflow-x: auto;
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .tab-btn {
+            padding: var(--space-3) var(--space-6);
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-medium);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+        .tab-btn:hover {
+            color: var(--color-primary);
+            background: var(--color-surface-hover);
+        }
+        .tab-btn.active {
+            background: var(--color-surface);
+            color: var(--color-primary);
+            box-shadow: var(--shadow-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+        .tab-content {
+            padding: var(--space-6);
+            display: none;
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-2);
+            animation: fadeIn var(--transition-base);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        /* Material Grid Styles */
+        .material-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+            gap: var(--space-4);
+            margin-top: var(--space-4);
+        }
+        .material-card {
+            text-align: center;
+            padding: var(--space-3);
+            background: var(--color-bg-primary);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-md);
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-05.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-07.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 46%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 6 of 13</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>✂️</span>
+                        <span>Topic 06</span>
+                    </div>
+                    <h1 class="document-title">Sectional Views</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Module 3: Sectional Views</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>30 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🤔</span>
+                                Why Sectional Views?
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Invisible features of an object are typically shown by means of hidden lines in their projected views. However, when such lines are too many, they make the views more complicated and difficult to interpret.</p>
+                            
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">The Solution</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>In such cases, it is customary to imagine the object as being <strong>cut through by a plane</strong>. The part of the object between the plane and the observer is assumed to be removed to reveal internal details.</p>
+                                </div>
+                            </div>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-55e04c1c.jpeg" alt="Example of a Section Cut" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Visualize the cut</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Visualizing a Sectional Cut</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Important Terms -->
+                    <section class="content-section" id="terminology">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📖</span>
+                                Important Terms
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Understanding the standard terminology is essential for creating correct sectional views.</p>
+
+                            <!-- Interactive Tabs for Terminology -->
+                            <div class="tabs-container">
+                                <div class="tabs-header" role="tablist">
+                                    <button class="tab-btn active" data-tab="planes" role="tab" aria-selected="true">Cutting Plane</button>
+                                    <button class="tab-btn" data-tab="views" role="tab" aria-selected="false">Sectional View</button>
+                                    <button class="tab-btn" data-tab="lines" role="tab" aria-selected="false">Cutting Plane Line</button>
+                                </div>
+                                
+                                <div class="tabs-content">
+                                    <div class="tab-content active" id="planes" role="tabpanel">
+                                        <h4>Cutting Plane (or Section Plane)</h4>
+                                        <p>The imaginary plane by which the object is assumed to be cut through. It is assumed to be parallel to the plane on which the view is projected.</p>
+                                        <figure class="content-figure" style="margin-top: 1rem;">
+                                            <img src="../assets/images/image-20251222-f8a5260c.jpeg" alt="Cutting Plane Diagram" class="figure-image">
+                                        </figure>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="views" role="tabpanel">
+                                        <h4>Section</h4>
+                                        <p>The surface produced by cutting an object by the section plane is called the section.</p>
+                                        <h4>Sectional View</h4>
+                                        <p>The projection of the section along with the remaining part of the object is called the sectional view.</p>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="lines" role="tabpanel">
+                                        <h4>Cutting Plane Line</h4>
+                                        <p>The position of the cutting plane is indicated by this line. It is an <strong>edge view</strong> of the cutting plane.</p>
+                                        <ul>
+                                            <li>The direction of viewing the section is shown by arrows resting on the cutting plane line.</li>
+                                            <li>The sight arrows are always perpendicular to the cutting plane.</li>
+                                            <li>It is designated by capital letters (e.g., A-A).</li>
+                                        </ul>
+                                        <figure class="content-figure" style="margin-top: 1rem;">
+                                            <img src="../assets/images/image-20251222-bd4d5729.jpeg" alt="Cutting Plane Line Example" class="figure-image">
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Section Lining -->
+                    <section class="content-section" id="lining">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">✏️</span>
+                                Section Lining (Hatching)
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Section lines or cross-hatch lines are used to indicate the surfaces that are cut by the cutting plane.</p>
+                            
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📐</span>
+                                    <h4 class="callout-title">Drafting Rules</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">The section lines should be drawn evenly spaced inclined at <strong>$45^{\circ}$</strong> to the axis or to the main outline of the section.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">They can also be drawn at $30^{\circ}$ or $60^{\circ}$ if necessary.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Section lines should be drawn with a <strong>2H</strong> or <strong>3H</strong> pencil.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">The spaces between lines may vary from 1.5 mm for small sections to 3 mm for large sections.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Material Symbols</h3>
+                            <p>The section lines are different for each material type. However, for practical purposes, the <strong>cast iron</strong> symbol is used most often for general materials.</p>
+                            
+                            <div class="material-grid">
+                                <div class="material-card">
+                                    <img src="../assets/images/image-20251222-e1d4b019.jpeg" alt="Cast Iron Hatching" class="figure-image" style="height: 100px; object-fit: contain;">
+                                    <p><strong>Cast Iron</strong><br>(General Use)</p>
+                                </div>
+                                <div class="material-card">
+                                    <img src="../assets/images/image-20251222-933d1afd.jpeg" alt="Concrete Hatching" class="figure-image" style="height: 100px; object-fit: contain;">
+                                    <p><strong>Concrete</strong></p>
+                                </div>
+                                <div class="material-card">
+                                    <img src="../assets/images/image-20251222-5e315b05.jpeg" alt="Sand Hatching" class="figure-image" style="height: 100px; object-fit: contain;">
+                                    <p><strong>Sand</strong></p>
+                                </div>
+                                <div class="material-card">
+                                    <img src="../assets/images/image-20251222-aa4df478.jpeg" alt="Wood Hatching" class="figure-image" style="height: 100px; object-fit: contain;">
+                                    <p><strong>Wood</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Types of Sections -->
+                    <section class="content-section" id="types">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔄</span>
+                                Types of Section Views
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Common types include Full sections, Half sections, Revolved sections, Removed sections, and Offset sections.</p>
+
+                            <!-- Full Section -->
+                            <div class="collapsible-section" style="margin-bottom: var(--space-6);">
+                                <div class="collapsible-trigger" style="cursor: default; background: var(--color-bg-secondary);">
+                                    <span class="trigger-icon">🔵</span>
+                                    <span class="trigger-text">Full Section View</span>
+                                </div>
+                                <div class="collapsible-content" style="display: block;">
+                                    <p>The view is made by passing the <strong>straight</strong> cutting plane <strong>completely through</strong> the part. The front half is assumed to be removed.</p>
+                                    <div class="callout callout--warning">
+                                        <div class="callout-header">
+                                            <span class="callout-icon">⚠️</span>
+                                            <h4 class="callout-title">Important Rule</h4>
+                                        </div>
+                                        <div class="callout-content">
+                                            <p>Hidden lines become visible in a section view.</p>
+                                        </div>
+                                    </div>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251222-1d7d5e21.jpeg" alt="Full Section View Example" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Full Section View</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <!-- Half Section -->
+                            <div class="collapsible-section">
+                                <div class="collapsible-trigger" style="cursor: default; background: var(--color-bg-secondary);">
+                                    <span class="trigger-icon">🌓</span>
+                                    <span class="trigger-text">Half Section View</span>
+                                </div>
+                                <div class="collapsible-content" style="display: block;">
+                                    <p>The object is assumed to be cut by two cutting planes at right angles to each other and containing two center lines of the object. One quarter of the object between two planes is removed.</p>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">A <strong>center line</strong> is used to separate the sectioned half from the unsectioned half of the view.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content"><strong>Hidden lines</strong> are omitted in the unsectioned half of the view.</span>
+                                        </li>
+                                    </ul>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251222-65a62661.jpeg" alt="Half Section View Example" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Half Section Visualization</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Exercise -->
+                    <section class="content-section" id="exercise">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">✍️</span>
+                                Individual Exercise
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Sketch a full section of the object shown below.</p>
+                            
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Problem</h4>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251222-02fedb02.jpeg" alt="Exercise Object" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Solution</h4>
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251222-e14dab6d.jpeg" alt="Exercise Solution" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                                <span class="overlay-text">Reveal Solution</span>
+                                            </div>
+                                        </div>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-05.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-07.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 46%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 6 of 13</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+    <script src="../js/tabs.js"></script>
+</body>
+</html>

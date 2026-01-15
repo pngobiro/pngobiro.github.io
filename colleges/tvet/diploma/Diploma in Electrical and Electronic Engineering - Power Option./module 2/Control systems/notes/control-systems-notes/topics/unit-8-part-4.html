@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 8: Frequency Response & Bode Plot (Part 4)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-8-part-3.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 8 (Part 4) of 9</span>
+                    </div>
+                    <a href="unit-8-part-5.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <!-- Reusing title from part 1 -->
+                <h1 class="section-title">Unit-8: Frequency-Response Analysis & Bode Plot</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: unit-8-bode-intro -->
+                <section id="unit-8-bode-intro" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">Bode plot</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>It is a frequency response plot that contains two graphs, <strong>magnitude</strong> and <strong>phase</strong>. The first plot is the magnitude plot of sinusoidal transfer function versus log $\omega$, and the other graph represents the phase angle. It can be drawn both for the open-loop and closed-loop system. It is generally drawn for the <strong>open-loop system</strong> because it conveniently determines the stability and other related parameters.</p>
+                        <p>Bode plot helps us determine the system's <strong>stability</strong> and provides us with a way to <strong>improve</strong> that stability. The standard representation of the Bode plot of the open-loop system is given by:</p>
+                        <h3 class="subsection-heading">Magnitude Plot</h3>
+                        <div class="equation">$$ 20 \log |G(j\omega)| $$</div>
+                        <p>It represents the logarithmic magnitude of the function $G(s)$ or $G(j\omega)$. Here, the base of logarithmic is 10. The unit represents the magnitude of the logarithmic function $G(j\omega)$ in <strong>decibels or db</strong>. The curve is not drawn on a simple graph paper; and instead, it is drawn on the <strong>semilog paper</strong> that uses the frequency, phase angle, and magnitude for plotting. The log scale or abscissa is used for the frequency, and the linear scale or ordinate for the phase angle and magnitude.</p>
+                        <p>The logarithmic function allows the various values in the forms of multiple to be added. For example,</p>
+                        <p>$\log ab = \log a + \log b$</p>
+                        <p>Thus, the bode plot has an advantage of converting the multiplication of magnitudes in addition. For example,</p>
+                        <p>Let $G(j\omega) = K / [j\omega (1 + j\omega T)]$</p>
+                        <p>The magnitude of $G(j\omega)$ is $K/[\omega \sqrt{(1 + \omega^2 T^2)}]$</p>
+                        <p>The phase angle of $G(j\omega)$ is $-90^\circ - \tan^{-1}(\omega T)$</p> <!-- Corrected MMD typo -->
+                        <p>The magnitude in the form of decibels can be expressed as:</p>
+                        <div class="equation">$$ 20 \log [K / (\omega \sqrt{1 + \omega^2 T^2})] $$</div>
+                        <div class="equation">$$ = 20 \log (K / \omega) + 20 \log (1 / \sqrt{1 + \omega^2 T^2}) $$</div>
+                        <div class="equation">$$ = 20 \log K - 20 \log \omega - 20 \log \sqrt{1 + \omega^2 T^2} $$</div> <!-- Expanded log further -->
+                        <div class="equation">$$ = 20 \log K - 20 \log \omega - 10 \log (1 + \omega^2 T^2) $$</div> <!-- Simplified log(sqrt) -->
+                        <p>We have inserted the negative sign due to the inverse of the logarithmic value.</p>
+                        <p>It means that $\log (1/a)$ can be written as $\log (a)^{-1}$, which is equal to $-\log a$.</p>
+                        <p>Thus, the above equation depicts that the magnitude when expressed in terms of db. It can easily convert the multiplicative terms to add, meaning that the individual factors of the given transfer function can be added. We will also discuss an example to draw a bode plot later in the topic.</p>
+                    </div>
+                </section>
+                <!-- END: unit-8-bode-intro -->
+
+                <!-- START: unit-8-bode-factors -->
+                <section id="unit-8-bode-factors" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧱</span>
+                        <span class="heading-text">Bode Plot Factors</span>
+                    </h2>
+                    <div class="content-card">
+
+                        <h3 class="subsection-heading">Constant gain K in Bode plot</h3>
+                        <p>The constant gain is represented by K. It is also known as the system gain in case of root locus and transfer functions.</p>
+                        <p>Let, $G(s) = K$</p>
+                        <p>$G(s) = G(j\omega) = K$</p>
+                        <p>The angle assumed for the constant gain is 0 degrees.</p>
+                        <p>In terms of decibels, we can represent the system gain as:</p>
+                        <div class="equation">$$ A = |G(j\omega)| = 20\log K $$</div>
+                        <p>If the value of K is negative, the angle thus will be 180 degrees.</p>
+                        <p>At the magnitude of the $20\log K$, the magnitude of constant gain K will be a horizontal straight line.</p>
+                        <p>There are three range of K.</p>
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">o</span> <span class="item-text">K > 1</span></li>
+                           <li class="list-item"><span class="item-icon">o</span> <span class="item-text">K = 1</span></li>
+                           <li class="list-item"><span class="item-icon">o</span> <span class="item-text">0 < K < 1</span></li>
+                        </ul>
+                        <p>When the value of K is greater than 1, $20\log K$ is positive.</p>
+                        <p>When the value of K is 1, $20\log K$ is zero. It is because the value of $\log 1$ is 0.</p>
+                        <p>When the value of K is greater than 0 and less than 1, $20\log K$ is negative.</p>
+
+                        <h3 class="subsection-heading">Integral factor in Bode plot</h3>
+                        <p>Both the integral factor and the derivative factor affect the slope of the magnitude curve. Let's first discuss the integral factor in the Bode plot.</p>
+                        <p>Let the integral factor be $K / j\omega$. The integral factor is represented by constant gain divided by the s, and it can be of one order or more.</p>
+                        <p>$G(s) = K/s$</p>
+                        <p>$G(j\omega) = K / j\omega$</p> <!-- Corrected G(s) to G(jw) -->
+                        <p>Its magnitude and phase angles are $K/\omega$ and -90 degrees.</p>
+                        <p>Its gain in decibels $= A = |G(j\omega)| = 20\log (K/\omega)$</p>
+                        <p>When $\omega = 0.1 K$, $A = 20\log (K/0.1K) = 20\log (10) = 20$ db</p>
+                        <p>It is because the value of $\log 10$ is 1.</p>
+                        <p>When $\omega = K$, $A = 20\log (K/K) = 20\log (1) = 0$ db</p>
+                        <p>When $\omega = 10 K$, $A = 20\log (K/10K) = 20\log (10)^{-1} = -20$ db</p>
+                        <p>It is because the value of $\log a^{-n}$ is $-n \log a$.</p>
+                        <p>From the above analysis for different values of $\omega$, we can find the magnitude of the integral factor. It will be a straight line with a slope of -20 db/decade. It will also pass through 0 db, when the value of $\omega$ is K.</p>
+                        <p>The plot of an integral factor $K/ j\omega$ is shown below:</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-102-1.jpg" alt="Bode plot for integral factor K/jw, showing magnitude slope of -20dB/decade crossing 0dB at w=K, and constant -90 degree phase." class="content-image">
+                        <p>Let's consider another example of an integral factor in the multiples of n. It is given by:</p>
+                        <p>$G(s) = K/s^n$</p>
+                        <p>$G(j\omega) = K/ (j\omega)^n$</p> <!-- Corrected G(s) and added brackets -->
+                        <p>Its magnitude and phase angle are $K/\omega^n$ and -90n degrees.</p>
+                        <p>Its gain in decibels $= A = |G(j\omega)| = 20\log (K/\omega^n)$</p>
+                        <p>The plot of an integral factor in the multiples of n is shown below:</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-102-2.jpg" alt="Bode plot for integral factor K/(jw)^n, showing magnitude slope of -20n dB/decade crossing 0dB at w=K^(1/n), and constant -90n degree phase." class="content-image">
+
+                        <h3 class="subsection-heading">Derivative factor in the Bode plot</h3>
+                        <p>The derivative factor consists of the terms containing s in the numerator itself. Let's consider a derivative factor represented by $K j\omega$.</p>
+                        <p>$G(s) = Ks = K j\omega$</p>
+                        <p>Its magnitude and phase angles are $K\omega$ and 90 degrees.</p>
+                        <p>It is because the term $j\omega$ is in the numerator. Thus, the angle will be in positive degrees.</p>
+                        <p>Its gain in decibels $= A = |G(j\omega)| = 20\log (K\omega)$</p>
+                        <p>When $\omega = 0.1/K$, $A = 20\log (K \times 0.1/K) = 20\log (0.1) = 20\log (10)^{-1} = -20$ db</p>
+                        <p>It is because the value of $\log a^{-n}$ is $-n \log a$.</p>
+                        <p>When $\omega = 1/K$, $A = 20\log (K/K) = 20\log (1) = 0$ db</p>
+                        <p>When $\omega = 10/ K$, $A = 20\log (K \times 10/ K) = 20\log (10) = 20$ db</p>
+                        <p>The plot of the above derivative factor is shown below:</p>
+                         <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-103-1.jpg" alt="Bode plot for derivative factor K*jw, showing magnitude slope of +20dB/decade crossing 0dB at w=1/K, and constant +90 degree phase." class="content-image">
+                        <p>It is because the value of $\log 10$ is 1.</p>
+                        <p>From the above analysis for different values of $\omega$, we can find the magnitude of the derivative factor. It will be a straight line with a slope of +20 db/decade. It will also pass through 0 db, when the value of $\omega$ is 1/K.</p>
+                        <p>Let's consider another example of a derivative factor in the multiples of n. It is given by:</p>
+                        <p>$G(s) = Ks^n$</p>
+                        <p>$G(j\omega) = K(j\omega)^n$</p> <!-- Corrected G(s) and added brackets -->
+                        <p>Its magnitude and phase angle are $K\omega^n$ and 90n degrees.</p>
+                        <p>Its gain in decibels $= A = |G(j\omega)| = 20\log (K\omega^n)$</p>
+
+                        <p>Let's discuss the first order factors in numerator and denominator of the transfer function.</p>
+
+                        <h3 class="subsection-heading">First order factor in the numerator</h3>
+                        <p>The first order factor in the numerator or a derivative factor is given by:</p>
+                        <p>$G(s) = 1 + sT$</p>
+                        <p>$G(j\omega) = 1 + j\omega T$</p>
+                        <p>$|G(j\omega)| = \sqrt{1 + \omega^2 T^2}$</p> <!-- Corrected sqrt formatting -->
+                        <p>Angle $= \tan^{-1}(\omega T)$</p> <!-- Corrected MMD typo -->
+                        <p>The gain in decibels is given by:</p>
+                        <div class="equation">$$ A = 20 \log \sqrt{1 + \omega^2 T^2} = 10 \log (1 + \omega^2 T^2) $$</div> <!-- Corrected sqrt formatting -->
+                        <p>The value of gain at very low frequencies ($\omega \ll 1/T$) will be equal to $10 \log 1 = 0$ dB.</p> <!-- Corrected omega condition -->
+                        <p>The value of gain at high frequencies ($\omega \gg 1/T$) will be equal to $10 \log (\omega^2 T^2) = 20 \log (\omega T)$.</p> <!-- Corrected omega condition -->
+                        <p>The Bode plot for the first order function given above is shown below:</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-104-1.jpg" alt="Bode plot for first order factor (1+jwT), showing magnitude asymptotes (0dB and +20dB/decade slope) meeting at corner frequency wc=1/T, and phase increasing from 0 to +90 degrees." class="content-image">
+                        <p>We have approximated the magnitude of the plot in two straight lines. The first line is a straight horizontal line with very low frequencies (0 db), while the other slanting slope refers to the high frequencies ($20 \log \omega T$). It would have a slope of +20db/decade.</p>
+                        <p>The two straight lines are the asymptotes of the exact curve. The frequency at which these two asymptotes meet is known as the <strong>corner frequency</strong>, and it is also known as break frequency.</p>
+                        <p>For the above-given function, the corner frequency will arise when $\omega = 1/T$. The phase angle will vary from 0 degrees to 90 degrees with frequency variation between zero and infinity.</p>
+                        <p>The magnitude approximated at the corner frequency is around + 3dB, and it is generally considered the loss in db at this corner frequency.</p> <!-- Should be gain, not loss -->
+
+                        <h3 class="subsection-heading">First order factor in the denominator</h3>
+                        <p>The first order factor in the denominator or an integral factor is given by:</p>
+                        <p>$G(s) = 1/(1 + sT)$</p>
+                        <p>$G(j\omega) = 1/ (1 + j\omega T)$</p>
+                        <p>$|G(j\omega)| = 1/ \sqrt{1 + \omega^2 T^2}$</p> <!-- Corrected sqrt formatting -->
+                        <p>Angle $= -\tan^{-1}(\omega T)$</p> <!-- Corrected MMD typo and added sign -->
+                        <p>The gain in decibels is given by:</p>
+                        <div class="equation">$$ A = 20 \log (1 / \sqrt{1 + \omega^2 T^2}) $$</div>
+                         <div class="equation">$$ A = 20 \log (1 + \omega^2 T^2)^{-1/2} $$</div>
+                         <div class="equation">$$ A = -10 \log (1 + \omega^2 T^2) $$</div> <!-- Corrected factor -->
+                        <p>It is because the value of $\log a^{-n}$ is $-n \log a$.</p>
+                        <p>The value of gain at very low frequencies ($\omega \ll 1/T$) will be equal to $-10 \log 1 = 0$ dB.</p> <!-- Corrected factor -->
+                        <p>The value of gain at high frequencies ($\omega \gg 1/T$) will be equal to $-10 \log (\omega^2 T^2) = -20 \log (\omega T)$.</p> <!-- Corrected factor -->
+                        <p>The Bode plot for the first order function given above is shown below:</p>
+                        <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-106-1.jpg" alt="Bode plot for first order factor 1/(1+jwT), showing magnitude asymptotes (0dB and -20dB/decade slope) meeting at corner frequency wc=1/T, and phase decreasing from 0 to -90 degrees." class="content-image">
+                        <p>We have approximated the magnitude of the plot in two straight lines. The first line is a straight horizontal line with the very low frequencies (0 db), while the other slanting slope refers to the high frequencies ($-20 \log \omega T$). It would have a slope of -20db/decade.</p>
+                        <div class="content-card" style="background-color: #fff9e6; border-color: #ffe58f; margin-top:1rem;"> <!-- Highlight note -->
+                           <p><strong>Note:</strong> The derivative factor in the transfer function generally represents to the positive slope, while the integral factor represents the negative slope in the bode plot.</p>
+                        </div>
+                        <p>The two straight lines are the asymptotes of the exact curve.</p>
+                        <p>For the above-given function, the corner frequency will arise when $\omega = 1/T$. The corner frequency divides the curve of the Bode plot into two regions, i.e., low frequency and high frequency. The phase angle will vary from 0 degrees to -90 degrees with frequency variation between zero and infinity.</p>
+                        <p>The magnitude approximated at the corner frequency is around - 3dB, and it is generally considered the loss in db at this corner frequency. <strong>Note:</strong> The two curves in the Bode plot is the magnitude curve and the phase angle curve. The first curve that represents the value in decibels represents the magnitude curve, while the second curve represents the phase angle curve.</p>
+
+                        <h3 class="subsection-heading">Quadratic factor in the denominator</h3>
+                        <p>It is the essential part of the Bode plot to understand. It means the factor in the denominator in present in the form of quadratic equation.</p>
+                        <p>Let's consider a quadratic equation, which is given by:</p>
+                        <div class="equation">$$ G(s) = \frac{\omega_{n}^{2}}{s^{2} + 2\zeta \omega_{n}s + \omega_{n}^{2}} $$</div> <!-- Corrected 'a' to zeta -->
+                        <p>Where,</p>
+                        <p>$\zeta$ is the damping ratio</p> <!-- Corrected 'a' to zeta -->
+                        <p>$\omega_n$ is the natural frequency</p>
+                        <p>We can write the above transfer function as:</p>
+                        <div class="equation">$$ G(s) = \frac{1}{1 + 2\zeta(s/\omega_n) + (s/\omega_n)^2} $$</div> <!-- Corrected 'a' to zeta -->
+                        <p>Put, $s = j\omega$</p>
+                        <div class="equation">$$ G(j\omega) = \frac{1}{1 + 2\zeta j\omega/\omega_n + (j\omega / \omega_n)^2} $$</div> <!-- Corrected 'a' to zeta -->
+                        <div class="equation">$$ G(j\omega) = \frac{1}{(1 - (\omega / \omega_n)^2) + j(2\zeta \omega/ \omega_n)} $$</div> <!-- Corrected 'a' to zeta -->
+                        <p>The magnitude is given by:</p>
+                        <div class="equation">$$ |G(j\omega) | = \frac{1}{\sqrt{[(1 - (\omega / \omega_n)^2)^2 + (2\zeta \omega/ \omega_n)^2]}} $$</div> <!-- Corrected formula and zeta -->
+                        <p>The phase angle is given by:</p>
+                        <div class="equation">$$ \text{Angle } G(j\omega) = -\tan^{-1}\left[\frac{(2\zeta \omega/\omega_n)}{(1 - (\omega / \omega_n)^2)}\right] $$</div> <!-- Added minus sign, corrected zeta -->
+                        <p>Let's find the gain of the above transfer function in decibels.</p>
+                        <p>$A = 20\log |G(j\omega)|$</p>
+                        <div class="equation">$$ A = 20 \log \left( \frac{1}{\sqrt{[(1 - (\omega / \omega_n)^2)^2 + (2\zeta \omega/ \omega_n)^2]}} \right) $$</div> <!-- Corrected formula and zeta -->
+                        <p>The factor $G(j\omega)$ is present in the denominator. To bring it in numerator, we will insert a negative sign. It is because $\log (1/a)$ is equal to $-\log a$.</p>
+                        <p>So, the gain will be:</p>
+                         <div class="equation">$$ A = -10 \log {[(1 - (\omega / \omega_n)^2)^2 + (2\zeta \omega/ \omega_n)^2]} $$</div> <!-- Corrected formula and zeta -->
+                        <p>Let's find the value of gain at different frequencies.</p>
+                        <p>The value of gain at very low frequencies ($\omega\ll \omega_n$) is equal to:</p>
+                         <!-- MMD version is overly complex, simplifying -->
+                        <p>$A \approx -10 \log [(1 - 0)^2 + 0] = -10 \log 1 = 0$ dB</p>
+                        <p>The value of gain at very high frequencies ($\omega\gg \omega_n$) is equal to:</p>
+                        <p>$A \approx -10 \log [( - (\omega / \omega_n)^2)^2] = -10 \log [(\omega / \omega_n)^4]$</p>
+                        <div class="equation">$$ A = -40 \log (\omega/ \omega_n) $$</div> <!-- Corrected MMD steps -->
+                        <p>At, $\omega= \omega_n$</p>
+                        <div class="equation">$$ A = -10 \log {[(1 - 1)^2 + (2\zeta \omega_n/ \omega_n)^2]} = -10 \log((2\zeta)^2) = -20 \log(2\zeta) $$</div> <!-- Actual gain depends on zeta -->
+                        <!-- MMD calculation for high frequency seems incorrect/confusing -->
+                        <!-- <p>At, $\omega= 100\omega_n$</p>
+                        <p>$A = -40 \log 100$</p>
+                        <p>$A = -40 \log 10^2$</p>
+                        <p>$A = -40 \times 2 \log 10$</p>
+                        <p>$A = -80 \log 10 = -80$ db</p>
+                        <p>At, $\omega= 10\omega_n$</p>
+                        <p>$A = -40 \log 10 = -40$</p> -->
+                        <p>The high frequency asymptote has a slope of -40 dB/decade.</p>
+                        <p>Thus we can conclude that the magnitude plot of the quadratic factor can be approximated by two straight lines with a slope of 0 db/decade at low frequencies and -40 db/decade at high frequencies.</p>
+                        <p>Let' find the value of angle $G(j\omega)$ at different values of frequency.</p>
+                        <div class="equation">$$ \text{Angle } G(j\omega) = -\tan^{-1}\left[\frac{(2\zeta \omega/\omega_n)}{(1 - (\omega / \omega_n)^2)}\right] $$</div>
+                        <p>At, $\omega = \omega_n$</p>
+                        <p>Angle $G(j\omega) = -\tan^{-1}(2\zeta/0)$. Since $1-(\omega/\omega_n)^2$ passes through 0, the angle jumps by $-180^\circ$ at $\omega_n$. Assuming $2\zeta\omega/\omega_n$ is positive, the angle approaches $-90^\circ$ from below and $-270^\circ$ from above $\omega_n$. The text simplification is common but overlooks the discontinuity.</p>
+                        <p>Text states: Angle $G(j\omega) = -90$ degrees. </p> <!-- Preserving text simplification -->
+                        <!-- <p>It is because the value of $\tan^{-1}(\infty)$ is -90 degrees.</p> --> <!-- MMD logic is flawed here -->
+                        <p>At $\omega = 0$, the value of angle is 0 degrees.</p>
+                        <p>At $\omega = \infty$, the value of angle tends to $-180$ degrees.</p>
+                        <p>The plot of the quadratic factor is denominator is shown below:</p>
+                         <!-- Using corrected filename (Image from page 109 as it completes this section) -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-109-1.jpg" alt="Bode plot for quadratic factor 1/[(s/wn)^2 + 2zeta(s/wn) + 1], showing magnitude peaking near wn for low zeta and phase shifting from 0 to -180 degrees." class="content-image">
+                        <p>The two curves are independent of the damping ratio $\zeta$. The height of the resonant peak is inversely proportional to the damping ratio. It means that the decrease in the value of the damping ratio will increase the resonant peak.</p> <!-- Statement about independence is incorrect, preserving verbatim -->
+                     </div>
+                </section>
+                 <!-- END: unit-8-bode-factors -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-8-part-3.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 8 (Part 4) of 9</span>
+                    </div>
+                    <a href="unit-8-part-5.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

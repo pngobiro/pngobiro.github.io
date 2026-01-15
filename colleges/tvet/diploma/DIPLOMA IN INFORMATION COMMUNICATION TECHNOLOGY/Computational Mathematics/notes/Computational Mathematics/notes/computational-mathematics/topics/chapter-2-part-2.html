@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Number System and Binary Arithmetic - Part 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 2 Part 2 of 3</span>
+                    </div>
+                    <a href="chapter-2-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 2: NUMBER SYSTEM AND BINARY ARITHMETIC (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-2-binary-arithmetic-intro -->
+                <section id="chapter-2-binary-arithmetic-intro" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕➖✖️➗</span>
+                        <span class="heading-text">Introduction to Binary Arithmetic</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Arithmetic circuits form point of the CPU. Mathematical operations include</p>
+                        <p>Subtraction, multiplication, division and addition</p>
+                    </div>
+                </section>
+                <!-- END: chapter-2-binary-arithmetic-intro -->
+
+                <!-- START: chapter-2-binary-addition -->
+                <section id="chapter-2-binary-addition" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕</span>
+                        <span class="heading-text">Addition</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">a) Binary addition</h3>
+                        <p>Binary addition takes in consideration of the following conditions</p>
+                        <div class="equation">$$0+0=0,0+1=1,1+0=1,1+1=0 \text{ (carry 1)}$$</div> <!-- Added carry info -->
+                        <p>When adding larger numbers, the resulting ones are carried to other higher columns</p>
+                        <p>e.g.</p>
+                        <pre class="code-block"><code>  101      1010
++ 010    + 1101
+-----    ------
+  111     10111</code></pre> <!-- Using code block for alignment -->
+
+                        <h3 class="subsection-heading">b) hexadecimal addition</h3>
+                        <p>Let's add</p>
+                        <img src="../assets/images/chapter-2-hex-addition.jpg" alt="Hexadecimal addition example: 15FC + 245D = 3A59" class="content-image">
+                        <p>Alternatively ADD the binary equivalence of the hexadecimal numbers</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead>
+                               <tr><th>Hex</th><th>1</th><th>5</th><th>F</th><th>C</th></tr>
+                             </thead>
+                             <tbody>
+                               <tr><td>Binary</td><td>0001</td><td>0101</td><td>1111</td><td>1100</td></tr>
+                               <tr><td>Hex</td><td>2</td><td>4</td><td>5</td><td>D</td></tr>
+                               <tr><td>Binary</td><td>0010</td><td>0100</td><td>0101</td><td>1101</td></tr>
+                               <tr><td>Sum (Hex)</td><td>3</td><td>A</td><td>5</td><td>9</td></tr>
+                               <tr><td>Sum (Binary)</td><td>0011</td><td>1010</td><td>0101</td><td>1001</td></tr>
+                             </tbody>
+                           </table>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: chapter-2-binary-addition -->
+
+                <!-- START: chapter-2-binary-subtraction -->
+                <section id="chapter-2-binary-subtraction" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➖</span>
+                        <span class="heading-text">Subtraction</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">a) Binary subtraction</h3>
+                        <p>In arithmetic subtraction, the initial numeric quotients that are combined by subtraction are the minuend and the subtrahend.. the result of the subtraction is called the difference</p>
+                        <img src="../assets/images/chapter-2-subtraction-terms.jpg" alt="Subtraction terms: Minuend - Subtrahend = Difference" class="content-image">
+                        <!-- Text below image seems redundant -->
+                        <p>To subtract from a larger binary number, subtract column by column borrowing from adjacent columns when necessary.</p>
+                        <p>Remember when borrowing from adjacent column, there are two digits</p>
+                        <h4 class="subsection-heading">Example</h4>
+                        <p>1. subtract 1001 from 1101</p>
+                        <pre class="code-block"><code>  1101
+- 1001
+------
+  0100</code></pre>
+                        <p>2. subtract 0111 from 1011</p>
+                        <p>The procedure for this calculation is identical to that of decimal numbers because the smaller value is subtracted from the larger value and the negative sign placed in front of the results</p>
+                        <img src="../assets/images/chapter-2-subtraction-negative-example.jpg" alt="Example of subtracting a larger number resulting in a negative difference" class="content-image">
+                        <!-- Text below image seems redundant/confusing -->
+                        <p>There are two other methods available for doing subtraction and representation of a negative number.</p>
+                        <h4 class="subsection-heading">i. ones' compliment</h4>
+                        <p>The procedure for subtracting numbers using ones' compliment is as follows</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">Step1-</span><span class="item-text">change the 0's of subtra-end to 1's and the 1's of subtra-end to 0's</span></li>
+                            <li class="list-item"><span class="item-icon">step2-</span><span class="item-text">add the two numbers</span></li>
+                            <li class="list-item"><span class="item-icon">Step3-</span><span class="item-text">remove the last carry and add it to the number</span></li>
+                        </ol>
+                        <p>i.e. - end round carry</p>
+                        <h4 class="subsection-heading">Example</h4>
+                        <img src="../assets/images/chapter-2-ones-complement-example1.jpg" alt="Example of subtraction using ones' complement with end-around carry" class="content-image">
+                        <p>When there is a carry in the end of the result, then we know the result is positive.</p>
+                        <p>When there is no carry then we know the result is negative and we can now place a minus sign in front of the answer.</p>
+                        <h4 class="subsection-heading">Example</h4>
+                        <img src="../assets/images/chapter-2-ones-complement-example2.jpg" alt="Example of subtraction using ones' complement with no end-around carry, indicating a negative result" class="content-image">
+                        <h4 class="subsection-heading">ii. two's compliment</h4>
+                        <p>The general rule is that the two's complement subtra-end is added to menu-end.</p>
+                        <p>If the sign bit of the result is 0 , then the result is the true difference and is assigned a positive sign.</p>
+                        <p>If the sign bit is 1 , the result is a two's complement of the difference.</p>
+                        <p>Any over flow produced by the calculation is lost.</p>
+                        <h4 class="subsection-heading">Example</h4>
+                        <p>Subtract 11011 from 01101</p>
+                        <p>Store 11011</p>
+                        <p>Reverse bits 00100 (1's compliment)</p>
+                        <img src="../assets/images/chapter-2-twos-complement-step.jpg" alt="Adding 1 to ones' complement to get two's complement" class="content-image">
+                        <p>00101 (2's compliment)</p>
+                        <pre class="code-block"><code>  01101
++ 00101
+-------
+  10010</code></pre>
+                        <p>Sign bit is 1, so result is negative. Find two's complement of 10010:</p>
+                        <p>Reverse bits: 01101</p>
+                        <img src="../assets/images/chapter-2-twos-complement-result.jpg" alt="Adding 1 to get the magnitude" class="content-image">
+                        <p>Result is 01110. We can now add a minus sign: <span class="math-inline">$-01110 (-14)$</span></p>
+
+                        <h3 class="subsection-heading">b) Hexadecimal subtraction</h3>
+                        <h4 class="subsection-heading">Example</h4>
+                        <p>Subtract 15FCH from 245DH</p>
+                        <img src="../assets/images/chapter-2-hex-subtraction.jpg" alt="Example of hexadecimal subtraction with borrowing" class="content-image">
+                        <p>Alternatively convert the decimal numbers to binary then subtract using the rules of binary subtraction.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-2-binary-subtraction -->
+
+                <!-- START: chapter-2-binary-multiplication -->
+                <section id="chapter-2-binary-multiplication" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✖️</span>
+                        <span class="heading-text">Multiplication</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">c) Binary multiplication</h3> <!-- Assuming c) follows a) and b) from Addition/Subtraction -->
+                        <p>Binary numbers are multiplied in the same manner as decimal numbers.</p>
+                        <h4 class="subsection-heading">Rules</h4>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><span class="math-inline">$0 \times 0=0, 0 \times 1=0, 1 \times 0=0, 1 \times 1=1$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">To multiply number with more than one digit, you form partial products and add them together.</span></li>
+                        </ul>
+                        <img src="../assets/images/chapter-2-binary-multiplication.jpg" alt="Example of binary multiplication using partial products: 1110 * 1010 = 10001100" class="content-image">
+                        <!-- Result below image seems incorrect based on example -->
+                        <p>Computers cannot store partial products. The multiplication method used by the computer is repeated additions.</p>
+                        <p>To determine <span class="math-inline">$7 \times 55$</span>, the computer can add 7, 55 times</p>
+                        <p>A faster method of micro-processor system is the add and shift method</p>
+                    </div>
+                </section>
+                <!-- END: chapter-2-binary-multiplication -->
+
+                <!-- START: chapter-2-binary-division -->
+                <section id="chapter-2-binary-division" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➗</span>
+                        <span class="heading-text">Division</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">d) Binary division</h3> <!-- Assuming d) follows c) -->
+                        <p>There are several methods of performing binary division. In the partial method also known as the restoring method, division is similar to decimal method</p>
+                        <h4 class="subsection-heading">Example</h4>
+                        <p>Divide 14 by 2 (Binary: 1110 / 10)</p>
+                        <img src="../assets/images/chapter-2-binary-division.jpg" alt="Example of binary division using long division method: 1110 / 10 = 111" class="content-image">
+                        <h4 class="subsection-heading">Successive subtraction</h4>
+                        <p>Divisor is subtracted from the divided and from each successive remainder until a barrow is realized. The desired quotient is one less the number of subtraction needed to produce a borrow. This method is simple but slow for large numbers.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-2-binary-division -->
+
+                <!-- START: chapter-2-negative-numbers -->
+                <section id="chapter-2-negative-numbers" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➖</span>
+                        <span class="heading-text">Representation of negative numbers</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The examples shown so far have been using positive numbers. In practice, a digital system must represent all positive and negative numbers. To accommodate the sign of numbers, an additional digit known as the sign digit is included in the representation along with the magnitude digit. Thus to represent an <span class="math-inline">$n$</span>-digit number, we world need <span class="math-inline">$n+1$</span> digit.</p>
+                        <p>Typically, the sign of digit is the MSB</p>
+                        <p>There are two ways to represent sign numbers</p>
+                        <h3 class="subsection-heading">e) sign-magnitude system</h3> <!-- Assuming e) follows d) -->
+                        <p>in this representation, <span class="math-inline">$n+1$</span> digit are used to represent a number where the MS digit is the sign digit and the remaining <span class="math-inline">$n$</span>-digit are the magnitude digit. The value of the sign digit is 0 for a positive number and <span class="math-inline">$r-1$</span> for a negative number, where r is the radix of the number system.</p>
+                        <p>Sign <span class="math-inline">$\underbrace{0}_{\text{Magnitude}}$</span></p> <!-- MMD formatting issue -->
+                        <p>The sign and magnitude portions are handled separately in arithmetic using sign magnitude number</p>
+                        <h3 class="subsection-heading">f) Compliment system</h3> <!-- Assuming f) follows e) -->
+                        <p>To compliment a binary number, change all 0 's to 1 's and all 1 's to 0 's. this is known as ones' compliment form of a binary number.</p>
+                        <p>i.e. - <span class="math-inline">$0110=1001$</span> in compliment</p>
+                        <p>The most common way to express a negative binary number is to show it as a two's compliment. A two's compliment is a binary number that shows when one is added to the first compliment</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead>
+                               <tr><th>Signed Decimal</th><th>Ones' compliment</th><th>Two's compliment</th></tr>
+                             </thead>
+                             <tbody>
+                               <tr><td>+7</td><td>0111</td><td>0111</td></tr>
+                               <tr><td>+6</td><td>0110</td><td>0110</td></tr>
+                               <tr><td>+5</td><td>0101</td><td>0101</td></tr>
+                               <tr><td>+4</td><td>0100</td><td>0100</td></tr>
+                               <tr><td>+3</td><td>0011</td><td>0011</td></tr>
+                               <tr><td>+2</td><td>0010</td><td>0010</td></tr>
+                               <tr><td>+1</td><td>0001</td><td>0001</td></tr>
+                               <tr><td>0</td><td>0000</td><td>0000</td></tr>
+                               <tr><td>-1</td><td>1110</td><td>1111</td></tr> <!-- Corrected MMD value -->
+                               <tr><td>-2</td><td>1101</td><td>1110</td></tr>
+                               <tr><td>-3</td><td>1100</td><td>1101</td></tr>
+                               <tr><td>-4</td><td>1011</td><td>1100</td></tr>
+                               <tr><td>-5</td><td>1010</td><td>1011</td></tr> <!-- Corrected MMD value -->
+                               <tr><td>-6</td><td>1001</td><td>1010</td></tr>
+                               <tr><td>-7</td><td>1000</td><td>1001</td></tr>
+                             </tbody>
+                           </table>
+                        </div>
+                        <p>Using the two's compliment makes its easier for digital system to perform digital operation. The correct sign bit is generated by performing the two's compliment</p>
+                    </div>
+                </section>
+                <!-- END: chapter-2-negative-numbers -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 2 Part 2 of 3</span>
+                    </div>
+                    <a href="chapter-2-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

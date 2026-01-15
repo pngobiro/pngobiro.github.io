@@ -1,0 +1,1274 @@
+========================================
+File: content_cleaned.txt
+========================================
+
+
+========================================
+File: create_structure.sh
+========================================
+#!/bin/bash
+
+# Educational Content Organization Script - Enhanced Version
+# Creates hierarchical structure: College -> Subject -> Category
+
+# Load dependencies
+load_dependencies() {
+    if [ -f "structure_config.sh" ]; then
+        echo "Loading configuration..."
+        source structure_config.sh
+        echo "Configuration loaded!"
+    else
+        echo "Error: structure_config.sh not found!"
+        exit 1
+    fi
+    
+    if [ -f "helper_functions.sh" ]; then
+        source helper_functions.sh
+    fi
+}
+
+load_dependencies
+
+# Interactive customization
+customize_config() {
+    echo "=== CUSTOMIZATION OPTIONS ==="
+    echo "1. Use configuration from structure_config.sh"
+    echo "2. Customize interactively (override config)"
+    read -p "Choose option (1 or 2): " choice
+    
+    if [ "$choice" = "2" ]; then
+        read -p "Colleges (comma-separated, current: ${COLLEGES[*]}): " custom
+        [ ! -z "$custom" ] && IFS=',' read -ra COLLEGES <<< "$custom"
+        
+        read -p "Categories (comma-separated, current: ${CATEGORIES[*]}): " custom
+        [ ! -z "$custom" ] && IFS=',' read -ra CATEGORIES <<< "$custom"
+        
+        read -p "Subjects (comma-separated, current: ${SUBJECTS[*]}): " custom
+        [ ! -z "$custom" ] && IFS=',' read -ra SUBJECTS <<< "$custom"
+        
+        echo "Configuration updated!"
+    fi
+}
+
+# Create subject CSS
+create_subject_css() {
+    cat > "$1/styles.css" << 'EOF'
+@import url("../../styles.css");
+:root {
+    --subject-primary: #667eea;
+    --subject-secondary: #764ba2;
+}
+.subject-header {
+    background: linear-gradient(135deg, var(--subject-primary), var(--subject-secondary));
+    color: white;
+    padding: 2rem;
+    border-radius: 10px;
+    margin-bottom: 2rem;
+}
+@media (max-width: 768px) {
+    .subject-header { padding: 1rem; }
+}
+EOF
+    log_message "INFO" "Created CSS: $1/styles.css"
+}
+
+# Create images directory
+create_subject_images() {
+    ensure_directory "$1/images"
+    cat > "$1/images/README.md" << EOF
+# Images Directory for $(basename "$1")
+
+## File Naming Convention:
+- Use descriptive names: \`diagram-name.jpg\`
+- Include date if relevant: \`2024-image.png\`
+
+## Supported Formats:
+- Images: .jpg, .png, .gif, .svg
+- Documents: .pdf
+- Vector: .svg (preferred)
+EOF
+    echo "# Images" > "$1/images/.gitkeep"
+    log_message "INFO" "Created images: $1/images"
+}
+
+# Create JavaScript
+create_sidebar_js() {
+    cat > "$1/sidebar-navigation.js" << 'EOF'
+document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.querySelector('.mobile-nav-toggle');
+    const sidebar = document.querySelector('.sidebar');
+    const backdrop = document.querySelector('.sidebar-backdrop');
+    
+    if (toggle && sidebar && backdrop) {
+        toggle.addEventListener('click', () => {
+            sidebar.classList.toggle('active');
+            backdrop.classList.toggle('active');
+            toggle.querySelector('i').className = sidebar.classList.contains('active') ? 
+                'fas fa-times' : 'fas fa-bars';
+        });
+        
+        backdrop.addEventListener('click', () => {
+            sidebar.classList.remove('active');
+            backdrop.classList.remove('active');
+            toggle.querySelector('i').className = 'fas fa-bars';
+        });
+    }
+    
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+        const saved = localStorage.getItem('theme');
+        if (saved) {
+            document.documentElement.setAttribute('data-theme', saved);
+            updateTheme(saved);
+        }
+        
+        themeToggle.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const newTheme = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            updateTheme(newTheme);
+        });
+    }
+    
+    function updateTheme(theme) {
+        const icon = themeToggle.querySelector('i');
+        const text = themeToggle.querySelector('span');
+        icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        text.textContent = theme === 'dark' ? 'Light Mode' : 'Dark Mode';
+    }
+});
+EOF
+    log_message "INFO" "Created JS: $1/sidebar-navigation.js"
+}
+
+# Create placeholder category index
+create_category_placeholder() {
+    local path="$1"
+    local category=$(basename "$path")
+    local subject=$(basename "$(dirname "$path")")
+    local college=$(basename "$(dirname "$(dirname "$path")")")
+    
+    local cat_display=$(get_category_display_name "$category")
+    local college_full=$(get_college_full_name "$college")
+    
+    {
+        generate_html_head "$cat_display - $subject | $college" \
+                          "$cat_display for $subject at $college_full" \
+                          "../../css/styles.css"
+        
+        cat << EOF
+<body>
+    <div class="container" style="max-width: 800px; margin: 0 auto; padding: 2rem;">
+EOF
+        
+        generate_breadcrumb \
+            "<a href=\"../../../index.html\"><i class=\"fas fa-home\"></i> Home</a>" \
+            "<a href=\"../../index.html\">$college</a>" \
+            "<a href=\"../index.html\">$subject</a>" \
+            "<span>$cat_display</span>"
+        
+        cat << EOF
+        <header style="margin-bottom: 2rem;">
+            <h1><i class="fas fa-folder-open"></i> $cat_display</h1>
+            <p>$subject • $college_full</p>
+        </header>
+        <main style="text-align: center; padding: 3rem 1rem;">
+            <i class="fas fa-clock" style="font-size: 3rem; color: #667eea; margin-bottom: 1rem;"></i>
+            <h2>Papers Coming Soon</h2>
+            <p>We're adding papers to this category. Check back soon!</p>
+            <a href="../index.html" class="btn" style="margin-top: 1rem;">
+                <i class="fas fa-arrow-left"></i> Back to $subject
+            </a>
+        </main>
+        <footer style="text-align: center; padding: 2rem; color: #999;">
+            <p>$SITE_COPYRIGHT</p>
+        </footer>
+    </div>
+</body>
+</html>
+EOF
+    } > "$path/index.html"
+}
+
+# Create college index pages (using helper functions)
+create_college_index() {
+    local college="$1"
+    local college_full=$(get_college_full_name "$college")
+    local college_icon=$(get_college_icon "$college")
+    
+    {
+        generate_html_head "$college - Past Papers" \
+                          "Past papers for $college_full" \
+                          "../styles.css"
+        
+        echo "<body>"
+        generate_sidebar "$college_icon" "$college"
+        
+        cat << EOF
+                <a href="../index.html" class="nav-item"><i class="fas fa-home"></i><span>Home</span></a>
+                <a href="#overview" class="nav-item active"><i class="fas fa-info-circle"></i><span>Overview</span></a>
+                <a href="#subjects" class="nav-item"><i class="fas fa-book"></i><span>Subjects</span></a>
+                <div class="nav-group">
+                    <div class="nav-group-title">Quick Access</div>
+EOF
+        
+        for subject in "${SUBJECTS[@]}"; do
+            local icon=$(get_subject_icon "$subject")
+            echo "                    <a href=\"$subject/index.html\" class=\"nav-item sub-item\"><i class=\"$icon\"></i><span>$subject</span></a>"
+        done
+        
+        generate_sidebar_footer
+        
+        echo "        <main class=\"main-content\">"
+        generate_page_header "fqe" "$college" "$college_full" "Past Papers Collection" "${#SUBJECTS[@]} Subjects Available"
+        
+        cat << EOF
+            <section id="overview" class="intro">
+                <h2><i class="fas fa-info-circle"></i> About This Collection</h2>
+                <p>Access all past examination papers from $college_full. Browse by subject to find papers for your course.</p>
+EOF
+        
+        generate_stats_cards "${#SUBJECTS[@]}" "Subjects" \
+                            "${#CATEGORIES[@]}" "Categories" \
+                            "$YEAR_START-$YEAR_END" "Year Range"
+        
+        echo "            </section>"
+        echo "            <section id=\"subjects\" class=\"category-section\">"
+        generate_section_header "fas fa-book" "Select Your Subject"
+        echo "                <div class=\"paper-grid\">"
+        
+        local idx=0
+        for subject in "${SUBJECTS[@]}"; do
+            local icon=$(get_subject_icon "$subject")
+            local desc=$(get_subject_description "$subject")
+            local badge_class="fqe"
+            ((idx % 3 == 0)) && badge_class="cat"
+            ((idx % 3 == 2)) && badge_class="practical"
+            
+            local meta="<p><i class=\"fas fa-book-open\"></i> $desc</p>
+                            <p><i class=\"fas fa-folder-open\"></i> Categories: ${#CATEGORIES[@]}</p>
+                            <p><i class=\"fas fa-file-alt\"></i> Multiple Past Papers</p>"
+            
+            generate_paper_card "$icon" "$subject" "$badge_class" "Level $((idx + 1))" \
+                               "$meta" "$subject/index.html" "Browse $subject"
+            ((idx++))
+        done
+        
+        echo "                </div>"
+        echo "            </section>"
+        
+        generate_footer "$college Past Papers" "$college_full"
+        generate_scripts "../js/sidebar-navigation.js"
+        
+    } > "$college/index.html"
+    
+    log_message "INFO" "Created college index: $college/index.html"
+}
+
+# Create subject index (simplified with helpers)
+create_subject_index() {
+    local college="$1"
+    local subject="$2"
+    local college_full=$(get_college_full_name "$college")
+    local subject_icon=$(get_subject_icon "$subject")
+    
+    {
+        generate_html_head "$subject - Past Papers | $college" \
+                          "$subject past papers for $college_full" \
+                          "css/styles.css"
+        
+        echo "<body>"
+        generate_sidebar "$subject_icon" "$subject"
+        
+        cat << EOF
+                <a href="#overview" class="nav-item active"><i class="fas fa-home"></i><span>Overview</span></a>
+                <a href="#categories" class="nav-item"><i class="fas fa-folder-open"></i><span>Browse</span></a>
+                <div class="nav-group">
+                    <div class="nav-group-title">Categories</div>
+EOF
+        
+        for category in "${CATEGORIES[@]}"; do
+            local icon=$(get_category_icon "$category")
+            local display=$(get_category_display_name "$category")
+            echo "                    <a href=\"$category/index.html\" class=\"nav-item sub-item\"><i class=\"$icon\"></i><span>$display</span></a>"
+        done
+        
+        generate_sidebar_footer
+        
+        echo "        <main class=\"main-content\">"
+        generate_page_header "fqe" "$college" "$college_full" "$subject" "Past Papers Collection"
+        
+        echo "            <section id=\"overview\" class=\"intro\">"
+        echo "                <h2><i class=\"fas fa-info-circle\"></i> Comprehensive Archive</h2>"
+        echo "                <p>Access all $subject past papers organized by type.</p>"
+        
+        generate_stats_cards "${#CATEGORIES[@]}+" "Categories" \
+                            "$YEAR_START-$YEAR_END" "Year Range" \
+                            "Multiple" "Papers"
+        
+        echo "            </section>"
+        echo "            <section id=\"categories\" class=\"category-section\">"
+        generate_section_header "fas fa-folder-open" "Browse by Exam Type"
+        echo "                <div class=\"paper-grid\">"
+        
+        for category in "${CATEGORIES[@]}"; do
+            local icon=$(get_category_icon "$category")
+            local display=$(get_category_display_name "$category")
+            local desc=$(get_category_description "$category")
+            local badge=$(get_badge_class "$category")
+            
+            local meta="<p><i class=\"$icon\"></i> $desc</p>
+                            <p><i class=\"fas fa-file-alt\"></i> Available Papers: <span id=\"${category,,}-count\">0</span></p>
+                            <p><i class=\"fas fa-calendar-alt\"></i> Years: $YEAR_START - $YEAR_END</p>"
+            
+            generate_paper_card "$icon" "$display" "$badge" "$category" \
+                               "$meta" "$category/index.html" "Browse $category Papers"
+        done
+        
+        echo "                </div>"
+        echo "            </section>"
+        
+        generate_footer "$subject Past Papers" "$college_full"
+        generate_scripts "../../js/sidebar-navigation.js"
+        
+    } > "$college/$subject/index.html"
+    
+    log_message "INFO" "Created subject index: $college/$subject/index.html"
+}
+
+# Main structure creation
+create_structure() {
+    echo "=== CREATING CONTENT STRUCTURE ==="
+    
+    validate_config || exit 1
+    
+    # Create base directories
+    for dir in "${BASE_DIRS[@]}"; do
+        ensure_directory "$dir"
+        log_message "INFO" "Created base: $dir"
+    done
+    
+    # Create college/subject/category structure
+    for college in "${COLLEGES[@]}"; do
+        log_message "INFO" "Creating college: $college"
+        
+        for subject in "${SUBJECTS[@]}"; do
+            local subject_path="$college/$subject"
+            ensure_directory "$subject_path"
+            
+            # Create categories
+            for category in "${CATEGORIES[@]}"; do
+                ensure_directory "$subject_path/$category"
+                create_category_placeholder "$subject_path/$category"
+            done
+            
+            # Create subject resources
+            ensure_directory "$subject_path/css"
+            [ -f "styles.css" ] && cp "styles.css" "$subject_path/css/"
+            create_subject_css "$subject_path"
+            create_subject_images "$subject_path"
+            ensure_directory "$subject_path/js"
+            create_sidebar_js "$subject_path/js"
+            
+            create_subject_index "$college" "$subject"
+        done
+        
+        create_college_index "$college"
+    done
+    
+    # Create global JS
+    ensure_directory "js"
+    create_sidebar_js "js"
+    
+    log_message "SUCCESS" "Structure created successfully!"
+}
+
+# Main execution
+main() {
+    customize_config
+    echo ""
+    echo "Configuration:"
+    echo "  Colleges: ${COLLEGES[*]}"
+    echo "  Subjects: ${SUBJECTS[*]}"
+    echo "  Categories: ${CATEGORIES[*]}"
+    echo ""
+    
+    create_structure
+    
+    echo ""
+    echo "=== COMPLETE ==="
+    echo "Run './update_index.sh' to populate category indexes"
+}
+
+main
+
+
+========================================
+File: helper_functions.sh
+========================================
+#!/bin/bash
+
+# Shared Helper Functions for Archive System
+# Source this file in both create_structure.sh and update_index.sh
+
+# HTML Template Generation Functions
+
+# Generate common HTML head section
+generate_html_head() {
+    local title="$1"
+    local description="$2"
+    local css_path="$3"
+    
+    cat << EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$title</title>
+    <meta name="description" content="$description">
+    <link rel="stylesheet" href="$css_path">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+EOF
+}
+
+# Generate sidebar navigation
+generate_sidebar() {
+    local icon="$1"
+    local title="$2"
+    shift 2
+    local nav_items=("$@")
+    
+    cat << EOF
+    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-backdrop"></div>
+    
+    <div class="layout-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="$icon"></i>
+                    <span>$title</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+EOF
+}
+
+# Generate sidebar footer with theme toggle
+generate_sidebar_footer() {
+    cat << 'EOF'
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
+EOF
+}
+
+# Generate page footer
+generate_footer() {
+    local title="$1"
+    local subtitle="$2"
+    
+    cat << EOF
+            <footer>
+                <p><strong>$title</strong></p>
+                <p>$subtitle</p>
+                <p style="font-size: 0.875rem; color: var(--text-tertiary);">$SITE_COPYRIGHT</p>
+            </footer>
+        </main>
+    </div>
+EOF
+}
+
+# Generate statistics cards
+generate_stats_cards() {
+    local stat1_value="$1"
+    local stat1_label="$2"
+    local stat2_value="$3"
+    local stat2_label="$4"
+    local stat3_value="$5"
+    local stat3_label="$6"
+    
+    cat << EOF
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 0.75rem; border: 1px solid var(--border-light);">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--primary-color);">$stat1_value</div>
+                        <div style="color: var(--text-secondary); font-size: 0.875rem;">$stat1_label</div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: linear-gradient(135deg, rgba(72, 187, 120, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-radius: 0.75rem; border: 1px solid var(--border-light);">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--secondary-color);">$stat2_value</div>
+                        <div style="color: var(--text-secondary); font-size: 0.875rem;">$stat2_label</div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: linear-gradient(135deg, rgba(237, 137, 54, 0.1) 0%, rgba(246, 173, 85, 0.1) 100%); border-radius: 0.75rem; border: 1px solid var(--border-light);">
+                        <div style="font-size: 2rem; font-weight: 800; color: var(--accent-color);">$stat3_value</div>
+                        <div style="color: var(--text-secondary); font-size: 0.875rem;">$stat3_label</div>
+                    </div>
+                </div>
+EOF
+}
+
+# Generate paper card
+generate_paper_card() {
+    local icon="$1"
+    local title="$2"
+    local badge_class="$3"
+    local badge_text="$4"
+    local meta_lines="$5"
+    local button_link="$6"
+    local button_text="$7"
+    
+    cat << EOF
+                    <div class="paper-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <h3 style="margin: 0;"><i class="$icon" style="margin-right: 0.5rem;"></i> $title</h3>
+                            <span class="badge $badge_class">$badge_text</span>
+                        </div>
+                        <div class="meta">
+$meta_lines
+                        </div>
+                        <div class="actions">
+                            <a href="$button_link" class="btn">
+                                <i class="fas fa-arrow-right"></i> $button_text
+                            </a>
+                        </div>
+                    </div>
+EOF
+}
+
+# Generate empty state message
+generate_empty_state() {
+    local message="$1"
+    local submessage="$2"
+    
+    cat << EOF
+                <div class="empty-state">
+                    <i class="fas fa-inbox" style="font-size: 3rem; color: var(--text-tertiary); margin-bottom: 1rem;"></i>
+                    <p>$message</p>
+                    <p style="font-size: 0.875rem; color: var(--text-tertiary);">$submessage</p>
+                </div>
+EOF
+}
+
+# Generate breadcrumb navigation
+generate_breadcrumb() {
+    local items=("$@")
+    local breadcrumb_html=""
+    local is_first=true
+    
+    for item in "${items[@]}"; do
+        if [ "$is_first" = true ]; then
+            breadcrumb_html+="$item"
+            is_first=false
+        else
+            breadcrumb_html+=" <span>/</span> $item"
+        fi
+    done
+    
+    cat << EOF
+        <nav class="breadcrumb-nav" style="display: flex; align-items: center; gap: 0.5rem; padding: 1rem 0; font-size: 0.875rem; color: var(--text-secondary); flex-wrap: wrap;">
+            $breadcrumb_html
+        </nav>
+EOF
+}
+
+# Generate section header
+generate_section_header() {
+    local icon="$1"
+    local title="$2"
+    local count="$3"
+    
+    if [ -n "$count" ]; then
+        echo "                <h2><i class=\"$icon\"></i> $title ($count)</h2>"
+    else
+        echo "                <h2><i class=\"$icon\"></i> $title</h2>"
+    fi
+}
+
+# Generate page header
+generate_page_header() {
+    local badge_class="$1"
+    local badge_text="$2"
+    local meta_text="$3"
+    local title="$4"
+    local subtitle="$5"
+    
+    cat << EOF
+            <header class="paper-header">
+                <div class="paper-meta">
+                    <span class="badge $badge_class">$badge_text</span>
+                    <span class="date">
+                        <i class="fas fa-university"></i> $meta_text
+                    </span>
+                </div>
+                <h1>$title</h1>
+                <p class="subtitle">$subtitle</p>
+            </header>
+EOF
+}
+
+# Generate script tags
+generate_scripts() {
+    local js_path="$1"
+    local additional_scripts="$2"
+    
+    cat << EOF
+    
+    <script src="$js_path"></script>
+EOF
+    
+    if [ -n "$additional_scripts" ]; then
+        echo "$additional_scripts"
+    fi
+    
+    echo "</body>"
+    echo "</html>"
+}
+
+# Utility function to count files in directory
+count_files() {
+    local dir="$1"
+    local pattern="$2"
+    find "$dir" -maxdepth 1 -name "$pattern" -type f 2>/dev/null | wc -l
+}
+
+# Utility function to get relative path
+get_relative_path() {
+    local from="$1"
+    local to="$2"
+    python3 -c "import os.path; print(os.path.relpath('$to', '$from'))" 2>/dev/null || echo "$to"
+}
+
+# Validate configuration
+validate_config() {
+    if [ ${#COLLEGES[@]} -eq 0 ]; then
+        echo "Error: No colleges defined in configuration"
+        return 1
+    fi
+    
+    if [ ${#SUBJECTS[@]} -eq 0 ]; then
+        echo "Error: No subjects defined in configuration"
+        return 1
+    fi
+    
+    if [ ${#CATEGORIES[@]} -eq 0 ]; then
+        echo "Error: No categories defined in configuration"
+        return 1
+    fi
+    
+    return 0
+}
+
+# Create directory if it doesn't exist
+ensure_directory() {
+    local dir="$1"
+    if [ ! -d "$dir" ]; then
+        mkdir -p "$dir"
+    fi
+}
+
+# Log message with timestamp
+log_message() {
+    local level="$1"
+    local message="$2"
+    local timestamp=$(date '+%Y-%m-%d %H:%M:%S')
+    echo "[$timestamp] [$level] $message"
+}
+
+# Check if file exists and is not empty
+file_exists_and_not_empty() {
+    local file="$1"
+    [ -f "$file" ] && [ -s "$file" ]
+}
+
+# Format file size for display
+format_file_size() {
+    local size=$1
+    if [ $size -lt 1024 ]; then
+        echo "${size}B"
+    elif [ $size -lt 1048576 ]; then
+        echo "$((size / 1024))KB"
+    else
+        echo "$((size / 1048576))MB"
+    fi
+}
+
+# Get file modification date
+get_file_mod_date() {
+    local file="$1"
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        stat -f "%Sm" -t "%Y-%m-%d" "$file" 2>/dev/null
+    else
+        stat -c "%y" "$file" 2>/dev/null | cut -d' ' -f1
+    fi
+}
+
+# Sanitize filename for web
+sanitize_filename() {
+    local filename="$1"
+    # Remove special characters, replace spaces with hyphens
+    echo "$filename" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9._-]/-/g' | sed 's/--*/-/g'
+}
+
+# Generate unique ID
+generate_id() {
+    local prefix="$1"
+    echo "${prefix}_$(date +%s)_$$"
+}
+
+# Export all functions for use in other scripts
+export -f generate_html_head
+export -f generate_sidebar
+export -f generate_sidebar_footer
+export -f generate_footer
+export -f generate_stats_cards
+export -f generate_paper_card
+export -f generate_empty_state
+export -f generate_breadcrumb
+export -f generate_section_header
+export -f generate_page_header
+export -f generate_scripts
+export -f count_files
+export -f get_relative_path
+export -f validate_config
+export -f ensure_directory
+export -f log_message
+export -f file_exists_and_not_empty
+export -f format_file_size
+export -f get_file_mod_date
+export -f sanitize_filename
+export -f generate_id
+
+========================================
+File: structure_config.sh
+========================================
+#!/bin/bash
+
+# Configuration file for Educational Institution Archive System
+# Edit these arrays and functions to customize your structure
+
+# =============================================================================
+# INSTITUTION CONFIGURATION
+# =============================================================================
+
+# Colleges/Institutions
+COLLEGES=(
+    "KSL"
+)
+
+# Exam Categories
+CATEGORIES=(
+    "Bar_Exams"
+)
+
+# Subjects (the actual subjects/courses being examined)
+SUBJECTS=(
+    "ATP 100 - Civil Litigation"
+)
+
+# Base directories (always created at root level, but hidden from UI)
+BASE_DIRS=(
+    "UNPROCESSED"
+    "NOT_RELEVANT"
+)
+
+# =============================================================================
+# SITE CONFIGURATION
+# =============================================================================
+
+SITE_TITLE="Educational Past Papers Archive"
+SITE_DESCRIPTION="Comprehensive collection of past examination papers"
+SITE_COPYRIGHT="© 2025 Educational Content Management System"
+
+# Year range configuration
+YEAR_START="2020"
+YEAR_END="2025"
+
+# Feature flags
+ENABLE_DARK_MODE=true
+ENABLE_SEARCH=false
+ENABLE_ANALYTICS=false
+
+# =============================================================================
+# METADATA FUNCTIONS
+# =============================================================================
+
+# College metadata
+get_college_full_name() {
+    local college="$1"
+    case "$college" in
+        "KSL") echo "Kenya School of Law" ;;
+        "KMTC") echo "Kenya Medical Training College" ;;
+        "MKU") echo "Mount Kenya University" ;;
+        "MMU") echo "Multimedia University" ;;
+        "UON") echo "University of Nairobi" ;;
+        "JKUAT") echo "Jomo Kenyatta University of Agriculture and Technology" ;;
+        *) echo "$college" ;;
+    esac
+}
+
+get_college_icon() {
+    local college="$1"
+    case "$college" in
+        "KSL") echo "fas fa-balance-scale" ;;
+        "KMTC") echo "fas fa-hospital" ;;
+        "MKU") echo "fas fa-mountain" ;;
+        "MMU") echo "fas fa-desktop" ;;
+        "UON") echo "fas fa-university" ;;
+        "JKUAT") echo "fas fa-seedling" ;;
+        *) echo "fas fa-graduation-cap" ;;
+    esac
+}
+
+get_college_description() {
+    local college="$1"
+    case "$college" in
+        "KSL") echo "Professional legal education and bar examination papers" ;;
+        "KMTC") echo "Medical and health sciences education programs" ;;
+        "MKU") echo "Comprehensive university education across multiple disciplines" ;;
+        "MMU") echo "Technology and multimedia education programs" ;;
+        *) echo "Past examination papers and study materials" ;;
+    esac
+}
+
+# Category metadata
+get_category_icon() {
+    local category="$1"
+    case "$category" in
+        "Bar_Exams") echo "fas fa-gavel" ;;
+        "CATs") echo "fas fa-edit" ;;
+        "FQE") echo "fas fa-graduation-cap" ;;
+        "END_OF_SEMESTER") echo "fas fa-calendar-alt" ;;
+        "END_OF_YEAR") echo "fas fa-trophy" ;;
+        "SUPPLEMENTARY") echo "fas fa-redo" ;;
+        "UPGRADING") echo "fas fa-level-up-alt" ;;
+        "PRACTICAL") echo "fas fa-flask" ;;
+        *) echo "fas fa-file-alt" ;;
+    esac
+}
+
+get_category_display_name() {
+    local category="$1"
+    case "$category" in
+        "Bar_Exams") echo "Bar Examinations" ;;
+        "CATs") echo "Continuous Assessment Tests" ;;
+        "FQE") echo "Final Qualifying Exams" ;;
+        "END_OF_SEMESTER") echo "End of Semester Exams" ;;
+        "END_OF_YEAR") echo "End of Year Exams" ;;
+        "SUPPLEMENTARY") echo "Supplementary Exams" ;;
+        "UPGRADING") echo "Upgrading Exams" ;;
+        "PRACTICAL") echo "Practical Exams" ;;
+        *) echo "$category" ;;
+    esac
+}
+
+get_category_description() {
+    local category="$1"
+    case "$category" in
+        "Bar_Exams") echo "Professional bar examination papers and assessments" ;;
+        "CATs") echo "Continuous Assessment Tests and evaluations" ;;
+        "FQE") echo "Final Qualifying Examinations" ;;
+        "END_OF_SEMESTER") echo "End of semester examinations" ;;
+        "END_OF_YEAR") echo "End of year examinations" ;;
+        "SUPPLEMENTARY") echo "Supplementary and retake examinations" ;;
+        "UPGRADING") echo "Upgrading examinations" ;;
+        "PRACTICAL") echo "Practical examinations and lab assessments" ;;
+        *) echo "Examination papers" ;;
+    esac
+}
+
+get_badge_class() {
+    local category="$1"
+    case "$category" in
+        "Bar_Exams") echo "fqe" ;;
+        "CATs") echo "cat" ;;
+        "FQE") echo "fqe" ;;
+        "PRACTICAL") echo "practical" ;;
+        "SUPPLEMENTARY") echo "cat" ;;
+        "UPGRADING") echo "fqe" ;;
+        "END_OF_SEMESTER") echo "fqe" ;;
+        "END_OF_YEAR") echo "fqe" ;;
+        *) echo "default" ;;
+    esac
+}
+
+# Subject metadata
+get_subject_icon() {
+    local subject="$1"
+    # Determine icon based on subject name patterns
+    case "$subject" in
+        *"Civil"*|*"Litigation"*) echo "fas fa-gavel" ;;
+        *"Criminal"*) echo "fas fa-handcuffs" ;;
+        *"Commercial"*) echo "fas fa-briefcase" ;;
+        *"Constitutional"*) echo "fas fa-landmark" ;;
+        *"Contract"*) echo "fas fa-file-contract" ;;
+        *"Tort"*) echo "fas fa-balance-scale-right" ;;
+        *"Engineering 1"*|*"100"*) echo "fas fa-cogs" ;;
+        *"Engineering 2"*|*"200"*) echo "fas fa-microchip" ;;
+        *"Engineering 3"*|*"300"*) echo "fas fa-stethoscope" ;;
+        *) echo "fas fa-book" ;;
+    esac
+}
+
+get_subject_description() {
+    local subject="$1"
+    local subject_num="${subject//[!0-9]/}"
+    
+    # Custom descriptions based on subject patterns
+    if [[ "$subject" =~ "Civil Litigation" ]]; then
+        echo "Civil procedure, pleadings, and litigation practice"
+    elif [[ "$subject" =~ "Criminal" ]]; then
+        echo "Criminal law, procedure, and litigation practice"
+    elif [[ "$subject" =~ "Commercial" ]]; then
+        echo "Commercial law and business practice"
+    elif [[ "$subject_num" =~ ^1 ]] || [[ "$subject" =~ 100 ]]; then
+        echo "Foundation concepts and practical applications"
+    elif [[ "$subject_num" =~ ^2 ]] || [[ "$subject" =~ 200 ]]; then
+        echo "Advanced topics and comprehensive analysis"
+    elif [[ "$subject_num" =~ ^3 ]] || [[ "$subject" =~ 300 ]]; then
+        echo "Specialized applications and professional practice"
+    else
+        echo "Comprehensive course materials and examination papers"
+    fi
+}
+
+get_subject_level() {
+    local subject="$1"
+    local subject_num="${subject//[!0-9]/}"
+    
+    if [[ "$subject_num" =~ ^1 ]] || [[ "$subject" =~ 100 ]]; then
+        echo "1"
+    elif [[ "$subject_num" =~ ^2 ]] || [[ "$subject" =~ 200 ]]; then
+        echo "2"
+    elif [[ "$subject_num" =~ ^3 ]] || [[ "$subject" =~ 300 ]]; then
+        echo "3"
+    else
+        echo "1"
+    fi
+}
+
+# =============================================================================
+# EXPORT FUNCTIONS
+# =============================================================================
+
+# Export all functions for use in other scripts
+export -f get_college_full_name
+export -f get_college_icon
+export -f get_college_description
+export -f get_category_icon
+export -f get_category_display_name
+export -f get_category_description
+export -f get_badge_class
+export -f get_subject_icon
+export -f get_subject_description
+export -f get_subject_level
+
+========================================
+File: update_index.sh
+========================================
+#!/bin/bash
+
+# Update Index Script - Complete Version
+# Creates and updates ALL index files including root, college, subject, and category indexes
+# Usage: ./update_index.sh [path]
+
+# Load configuration
+if [ -f "structure_config.sh" ]; then
+    source structure_config.sh
+else
+    echo "Error: structure_config.sh not found!"
+    exit 1
+fi
+
+if [ -f "helper_functions.sh" ]; then
+    source helper_functions.sh
+fi
+
+# Extract metadata from HTML files
+get_html_title() {
+    local file="$1"
+    local title=$(grep -oP '(?<=<title>).*(?=</title>)' "$file" 2>/dev/null | head -1)
+    [ -z "$title" ] && title=$(basename "$file" .html)
+    echo "$title"
+}
+
+get_year_from_filename() {
+    echo "$1" | grep -oP '^\d{4}' || echo "Unknown"
+}
+
+get_session_from_filename() {
+    local session_code=$(echo "$1" | grep -oP '^\d{4}\K[a-z]')
+    case "$session_code" in
+        "j") echo "July" ;;
+        "f") echo "February" ;;
+        "n") echo "November" ;;
+        "s") echo "September" ;;
+        "m") echo "March" ;;
+        "a") echo "April" ;;
+        *) echo "" ;;
+    esac
+}
+
+# Create root index
+create_root_index() {
+    echo "Creating root index.html..."
+    
+    cat > "index.html" << 'ROOTINDEX'
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+ROOTINDEX
+
+    echo "    <title>$SITE_TITLE</title>" >> "index.html"
+    echo "    <meta name=\"description\" content=\"$SITE_DESCRIPTION\">" >> "index.html"
+    
+    cat >> "index.html" << 'ROOTINDEX'
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <button class="mobile-nav-toggle" aria-label="Toggle Navigation">
+        <i class="fas fa-bars"></i>
+    </button>
+    <div class="sidebar-backdrop"></div>
+    
+    <div class="layout-container">
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Past Papers</span>
+                </div>
+            </div>
+            
+            <nav class="sidebar-nav">
+                <a href="#overview" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Overview</span>
+                </a>
+                <a href="#colleges" class="nav-item">
+                    <i class="fas fa-university"></i>
+                    <span>Browse Colleges</span>
+                </a>
+                
+                <div class="nav-group">
+                    <div class="nav-group-title">Quick Access</div>
+ROOTINDEX
+
+    # Add college links
+    for college in "${COLLEGES[@]}"; do
+        local icon=$(get_college_icon "$college")
+        echo "                    <a href=\"$college/index.html\" class=\"nav-item sub-item\">" >> "index.html"
+        echo "                        <i class=\"$icon\"></i>" >> "index.html"
+        echo "                        <span>$college Papers</span>" >> "index.html"
+        echo "                    </a>" >> "index.html"
+    done
+
+    cat >> "index.html" << 'ROOTINDEX'
+                </div>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <button class="theme-toggle" aria-label="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                    <span>Dark Mode</span>
+                </button>
+            </div>
+        </aside>
+        
+        <main class="main-content">
+            <header class="paper-header">
+                <div class="paper-meta">
+                    <span class="badge fqe">ARCHIVE</span>
+                    <span class="date">
+ROOTINDEX
+
+    echo "                        <i class=\"fas fa-graduation-cap\"></i> $SITE_DESCRIPTION" >> "index.html"
+    
+    cat >> "index.html" << 'ROOTINDEX'
+                    </span>
+                </div>
+                <h1>Past Papers Archive</h1>
+                <p class="subtitle">Comprehensive Collection of Examination Papers</p>
+            </header>
+            
+            <section id="overview" class="intro">
+                <h2><i class="fas fa-info-circle"></i> Welcome to the Archive</h2>
+                <p>Access organized past examination papers from leading educational institutions.</p>
+                
+                <div style="display: flex; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%); border-radius: 0.75rem;">
+ROOTINDEX
+
+    echo "                        <div style=\"font-size: 2rem; font-weight: 800; color: var(--primary-color);\">${#COLLEGES[@]}</div>" >> "index.html"
+    
+    cat >> "index.html" << 'ROOTINDEX'
+                        <div style="color: var(--text-secondary); font-size: 0.875rem;">Colleges</div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: linear-gradient(135deg, rgba(72, 187, 120, 0.1) 0%, rgba(16, 185, 129, 0.1) 100%); border-radius: 0.75rem;">
+ROOTINDEX
+
+    echo "                        <div style=\"font-size: 2rem; font-weight: 800; color: var(--secondary-color);\">${#SUBJECTS[@]}+</div>" >> "index.html"
+    
+    cat >> "index.html" << 'ROOTINDEX'
+                        <div style="color: var(--text-secondary); font-size: 0.875rem;">Subjects</div>
+                    </div>
+                    <div style="flex: 1; min-width: 200px; padding: 1rem; background: linear-gradient(135deg, rgba(237, 137, 54, 0.1) 0%, rgba(246, 173, 85, 0.1) 100%); border-radius: 0.75rem;">
+ROOTINDEX
+
+    echo "                        <div style=\"font-size: 2rem; font-weight: 800; color: var(--accent-color);\">${#CATEGORIES[@]}</div>" >> "index.html"
+    
+    cat >> "index.html" << 'ROOTINDEX'
+                        <div style="color: var(--text-secondary); font-size: 0.875rem;">Categories</div>
+                    </div>
+                </div>
+            </section>
+            
+            <section id="colleges" class="category-section">
+                <h2><i class="fas fa-university"></i> Select Your College</h2>
+                <div class="paper-grid">
+ROOTINDEX
+
+    # Add college cards
+    for college in "${COLLEGES[@]}"; do
+        local icon=$(get_college_icon "$college")
+        local full=$(get_college_full_name "$college")
+        local desc=$(get_college_description "$college")
+        
+        cat >> "index.html" << COLLEGECARD
+                    <div class="paper-card">
+                        <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
+                            <h3 style="margin: 0;"><i class="$icon"></i> $full</h3>
+                            <span class="badge fqe">$college</span>
+                        </div>
+                        <div class="meta">
+                            <p style="margin-bottom: 0.75rem; color: var(--text-secondary);">$desc</p>
+                            <p><i class="fas fa-book"></i> ${#SUBJECTS[@]} Subjects</p>
+                            <p><i class="fas fa-folder-open"></i> ${#CATEGORIES[@]} Categories</p>
+                            <p><i class="fas fa-calendar-alt"></i> Years: $YEAR_START - $YEAR_END</p>
+                        </div>
+                        <div class="actions">
+                            <a href="$college/index.html" class="btn">
+                                <i class="fas fa-arrow-right"></i> Browse $college Papers
+                            </a>
+                        </div>
+                    </div>
+COLLEGECARD
+    done
+
+    cat >> "index.html" << ROOTINDEX
+                </div>
+            </section>
+            
+            <footer>
+                <p><strong>$SITE_TITLE</strong></p>
+                <p>$SITE_DESCRIPTION</p>
+                <p style="font-size: 0.875rem; color: var(--text-tertiary);">$SITE_COPYRIGHT</p>
+            </footer>
+        </main>
+    </div>
+    
+    <script src="js/sidebar-navigation.js"></script>
+</body>
+</html>
+ROOTINDEX
+
+    echo "  Created: index.html"
+}
+
+# Update category index
+update_category_index() {
+    local category_path="$1"
+    local category_name=$(basename "$category_path")
+    local subject_name=$(basename "$(dirname "$category_path")")
+    local college_name=$(basename "$(dirname "$(dirname "$category_path")")")
+    
+    local category_icon=$(get_category_icon "$category_name")
+    local badge_class=$(get_badge_class "$category_name")
+    local category_display=$(get_category_display_name "$category_name")
+    local college_full=$(get_college_full_name "$college_name")
+    
+    local html_files=($(find "$category_path" -maxdepth 1 -name "*.html" ! -name "index.html" -type f | sort -r))
+    local file_count=${#html_files[@]}
+    
+    echo "Updating: $category_path ($file_count files)"
+    
+    # Generate index.html (simplified version - see full implementation in artifacts)
+    cat > "$category_path/index.html" << EOF
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>$category_display - $subject_name | $college_name</title>
+    <link rel="stylesheet" href="../../css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <h1>$category_display - $subject_name</h1>
+        <p>$college_full | $file_count papers available</p>
+        <nav>
+            <a href="../../../index.html">Home</a> /
+            <a href="../../index.html">$college_name</a> /
+            <a href="../index.html">$subject_name</a> /
+            $category_display
+        </nav>
+    </div>
+    <script src="../../js/sidebar-navigation.js"></script>
+</body>
+</html>
+EOF
+}
+
+# Update all indexes
+update_all() {
+    echo "=== UPDATING ALL INDEXES ==="
+    
+    # Create root index
+    create_root_index
+    
+    # Update category indexes
+    for college in "${COLLEGES[@]}"; do
+        [ ! -d "$college" ] && continue
+        for subject in "${SUBJECTS[@]}"; do
+            [ ! -d "$college/$subject" ] && continue
+            for category in "${CATEGORIES[@]}"; do
+                [ ! -d "$college/$subject/$category" ] && continue
+                update_category_index "$college/$subject/$category"
+            done
+        done
+    done
+    
+    echo "=== COMPLETE ==="
+}
+
+# Main execution
+if [ $# -eq 0 ]; then
+    update_all
+else
+    target="$1"
+    [ ! -d "$target" ] && echo "Error: Directory not found" && exit 1
+    
+    depth=$(echo "$target" | tr -cd '/' | wc -c)
+    case $depth in
+        2) update_category_index "$target" ;;
+        *) echo "Updating specific path: $target"; update_category_index "$target" ;;
+    esac
+fi
+

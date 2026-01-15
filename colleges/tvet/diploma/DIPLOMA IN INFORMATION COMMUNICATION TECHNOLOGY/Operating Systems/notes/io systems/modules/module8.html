@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I/O Systems - Module 8</title>
+  <meta name="description" content="Detailed transcription of Security section">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="8">
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module7.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 8 of 8</span>
+        </div>
+        <a href="../index.html" class="nav-button">
+          Home
+        </a>
+      </div>
+    </nav>
+
+    <main class="module-content">
+      <h1>5.2 Security</h1>
+      
+      <h2>The Security Problem</h2>
+      
+      <p>Protection dealt with protecting files and other resources from accidental misuse by cooperating users sharing a system generally using the computer for normal purposes.</p>
+      
+      <p>Security deals with protecting systems from deliberate attacks either internal or external from individuals intentionally attempting to steal information damage information or otherwise deliberately wreak havoc in some manner.</p>
+      
+      <p>Some of the most common types of violations include:</p>
+      <ul>
+        <li>Breach of Confidentiality - Theft of private or confidential information such as credit-card numbers trade secrets patents secret formulas manufacturing procedures medical information financial information etc.</li>
+        <li>Breach of Integrity - Unauthorized modification of data which may have serious indirect consequences. For example a popular game or other program's source code could be modified to open up security holes on users systems before being released to the public.</li>
+        <li>Breach of Availability - Unauthorized destruction of data often just for the "fun" of causing havoc and for bragging rites. Vandalism of web sites is a common form of this violation.</li>
+        <li>Theft of Service - Unauthorized use of resources such as theft of CPU cycles installation of daemons running an unauthorized file server or tapping into the target's telephone or networking services.</li>
+        <li>Denial of Service DOS - Preventing legitimate users from using the system often by overloading and overwhelming the system with an excess of requests for service.</li>
+      </ul>
+      
+      <p>One common attack is masquerading in which the attacker pretends to be a trusted third party. A variation of this is the man-in-the-middle in which the attacker masquerades as both ends of the conversation to two targets.</p>
+      
+      <p>A replay attack involves repeating a valid transmission. Sometimes this can be the entire attack (such as repeating a request for a money transfer) or other times the content of the original message is replaced with malicious content.</p>
+      
+      <figure>
+        <img src="../assets/images/module8-standard-security-attacks.jpg" alt="Standard security attacks showing different types of attack vectors and methods" width="600" height="400">
+        <figcaption>Fig: Standard security attacks.</figcaption>
+      </figure>
+      
+      <p>There are four levels at which a system must be protected:</p>
+      <ol>
+        <li>Physical - The easiest way to steal data is to pocket the backup tapes. Also access to the root console will often give the user special privileges such as rebooting the system as root from removable media. Even general access to terminals in a computer room offers some opportunities for an attacker although today's modern high-speed networking environment provides more and more opportunities for remote attacks.</li>
+        <li>Human - There is some concern that the humans who are allowed access to a system be trustworthy and that they cannot be coerced into breaching security. However more and more attacks today are made via social engineering which basically means fooling trustworthy people into accidentally breaching security.
+          <ul>
+            <li>Phishing involves sending an innocent-looking e-mail or web site designed to fool people into revealing confidential information. E.g. spam e-mails pretending to be from e-Bay PayPal or any of a number of banks or credit-card companies.</li>
+            <li>Dumpster Diving involves searching the trash or other locations for passwords that are written down. (Note: Passwords that are too hard to remember or which must be changed frequently are more likely to be written down somewhere close to the user's station.)</li>
+            <li>Password Cracking involves divining user's passwords either by watching them type in their passwords knowing something about them like their pet's names or simply trying all words in common dictionaries. (Note: "Good" passwords should involve a minimum number of characters include non-alphabetical characters and not appear in any dictionary (in any language) and should be changed frequently. Note also that it is proper etiquette to look away from the keyboard while someone else is entering their password.)</li>
+          </ul>
+        </li>
+        <li>Operating System - The OS must protect itself from security breaches such as runaway processes (denial of service) memory-access violations stack overflow violations the launching of programs with excessive privileges and many others.</li>
+        <li>Network - As network communications become ever more important and pervasive in modern computing environments it becomes ever more important to protect this area of the system. (Both protecting the network itself from attack and protecting the local system from attacks coming in through the network.) This is a growing area of concern as wireless communications and portable devices become more and more prevalent.</li>
+      </ol>
+      
+      <h2>Program Threats</h2>
+      
+      <p>There are many common threats to modern systems. Only a few are discussed here.</p>
+      
+      <h3>Trojan Horse</h3>
+      
+      <p>A Trojan Horse is a program that secretly performs some maliciousness in addition to its visible actions.</p>
+      
+      <p>Some Trojan horses are deliberately written as such and others are the result of legitimate programs that have become infected with viruses (see below.)</p>
+      
+      <p>One dangerous opening for Trojan horses is long search paths and in particular paths which include the current directory (".") as part of the path. If a dangerous program having the same name as a legitimate program (or a common mis-spelling such as "sl" instead of "ls") is placed anywhere on the path then an unsuspecting user may be fooled into running the wrong program by mistake.</p>
+      
+      <p>Another classic Trojan Horse is a login emulator which records a users account name and password issues a "password incorrect" message and then logs off the system. The user then tries again (with a proper login prompt) logs in successfully and doesn't realize that their information has been stolen.</p>
+      
+      <p>Two solutions to Trojan Horses are to have the system print usage statistics on logouts and to require the typing of non-trappable key sequences such as Control-Alt-Delete in order to log in. (This is why modern Windows systems require the Control-Alt-Delete sequence to commence logging in which cannot be emulated or caught by ordinary programs. I.e. that key sequence always transfers control over to the operating system.)</p>
+      
+      <p>Spy ware is a version of a Trojan Horse that is often included in "free" software downloaded off the Internet. Spy ware programs generate pop-up browser windows and may also accumulate information about the user and deliver it to some central site. (This is an example of covert channels in which surreptitious communications occur.) Another common task of spyware is to send out spam e-mail messages which then purportedly come from the infected user.</p>
+      
+      <div class="summary">
+        <h2>📝 Summary</h2>
+        <ul>
+          <li>Security protects systems from deliberate attacks by malicious users</li>
+          <li>Common security violations include breaches of confidentiality, integrity, and availability</li>
+          <li>Systems must be protected at physical, human, operating system, and network levels</li>
+          <li>Program threats include Trojan horses, trap doors, logic bombs, and buffer overflows</li>
+          <li>Social engineering attacks like phishing exploit human vulnerabilities</li>
+        </ul>
+      </div>
+    </main>
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module7.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 8 of 8</span>
+        </div>
+        <a href="../index.html" class="nav-button">
+          Home
+        </a>
+      </div>
+    </nav>
+  </article>
+</body>
+</html>

@@ -1,0 +1,504 @@
+:root {
+    --primary-color: #2c3e50;
+    --secondary-color: #34495e;
+    --accent-color: #3498db;
+    --background-color: #f5f6fa;
+    --text-color: #2c3e50;
+    --border-color: #dcdde1;
+    --font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+    line-height: 1.6;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem;
+}
+
+/* Navigation container */
+.document-nav {
+    margin: 2rem 0;
+}
+
+.nav-links {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* Navigation buttons with distinct colors */
+.nav-button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    text-decoration: none;
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+/* Table of Contents link */
+.nav-button[href*="index.html"] {
+    color: #2980b9;
+    border-color: #2980b9;
+}
+
+.nav-button[href*="index.html"]:hover {
+    background: #eef7fc;
+}
+
+/* Previous Section link */
+.nav-links .nav-button:nth-child(2) { /* Assumes Previous is the second button */
+    color: #e67e22;
+    border-color: #e67e22;
+}
+
+.nav-links .nav-button:nth-child(2):hover {
+    background: #fef5ec;
+}
+
+/* Next Section link */
+.nav-links .nav-button:last-child { /* Assumes Next is the last button */
+    color: #27ae60;
+    border-color: #27ae60;
+}
+
+.nav-links .nav-button:last-child:hover {
+    background: #eefaf3;
+}
+
+/* Disabled states */
+.nav-button.disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+.nav-button.disabled[href="#"] {
+    opacity: 0.7;
+    background: #fafafa;
+}
+
+/* Table of Contents Styling */
+.toc-container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 30px;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.toc-header {
+    text-align: center;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #e0e0e0;
+    padding-bottom: 20px;
+}
+
+.toc-title {
+    font-size: 2.5em;
+    color: #2c3e50;
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.toc-subtitle {
+    font-size: 1.2em;
+    color: #7f8c8d;
+}
+
+.toc-list {
+    list-style: none;
+    padding: 0;
+}
+
+.toc-chapter {
+    margin-bottom: 25px;
+    border-left: 3px solid #3498db;
+    padding-left: 15px;
+}
+
+.toc-chapter-title {
+    font-size: 1.6em;
+    font-weight: 600;
+    color: #3498db;
+    margin-bottom: 10px;
+}
+
+.toc-section-list {
+    list-style: none; /* Ensure nested lists also have no bullets */
+    padding-left: 10px; /* Indent sections slightly */
+}
+
+.toc-section-item {
+    margin-bottom: 8px; /* Space between section links */
+}
+
+.toc-link {
+    text-decoration: none;
+    color: #2980b9;
+    font-size: 1.1em;
+    transition: color 0.3s ease, padding-left 0.3s ease;
+    display: block;
+    padding: 5px 0;
+}
+
+.toc-link:hover {
+    color: #1abc9c;
+    padding-left: 5px;
+}
+
+.toc-link::before {
+    content: '➔ ';
+    color: #bdc3c7;
+    margin-right: 8px;
+    font-size: 0.9em;
+}
+
+/* Content Styling */
+.document-section { /* Wrapper for topic page content */
+    background-color: #ffffff; /* Optional: Give article area a background */
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+}
+
+.section-header {
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.section-title {
+    font-size: 2rem;
+    color: var(--primary-color);
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.title-underline {
+    height: 3px;
+    width: 60px;
+    background-color: var(--accent-color);
+}
+
+.section-content {
+    /* Styles for the main content area */
+}
+
+/* Content sections within main */
+.content-section {
+    background: white; /* Keep this if needed, or remove if document-section provides background */
+    border-radius: 8px;
+    padding: 1rem; /* Adjust padding as needed */
+    margin-bottom: 2rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05); /* Keep or adjust shadow */
+}
+
+.content-card {
+    padding: 1rem; /* Padding inside the card */
+}
+
+/* Headings */
+.section-heading { /* For H2 within content-section */
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    font-weight: 600;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #eee;
+}
+
+.heading-icon {
+    font-size: 1.2em;
+}
+
+.heading-text {
+    flex-grow: 1;
+}
+
+
+.subsection-heading { /* For H3 */
+    color: var(--secondary-color);
+    font-size: 1.25rem;
+    margin-top: 1.5rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+}
+
+/* Paragraphs */
+p {
+    margin-bottom: 1rem;
+}
+
+/* Tables */
+.table-container {
+    margin: 1.5rem 0;
+    overflow-x: auto; /* Ensure tables are scrollable on small screens */
+    background: white;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.content-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0; /* Remove default margin */
+}
+
+.content-table caption {
+    caption-side: top; /* Or bottom */
+    font-weight: 600;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.content-table th,
+.content-table td {
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--border-color);
+    text-align: left;
+    vertical-align: top; /* Align content to the top */
+}
+
+.content-table th {
+    background-color: #f8f9fa;
+    font-weight: 600;
+}
+
+.content-table tbody tr:nth-child(even) {
+    background-color: #fdfdfe; /* Subtle striping */
+}
+
+/* Mathematical expressions */
+.math-inline {
+    font-family: 'Times New Roman', Times, serif; /* Ensure math font */
+    padding: 0 0.2em;
+    background-color: #f0f0f0; /* Slight background to distinguish */
+    border-radius: 3px;
+}
+
+.equation { /* For block math $$...$$ */
+    font-family: 'Times New Roman', Times, serif; /* Ensure math font */
+    margin: 1.5rem 0;
+    text-align: center;
+    overflow-x: auto; /* Scroll if equation is too wide */
+    padding: 1rem;
+    background-color: #f8f9fa; /* Background for block equations */
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+}
+
+/* Adjustments for MathJax rendering if needed */
+.MathJax_Display {
+    margin: 1.5rem 0 !important;
+}
+
+/* Lists and Images */
+/* Enhanced lists */
+.enhanced-list {
+    list-style: none;
+    padding: 0;
+    margin-left: 1rem; /* Indent lists slightly */
+}
+
+.list-item {
+    display: flex;
+    align-items: baseline; /* Align icon and text nicely */
+    gap: 0.75rem; /* Space between icon and text */
+    margin-bottom: 0.5rem;
+}
+
+.item-icon {
+    color: var(--accent-color);
+    font-weight: bold; /* Make bullet/icon stand out */
+}
+
+/* Specific list types if needed */
+ul { margin-bottom: 1rem; padding-left: 20px; }
+ol { margin-bottom: 1rem; padding-left: 20px; }
+li { margin-bottom: 0.5rem; }
+
+/* Images */
+img.content-image { /* Class for general content images */
+    max-width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin: 1rem auto; /* Center images */
+    display: block; /* Ensure centering works */
+    border: 1px solid var(--border-color);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Key Points Section */
+.key-points-section {
+    margin-top: 2rem;
+    background-color: #eaf2f8; /* Light blue background */
+    border-left: 5px solid var(--accent-color);
+    border-radius: 4px;
+    padding: 1.5rem;
+}
+
+.key-points-container {
+    /* Container if needed */
+}
+
+.key-points-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.key-points-icon {
+    font-size: 1.5rem;
+}
+
+.key-points-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--primary-color);
+    margin: 0;
+}
+
+.key-points-content {
+    /* Styling for content area */
+}
+
+.key-points-list {
+    list-style: none;
+    padding: 0;
+}
+
+.key-point-item {
+    display: flex;
+    align-items: baseline;
+    gap: 0.75rem;
+    margin-bottom: 0.75rem;
+}
+
+.point-marker {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+.key-point-item p {
+    margin: 0; /* Remove default paragraph margin */
+}
+
+/* Code Blocks */
+pre.code-block {
+    background-color: #2d2d2d; /* Dark background for code */
+    color: #f8f8f2; /* Light text */
+    padding: 1rem;
+    border-radius: 4px;
+    overflow-x: auto; /* Scroll long lines */
+    margin: 1.5rem 0;
+    font-family: 'Courier New', Courier, monospace; /* Monospace font */
+    font-size: 0.9em;
+}
+
+pre.code-block code {
+    font-family: inherit; /* Inherit font from pre */
+    background: none; /* No background for inline code tag */
+    padding: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 1rem;
+    }
+
+    .toc-container {
+        margin: 20px;
+        padding: 20px;
+    }
+
+    .toc-title {
+        font-size: 2em;
+    }
+
+    .nav-links {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .nav-button {
+        justify-content: center;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+    }
+
+    .section-heading {
+        font-size: 1.4rem;
+    }
+
+    .subsection-heading {
+        font-size: 1.2rem;
+    }
+
+    .content-table {
+        font-size: 0.9em;
+    }
+
+    .content-table th,
+    .content-table td {
+        padding: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .toc-title {
+        font-size: 1.8em;
+    }
+
+    .toc-chapter-title {
+        font-size: 1.2em;
+    }
+
+    .section-title {
+        font-size: 1.6rem;
+    }
+
+    .section-heading {
+        font-size: 1.3rem;
+    }
+
+    .subsection-heading {
+        font-size: 1.1rem;
+    }
+
+    body {
+        font-size: 15px; /* Slightly smaller base font on mobile */
+    }
+
+    .container {
+        padding: 0.5rem;
+    }
+
+    .document-section {
+        padding: 1rem;
+    }
+}

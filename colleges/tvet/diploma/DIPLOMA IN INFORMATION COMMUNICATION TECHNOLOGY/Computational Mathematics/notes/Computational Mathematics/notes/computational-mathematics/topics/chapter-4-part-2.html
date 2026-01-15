@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Discrete Counting - Part 2</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-4-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 4 Part 2 of 3</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-4-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 4: DISCRETE COUNTING (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-4-combinations -->
+                <section id="chapter-4-combinations" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎲</span>
+                        <span class="heading-text">Combinations</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A combination is selection of some given elements in which order does not matter.</p>
+                        <p>The number of all combinations of <span class="math-inline">$n$</span> things, taken <span class="math-inline">$r$</span> at a time is -</p>
+                        <div class="equation">$$_{n} C_{r}=\frac{n!}{r!(n-r)!}$$</div>
+                        <h3 class="subsection-heading">Problem 1</h3>
+                        <p>Find the number of subsets of the set <span class="math-inline">$\{1,2,3,4,5,6\}$</span> having 3 elements.</p>
+                        <p>Solution</p>
+                        <p>The cardinality of the set is 6 and we have to choose 3 elements from the set. Here, the ordering does not matter. Hence, the number of subsets will be <span class="math-inline">$6 C 3=\frac{6!}{3!(6-3)!} = \frac{6 \times 5 \times 4}{3 \times 2 \times 1} = 20$</span>.</p> <!-- Added calculation -->
+                        <h3 class="subsection-heading">Problem 2</h3>
+                        <p>There are 6 men and 5 women in a room. In how many ways we can choose 3 men and 2 women from the room?</p>
+                        <p>Solution</p>
+                        <p>The number of ways to choose 3 men from 6 men is <span class="math-inline">$6 C 3 = \frac{6!}{3!3!} = 20$</span> and the number of ways to choose 2 women from 5 women is <span class="math-inline">$5 C_{2} = \frac{5!}{2!3!} = 10$</span></p> <!-- Added calculation -->
+                        <p>Hence, the total number of ways is - <span class="math-inline">$6 C_{3} \times 5 C_{2}=20 \times 10=200$</span></p>
+                        <h3 class="subsection-heading">Problem 3</h3>
+                        <p>How many ways can you choose 3 distinct groups of 3 students from total 9 students?</p>
+                        <p>Solution</p>
+                        <p>Let us number the groups as 1,2 and 3</p>
+                        <p>For choosing 3 students for <span class="math-inline">$1^{\text {st }}$</span> group, the number of ways - <span class="math-inline">$9 C 3 = \frac{9!}{3!6!} = 84$</span></p> <!-- Added calculation -->
+                        <p>The number of ways for choosing 3 students for <span class="math-inline">$2^{\text {nd }}$</span> group after choosing 1 st group - <span class="math-inline">$6 C 3 = \frac{6!}{3!3!} = 20$</span></p> <!-- Added calculation -->
+                        <p>The number of ways for choosing 3 students for <span class="math-inline">$3^{\text {rd }}$</span> group after choosing <span class="math-inline">$1^{\text {st }}$</span> and <span class="math-inline">$2^{\text {nd }}$</span> group - <span class="math-inline">$3 C 3 = \frac{3!}{3!0!} = 1$</span></p> <!-- Added calculation -->
+                        <p>Hence, the total number of ways = <span class="math-inline">$9 C_{3} \times 6 C_{3} \times 3 C_{3}=84 \times 20 \times 1=1680$</span></p>
+                        <p>However, since the groups are distinct but not ordered (group 1, group 2, group 3 is the same as group 2, group 1, group 3), we must divide by the number of ways to order the groups (3!).</p>
+                        <p>Corrected ways = <span class="math-inline">$1680 / 3! = 1680 / 6 = 280$</span></p> <!-- Added correction for distinct groups -->
+                    </div>
+                </section>
+                <!-- END: chapter-4-combinations -->
+
+                <!-- START: chapter-4-pascals-identity -->
+                <section id="chapter-4-pascals-identity" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📐</span>
+                        <span class="heading-text">Pascal's Identity</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Pascal's identity, first derived by Blaise Pascal in <span class="math-inline">$19^{\text {th }}$</span> century, states that the number of ways to choose <span class="math-inline">$k$</span> elements from <span class="math-inline">$n$</span> elements is equal to the summation of number of ways to choose ( <span class="math-inline">$k-1$</span> ) elements from ( <span class="math-inline">$n-1$</span> ) elements and the number of ways to choose <span class="math-inline">$k$</span> elements from <span class="math-inline">$n-1$</span> elements.</p> <!-- Corrected MMD -->
+                        <p>Mathematically, for any positive integers k and n : <span class="math-inline">${ }_{n} C_{k}={ }_{n-1} C_{k-1}+{ }_{n-1} C_{k}$</span></p>
+                        <p>Proof -</p>
+                        <div class="equation">$$\begin{aligned} _{n-1} C_{k-1}+{ }_{n-1} C_{k} & = \frac{(n-1)!}{(k-1)!(n-1-(k-1))!} + \frac{(n-1)!}{k!(n-1-k)!} \\ & = \frac{(n-1)!}{(k-1)!(n-k)!} + \frac{(n-1)!}{k!(n-k-1)!} \\ & = \frac{(n-1)!}{(k-1)!(n-k-1)!} \left( \frac{1}{n-k} + \frac{1}{k} \right) \\ & = \frac{(n-1)!}{(k-1)!(n-k-1)!} \left( \frac{k + (n-k)}{k(n-k)} \right) \\ & = \frac{(n-1)!}{(k-1)!(n-k-1)!} \left( \frac{n}{k(n-k)} \right) \\ & = \frac{n(n-1)!}{k(k-1)!(n-k)(n-k-1)!} \\ & = \frac{n!}{k!(n-k)!} \\ & = { }_{n} C_{k} \end{aligned}$$</div> <!-- Corrected proof steps -->
+                    </div>
+                </section>
+                <!-- END: chapter-4-pascals-identity -->
+
+                <!-- START: chapter-4-binomial-theorem -->
+                <section id="chapter-4-binomial-theorem" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕<span style="font-size: smaller; vertical-align: super;">n</span></span>
+                        <span class="heading-text">Binomial Theorem</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A binomial is a polynomial with two terms</p>
+                        <img src="../assets/images/chapter-4-binomial-example.jpg" alt="Examples of binomials: a+b, x-3, etc." class="content-image">
+                        <p>What happens when we multiply a binomial by itself ... many times?</p>
+                        <p>Example: a+b</p>
+                        <p><span class="math-inline">$\mathbf{a}+\mathbf{b}$</span> is a binomial (the two terms are <span class="math-inline">$\mathbf{a}$</span> and <span class="math-inline">$\mathbf{b}$</span> )</p>
+                        <p>Let us multiply a+b by itself using Polynomial Multiplication :</p>
+                        <div class="equation">$$(a+b)(a+b)=a^{2}+2 a b+b^{2}$$</div>
+                        <p>Now take that result and multiply by <span class="math-inline">$\mathbf{a}+\mathbf{b}$</span> again:</p>
+                        <div class="equation">$$\left(a^{2}+2 a b+b^{2}\right)(a+b)=\mathbf{a}^{3}+\mathbf{3a}^{2} \mathbf{b}+\mathbf{3} \mathbf{a b}^{2}+\mathbf{b}^{3}$$</div>
+                        <p>And again:</p>
+                        <div class="equation">$$\left(a^{3}+3 a^{2} b+3 a b^{2}+b^{3}\right)(a+b)=\mathbf{a}^{4}+4 a^{3} b+6 \mathbf{a}^{2} \mathbf{b}^{2}+4 \mathbf{a} b^{3}+\mathbf{b}^{4}$$</div>
+                        <p>The calculations get longer and longer as we go, but there is some kind of pattern developing.</p>
+                        <p>That pattern is summed up by the Binomial Theorem:</p>
+                        <div class="equation">$$\begin{gathered} (a+b)^{n}=\sum_{k=0}^{n}\binom{n}{k} a^{n-k} b^{k} \\ \text { The Binomial Theorem } \end{gathered}$$</div>
+                        <p>Don't worry ... it will all be explained!</p>
+                        <p>And you will learn lots of cool math symbols along the way.</p>
+                        <h3 class="subsection-heading">Exponents</h3>
+                        <p>First, a quick summary of Exponents.</p>
+                        <p>An exponent says how many times to use something in a multiplication.</p>
+                        <p>Example: <span class="math-inline">$8^{2}=8 \times 8=64$</span></p>
+                        <img src="../assets/images/chapter-4-exponent-example.jpg" alt="Diagram showing 8^2 = 8 * 8 = 64" class="content-image">
+                        <p>An exponent of <span class="math-inline">$\mathbf{1}$</span> means just to have it appear once, so we get the original value:</p>
+                        <p>Example: <span class="math-inline">$8^{1}=8$</span></p>
+                        <p>An exponent of <span class="math-inline">$\mathbf{0}$</span> means not to use it at all, and we have only 1:</p>
+                        <p>Example: <span class="math-inline">$8^{0}=1$</span></p>
+                        <h3 class="subsection-heading">Exponents of (a+b)</h3>
+                        <p>Now on to the binomial.</p>
+                        <p>We will use the simple binomial a+b, but it could be any binomial.</p>
+                        <p>Let us start with an exponent of <span class="math-inline">$\mathbf{0}$</span> and build upwards.</p>
+                        <p>Exponent of 0: When an exponent is 0 , we get 1:</p>
+                        <div class="equation">$$(a+b)^{0}=1$$</div>
+                        <p>Exponent of 1: When the exponent is 1, we get the original value, unchanged:</p>
+                        <div class="equation">$$(a+b)^{1}=a+b$$</div>
+                        <p>Exponent of 2: An exponent of 2 means to multiply by itself.</p>
+                        <div class="equation">$$(a+b)^{2}=(a+b)(a+b)=a^{2}+2 a b+b^{2}$$</div>
+                        <p>Exponent of 3: For an exponent of 3 just multiply again:</p>
+                        <div class="equation">$$(a+b)^{3}=\left(a^{2}+2 a b+b^{2}\right)(a+b)=a^{3}+3 a^{2} b+3 a b^{2}+b^{3}$$</div>
+                        <p>We have enough now to start talking about the pattern.</p>
+                        <h3 class="subsection-heading">The Pattern</h3>
+                        <p>In the last result we got:</p>
+                        <div class="equation">$$a^{3}+3 a^{2} b+3 a b^{2}+b^{3}$$</div>
+                        <p>Now, notice the exponents of a. They start at 3 and go down: <span class="math-inline">$3, 2, 1, 0$</span> :</p>
+                        <img src="../assets/images/chapter-4-binomial-pattern-a.jpg" alt="Highlighting the decreasing exponents of 'a' in the expansion of (a+b)^3" class="content-image">
+                        <p>Likewise the exponents of <span class="math-inline">$b$</span> go upwards: <span class="math-inline">$0, 1, 2, 3$</span> :</p>
+                        <img src="../assets/images/chapter-4-binomial-pattern-b.jpg" alt="Highlighting the increasing exponents of 'b' in the expansion of (a+b)^3" class="content-image">
+                        <p>If we number the terms 0 to <span class="math-inline">$n$</span>, we get this:</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead><tr><th>k=0</th><th>k=1</th><th>k=2</th><th>k=3</th></tr></thead>
+                             <tbody>
+                               <tr><td><span class="math-inline">$a^{3}$</span></td><td><span class="math-inline">$a^{2}$</span></td><td><span class="math-inline">$a$</span></td><td>1</td></tr>
+                               <tr><td>1</td><td><span class="math-inline">$b$</span></td><td><span class="math-inline">$b^{2}$</span></td><td><span class="math-inline">$b^{3}$</span></td></tr>
+                             </tbody>
+                           </table>
+                        </div>
+                        <p>Which can be brought together into this:</p>
+                        <div class="equation">$$a^{n-k} b^{k}$$</div>
+                        <p>How about an example to see how it works:</p>
+                        <p>Example: When the exponent, <span class="math-inline">$n$</span>, is 3 .</p>
+                        <p>The terms are:</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead><tr><th>k=0:</th><th>k=1:</th><th>k=2:</th><th>k=3:</th></tr></thead>
+                             <tbody>
+                               <tr>
+                                 <td><span class="math-inline">$a^{n-k} b^{k} = a^{3-0} b^{0} = \mathbf{a}^{3}$</span></td>
+                                 <td><span class="math-inline">$a^{n-k} b^{k} = a^{3-1} b^{1} = \mathbf{a}^{2} \mathbf{b}$</span></td>
+                                 <td><span class="math-inline">$a^{n-k} b^{k} = a^{3-2} b^{2} = \mathbf{a b}^{2}$</span></td>
+                                 <td><span class="math-inline">$a^{n-k} b^{k} = a^{3-3} b^{3} = \mathbf{b}^{3}$</span></td>
+                               </tr>
+                             </tbody>
+                           </table>
+                        </div>
+                        <p>It works like magic!</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-binomial-theorem -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-4-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 4 Part 2 of 3</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-4-part-3.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

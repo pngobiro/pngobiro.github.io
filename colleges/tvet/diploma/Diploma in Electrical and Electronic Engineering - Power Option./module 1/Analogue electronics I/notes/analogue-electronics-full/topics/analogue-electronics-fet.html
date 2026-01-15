@@ -1,0 +1,545 @@
+<!-- topics/analogue-electronics-fet.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 4: Field Effect Transistors (FETs)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="analogue-electronics-bjt.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div> <!-- Set percentage dynamically -->
+                        </div>
+                        <span class="progress-text">Part 4 of 4</span> <!-- Update text -->
+                    </div>
+                    <a href="#" class="nav-button disabled"> <!-- Add 'disabled' class if last chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Field Effect Transistors (FETs)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: fet-intro -->
+                <section id="fet-intro" class="content-section" aria-labelledby="fet-intro-heading">
+                    <h2 id="fet-intro-heading" class="section-heading">
+                        <span class="heading-icon">⚡</span>
+                        <span class="heading-text">Field Effect Transistors(FETs)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>FETs are unipolar devices because, unlike BJTs that use both electron and hole current, they operate only with one type of charge carrier.</p>
+                        <p>The two main types of FETs are the junction field-effect transistor (JFET) and the metal oxide semiconductor field-effect transistor (MOSFET).</p>
+                        <p>The term field-effect relates to the depletion region formed in the channel of a FET as a result of a voltage applied on one of its terminals (gate).</p>
+                        <p>The BJT transistor is a current-controlled device, whereas the JFET transistor is a voltage-controlled device.</p>
+                        <p>One of the most important characteristics of the FET is its high input impedance.</p>
+                        <p>FETs are more temperature stable than BJTs, and FETs are usually smaller than BJTs, making them particularly useful in integrated-circuit (IC) chips.</p>
+                    </div>
+                </section>
+                <!-- END: fet-intro -->
+
+                <!-- START: jfet-construction -->
+                <section id="jfet-construction" class="content-section" aria-labelledby="jfet-construction-heading">
+                    <h2 id="jfet-construction-heading" class="section-heading">
+                        <span class="heading-icon">🏗️</span>
+                        <span class="heading-text">Construction of JFET</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The JFET is a three-terminal device with one terminal capable of controlling the current between the other two.</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-183-1.jpg" alt="Cross-section diagram of an N-channel JFET showing the n-channel, p-type gate regions, Source (S), Drain (D), and Gate (G) terminals, and depletion regions." class="content-image">
+                           <figcaption>N-channel JFET Structure</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">N-channel JFET</h3>
+                        <p>the major part of the structure is the n -type material, which forms the channel between the embedded layers of p-type material.</p>
+                        <p>The top of the n-type channel is connected through an ohmic contact to a terminal referred to as the drain (D) , whereas the lower end of the same material is connected through an ohmic contact to a terminal referred to as the source (S).</p>
+                        <p>The two p -type materials are connected together and to the gate ( G ) terminal.</p>
+                        <p>In essence, therefore, the drain and the source are connected to the ends of the n -type channel and the gate to the two layers of p -type material.</p>
+
+                        <h3 class="subsection-heading">Water Analogy</h3>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-185-1.jpg" alt="Water analogy for a FET: Source is the water source, Drain is the drain pipe, Gate is a valve controlling the flow." class="content-image">
+                           <figcaption>JFET Water Analogy</figcaption>
+                        </figure>
+                    </div>
+                </section>
+                <!-- END: jfet-construction -->
+
+                <!-- START: jfet-operation -->
+                <section id="jfet-operation" class="content-section" aria-labelledby="jfet-operation-heading">
+                    <h2 id="jfet-operation-heading" class="section-heading">
+                        <span class="heading-icon">⚙️</span>
+                        <span class="heading-text">JFET Operation</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">$\mathrm{V}_{\mathrm{GS}}=0 \mathrm{~V}, \mathrm{~V}_{\mathrm{DS}}$ Some Positive Value</h3>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-186-1.jpg" alt="Left: JFET structure with VGS=0V and VDS>0V applied. Right: Illustration of varying reverse bias potentials along the channel due to VDS." class="content-image">
+                           <figcaption>JFET Operation with VGS = 0V</figcaption>
+                        </figure>
+                        <p>The result is a gate and a source terminal at the same potential and a depletion region in the low end of each $p$-material similar to the distribution of the no-bias conditions</p>
+                        <p>The instant the voltage $\mathrm{V}_{\mathrm{DD}}\left(=\mathrm{V}_{\mathrm{DS}}\right)$ is applied, the electrons are drawn to the drain terminal, establishing the conventional current $\mathrm{I}_{\mathrm{D}}$.</p>
+                        <p>The path of charge flow clearly reveals that the drain and source currents are equivalent ( $\mathrm{I}_{\mathrm{D}}=\mathrm{I}_{\mathrm{S}}$ ).</p>
+                        <p>As the voltage $\mathrm{V}_{\mathrm{DS}}$ is increased from 0 V to a few volts, the current will increase as determined by Ohm's law and the plot of $I_{D}$ versus $\mathrm{V}_{\mathrm{DS}}$ will appear.</p>
+                        <p>As $\mathrm{V}_{\text {DS }}$ increases and approaches a level referred to as $V_{\text {P. }}$</p>
+                        <p>the depletion regions will widen, causing a noticeable reduction in the channel width.</p>
+                        <p>The reduced path of conduction causes the resistance to increase</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-189-1.jpg" alt="JFET output characteristic curve (ID vs VDS) for VGS=0V. Shows ohmic region initially, then current saturating at IDSS as VDS approaches the pinch-off voltage VP." class="content-image">
+                           <figcaption>ID vs VDS Characteristic (VGS=0V)</figcaption>
+                        </figure>
+                        <p>If $\mathrm{V}_{\mathrm{DS}}$ is increased to a level where it appears that the two depletion regions would "touch", a condition referred to as pinch-off will result.</p>
+                        <p>The level of $\mathrm{V}_{\mathrm{DS}}$ that establishes this condition is referred to as the pinch-off voltage and is denoted by $\mathrm{V}_{\mathrm{P}}$.</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-191-1.jpg" alt="Diagram of JFET channel at pinch-off (VDS=VP). The depletion regions nearly meet, restricting current flow." class="content-image">
+                           <figcaption>JFET at Pinch-Off</figcaption>
+                        </figure>
+                        <p>At pinch-off, $\mathrm{I}_{\mathrm{D}}$ maintains the saturation level, $\mathrm{I}_{\text {DSS }}$.</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-192-1.jpg" alt="Current source equivalent circuit for a JFET operating in saturation (VDS > VP) with VGS=0V. Current is constant at IDSS." class="content-image">
+                           <figcaption>JFET Current Source Equivalent (Saturation)</figcaption>
+                        </figure>
+                         <p>The choice of notation $I_{DSS}$ is derived from the fact that it is the drain-to- source current with a short-circuit connection from gate to source.</p>
+                         <p>$I_{DSS}$ is the maximum drain current for a JFET and is defined by the conditions:</p>
+                         <div class="equation">$$V_{G S}=0 \mathrm{~V} \text { and } \mathrm{V}_{\mathrm{DS}}=\left|\mathrm{V}_{\mathrm{P}}\right| .$$</div>
+
+                        <h3 class="subsection-heading">$V_{G S}<0 \mathrm{~V}$}</h3>
+                        <p>The voltage from gate to source, denoted $V_{GS}$ , is the controlling voltage of the JFET.</p>
+                        <p>curves of $I_{D}$ versus $V_{D S}$ for various levels of $\mathrm{V}_{\mathrm{GS}}$ can be developed for the JFET.</p>
+                        <p>For the $\boldsymbol{n}$-channel device the controlling voltage $V_{G S}$ is made more and more negative from its $V_{G S}=0 \mathrm{~V}$ level.</p>
+                        <p>In other words, the gate terminal will be set at lower and lower potential levels as compared to the source.</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-195-1.jpg" alt="Diagram showing JFET operation with negative VGS (-1V). The depletion regions are wider initially compared to VGS=0V, causing pinch-off to occur at a lower VDS." class="content-image">
+                           <figcaption>JFET Operation with VGS < 0V</figcaption>
+                        </figure>
+                        <p>The effect of the applied negative-bias $V_{G S}$ is to establish depletion regions similar to those obtained with $V_{G S}=0 \mathrm{~V}$, but at lower levels of $V_{D S}$.</p>
+                        <p>Therefore, the result of applying a negative bias to the gate is to reach the saturation level at a lower level of $V_{D S}$.</p>
+                        <p>The level of $V_{G S}$ that results in $I_{D}=0 \mathrm{~mA}$ is defined by $V_{G S}=V_{P}$, with $V_{P}$ being a negative voltage for $n$-channel devices and a positive voltage for $p$-channel JFETs.</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-197-1.jpg" alt="Family of JFET output characteristics (ID vs VDS) for different negative VGS values (0V, -1V, -2V, -3V, -4V=VP). Shows saturation current decreasing as VGS becomes more negative. Pinch-off locus is shown." class="content-image">
+                           <figcaption>N-Channel JFET Output Characteristics</figcaption>
+                        </figure>
+                        <p>On most specification sheets the pinch-off voltage is specified as $V_{G S(\text { off })}$ rather than $V_{P}$.</p>
+                        <p>The region to the right of the pinch-off locus of is the region typically employed in linear amplifiers (amplifiers with minimum distortion of the applied signal) and is commonly referred to as the constant-current, saturation, or linear amplification region.</p>
+
+                        <h3 class="subsection-heading">Voltage-Controlled Resistor</h3>
+                        <p>The region to the left of the pinch-off locus is referred to as the ohmic or voltage-controlled resistance region.</p>
+                        <p>In this region the JFET can actually be employed as a variable resistor (possibly for an automatic gain control system) whose resistance is controlled by the applied gate-tosource voltage.</p>
+                        <div class="equation">$$r_{d}=\frac{r_{o}}{\left(1-\frac{V_{G S}}{V_{P}}\right)^{2}}$$</div>
+                        <p>where $r_{o}$ is the resistance with $V_{G S}=0 \mathrm{~V}$ and $r_{d}$ is the resistance at a particular level of $V_{G S}$</p>
+
+                        <h3 class="subsection-heading">$p$-Channel Devices</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-200-1.jpg" alt="Diagram showing a p-channel JFET structure and biasing. VGS is positive, VDS is negative." class="content-image">
+                           <figcaption>P-Channel JFET Structure and Biasing</figcaption>
+                        </figure>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-201-1.jpg" alt="P-channel JFET output characteristics (ID vs VDS). VDS is negative. Curves shown for positive VGS values (0V, +1V, ... +5V=VP). Current flows opposite to n-channel." class="content-image">
+                           <figcaption>P-Channel JFET Output Characteristics</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">Symbols</h3>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-202-1.jpg" alt="Circuit symbols for n-channel JFET (arrow points in) and p-channel JFET (arrow points out) on the gate terminal." class="content-image">
+                           <figcaption>JFET Circuit Symbols</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">Drain Current</h3>
+                        <p>The relationship between I D and V GS is defined by Shockley's equation:</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-203-1.jpg" alt="Shockley's equation for JFET drain current: ID = IDSS * (1 - VGS/VP)^2." class="content-image">
+                           <figcaption>Shockley's Equation</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">Important relationships</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-204-1.jpg" alt="Comparison of JFET and BJT. JFET: ID=IDSS(1-VGS/VP)^2, ID=IS, IG=0A. BJT: IC=beta*IB, IC approx IE, VBE=0.7V. Shows circuit symbols and basic biasing." class="content-image">
+                           <figcaption>JFET vs BJT Comparison</figcaption>
+                        </figure>
+                        <p>The condition $I_{G}=0 \mathrm{~A}$ is often the starting point for the analysis of a JFET configuration.</p>
+                    </div>
+                </section>
+                <!-- END: jfet-operation -->
+
+                <!-- START: mosfet -->
+                <section id="mosfet" class="content-section" aria-labelledby="mosfet-heading">
+                    <h2 id="mosfet-heading" class="section-heading">
+                        <span class="heading-icon">🧱</span>
+                        <span class="heading-text">MOSFET (Metal Oxide Semiconductor FET)</span>
+                    </h2>
+                    <div class="content-card">
+                        <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Depletion Type MOSFET</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Enhancement Type MOSFET</span></li>
+                        </ul>
+
+                        <h3 class="subsection-heading">Depletion Type</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-206-1.jpg" alt="Cross-section diagram of an n-channel depletion-type MOSFET (D-MOSFET). Shows n-channel physically connecting Source and Drain, insulated gate (metal over SiO2), p-type substrate, and SS terminal." class="content-image">
+                           <figcaption>N-Channel Depletion-Type MOSFET Structure</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">n-Channel depletion-type MOSFET</h4>
+                        <p>A slab of $p$-type material is formed from a silicon base and is referred to as the substrate.</p>
+                        <p>In some cases the substrate is internally connected to the source terminal. However, many discrete devices provide an additional terminal labeled $S S$, resulting in a fourterminal device</p>
+                        <p>The source and drain terminals are connected through metallic contacts to $n$ doped regions linked by an $n$-channel</p>
+                        <p>The gate is also connected to a metal contact surface but remains insulated from the $n$ channel by a very thin silicon dioxide $\left(\mathrm{SiO}_{2}\right)$ layer.</p>
+                        <p>$\mathrm{SiO}_{2}$ is a type of insulator referred to as a dielectric , which sets up opposing electric fields within the dielectric when exposed to an externally applied field.</p>
+                        <p>There is no direct electrical connection between the gate terminal and the channel of a MOSFET.</p>
+                        <p>It is the insulating layer of $\mathrm{SiO}_{2}$ in the MOSFET construction that accounts for the very desirable high input impedance of the device.</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-209-1.jpg" alt="N-channel D-MOSFET operation with VGS=0V and VDS>0V. Electrons flow from Source to Drain through the existing n-channel. ID=IS=IDSS." class="content-image">
+                           <figcaption>D-MOSFET Operation (VGS=0V)</figcaption>
+                        </figure>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-210-1.jpg" alt="N-channel D-MOSFET transfer characteristic (ID vs VGS) and output characteristics (ID vs VDS). Shows operation in both depletion mode (VGS<0) and enhancement mode (VGS>0)." class="content-image">
+                           <figcaption>N-Channel D-MOSFET Characteristics</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Reduction in free carriers in a channel due to a negative potential at the gate terminal.</h4>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-211-1.jpg" alt="Diagram showing effect of negative VGS on D-MOSFET channel. Negative gate repels electrons from channel into substrate, reducing channel conductivity (depletion mode)." class="content-image">
+                           <figcaption>D-MOSFET Depletion Mode (VGS<0V)</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">When $\mathrm{V}_{\mathrm{GS}}$ is set to negative</h4>
+                        <p>The negative potential at the gate will tend to pressure electrons toward the $p$-type substrate (like charges repel) and attract holes from the $p$-type substrate (opposite charges attract)</p>
+                        <p>Depending on the magnitude of the negative bias established by $V_{G S}$, a level of recombination between electrons and holes will occur that will reduce the number of free electrons in the $n$ -channel available for conduction.</p>
+                        <p>The more negative the bias, the higher is the rate of recombination. The resulting level of drain current is therefore reduced with increasing negative bias for $V_{G S}$</p>
+
+                         <h4 class="subsubsection-heading">When $\mathrm{V}_{\mathrm{GS}}$ is positive</h4>
+                         <p>For positive values of $V_{G S}$, the positive gate will draw additional electrons (free carriers) from the $p$-type substrate due to the reverse leakage current and establish new carriers through the collisions resulting between accelerating particles.</p>
+                         <p>As the gate-to-source voltage continues to increase in the positive direction, the drain current will increase at a rapid rate.</p>
+                         <p>For this reason the region of positive gate voltages on the drain or transfer characteristics is often referred to as the enhancement region.</p>
+                         <p>the region between cutoff and the saturation level of $I_{D S S}$ referred to as the depletion region</p>
+
+                         <h4 class="subsubsection-heading">p-Channel Depletion-Type MOSFET</h4>
+                          <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-214-1.jpg" alt="Cross-section diagram of a p-channel depletion-type MOSFET (D-MOSFET). Shows p-channel, n-type substrate." class="content-image">
+                           <figcaption>P-Channel D-MOSFET Structure</figcaption>
+                        </figure>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-215-1.jpg" alt="P-channel D-MOSFET transfer characteristic (ID vs VGS) and output characteristics (ID vs VDS). VGS is positive for depletion, negative for enhancement. VDS is negative." class="content-image">
+                           <figcaption>P-Channel D-MOSFET Characteristics</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Note</h4>
+                        <p>Shockley's equation will continue to be applicable for the depletion-type MOSFET characteristics in both the depletion and enhancement regions.</p>
+                        <p>For both regions, it is simply necessary that the proper sign be included with $V_{G S}$ in the equation and the sign be carefully monitored in the mathematical operations.</p>
+
+                        <h4 class="subsubsection-heading">Symbols</h4>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-217-1.jpg" alt="Circuit symbols for n-channel and p-channel depletion-type MOSFETs. Includes symbols with substrate connected internally to source and with separate substrate terminal (SS)." class="content-image">
+                           <figcaption>D-MOSFET Circuit Symbols</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">Enhancement type MOSFET</h3>
+                        <p>The transfer curve is not defined by Shockley's equation, and the drain current is now cut off until the gate-to source voltage reaches a specific magnitude.</p>
+                        <p>In particular, current control in an $n-$ channel device is now effected by a positive gate-to-source voltage rather than the range of negative voltages encountered for $n$ channel JFETs and $n$-channel depletion-type MOSFETs.</p>
+
+                        <h4 class="subsubsection-heading">N-channel e-MOSFET</h4>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-219-1.jpg" alt="Cross-section diagram of an n-channel enhancement-type MOSFET (E-MOSFET). Shows Source and Drain regions separated by p-type substrate, with no initial channel. Gate is insulated by SiO2." class="content-image">
+                           <figcaption>N-Channel E-MOSFET Structure</figcaption>
+                        </figure>
+                        <p>The construction of an enhancement-type MOSFET is quite similar to that of the depletiontype MOSFET, except for the absence of a channel between the drain and source terminals.</p>
+
+                        <h4 class="subsubsection-heading">Channel Formation</h4>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-220-1.jpg" alt="Diagram showing channel formation in an N-channel E-MOSFET. Positive VGS attracts electrons to the region under the gate, forming an induced n-channel when VGS > VT." class="content-image">
+                           <figcaption>E-MOSFET Channel Formation (VGS > VT)</figcaption>
+                        </figure>
+                         <p>The positive potential at the gate will pressure the holes (since like charges repel) in the $p$-substrate along the edge of the $\mathrm{SiO}_{2}$ layer to leave the area and enter deeper regions of the $p$-substrate.</p>
+                         <p>The result is a depletion region near the $\mathrm{SiO}_{2}$ insulating layer void of holes.</p>
+                         <p>However, the electrons in the $p$-substrate (the minority carriers of the material) will be attracted to the positive gate and accumulate in the region near the surface of the $\mathrm{SiO}_{2}$ layer.</p>
+                         <p>The SiO2 layer and its insulating qualities will prevent the negative carriers from being absorbed at the gate terminal.</p>
+                         <p>As $V_{G S}$ increases in magnitude, the concentration of electrons near the $\mathrm{SiO}_{2}$ surface increases until eventually the induced $n$-type region can support a measurable flow between drain and source.</p>
+                         <p>The level of $\mathbf{V}_{\mathrm{GS}}$ that results in the significant increase in drain current is called the threshold voltage and is given the symbol $\mathbf{V}_{\mathbf{T}}$ or $\mathbf{V}_{\mathbf{G S}(\mathbf{T h})}$</p>
+                         <p>Since the channel is nonexistent with $\mathrm{V}_{\mathrm{GS}}=0 \mathrm{~V}$ and "enhanced" by the application of a positive gate-tosource voltage, this type of MOSFET is called an enhancement-type MOSFET.</p>
+                         <p>Both depletion- and enhancement type MOSFETs have enhancement-type regions, but the label was applied to the latter since it is its only mode of operation.</p>
+                         <p>As $V_{G S}$ is increased beyond the threshold level, the density of free carriers in the induced channel will increase, resulting in an increased level of drain current.</p>
+                         <p>However, if we hold $V_{G S}$ constant and increase the level of $V_{D S}$, the drain current will eventually reach a saturation level as occurred for the JFET and depletion-type MOSFET.</p>
+                         <p>The leveling off of $\mathrm{I}_{\mathrm{D}}$ is due to a pinching-off process depicted by the narrower channel at the drain end of the induced channel</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-224-1.jpg" alt="Diagram illustrating pinch-off in an E-MOSFET. As VDS increases, the channel narrows near the drain end due to the VDG difference." class="content-image">
+                           <figcaption>E-MOSFET Pinch-Off</figcaption>
+                        </figure>
+                         <div class="equation">$$V_{D G}=V_{D S}-V_{G S}$$</div>
+                          <p>If $V_{G S}$ is held fixed at some value such as 8 V and $V DS$ is increased from 2 V to 5 V , the voltage $V_{D G}$ will increase from -6 V to -3 V and the gate will become less and less positive with respect to the drain.</p>
+                          <p>This reduction in gate-to-drain voltage will in turn reduce the attractive forces for free carriers (electrons) in this region of the induced channel, causing a reduction in the effective channel width.</p>
+                          <p>Eventually, the channel will be reduced to the point of pinch-off and a saturation condition will be established</p>
+                          <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-226-1.jpg" alt="N-channel E-MOSFET output characteristics (ID vs VDS) for different positive VGS values above the threshold voltage VT (e.g., VT=2V). ID=0 for VGS < VT." class="content-image">
+                           <figcaption>N-Channel E-MOSFET Output Characteristics</figcaption>
+                        </figure>
+                         <p>For values of $V_{G S}$ less than the threshold level, the drain current of an enhancement type MOSFET is 0 mA .</p>
+                         <p>the drain current is related to the applied gate-to-source voltage by the following nonlinear relationship:</p>
+                         <div class="equation">$$I_{D}=k\left(V_{G S}-V_{T}\right)^{2}$$</div>
+                         <p>The $k$ term is a constant that is a function of the construction of the device.</p>
+                         <p>The value of $k$ can be determined from:</p>
+                         <div class="equation">$$k=\frac{I_{D(o n)}}{\left(V_{G S(o n)}-V_{T}\right)^{2}}$$</div>
+                         <p>where $I_{D(0n)}$ and $V_{GS(on)}$ are the values for each at a particular point on the characteristics of the device.</p>
+
+                         <h4 class="subsubsection-heading">p-Channel Enhancement-Type MOSFETs</h4>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-229-1.jpg" alt="Cross-section of a p-channel enhancement-type MOSFET (E-MOSFET)." class="content-image">
+                           <figcaption>P-Channel E-MOSFET Structure</figcaption>
+                        </figure>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-230-1.jpg" alt="P-channel E-MOSFET transfer characteristic (ID vs VGS) and output characteristics (ID vs VDS). Requires negative VGS below negative VT to turn on. VDS is negative." class="content-image">
+                           <figcaption>P-Channel E-MOSFET Characteristics</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Symbols</h4>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-231-1.jpg" alt="Circuit symbols for n-channel and p-channel enhancement-type MOSFETs. Note the broken channel line indicating normally off operation." class="content-image">
+                           <figcaption>E-MOSFET Circuit Symbols</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">Summary of Equations</h3>
+                        <p>JFET and D-MOSFET</p>
+                         <div class="equation">$$ I_{D}=I_{D S S}\left(1-\frac{V_{G S}}{V_{p}}\right)^{2} $$</div>
+                         <div class="equation">$$ P_{D}=I_{D} V_{D S} $$</div>
+                         <div class="equation">$$ r_{D}=\frac{r_{0}}{\left(1 - V_{G S}/V_{p}\right)^{2}} $$</div> <!-- Corrected formula from image context -->
+                         <p>E-MOSFET</p>
+                         <div class="equation">$$ I_{D}=k\left(V_{G S}-V_{T}\right)^{2} $$</div>
+                         <div class="equation">$$ k=\frac{I_{D(o n)}}{\left(V_{G S(o n)}-V_{T}\right)^{2}} $$</div>
+                    </div>
+                </section>
+                <!-- END: mosfet -->
+
+                <!-- START: fet-biasing -->
+                <section id="fet-biasing" class="content-section" aria-labelledby="fet-biasing-heading">
+                    <h2 id="fet-biasing-heading" class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">FET Biasing</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Applicable formulas</h3>
+                        <p>For all FETs</p>
+                         <div class="equation">$$ \mathrm{I}_{G} \cong 0 A $$</div>
+                         <div class="equation">$$ I_{D}=I_{S} $$</div>
+                        <p>For all JFETs and Depletion MOSFET</p>
+                         <div class="equation">$$ \mathrm{I}_{D}=I_{D S S}\left(1-\frac{V_{G S}}{V_{P}}\right)^{2} $$</div>
+                        <p>For enhancement-type MOSFET</p>
+                         <div class="equation">$$ \mathrm{I}_{D}=k\left(V_{G S}-V_{T}\right)^{2} $$</div>
+                         <p>They do not change with each network configuration so long as the device is in the active region.</p>
+                         <p>The network simply defines the level of current and voltage associated with the operating point through its own set of equations.</p>
+                         <p>In reality, the dc solution of BJT and FET networks is the solution of simultaneous equations established by the device and the network.</p>
+
+                         <h3 class="subsection-heading">Fixed-bias configuration</h3>
+                         <p>Determine the following for the network</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-236-1.jpg" alt="Fixed-bias JFET circuit. N-channel JFET (IDSS=10mA, VP=-8V). Gate connected to -2V supply via RG=1MOhm. Drain connected to +16V supply via RD=2kOhm. Source grounded." class="content-image">
+                           <figcaption>JFET Fixed-Bias Example</figcaption>
+                        </figure>
+                         <p>Determine $V_{GSQ}, I_{DQ}, V_{DS}, V_{D}, V_{G}, V_{S}$</p>
+
+                         <h4 class="subsubsection-heading">Solution</h4>
+                         <p>KVL for input loop (G-S)</p>
+                         <div class="equation">$$ V_{GG} + V_{GSQ} = 0 \implies -2V + V_{GSQ} = 0 \implies V_{GSQ} = +2V $$</div>
+                          <!-- Correction: The diagram shows a -2V supply connected to the gate resistor, which is connected to the gate. Source is ground. So VGS = VG - VS = VG - 0 = VG. KVL on input loop: -2V - IG*RG + VG = 0. Since IG=0, VG = -2V. Therefore VGSQ = -2V. -->
+                         <div class="equation">$$ +V_{G} - I_G R_G - V_{GG} = 0 \implies V_G - 0 - (-2V) = 0 \implies V_G = -2V $$</div>
+                         <div class="equation">$$ V_{GSQ} = V_G - V_S = -2V - 0V = -2V $$</div>
+                         <div class="equation">$$ I_{D Q}=I_{D S S}\left(1-\frac{V_{G S}}{V_{p}}\right)^{2}=10\left(1-\frac{-2}{-8}\right)^{2} = 10\left(1-\frac{1}{4}\right)^{2} = 10\left(\frac{3}{4}\right)^2 = 10 \times \frac{9}{16} = 5.625 \mathrm{~mA} $$</div>
+                         <p>Writing KVL for output loop (D-S)</p>
+                         <div class="equation">$$ V_{DD} - I_{D} R_{D} - V_{D S} = 0 \implies V_{D S Q} = V_{DD} - I_{DQ} R_D = 16\text{V} - (5.625\text{mA})(2 \mathrm{k\Omega}) = 16 - 11.25 = 4.75 \mathrm{~V} $$</div>
+                         <div class="equation">$$ V_{D S}=V_{D}-V_{S} \implies V_{D}=V_{D S}+V_{S}=4.75+0=4.75 \mathrm{~V} $$</div>
+                         <div class="equation">$$ V_{G S}=V_{G}-V_{S} \implies V_{G}=V_{G S}+V_{S}=-2+0=-2 \mathrm{~V} $$</div>
+                         <div class="equation">$$ V_{S}=0 \mathrm{~V} $$</div>
+
+                        <h3 class="subsection-heading">Self Bias Configuration</h3>
+                        <p>Determine the following for the network</p>
+                        <p>$V_{G S Q}, I_{D Q}, V_{D S}, V_{S}, V_{G}, V_{D}$</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-238-1.jpg" alt="Self-bias JFET circuit. N-channel JFET (IDSS=8mA, VP=-6V). Gate connected to ground via RG=1MOhm. Drain connected to +20V via RD=3.3kOhm. Source connected to ground via RS=1kOhm." class="content-image">
+                           <figcaption>JFET Self-Bias Example</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Solution</h4>
+                        <p>KVL for input loop (G-S)</p>
+                         <!-- VG = 0 since IG=0 and RG goes to ground -->
+                         <div class="equation">$$ V_G - V_{GSQ} - I_S R_S = 0 \implies 0 - V_{GSQ} - I_D R_S = 0 \implies V_{GSQ} = -I_D R_S $$</div>
+                        <p>Using $R_S = 1k\Omega$: $V_{GSQ} = -I_D (1k\Omega)$. (Note: $I_D$ will be in mA for $V_{GS}$ in V).</p>
+                        <p>Substitute into Shockley's equation: $I_D = I_{DSS} \left(1 - \frac{V_{GSQ}}{V_P}\right)^2$</p>
+                        <div class="equation">$$ I_D = 8 \left(1 - \frac{-I_D(1k)}{-6}\right)^2 = 8 \left(1 - \frac{I_D}{6}\right)^2 $$</div>
+                        <p>Expand and solve the quadratic equation for $I_D$ (where $I_D$ is in mA):</p>
+                         <div class="equation">$$ I_D = 8 \left(1 - \frac{2 I_D}{6} + \frac{I_D^2}{36}\right) = 8 \left(1 - \frac{I_D}{3} + \frac{I_D^2}{36}\right) $$</div>
+                         <div class="equation">$$ I_D = 8 - \frac{8 I_D}{3} + \frac{8 I_D^2}{36} = 8 - \frac{8 I_D}{3} + \frac{2 I_D^2}{9} $$</div>
+                         <p>Multiply by 9 to clear fractions:</p>
+                         <div class="equation">$$ 9 I_D = 72 - 24 I_D + 2 I_D^2 $$</div>
+                         <div class="equation">$$ 2 I_D^2 - 33 I_D + 72 = 0 $$</div>
+                         <p>Using the quadratic formula: $I_D = \frac{-(-33) \pm \sqrt{(-33)^2 - 4(2)(72)}}{2(2)} = \frac{33 \pm \sqrt{1089 - 576}}{4} = \frac{33 \pm \sqrt{513}}{4} = \frac{33 \pm 22.65}{4}$</p>
+                         <p>$I_D = \frac{33 + 22.65}{4} = \frac{55.65}{4} \approx 13.9 \text{ mA}$ OR $I_D = \frac{33 - 22.65}{4} = \frac{10.35}{4} \approx 2.59 \text{ mA}$</p>
+                         <p>Since $I_D$ cannot be larger than $I_{DSS}=8mA$, therefore $I_{DQ}=2.59 \text{ mA}$</p>
+                         <div class="equation">$$ V_{G S Q}=-I_{D Q} (1k\Omega) = -2.59 \mathrm{~V} $$</div>
+                         <p>KVL for output loop (D-S)</p>
+                         <div class="equation">$$ V_{DD} - I_{D}(R_{D}+R_{s}) - V_{D S} = 0 \implies V_{D S Q} = V_{DD} - I_{DQ}(R_D+R_S) $$</div>
+                         <div class="equation">$$ V_{D S Q} = 20 - (2.59)(3.3+1) = 20 - (2.59)(4.3) = 20 - 11.137 = 8.863 \mathrm{~V} $$</div>
+                         <div class="equation">$$ V_{S}=I_{S} R_{S}=I_{D} R_{s}=(2.59)(1)=2.59 \mathrm{~V} $$</div>
+                         <div class="equation">$$ V_{G}=0 \mathrm{~V} $$</div>
+                         <div class="equation">$$ V_{D S}=V_{D}-V_{S} \implies V_{D}=V_{D S}+V_{S}=8.863+2.59=11.453 \mathrm{~V} $$</div> <!-- Corrected calculation slightly -->
+
+                        <h3 class="subsection-heading">Depletion Type MOSFET</h3>
+                        <p>determine: $I_{D Q}, V_{G S Q}, V_{D S}$</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-241-1.jpg" alt="Voltage divider bias circuit for an N-channel D-MOSFET (IDSS=6mA, VP=-3V). R1=110MOhm, R2=10MOhm, RD=1.8kOhm, RS=750Ohm, VDD=18V." class="content-image">
+                           <figcaption>D-MOSFET Voltage Divider Bias Example</figcaption>
+                        </figure>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                             <p>1. Find Gate voltage $V_G$. Since $I_G=0$, the gate resistors form a simple voltage divider.</p>
+                             <p>$V_G = V_{DD} \times \frac{R2}{R1+R2} = 18V \times \frac{10M\Omega}{110M\Omega + 10M\Omega} = 18V \times \frac{10}{120} = 18V \times \frac{1}{12} = 1.5V$.</p>
+                              <p>2. KVL Gate-Source loop: $V_G - V_{GSQ} - I_S R_S = 0 \implies V_{GSQ} = V_G - I_D R_S = 1.5 - I_D (0.75k\Omega)$. (ID in mA).</p>
+                              <p>3. Substitute into Shockley's Eq: $I_D = I_{DSS} \left(1 - \frac{V_{GSQ}}{V_P}\right)^2 = 6 \left(1 - \frac{1.5 - 0.75 I_D}{-3}\right)^2$.</p>
+                              <p>4. $I_D = 6 \left(1 + \frac{1.5 - 0.75 I_D}{3}\right)^2 = 6 \left(1 + 0.5 - 0.25 I_D\right)^2 = 6 (1.5 - 0.25 I_D)^2$.</p>
+                              <p>5. This requires solving a quadratic or graphical/iterative solution. Let's try values.</p>
+                              <p>If $I_D = 2mA$, $V_{GSQ} = 1.5 - 2(0.75) = 0V$. $I_D = 6(1 - 0/-3)^2 = 6mA$. Too high.</p>
+                              <p>If $I_D = 4mA$, $V_{GSQ} = 1.5 - 4(0.75) = 1.5 - 3 = -1.5V$. $I_D = 6(1 - (-1.5)/-3)^2 = 6(1 - 0.5)^2 = 6(0.5)^2 = 6(0.25) = 1.5mA$. Too low.</p>
+                               <p>Let's try $I_D=3mA$. $V_{GSQ}=1.5 - 3(0.75) = 1.5 - 2.25 = -0.75V$. $I_D = 6(1 - (-0.75)/-3)^2 = 6(1 - 0.25)^2 = 6(0.75)^2 = 6(0.5625) = 3.375mA$. Close.</p>
+                               <p>Let's try $I_D=2.7mA$. $V_{GSQ}=1.5 - 2.7(0.75) = 1.5 - 2.025 = -0.525V$. $I_D = 6(1 - (-0.525)/-3)^2 = 6(1 - 0.175)^2 = 6(0.825)^2 = 6(0.6806) \approx 4.08mA$. Wrong direction.</p>
+                                <p>Let's try $I_D=3.2mA$. $V_{GSQ}=1.5 - 3.2(0.75) = 1.5 - 2.4 = -0.9V$. $I_D = 6(1 - (-0.9)/-3)^2 = 6(1 - 0.3)^2 = 6(0.7)^2 = 6(0.49) = 2.94mA$. Very close.</p>
+                                <p>Let's estimate $I_{DQ} \approx 3.1mA$. $V_{GSQ} \approx 1.5 - 3.1(0.75) = 1.5 - 2.325 = -0.825V$.</p>
+                              <p>6. Find $V_{DSQ}$: $V_{DSQ} = V_{DD} - I_{DQ}(R_D + R_S) = 18 - (3.1mA)(1.8k\Omega + 0.75k\Omega) = 18 - (3.1)(2.55k) = 18 - 7.905 = 10.095V$.</p>
+                              <p>Approximate Q-point: $I_{DQ} \approx 3.1mA, V_{GSQ} \approx -0.825V, V_{DSQ} \approx 10.1V$.</p>
+                         </aside>
+
+                        <h3 class="subsection-heading">Enhancement type MOSFET</h3>
+                        <p>Determine $I_{D Q}$ and $V_{D S Q}$ for the enhancementtype MOSFET</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-242-1.jpg" alt="Feedback bias circuit for an N-channel E-MOSFET (ID(on)=6mA at VGS(on)=8V, VGS(th)=3V). RG=10MOhm connected gate-to-drain. RD=2kOhm. VDD=12V." class="content-image">
+                           <figcaption>E-MOSFET Feedback Bias Example</figcaption>
+                        </figure>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                             <p>1. In feedback bias, since $I_G=0$, there is no voltage drop across $R_G$, so $V_{GS} = V_{DS}$.</p>
+                             <p>2. KVL Drain-Source loop: $V_{DD} - I_D R_D - V_{DS} = 0$. $V_{DS} = V_{DD} - I_D R_D$.</p>
+                              <p>3. Since $V_{GS} = V_{DS}$, we have $V_{GS} = V_{DD} - I_D R_D = 12 - I_D (2k)$.</p>
+                              <p>4. E-MOSFET equation: $I_D = k(V_{GS} - V_T)^2$. First find k.</p>
+                              <p>$k = I_{D(on)} / (V_{GS(on)} - V_T)^2 = 6mA / (8V - 3V)^2 = 6mA / (5V)^2 = 6mA / 25 = 0.24 mA/V^2$.</p>
+                              <p>5. Substitute $V_{GS}$ from step 3 into eq from step 4: $I_D = 0.24 ( (12 - 2 I_D) - 3 )^2 = 0.24 (9 - 2 I_D)^2$. (ID in mA).</p>
+                              <p>6. $I_D = 0.24 (81 - 36 I_D + 4 I_D^2)$.</p>
+                              <p>7. $I_D = 19.44 - 8.64 I_D + 0.96 I_D^2$.</p>
+                              <p>8. $0.96 I_D^2 - 9.64 I_D + 19.44 = 0$.</p>
+                              <p>9. Solve quadratic: $I_D = \frac{-(-9.64) \pm \sqrt{(-9.64)^2 - 4(0.96)(19.44)}}{2(0.96)} = \frac{9.64 \pm \sqrt{92.93 - 74.65}}{1.92} = \frac{9.64 \pm \sqrt{18.28}}{1.92} = \frac{9.64 \pm 4.275}{1.92}$.</p>
+                              <p>10. $I_D = (9.64+4.275)/1.92 = 13.915/1.92 \approx 7.25mA$ OR $I_D = (9.64-4.275)/1.92 = 5.365/1.92 \approx 2.79mA$.</p>
+                               <p>11. Check which solution is valid. Need $V_{GS} > V_T = 3V$.</p>
+                               <p>If $I_D = 7.25mA$, $V_{GS} = 12 - 2(7.25) = 12 - 14.5 = -2.5V$. Not valid as $V_{GS} < V_T$.</p>
+                               <p>If $I_D = 2.79mA$, $V_{GS} = 12 - 2(2.79) = 12 - 5.58 = 6.42V$. Valid as $V_{GS} > V_T$.</p>
+                               <p>12. So, $I_{DQ} = 2.79 \text{ mA}$.</p>
+                               <p>13. $V_{DSQ} = V_{GSQ} = 6.42 \text{ V}$.</p>
+                         </aside>
+
+                        <p>Determine $I_{D Q}, V_{G S Q}$, and $V_{D S}$ for the network</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-243-1.jpg" alt="Voltage divider bias for N-channel E-MOSFET (2N4351: VGS(th)=5V, ID(on)=3mA at VGS(on)=10V). VDD=40V, R1=22MOhm, R2=18MOhm, RD=3kOhm, RS=0.82kOhm." class="content-image">
+                           <figcaption>E-MOSFET Voltage Divider Bias Example</figcaption>
+                        </figure>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                              <p>1. Find $k$: $k = I_{D(on)} / (V_{GS(on)} - V_T)^2 = 3mA / (10V - 5V)^2 = 3mA / (5V)^2 = 3mA / 25 = 0.12 mA/V^2$.</p>
+                              <p>2. Find $V_G$: $V_G = V_{DD} \times \frac{R2}{R1+R2} = 40V \times \frac{18M\Omega}{22M\Omega + 18M\Omega} = 40V \times \frac{18}{40} = 18V$.</p>
+                              <p>3. KVL Gate-Source: $V_G - V_{GSQ} - I_S R_S = 0 \implies V_{GSQ} = V_G - I_D R_S = 18 - I_D (0.82)$. (ID in mA).</p>
+                              <p>4. Substitute into E-MOSFET eq: $I_D = k(V_{GSQ} - V_T)^2 = 0.12 ( (18 - 0.82 I_D) - 5 )^2 = 0.12 (13 - 0.82 I_D)^2$.</p>
+                               <p>5. $I_D = 0.12 (169 - 2 \times 13 \times 0.82 I_D + (0.82 I_D)^2 ) = 0.12 (169 - 21.32 I_D + 0.6724 I_D^2)$.</p>
+                               <p>6. $I_D = 20.28 - 2.558 I_D + 0.0807 I_D^2$.</p>
+                               <p>7. $0.0807 I_D^2 - 3.558 I_D + 20.28 = 0$.</p>
+                               <p>8. Solve quadratic: $I_D = \frac{-(-3.558) \pm \sqrt{(-3.558)^2 - 4(0.0807)(20.28)}}{2(0.0807)} = \frac{3.558 \pm \sqrt{12.66 - 6.54}}{0.1614} = \frac{3.558 \pm \sqrt{6.12}}{0.1614} = \frac{3.558 \pm 2.474}{0.1614}$.</p>
+                               <p>9. $I_D = (3.558+2.474)/0.1614 \approx 37.37mA$ OR $I_D = (3.558-2.474)/0.1614 \approx 6.72mA$.</p>
+                                <p>10. Check validity ($V_{GSQ} > V_T = 5V$).</p>
+                               <p>If $I_D = 37.37mA$, $V_{GSQ} = 18 - 37.37(0.82) = 18 - 30.6 = -12.6V$. Not valid.</p>
+                               <p>If $I_D = 6.72mA$, $V_{GSQ} = 18 - 6.72(0.82) = 18 - 5.51 = 12.49V$. Valid ($>5V$).</p>
+                               <p>11. $I_{DQ} = 6.72 \text{ mA}$.</p>
+                               <p>12. $V_{GSQ} = 12.49 \text{ V}$.</p>
+                               <p>13. $V_{DSQ} = V_{DD} - I_{DQ}(R_D + R_S) = 40 - (6.72mA)(3k\Omega + 0.82k\Omega) = 40 - (6.72)(3.82k) = 40 - 25.67 = 14.33 \text{ V}$.</p>
+                         </aside>
+                    </div>
+                </section>
+                <!-- END: fet-biasing -->
+
+                <!-- START: end-marker -->
+                <section id="end-marker" class="content-section" aria-labelledby="end-marker-heading">
+                     <h2 id="end-marker-heading" class="section-heading">
+                        <span class="heading-icon">🏁</span>
+                        <span class="heading-text">End of Notes</span>
+                     </h2>
+                    <div class="content-card">
+                        <p>Thank You</p>
+                        <p>?</p>
+                     </div>
+                </section>
+                <!-- END: end-marker -->
+
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="analogue-electronics-bjt.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">Part 4 of 4</span>
+                    </div>
+                    <a href="#" class="nav-button disabled">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

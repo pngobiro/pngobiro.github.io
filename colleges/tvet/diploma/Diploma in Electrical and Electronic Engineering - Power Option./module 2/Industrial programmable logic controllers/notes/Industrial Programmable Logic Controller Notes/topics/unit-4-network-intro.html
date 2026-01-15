@@ -1,0 +1,507 @@
+<!-- topics/unit-4-network-intro.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 4 Part 1: Network Introduction, Levels, Models, Media</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-3-scada.html" class="nav-button"> <!-- Link to previous chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div> <!-- Chunk 6/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 6 of 10</span>
+                    </div>
+                    <a href="unit-4-network-wireless-lan.html" class="nav-button"> <!-- Link to next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">TOPIC 4: INDUSTRIAL COMMUNICATION NETWORK</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: topic-4-intro -->
+                <section id="topic-4-intro" class="content-section" aria-labelledby="topic-4-intro-heading">
+                    <h2 id="topic-4-intro-heading" class="section-heading">
+                        <span class="heading-icon">🌐</span>
+                        <span class="heading-text">Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><dfn>Industrial communication</dfn> refers to the wide range of hardware and software products and protocols used to communicate between standard computer platforms and devices used in industrial automation.</p>
+                        <p>Although a communication circuit can involve only two pieces of equipment with a circuit between them, the term <dfn>network</dfn> typically refers to connecting many devices together to permit sharing of data between devices over a single or redundant circuit.</p>
+                        <p>The industrial automation systems are often implemented as an open distributed architecture with communication over digital communication networks.</p>
+                        <p>It is now common for users connected to a local area network to communicate with computers or automation devices on other local area networks via gateways linked by a wide area network.</p>
+                        <p>As the industrial automation systems becomes large and the number of automation devices increases, it has become very important for industrial automation to provide standards which make it possible to interconnect many different automation devices in a standard way.</p>
+                        <p>Considerable international standardization efforts have been made in the area of local area networks. The Open Systems Interconnection (OSI) standards permit any pair of automation devices to communicate reliably regardless of the manufacturer.</p>
+                        <p>By definition, an industrial network requires geographical distribution of the physical measurement I/O and sensors or functional distribution of applications. Most industrial networks transfer bits of information serially.</p>
+                        <p>Serial data transfer has the advantage of requiring only a limited number of wires to exchange data between devices. With fewer wires, we can send information over greater distances. Because industrial networks work with several devices on the same line, it is easier to add a new device to existing systems.</p>
+                        <p>To make all this work, our network must define a set of rules - a <dfn>communication protocol</dfn> -- to determine how information flows on the network of devices, controllers, PCs, and so on.</p>
+                        <p>With improved communication protocols, it is now possible to reduce the time needed for the transfer, ensure better data protection, and guarantee time synchronization, and real-time deterministic response in some applications.</p>
+                        <p>Industrial networks also ensure that the system sends information reliably without errors and securely between nodes on the network.</p>
+                    </div>
+                </section>
+                <!-- END: topic-4-intro -->
+
+                <!-- START: topic-4-network-levels -->
+                <section id="topic-4-network-levels" class="content-section" aria-labelledby="topic-4-network-levels-heading">
+                    <h2 id="topic-4-network-levels-heading" class="section-heading">
+                        <span class="heading-icon">📶</span>
+                        <span class="heading-text">Network levels</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The industrial automation systems can be very complex, and it is usually structured into several hierarchical levels. Each of the hierarchical level has an appropriate communication level, which places different requirements on the communication network.</p>
+                        <p>Industrial networks may be classified in several different categories based on functionality: field-level networks (sensor, actuator or device buses), control-level networks (control buses) and information-level networks</p>
+                        <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-037-1.jpg" alt="Diagram showing the hierarchical levels of industrial networks: Information Level at the top, Control Level (Area Sublevel, Cell Sublevel) in the middle, and Field Level (Element Sublevel with devices like motors, valves, sensors) at the bottom." class="content-image" style="max-width: 500px;">
+                            <figcaption>Industrial Network Levels Hierarchy</figcaption>
+                        </figure>
+                        <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-038-1.jpg" alt="Alternative diagram illustrating network levels: Management (MES/ERP), Shop floor (SCADA, Ethernet Modbus TCP), Machine (CANopen, Ethernet Modbus TCP), Sensor (AS-i)." class="content-image" style="max-width: 700px;">
+                             <figcaption>Industrial Network Levels Example</figcaption>
+                         </figure>
+
+                        <h3 class="subsection-heading">Field Level</h3>
+                        <p>The lowest level of the automation hierarchy is the field level, which includes the field devices such as actuators and sensors.</p>
+                        <p>The elementary field devices are sometimes classified as the element sublevel. The task of the devices in the field level is to transfer data between the manufactured product and the technical process.</p>
+                        <p>The data may be both binary and analogue. Measured values may be available for a short period of time or over a long period of time. For the field level communication, parallel, multi-wire cables, and serial interfaces such as the 20 mA current loop has been widely used from the past.</p>
+                        <p>The serial communication standards such as RS232C, RS422, and RS485 are most commonly used protocols together with the parallel communication standard IEEE488.</p>
+                        <p>Those point-to-point communication methods have evolved to the bus communication network to cope with the cabling cost and to achieve a high quality communication.</p>
+                        <p>Field-level industrial networks are a large category, distinguished by characteristics such as message size and response time.</p>
+                        <p>In general, these networks connect smart devices that work cooperatively in a distributed, time-critical network. They offer higherlevel diagnostic and configuration capabilities generally at the cost of more intelligence, processing power, and price.</p>
+                        <p>At their most sophisticated, fieldbus networks work with truly distributed control among intelligent devices like FOUNDATION Fieldbus.</p>
+                        <p>Common networks included in the devicebus and fieldbus classes include CANOpen, DeviceNet, FOUNDATION Fieldbus, Interbus-S, LonWorks, Profibus-DP, and SDS.</p>
+                        <p>Nowadays, the fieldbus is often used for information transfer in the field level. Due to timing requirements, which have to be strictly observed in an automation process, the applications in the field level controllers require cyclic transport functions, which transmit source information at regular intervals.</p>
+                        <p>The data representation must be as short as possible in order to reduce message transfer time on the bus.</p>
+
+                         <h3 class="subsection-heading">Control Level</h3>
+                         <p>At the control level, the information flow mainly consists of the loading of programs, parameters and data.</p>
+                         <p>In processes with short machine idle times and readjustments, this is done during the production process. In small controllers it may be necessary to load subroutines during one manufacturing cycle.</p>
+                         <p>This determines the timing requirements. It can be divided into two: cell and area sublevels.</p>
+                         <h4 class="subsubsection-heading">i) Cell sublevel:</h4>
+                         <p>For the cell level operations, machine synchronizations and event handlings may require short response times on the bus. These realtime requirements are not compatible with time excessive transfers of application programs, thus making adaptable message segmentation necessary.</p>
+                         <p>In order to achieve the communication requirements in this level, local area networks have been used as the communication network. After the introduction of the CIM concept and the DCCS concept, many companies developed their proprietary networks for the cell level of an automation system.</p>
+                         <p>The Ethernet together with TCP/IP (transmission control protocol/internet protocol) was accepted as a de facto standard for this level, though it cannot provide a true real-time communication.</p>
+                         <p>Many efforts have been made for the standardization of the communication network for the cell level.</p>
+                         <p>The IEEE standard networks based on the OSI layered architecture were developed and the Mini-MAP network was developed to realize a standard communication between various devices from different vendors. Some fieldbuses can also be used for this level.</p>
+                         <h4 class="subsubsection-heading">ii) Area sublevel:</h4>
+                         <p>The area level consists of cells combined into groups. Cells are designed with an application-oriented functionality.</p>
+                         <p>By the area level controllers or process operators, the controlling and intervening functions are made such as the setting of production targets, machine startup and shutdown, and emergency activities.</p>
+                         <p>Control-level networks are typically used for peer-to between controllers such as programmable logic controllers (PLCs), distributed control systems (DCS), and computer systems used for human-machine interface (HMI), historical archiving, and supervisory control.</p>
+                         <p>Control buses are used to coordinate and synchronize control between production units and manufacturing cells.</p>
+                         <p>Typically, ControlNet, PROFIBUS-FMS and (formerly) MAP are used as the industrial networks for controller buses.</p>
+                         <p>In addition, we can frequently use Ethernet with TCP/IP as a controller bus to connect upper-level control devices and computers.</p>
+
+                        <h3 class="subsection-heading">Information level</h3>
+                        <p>The information level is the top level of a plant or an industrial automation system.</p>
+                        <p>The plant level controller gathers the management information from the area levels, and manages the whole automation system.</p>
+                        <p>At the information level there exist large scale networks, e.g. Ethernet WANs for factory planning and management information exchange.</p>
+                        <p>Ethernet networks are used as a gateway to connect other industrial networks.</p>
+                        <p>With respect to management Information System Communication in automated system, there are three types of networks used:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Local Area Network (LAN)</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Wide Area Network (WAN)</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Metropolitan area network (MAN)</span></li>
+                        </ul>
+
+                        <h4 class="subsubsection-heading">1) Local Area Network (LAN)</h4>
+                        <p>These types of networks connect network devices over a relatively short distance.</p>
+                        <p>Quite often, a networked office building, home or school contains a single LAN although it is normal to come across a building that contains a few small LANs.</p>
+                        <p>On a few occasions, a LAN may also span over a group of nearby buildings. Such networks are usually owned by one organization.</p>
+                        <p>It interconnects computers and filed devices/peripherals over a common medium so users might share access to host computers, database, files, applications and peripherals.</p>
+                        <p>The following characteristics differentiate one LAN from another</p>
+                        <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Topology</strong> - The geometric arrangement of devices on the network e.g. star, ring etc.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Protocols</strong> - The rules and encoding specifications for sending data. The protocol also determines whether the network uses peer to peer or client/server architecture.</span></li>
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Medium/media</strong> - Devices can be connected by twisted pain wire, coaxial cable, or fibre optic cables. Some networks do without connecting media instead communicate through radio waves.</span></li>
+                        </ul>
+
+                        <h4 class="subsubsection-heading">2) Wide Area Network (WAN)</h4>
+                        <p>WAN is a data communication network that covers a relatively broad geographical area and often uses transmission facilities provided by common carriers e.g telephone companies.</p>
+                        <p>WAN technologies generally function at the lower layers of the OSI reference model (Open system Interconnection) the physical layer, data link layer and network layer.</p>
+                        <p>It's used to connect LANs and other types of networks together so that users and computers in one location can communicate with users and computers in other location.</p>
+                        <p>LANs are connected to a WAN through a device referred to as a router. In IP networking, both the LAN and WAN addresses are maintained by the router.</p>
+                        <p>Most WANs exist under distributed or collective ownership and management and unlike the LANs, are not necessarily owned by one organization.</p>
+
+                        <h4 class="subsubsection-heading">3) Metropolitan Area Network (MAN)</h4>
+                        <p>This is a network that spans over a physical area like a city that is smaller than a WAN but larger than a LAN.</p>
+                        <p>Quite often, such computer networks are owned and operated by single entities such as government bodies or large corporations</p>
+
+                         <h4 class="subsubsection-heading">4) Controller Area Network (CAN)</h4>
+                         <p>The CAN protocol is a priority based bus network using a career sense multiple Access with collision Avoidance (CSMA/CA) medium access scheme.</p>
+                         <p>In this protocol, any station can access the bus when ever it becomes idle.</p>
+                         <p>This is a communication protocol specification that defines parts of the OSI physical and data link layer. It meets real-time requirements encountered in any industries. The network protocol can detect and correct transmission errors caused by electromagnetic interference</p>
+                         <p>It is suitable for industrial applications because:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Low cost</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Suitability for harsh electrical environment</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Good real-time capabilities</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Ease of configuration</span></li>
+                         </ul>
+                         <p>CAN is particularly well suited to networking smart I/O devices sensors and actuators either in a single machine or plant.</p>
+                    </div>
+                </section>
+                <!-- END: topic-4-network-levels -->
+
+                <!-- START: topic-4-network-models -->
+                <section id="topic-4-network-models" class="content-section" aria-labelledby="topic-4-network-models-heading">
+                    <h2 id="topic-4-network-models-heading" class="section-heading">
+                        <span class="heading-icon">🧱</span>
+                        <span class="heading-text">Networks Models/Layers</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Network model defines a set of network layer and how they interact. There are several different network models depending on what organization/industry want.</p>
+                        <p>The most important are:</p>
+                        <ol type="i" class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">i)</span><span class="item-text">The TCP / IP model</span></li>
+                            <li class="list-item"><span class="item-icon">ii)</span><span class="item-text">OSI network model</span></li>
+                        </ol>
+
+                        <h3 class="subsection-heading">1. The TCP/IP model</h3>
+                        <p>TCP/IP (Transmission Control Protocol/Internet Protocol) is the basic communication language or protocol of the Internet. It can also be used as a communications protocol in a private network (either an intranet or an extranet).</p>
+                        <p>TCP/IP is the de facto global standard for the Internet (network) and host-to-host (transport) layer implementation of internet work applications because of the popularity of the Internet.</p>
+                        <p>The TCP/IP (Transmission Control Protocol / Internet) is a layer protocol where it defines 4 layers:</p>
+                        <h4 class="subsubsection-heading">i) Network access/interface layer</h4>
+                        <p>It provides access to the physical-network. The purpose of a network interface is to allow your PC to in order to access the wireless or fiberoptic network-infrastructure & send data to other computer systems.</p>
+                        <p>Its main function is to connect host and devices using some protocol so that data or IP packet can transmit over it.</p>
+                        <h4 class="subsubsection-heading">ii) Internet layer</h4>
+                        <p>Internet Layer provides connectionless communication across one or more networks. It is concerned with network-to-network communication. This layer is responsible for addressing & routing of data on the network.</p>
+                        <p>It is used to allow hosts to insert packets into any network and have them to deliver independently to the destination.</p>
+                        <p>It specifies an official packet format and protocol known on internet protocol. Packet routing is very essential task in order to avoid congestion.</p>
+                        <h4 class="subsubsection-heading">iii) Transport layer</h4>
+                        <p>It provides the means for the transport of data segments across the Internet-layer. It is concerned with end-to-end communication.</p>
+                        <p>This layer sends the data to the internet-layer when transmitting & sends data to the Application-layer when receiving.</p>
+                        <p>It specifies 2 end-to-end protocol; TCP and UDP (Transmission Control Protocol and user datagram protocol).</p>
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>TCP</strong> is a reliable connection - oriented protocol that permits a byte stream originating on one machine to be transported without error on any machine in the internet.</span></li>
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>UDP</strong> is an unreliable, connectionless protocol for applications that do not want TCPs sequencing on flow control and wish to offer their own.</span></li>
+                        </ul>
+                        <h4 class="subsubsection-heading">iv) Application layer</h4>
+                        <p>It provides the user with the interface to communication. This Application layer is where web browser, TELNET, FTP, email, or other client application runs. This layer sends to & receives data from the transport-layer</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">The virtual terminal protocol (VTP) permits a user on one machine to log into a distant machine and work there.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">The file transfer protocol (FTP) permits a user on one machine to log into a distant machine and work there. It offers a way to more data efficiently from one machine to another.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Electronic mail (simple mail transfer protocol (SMTP)) sends emails to other computers that support the TCP/IP protocol.</span></li>
+                         </ul>
+                         <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-041-1.jpg" alt="Comparison of OSI Model (7 layers: Physical, Data-Link, Network, Transport, Session, Presentation, Application) and TCP/IP Model (4 layers: Network Access, Internet, Transport, Application). Mapping and example protocols like Ethernet, IP, TCP, HTTP are shown." class="content-image" style="max-width: 600px;">
+                             <figcaption>OSI vs TCP/IP Model Comparison</figcaption>
+                         </figure>
+
+                        <h4 class="subsubsection-heading">Advantages TCP/IP model:</h4>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It can be used to establish/set up connection b/w different types of computers.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It operates/works independently of the operating system.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It support for a number of routing-protocols.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It enables the internetworking between the organizations.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It has a scalable, client-server architecture.</span></li>
+                         </ul>
+                        <h4 class="subsubsection-heading">Disadvantages:</h4>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">It is complex to set up & manage.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Internetwork Packet Exchange (IPX) is faster than TCP/IP model.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The shallow/overhead of TCP/IP is higher-than IPX.</span></li>
+                         </ul>
+
+                        <h3 class="subsection-heading">2. OSI network model</h3>
+                        <p>Developed by international standards organization (ISO) to standardize protocols used in version (TCP/IP) layers.</p>
+                        <p>The model is known as the OSI (open systems interconnectivity) reference model because it is related with connecting open system i.e. systems that are open for communication with other system.</p>
+                        <p>It describes seven layers as they relate to one host computer communicating to another host computer.</p>
+                        <h4 class="subsubsection-heading">i) Physical layer</h4>
+                        <p>This is the lowest layer which describes the way actual data in the form of symbols that are sent over a medium such as copper wire or fibre optic cabling. Item like signal level symbol representation and connector pinout are defined at this layer. The main functions are</p>
+                        <ol type="a" class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">a)</span><span class="item-text"><strong>Hardware specification</strong> - the details of the physical cables, network interface cards, wireless radios etc are part of this layer.</span></li>
+                            <li class="list-item"><span class="item-icon">b)</span><span class="item-text"><strong>Encoding and signaling</strong> - How are the bits encoded in the medium is also decided by this layer.</span></li>
+                            <li class="list-item"><span class="item-icon">c)</span><span class="item-text"><strong>Data transmission and reception:</strong> the transfer of each bit of data and assures the transmission of each bit with a high probability.</span></li>
+                            <li class="list-item"><span class="item-icon">d)</span><span class="item-text"><strong>Topology and network design:</strong> the type of network topologies to be used and which part of the network in the routes going to be placed, where the switches will be used etc.</span></li>
+                        </ol>
+                        <h4 class="subsubsection-heading">ii) Data link layer</h4>
+                        <p>This layer provides reliable transmission of a packet by using the services of the physical layer which transmits bits over the medium in an unreliable fashion.</p>
+                        <p>It maintains a reliable connection between adjacent nodes or stations over a physical channel</p>
+                        <p>To distinguish one from another, a method of node addressing must be defined.</p>
+                        <p>To ensure only one node has access at any one time, a method of medium access control (MAC) must be implemented.</p>
+                        <p>Information sent over the data link layer is called <strong>frames</strong>. This layer is concerned with:</p>
+                         <ol type="a" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">a)</span><span class="item-text"><strong>Framing</strong> - breaking input data into frames and caring about the frame boundaries and the size of each frame (a few hundred bytes)</span></li>
+                             <li class="list-item"><span class="item-icon">b)</span><span class="item-text"><strong>Acknowledgement:</strong> sent by receiving end to inform the source that the frame was received without any error.</span></li>
+                             <li class="list-item"><span class="item-icon">c)</span><span class="item-text"><strong>Sequence numbering</strong> - to acknowledge which frame was received.</span></li>
+                             <li class="list-item"><span class="item-icon">d)</span><span class="item-text"><strong>Error detection:</strong> the frames may be damaged lost or duplicated leading to errors. The error control is on link to link basis.</span></li>
+                             <li class="list-item"><span class="item-icon">e)</span><span class="item-text"><strong>Retransmission</strong> - The packet is retransmitted if the source fails to receive acknowledgment.</span></li>
+                             <li class="list-item"><span class="item-icon">f)</span><span class="item-text"><strong>Flow control</strong> - necessary for a fast transmitter to keep pace with a slow receiver.</span></li>
+                          </ol>
+                        <h4 class="subsubsection-heading">iii) Network layer</h4>
+                        <p>It is concerned with logical addressing process of nodes and routing schemes. The basic functions of the layer are routing and congestion control.</p>
+                        <p>Routing deals with determining how packets will be routed (transferred) from source to destination.</p>
+                        <p>Congestion control involves the control of packets minimizing dropping of packets, transmitting fine and delays.</p>
+                        <p>It is required when communication must span multiple networks interconnecting.</p>
+                        <h4 class="subsubsection-heading">iv) Transport layer</h4>
+                        <p>This layer is concerned with the variable transmission of messages sent between two host computers.</p>
+                        <p>It is responsible for the end to end communication control. This is different from the data link layer which only concerned with the transmission of frames.</p>
+                        <p>A message usually requires many - frames to be sent before the complete message can be received.</p>
+                        <p>This requires fragmenting the message into many pieces to be reassembled at the other end. Missing fragments must be re-sent. The transport layer addresses this issue.</p>
+                        <p>Other functions are:-</p>
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text">Multiplexing and de-multiplexing</span></li>
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text">Error control mechanism on end to end basis</span></li>
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text">Flow control - regulate flow of information</span></li>
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text">Connection establishment / release.</span></li>
+                        </ul>
+                        <h4 class="subsubsection-heading">v) Session layer</h4>
+                        <p>The layer is concerned with the establishment and termination of communication sessions between processors in host computers.</p>
+                        <p>It also ensures that the data transfer starts from where it breaks, keeping it transparent to the end user.</p>
+                        <h4 class="subsubsection-heading">vi) Presentation layer</h4>
+                        <p>The presentation layer translates the format of data between sender and receiver.</p>
+                        <p>It is responsible for the data interpretation, which allows for interoperability among different equipments.</p>
+                        <h4 class="subsubsection-heading">vii) Application layer</h4>
+                        <p>This layer provides the services that are required by specific applications. It contains application protocols with which the user gains access to the network.</p>
+                        <p>The choice of which specific protocols end their associated functions are to be used at the application level is up to the individual user. For example commonly used protocols or HTTP( for web browsing), FTP (or file transfer)</p>
+                        <p>HTTP - Hyper text transfer protocol - permits applications such as browser to upload and download web pages.</p>
+
+                         <h3 class="subsection-heading">Operation of OSI layer</h3>
+                          <figure style="text-align: center;">
+                                <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-043-1.jpg" alt="Diagram illustrating data flow through OSI layers. Data from Application is encapsulated with headers at each lower layer (Presentation, Session, Transport, Network, Data Link) before being transmitted by Physical Layer. The receiving node reverses the process, de-encapsulating at each layer." class="content-image" style="max-width: 700px;">
+                                <figcaption>OSI Layer Data Flow</figcaption>
+                           </figure>
+                         <p>From the figure, if a node wants to sent a data packet from the application, it must first call for the sending service of its application layer which in turn will call the sending function in the next layer, and so on till the data is sent at the physical medium to other node.</p>
+                         <p>This node will reverse the sequence till the received data reaches the application. Layer of its node then to the application which will use this data.</p>
+                         <p>Any communication system that is based on the OSI seven layer has high flexibility and compatibility with product from different vendors.</p>
+                         <p>However OSI system is often too complex for network architecture hence has a considerable overhead in both the communication and the processing.</p>
+                         <p>Strictly speaking, a network requires only layers 1, 2, and 7 of the protocol model to operate.</p>
+                         <p>In fact, many device bus networks use only these three layers. The other layers are added only as more services are required (e.g., errorfree delivery, routing, session control, data conversion, etc.).</p>
+                         <p>Most of today's local area networks contain all or most of the OSI layers to allow connection to other networks and devices.</p>
+
+                         <h3 class="subsection-heading">Advantages:</h3>
+                          <ul class="enhanced-list">
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">It provides wide variety of choice.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">It does not depend or rely on a specific computer system.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">It interprets the product functionality at each-stage.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">It encrypts the data for security purpose.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">It is easy to add multiple-network models.</span></li>
+                          </ul>
+                         <h3 class="subsection-heading">Disadvantages:</h3>
+                          <ul class="enhanced-list">
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">Many applications do not require/need the data integrity, which is provided by OSI-model.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">In order to fast set up OSI requires agreement between three-parties: users & service provider.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">Complex.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">This model is not adapted at all to telecommunication applications on computer.</span></li>
+                           </ul>
+
+                        <h3 class="subsection-heading">3. Field bus model</h3>
+                        <p>Due to complexity of the OSI model, modification has been done on the industrial networks, where only three layers are left.</p>
+                        <p>The resulting fieldbus is referred to as a 3 - layer architecture. These layers are:-</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Application layer</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Data link layer</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Physical layer</span></li>
+                         </ul>
+                         <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-043-2.jpg" alt="Comparison of OSI 7-layer model and reduced 3-layer Fieldbus model (Application, Datalink, Physical)." class="content-image" style="max-width: 700px;">
+                             <figcaption>Fieldbus 3-Layer Model vs OSI</figcaption>
+                         </figure>
+                        <p>Several characteristics and functions in the data link layer are key to the distributed real time control capabilities of fieldbus.</p>
+                        <ol type="a" class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">a)</span><span class="item-text">The data link layer is based on a token passing protocol.</span></li>
+                            <li class="list-item"><span class="item-icon">b)</span><span class="item-text">The Link Active Scheduler (LAS) is a centralized device that acts as the arbitrator of the bus.</span></li>
+                            <li class="list-item"><span class="item-icon">c)</span><span class="item-text">The LAS executes a schedule that makes possible deterministic communication.</span></li>
+                            <li class="list-item"><span class="item-icon">d)</span><span class="item-text">The LAS distributes time to the network to permit all devices to share the same sense of time.</span></li>
+                        </ol>
+                        <p>The user application layer defines blocks that represent the functions and data available in a device.</p>
+                        <p>Rather than interface to a device through a set of commands as commonly used with communication protocols, fieldbus user interacts with device through a set of blocks that define device capabilities in a standardized way.</p>
+                        <p>The data link layer has important aspect which is medium access control.</p>
+                    </div>
+                </section>
+                <!-- END: topic-4-network-models -->
+
+                 <!-- START: topic-4-mac -->
+                 <section id="topic-4-mac" class="content-section" aria-labelledby="topic-4-mac-heading">
+                     <h2 id="topic-4-mac-heading" class="section-heading">
+                         <span class="heading-icon">🚦</span>
+                         <span class="heading-text">Medium Access Control (MAC)</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>In a field bus or industrial network, several stations share the same communications media in order to save wiring costs. However, since the medium is shared, not all devices can communicate simultaneously.</p>
+                         <p>Therefore there must be rules to govern who gains access to the medium and those rules are called <dfn>medium access control (MAC)</dfn>. Thus MAC addresses identify network devices in LANS.</p>
+                         <p>This process of media access requires that each node be able to shut down its transmitter without interfering with the network's operation.</p>
+                         <p>This can be done in one of the following ways:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">with a modem that can turn off its carrier</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">with a transmitter that can be set to a high independence state</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">with a passive current-loop transmitter, wired in series with other transmitters, that shorts when inactive</span></li>
+                         </ul>
+                         <p>Although many access methods exist, the most commonly used ones are polling, collision detection, and token passing.</p>
+
+                         <h3 class="subsection-heading">1) Polling</h3>
+                         <p>The access method most often used in master/slave protocols is polling.</p>
+                         <p>In polling, the master interrogates, or polls, each station (slave) in sequence to see if it has data to transmit. The master sends a message to a specific slave and waits a fixed amount of time for the slave to respond.</p>
+                         <p>The slave should respond by sending either data or a short message saying that it has no data to send. If the slave does not respond within the allotted time, the master assumes that the slave is dead and continues polling the other slaves.</p>
+                         <p>Interslave communication in a master/slave configuration is inefficient, since polling requires that data first be sent to the master and then to the receiving slave.</p>
+                         <p>Since master/slave configurations use this technique, polling is often referred to as the master/slave access method.</p>
+
+                         <h3 class="subsection-heading">2) Carrier Sense, Multiple Access (CSMA)</h3>
+                         <p>The basic media access method that uses first-come-first served principle.</p>
+                         <p>It is probabilistic media access control (MAC) protocol in which a node verifies the absence other traffic before transmitting on a shared transmission medium, such as an electrical bus or a band of the electromagnetic spectrum.</p>
+                         <p>It is based on the principle sense before transmitting or 'listen before talk'.</p>
+                         <p><strong>CSMA/CD collision detection</strong> - performance by terminating transmission as soon as a collision detected, thus shortening the time required before a retry can be attempted.</p>
+                         <p>This method handles collision as they occur, but if the bus is constantly busy, collision can occur so often that performance drops drastically. Thus this method works well as long as the network does not have an excessive amount of traffic.</p>
+                         <p><strong>CSMA/CA collision avoidance</strong> - is used to improve the performance by attempting to be less 'greedy' on the channel.</p>
+                         <p>If the channel is sensed busy before transmission then the transmission is differed for a random interval.</p>
+                         <p>If the channels sensed 'idle' then the station is permitted to transmit. Once the channel is clear a station sends a signal telling all other stations not to transmit, and then sends its packet.</p>
+
+                         <h3 class="subsection-heading">3) Token passing protocol</h3>
+                         <p>With this approach, each participant to the network is guaranteed some time to transmit a message on a permission basis.</p>
+                         <p>This permission occurs when a participant receives the one <dfn>token</dfn> that exist in the network (token is a small frame)</p>
+                         <p>The token is passed from one participant to another in a circular fashion in what is called <dfn>logical ring</dfn>.</p>
+                         <p>Once a participant receives the token, the participant must initiate a transmission or pair the token to the next participant in an orderly fashion.</p>
+                         <p>The token is usually passed from one participant to another with the highest address regardless of the next participant's physical location.</p>
+                         <p>The participant with the highest address will pair the token to a participant with the lowest address.</p>
+                         <p>It's not necessary to have one master to hand out the token.</p>
+                         <p>Participant could be peer to one another and simply agree that they will not possess the token for more time than previously agreed.</p>
+                         <p>Token passing networks are deterministic, which means that its possible to calculate the maximum time that will pair before any end station will be capable of transmitting.</p>
+                         <p>Token ring networks are ideal for application, in which delays must be predictable and robust network operation is important.</p>
+                         <p>Factory automation environment are examples of such applications.</p>
+                     </div>
+                 </section>
+                 <!-- END: topic-4-mac -->
+
+                 <!-- START: topic-4-physical-layer -->
+                 <section id="topic-4-physical-layer" class="content-section" aria-labelledby="topic-4-physical-layer-heading">
+                     <h2 id="topic-4-physical-layer-heading" class="section-heading">
+                         <span class="heading-icon">🔩</span>
+                         <span class="heading-text">Physical layer</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>Physical layer is concerned with transmitting raw bits over a communication channel.</p>
+
+                         <h3 class="subsection-heading">Types of medium</h3>
+                         <p>Medium can be classified into two categories</p>
+                         <ol type="a" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">a)</span><span class="item-text"><strong>Guided media</strong> - means that signals is guided by the presence of physical media i.e. signals are under control and remains in the physical wire e.g. copper wire</span></li>
+                             <li class="list-item"><span class="item-icon">b)</span><span class="item-text"><strong>Unguided media</strong> - means that there is no physical path for the signal to propagate. This is done through electromagnetic waves.</span></li>
+                         </ol>
+
+                         <h3 class="subsection-heading">Communication links</h3>
+                         <p>In a network nodes are connected through links.</p>
+                         <p>The communication through links can be classified as</p>
+                         <ol type="i" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">i)</span><span class="item-text"><strong>Simplex</strong> - communication can take place only in one direction e.g. radio, T.V</span></li>
+                             <li class="list-item"><span class="item-icon">ii)</span><span class="item-text"><strong>Half duplex</strong> - communication can take place in one direction at a time. Suppose node A and B are connected, then half duplex communication means that at a time data can flow from A to B or from B to A but not simultaneously.</span></li>
+                             <li class="list-item"><span class="item-icon">iii)</span><span class="item-text"><strong>Full duplex</strong> - communication can take place simultaneously in both direction mobile phone.</span></li>
+                         </ol>
+                         <p>Links can be further classified as</p>
+                         <ol type="i" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">i)</span><span class="item-text"><strong>Point the point</strong> - in this communication only two nodes are connected to each other side and non else.</span></li>
+                             <li class="list-item"><span class="item-icon">ii)</span><span class="item-text"><strong>Multipoint</strong> - It is a kind of shaving communication in which signals can be received by all nodes. This is also called broadcast.</span></li>
+                         </ol>
+
+                         <h3 class="subsection-heading">Media standard</h3>
+                         <p>Industry standard for communications media define both the physical and electrical (or optical) characteristics of both the conductors and the connectors used to mate them to communication ports.</p>
+                         <p>Some common network conductor, physical standards and then characteristics are listed below:-</p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <caption>Common Network Media Standards</caption>
+                                <thead>
+                                    <tr><th>Standard designation</th><th>Conductor type</th><th>Connection</th><th>Transmission speed</th><th>Maximum distance</th><th>Typical application</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>RS - 232</td><td>Copper M/C with a pin connector</td><td>Point to point</td><td>265 kbps</td><td>15m</td><td>Laptop comp to PLC</td></tr>
+                                    <tr><td>RS - 485</td><td>Copper UTP or STD</td><td>Multi-drop</td><td>10 mbps</td><td>1000m</td><td>PLC to field devices</td></tr>
+                                    <tr><td>CAT 5</td><td>Copper UTP or STD</td><td>Multi-drop</td><td>100 mbps</td><td>Depends on protocol</td><td>PLC to PLC</td></tr>
+                                    <tr><td>RG 6</td><td>Copper coax</td><td>Multi-drop</td><td>5 mbps</td><td>1000m</td><td>PLC to PLC video</td></tr>
+                                    <tr><td></td><td>Single mode fibre</td><td>Point to point</td><td>1 Gbps</td><td>50km</td><td>No typical applications</td></tr>
+                                    <tr><td></td><td>Multimode fibre</td><td>Point to point</td><td>1 Gbps</td><td>1000m</td><td>PLC to control Room and PLC to PLC</td></tr>
+                                </tbody>
+                            </table>
+                         </div>
+                         <p>In guided transmission media, two kind of materials used:</p>
+                         <ol type="I" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">I)</span><span class="item-text">Copper - twisted pair, Coaxial fibre</span></li>
+                             <li class="list-item"><span class="item-icon">II)</span><span class="item-text">Optical fibre</span></li>
+                         </ol>
+                         <h4 class="subsubsection-heading">Twisted pair</h4>
+                         <p>Twisted pair cabling is a type of wiring in which two conductors of a single circuit are twisted together for the purposes of canceling out electromagnetic interference (EMI) from external sources.</p>
+                         <p>The wires are twisted together in a helical form and the purpose of twisting is to reduce crosstalk interference between neighbouring pairs.</p>
+                         <p>Twisted pair is much cheaper than coaxial cable but it is susceptible to noise and electromagnetic inference and attenuation is large.</p>
+                         <p>When electrical current flow through a wire, it creates a small, circular magnetic field around the wire.</p>
+                         <p>When two wires in an electrical circuit are placed close together, their magnetic fields are the exact, opposite of each other.</p>
+                         <p>Thus the two magnetic fields cancel each other out. They also cancel out any outside magnetic fields. Twisting the wires can enhance this cancellation effect.</p>
+                         <p>Twisted pair can be further classified into two categories:</p>
+                         <ul class="enhanced-list">
+                              <li class="list-item"><span class="item-icon">-</span><span class="item-text">Unshielded twisted pair (UTP)</span></li>
+                              <li class="list-item"><span class="item-icon">-</span><span class="item-text">Shielded Twisted Pair (STP)</span></li>
+                         </ul>
+                         <!-- Details of UTP/STP/Coax/Fiber moved to next chunk -->
+                    </div>
+                </section>
+                <!-- END: topic-4-physical-layer -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <!-- Repeat exact same links as top navigation -->
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-3-scada.html" class="nav-button"> <!-- Link to previous chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div> <!-- Chunk 6/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 6 of 10</span>
+                    </div>
+                    <a href="unit-4-network-wireless-lan.html" class="nav-button"> <!-- Link to next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

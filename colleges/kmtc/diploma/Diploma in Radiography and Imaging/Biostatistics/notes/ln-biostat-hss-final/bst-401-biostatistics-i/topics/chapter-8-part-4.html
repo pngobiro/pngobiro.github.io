@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8 (Part 4): Chi-Square (Independence/Homogeneity), Fisher's &amp; Exercises - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-3.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 4): Chi-Sq, Fisher, Exer.</span>
+                    </div>
+                    <a href="chapter-9-part-1.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-8-part-4 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER EIGHT <br> Hypothesis Testing (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-8-chi-square-cont">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">8.9 Test of significance using the Chi-square and Fisher's exact tests (Continued)</span>
+                    </h2>
+                    <div class="content-card">
+
+                        <h3 class="subsection-heading">Chi-Square Test of Independence</h3>
+                        <p>Tests whether two categorical variables, measured on the same subjects, are associated or independent in the population.</p>
+                        <p>Data are presented in a contingency table (cross-tabulation).</p>
+                        <p><strong>Hypotheses:</strong></p>
+                        <p>$H_0$: The two variables are independent (no association).</p>
+                        <p>$H_1$: The two variables are dependent (associated).</p>
+                        <p><strong>Expected Frequencies (E):</strong> Under the assumption of independence ($H_0$), the expected frequency for a cell in row $i$ and column $j$ is calculated as:</p>
+                        <div class="equation">
+                            $$ E_{ij} = \frac{(\text{Row } i \text{ Total}) \times (\text{Column } j \text{ Total})}{\text{Grand Total}} $$
+                        </div>
+                        <p><strong>Test Statistic:</strong> $\chi^2_{calc} = \sum \frac{(O_{ij} - E_{ij})^2}{E_{ij}}$, summed over all cells in the table.</p>
+                        <p><strong>Degrees of Freedom:</strong> $df = (\text{Number of Rows} - 1) \times (\text{Number of Columns} - 1)$.</p>
+                        <p><strong>Decision Rule:</strong> Reject $H_0$ if $\chi^2_{calc} > \chi^2_{\alpha, df}$ or if p-value $\le \alpha$.</p>
+                        <p><strong>Assumption:</strong> Most expected frequencies ($E_{ij}$) should be $\ge 5$. No expected frequency should be < 1. (Some sources say no more than 20% of cells should have $E < 5$).</p>
+
+                        <p><strong>Example:</strong> Test if there is an association between smoking status and hypertension status using the following observed data at $\alpha=0.05$.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Table 8.2 Observed Frequencies: Smoking and Hypertension</caption>
+                                <thead>
+                                    <tr><th></th><th>Hypertensive</th><th>Not Hypertensive</th><th>Row Total</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><strong>Smoker</strong></td><td>30 (O)</td><td>70 (O)</td><td>100</td></tr>
+                                    <tr><td><strong>Non-Smoker</strong></td><td>20 (O)</td><td>180 (O)</td><td>200</td></tr>
+                                    <tr><td><strong>Column Total</strong></td><td>50</td><td>250</td><td><strong>300 (Grand Total)</strong></td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Calculate Expected Frequencies:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">E(Smoker, Hyper) = (100 * 50) / 300 = 16.67</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">E(Smoker, Not Hyper) = (100 * 250) / 300 = 83.33</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">E(Non-Smoker, Hyper) = (200 * 50) / 300 = 33.33</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">E(Non-Smoker, Not Hyper) = (200 * 250) / 300 = 166.67</span></li>
+                        </ul>
+                        <p>(All $E_{ij} \ge 5$).</p>
+                        <p>Calculate $\chi^2$ statistic:</p>
+                        <div class="equation">
+                            $$ \chi^2_{calc} = \frac{(30-16.67)^2}{16.67} + \frac{(70-83.33)^2}{83.33} + \frac{(20-33.33)^2}{33.33} + \frac{(180-166.67)^2}{166.67} $$
+                            $$ = \frac{(13.33)^2}{16.67} + \frac{(-13.33)^2}{83.33} + \frac{(-13.33)^2}{33.33} + \frac{(13.33)^2}{166.67} $$
+                            $$ = \frac{177.69}{16.67} + \frac{177.69}{83.33} + \frac{177.69}{33.33} + \frac{177.69}{166.67} $$
+                            $$ \approx 10.66 + 2.13 + 5.33 + 1.07 \approx 19.19 $$
+                        </div>
+                        <p>$df = (2-1) \times (2-1) = 1 \times 1 = 1$.</p>
+                        <p>Critical value $\chi^2_{0.05, 1}$ from table is 3.841.</p>
+                        <p>Decision: Since $\chi^2_{calc} = 19.19 > 3.841$, reject $H_0$.</p>
+                        <p>Conclusion: There is a significant association between smoking status and hypertension status at $\alpha=0.05$.</p>
+
+                        <h3 class="subsection-heading">Chi-Square Test of Homogeneity</h3>
+                        <p>Tests if the distribution of a categorical variable is the same across two or more different populations (groups).</p>
+                        <p>The calculation procedure and test statistic are identical to the test of independence. The difference lies in the study design and interpretation:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Independence:</strong> One sample drawn, two variables measured on each subject. Question: Are the variables associated?</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Homogeneity:</strong> Two or more samples drawn from different populations/groups. One variable measured on each subject. Question: Is the distribution of the variable the same across the groups?</span></li>
+                        </ul>
+                        <p><strong>Hypotheses:</strong></p>
+                        <p>$H_0$: The proportions for the variable are the same across all populations/groups.</p>
+                        <p>$H_1$: The proportions for the variable differ across at least two populations/groups.</p>
+
+                        <h3 class="subsection-heading">Fisher's Exact Test</h3>
+                        <p>An alternative test for association in 2x2 contingency tables, especially used when the assumptions for the Chi-square test are not met (i.e., when expected frequencies are small, typically < 5).</p>
+                        <p>It calculates the exact probability of observing the actual cell frequencies, or more extreme frequencies, given the fixed row and column totals, assuming the null hypothesis of independence is true.</p>
+                        <p>The calculation involves factorials and is often performed using statistical software.</p>
+                        <p>If the calculated exact probability (p-value) is less than or equal to $\alpha$, $H_0$ is rejected.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-8-exercises">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">✏️</span>
+                        <span class="heading-text">8.10 Exercises</span>
+                    </h2>
+                    <div class="content-card">
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">State the null and alternative hypotheses for the following scenarios:
+                                <ol type="a" style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Testing if the average height of adult women is 163 cm.</li>
+                                    <li>Testing if a new teaching method improves test scores compared to the old method (mean score $\mu_{old}$).</li>
+                                    <li>Testing if the proportion of patients experiencing side effects from drug A is lower than that from drug B.</li>
+                                </ol>
+                            </span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Explain Type I and Type II errors in the context of testing a new drug for effectiveness. What are the consequences of each type of error?</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">A standard drug cures 75% of patients with a certain disease. A new drug is tested on 100 patients, and 85 are cured. Is there significant evidence at $\alpha=0.05$ to conclude that the new drug has a higher cure rate? State hypotheses, calculate the test statistic and p-value, and make a conclusion.</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Two different methods for measuring cholesterol levels are compared. Method A (n=50) gives $\bar{x}_A=200, s_A=15$. Method B (n=60) gives $\bar{x}_B=195, s_B=18$. Test if there is a significant difference between the mean measurements of the two methods at $\alpha=0.01$.</span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text">A study investigates the effect of exercise on pulse rate. Pulse rates (beats/min) are measured for 12 subjects before and after an exercise program:
+                                <div class="table-container" style="margin-top: 5px;">
+                                    <table class="content-table">
+                                        <thead><tr><th>Subject</th><th>Before</th><th>After</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>1</td><td>72</td><td>68</td></tr>
+                                            <tr><td>2</td><td>80</td><td>75</td></tr>
+                                            <tr><td>3</td><td>65</td><td>66</td></tr>
+                                            <tr><td>4</td><td>78</td><td>72</td></tr>
+                                            <tr><td>5</td><td>82</td><td>78</td></tr>
+                                            <tr><td>6</td><td>88</td><td>80</td></tr>
+                                            <tr><td>7</td><td>70</td><td>65</td></tr>
+                                            <tr><td>8</td><td>75</td><td>70</td></tr>
+                                            <tr><td>9</td><td>77</td><td>78</td></tr>
+                                            <tr><td>10</td><td>81</td><td>75</td></tr>
+                                            <tr><td>11</td><td>74</td><td>70</td></tr>
+                                            <tr><td>12</td><td>79</td><td>72</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                Is there significant evidence at $\alpha=0.05$ that the exercise program reduces pulse rate? Perform a paired t-test.
+                            </span></li>
+                            <li class="list-item"><span class="item-icon">6.</span><span class="item-text">A survey asked 200 men and 150 women about their opinion on a health policy (Favor, Oppose, Undecided). The results are:
+                                <div class="table-container" style="margin-top: 5px;">
+                                    <table class="content-table">
+                                        <thead><tr><th>Opinion</th><th>Men</th><th>Women</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>Favor</td><td>80</td><td>70</td></tr>
+                                            <tr><td>Oppose</td><td>90</td><td>50</td></tr>
+                                            <tr><td>Undecided</td><td>30</td><td>30</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                Is there a significant association between gender and opinion on the health policy at $\alpha=0.05$? Perform a Chi-square test.
+                            </span></li>
+                        </ol>
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-8-part-4 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-8-part-3.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 4): Chi-Sq, Fisher, Exer.</span>
+                    </div>
+                    <a href="chapter-9-part-1.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

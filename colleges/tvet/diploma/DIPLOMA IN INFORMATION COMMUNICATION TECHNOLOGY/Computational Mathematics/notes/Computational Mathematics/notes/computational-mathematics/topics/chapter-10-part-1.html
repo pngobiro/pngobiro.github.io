@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 10: Numerical Analysis - Part 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-1.html" class="nav-button"> <!-- Link to previous chapter's last part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 10 Part 1 of 1</span> 
+                    </div>
+                    <a href="chapter-11-part-1.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 10: NUMERICAL ANALYSIS</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-10-intro-numerical-analysis -->
+                <section id="chapter-10-intro-numerical-analysis" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">Introduction to Numerical analysis</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Numerical analysis is the study of algorithms that use numerical approximation (as opposed to general symbolic manipulations) for the problems of mathematical analysis (as distinguished from discrete mathematics).</p>
+                        <p>Numerical analysis naturally finds applications in all fields of engineering and the physical sciences, but in the 21 st century also the life sciences and even the arts have adopted elements of scientific computations. Ordinary differential equations appear in celestial mechanics (planets, stars and galaxies); numerical linear algebra is important for data analysis; stochastic differential equations and Markov chains are essential in simulating living cells for medicine and biology.</p>
+                        <p>Before the advent of modern computers numerical methods often depended on hand interpolation in large printed tables. Since the mid 20th century, computers calculate the required functions instead. These same interpolation formulas nevertheless continue to be used as part of the software algorithms for solving differential equations.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-10-intro-numerical-analysis -->
+
+                <!-- START: chapter-10-general-intro -->
+                <section id="chapter-10-general-intro" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🌐</span>
+                        <span class="heading-text">General introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The overall goal of the field of numerical analysis is the design and analysis of techniques to give approximate but accurate solutions to hard problems, the variety of which is suggested by the following:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Advanced numerical methods are essential in making numerical weather prediction feasible.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Computing the trajectory of a spacecraft requires the accurate numerical solution of a system of ordinary differential equations.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Car companies can improve the crash safety of their vehicles by using computer simulations of car crashes. Such simulations essentially consist of solving partial differential equations numerically.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Hedge funds (private investment funds) use tools from all fields of numerical analysis to attempt to calculate the value of stocks and derivatives more precisely than other market participants.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Airlines use sophisticated optimization algorithms to decide ticket prices, airplane and crew assignments and fuel needs. Historically, such algorithms were developed within the overlapping field of operations research.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Insurance companies use numerical programs for actuarial analysis.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-10-general-intro -->
+
+                <!-- START: chapter-10-approximation-theory -->
+                <section id="chapter-10-approximation-theory" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">≈</span>
+                        <span class="heading-text">Approximation theory</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Use computable functions <span class="math-inline">$p(x)$</span> to approximate the values of functions <span class="math-inline">$f(x)$</span> that are not easily computable or use approximations to simplify dealing with such functions. The most popular types of computable functions <span class="math-inline">$p(x)$</span> are polynomials, rational functions, and piecewise versions of them, for example spline functions. Trigonometric polynomials are also a very useful choice.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Best approximations. Here a given function <span class="math-inline">$f(x)$</span> is approximated within a given finite-dimensional family of computable functions. The quality of the approximation is expressed by a functional, usually the maximum absolute value of the approximation error or an integral involving the error. Least squares approximations and minimax approximations are the most popular choices.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Interpolation. A computable function <span class="math-inline">$p(x)$</span> is to be chosen to agree with a given <span class="math-inline">$f(x)$</span> at a given finite set of points <span class="math-inline">$x$</span>. The study of determining and analyzing such interpolation functions is still an active area of research, particularly when <span class="math-inline">$p(x)$</span> is a multivariate polynomial.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Fourier series. A function <span class="math-inline">$f(x)$</span> is decomposed into orthogonal components based on a given orthogonal basis <span class="math-inline">$\{\varphi 1, \varphi 2, \ldots\}$</span>, and then <span class="math-inline">$f(x)$</span> is approximated by using only the largest of such components. The convergence of Fourier series is a classical area of mathematics, and it is very important in many fields of application. The development of the Fast Fourier Transform in 1965 spawned a rapid progress in digital technology. In the 1990s wavelets became an important tool in this area.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Numerical integration and differentiation. Most integrals cannot be evaluated directly in terms of elementary functions, and instead they must be approximated numerically. Most functions can be differentiated analytically, but there is still a need for numerical differentiation, both to approximate the derivative of numerical data and to obtain approximations for discretizing differential equations.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-10-approximation-theory -->
+
+                <!-- START: chapter-10-numerical-methods -->
+                <section id="chapter-10-numerical-methods" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚙️</span>
+                        <span class="heading-text">Numerical methods</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Mathematical techniques for solving practical problems. They are called numerical methods because they produce the solution as real numbers such as " 3.1768 ", rather than as algebraic expressions (such as " <span class="math-inline">$x^{2}+c$</span> ") or surds (such as " <span class="math-inline">$2 \pm \sqrt{11}$</span> " where sqrt means the square root function).</p>
+                        <p>Numerical methods are, some might say, a lot easier to use than the algebraic methods.</p>
+                        <p>Numerical methods to solve three types of problem:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Find a solution to a nonlinear equation <span class="math-inline">$\mathrm{F}(x)=0$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Find an interpolated value from a table of data</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Find the numerical solution of a differential equation</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-10-numerical-methods -->
+
+                <!-- START: chapter-10-direct-iterative -->
+                <section id="chapter-10-direct-iterative" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➡️</span>
+                        <span class="heading-text">Direct and iterative methods</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Direct methods compute the solution to a problem in a finite number of steps. These methods would give the precise answer if they were performed in infinite precision arithmetic. Examples include Gaussian elimination, the QR factorization method for solving systems of linear equations, and the simplex method of linear programming. In practice, finite precision is used and the result is an approximation of the true solution (assuming stability).</p>
+                        <p>In contrast to direct methods, iterative methods are not expected to terminate in a finite number of steps. Starting from an initial guess, iterative methods form successive approximations that converge to the exact solution only in the limit. A convergence test, often involving the residual, is specified in order to decide when a sufficiently accurate solution has (hopefully) been found. Even using infinite precision arithmetic these methods would not reach the solution within a finite number of steps (in general). Examples include Newton's method, the bisection method, and Jacobi iteration. In computational matrix algebra, iterative methods are generally needed for large problems.</p>
+                        <p>Downloaded by Patrick Ngobiro (pngobiro@gmail.com)</p>
+                        <p>Iterative methods are more common than direct methods in numerical analysis. Some methods are direct in principle but are usually used as though they were not, e.g. GMRES and the conjugate gradient method. For these methods the number of steps needed to obtain the exact solution is so large that an approximation is accepted in the same manner as for an iterative method.</p>
+                        <h3 class="subsection-heading">Direct vs iterative methods</h3>
+                        <p>Consider the problem of solving</p>
+                        <div class="equation">$$3 x^{3}+4=28$$</div>
+                        <p>for the unknown quantity <span class="math-inline">$x$</span>.</p>
+                        <h4 class="subsection-heading">Direct method</h4>
+                        <div class="equation">$$3 x^{3}+4=28 .$$</div>
+                        <p>Subtract <span class="math-inline">$4 \quad 3 x^{3}=24$</span>.</p>
+                        <p>Divide by <span class="math-inline">$3 \quad x^{3}=8$</span>.</p>
+                        <p>Take cube roots <span class="math-inline">$\quad x=2$</span>.</p>
+                        <h4 class="subsection-heading">Iterative method</h4>
+                        <p>For the iterative method, apply the bisection method to <span class="math-inline">$f(x)=3 x^{3}-24$</span>. The initial values are <span class="math-inline">$a= 0, b=3, f(a)=-24, f(b)=57$</span>.</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead><tr><th><span class="math-inline">$\boldsymbol{a}$</span></th><th><span class="math-inline">$\boldsymbol{b}$</span></th><th>mid</th><th><span class="math-inline">$\boldsymbol{f}$</span> (mid)</th></tr></thead>
+                             <tbody>
+                               <tr><td>0</td><td>3</td><td>1.5</td><td>-13.875</td></tr>
+                               <tr><td>1.5</td><td>3</td><td>2.25</td><td>10.17...</td></tr>
+                               <tr><td>1.5</td><td>2.25</td><td>1.875</td><td>-4.22...</td></tr>
+                               <tr><td>1.875</td><td>2.25</td><td>2.0625</td><td>2.32...</td></tr> <!-- Corrected MMD table formatting -->
+                             </tbody>
+                           </table>
+                        </div>
+                        <p>We conclude from this table that the solution is between 1.875 and 2.0625. The algorithm might return any number in that range with an error less than 0.2.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-10-direct-iterative -->
+
+                <!-- START: chapter-10-discretization -->
+                <section id="chapter-10-discretization" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">Discretization</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Furthermore, continuous problems must sometimes be replaced by a discrete problem whose solution is known to approximate that of the continuous problem; this process is called discretization. For example, the solution of a differential equation is a function. This function must be represented by a finite amount of data, for instance by its value at a finite number of points at its domain, even though this domain is a continuum.</p>
+                        <h3 class="subsection-heading">Discretization and numerical integration</h3>
+                        <p>In a two-hour race, we have measured the speed of the car at three instants and recorded them in the following table.</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead><tr><th>Time</th><th>0:20</th><th>1:00</th><th>1:40</th></tr></thead>
+                             <tbody><tr><td>km/h</td><td>140</td><td>150</td><td>180</td></tr></tbody>
+                           </table>
+                        </div>
+                        <p>A discretization would be to say that the speed of the car was constant from 0:00 to <span class="math-inline">$0: 40$</span>, then from <span class="math-inline">$0: 40$</span> to <span class="math-inline">$1: 20$</span> and finally from 1:20 to <span class="math-inline">$2: 00$</span>. For instance, the total distance traveled in the first 40 minutes is approximately <span class="math-inline">$(2 / 3 \mathrm{~h} \times 140 \mathrm{~km} / \mathrm{h})=93.3 \mathrm{~km}$</span>. This would allow us to estimate the total distance traveled as <span class="math-inline">$93.3 \mathrm{~km}+100 \mathrm{~km}+120 \mathrm{~km}=$</span> 313.3 km , which is an example of numerical integration (see below) using a Riemann sum, because displacement is the integral of velocity.</p>
+                        <p>III-conditioned problem: Take the function <span class="math-inline">$f(x)=1 /(x-1)$</span>. Note that <span class="math-inline">$f(1.1)=10$</span> and <span class="math-inline">$f(1.001)=1000$</span> : a change in <span class="math-inline">$x$</span> of less than 0.1 turns into a change in <span class="math-inline">$f(x)$</span> of nearly 1000 . Evaluating <span class="math-inline">$f(x)$</span> near <span class="math-inline">$x=1$</span> is an ill-conditioned problem.</p>
+                        <p>Well-conditioned problem: By contrast, evaluating the same function <span class="math-inline">$f(x)=1 /(x-1)$</span> near <span class="math-inline">$x=10$</span> is a well-conditioned problem. For instance, <span class="math-inline">$f(10)=1 / 9 \approx 0.111$</span> and <span class="math-inline">$f(11)=$</span> 0.1: a modest change in <span class="math-inline">$x$</span> leads to a modest change in <span class="math-inline">$f(x)$</span>.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-10-discretization -->
+
+                <!-- START: chapter-10-errors -->
+                <section id="chapter-10-errors" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❌</span>
+                        <span class="heading-text">Generation and propagation of errors</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The study of errors forms an important part of numerical analysis. There are several ways in which error can be introduced in the solution of the problem.</p>
+                        <h3 class="subsection-heading">Round-off</h3>
+                        <p>Round-off errors arise because it is impossible to represent all real numbers exactly on a machine with finite memory (which is what all practical digital computers are).</p>
+                        <h3 class="subsection-heading">Truncation and discretization error</h3>
+                        <p>Truncation errors are committed when an iterative method is terminated or a mathematical procedure is approximated, and the approximate solution differs from the exact solution. Similarly, discretization induces a discretization error because the solution of the discrete problem does not coincide with the solution of the continuous problem. For instance, in the iteration in the sidebar to compute the solution of <span class="math-inline">$3 x^{3}+4=28$</span>, after 10 or so iterations, we conclude that the root is roughly 1.99 (for example). We therefore have a truncation error of 0.01 .</p>
+                        <p>Once an error is generated, it will generally propagate through the calculation. For instance, we have already noted that the operation + on a calculator (or a computer) is inexact. It follows that a calculation of the type <span class="math-inline">$a+b+c+d+e$</span> is even more inexact.</p>
+                        <p>What does it mean when we say that the truncation error is created when we approximate a mathematical procedure? We know that to integrate a function exactly requires one to find the sum of infinite trapezoids. But numerically one can find the sum of only finite trapezoids, and hence the approximation of the mathematical procedure. Similarly, to differentiate a function, the differential element approaches zero but numerically we can only choose a finite value of the differential element.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-10-errors -->
+
+                <!-- START: chapter-10-areas-study -->
+                <section id="chapter-10-areas-study" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📚</span>
+                        <span class="heading-text">Areas of study</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The field of numerical analysis includes many sub-disciplines. Some of the major ones are:</p>
+                        <h3 class="subsection-heading">Computing values of functions</h3>
+                        <p>One of the simplest problems is the evaluation of a function at a given point. The most straightforward approach, of just plugging in the number in the formula is sometimes not very efficient. For polynomials, a better approach is using the Horner scheme, since it reduces the necessary number of multiplications and additions. Generally, it is important to estimate and control round-off errors arising from the use of floating point arithmetic.</p>
+                        <h3 class="subsection-heading">Interpolation, extrapolation, and regression</h3>
+                        <p>Interpolation solves the following problem: given the value of some unknown function at a number of points, what value does that function have at some other point between the given points?</p>
+                        <p>Extrapolation is very similar to interpolation, except that now we want to find the value of the unknown function at a point which is outside the given points.</p>
+                        <p>Regression is also similar, but it takes into account that the data is imprecise. Given some points, and a measurement of the value of some function at these points (with an error), we want to determine the unknown function. The least squares-method is one popular way to achieve this.</p>
+                        <p>Interpolation: We have observed the temperature to vary from 20 degrees Celsius at 1:00 to 14 degrees at 3:00. A linear interpolation of this data would conclude that it was 17 degrees at 2:00 and 18.5 degrees at <span class="math-inline">$1: 30 \mathrm{pm}$</span>.</p>
+                        <p>Extrapolation: If the gross domestic product of a country has been growing an average of 5% per year and was 100 billion dollars last year, we might extrapolate that it will be 105 billion dollars this year.</p>
+                        <img src="../assets/images/chapter-10-regression-example.jpg" alt="Scatter plot showing data points and a regression line" class="content-image">
+                        <p>Regression: In linear regression, given <span class="math-inline">$n$</span> points, we compute a line that passes as close as possible to those <span class="math-inline">$n$</span> points.</p>
+                        <p>Optimization: Say you sell lemonade at a lemonade stand, and notice that at <span class="math-inline">$\$ 1$</span>, you can sell 197 glasses of lemonade per day, and that for each increase of <span class="math-inline">$\$ 0.01$</span>, you will sell one glass of lemonade less per day. If you could charge <span class="math-inline">$\$ 1.485$</span>, you would maximize your profit, but due to the constraint of having to charge a whole cent amount, charging <span class="math-inline">$\$ 1.48$</span> or <span class="math-inline">$\$ 1.49$</span> per glass will both yield the maximum income of <span class="math-inline">$\$ 220.52$</span> per day.</p>
+                        <p>Differential equation: If you set up 100 fans to blow air from one end of the room to the other and then you drop a feather into the wind, what happens? The feather will follow the air currents, which may be very complex. One approximation is to measure the speed at which the air is blowing near the feather every second, and advance the simulated feather as if it were moving in a straight line at that same speed for one second, before measuring the wind speed again. This is called the Euler method for solving an ordinary differential equation.</p>
+                        <h3 class="subsection-heading">Solving equations and systems of equations</h3>
+                        <p>Another fundamental problem is computing the solution of some given equation. Two cases are commonly distinguished, depending on whether the equation is linear or not. For instance, the equation <span class="math-inline">$2 \chi+5=3$</span> is linear while <span class="math-inline">$2 \chi 2+5=3$</span> is not.</p> <!-- Assuming chi is x -->
+                        <p>Much effort has been put in the development of methods for solving systems of linear equations. Standard direct methods, i.e., methods that use some matrix decomposition are Gaussian elimination, LU decomposition, Cholesky decomposition for symmetric (or hermitian) and positive-definite matrix, and QR decomposition for non-square matrices. Iterative methods such as the Jacobi method, Gauss-Seidel method, successive over-relaxation and conjugate gradient method are usually preferred for large systems. General iterative methods can be developed using a matrix splitting.</p>
+                        <p>Root-finding algorithms are used to solve nonlinear equations (they are so named since a root of a function is an argument for which the function yields zero). If the function is differentiable and the derivative is known, then Newton's method is a popular choice. Linearization is another technique for solving nonlinear equations.</p>
+                        <h3 class="subsection-heading">Solving eigenvalue or singular value problems</h3>
+                        <p>Several important problems can be phrased in terms of eigenvalue decompositions or singular value decompositions. For instance, the spectral image compression algorithm is based on the singular value decomposition. The corresponding tool in statistics is called principal component analysis.</p>
+                        <h3 class="subsection-heading">Optimization</h3>
+                        <p>Optimization problems ask for the point at which a given function is maximized (or minimized). Often, the point also has to satisfy some constraints.</p>
+                        <p>The field of optimization is further split in several subfields, depending on the form of the objective function and the constraint. For instance, linear programming deals with the case that both the objective function and the constraints are linear. A famous method in linear programming is the simplex method.</p>
+                        <p>The method of Lagrange multipliers can be used to reduce optimization problems with constraints to unconstrained optimization problems.</p>
+                        <h3 class="subsection-heading">Evaluating integrals</h3>
+                        <p>Numerical integration, in some instances also known as numerical quadrature, asks for the value of a definite integral. Popular methods use one of the Newton-Cotes formulas (like the midpoint rule or Simpson's rule) or Gaussian quadrature. These methods rely on a "divide and conquer" strategy, whereby an integral on a relatively large set is broken down into integrals on smaller sets. In higher dimensions, where these methods become prohibitively expensive in terms of computational effort, one may use Monte Carlo or quasi-Monte Carlo methods, or in modestly large dimensions, the method of sparse grids.</p>
+                        <h3 class="subsection-heading">Differential equations</h3>
+                        <p>Numerical analysis is also concerned with computing (in an approximate way) the solution of differential equations, both ordinary differential equations and partial differential equations.</p>
+                        <p>Partial differential equations are solved by first discretizing the equation, bringing it into a finitedimensional subspace. This can be done by a finite element method, a finite difference method, or (particularly in engineering) a finite volume method. The theoretical justification of these methods often involves theorems from functional analysis. This reduces the problem to the solution of an algebraic equation.</p>
+                        <h3 class="subsection-heading">Software</h3>
+                        <p>Since the late twentieth century, most algorithms are implemented in a variety of programming languages. The Netlib repository contains various collections of software routines for numerical problems, mostly in Fortran and C. Commercial products implementing many different numerical algorithms include the IMSL and NAG libraries; a free-software alternative is the GNU Scientific Library.</p>
+                        <p>There are several popular numerical computing applications such as MATLAB, TK Solver, SPLUS, and IDL as well as free and open source alternatives such as FreeMat, Scilab, GNU Octave (similar to Matlab), and IT++ (a C++ library). There are also programming languages such as R (similar to S-PLUS) and Python with libraries such as NumPy, SciPy and SymPy. Performance varies widely: while vector and matrix operations are usually fast, scalar loops may vary in speed by more than an order of magnitude.</p>
+                        <p>Many computer algebra systems such as Mathematica also benefit from the availability of arbitrary precision arithmetic which can provide more accurate results.</p>
+                        <p>Also, any spreadsheet software can be used to solve simple problems relating to numerical analysis.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-10-areas-study -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-1.html" class="nav-button"> <!-- Link to previous chapter's last part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 10 Part 1 of 1</span> 
+                    </div>
+                    <a href="chapter-11-part-1.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

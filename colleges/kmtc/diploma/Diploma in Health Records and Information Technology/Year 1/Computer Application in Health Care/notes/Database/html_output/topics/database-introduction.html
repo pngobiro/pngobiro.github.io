@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introduction to Databases</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+        tex: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true,
+            processEnvironments: true,
+            tags: 'ams' // Use AMS numbering of equations
+        },
+        svg: { fontCache: 'global' },
+        options: {
+            skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+        }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="#" class="nav-button disabled">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
+                       <span class="progress-text">Lecture 1 of 5</span>
+                    </div>
+                    <a href="database-design-and-tables.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Introduction to Access 2007</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: access-2007-intro -->
+                <section id="access-2007-intro" class="content-section" aria-labelledby="section-heading-1">
+                    <h2 id="section-heading-1" class="section-heading">
+                         <span class="heading-icon"> </span>
+                        <span class="heading-text">Access 2007 Overview</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Access 2007 is the database software in the Microsoft 2007 Office suite that allows you to order, manage, search, and report large amounts of information. This tutorial will show you how to build a database from scratch, including how to set up tables, create and use forms to enhance data integrity, design and run meaningful queries, and produce useful and attractive reports.</p>
+                    </div>
+                </section>
+                <!-- END: access-2007-intro -->
+
+                <!-- START: why-a-database -->
+                <section id="why-a-database" class="content-section" aria-labelledby="section-heading-2">
+                    <h2 id="section-heading-2" class="section-heading">
+                         <span class="heading-icon"> </span>
+                         <span class="heading-text">Why Do We Need a Database?</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>Introduction</h3>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-01-1.jpg" alt="A collage of various databases and forms, representing data management." class="content-image">
+                        <p>Once you have determined that an Access database will help you store and manage your data, you will need to learn the parts of a database, how to start using Access, and how to navigate the Access window. In this lesson, we will provide a basic overview of Access, including the parts of a database and common tasks you can complete using a database.</p>
+                        
+                        <h3>Databases in our lives</h3>
+                        <p>Think about all of the information we encounter on a typical day that might be organized by a database. For example, if you go shopping at a department store for a toaster, the store inventory of products is information that must be stored somewhere, along with the price of each product.</p>
+                        <p>When you make a purchase, the store needs to be able to store the sales information to determine the daily sales total and how to track the decrease in inventory. A database could store this information, and it could also allow the store to quickly determine how many Brand X toasters are in inventory without needing to count inventory on the shelves.</p>
+                        
+                        <figure>
+                            <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-02-1.jpg" alt="Diagram showing a toaster's product information and how a sale affects inventory and daily sales totals." class="content-image">
+                            <figcaption>A simple sales transaction tracked by a database.</figcaption>
+                        </figure>
+
+                        <p>While this information could be managed without a database, it would be easier and more efficient to use one. Databases have an enormous impact in almost every area of our lives.</p>
+                        
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Department Store Inventory</caption>
+                                <thead>
+                                    <tr>
+                                        <th>ID</th>
+                                        <th>Item</th>
+                                        <th>Item #</th>
+                                        <th>Color</th>
+                                        <th>Price</th>
+                                        <th>In Stock</th>
+                                        <th>Barcode</th>
+                                        <th>Location</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>2</td>
+                                        <td>Brand X Toaster</td>
+                                        <td>12546465</td>
+                                        <td>Blk</td>
+                                        <td>$15.00</td>
+                                        <td>100</td>
+                                        <td>12211111</td>
+                                        <td>Kitchen & Home</td>
+                                    </tr>
+                                    <tr>
+                                        <td>3</td>
+                                        <td>Brand Y Blender</td>
+                                        <td>243456464</td>
+                                        <td>Crm</td>
+                                        <td>$25.00</td>
+                                        <td>85</td>
+                                        <td>13419673</td>
+                                        <td>Kitchen & Home</td>
+                                    </tr>
+                                    <tr>
+                                        <td>4</td>
+                                        <td>Coffee Maker</td>
+                                        <td>55664</td>
+                                        <td>Blk</td>
+                                        <td>$150.00</td>
+                                        <td>150</td>
+                                        <td>15444779</td>
+                                        <td>Kitchen & Home</td>
+                                    </tr>
+                                    <tr>
+                                        <td>5</td>
+                                        <td>Microwave Oven</td>
+                                        <td>977484152</td>
+                                        <td>Wht</td>
+                                        <td>$66.85</td>
+                                        <td>50</td>
+                                        <td>11547547</td>
+                                        <td>Kitchen & Home</td>
+                                    </tr>
+                                    <tr>
+                                        <td>6</td>
+                                        <td>Silverware Set</td>
+                                        <td>354675678</td>
+                                        <td>Silver</td>
+                                        <td>$15.99</td>
+                                        <td>235</td>
+                                        <td>15457867</td>
+                                        <td>Kitchen & Home</td>
+                                    </tr>
+                                    <tr>
+                                        <td>7</td>
+                                        <td>Throw Pillow</td>
+                                        <td>232</td>
+                                        <td>Pink/Gold</td>
+                                        <td>$12.00</td>
+                                        <td>32</td>
+                                        <td>12547977</td>
+                                        <td>Bedding</td>
+                                    </tr>
+                                    <tr>
+                                        <td>8</td>
+                                        <td>Television</td>
+                                        <td>1314645</td>
+                                        <td>Blk</td>
+                                        <td>$300.00</td>
+                                        <td>12</td>
+                                        <td>12457878</td>
+                                        <td>Electronics</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <h3>Think about it</h3>
+                        <p>Think about what is going on around you in everyday situations and whether there might be a database at work:</p>
+                        <ul class="enhanced-list">
+                            <li>Grocery store: The grocery store is stocked with items. Items must be ordered, shipped, and stocked in the store. The store must pay for the items. When a customer buys items, the cash register retrieves prices and the customer pays for products. Where might databases be involved in this situation?</li>
+                            <li>Restaurant: Where does the food come from? How does management know when to reorder a product? How are bills paid?</li>
+                            <li>Traffic lights: Who or what controls when the lights turn red or green?</li>
+                        </ul>
+                        <p>A database maintains order and structure in our lives. Databases are created using programs such as Microsoft Access 2007, which is a relational database program.</p>
+                    </div>
+                </section>
+                <!-- END: why-a-database -->
+
+                <!-- START: getting-started -->
+                <section id="getting-started" class="content-section" aria-labelledby="section-heading-3">
+                    <h2 id="section-heading-3" class="section-heading">
+                         <span class="heading-icon"> </span>
+                         <span class="heading-text">Getting Started with Access</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>When you start Access 2007, you will see the Getting Started window. In the left pane, the template categories—including the featured local templates—are listed, as well as the categories on Office Online. Templates are prebuilt databases focused on a specific task that you can download and use immediately.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-03-1.jpg" alt="The Access 2007 Getting Started window, showing template categories on the left and featured templates in the center." class="content-image">
+                        
+                        <h3>Opening a database</h3>
+                        <p>You have three main options on the Getting Started page. You can open a template database stored locally or online, an existing database, or a blank database.</p>
+                        
+                        <p><strong>To view templates included with Access:</strong></p>
+                        <ul>
+                            <li>Click Local Templates in the left pane. The center of the screen will change to display icons for the templates.</li>
+                            <li>Select an icon in the center of the screen. Details about the database template will appear on the right.</li>
+                        </ul>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-05-1.jpg" alt="Selecting a local template in Access, with details appearing on the right side of the screen." class="content-image">
+                        
+                        <p><strong>To open an existing database:</strong></p>
+                        <ul>
+                            <li>In the Open Recent Database section, double-click the file name of the database you want to open. It will appear in the window.</li>
+                            <li>OR</li>
+                            <li>Click the More link. A dialog box will appear.</li>
+                            <li>Select the database you want to open.</li>
+                        </ul>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-06-1.jpg" alt="The 'Open' dialog box in Access, used for browsing to and selecting an existing database file." class="content-image">
+                        <p>Click Open. The database will appear.</p>
+                    </div>
+                </section>
+                <!-- END: getting-started -->
+
+                <!-- START: access-window -->
+                <section id="access-window" class="content-section" aria-labelledby="section-heading-4">
+                    <h2 id="section-heading-4" class="section-heading">
+                         <span class="heading-icon"> </span>
+                         <span class="heading-text">The Access Window</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Before you can begin to use a database, you need to become familiar with the Access window.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-07-1.jpg" alt="The main Access 2007 window with key components labeled: Ribbon, Quick Access Toolbar, Microsoft Office Button, and Navigation Pane." class="content-image">
+
+                        <h3>The Ribbon</h3>
+                        <p>Like other software in the Microsoft Office 2007 suite, Access 2007 has a tabbed Ribbon system you use to navigate the database. The Ribbon is organized into tabs. Each tab contains groups of commands you use to perform tasks in Access.</p>
+                        <p>For example, on the Home tab you'll see that there is a Font group that contains font formatting commands such as font type, size, color, and alignment. Unless you use keyboard shortcuts for everything, the Ribbon is how you get work done in Access.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-07-2.jpg" alt="Close-up of the Home tab on the Access Ribbon, showing the Font and Rich Text command groups." class="content-image">
+
+                        <h3>The Quick Access toolbar</h3>
+                        <p>Once you are familiar with Access, you may find that there are commands you use more often than others. To make it easier to use these commands, you can add them to the Quick Access toolbar. By default, the toolbar appears above the Ribbon on the left side of the Access window and includes the Save, Undo, and Redo commands.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-08-1.jpg" alt="The Quick Access Toolbar in the top-left corner of the Access window, showing the Save, Undo, and Redo icons." class="content-image">
+
+                        <h3>The Microsoft Office button</h3>
+                        <p>The Microsoft Office button is located in the upper-left corner of the Access window and includes key menu options such as New, Save, and Print. From this menu, you can also change your Access Options.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-08-2.jpg" alt="The Microsoft Office Button menu, displaying commands like New, Open, Save, Save As, and Print." class="content-image">
+
+                        <h3>The navigation pane</h3>
+                        <p>The main control center of each Access database is the navigation pane. It shows you what is in the database and makes the information accessible to you. You can choose to close the navigation pane if you need more of the Access window to complete specific tasks.</p>
+                        <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-09-1.jpg" alt="The Navigation Pane on the left side of the Access window, listing database objects like tables." class="content-image">
+
+                        <p><strong>To open and close the navigation pane:</strong></p>
+                        <ul>
+                            <li>Click the Shutter Bar button on the right side of the navigation pane.</li>
+                        </ul>
+                         <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-09-2.jpg" alt="The Shutter Bar button used to collapse and expand the Navigation Pane." class="content-image">
+                        <p>The navigation pane appears as a single column when it is collapsed.</p>
+                         <img src="../assets/images/2025_11_14_b4e950dbd66c79507867g-10-1.jpg" alt="The Navigation Pane in its collapsed state, appearing as a thin vertical bar." class="content-image">
+                    </div>
+                </section>
+                <!-- END: access-window -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+             <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon"></span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="#" class="nav-button disabled">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 20%;"></div>
+                        </div>
+                       <span class="progress-text">Lecture 1 of 5</span>
+                    </div>
+                    <a href="database-design-and-tables.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

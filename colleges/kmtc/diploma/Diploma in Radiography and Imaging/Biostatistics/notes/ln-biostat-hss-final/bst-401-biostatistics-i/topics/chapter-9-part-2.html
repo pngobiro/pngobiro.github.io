@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9 (Part 2): Regression Analysis &amp; Exercises - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-1.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 9 (Part 2): Regression</span>
+                    </div>
+                    <a href="appendix-tables-part-1.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-9-part-2 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER NINE <br> Correlation and Regression (Continued)</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-9-regression-analysis">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">9.4 Regression analysis</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Regression analysis aims to model the relationship between a dependent variable (Y) and one or more independent variables (X). Simple linear regression involves one independent variable.</p>
+                        <p>The goal is to find the equation of the line that best fits the data points on a scatter plot, allowing us to predict Y for a given value of X.</p>
+
+                        <h3 class="subsection-heading">The Simple Linear Regression Model</h3>
+                        <p>The model assumes a linear relationship between X and Y in the population:</p>
+                        <div class="equation">
+                            $$ Y = \beta_0 + \beta_1 X + \epsilon $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$Y$ is the dependent variable.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$X$ is the independent variable.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$\beta_0$ is the population Y-intercept (the value of Y when X=0).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$\beta_1$ is the population slope (the change in Y for a one-unit increase in X).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$\epsilon$ (epsilon) is the random error term, representing the variability in Y not explained by X. It is assumed to have a mean of 0 and constant variance $\sigma^2$.</span></li>
+                        </ul>
+
+                        <h3 class="subsection-heading">The Least-Squares Regression Line</h3>
+                        <p>We estimate the population regression line using sample data. The estimated regression line is:</p>
+                        <div class="equation">
+                            $$ \hat{y} = b_0 + b_1 x $$
+                        </div>
+                        <p>Where:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$\hat{y}$ (y-hat) is the predicted value of Y for a given x.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$b_0$ is the sample Y-intercept (estimate of $\beta_0$).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$b_1$ is the sample slope (estimate of $\beta_1$).</span></li>
+                        </ul>
+                        <p>The line is determined using the <strong>method of least squares</strong>, which minimizes the sum of the squared vertical distances (residuals) between the observed Y values ($y_i$) and the predicted Y values ($\hat{y}_i$): Minimize $\sum (y_i - \hat{y}_i)^2$.</p>
+                        <p><strong>Formulas for Slope ($b_1$) and Intercept ($b_0$):</strong></p>
+                        <div class="equation">
+                            $$ b_1 = \frac{S_{xy}}{S_{xx}} = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{\sum (x_i - \bar{x})^2} = \frac{\sum x_i y_i - \frac{(\sum x_i)(\sum y_i)}{n}}{\sum x_i^2 - \frac{(\sum x_i)^2}{n}} $$
+                        </div>
+                        <div class="equation">
+                            $$ b_0 = \bar{y} - b_1 \bar{x} $$
+                        </div>
+                        <p>(Note: $S_{xy}$ and $S_{xx}$ are the same quantities calculated for the correlation coefficient).</p>
+
+                        <p><strong>Example:</strong> Find the regression line for predicting weight (Y) from height (X) using the data from Table 2.9.</p>
+                        <p>From previous calculations: $\bar{x} = 171.6$, $\bar{y} = 66.3$, $S_{xy} = 253.2$, $S_{xx} = 686.4$.</p>
+                        <p>Calculate slope:</p>
+                        <div class="equation">
+                            $$ b_1 = \frac{S_{xy}}{S_{xx}} = \frac{253.2}{686.4} \approx 0.3688 $$
+                        </div>
+                        <p>Calculate intercept:</p>
+                        <div class="equation">
+                            $$ b_0 = \bar{y} - b_1 \bar{x} = 66.3 - (0.3688)(171.6) = 66.3 - 63.28 \approx 3.02 $$
+                        </div>
+                        <p>The least-squares regression line is:</p>
+                        <div class="equation">
+                            $$ \hat{y} = 3.02 + 0.3688 x $$
+                        </div>
+                        <p>Or: Predicted Weight (kg) = 3.02 + 0.3688 * Height (cm).</p>
+                        <p><strong>Interpretation:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Slope ($b_1 \approx 0.37$):</strong> For each 1 cm increase in height, the predicted weight increases by approximately 0.37 kg.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Intercept ($b_0 \approx 3.02$):</strong> The predicted weight for a person with height 0 cm is 3.02 kg. This often has no practical interpretation, especially if X=0 is outside the range of observed data.</span></li>
+                        </ul>
+                        <p><strong>Prediction:</strong> Predict the weight of a student with height 170 cm.</p>
+                        <div class="equation">
+                            $$ \hat{y} = 3.02 + 0.3688 (170) = 3.02 + 62.696 = 65.716 \text{ kg} $$
+                        </div>
+
+                        <h3 class="subsection-heading">Coefficient of Determination ($r^2$)</h3>
+                        <p>The coefficient of determination, $r^2$ (the square of the correlation coefficient), measures the proportion of the total variability in the dependent variable (Y) that is explained by the linear relationship with the independent variable (X).</p>
+                        <div class="equation">
+                            $$ r^2 = \frac{\text{Explained Variation}}{\text{Total Variation}} = \frac{SSR}{SST} $$
+                        </div>
+                        <p>Where SSR is the Sum of Squares due to Regression and SST is the Total Sum of Squares ($S_{yy}$).</p>
+                        <p>It ranges from 0 to 1 ($0 \le r^2 \le 1$).</p>
+                        <p>$r^2$ is often expressed as a percentage.</p>
+                        <p><strong>Example:</strong> For the height/weight data, $r \approx 0.378$.</p>
+                        <div class="equation">
+                            $$ r^2 = (0.378)^2 \approx 0.143 $$
+                        </div>
+                        <p>Interpretation: Approximately 14.3% of the variation in student weights can be explained by the linear relationship with their heights. The remaining 85.7% is due to other factors or random error.</p>
+
+                        <h3 class="subsection-heading">Assumptions of Linear Regression</h3>
+                        <p>For inference (hypothesis tests, confidence intervals) in linear regression to be valid, certain assumptions should be met:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Linearity:</strong> The relationship between X and Y is linear. (Check scatter plot).</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Independence:</strong> The errors ($\epsilon_i$) are independent of each other. (Important for time series data).</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Normality:</strong> The errors ($\epsilon_i$) are normally distributed for each value of X. (Check histogram or normality plot of residuals).</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text"><strong>Equal Variance (Homoscedasticity):</strong> The variance of the errors ($\sigma^2$) is constant for all values of X. (Check residual plot vs predicted values - should show random scatter).</span></li>
+                        </ul>
+
+                        <h3 class="subsection-heading">Hypothesis Test for the Slope ($\beta_1$)</h3>
+                        <p>Tests if there is a significant linear relationship between X and Y in the population.</p>
+                        <p><strong>Hypotheses:</strong></p>
+                        <p>$H_0: \beta_1 = 0$ (No linear relationship)</p>
+                        <p>$H_1: \beta_1 \ne 0$ (Linear relationship exists)</p>
+                        <p>(One-tailed tests are also possible: $H_1: \beta_1 < 0$ or $H_1: \beta_1 > 0$).</p>
+                        <p><strong>Test Statistic (t-test):</strong></p>
+                        <div class="equation">
+                            $$ t_{calc} = \frac{b_1 - \beta_{1,0}}{s_{b_1}} $$
+                        </div>
+                        <p>Where $\beta_{1,0}$ is the hypothesized slope (usually 0), and $s_{b_1}$ is the standard error of the slope estimate:</p>
+                        <div class="equation">
+                            $$ s_{b_1} = \frac{s_e}{\sqrt{S_{xx}}} $$
+                        </div>
+                        <p>And $s_e$ is the standard error of the estimate (standard deviation of residuals):</p>
+                        <div class="equation">
+                            $$ s_e = \sqrt{\frac{SSE}{n-2}} = \sqrt{\frac{\sum (y_i - \hat{y}_i)^2}{n-2}} = \sqrt{\frac{S_{yy} - b_1 S_{xy}}{n-2}} $$
+                        </div>
+                        <p><strong>Degrees of Freedom:</strong> $df = n-2$.</p>
+                        <p><strong>Decision Rule:</strong> Compare $t_{calc}$ to the critical value $t_{\alpha/2, df}$ or $t_{\alpha, df}$ from the t-distribution table, or use the p-value approach.</p>
+                        <p>(Note: The t-statistic for testing $\beta_1=0$ is mathematically equivalent to the t-statistic for testing $\rho=0$ from correlation analysis: $t = \frac{r \sqrt{n-2}}{\sqrt{1-r^2}}$).</p>
+
+                        <p><strong>Example:</strong> Test if the slope for the height/weight regression is significantly different from zero at $\alpha=0.05$.</p>
+                        <p>$H_0: \beta_1 = 0$</p>
+                        <p>$H_1: \beta_1 \ne 0$</p>
+                        <p>We need $s_e$. First, $SSE = S_{yy} - b_1 S_{xy} = 654.1 - (0.3688)(253.2) = 654.1 - 93.43 = 560.67$.</p>
+                        <div class="equation">
+                            $$ s_e = \sqrt{\frac{560.67}{10-2}} = \sqrt{\frac{560.67}{8}} = \sqrt{70.08} \approx 8.37 $$
+                            $$ s_{b_1} = \frac{8.37}{\sqrt{686.4}} = \frac{8.37}{26.2} \approx 0.319 $$
+                            $$ t_{calc} = \frac{b_1 - 0}{s_{b_1}} = \frac{0.3688}{0.319} \approx 1.156 $$
+                        </div>
+                        <p>$df = n-2 = 8$. Critical value $t_{0.025, 8} = 2.306$.</p>
+                        <p>Decision: Since $|t_{calc}| = 1.156 < 2.306$, do not reject $H_0$.</p>
+                        <p>Conclusion: There is not sufficient evidence at $\alpha=0.05$ to conclude that there is a significant linear relationship between height and weight (same conclusion as the correlation test).</p>
+
+                        <h3 class="subsection-heading">Correlation vs. Causation</h3>
+                        <p>A significant correlation or regression relationship between two variables does not necessarily imply that one variable causes the other.</p>
+                        <p>Association may be due to:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Direct causation (X causes Y or Y causes X).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Confounding (a third variable influences both X and Y).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Coincidence (chance association).</span></li>
+                        </ul>
+                        <p>Establishing causation requires more than just statistical association; it typically involves considering study design (e.g., randomized controlled trials), biological plausibility, consistency of findings, etc.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-9-exercises">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">✏️</span>
+                        <span class="heading-text">9.5 Exercises</span>
+                    </h2>
+                    <div class="content-card">
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">What information does a scatter plot provide about the relationship between two variables?</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Interpret the following correlation coefficients: r = 0.85, r = -0.15, r = -0.95, r = 0.05.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Consider the following data on age (X) and systolic blood pressure (Y) for 8 individuals:
+                                <div class="table-container" style="margin-top: 5px;">
+                                    <table class="content-table">
+                                        <thead><tr><th>Age (X)</th><th>SBP (Y)</th></tr></thead>
+                                        <tbody>
+                                            <tr><td>45</td><td>130</td></tr>
+                                            <tr><td>50</td><td>135</td></tr>
+                                            <tr><td>55</td><td>140</td></tr>
+                                            <tr><td>60</td><td>142</td></tr>
+                                            <tr><td>65</td><td>145</td></tr>
+                                            <tr><td>70</td><td>150</td></tr>
+                                            <tr><td>75</td><td>155</td></tr>
+                                            <tr><td>80</td><td>158</td></tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <ol type="a" style="margin-left: 20px; margin-top: 5px;">
+                                    <li>Create a scatter plot. Does the relationship appear linear? Positive or negative? Strong or weak?</li>
+                                    <li>Calculate Pearson's correlation coefficient (r).</li>
+                                    <li>Test if the correlation is significantly different from zero at $\alpha=0.05$.</li>
+                                    <li>Determine the equation of the least-squares regression line ($\hat{y} = b_0 + b_1 x$).</li>
+                                    <li>Interpret the slope ($b_1$) in the context of the problem.</li>
+                                    <li>Calculate the coefficient of determination ($r^2$) and interpret it.</li>
+                                    <li>Predict the SBP for a person aged 62.</li>
+                                </ol>
+                            </span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Explain why correlation does not imply causation. Give an example of two variables that might be correlated but where one does not cause the other.</span></li>
+                        </ol>
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-9-part-2 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-1.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 9 (Part 2): Regression</span>
+                    </div>
+                    <a href="appendix-tables-part-1.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

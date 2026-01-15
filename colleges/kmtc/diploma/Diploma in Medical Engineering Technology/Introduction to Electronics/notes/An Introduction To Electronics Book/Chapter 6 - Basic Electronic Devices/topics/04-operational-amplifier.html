@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Operational Amplifier - Basic Electronic Devices</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <!-- Skip Link -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="03-amplifier.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="#" class="nav-button nav-button--next disabled" aria-disabled="true">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 4 of 4</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🎛️</span>
+                        <span>Topic 04</span>
+                    </div>
+                    <h1 class="document-title">Operational Amplifier (Op-Amp)</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Basic Electronic Devices</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>25 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Floating Table of Contents -->
+                    <nav class="floating-toc" id="floating-toc">
+                        <div class="floating-toc-header">Contents</div>
+                        <ul class="floating-toc-list">
+                            <!-- Populated by JS -->
+                        </ul>
+                    </nav>
+
+                    <!-- Section 5.4: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔌</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>An operational amplifier (op-amp) is a DC-coupled high-gain electronic voltage amplifier with a differential input and, usually, a single-ended output.[1] In this configuration, an op-amp produces an output potential (relative to circuit ground) that is typically hundreds of thousands of times larger than the potential difference between its input terminals.[2]</p>
+                            
+                            <p>Operational amplifiers had their origins in analog computers, where they were used to do mathematical operations in many linear, non-linear and frequency-dependent circuits. Characteristics of a circuit using an op-amp are set by external components with little dependence on temperature changes or manufacturing variations in the op-amp itself, which makes op-amps popular building blocks for circuit design.</p>
+                            
+                            <p>Op-amps are among the most widely used electronic devices today, being used in a vast array of consumer, industrial, and scientific devices. Many standard IC op-amps cost only a few cents in moderate production volume; however some integrated or hybrid operational amplifiers with special performance specifications may cost over $100 US in small quantities.[3] Op-amps may be packaged as components, or used as elements of more complex integrated circuits.</p>
+                            
+                            <p>The op-amp is one type of differential amplifier. Other types of differential amplifier include the fully differential amplifier (similar to the op-amp, but with two outputs), the instrumentation amplifier (usually built from three op-amps), the isolation amplifier (similar to the instrumentation amplifier, but with tolerance to common-mode voltages that would destroy an ordinary op-amp), and negative feedback amplifier (usually built from one or more op-amps and a resistive feedback network).</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.4.1: Operation -->
+                    <section class="content-section" id="operation">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚙️</span>
+                                Operation
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-5bc38112.jpeg" 
+                                         alt="An op-amp without negative feedback (a comparator)" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">An op-amp without negative feedback (a comparator)</figcaption>
+                            </figure>
+
+                            <p>The amplifier's differential inputs consist of a non-inverting input (+) with voltage $V_{+}$ and an inverting input (-) with voltage $V_{-}$; ideally the op-amp amplifies only the difference in voltage between the two, which is called the differential input voltage. The output voltage of the op-amp $V_{\text{out}}$ is given by the equation:</p>
+                            
+                            <div class="equation">
+                                $$V_{\text{out}} = A_{\text{OL}} (V_{+} - V_{-})$$
+                            </div>
+                            
+                            <p>where $A_{OL}$ is the open-loop gain of the amplifier (the term "open-loop" refers to the absence of a feedback loop from the output to the input).</p>
+
+                            <h3>Open loop amplifier</h3>
+                            <p>The magnitude of $A_{OL}$ is typically very large—100,000 or more for integrated circuit op-amps—and therefore even a quite small difference between $V_{+}$ and $V_{-}$ drives the amplifier output nearly to the supply voltage. Situations in which the output voltage is equal to or greater than the supply voltage are referred to as saturation of the amplifier. The magnitude of $A_{OL}$ is not well controlled by the manufacturing process, and so it is impractical to use an operational amplifier as a stand-alone differential amplifier.</p>
+                            
+                            <p>Without negative feedback, and perhaps with positive feedback for regeneration, an op-amp acts as a comparator. If the inverting input is held at ground (0 V) directly or by a resistor $\mathbf{R}_{\mathrm{g}}$, and the input voltage $\mathbf{V}_{\mathrm{in}}$ applied to the non-inverting input is positive, the output will be maximum positive; if $\mathbf{V}_{\mathrm{in}}$ is negative, the output will be maximum negative. Since there is no feedback from the output to either input, this is an open loop circuit acting as a comparator. The circuit's gain is just the $A_{OL}$ of the op-amp.</p>
+
+                            <h3>Closed loop</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-635d0f7f.jpeg" 
+                                         alt="An op-amp with negative feedback (a non-inverting amplifier)" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">An op-amp with negative feedback (a non-inverting amplifier)</figcaption>
+                            </figure>
+
+                            <p>If predictable operation is desired, negative feedback is used, by applying a portion of the output voltage to the inverting input. The closed loop feedback greatly reduces the gain of the circuit. When negative feedback is used, the circuit's overall gain and response becomes determined mostly by the feedback network, rather than by the op-amp characteristics.</p>
+
+                            <p>In the non-inverting amplifier on the right, the presence of negative feedback via the voltage divider $R_{\mathrm{f}}$, $R_{\mathrm{g}}$ determines the closed-loop gain $A\mathrm{CL} = V_{\mathrm{out}} / V_{\mathrm{in}}$. Equilibrium will be established when $V_{\mathrm{out}}$ is just sufficient to "reach around and pull" the inverting input to the same voltage as $V_{\mathrm{in}}$. The voltage gain of the entire circuit is thus $1 + R_{\mathrm{f}} / R_{\mathrm{g}}$.</p>
+                            
+                            <p>By combining terms, we determine the closed-loop gain $A_{CL}$:</p>
+                            <div class="equation">
+                                $$A_{\mathrm{CL}} = \frac{V_{\mathrm{out}}}{V_{\mathrm{in}}} = 1 + \frac{R_{f}}{R_{g}}$$
+                            </div>
+
+                            <p><strong>Inverting amplifier:</strong> In an inverting amplifier, the output voltage changes in an opposite direction to the input voltage.</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-efb429c9.jpeg" 
+                                         alt="An op-amp connected in the inverting amplifier configuration" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">An op-amp connected in the inverting amplifier configuration</figcaption>
+                            </figure>
+
+                            <p>If $A_{OL}$ is very large, the gain equation simplifies to:</p>
+                            <div class="equation">
+                                $$V_{\text{out}} \approx - V_{\text{in}} \frac{R_{\mathrm{f}}}{R_{\text{in}}}$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.4.2: Op-amp characteristics -->
+                    <section class="content-section" id="characteristics">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📊</span>
+                                Op-amp characteristics
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Ideal op-amps</h3>
+                            <p>An ideal op-amp is usually considered to have the following properties:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Infinite open-loop gain $G = v_{\mathrm{out}} / v_{\mathrm{in}}$</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Infinite input impedance $R_{\mathrm{in}}$, and so zero input current</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Zero input offset voltage</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Infinite voltage range available at the output</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Infinite bandwidth with zero phase shift and infinite slew rate</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Zero output impedance $R_{\mathrm{out}}$</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Zero noise</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Infinite Common-mode rejection ratio (CMRR)</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Infinite Power supply rejection ratio.</span></li>
+                            </ul>
+
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">⭐</span>
+                                    <h4 class="callout-title">The Two "Golden Rules"</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>These ideals can be summarized by two rules useful for analyzing closed-loop circuits:</p>
+                                    <ol>
+                                        <li>The output attempts to do whatever is necessary to make the voltage difference between the inputs zero.</li>
+                                        <li>The inputs draw no current.</li>
+                                    </ol>
+                                </div>
+                            </div>
+
+                            <h3>Real op-amps</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-5aed155a.jpeg" 
+                                         alt="An equivalent circuit of an operational amplifier that models some resistive non-ideal parameters" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">An equivalent circuit of an operational amplifier that models some resistive non-ideal parameters.</figcaption>
+                            </figure>
+
+                            <p>Real operational amplifiers suffer from several non-ideal effects:</p>
+                            
+                            <h4>DC imperfections</h4>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Finite gain:</strong> Open-loop gain is infinite in the ideal operational amplifier but finite in real operational amplifiers (100,000 to over 1 million).</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Finite input impedances:</strong> The differential input impedance is defined as the impedance between its two inputs; the common-mode input impedance is the impedance from each input to ground.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Non-zero output impedance:</strong> Low output impedance is important for low-impedance loads; for these loads, the voltage drop across the output impedance effectively reduces the open loop gain.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Input current:</strong> Due to biasing requirements or leakage, a small amount of current flows into the inputs.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Input offset voltage:</strong> This voltage is what is required across the op-amp's input terminals to drive the output voltage to zero.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Common-mode gain:</strong> A perfect operational amplifier amplifies only the voltage difference between its two inputs, completely rejecting all voltages that are common to both. However, the differential input stage of an operational amplifier is never perfect.</span></li>
+                            </ul>
+
+                            <h4>AC imperfections</h4>
+                            <p>The op-amp gain calculated at DC does not apply at higher frequencies. Thus, for high-speed operation, more sophisticated considerations must be used in an op-amp circuit design.</p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Finite bandwidth:</strong> All amplifiers have finite bandwidth. To a first approximation, the op-amp has the frequency response of an integrator with gain.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Input capacitance:</strong> Most important for high frequency operation because it further reduces the open-loop bandwidth of the amplifier.</span></li>
+                            </ul>
+
+                            <h4>Non-linear imperfections</h4>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-33473ea5.jpeg" 
+                                         alt="The input (yellow) and output (green) of a saturated op amp in an inverting amplifier" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">The input (yellow) and output (green) of a saturated op amp in an inverting amplifier</figcaption>
+                            </figure>
+
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Saturation:</strong> Output voltage is limited to a minimum and maximum value close to the power supply voltages.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Slewing:</strong> The amplifier's output voltage reaches its maximum rate of change, the slew rate, usually specified in volts per microsecond.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Non-linear input-output relationship:</strong> The output voltage may not be accurately proportional to the difference between the input voltages (distortion).</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.4.3: Internal circuitry -->
+                    <section class="content-section" id="internal-circuitry">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧩</span>
+                                Internal circuitry of 741-type op-amp
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-bb0eb1c2.jpeg" 
+                                         alt="A component-level diagram of the common 741 op-amp" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">A component-level diagram of the common 741 op-amp. Dotted lines outline: current mirrors (red); differential amplifier (blue); class A gain stage (magenta); voltage level shifter (green); output stage (cyan).</figcaption>
+                            </figure>
+
+                            <p>Sourced by many manufacturers, and in multiple similar products, an example of a bipolar transistor operational amplifier is the 741 integrated circuit designed by Dave Fullagar at Fairchild Semiconductor after Bob Widlar's LM301 integrated circuit design.[9]</p>
+
+                            <h3>Architecture</h3>
+                            <p>A small-scale integrated circuit, the 741 op-amp shares with most op-amps an internal structure consisting of three gain stages:</p>
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Differential amplifier (outlined blue):</strong> provides high differential amplification (gain), with rejection of common-mode signal, low noise, high input impedance.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Voltage amplifier (outlined magenta):</strong> provides high voltage gain, a single-pole frequency roll-off.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Output amplifier (outlined cyan and green):</strong> provides high current gain (low output impedance), along with output current limiting, and output short-circuit protection.</span>
+                                </li>
+                            </ol>
+
+                            <h3>Differential amplifier</h3>
+                            <p>A cascaded differential amplifier followed by a current-mirror active load, the input stage (outlined in blue) is a transconductance amplifier, turning a differential voltage signal at the bases of Q1, Q2 into a current signal into the base of Q15.</p>
+                            
+                            <p>It entails two cascaded transistor pairs, satisfying conflicting requirements. The first stage consists of the matched NPN emitter follower pair Q1, Q2 that provide high input impedance. The second is the matched PNP common-base pair Q3, Q4 that eliminates the undesirable Miller effect; it drives an active load Q7 plus matched pair Q5, Q6.</p>
+
+                            <h3>Voltage amplifier</h3>
+                            <p>The (class-A) voltage gain stage (outlined in magenta) consists of the two NPN transistors Q15/Q19 connected in a Darlington configuration and uses the output side of current mirror Q12/Q13 as its collector (dynamic) load to achieve its high voltage gain. The output sink transistor Q20 receives its base drive from the common collectors of Q15 and Q19; the level-shifter Q16 provides base drive for the output source transistor Q14.</p>
+
+                            <h3>Output amplifier</h3>
+                            <p>The output stage (Q14, Q20, outlined in cyan) is a Class AB push-pull emitter follower amplifier. It provides an output drive with impedance of $\approx 50\Omega$, in essence, current gain. Transistor Q16 (outlined in green) provides the quiescent current for the output transistors, and Q17 provides output current limiting.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.4.4: Classification -->
+                    <section class="content-section" id="classification">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🏷️</span>
+                                Classification
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Op-amps may be classified by their construction:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">discrete (built from individual transistors or tubes/valves)</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">IC (fabricated in an Integrated circuit) — most common</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">hybrid</span></li>
+                            </ul>
+                            
+                            <p>IC op-amps may be classified in many ways, including:</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Grade:</strong> Military, Industrial, or Commercial grade.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Package type:</strong> DIP, surface-mount, etc.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Internal compensation:</strong> Op-amps with a built-in capacitor are termed "compensated".</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Single, dual and quad versions:</strong> Meaning 1, 2 or 4 operational amplifiers are included in the same package.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>Rail-to-rail:</strong> Can work with input (and/or output) signals very close to the power supply rails.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content"><strong>CMOS op-amps:</strong> Provide extremely high input resistances.</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.4.5: Applications -->
+                    <section class="content-section" id="applications">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🛠️</span>
+                                Applications
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-7d089365.jpeg" 
+                                         alt="DIP pinout for 741-type operational amplifier" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">DIP pinout for 741-type operational amplifier</figcaption>
+                            </figure>
+
+                            <p>The use of op-amps as circuit blocks is much easier and clearer than specifying all their individual circuit elements (transistors, resistors, etc.).</p>
+
+                            <h3>Applications without using any feedback</h3>
+                            <p>The op-amp is being used as a voltage comparator. A voltage level detector can be obtained if a reference voltage $V_{\mathrm{ref}}$ is applied to one of the op-amp's inputs.</p>
+
+                            <h3>Positive feedback applications</h3>
+                            <p>Another typical configuration of op-amps is with positive feedback, which takes a fraction of the output signal back to the non-inverting input. An important application of it is the comparator with hysteresis, the Schmitt trigger.</p>
+
+                            <h3>Negative feedback applications</h3>
+                            <p>In the non-inverting amplifier, the presence of negative feedback via the voltage divider determines the closed-loop gain. In an inverting amplifier, the output voltage changes in an opposite direction to the input voltage.</p>
+
+                            <h3>Other applications</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">audio- and video-frequency pre-amplifiers and buffers</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">differential amplifiers</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">differentiators and integrators</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">filters</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">precision rectifiers and peak detectors</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">voltage and current regulators</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">analog-to-digital converters</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">digital-to-analog converters</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">oscillators and waveform generators</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.4.6: Historical timeline -->
+                    <section class="content-section" id="historical-timeline">
+                        <div class="section-header">
+                            <div class="section-number">07</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📜</span>
+                                Historical timeline
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>1941: A vacuum tube op-amp.</strong> First found in U.S. Patent 2,401,779 filed by Karl D. Swartzel Jr. of Bell Labs.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>1947: An op-amp with an explicit non-inverting input.</strong> Designed by Loebe Julie.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>1949: A chopper-stabilized op-amp.</strong> Designed by Edwin A. Goldberg.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>1953: A commercially available op-amp.</strong> Model K2-W from George A. Philbrick Researches.
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <div class="figure-image-wrapper">
+                                                <img src="../assets/images/image-20251223-5391b619.jpeg" alt="GAP/R's K2-W" class="figure-image">
+                                                <div class="figure-overlay"><span class="overlay-icon">🔍</span></div>
+                                            </div>
+                                            <figcaption class="figure-caption">GAP/R's K2-W: a vacuum-tube op-amp (1953)</figcaption>
+                                        </figure>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>1961: A discrete IC op-amp.</strong> P45.
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <div class="figure-image-wrapper">
+                                                <img src="../assets/images/image-20251223-826d8a52.jpeg" alt="GAP/R's model P45" class="figure-image">
+                                                <div class="figure-overlay"><span class="overlay-icon">🔍</span></div>
+                                            </div>
+                                            <figcaption class="figure-caption">GAP/R's model P45: a solid-state, discrete op-amp (1961)</figcaption>
+                                        </figure>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>1962: An op-amp in a potted module.</strong>
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <div class="figure-image-wrapper">
+                                                <img src="../assets/images/image-20251223-2bfe6f09.jpeg" alt="GAP/R's model PP65" class="figure-image">
+                                                <div class="figure-overlay"><span class="overlay-icon">🔍</span></div>
+                                            </div>
+                                            <figcaption class="figure-caption">GAP/R's model PP65: a solid-state op-amp in a potted module (1962)</figcaption>
+                                        </figure>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>1963: A monolithic IC op-amp.</strong> $\mu$A702 designed by Bob Widlar at Fairchild.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>1968: Release of the $\mu$A741.</strong> Designed by Dave Fullagar at Fairchild.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>1970: First high-speed, low-input current FET design.</strong>
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <div class="figure-image-wrapper">
+                                                <img src="../assets/images/image-20251223-c9296fe2.jpeg" alt="ADI's HOS-050" class="figure-image">
+                                                <div class="figure-overlay"><span class="overlay-icon">🔍</span></div>
+                                            </div>
+                                            <figcaption class="figure-caption">ADI's HOS-050: a high speed hybrid IC op-amp (1979)</figcaption>
+                                        </figure>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Recent trends.</strong> Low-voltage op-amps, rail-to-rail output.
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <div class="figure-image-wrapper">
+                                                <img src="../assets/images/image-20251223-e4ae01d9.jpeg" alt="Modern mini DIP" class="figure-image">
+                                                <div class="figure-overlay"><span class="overlay-icon">🔍</span></div>
+                                            </div>
+                                            <figcaption class="figure-caption">An op-amp in a modern mini DIP</figcaption>
+                                        </figure>
+                                    </span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 5.4.7: See also & References -->
+                    <section class="content-section" id="references">
+                        <div class="section-header">
+                            <div class="section-number">08</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📚</span>
+                                References & See Also
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>See also</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Operational amplifier applications</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Differential amplifier</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Instrumentation amplifier</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Active filter</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Current-feedback operational amplifier</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Analog computer</span></li>
+                            </ul>
+
+                            <h3>References</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">[1] Maxim Application Note 1108: Understanding Single-Ended, Pseudo-Differential and Fully-Differential ADC Inputs – Retrieved November 10, 2007</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">[2] Analog devices MT-044 Tutorial</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">[5] Horowitz, Paul; Hill, Winfield (1989). <em>The Art of Electronics</em>. Cambridge, UK: Cambridge University Press. ISBN 0-521-37095-7.</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="03-amplifier.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button nav-button--home">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="#" class="nav-button nav-button--next disabled" aria-disabled="true">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 4 of 4</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop" data-close-lightbox></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" data-close-lightbox aria-label="Close image viewer">&times;</button>
+            <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

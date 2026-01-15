@@ -1,0 +1,455 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AC Analysis & Phasors - Circuit Laws & Analysis</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Theme Toggle -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-02-basic-circuit-laws.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-04-rlc-circuits.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 5</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>〰️</span>
+                        <span>Topic 03</span>
+                    </div>
+                    <h1 class="document-title">AC Analysis & Phasors</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>AC Analysis</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>10 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Section: Phasor Definition -->
+                    <section class="content-section" id="phasor-definition">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Phasor Fundamentals
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-ea0fdaf1.jpeg" 
+                                         alt="An example of series RLC circuit and respective phasor diagram for a specific omega" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">An example of series RLC circuit and respective phasor diagram for a specific $\omega$</figcaption>
+                            </figure>
+
+                            <p>In physics and engineering, a phasor (a portmanteau of phase vector), is a complex number representing a sinusoidal function whose amplitude ($A$), frequency ($\omega$), and phase ($\theta$) are time-invariant. It is also known as complex amplitude. It is a special case of a more general concept called analytic representation. Phasors separate the dependencies on $A$, $\omega$, and $\theta$ into three independent factors. This can be particularly useful because the frequency factor (which includes the time-dependence of the sinusoid) is often common to all the components of a linear combination of sinusoids. In those situations, phasors allow this common feature to be factored out, leaving just the $A$ and $\theta$ features.</p>
+
+                            <h3>Definition</h3>
+                            <p>Euler's formula indicates that sinusoids can be represented mathematically as the sum of two complex-valued functions:</p>
+                            
+                            <div class="equation">
+                                $$A \cdot \cos (\omega t + \theta) = A \cdot \frac {e ^ {i (\omega t + \theta)} + e ^ {- i (\omega t + \theta)}}{2}$$
+                            </div>
+                            
+                            <p>or as the real part of one of the functions:</p>
+                            
+                            <div class="equation">
+                                $$A \cdot \cos (\omega t + \theta) = \operatorname {Re} \left\{A \cdot e ^ {i (\omega t + \theta)} \right\} = \operatorname {Re} \left\{A e ^ {i \theta} \cdot e ^ {i \omega t} \right\}$$
+                            </div>
+
+                            <p>The term phasor can refer to either $Ae^{i\theta}e^{i\omega t}$ or just the complex constant, $Ae^{i\theta}$. In the latter case, it is understood to be a shorthand notation, encoding the amplitude and phase of an underlying sinusoid. An even more compact shorthand is angle notation: $A\angle \theta$.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-379b7e51.jpeg" 
+                                         alt="A phasor considered as a vector rotating about the origin in a complex plane" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">A phasor can be considered a vector rotating about the origin in a complex plane. The cosine function is the projection of the vector onto the real axis.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section: Phasor Arithmetic -->
+                    <section class="content-section" id="phasor-arithmetic">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧮</span>
+                                Phasor Arithmetic
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Multiplication by a constant (scalar)</h3>
+                            <p>Multiplication of the phasor $Ae^{i\theta}e^{i\omega t}$ by a complex constant, $Be^{i\phi}$, produces another phasor. That means its only effect is to change the amplitude and phase of the underlying sinusoid:</p>
+                            
+                            <div class="equation">
+                                $$\operatorname {Re} \left\{\left(A e ^ {i \theta} \cdot B e ^ {i \phi}\right) \cdot e ^ {i \omega t} \right\} = \operatorname {Re} \left\{\left(A B e ^ {i (\theta + \phi)}\right) \cdot e ^ {i \omega t} \right\} = A B \cos (\omega t + (\theta + \phi))$$
+                            </div>
+                            
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Impedance Note</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>In electronics, $Be^{i\phi}$ would represent an impedance, which is independent of time. In particular it is not the shorthand notation for another phasor. Multiplying a phasor current by an impedance produces a phasor voltage.</p>
+                                </div>
+                            </div>
+
+                            <h3>Differentiation and integration</h3>
+                            <p>The time derivative or integral of a phasor produces another phasor.</p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Differentiation:</strong> The time derivative of a sinusoid becomes just multiplication by the constant, $i\omega = (e^{i\pi /2}\cdot \omega)$.
+                                        <div class="math-inline" style="padding: 0.5rem 0;">
+                                            $\frac{d}{dt} (Ae^{i\theta}\cdot e^{i\omega t}) = i\omega \cdot Ae^{i\theta} \cdot e^{i\omega t}$
+                                        </div>
+                                    </span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">
+                                        <strong>Integration:</strong> Integrating a phasor corresponds to multiplication by $\frac{1}{i\omega} = \frac{e^{-i\pi / 2}}{\omega}$.
+                                    </span>
+                                </li>
+                            </ul>
+
+                            <h3>Addition</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-52d4eab0.jpeg" 
+                                         alt="The sum of phasors as addition of rotating vectors" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">The sum of phasors as addition of rotating vectors</figcaption>
+                            </figure>
+
+                            <p>The sum of multiple phasors produces another phasor. That is because the sum of sinusoids with the same frequency is also a sinusoid with that frequency:</p>
+                            <div class="equation">
+                                $$A_1 \angle \theta_1 + A_2 \angle \theta_2 = A_3 \angle \theta_3$$
+                            </div>
+
+                            <p>In physics, this sort of addition occurs when sinusoids interfere with each other, constructively or destructively. The static vector concept provides useful insight into questions like this: "What phase difference would be required between three identical sinusoids for perfect cancellation?" In this case, simply imagine taking three vectors of equal length and placing them head to tail such that the last head matches up with the first tail. Clearly, the shape which satisfies these conditions is an equilateral triangle, so the angle between each phasor to the next is $120^{\circ}$ (2π/3 radians), or one third of a wavelength $k / 3$.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-dd0d51e6.jpeg" 
+                                         alt="Phasor diagram of three waves in perfect destructive interference" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Phasor diagram of three waves in perfect destructive interference</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section: Circuit Laws -->
+                    <section class="content-section" id="circuit-laws">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚖️</span>
+                                Circuit Laws in AC
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>With phasors, the techniques for solving DC circuits can be applied to solve AC circuits.</p>
+
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Ohm's Law Extensions</h4>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content"><strong>Resistors:</strong> $V = IR$ remains valid as a resistor has no time delays.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content"><strong>General Components:</strong> $V = IZ$ where $Z$ is the complex impedance.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Power & KCL/KVL</h4>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content"><strong>Power Law:</strong> $S = VI^{*}$ where $I^{*}$ is the complex conjugate of $I$.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content"><strong>Kirchhoff's Laws:</strong> Work with phasors in complex form.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            
+                            <p>Given this we can apply the techniques of analysis of resistive circuits with phasors to analyze single frequency AC circuits containing resistors, capacitors, and inductors.</p>
+                            
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">⚡</span>
+                                    <h4 class="callout-title">Power Engineering</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>In analysis of three phase AC power systems, usually a set of phasors is defined as the three complex cube roots of unity, graphically represented as unit magnitudes at angles of 0, 120 and 240 degrees. By treating polyphase AC circuit quantities as phasors, balanced circuits can be simplified and unbalanced circuits can be treated as an algebraic combination of symmetrical circuits.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Electric Power -->
+                    <section class="content-section" id="electric-power">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔌</span>
+                                Electric Power
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Electric power is the rate at which electric energy is transferred by an electric circuit. The SI unit of power is the watt, one joule per second.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-b9fe0a5a.jpeg" 
+                                         alt="Electric power is transmitted on overhead lines like these, and also on underground high voltage cables." 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Electric power is transmitted on overhead lines like these, and also on underground high voltage cables.</figcaption>
+                            </figure>
+
+                            <h3>Definition</h3>
+                            <p>Electric power, like mechanical power, is the rate of doing work, measured in watts, and represented by the letter $P$. The electric power in watts produced by an electric current $I$ consisting of a charge of $Q$ coulombs every $t$ seconds passing through an electric potential (voltage) difference of $V$ is:</p>
+                            
+                            <div class="equation">
+                                $$P = \text{time unit per done work} = \frac {V Q}{t} = V I$$
+                            </div>
+
+                            <h3>Component Categories</h3>
+                            
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Passive devices (Loads)</h4>
+                                    <p>Devices that consume electric power from the circuit, converting it to other forms such as mechanical work, heat, light, etc. Examples are electrical appliances, such as light bulbs, electric motors, and electric heaters.</p>
+                                    <figure class="content-figure" style="margin: 1rem 0;" data-lightbox="true">
+                                        <img src="../assets/images/image-20251223-41f33023.jpeg" alt="Animation showing electric load" class="figure-image">
+                                        <figcaption class="figure-caption">Electric load</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Active devices (Sources)</h4>
+                                    <p>Devices that force charges to move from a lower electric potential to a higher, converting other energy types into electric potential energy. Examples include electric generators and batteries.</p>
+                                    <figure class="content-figure" style="margin: 1rem 0;" data-lightbox="true">
+                                        <img src="../assets/images/image-20251223-3e592830.jpeg" alt="Animation showing power source" class="figure-image">
+                                        <figcaption class="figure-caption">Power source</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+
+                            <h3>Passive sign convention</h3>
+                            <p>Electric power flowing out of a circuit into a component is arbitrarily defined to have a positive sign, while power flowing into a circuit from a component is defined to have a negative sign. Thus passive components have positive power consumption.</p>
+
+                            <h3>Alternating current power</h3>
+                            <p>In alternating current circuits, energy storage elements such as inductance and capacitance may result in periodic reversals of the direction of energy flow. The portion of power flow that, averaged over a complete cycle of the AC waveform, results in net transfer of energy in one direction is known as <strong>real power</strong> (also referred to as active power). That portion of power flow due to stored energy, that returns to the source in each cycle, is known as <strong>reactive power</strong>.</p>
+                            
+                            <p>The real power $P$ in watts consumed by a device is given by:</p>
+                            <div class="equation">
+                                $$P = \frac {1}{2} V _ {p} I _ {p} \cos \theta = V _ {r m s} I _ {r m s} \cos \theta$$
+                            </div>
+                            <p>Where $\theta$ is the phase angle between the current and voltage sine waves.</p>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-22f52e58.jpeg" 
+                                         alt="Power triangle: The components of AC power" 
+                                         class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Power triangle: The components of AC power. Real power is horizontal, reactive power is vertical.</figcaption>
+                            </figure>
+
+                            <p>The relationship between real power, reactive power and apparent power can be expressed by representing the quantities as vectors. Real power is represented as a horizontal vector and reactive power is represented as a vertical vector. The apparent power vector is the hypotenuse of a right triangle formed by connecting the real and reactive power vectors.</p>
+                            
+                            <div class="equation">
+                                $$(\text{apparent power}) ^ {2} = (\text{real power}) ^ {2} + (\text{reactive power}) ^ {2}$$
+                            </div>
+                            
+                            <p>The ratio of real power to apparent power is called <strong>power factor</strong> and is a number always between 0 and 1.</p>
+                        </div>
+                    </section>
+
+                    <!-- Key Points -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>A phasor is a complex number representing a sinusoidal function whose amplitude, frequency, and phase are time-invariant.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>In phasor representation, differentiation becomes multiplication by $i\omega$, and integration becomes division by $i\omega$.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Ohm's Law for AC circuits is $V = IZ$, where $Z$ is the complex impedance.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Real Power ($P$) is the net transfer of energy, while Reactive Power ($Q$) is power oscillating due to stored energy.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-02-basic-circuit-laws.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-04-rlc-circuits.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 5</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

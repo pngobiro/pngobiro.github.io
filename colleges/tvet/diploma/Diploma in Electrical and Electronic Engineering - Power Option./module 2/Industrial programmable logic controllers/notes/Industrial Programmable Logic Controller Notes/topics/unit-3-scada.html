@@ -1,0 +1,507 @@
+<!-- topics/unit-3-scada.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Topic 3: SCADA</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-2-plc-peripherals-maintenance.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 50%;"></div> <!-- Chunk 5/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 5 of 10</span>
+                    </div>
+                    <a href="unit-4-network-intro.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Topic 3: SUPERVISORY CONTROL AND DATA ACQUISITION (SCADA)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: topic-3-intro -->
+                <section id="topic-3-intro" class="content-section" aria-labelledby="topic-3-intro-heading">
+                    <h2 id="topic-3-intro-heading" class="section-heading">
+                        <span class="heading-icon">📡</span>
+                        <span class="heading-text">Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In modern manufacturing and industrial processes, mining industries, public and private utilities, leisure and security industries telemetry is often needed to connect equipment and systems separated by large distances.</p>
+                        <p>Control system architecture can range from simple local control to highly redundant distributed control. The SCADA system applies to facilities that are large enough that a central control system is necessary.</p>
+                        <p><dfn>SCADA</dfn> refers to the combination of telemetry and data acquisition. It encompasses the collecting of the information, transferring it back to the central site, carrying out any necessary analysis and control, and then displaying that information on a number of operator screens or displays. The required control actions are then conveyed back to the process.</p>
+                        <p>SCADA is a widely distributed computerized system primarily used to remotely control and monitor the conditions of field based assets from a centralized location.</p>
+                        <p>The PLC is still one of the most widely used control systems in industry. As need to monitor and control more devices in the plant grew, the PLCs were distributed and the systems became more intelligent and smaller in size. PLCs and DCS (distributed control systems) are used</p>
+                    </div>
+                </section>
+                <!-- END: topic-3-intro -->
+
+                <!-- START: topic-3-components -->
+                <section id="topic-3-components" class="content-section" aria-labelledby="topic-3-components-heading">
+                    <h2 id="topic-3-components-heading" class="section-heading">
+                        <span class="heading-icon">🧩</span>
+                        <span class="heading-text">Components of a SCADA system</span>
+                    </h2>
+                     <div class="content-card">
+                        <p>SCADA encompasses the transfer of data between a SCADA central host computer and number of remote sites (RTU) and the central host and the operator terminals.</p>
+                        <p>The figure below shows a generic SCADA system that employs data multiplexing (MUX) between the central host and the RTU.</p>
+                        <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-029-1.jpg" alt="Generic SCADA System Diagram showing Display Server, Printer, Multiplexer (MUX), RTUs, and Field Instrumentation (Analog/Digital In/Out)." class="content-image" style="max-width: 400px;">
+                             <figcaption>Generic SCADA System</figcaption>
+                         </figure>
+                        <p>SCADA system consist of:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Remote terminal unit (RTU):</strong> They are primarily used to convert electronic signals received from field devices into (or from) the language (known as the communication protocol) used to transmit the data over a communication channel.
+                                <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">It connects to sensors in the process, converting data to the supervisory system.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">PLC used as field devices because they are more economical, versatile, flexible and configurable than special-purpose RTU's</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">RTU gathers data from field devices (pump, valves alarms etc) in memory, until the MTU (master terminal unit) initiates a second command.</span></li>
+                                </ul>
+                            </span></li>
+                             <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>Communication network / system</strong> - used to transfer data between field data interface devices and control units and the computers in the SCADA host computer (MTU)
+                                <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">This is intended to provide the means by which data can be transferred between the central host computer server and field based RTU.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Communication network refers to the equipments needed to transfer data to and from different sites.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">The medium used can either be cable, telephone or radio</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">The way the SCADA system network (topology) is set up can vary with each system but there must be uninterrupted, bidirectional communication between the MTU and the RTU for a SCADA or data acquisition system (DAS) to function properly.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">This can be accomplished in various way i.e private wire lines, underground cables, telephone radio, modern, microwave dishes, satellite and other atmospheric means and many times, system employ more than one means of communicating to the remote site.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Communication systems used for SCADA are often split into two distinct part: WAN and LAN.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">The interface between the two parts is commonly achieved through some form of multiplexing.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Multiplexing allows different data streams to share single data link. It combines communication paths to and from many RTUs into a single bit stream, usually using Time Division Multiplexing (TDM).</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">It may itself be a SCADA processing device that manages the local network and not only combines data, but also reduces the amount of data that be interchanged within the central host.</span></li>
+                                </ul>
+                             </span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>Central computer or master terminal unit (MTU)</strong>
+                                <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">It is defined as the master or heart of a SCADA system and is located at the operator's central control facility.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Most often it is a single computer or a network of computer servers that provide a man-machine operator interface to the SCADA system.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">The computers process the information received from or sent to the RTU sites and present it to human operator in a form that the operators can work with.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Operators terminals are connected to the central host computer by a computer network so that the viewing screens end associated data can be displayed for the operator.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Some examples of the types of display screens offered by most systems include:
+                                        <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">System overview pages displaying the entire System often summarizing SCADA sites that might be faulty</span></li>
+                                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Site mimic screens for each individual RTU location showing up to the minute site information</span></li>
+                                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Alarm summary pages displayed current alarms and other types of alarms in which have been acknowledged or not</span></li>
+                                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Trend screens enabling the operator to display the behaviour of a particular variable over time.</span></li>
+                                        </ul>
+                                    </span></li>
+                                </ul>
+                            </span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text"><strong>Human machine interface (HMI)</strong>
+                                <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">It is the apparatus which present process data to a human operator, and through which the human operator controls the process.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">This displays this information in an easily understood graphical form, a rehives the data received, transmit alarms and permit operator control as required.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">The HMI is essentially a PC system running powerful graphic and alarm software programs.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">It is usually linked to the SCADA system's database and software programs, to provide trending, diagnostic data and information management.</span></li>
+                                </ul>
+                            </span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text"><strong>SCADA software</strong>
+                                 <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">SCADA software can be divided into two types: open and proprietary.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Proprietary software often is configured for a specific hardware platform and may not interface with the software or hardware produced by competing vendors.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Commercial off-the shelf (COTS)/open software are more flexible, and will interface with different types of hardware and software.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">The focus of proprietary software is on process and control functionality while COTS software emphasizes on compatibility with a variety of equipment and instrumentation.</span></li>
+                                    <li class="list-item"><span class="item-icon">-</span><span class="item-text">Software products typically used within a SCADA system are as follows:
+                                        <ul class="enhanced-list" style="margin-left: 1rem; margin-top: 0.5rem;">
+                                            <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Central host computer operating system:</strong>- software used to control the central host computer hardware.</span></li>
+                                            <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Operator terminal operating system</strong> - Software used to control the central host computer hardware at the operators terminal. It contributes to the networking of the central host and operator's terminal.</span></li>
+                                            <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Applications</strong> - They are of two types; central host computer application and operator terminal applications. These handles transmitted and reception of data to and from the RTU and central computer. It also provides the GU/ which offers mimic screens, alarm pages trend.</span></li>
+                                            <li class="list-item"><span class="item-icon">-</span><span class="item-text"><strong>Communication protocol drives:</strong>- required to control the translation and interpretation of the data between ends of the communication links in the systems.</span></li>
+                                        </ul>
+                                    </span></li>
+                                 </ul>
+                             </span></li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: topic-3-components -->
+
+                 <!-- START: topic-3-how-it-works -->
+                 <section id="topic-3-how-it-works" class="content-section" aria-labelledby="topic-3-how-it-works-heading">
+                     <h2 id="topic-3-how-it-works-heading" class="section-heading">
+                         <span class="heading-icon">⚙️</span>
+                         <span class="heading-text">How does SCADA Work</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>SCADA is a computer system for gathering and analyzing real time data</p>
+                        <p>The ability to monitor the entire control system in real time is facilitated by data acquisition including meter reading and checking status of sensors that are communicated at standard intervals depending on the system.</p>
+                        <p>The collected field data is transmitted through a communication network to the master terminal unit which the data is processed.</p>
+                        <p>The MTU monitors and control data from various field devices (sensor) that are either in close proximity or off site.</p>
+                        <p>Thus in summary, the SCADA system perform the following four functions:</p>
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text">Data acquisition</span></li>
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text">Networked data communication</span></li>
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text">Data presentation</span></li>
+                           <li class="list-item"><span class="item-icon">-</span><span class="item-text">Control</span></li>
+                        </ul>
+                     </div>
+                 </section>
+                 <!-- END: topic-3-how-it-works -->
+
+                 <!-- START: topic-3-data-acquisition -->
+                 <section id="topic-3-data-acquisition" class="content-section" aria-labelledby="topic-3-data-acquisition-heading">
+                     <h2 id="topic-3-data-acquisition-heading" class="section-heading">
+                         <span class="heading-icon">📊</span>
+                         <span class="heading-text">Data acquisition</span>
+                     </h2>
+                      <div class="content-card">
+                         <p>This is the process of sampling signals that measure real world physical conditions and converting the resulting samples into digital numerical values that can be manipulated by a computer.</p>
+                         <p>Data acquisition within SCADA system is accomplished first by the RTU scanning the field data interface devices connected to the RTU.</p>
+                         <p>The time to perform this task is called the <strong>scanning internal</strong>. Then NTU scans RTU to access data in the process referred to as <strong>potting</strong> the RTU.</p>
+                         <p>Some systems allow the RTU to transmit field values alarms to the central host without being processed by the central host.</p>
+                         <p>The components of data acquisition systems include:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Sensors that converts physical parameters to electrical signals</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Signal conditioning circuitry to convert sensor signals into a form that can be converted to digital values e.g implication, alternation multiplexing.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Analog to digital converters, which converts conditioned signals to digital values.</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Data acquisition hardware acts as the interface between the computer and the outside world. It primarily functions as a device that digitizes incoming signal so that the computer can interpret them.</span></li>
+                         </ul>
+
+                         <h3 class="subsection-heading">Types of data acquisition systems (DAS)</h3>
+                         <p>These depend on type of communication protocol used.</p>
+                         <ol type="i" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">i)</span><span class="item-text"><strong>Wireless data acquisition system:</strong> consist of one or more wireless transmission sending data back to a wireless receiver connected to a remote computer.</span></li>
+                             <li class="list-item"><span class="item-icon">ii)</span><span class="item-text"><strong>Serial communication data acquisition system:</strong> are good choices when the measurement needs to be made at a location which is distance from computer.</span></li>
+                             <li class="list-item"><span class="item-icon">iii)</span><span class="item-text"><strong>USB DAS:</strong> The Universal Serial Bus (USB) is a new standard for connecting P.C to peripheral devices such as monitor, DAS.</span></li>
+                         </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-3-data-acquisition -->
+
+                 <!-- START: topic-3-data-processing -->
+                 <section id="topic-3-data-processing" class="content-section" aria-labelledby="topic-3-data-processing-heading">
+                     <h2 id="topic-3-data-processing-heading" class="section-heading">
+                         <span class="heading-icon">📈</span>
+                         <span class="heading-text">Processing Data from the field</span>
+                     </h2>
+                      <div class="content-card">
+                         <p>Data can be of three main types:</p>
+                         <ol type="i" class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">i)</span><span class="item-text"><strong>Analog data</strong> (real numbers) which will be trended (placed in graphs)</span></li>
+                            <li class="list-item"><span class="item-icon">ii)</span><span class="item-text"><strong>Digital data</strong> (ON/OFF) which may have alarms attached to one state or the other</span></li>
+                            <li class="list-item"><span class="item-icon">iii)</span><span class="item-text"><strong>Pulse data</strong> (e.g. counting revolution of a meter) is analog data normally accumulated or counted such data are treated within the SCADA operator terminal software displays as analog data and may be trended.</span></li>
+                         </ol>
+                         <p>Data from the field are processes to detect alarm conditions, and if alarm is predicted, it will be displayed on dedicated alarm list on the application software running on the central host computer.</p>
+                         <p>Where variables in the field have been changing over time, the SCADA system usually offers a trending system where the behaviour of a particular variable can be plotted on a GUI screen (graphical user interface screen).</p>
+                     </div>
+                 </section>
+                 <!-- END: topic-3-data-processing -->
+
+                 <!-- START: topic-3-scada-tasks -->
+                 <section id="topic-3-scada-tasks" class="content-section" aria-labelledby="topic-3-scada-tasks-heading">
+                     <h2 id="topic-3-scada-tasks-heading" class="section-heading">
+                         <span class="heading-icon">📋</span>
+                         <span class="heading-text">Tasks in SCADA system</span>
+                     </h2>
+                      <div class="content-card">
+                         <ol type="i" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">i)</span><span class="item-text"><strong>Input/output task</strong> - This program is the interface between the control and monitoring system and plant floor.</span></li>
+                             <li class="list-item"><span class="item-icon">ii)</span><span class="item-text"><strong>Alarm task</strong> - this manages all alarms by detecting digital alarm point and comparing the values of analog alarm points to alarm threshold.</span></li>
+                         </ol>
+                         <aside class="callout note" role="note">
+                           <h4 class="callout-title">Note</h4>
+                           <p>SCADA can be seen as a system with many data elements called <strong>points</strong>. Each point is a monitor or sensor and there points can be either <strong>soft</strong> or <strong>hard</strong>. Hard data points can be on actual monitor; soft point can be application or software calculation. Data elements from hand and soft points are usually always recorded and logged to create a time stamp or history.</p>
+                         </aside>
+                         <ol type="i" class="enhanced-list" start="3">
+                             <li class="list-item"><span class="item-icon">iii)</span><span class="item-text"><strong>Trend task:</strong> it collects data to be monitored over time.</span></li>
+                             <li class="list-item"><span class="item-icon">iv)</span><span class="item-text"><strong>Report task</strong> - Reports are produced from plant data. These reports are periodic, event triggered or activated by the operator.</span></li>
+                             <li class="list-item"><span class="item-icon">v)</span><span class="item-text"><strong>Display task</strong> - manages all data to be monitored by the operator and all control actions requested.</span></li>
+                         </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-3-scada-tasks -->
+
+                 <!-- START: topic-3-scada-applications -->
+                 <section id="topic-3-scada-applications" class="content-section" aria-labelledby="topic-3-scada-applications-heading">
+                     <h2 id="topic-3-scada-applications-heading" class="section-heading">
+                         <span class="heading-icon">🏭</span>
+                         <span class="heading-text">Application of SCADA system</span>
+                     </h2>
+                      <div class="content-card">
+                         <p>In essence, SCADA application has two elements:-</p>
+                         <ol type="i" class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">i)</span><span class="item-text">The process/system/machinery needed to be monitored or controlled: - This can take the form of a power plant, water system, network, traffic light system.</span></li>
+                            <li class="list-item"><span class="item-icon">ii)</span><span class="item-text">A network of intelligent devices that interfaces with the first system through sensors and control output. This network, which is the SCADA system, gives the capability to measure and control specific elements of the first system.</span></li>
+                         </ol>
+                         <p>SCADA systems control are used in the following industries</p>
+                         <ol type="i" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">i)</span><span class="item-text"><strong>Manufacturing:</strong> SCADA system manages parts inventories, regulate industrial automation and robots, and monitor process and quality control.</span></li>
+                             <li class="list-item"><span class="item-icon">ii)</span><span class="item-text"><strong>Traffic signals:</strong> SCADA regulates traffic lights, controls traffic flow and detects out of order signals.</span></li>
+                             <li class="list-item"><span class="item-icon">iii)</span><span class="item-text"><strong>Electric power generation, transmission and distribution:</strong> Electric utilities use SCADA system to detect current flow and line voltage, monitor the operation of circuit breakers, and to take sections of the power grid outline or offline.</span></li>
+                             <li class="list-item"><span class="item-icon">iv)</span><span class="item-text"><strong>Building, facilities and environment:</strong> Facility managers use SCADA to control HVAC, refrigeration units lighting and entry systems.</span></li>
+                             <li class="list-item"><span class="item-icon">v)</span><span class="item-text"><strong>Water and Sewage:</strong> state and municipal water utilities use SCADA to monitor and regulate water flow, reservoir levels and pipe pressure.</span></li>
+                             <li class="list-item"><span class="item-icon">vi)</span><span class="item-text"><strong>Mass transit:</strong> transit authorities use SCADA to regulate electricity to subways, trains and trolley buses, to automate traffic signals for rail system; to track and locate trains and buses; and to control rail road - crossing gates.</span></li>
+                         </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-3-scada-applications -->
+
+                <!-- START: topic-3-scada-benefits -->
+                <section id="topic-3-scada-benefits" class="content-section" aria-labelledby="topic-3-scada-benefits-heading">
+                    <h2 id="topic-3-scada-benefits-heading" class="section-heading">
+                        <span class="heading-icon">✅</span>
+                        <span class="heading-text">Benefits of SCADA</span>
+                    </h2>
+                     <div class="content-card">
+                         <ol type="i" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">i)</span><span class="item-text">Improved operation of the plant or process resulting in savings due to optimization of the system.</span></li>
+                             <li class="list-item"><span class="item-icon">ii)</span><span class="item-text">Reduces the operating and maintenance cost hence maximize the profits.</span></li>
+                             <li class="list-item"><span class="item-icon">iii)</span><span class="item-text">Maximize productivity, ensure continuous production and increased productivity of the personnel.</span></li>
+                             <li class="list-item"><span class="item-icon">iv)</span><span class="item-text">Improved safety of the system due to better information and improved control.</span></li>
+                             <li class="list-item"><span class="item-icon">v)</span><span class="item-text">Protection of the plant equipment.</span></li>
+                             <li class="list-item"><span class="item-icon">vi)</span><span class="item-text">Safeguarding the environment from a failure of the system.</span></li>
+                             <li class="list-item"><span class="item-icon">vii)</span><span class="item-text">Enhances reliability and robustness of critical industrial processes.</span></li>
+                             <li class="list-item"><span class="item-icon">viii)</span><span class="item-text">Improved energy savings due to optimization of the plant.</span></li>
+                             <li class="list-item"><span class="item-icon">ix)</span><span class="item-text">Improved and quicker receipt of data so that clients can be invoiced more quickly and accurately.</span></li>
+                             <li class="list-item"><span class="item-icon">x)</span><span class="item-text">Government regulations for safety and metering of gas (for royalties & tax etc).</span></li>
+                         </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-3-scada-benefits -->
+
+                 <!-- START: topic-3-scada-creation -->
+                 <section id="topic-3-scada-creation" class="content-section" aria-labelledby="topic-3-scada-creation-heading">
+                     <h2 id="topic-3-scada-creation-heading" class="section-heading">
+                         <span class="heading-icon">🏗️</span>
+                         <span class="heading-text">Creating a functional SCADA system</span>
+                     </h2>
+                      <div class="content-card">
+                         <ol type="i" class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">(i)</span><span class="item-text"><strong>Phase 1: The DESIGN</strong> of the system architecture includes the communication system. Also involved in this initial phase will be any site instrumentation that is not currently in existence, but will be required to monitor desired parameters. Design stage translate the design basis document into a system design and document the design clearly and completely so that it can be constructed properly, commissioned completely, and operated and maintained reliably and efficiently.</span></li>
+                             <li class="list-item"><span class="item-icon">(ii)</span><span class="item-text"><strong>Phase 2: The SUPPLY</strong> of RTU, communication, and HMI equipment, which consists of a PC system and the required powerful graphic and alarm software programs.</span></li>
+                             <li class="list-item"><span class="item-icon">(iii)</span><span class="item-text"><strong>Phase 3: The PROGRAMMING</strong> of the communication equipment and the powerful HMI graphic and alarm software programs.</span></li>
+                             <li class="list-item"><span class="item-icon">(iv)</span><span class="item-text"><strong>Phase 4: The INSTALLATION</strong> of the communication equipment and the PC system. The stage involves installing and placing into operation the SCADA system hardware and software in compliance with the design documents.</span></li>
+                             <li class="list-item"><span class="item-icon">(v)</span><span class="item-text"><strong>Phase 5: The COMMISSIONING</strong> of the system, where communication and HMI programming problems are solved, and the system is proven to the client, and operator training and system documentation is provided. Commissioning is the formal process of verifying and documenting that the installed SCADA system complies with and performs in accordance with the design intent, as defined in the design documentation</span></li>
+                         </ol>
+                     </div>
+                 </section>
+                 <!-- END: topic-3-scada-creation -->
+
+                <!-- START: topic-3-design-approaches -->
+                <section id="topic-3-design-approaches" class="content-section" aria-labelledby="topic-3-design-approaches-heading">
+                    <h2 id="topic-3-design-approaches-heading" class="section-heading">
+                        <span class="heading-icon">📐</span>
+                        <span class="heading-text">Design approaches/strategies for SCADA system</span>
+                    </h2>
+                    <div class="content-card">
+
+                         <h3 class="subsection-heading">Local control system</h3>
+                         <p>It describes a system architecture in which sensors, controllers and controlled equipments are within close proximity and the scope of each controller is limited to a specific system or sub-system.</p>
+                         <p>Local controllers are typically capable of accepting inputs from a supervisory controller to initiate or terminate locally.</p>
+                         <p>Controlled automatic sequence, or to adjust control set points, but the control action itself is determined in the local controller.</p>
+                         <figure style="text-align: center;">
+                            <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-033-1.jpg" alt="Diagrams comparing Local Control, Centralized Control, and Distributed Control System (DCS) architectures." class="content-image">
+                             <figcaption>Control System Architectures</figcaption>
+                         </figure>
+
+                         <h3 class="subsection-heading">Centralized control system</h3>
+                         <p>Describes a system in which all sensors, actuators and other equipment within the facility are connected to a single controller or a group of controllers located in a common control room.</p>
+                         <p>This type was common for power plants and other facilities using single-loop controllers.</p>
+
+                         <h3 class="subsection-heading">Distributed control system</h3>
+                         <p>It offers the best features of both local control and centralized control.</p>
+                         <p>In a DCS, controllers are provided locally to systems or group of equipment but networked to one or more operator stations in a central location through a digital communication circuit.</p>
+                         <p>Control action for each system or subsystem takes place in a local controller but the central operator station has complete visibility of the status of all systems and the input and output data in each controller, as well as the ability to intervene in the control logic of the local controller if necessary.</p>
+                         <p>In a DSC, data acquisition and control functions are performed by a number of distributed micro-processor-based units, situated near to the devices being controlled or the instrument from which data is being gathered.</p>
+                         <p>Input and output wiring runs are short and less vulnerable to physical description or electro-magnetic interference.</p>
+                         <p>The data highway is normally capable of high speed</p>
+                         <figure style="text-align: center;">
+                             <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-033-2.jpg" alt="Diagram of Distributed Control System (DCS) showing multiple controllers connected via network cables to a central control room with operator interfaces." class="content-image" style="max-width: 600px;">
+                             <figcaption>Distributed Control System (DCS)</figcaption>
+                         </figure>
+
+
+                         <h3 class="subsection-heading">User Configurable Open System (UCOS)</h3>
+                          <figure style="text-align: center;">
+                                <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-033-3.jpg" alt="Abbreviation UCOS" style="max-height: 3em; border: none; box-shadow: none;">
+                                <!--<figcaption>UCOS Abbreviation</figcaption>-->
+                           </figure>
+                         <p>UCOS is a control system that employs object-oriented techniques at every level of its system architecture. It includes a number of subsystems which segment the functionality of UCOS. This includes an Engineering Workstation Subsystem, an Operator Workstation Subsystem, and a Field Control Unit (FCU) Controller Subsystem. The subsystems communicate via a Control Network.</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Engineering Workstation (EWS)</strong> used for project development. The EWS is the development tool where control schemes are configured then downloaded to the OWS, FCU, and SDS. The entire project is configured using a single integrated tool based on graphical Windows standards. Graphical techniques are also used to define the logical relationships among the devices in a process area. Project configuration begins by defining the system architecture: workstations, field control units (FCUS), I/O, networking, etc. Graphical techniques are also used to define the logical relationships among the control elements multiple devices.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Operator Workstation (OWS)</strong> for operator interface. This is used to monitor and control the process. It uses the project screens created during project development and animates them based on real-time data received from field control units and field data servers. Authorized operators can monitor detailed activities for many types of devices and send commands using standard faceplate command windows and group displays.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Field Control Unit (FCU)</strong> for control logic execution and direct scanning of I/O. The FCU provides I/O services by monitoring and controlling I/O across standard networks and data highways. The FCU can provide simultaneous support for multiple vendors' I/O and I/O networks. The variety of platform and form-factor options supported by the FCU allows incorporation of distributed, distinct I/O subsystems into common control strategies.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Control Network.</strong> System supports redundant and non-redundant fiber optic and Ethernet local networks using the TCP/IP networking protocol for standardized, advanced application connectivity. The LAN/WAN can be extended to other sites inside or outside the plant using such remote communications technologies as satellite, radio, microwave, and dial-up running such standard protocols as TCP/IP, Modbus, OPC, DDE</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>I/O Subsystem</strong> supporting I/O from all industry standard suppliers. The same logic can be solved to manipulate different I/O subsystems from different manufacturers without having to change any of the programming or operational parameters of the configured system.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>SCADA Data Server (SDS)</strong> for interfacing data from intelligent devices, such as PLCs, Fieldbus technologies, RTUs, PLC I/O, and other third-party devices</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Process Historical Archiver (PHA)</strong> for storing and retrieving historical data collected by the FCU, SDS or any other intelligent device in the system</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>microFCU:</strong> is a small, low-powered PLC that executes sequential and regulatory logic and directly scans onboard I/O. It can replace RTUs at a significant reduction in cost and power consumption plus it can provide local intelligent control of devices, which RTUs can't do.</span></li>
+                         </ul>
+                         <figure style="text-align: center;">
+                              <img src="../assets/images/2025_05_05_bb7a9f6e05b71dd1aeeeg-034-1.jpg" alt="Diagram of UCOS architecture showing Engineering/Operator Workstations, Process Historical Archiver, Ethernet TCP/IP network, Field Control Unit, SCADA Data Server, microFCU, and various connected I/O devices and PLCs." class="content-image" style="max-width: 700px;">
+                              <figcaption>User Configurable Open System (UCOS) Architecture</figcaption>
+                          </figure>
+                    </div>
+                </section>
+                <!-- END: topic-3-design-approaches -->
+
+                 <!-- START: topic-3-security -->
+                 <section id="topic-3-security" class="content-section" aria-labelledby="topic-3-security-heading">
+                     <h2 id="topic-3-security-heading" class="section-heading">
+                         <span class="heading-icon">🔒</span>
+                         <span class="heading-text">SCADA SECURITY / ACCESS CONTROL</span>
+                     </h2>
+                      <div class="content-card">
+                         <p><dfn>Access control</dfn> is the selective restriction to access to a plant/place or other resources. Hence the security access control is the act of ensuring that an authenticated user accesses only what they are authorized to and no more.</p>
+                         <p>SCADA systems are used to control and monitor physical processes, however the security of these system is important because compromise or destruction of these system may impact multiple areas of society or industries.</p>
+                         <p>It is important to be able to detect possible attacks and respond in an appropriate manner in order to minimize the impacts.</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Protect:</strong> Deploying specific protection measures to prevent and discourage electronic attack against the process control systems.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Detect:</strong> Establishing mechanisms for rapidly identifying actual or suspected electronic attacks.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Respond:</strong> Undertaking appropriate action in response to confirmed security incidents against the process control systems.</span></li>
+                         </ul>
+
+                         <h3 class="subsection-heading">Defence in Depth</h3>
+                         <p>Where a single protection measure has been deployed to protect a system, there is a risk that if a weakness in that measure is identified and exploited there is effectively no protection provided.</p>
+                         <p>No single security measure itself is foolproof as vulnerabilities and weaknesses could be identified at any point in time. In order to reduce these risks, implementing multiple protection measures in series avoids single points of failure.</p>
+                         <p>In order to safeguard the process control system from electronic attacks (e.g. hackers, worms and viruses), it may be insufficient to rely on a single firewall, designed to protect the corporate IT network.</p>
+                         <p>A much more effective security model is to build on the benefits of the corporate firewall with an additional dedicated process control firewall and deploy other protection measures such as anti-virus software and intrusion detection</p>
+
+                         <h3 class="subsection-heading">Remote access</h3>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Maintain an inventory of all remote access connections and types (e.g. virtual private network or modems).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Ensure that a valid business justification exists for all remote access connections and keep remote connections to a minimum.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Implement appropriate authentication mechanisms (e.g. strong authentication) for remote access connections.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Implement appropriate procedures and assurance mechanisms for enabling and disabling remote access connections.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Ensure that remote access computers are appropriately secured (e.g. anti-virus, anti- spam and personal firewalls).</span></li>
+                         </ul>
+
+                         <h3 class="subsection-heading">Anti-virus:</h3>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Protect process control systems with anti-virus software on workstations and servers.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Where anti-virus software cannot be deployed other protection measures should be implemented (e.g. gateway anti-virus scanning or manual media checking)</span></li>
+                          </ul>
+
+                         <h3 class="subsection-heading">E-mail and Internet access</h3>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Disable all email and internet access from process control systems.</span></li>
+                          </ul>
+
+                         <h3 class="subsection-heading">System hardening</h3>
+                          <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Undertake hardening of process control systems to prevent network based attacks.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Remove or disable unused services and ports in the operating systems and applications to prevent unauthorized use.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Understand what ports are open and what services and protocols used by devices (especially embedded devices such as PLCs and RTUs). This could be established by a port scan in a test environment. All unnecessary ports and services should be disabled (e.g. embedded web servers).</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Ensure all inbuilt system security features are enabled.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Where possible restrict the use of removable media (e.g. CDs, floppy disks, USB memory sticks etc.) and if possible removable media should not be used. Where it is necessary to use removable media then procedures should be in place to ensure that these are checked for malware prior to use.</span></li>
+                          </ul>
+
+                         <h3 class="subsection-heading">Backups and recovery</h3>
+                           <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Ensure effective backup and recovery procedures are in place, and are appropriate for the identified electronic and physical threats. These should be reviewed and regularly tested.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Test the integrity of backups regularly through a full restore process. Store backups at on and off site locations.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Media should be transported securely and stored in appropriately secure locations.</span></li>
+                           </ul>
+
+                         <h3 class="subsection-heading">Physical security</h3>
+                           <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Deploy physical security protection measures to protect process control systems and associated networking equipment from physical attack and local unauthorized access.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">A combination of protection measures is likely to be required which could include, drive locks, tamper proof casing, secure server rooms, access control systems and CCTV.</span></li>
+                           </ul>
+
+                         <h3 class="subsection-heading">Security patching</h3>
+                           <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Implement processes for deployment of security patches to process control systems.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">These processes should be supported by deployment and audit tools.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">The processes should make allowance for vendor certification of patches, testing of patches prior to deployment, and a staged deployment process to minimize the risk of disruption from the change.</span></li>
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Where security patching is not possible or practical, alternative appropriate protection measures should be considered.</span></li>
+                           </ul>
+
+                         <h3 class="subsection-heading">Personnel background checks</h3>
+                            <ul class="enhanced-list">
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">Ensure all staff with operational or administration access to process control systems are appropriately screened.</span></li>
+                            </ul>
+
+                         <h3 class="subsection-heading">Passwords and accounts</h3>
+                             <ul class="enhanced-list">
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">Implement and enforce a password policy for all process control systems that cover strength of passwords and expiration times.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">It is recommended that passwords are changed frequently, but where this is not possible or practical, alternative appropriate protection should be considered.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">Regularly review all access rights and decommission old accounts.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">Where possible change vendor passwords from default settings.</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">Passwords may not be deemed necessary for some functions (e.g. view only mode).</span></li>
+                              <li class="list-item"><span class="item-icon">•</span><span class="item-text">Consider stronger authentication methods for critical functions.</span></li>
+                             </ul>
+
+                         <h3 class="subsection-heading">Document security framework</h3>
+                             <ul class="enhanced-list">
+                               <li class="list-item"><span class="item-icon">•</span><span class="item-text">Document a full inventory of the process control systems and components.</span></li>
+                               <li class="list-item"><span class="item-icon">•</span><span class="item-text">Document the framework that provides the security for the process control systems and regularly review and update to reflect current threats.</span></li>
+                               <li class="list-item"><span class="item-icon">•</span><span class="item-text">This document should include details of the risk assessments, assumptions made, known vulnerabilities and security protection measures deployed.</span></li>
+                               <li class="list-item"><span class="item-icon">•</span><span class="item-text">Ensure all process control system documentation is secured and access limited to authorized personnel</span></li>
+                             </ul>
+                     </div>
+                 </section>
+                 <!-- END: topic-3-security -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <!-- Repeat exact same links as top navigation -->
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="unit-2-plc-peripherals-maintenance.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 50%;"></div> <!-- Chunk 5/10 -->
+                        </div>
+                        <span class="progress-text">Chunk 5 of 10</span>
+                    </div>
+                    <a href="unit-4-network-intro.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

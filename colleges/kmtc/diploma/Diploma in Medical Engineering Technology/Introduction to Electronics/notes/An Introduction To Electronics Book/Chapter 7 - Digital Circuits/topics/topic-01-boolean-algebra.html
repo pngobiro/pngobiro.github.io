@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Boolean Algebra (Logic) - Digital Circuits Study Guide</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="#" class="nav-button nav-button--previous disabled" aria-disabled="true">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-02-logic-gates.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 12.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 1 of 8</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>⊨</span>
+                        <span>Topic 01</span>
+                    </div>
+                    <h1 class="document-title">Boolean Algebra (Logic)</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Logic Fundamentals</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>15 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📘</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>This article is about the subarea of mathematics. For the related algebraic structures, see Boolean algebra (structure) and Boolean ring.</p>
+                            
+                            <p>In mathematics and mathematical logic, Boolean algebra is the subarea of algebra in which the values of the variables are the truth values true and false, usually denoted 1 and 0 respectively. Instead of elementary algebra where the values of the variables are numbers, and the main operations are addition and multiplication, the main operations of Boolean algebra are the conjunction and, denoted $\land$, the disjunction or, denoted $\lor$, and the negation not, denoted $\neg$. It is thus a formalism for describing logical relations in the same way that ordinary algebra describes numeric relations.</p>
+                            
+                            <p>Boolean algebra was introduced by George Boole in his first book The Mathematical Analysis of Logic (1847), and set forth more fully in his An Investigation of the Laws of Thought (1854). According to Huntington the term "Boolean algebra" was first suggested by Sheffer in 1913.</p>
+                            
+                            <p>Boolean algebra has been fundamental in the development of digital electronics, and is provided for in all modern programming languages. It is also used in set theory and statistics.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: History -->
+                    <section class="content-section" id="history">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📜</span>
+                                History
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Boole's algebra predated the modern developments in abstract algebra and mathematical logic; it is however seen as connected to the origins of both fields. In an abstract setting, Boolean algebra was perfected in the late 19th century by Jevons, Schröder, Huntington, and others until it reached the modern conception of an (abstract) mathematical structure. For example, the empirical observation that one can manipulate expressions in the algebra of sets by translating them into expressions in Boole's algebra is explained in modern terms by saying that the algebra of sets is a Boolean algebra (note the indefinite article). In fact, M. H. Stone proved in 1936 that every Boolean algebra is isomorphic to a field of sets.</p>
+                            
+                            <p>In the 1930s, while studying switching circuits, Claude Shannon observed that one could also apply the rules of Boole's algebra in this setting, and he introduced switching algebra as a way to analyze and design circuits by algebraic means in terms of logic gates. Shannon already had at his disposal the abstract mathematical apparatus, thus he cast his switching algebra as the two-element Boolean algebra. In circuit engineering settings today, there is little need to consider other Boolean algebras, thus "switching algebra" and "Boolean algebra" are often used interchangeably. Efficient implementation of Boolean functions is a fundamental problem in the design of combinatorial logic circuits. Modern electronic design automation tools for VLSI circuits often rely on an efficient representation of Boolean functions known as (reduced ordered) binary decision diagrams (BDD) for logic synthesis and formal verification.</p>
+                            
+                            <p>Logic sentences that can be expressed in classical propositional calculus have an equivalent expression in Boolean algebra. Thus, Boolean logic is sometimes used to denote propositional calculus performed in this way. Boolean algebra is not sufficient to capture logic formulas using quantifiers, like those from first order logic. Although the development of mathematical logic did not follow Boole's program, the connection between his algebra and logic was later put on firm ground in the setting of algebraic logic, which also studies the algebraic systems of many other logics. The problem of determining whether the variables of a given Boolean (propositional) formula can be assigned in such a way as to make the formula evaluate to true is called the Boolean satisfiability problem (SAT), and is of importance to theoretical computer science, being the first problem shown to be NP-complete. The closely related model of computation known as a Boolean circuit relates time complexity (of an algorithm) to circuit complexity.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Values -->
+                    <section class="content-section" id="values">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔢</span>
+                                Values
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Whereas in elementary algebra expressions denote mainly numbers, in Boolean algebra they denote the truth values false and true. These values are represented with the bits (or binary digits), namely 0 and 1. They do not behave like the integers 0 and 1, for which $1+1=2$, but may be identified with the elements of the two-element field $\mathrm{GF}(2)$, that is, integer arithmetic modulo 2, for which $1 + 1 = 0$. Addition and multiplication then play the Boolean roles of XOR (exclusive-or) and AND (conjunction) respectively, with disjunction $x \vee y$ (inclusive-or) definable as $x + y + xy$.</p>
+                            
+                            <p>Boolean algebra also deals with functions which have their values in the set $\{0, 1\}$. A sequence of bits is a commonly used such function. Another common example is the subsets of a set $E$: to a subset $F$ of $E$ is associated the indicator function that takes the value 1 on $F$ and 0 outside $F$. The most general example is the elements of a Boolean algebra, with all of the foregoing being instances thereof.</p>
+                            
+                            <p>As with elementary algebra, the purely equational part of the theory may be developed without considering explicit values for the variables.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Operations -->
+                    <section class="content-section" id="operations">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚙️</span>
+                                Operations
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Basic operations</h3>
+                            <p>The basic operations of Boolean algebra are as follows.</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">And (conjunction), denoted $x \wedge y$ (sometimes $x$ AND $y$ or $Kxy$), satisfies $x \wedge y = 1$ if $x = y = 1$ and $x \wedge y = 0$ otherwise.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Or (disjunction), denoted $x \vee y$ (sometimes $x$ OR $y$ or $Axy$), satisfies $x \vee y = 0$ if $x = y = 0$ and $x \vee y = 1$ otherwise.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Not (negation), denoted $\neg x$ (sometimes NOT $x$, Nx or $!x$), satisfies $\neg x = 0$ if $x = 1$ and $\neg x = 1$ if $x = 0$.</span>
+                                </li>
+                            </ul>
+                            
+                            <p>If the truth values 0 and 1 are interpreted as integers, these operations may be expressed with the ordinary operations of the arithmetic:</p>
+                            
+                            <div class="equation">
+                                $$ \begin{array}{l}
+                                x \wedge y = x \times y \\
+                                x \vee y = x + y - (x \times y) \\
+                                \neg x = 1 - x \\
+                                \end{array} $$
+                            </div>
+                            
+                            <p>Alternatively the values of $x \wedge y$, $x \vee y$, and $\neg x$ can be expressed by tabulating their values with truth tables as follows.</p>
+                            
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📊</span>
+                                    <span class="table-title">Basic Boolean Operations Truth Table</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>$x$</th>
+                                                <th>$y$</th>
+                                                <th>$x \wedge y$</th>
+                                                <th>$x \vee y$</th>
+                                                <th>$\neg x$</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>0</td>
+                                                <td>1</td>
+                                                <td>0</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>0</td>
+                                                <td>0</td>
+                                                <td>1</td>
+                                                <td>0</td>
+                                            </tr>
+                                            <tr>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>1</td>
+                                                <td>0</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <p>One may consider that only the negation and one of the two other operations are basic, because of the following identities that allow to define the conjunction in terms of the negation and the disjunction, and vice versa:</p>
+                            
+                            <div class="equation">
+                                $$ \begin{array}{l}
+                                x \wedge y = \neg (\neg x \vee \neg y) \\
+                                x \vee y = \neg (\neg x \wedge \neg y) \\
+                                \end{array} $$
+                            </div>
+
+                            <h3>Derived operations</h3>
+                            <p>The three Boolean operations described above are referred to as basic, meaning that they can be taken as a basis for other Boolean operations that can be built up from them by composition, the manner in which operations are combined or compounded. Operations composed from the basic operations include the following examples:</p>
+                            
+                            <div class="equation">
+                                $$ \begin{array}{l}
+                                x \rightarrow y = \neg x \vee y \\
+                                x \oplus y = (x \vee y) \wedge \neg (x \wedge y) \\
+                                x \equiv y = \neg (x \oplus y) \\
+                                \end{array} $$
+                            </div>
+                            
+                            <p>These definitions give rise to the following truth tables giving the values of these operations for all four possible inputs.</p>
+                            
+                            <p>The first operation, $x \to y$, or $Cxy$, is called material implication. If $x$ is true then the value of $x \to y$ is taken to be that of $y$. But if $x$ is false then the value of $y$ can be ignored; however the operation must return some truth value and there are only two choices, so the return value is the one that entails less, namely true. (Relevance logic addresses this by viewing an implication with a false premise as something other than either true or false.)</p>
+                            
+                            <p>The second operation, $x \oplus y$, or $Jxy$, is called exclusive or to distinguish it from disjunction as the inclusive kind. It excludes the possibility of both $x$ and $y$. Defined in terms of arithmetic it is addition mod 2 where $1 + 1 = 0$.</p>
+                            
+                            <p>The third operation, the complement of exclusive or, is equivalence or Boolean equality: $x \equiv y$, or $Exy$, is true just when $x$ and $y$ have the same value. Hence $x \oplus y$ as its complement can be understood as $x \neq y$, being true just when $x$ and $y$ are different. Its counterpart in arithmetic mod 2 is $x + y + 1$.</p>
+                            
+                            <p>Given two operands, each with two possible values, there are $2^2 = 4$ possible combinations of inputs. Because each output can have two possible values, there are a total of $2^4 = 16$ possible binary Boolean operations.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Laws -->
+                    <section class="content-section" id="laws">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚖️</span>
+                                Laws
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A law of Boolean algebra is an identity such as $x \vee (y \vee z) = (x \vee y) \vee z$ between two Boolean terms, where a Boolean term is defined as an expression built up from variables and the constants 0 and 1 using the operations $\wedge$, $\vee$, and $\neg$. The concept can be extended to terms involving other Boolean operations such as $\oplus$, $\rightarrow$, and $\equiv$, but such extensions are unnecessary for the purposes to which the laws are put. Such purposes include the definition of a Boolean algebra as any model of the Boolean laws, and as a means for deriving new laws from old as in the derivation of $x \vee (y \wedge z) = x \vee (z \wedge y)$ from $y \wedge z = z \wedge y$ as treated in the section on axiomatization.</p>
+
+                            <h3>Monotone laws</h3>
+                            <p>Boolean algebra satisfies many of the same laws as ordinary algebra when one matches up $\vee$ with addition and $\wedge$ with multiplication. In particular the following laws are common to both kinds of algebra:</p>
+                            
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Complementation $x \wedge \neg x = 0$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Complementation $x \vee \neg x = 1$</span>
+                                </li>
+                            </ol>
+                            
+                            <p>All properties of negation including the laws below follow from the above two laws alone.</p>
+                            
+                            <p>In both ordinary and Boolean algebra, negation works by exchanging pairs of elements, whence in both algebras it satisfies the double negation law (also called involution law).</p>
+                            
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📋</span>
+                                    <span class="table-title">Laws of Boolean Algebra</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Law Name</th>
+                                                <th>Boolean Expression</th>
+                                                <th>Ordinary Algebra Equivalent</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Associativity</td>
+                                                <td>$x \vee (y \vee z) = (x \vee y) \vee z$</td>
+                                                <td>$(x + y) + z = x + (y + z)$</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Associativity</td>
+                                                <td>$x \wedge (y \wedge z) = (x \wedge y) \wedge z$</td>
+                                                <td>$(x \times y) \times z = x \times (y \times z)$</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Commutativity</td>
+                                                <td>$x \vee y = y \vee x$</td>
+                                                <td>$x + y = y + x$</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Commutativity</td>
+                                                <td>$x \wedge y = y \wedge x$</td>
+                                                <td>$x \times y = y \times x$</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Distributivity of $\wedge$ over $\vee$</td>
+                                                <td>$x \wedge (y \vee z) = (x \wedge y) \vee (x \wedge z)$</td>
+                                                <td>$x \times (y + z) = (x \times y) + (x \times z)$</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Identity</td>
+                                                <td>$x \vee 0 = x$</td>
+                                                <td>$x + 0 = x$</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Identity</td>
+                                                <td>$x \wedge 1 = x$</td>
+                                                <td>$x \times 1 = x$</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Annihilator</td>
+                                                <td>$x \wedge 0 = 0$</td>
+                                                <td>$x \times 0 = 0$</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <p>Boolean algebra however obeys some additional laws, in particular the following:</p>
+                            
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">De Morgan $\neg x \wedge \neg y = \neg (x \vee y)$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">De Morgan $\neg x \vee \neg y = \neg (x \wedge y)$</span>
+                                </li>
+                            </ol>
+                            
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">📋</span>
+                                    <span class="table-title">Additional Boolean Laws</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Law Name</th>
+                                                <th>Expression</th>
+                                                <th>Notes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>Idempotence</td>
+                                                <td>$x \vee x = x$</td>
+                                                <td>False in ordinary algebra ($1+1=2$)</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Idempotence</td>
+                                                <td>$x \wedge x = x$</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Absorption</td>
+                                                <td>$x \wedge (x \vee y) = x$</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Absorption</td>
+                                                <td>$x \vee (x \wedge y) = x$</td>
+                                                <td></td>
+                                            </tr>
+                                            <tr>
+                                                <td>Distributivity of $\vee$ over $\wedge$</td>
+                                                <td>$x \vee (y \wedge z) = (x \vee y) \wedge (x \vee z)$</td>
+                                                <td>False in ordinary algebra</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Annihilator</td>
+                                                <td>$x \vee 1 = 1$</td>
+                                                <td></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <p>A consequence of the first of these laws is $1 \vee 1 = 1$, which is false in ordinary algebra, where $1 + 1 = 2$. Taking $x = 2$ in the second law shows that it is not an ordinary algebra law either, since $2 \times 2 = 4$. The remaining four laws can be falsified in ordinary algebra by taking all variables to be 1, for example in Absorption Law 1 the left hand side is $1(1 + 1) = 2$ while the right hand side is 1, and so on.</p>
+                            
+                            <p>All of the laws treated so far have been for conjunction and disjunction. These operations have the property that changing either argument either leaves the output unchanged or the output changes in the same way as the input. Equivalently, changing any variable from 0 to 1 never results in the output changing from 1 to 0. Operations with this property are said to be monotone. Thus the axioms so far have all been for monotonic Boolean logic. Nonmonotonicity enters via complement $\neg$ as follows.</p>
+
+                            <h3>Nonmonotone laws</h3>
+                            <p>The complement operation is defined by the following two laws.</p>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Complementation 1: $x \wedge \neg x = 0$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Complementation 2: $x \vee \neg x = 1$</span>
+                                </li>
+                            </ul>
+
+                            <h3>Completeness</h3>
+                            <p>The laws listed above define Boolean algebra, in the sense that they entail the rest of the subject. The laws Complementation 1 and 2, together with the monotone laws, suffice for this purpose and can therefore be taken as one possible complete set of laws or axiomatization of Boolean algebra. Every law of Boolean algebra follows logically from these axioms. Furthermore Boolean algebras can then be defined as the models of these axioms as treated in the section thereon.</p>
+                            
+                            <p>To clarify, writing down further laws of Boolean algebra cannot give rise to any new consequences of these axioms, nor can it rule out any model of them. In contrast, in a list of some but not all of the same laws, there could have been Boolean laws that did not follow from those on the list, and moreover there would have been models of the listed laws that were not Boolean algebras.</p>
+                            
+                            <p>This axiomatization is by no means the only one, or even necessarily the most natural given that we did not pay attention to whether some of the axioms followed from others but simply chose to stop when we noticed we had enough laws, treated further in the section on axiomatizations. Or the intermediate notion of axiom can be sidestepped altogether by defining a Boolean law directly as any tautology, understood as an equation that holds for all values of its variables over 0 and 1. All these definitions of Boolean algebra can be shown to be equivalent.</p>
+                            
+                            <p>Boolean algebra has the interesting property that $x = y$ can be proved from any non-tautology. This is because the substitution instance of any non-tautology obtained by instantiating its variables with constants 0 or 1 so as to witness its non-tautologyhood reduces by equational reasoning to $0 = 1$. For example the non-tautologyhood of $x \wedge y = x$ is witnessed by $x = 1$ and $y = 0$ and so taking this as an axiom would allow us to infer $1 \wedge 0 = 1$ as a substitution instance of the axiom and hence $0 = 1$. We can then show $x = y$ by the reasoning $x = x \wedge 1 = x \wedge 0 = 0 = 1 = y \vee 1 = y \vee 0 = y$.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 6: Duality Principle -->
+                    <section class="content-section" id="duality">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🌗</span>
+                                Duality Principle
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>There is nothing magical about the choice of symbols for the values of Boolean algebra. We could rename 0 and 1 to say $\alpha$ and $\beta$, and as long as we did so consistently throughout it would still be Boolean algebra, albeit with some obvious cosmetic differences.</p>
+                            
+                            <p>But suppose we rename 0 and 1 to 1 and 0 respectively. Then it would still be Boolean algebra, and moreover operating on the same values. However it would not be identical to our original Boolean algebra because now we find $\vee$ behaving the way $\wedge$ used to do and vice versa. So there are still some cosmetic differences to show that we've been fiddling with the notation, despite the fact that we're still using 0s and 1s.</p>
+                            
+                            <p>But if in addition to interchanging the names of the values we also interchange the names of the two binary operations, now there is no trace of what we have done. The end product is completely indistinguishable from what we started with. We might notice that the columns for $x \wedge y$ and $x \vee y$ in the truth tables had changed places, but that switch is immaterial.</p>
+                            
+                            <p>When values and operations can be paired up in a way that leaves everything important unchanged when all pairs are switched simultaneously, we call the members of each pair dual to each other. Thus 0 and 1 are dual, and $\wedge$ and $\vee$ are dual. The Duality Principle, also called De Morgan duality, asserts that Boolean algebra is unchanged when all dual pairs are interchanged.</p>
+                            
+                            <p>One change we did not need to make as part of this interchange was to complement. We say that complement is a self-dual operation. The identity or do-nothing operation $x$ (copy the input to the output) is also self-dual. A more complicated example of a self-dual operation is $(x \wedge y) \vee (y \wedge z) \vee (z \wedge x)$. There is no self-dual binary operation that depends on both its arguments. A composition of self-dual operations is a self-dual operation. For example, if $f(x, y, z) = (x \wedge y) \vee (y \wedge z) \vee (z \wedge x)$, then $f(f(x, y, z), x, t)$ is a self-dual operation of four arguments $x, y, z, t$.</p>
+                            
+                            <p>The principle of duality can be explained from a group theory perspective by fact that there are exactly four functions that are one-to-one mappings (automorphisms) of the set of Boolean polynomials back to itself: the identity function, the complement function, the dual function and the contradual function (complemented dual). These four functions form a group under function composition, isomorphic to the Klein four-group, acting on the set of Boolean polynomials.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 7: Diagrammatic Representations -->
+                    <section class="content-section" id="diagrammatic">
+                        <div class="section-header">
+                            <div class="section-number">07</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🖼️</span>
+                                Venn Diagrams
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A Venn diagram is a representation of a Boolean operation using shaded overlapping regions. There is one region for each variable, all circular in the examples here. The interior and exterior of region $x$ corresponds respectively to the values 1 (true) and 0 (false) for variable $x$. The shading indicates the value of the operation for each combination of regions, with dark denoting 1 and light 0 (some authors use the opposite convention).</p>
+                            
+                            <p>The three Venn diagrams in the figure below represent respectively conjunction $x \wedge y$, disjunction $x \vee y$, and complement $\neg x$.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-2a6c01fa.jpeg" alt="Venn diagram for conjunction" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Figure 2a. Venn diagram for conjunction $x \wedge y$</figcaption>
+                            </figure>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-34266bfa.jpeg" alt="Venn diagram for disjunction" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Figure 2b. Venn diagram for disjunction $x \vee y$</figcaption>
+                            </figure>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-9071e559.jpeg" alt="Venn diagram for complement" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Figure 2c. Venn diagram for complement $\neg x$</figcaption>
+                            </figure>
+
+                            <p>For conjunction, the region inside both circles is shaded to indicate that $x \wedge y$ is 1 when both variables are 1. The other regions are left unshaded to indicate that $x \wedge y$ is 0 for the other three combinations.</p>
+                            
+                            <p>The second diagram represents disjunction $x \vee y$ by shading those regions that lie inside either or both circles. The third diagram represents complement $\neg x$ by shading the region not inside the circle.</p>
+                            
+                            <p>While we have not shown the Venn diagrams for the constants 0 and 1, they are trivial, being respectively a white box and a dark box, neither one containing a circle. However we could put a circle for $x$ in those boxes, in which case each would denote a function of one argument, $x$, which returns the same value independently of $x$, called a constant function. As far as their outputs are concerned, constants and constant functions are indistinguishable; the difference is that a constant takes no arguments, called a zeroary or nullary operation, while a constant function takes one argument, which it ignores, and is a unary operation.</p>
+                            
+                            <p>Venn diagrams are helpful in visualizing laws. The commutativity laws for $\wedge$ and $\vee$ can be seen from the symmetry of the diagrams: a binary operation that was not commutative would not have a symmetric diagram because interchanging $x$ and $y$ would have the effect of reflecting the diagram horizontally and any failure of commutativity would then appear as a failure of symmetry.</p>
+                            
+                            <p>Idempotence of $\wedge$ and $\vee$ can be visualized by sliding the two circles together and noting that the shaded area then becomes the whole circle, for both $\wedge$ and $\vee$.</p>
+                            
+                            <p>To see the first absorption law, $x \wedge (x \vee y) = x$, start with the diagram in the middle for $x \vee y$ and note that the portion of the shaded area in common with the $x$ circle is the whole of the $x$ circle. For the second absorption law, $x \vee (x \wedge y) = x$, start with the left diagram for $x \wedge y$ and note that shading the whole of the $x$ circle results in just the $x$ circle being shaded, since the previous shading was inside the $x$ circle.</p>
+                            
+                            <p>The double negation law can be seen by complementing the shading in the third diagram for $\neg x$, which shades the $x$ circle.</p>
+                            
+                            <p>To visualize the first De Morgan's law, $(\neg x)\wedge (\neg y) = \neg (x\vee y)$, start with the middle diagram for $x\vee y$ and complement its shading so that only the region outside both circles is shaded, which is what the right hand side of the law describes. The result is the same as if we shaded that region which is both outside the $x$ circle and outside the $y$ circle, i.e. the conjunction of their exteriors, which is what the left hand side of the law describes.</p>
+                            
+                            <p>The second De Morgan's law, $(\neg x)\vee (\neg y) = \neg (x\wedge y)$, works the same way with the two diagrams interchanged.</p>
+                            
+                            <p>The first complement law, $x \wedge \neg x = 0$, says that the interior and exterior of the $x$ circle have no overlap. The second complement law, $x \vee \neg x = 1$, says that everything is either inside or outside the $x$ circle.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 8: Boolean Algebras (Structure) -->
+                    <section class="content-section" id="boolean-algebras">
+                        <div class="section-header">
+                            <div class="section-number">08</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🏛️</span>
+                                Boolean Algebras (Structure)
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The term "algebra" denotes both a subject, namely the subject of algebra, and an object, namely an algebraic structure. Whereas the foregoing has addressed the subject of Boolean algebra, this section deals with mathematical objects called Boolean algebras, defined in full generality as any model of the Boolean laws. We begin with a special case of the notion definable without reference to the laws, namely concrete Boolean algebras, and then give the formal definition of the general notion.</p>
+
+                            <h3>Concrete Boolean algebras</h3>
+                            <p>A concrete Boolean algebra or field of sets is any nonempty set of subsets of a given set $X$ closed under the set operations of union, intersection, and complement relative to $X$.</p>
+                            
+                            <p>(As an aside, historically $X$ itself was required to be nonempty as well to exclude the degenerate or one-element Boolean algebra, which is the one exception to the rule that all Boolean algebras satisfy the same equations since the degenerate algebra satisfies every equation. However this exclusion conflicts with the preferred purely equational definition of "Boolean algebra," there being no way to rule out the one-element algebra using only equations—$0 \neq 1$ does not count, being a negated equation. Hence modern authors allow the degenerate Boolean algebra and let $X$ be empty.)</p>
+
+                            <h4>Example 1</h4>
+                            <p>The power set $2^{X}$ of $X$, consisting of all subsets of $X$. Here $X$ may be any set: empty, finite, infinite, or even uncountable.</p>
+
+                            <h4>Example 2</h4>
+                            <p>The empty set and $X$. This two-element algebra shows that a concrete Boolean algebra can be finite even when it consists of subsets of an infinite set. It can be seen that every field of subsets of $X$ must contain the empty set and $X$. Hence no smaller example is possible, other than the degenerate algebra obtained by taking $X$ to be empty so as to make the empty set and $X$ coincide.</p>
+
+                            <h4>Example 3</h4>
+                            <p>The set of finite and cofinite sets of integers, where a cofinite set is one omitting only finitely many integers. This is clearly closed under complement, and is closed under union because the union of a cofinite set with any set is cofinite, while the union of two finite sets is finite. Intersection behaves like union with "finite" and "cofinite" interchanged.</p>
+
+                            <h4>Example 4</h4>
+                            <p>For a less trivial example of the point made by Example 2, consider a Venn diagram formed by $n$ closed curves partitioning the diagram into $2^{n}$ regions, and let $X$ be the (infinite) set of all points in the plane not on any curve but somewhere within the diagram. The interior of each region is thus an infinite subset of $X$, and every point in $X$ is in exactly one region. Then the set of all $2^{2^{n}}$ possible unions of regions (including the empty set obtained as the union of the empty set of regions and $X$ obtained as the union of all $2^{n}$ regions) is closed under union, intersection, and complement relative to $X$ and therefore forms a concrete Boolean algebra. Again we have finitely many subsets of an infinite set forming a concrete Boolean algebra, with Example 2 arising as the case $n=0$ of no curves.</p>
+
+                            <h4>Subsets as bit vectors</h4>
+                            <p>A subset $Y$ of $X$ can be identified with an indexed family of bits with index set $X$, with the bit indexed by $x\in X$ being $1$ or $0$ according to whether or not $x\in Y$. (This is the so-called characteristic function notion of a subset.) For example a 32-bit computer word consists of 32 bits indexed by the set $\{0,1,2,\ldots,31\}$, with $0$ and $31$ indexing the low and high order bits respectively. For a smaller example, if $X=\{a,b,c\}$ where $a$, $b$, $c$ are viewed as bit positions in that order from left to right, the eight subsets $\{\}$, $\{c\}$, $\{b\}$, $\{b,c\}$, $\{a\}$, $\{a,c\}$, $\{a,b\}$, and $\{a,b,c\}$ of $X$ can be identified with the respective bit vectors $000$, $001$, $010$, $011$, $100$, $101$, $110$, and $111$. Bit vectors indexed by the set of natural numbers are infinite sequences of bits, while those indexed by the reals in the unit interval $[0,1]$ are packed too densely to be able to write conventionally but nonetheless form well-defined indexed families (imagine coloring every point of the interval $[0,1]$ either black or white independently; the black points then form an arbitrary subset of $[0,1]$).</p>
+                            
+                            <p>From this bit vector viewpoint, a concrete Boolean algebra can be defined equivalently as a nonempty set of bit vectors all of the same length (more generally, indexed by the same set) and closed under the bit vector operations of bitwise $\wedge$, $\vee$, and $\neg$, as in $1010\wedge 0110=0010$, $1010\vee 0110$ = $1110$, and $\neg 1010=0101$, the bit vector realizations of intersection, union, and complement respectively.</p>
+
+                            <h4>The prototypical Boolean algebra</h4>
+                            <p>The set $\{0,1\}$ and its Boolean operations as treated above can be understood as the special case of bit vectors of length one, which by the identification of bit vectors with subsets can also be understood as the two subsets of a one-element set. We call this the prototypical Boolean algebra, justified by the following observation.</p>
+                            
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Observation</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>The laws satisfied by all nondegenerate concrete Boolean algebras coincide with those satisfied by the prototypical Boolean algebra.</p>
+                                </div>
+                            </div>
+                            
+                            <p>This observation is easily proved as follows. Certainly any law satisfied by all concrete Boolean algebras is satisfied by the prototypical one since it is concrete. Conversely any law that fails for some concrete Boolean algebra must have failed at a particular bit position, in which case that position by itself furnishes a one-bit counterexample to that law. Nondegeneracy ensures the existence of at least one bit position because there is only one empty bit vector.</p>
+                            
+                            <p>The final goal of the next section can be understood as eliminating "concrete" from the above observation. We shall however reach that goal via the surprisingly stronger observation that, up to isomorphism, all Boolean algebras are concrete.</p>
+
+                            <h4>Boolean algebras: the definition</h4>
+                            <p>The Boolean algebras we have seen so far have all been concrete, consisting of bit vectors or equivalently of subsets of some set. Such a Boolean algebra consists of a set and operations on that set which can be shown to satisfy the laws of Boolean algebra.</p>
+                            
+                            <p>Instead of showing that the Boolean laws are satisfied, we can instead postulate a set $X$, two binary operations on $X$, and one unary operation, and require that those operations satisfy the laws of Boolean algebra. The elements of $X$ need not be bit vectors or subsets but can be anything at all. This leads to the more general <em>abstract</em> definition.</p>
+                            
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">ℹ️</span>
+                                    <h4 class="callout-title">Abstract Definition</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>A Boolean algebra is any set with binary operations $\land$ and $\lor$ and a unary operation $\neg$ thereon satisfying the Boolean laws.</p>
+                                </div>
+                            </div>
+                            
+                            <p>For the purposes of this definition it is irrelevant how the operations came to satisfy the laws, whether by fiat or proof. All concrete Boolean algebras satisfy the laws (by proof rather than fiat), whence every concrete Boolean algebra is a Boolean algebra according to our definitions. This axiomatic definition of a Boolean algebra as a set and certain operations satisfying certain laws or axioms <em>by fiat</em> is entirely analogous to the abstract definitions of group, ring, field etc. characteristic of modern or abstract algebra.</p>
+                            
+                            <p>Given any complete axiomatization of Boolean algebra, such as the axioms for a complemented distributive lattice, a sufficient condition for an algebraic structure of this kind to satisfy all the Boolean laws is that it satisfy just those axioms. The following is therefore an equivalent definition.</p>
+                            
+                            <blockquote>
+                                <p>A Boolean algebra is a complemented distributive lattice.</p>
+                            </blockquote>
+                            
+                            <p>The section on axiomatization lists other axiomatizations, any of which can be made the basis of an equivalent definition.</p>
+
+                            <h4>Representable Boolean algebras</h4>
+                            <p>Although every concrete Boolean algebra is a Boolean algebra, not every Boolean algebra need be concrete. Let $n$ be a square-free positive integer, one not divisible by the square of an integer, for example 30 but not 12. The operations of greatest common divisor, least common multiple, and division into $n$ (that is, $\neg x=n/x$), can be shown to satisfy all the Boolean laws when their arguments range over the positive divisors of $n$. Hence those divisors form a Boolean algebra. These divisors are not subsets of a set, making the divisors of $n$ a Boolean algebra that is not concrete according to our definitions.</p>
+                            
+                            <p>However if we <em>represent</em> each divisor of $n$ by the set of its prime factors, we find that this nonconcrete Boolean algebra is isomorphic to the concrete Boolean algebra consisting of all sets of prime factors of $n$, with union corresponding to least common multiple, intersection to greatest common divisor, and complement to division into $n$. So this example while not technically concrete is at least "morally" concrete via this representation, called an isomorphism. This example is an instance of the following notion.</p>
+                            
+                            <blockquote>
+                                <p>A Boolean algebra is called representable when it is isomorphic to a concrete Boolean algebra.</p>
+                            </blockquote>
+                            
+                            <p>The obvious next question is answered positively as follows.</p>
+                            
+                            <blockquote>
+                                <p>Every Boolean algebra is representable.</p>
+                            </blockquote>
+                            
+                            <p>That is, up to isomorphism, abstract and concrete Boolean algebras are the same thing. This quite nontrivial result depends on the Boolean prime ideal theorem, a choice principle slightly weaker than the axiom of choice, and is treated in more detail in the article Stone's representation theorem for Boolean algebras. This strong relationship implies a weaker result strengthening the observation in the previous subsection to the following easy consequence of representability.</p>
+                            
+                            <blockquote>
+                                <p>The laws satisfied by all Boolean algebras coincide with those satisfied by the prototypical Boolean algebra.</p>
+                            </blockquote>
+                            
+                            <p>It is weaker in the sense that it does not of itself imply representability. Boolean algebras are special here, for example a relation algebra is a Boolean algebra with additional structure but it is not the case that every relation algebra is representable in the sense appropriate to relation algebras.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 9: Axiomatizing -->
+                    <section class="content-section" id="axiomatizing">
+                        <div class="section-header">
+                            <div class="section-number">09</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Axiomatizing Boolean Algebra
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The above definition of an abstract Boolean algebra as a set and operations satisfying "the" Boolean laws raises the question, what are those laws? A simple-minded answer is "all Boolean laws," which can be defined as all equations that hold for the Boolean algebra of 0 and 1. Since there are infinitely many such laws this is not a terribly satisfactory answer in practice, leading to the next question: does it suffice to require only finitely many laws to hold?</p>
+                            
+                            <p>In the case of Boolean algebras the answer is yes. In particular the finitely many equations we have listed above suffice. We say that Boolean algebra is finitely axiomatizable or finitely based.</p>
+                            
+                            <p>Can this list be made shorter yet? Again the answer is yes. To begin with, some of the above laws are implied by some of the others. A sufficient subset of the above laws consists of the pairs of associativity, commutativity, and absorption laws, distributivity of $\wedge$ over $\vee$ (or the other distributivity law—one suffices), and the two complement laws. In fact this is the traditional axiomatization of Boolean algebra as a complemented distributive lattice.</p>
+                            
+                            <p>By introducing additional laws not listed above it becomes possible to shorten the list yet further. In 1933 Edward Huntington showed that if the basic operations are taken to be $x\vee y$ and $\neg x$, with $x\wedge y$ considered a derived operation (e.g. via De Morgan's law in the form $x\wedge y=\neg(\neg x\vee\neg y)$), then the equation $\neg(\neg x\vee\neg y)\vee\neg(\neg x\vee y)$ = $x$ along with the two equations expressing associativity and commutativity of $\vee$ completely axiomatized Boolean algebra. When the only basic operation is the binary NAND operation $\neg(x\wedge y)$, Stephen Wolfram has proposed in his book A New Kind of Science the single axiom ((( $xy$ ) $z$ )( $x$ ) $(xz)x$ ))) = $z$ as a one-equation axiomatization of Boolean algebra, where for convenience here $xy$ denotes the NAND rather than the AND of $x$ and $y$.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 10: Propositional Logic -->
+                    <section class="content-section" id="propositional-logic">
+                        <div class="section-header">
+                            <div class="section-number">10</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧠</span>
+                                Propositional Logic
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Propositional logic is a logical system that is intimately connected to Boolean algebra. Many syntactic concepts of Boolean algebra carry over to propositional logic with only minor changes in notation and terminology, while the semantics of propositional logic are defined via Boolean algebras in a way that the tautologies (theorems) of propositional logic correspond to equational theorems of Boolean algebra.</p>
+                            
+                            <p>Syntactically, every Boolean term corresponds to a propositional formula of propositional logic. In this translation between Boolean algebra and propositional logic, Boolean variables $x,y\ldots$ become propositional variables (or atoms) $P,Q,\ldots$, Boolean terms such as $x\vee y$ become propositional formulas $P\vee Q$, 0 becomes false or $\bot$, and 1 becomes true or T. It is convenient when referring to generic propositions to use Greek letters $\Phi$, $\Psi$,$\ldots$ as metavariables (variables outside the language of propositional calculus, used when talking about propositional calculus) to denote propositions.</p>
+                            
+                            <p>The semantics of propositional logic rely on truth assignments. The essential idea of a truth assignment is that the propositional variables are mapped to elements of a fixed Boolean algebra, and then the truth value of a propositional formula using these letters is the element of the Boolean algebra that is obtained by computing the value of the Boolean term corresponding to the formula. In classical semantics, only the two-element Boolean algebra is used, while in Boolean-valued semantics arbitrary Boolean algebras are considered. A tautology is a propositional formula that is assigned truth value 1 by every truth assignment of its propositional variables to an arbitrary Boolean algebra (or, equivalently, every truth assignment to the two element Boolean algebra).</p>
+                            
+                            <p>These semantics permit a translation between tautologies of propositional logic and equational theorems of Boolean algebra. Every tautology $\Phi$ of propositional logic can be expressed as the Boolean equation $\Phi$ = 1, which will be a theorem of Boolean algebra. Conversely every theorem $\Phi$ = $\Psi$ of Boolean algebra corresponds to the tautologies $(\Phi\vee\neg\Psi)$ $\wedge$ $(\neg\Phi\vee\Psi)$ and $(\Phi\wedge\Psi)$ $\vee$ $(\neg\Phi\wedge\neg\Psi)$. If $\rightarrow$ is in the language these last tautologies can also be written as $(\Phi\rightarrow\Psi)$ $\wedge$ $(\Psi\rightarrow\Phi)$, or as two separate theorems $\Phi\rightarrow\Psi$ and $\Psi\rightarrow\Phi$; if $\equiv$ is available then the single tautology $\Phi$ $\equiv$ $\Psi$ can be used.</p>
+
+                            <h5>Applications</h5>
+                            <p>One motivating application of propositional calculus is the analysis of propositions and deductive arguments in natural language. Whereas the proposition "if $x$ = 3 then $x$+1 = 4" depends on the meanings of such symbols as + and 1, the proposition "if $x$ = 3 then $x$ = 3" does not; it is true merely by virtue of its structure, and remains true whether "$x$ = 3" is replaced by "$x$ = 4" or "the moon is made of green cheese." The generic or abstract form of this tautology is "if $P$ then $P$", or in the language of Boolean algebra, "$P\rightarrow P$".</p>
+                            
+                            <p>Replacing $P$ by $x$ = 3 or any other proposition is called instantiation of $P$ by that proposition. The result of instantiating $P$ in an abstract proposition is called an instance of the proposition. Thus "$x$ = 3 $\rightarrow$ $x$ = 3" is a tautology by virtue of being an instance of the abstract tautology "$P$ $\rightarrow$ $P$". All occurrences of the instantiated variable must be instantiated with the same proposition, to avoid such nonsense as $P\rightarrow x$ = 3 or $x$ = 3 $\rightarrow$ $x$ = 4.</p>
+                            
+                            <p>Propositional calculus restricts attention to abstract propositions, those built up from propositional variables using Boolean operations. Instantiation is still possible within propositional calculus, but only by instantiating propositional variables by abstract propositions, such as instantiating $Q$ by $Q\rightarrow P$ in $P\rightarrow(Q\rightarrow P)$ to yield the instance $P\rightarrow((Q\rightarrow P)\rightarrow P)$.</p>
+                            
+                            <p>(The availability of instantiation as part of the machinery of propositional calculus avoids the need for metavariables within the language of propositional calculus, since ordinary propositional variables can be considered within the language to denote arbitrary propositions. The metavariables themselves are outside the reach of instantiation, not being part of the language of propositional calculus but rather part of the same language for talking about it that this sentence is written in, where we need to be able to distinguish propositional variables and their instantiations as being distinct syntactic entities.)</p>
+
+                            <h5>Deductive systems for propositional logic</h5>
+                            <p>An axiomatization of propositional calculus is a set of tautologies called axioms and one or more inference rules for producing new tautologies from old. A proof in an axiom system $A$ is a finite nonempty sequence of propositions each of which is either an instance of an axiom of $A$ or follows by some rule of $A$ from propositions appearing earlier in the proof (thereby disallowing circular reasoning). The last proposition is the theorem proved by the proof. Every nonempty initial segment of a proof is itself a proof, whence every proposition in a proof is itself a theorem. An axiomatization is sound when every theorem is a tautology, and complete when every tautology is a theorem.</p>
+
+                            <h3>Sequent calculus</h3>
+                            <p>Propositional calculus is commonly organized as a Hilbert system, whose operations are just those of Boolean algebra and whose theorems are Boolean tautologies, those Boolean terms equal to the Boolean constant 1. Another form is sequent calculus, which has two sorts, propositions as in ordinary propositional calculus, and pairs of lists of propositions called sequents, such as A∨B, A∧C,... $\vdash$ A, B→C,... The two halves of a sequent are called the antecedent and the succedent respectively. The customary metavariable denoting an antecedent or part thereof is Γ, and for a succedent Δ; thus Γ,A $\vdash$ Δ would denote a sequent whose succedent is a list Δ and whose antecedent is a list Γ with an additional proposition A appended after it. The antecedent is interpreted as the conjunction of its propositions, the succedent as the disjunction of its propositions, and the sequent itself as the entailment of the succedent by the antecedent.</p>
+                            
+                            <p>Entailment differs from implication in that whereas the latter is a binary operation that returns a value in a Boolean algebra, the former is a binary relation which either holds or does not hold. In this sense entailment is an external form of implication, meaning external to the Boolean algebra, thinking of the reader of the sequent as also being external and interpreting and comparing antecedents and succedents in some Boolean algebra. The natural interpretation of $\vdash$ is as ≤ in the partial order of the Boolean algebra defined by x ≤ y just when x∨y = y. This ability to mix external implication $\vdash$ and internal implication → in the one logic is among the essential differences between sequent calculus and propositional calculus.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 11: General Applications -->
+                    <section class="content-section" id="applications">
+                        <div class="section-header">
+                            <div class="section-number">11</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">💻</span>
+                                General Applications
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Two-valued logic</h3>
+                            <p>Boolean algebra as the calculus of two values is fundamental to digital logic, computer programming, and mathematical logic, and is also used in other areas of mathematics such as set theory and statistics.</p>
+                            
+                            <p>Digital logic codes its symbols in various ways: as voltages on wires in high-speed circuits and capacitive storage devices, as orientations of a magnetic domain in ferromagnetic storage devices, as holes in punched cards or paper tape, and so on. Now it is possible to code more than two symbols in any given medium. For example one might use respectively 0, 1, 2, and 3 volts to code a four-symbol alphabet on a wire, or holes of different sizes in a punched card. In practice however the tight constraints of high speed, small size, and low power combine to make noise a major factor. This makes it hard to distinguish between symbols when there are many of them at a single site. Rather than attempting to distinguish between four voltages on one wire, digital designers have settled on two voltages per wire, high and low. To obtain four symbols one uses two wires, and so on.</p>
+                            
+                            <p>Programmers programming in machine code, assembly language, and other programming languages that expose the low-level digital structure of the data registers operate on whatever symbols were chosen for the hardware, invariably bit vectors in modern computers for the above reasons. Such languages support both the numeric operations of addition, multiplication, etc. performed on words interpreted as integers, as well as the logical operations of disjunction, conjunction, etc. performed bit-wise on words interpreted as bit vectors. Programmers therefore have the option of working in and applying the laws of either numeric algebra or Boolean algebra as needed. A core differentiating feature is carry propagation with the former but not the latter.</p>
+                            
+                            <p>Other areas where two values is a good choice are the law and mathematics. In everyday relaxed conversation, nuanced or complex answers such as "maybe" or "only on the weekend" are acceptable. In more focused situations such as a court of law or theorem-based mathematics however it is deemed advantageous to frame questions so as to admit a simple yes-or-no answer—is the defendant guilty or not guilty, is the proposition true or false—and to disallow any other answer. However much of a straitjacket this might prove in practice for the respondent, the principle of the simple yes-no question has become a central feature of both judicial and mathematical logic, making two-valued logic deserving of organization and study in its own right.</p>
+                            
+                            <p>A central concept of set theory is membership. Now an organization may permit multiple degrees of membership, such as novice, associate, and full. With sets however an element is either in or out. The candidates for membership in a set work just like the wires in a digital computer: each candidate is either a member or a non-member, just as each wire is either high or low.</p>
+                            
+                            <p>Algebra being a fundamental tool in any area amenable to mathematical treatment, these considerations combine to make the algebra of two values of fundamental importance to computer hardware, mathematical logic, and set theory.</p>
+                            
+                            <p>Two-valued logic can be extended to multi-valued logic, notably by replacing the Boolean domain {0, 1} with the unit interval [0,1], in which case rather than only taking values 0 or 1, any value between and including 0 and 1 can be assumed. Algebraically, negation (NOT) is replaced with 1 - x, conjunction (AND) is replaced with multiplication ( $xy$ ), and disjunction (OR) is defined via De Morgan's law. Interpreting these values as logical truth values yields a multi-valued logic, which forms the basis for fuzzy logic and probabilistic logic. In these interpretations, a value is interpreted as the "degree" of truth – to what extent a proposition is true, or the probability that the proposition is true.</p>
+
+                            <h3>Boolean operations</h3>
+                            <p>The original application for Boolean operations was mathematical logic, where it combines the truth values, true or false, of individual formulas.</p>
+                            
+                            <p>Natural languages such as English have words for several Boolean operations, in particular conjunction (and), disjunction (or), negation (not), and implication (implies). But not is synonymous with and not. When used to combine situational assertions such as "the block is on the table" and "cats drink milk," which naively are either true or false, the meanings of these logical connectives often have the meaning of their logical counterparts. However with descriptions of behavior such as "Jim walked through the door", one starts to notice differences such as failure of commutativity, for example the conjunction of "Jim opened the door" with "Jim walked through the door" in that order is not equivalent to their conjunction in the other order, since and usually means and then in such cases. Questions can be similar: the order "Is the sky blue, and why is the sky blue?" makes more sense than the reverse order. Conjunctive commands about behavior are like behavioral assertions, as in get dressed and go to school. Disjunctive commands such love me or leave me or fish or cut bait tend to be asymmetric via the implication that one alternative is less preferable. Conjoined nouns such as tea and milk generally describe aggregation as with set union while tea or milk is a choice. However context can reverse these senses, as in your choices are coffee and tea which usually means the same as your choices are coffee or tea (alternatives). Double negation as in "I don't not like milk" rarely means literally "I do like milk" but rather conveys some sort of hedging, as though to imply that there is a third possibility. "Not not P" can be loosely interpreted as "surely P", and although P necessarily implies "not not P" the converse is suspect in English, much as with intuitionistic logic. In view of the highly idiosyncratic usage of conjunctions in natural languages, Boolean algebra cannot be considered a reliable framework for interpreting them.</p>
+                            
+                            <p>Boolean operations are used in digital logic to combine the bits carried on individual wires, thereby interpreting them over {0,1}. When a vector of n identical binary gates are used to combine two bit vectors each of n bits, the individual bit operations can be understood collectively as a single operation on values from a Boolean algebra with 2^{n} elements.</p>
+                            
+                            <p>Naive set theory interprets Boolean operations as acting on subsets of a given set X. As we saw earlier this behavior exactly parallels the coordinate-wise combinations of bit vectors, with the union of two sets corresponding to the disjunction of two bit vectors and so on.</p>
+                            
+                            <p>The 256-element free Boolean algebra on three generators is deployed in computer displays based on raster graphics, which use bit blit to manipulate whole regions consisting of pixels, relying on Boolean operations to specify how the source region should be combined with the destination, typically with the help of a third region called the mask. Modern video cards offer all 2^{2^{2}} = 256 ternary operations for this purpose, with the choice of operation being a one-byte (8-bit) parameter. The constants SRC = 0xaa or 10101010, DST = 0xcc or 11001100, and MSK = 0xf0 or 11110000 allow Boolean operations such as (SRC^DST)&MSK (meaning XOR the source and destination and then AND the result with the mask) to be written directly as a constant denoting a byte calculated at compile time, 0x60 in the (SRC^DST)&MSK example, 0x66 if just SRC^DST, etc. At run time the video card interprets the byte as the raster operation indicated by the original expression in a uniform way that requires remarkably little hardware and which takes time completely independent of the complexity of the expression.</p>
+                            
+                            <p>Solid modeling systems for computer aided design offer a variety of methods for building objects from other objects, combination by Boolean operations being one of them. In this method the space in which objects exist is understood as a set S of voxels (the three-dimensional analogue of pixels in two-dimensional graphics) and shapes are defined as subsets of S, allowing objects to be combined as sets via union, intersection, etc. One obvious use is in building a complex shape from simple shapes simply as the union of the latter. Another use is in sculpting understood as removal of material: any grinding, milling, routing, or drilling operation that can be performed with physical machinery on physical materials can be simulated on the computer with the Boolean operation x ∧ ¬y or x - y, which in set theory is set difference, remove the elements of y from those of x. Thus given two shapes one to be machined and the other the material to be removed, the result of machining the former to remove the latter is described simply as their set difference.</p>
+
+                            <h3>Boolean searches</h3>
+                            <p>Search engine queries also employ Boolean logic. For this application, each web page on the Internet may be considered to be an "element" of a "set". The following examples use a syntax supported by Google.</p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Doublequotes are used to combine whitespace-separated words into a single search term.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Whitespace is used to specify logical AND, as it is the default operator for joining search terms: <code>"Search term 1" "Search term 2"</code></span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">The OR keyword is used for logical OR: <code>"Search term 1" OR "Search term 2"</code></span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">A prefixed minus sign is used for logical NOT: <code>"Search term 1" – "Search term 2"</code></span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 12: See Also -->
+                    <section class="content-section" id="see-also">
+                        <div class="section-header">
+                            <div class="section-number">12</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔗</span>
+                                See Also
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Binary number</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Boolean algebra (structure)</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Boolean algebras canonically defined</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Booleo</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Heyting algebra</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Intuitionistic logic</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">List of Boolean algebra topics</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Logic design</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Propositional calculus</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Relation algebra</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Vector logic</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 13: References -->
+                    <section class="content-section" id="references">
+                        <div class="section-header">
+                            <div class="section-number">13</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📚</span>
+                                References
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Boole, George (2003) [1854]. An Investigation of the Laws of Thought. Prometheus Books. ISBN 978-1-59102-089-9.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">"The name Boolean algebra (or Boolean 'algebras') for the calculus originated by Boole, extended by Schröder, and perfected by Whitehead seems to have been first suggested by Sheffer, in 1913." E. V. Huntington, "New sets of independent postulates for the algebra of logic, with special reference to Whitehead and Russell's <em>Principia mathematica</em>", in <em>Trans. Amer. Math. Soc.</em> <strong>35</strong> (1933), 274-304; footnote, page 278.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Givant, Steven; Halmos, Paul (2009). <em>Introduction to Boolean Algebras</em>. Undergraduate Texts in Mathematics, Springer. ISBN 978-0-387-40293-2.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">J. Michael Dunn; Gary M. Hardegree (2001). <em>Algebraic methods in philosophical logic</em>. Oxford University Press US. p. 2. ISBN 978-0-19-853192-0.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Norman Balabanian; Bradley Carlson (2001). <em>Digital logic design principles</em>. John Wiley. pp. 39-40. ISBN 978-0-471-29351-4.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Rajaraman & Radhakrishnan. <em>Introduction To Digital Computer Design An 5Th Ed.</em>. PHI Learning Pvt. Ltd. p. 65. ISBN 978-81-203-3409-0.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">John A. Camara (2010). <em>Electrical and Electronics Reference Manual for the Electrical and Computer PE Exam</em>. www.ppi2pass.com. p. 41. ISBN 978-1-59126-166-7.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Shin-ichi Minato, Saburo Muroga (2007). "Binary Decision Diagrams". In Wai-Kai Chen. <em>The VLSI handbook</em> (2nd ed.). CRC Press. ISBN 978-0-8493-4199-1. chapter 29.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Alan Parkes (2002). <em>Introduction to languages, machines and logic: computable languages, abstract machines and formal logic</em>. Springer. p. 276. ISBN 978-1-85233-464-2.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Jon Barwise; John Etchemendy; Gerard Allwein; Dave Barker-Plummer, Albert Liu (1999). <em>Language, proof, and logic</em>. CSLI Publications. ISBN 978-1-889119-08-3.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Ben Goertzel (1994). <em>Chaotic logic: language, thought, and reality from the perspective of complex systems science</em>. Springer. p. 48. ISBN 978-0-306-44690-0.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Halmos, Paul (1963). Lectures on Boolean Algebras. van Nostrand.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">O'Regan, Gerard (2008). <em>A brief history of computing</em>. Springer. p. 33. ISBN 978-1-84800-083-4.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Steven R. Givant; Paul Richard Halmos (2009). <em>Introduction to Boolean algebras</em>. Springer. pp. 21-22. ISBN 978-0-387-40293-2.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">J. Venn, <em>On the Diagrammatic and Mechanical Representation of Propositions and Reasonings</em>, Philosophical Magazine and Journal of Science, Series 5, vol. 10, No. 59, July 1880.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Shannon, Claude (1949). "The Synthesis of Two-Terminal Switching Circuits". <em>Bell System Technical Journal</em> 28: 59-98. doi:10.1002/j.1538-7305.1949.tb03624.x.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Koppelberg, Sabine (1989). "General Theory of Boolean Algebras". <em>Handbook of Boolean Algebras, Vol. 1 (ed. J. Donald Monk with Robert Bonnet)</em>. Amsterdam: North Holland. ISBN 978-0-444-70261-6.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Hausman, Alan; Howard Kahane; Paul Tidman (2010) [2007]. <em>Logic and Philosophy: A Modern Introduction</em>. Wadsworth Cengage Learning. ISBN 0-495-60158-6.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Girard, Jean-Yves; Paul Taylor; Yves Lafont (1990) [1989]. <em>Proofs and Types</em>. Cambridge University Press (Cambridge Tracts in Theoretical Computer Science, 7). ISBN 0-521-37181-3.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Not all search engines support the same query syntax. Additionally, some organizations (such as Google) provide "specialized" search engines that support alternate or extended syntax.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Doublequote-delimited search terms are called "exact phrase" searches in the Google documentation.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Mano, Morris; Ciletti, Michael D. (2013). <em>Digital Design</em>. Pearson. ISBN 978-0-13-277420-8.</span></li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- Key Points Summary -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Boolean algebra is the subarea of algebra in which the values of the variables are the truth values true and false, usually denoted 1 and 0 respectively.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>The main operations of Boolean algebra are the conjunction and ($\land$), the disjunction or ($\lor$), and the negation not ($\neg$).</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Boolean algebra has been fundamental in the development of digital electronics, and is provided for in all modern programming languages.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Every Boolean algebra is representable... up to isomorphism, abstract and concrete Boolean algebras are the same thing.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Two-valued logic can be extended to multi-valued logic... Interpreting these values as logical truth values yields a multi-valued logic, which forms the basis for fuzzy logic and probabilistic logic.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="#" class="nav-button nav-button--previous disabled" aria-disabled="true">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-02-logic-gates.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 12.5%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 1 of 8</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop" data-close-lightbox></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" data-close-lightbox aria-label="Close image viewer">&times;</button>
+            <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

@@ -1,0 +1,2 @@
+https://www.studocu.com/en-us/document/mount-kenya-university/pharmaceutics-dispensing/dch-1101-inorganic-chemestry-1-notes/89825549
+https://www.studocu.com/en-us/document/mount-kenya-university/pharmaceutics-dispensing/dch-1101-inorganic-chemestry-1-notes/89825549

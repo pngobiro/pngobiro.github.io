@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 9: Linking to Databases (Part 3)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 9 (Part 3)</span>
+                    </div>
+                    <a href="chapter-9-part-4.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 9: Linking to Databases (Part 3)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-9-part-3 -->
+                <section id="chapter-9-ado-code" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💻</span>
+                        <span class="heading-text">ADO Data Control Button Code Examples</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>Save Button</h3>
+                        <pre><code class="language-vb">Private Sub cmdSave_Click()
+    adoBooks.Recordset.Fields("Title") = txtTitle.Text
+    adoBooks.Recordset.Fields("Year Published") = txtPub.Text
+    adoBooks.Recordset.Fields("ISBN") = txtISBN.Text
+    adoBooks.Recordset.Fields("PubID") = txtPubID.Text
+    adoBooks.Recordset.Fields("Subject") = txtSubject.Text
+    adoBooks.Recordset.Update
+End Sub
+</code></pre>
+                        <h3>Add Button</h3>
+                        <pre><code class="language-vb">Private Sub cmdAdd_Click()
+    adoBooks.Recordset.AddNew
+End Sub
+</code></pre>
+                        <h3>Delete Button</h3>
+                        <pre><code class="language-vb">Private Sub cmdDelete_Click()
+    Confirm = MsgBox("Are you sure you want to delete this record?", vbYesNo, "Deletion Confirmation")
+    If Confirm = vbYes Then
+        adoBooks.Recordset.Delete
+        MsgBox "Record Deleted!", , "Message"
+    Else
+        MsgBox "Record Not Deleted!", , "Message"
+    End If
+End Sub
+</code></pre>
+                        <h3>Cancel Button</h3>
+                        <pre><code class="language-vb">Private Sub cmdCancel_Click()
+    txtTitle.Text = " "
+    txtPub.Text = " "
+    txtPubID.Text = " "
+    txtISBN.Text = " "
+    txtSubject.Text = ""
+End Sub
+</code></pre>
+                        <h3>Previous Button (<)</h3>
+                        <pre><code class="language-vb">Private Sub cmdPrev_Click()
+    If Not adoBooks.Recordset.BOF Then adoBooks.Recordset.MovePrevious
+    If adoBooks.Recordset.BOF Then
+        adoBooks.Recordset.MoveNext
+    End If
+End Sub
+</code></pre>
+                        <h3>Next Button (>)</h3>
+                        <pre><code class="language-vb">Private Sub cmdNext_Click()
+    If Not adoBooks.Recordset.EOF Then
+        adoBooks.Recordset.MoveNext
+    End If
+    If adoBooks.Recordset.EOF Then
+        adoBooks.Recordset.MovePrevious
+    End If
+End Sub
+</code></pre>
+                    </div>
+                </section>
+                <!-- END: chapter-9-part-3 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-9-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 9 (Part 3)</span>
+                    </div>
+                    <a href="chapter-9-part-4.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

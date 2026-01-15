@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Boolean Algebra (I) (Part 1) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-4-part-5.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 5 (Part 1)</span>
+                    </div>
+                    <a href="chapter-5-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 5 : Boolean Algebra (I)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-5-objectives -->
+                <section id="chapter-5-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you would have learnt:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">the importance of two-state (TRUE/FALSE) logic in computing;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">model logical relations by truth tables, Venn diagrams, switching circuits or 'gates'.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-5-objectives -->
+
+                <!-- START: chapter-5-introduction -->
+                <section id="section-5-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💡</span>
+                        <span class="heading-text">5.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In programming, especially in selection or branching statements, we need to specify conditions. These conditions are either satisfied or not satisfied, in other words they are either TRUE or FALSE. Thus understanding of this two-state (TRUE or FALSE) logic is fundamental in programming, it will help to identify many logic errors that would be made otherwise.</p> <!-- MMD typos: undet tanding, progran aing -->
+                        <p>In digital electronics, devices like digital computers, calculators fundamentally work on two-state, 1 or 0, (ON or OFF). There are tiny circuit elements which operate on the two states, they are called Logic Gates. In this chapter, we will know more about AND, OR, NOT, NAND.</p> <!-- MMD typos: omputers, OPR -->
+                    </div>
+                </section>
+                <!-- END: chapter-5-introduction -->
+
+                <!-- START: chapter-5-logic-programming -->
+                <section id="section-5-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💻</span>
+                        <span class="heading-text">5.2 Logic in Programming</span> <!-- MMD typo: Programniils -->
+                    </h2>
+                    <div class="content-card">
+                        <p>Sooner or later, in all but the simplest of programs, we meet a situation where we have to write something like "IF so-and-so THEN DO something, ELSE DO something different". This means that we must be able to model the problem in two-state logical terms, i.e. outcome is YES or NO.</p> <!-- MMD typos: ar bat, sontthing, dífurent -->
+                        <p>In many cases, we may be making several logical decisions within a single line of code. If, for example, we are sorting data into the classes which we used for our statistical distribution of the run-times, we might well do so by a line such as:</p>
+                        <pre class="code-block language-pseudocode"><code>IF x < 7 THEN
+    C1 ← C1 + 1
+ELSE IF X < 11 THEN
+    C2 ← C2 + 1
+ELSE IF X < 15 THEN
+    C3 ← C3 + 1
+ELSE
+    C4 ← C4 + 1
+ENDIF</code></pre> <!-- Simplified structure, corrected MMD formatting -->
+                        <p>This involves compound decisions within which each single decision must be logically correct, without any doubt whatever.</p>
+                        <p>This is the realm of two-state logic, also referred to as Binary Logic and we use '1' for true or yes and '0' for false or no.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-logic-programming -->
+
+                <!-- START: chapter-5-logic-hardware -->
+                <section id="section-5-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔩</span>
+                        <span class="heading-text">5.3 Logic and Hardware</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>We shall also need to know precisely how the logical two-state system maps on to a physical two-state switching system if we become involved with assembly languages or the theory and architecture of the computer, or if we need to program any process control applications.</p>
+                        <p>Today such systems, from controlling traffic lights to running the cycles of a washing machine, embody the logical models in various arrangements of miniaturised transistor switches in 'chips'. In this context, 'yes' ordinarily translates as 'switch on' and 'no' as 'switch off'.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-logic-hardware -->
+
+                <!-- START: chapter-5-language-symbols -->
+                <section id="section-5-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🗣️</span>
+                        <span class="heading-text">5.4 Language and Symbols</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A different language & some new symbols:</p>
+                        <p><strong>STATEMENT</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Used in two-state logic to mean any single proposition which can only be TRUE or FALSE.</span></li> <!-- MMD typo: ingle -->
+                        </ul>
+                        <p>We now venture into total certainty, which associates YES with TRUE and binary 1; NO with FALSE and binary 0.</p> <!-- MMD typo: bini ry -->
+                        <p>Statements may be COMPOUND, when we associate two or more by the conjunction AND, or by the disjunction OR.</p> <!-- MMD typo: COMFCUND, theaisjunction -->
+                        <p>We often use the letters p, q and r as the symbols for this sort of logical statement. In particular, the compound statement <span class="math-inline">$p \land q$</span> means 'the consequences' of the two statements in conjunction. The consequences refer to the four possible results of any compound of two statements.</p> <!-- MMD typos: netters, partip, lar, stat:ments, ar y ompound -->
+                        <p>Similarly, <span class="math-inline">$p \lor q$</span> indicates the possible results of the disjunction of p, q. 'NOT p' is symbolised by <span class="math-inline">$\sim p$</span> or <span class="math-inline">$\overline{p}$</span>.</p> <!-- Added overline notation -->
+                    </div>
+                </section>
+                <!-- END: chapter-5-language-symbols -->
+
+                <!-- START: chapter-5-truth-tables -->
+                <section id="section-5-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📋</span>
+                        <span class="heading-text">5.5 Truth Tables</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Let us now use our primary tool for simplifying the NOT, AND and OR models, the truth table.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>p</th><th>q</th><th>p ∧ q (p AND q)</th><th>p ∨ q (p OR q)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>False (0)</td><td>False (0)</td><td>False (0)</td><td>False (0)</td></tr>
+                                    <tr><td>False (0)</td><td>True (1)</td><td>False (0)</td><td>True (1)</td></tr>
+                                    <tr><td>True (1)</td><td>False (0)</td><td>False (0)</td><td>True (1)</td></tr>
+                                    <tr><td>True (1)</td><td>True (1)</td><td>True (1)</td><td>True (1)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>In logic, we distinguish between OR (inclusive OR), meaning in either of the named sets or their intersection, and XOR (exclusive OR), which means in either but not both.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-truth-tables -->
+
+                <!-- START: chapter-5-logical-equivalence -->
+                <section id="section-5-6" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⇔</span>
+                        <span class="heading-text">5.6 Logical Equivalence</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The use of truth tables leads also to another condition, the logical equivalence of compound statements. If the outcomes of two truth tables are identical, the statements which they represent are logically equivalent and we use the '=' or '<span class="math-inline">$\equiv$</span>' symbol to represent this state.</p> <!-- Added equivalent symbol -->
+                        <p>For example, <span class="math-inline">$\sim(p \land q) \equiv (\sim p \lor \sim q)$</span> (De Morgan's Law)</p> <!-- MMD typo: (p ~v ~q) -->
+                        <div class="table-container">
+                             <table class="content-table">
+                                <thead><tr><th>p</th><th>q</th><th>p ∧ q</th><th>~(p ∧ q)</th><th>~p</th><th>~q</th><th>~p ∨ ~q</th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The compound statements will often include more than two propositions and the table may then become quite large.</p> <!-- MMD typo: racie -->
+                        <p>If the compound statement were 'p AND q OR r' we might find that the interpreter we are using automatically takes the 'AND' before the 'OR', but is often safer to use brackets whilst we are working on the model and write it as <span class="math-inline">$(p \land q) \lor r$</span> and to insert the intermediate result, which is <span class="math-inline">$p \land q$</span>:</p> <!-- MMD typos: whilct, s -->
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>p</th><th>q</th><th>(p ∧ q)</th><th>r</th><th>(p ∧ q) ∨ r</th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr> <!-- MMD typo: x5 -->
+                                    <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>With three statements, we must ensure that the program includes all the <span class="math-inline">$2^3 = 8$</span> possible combinations which can give rise to 8 possible results.</p>
+                        <p>Example: For the boolean expression <span class="math-inline">$Z = A + B \cdot \overline{C}$</span> or <span class="math-inline">$Z = A \lor (B \land (\sim C))$</span></p> <!-- Corrected MMD equation -->
+                        <p>The truth table is as follows:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>C</th><th><span class="math-inline">$\overline{C}$</span></th><th><span class="math-inline">$B \cdot \overline{C}$</span></th><th><span class="math-inline">$Z = A + B \overline{C}$</span></th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Example: For the boolean expression <span class="math-inline">$Z = (A \cdot \overline{B}) + \overline{C} + D$</span> or <span class="math-inline">$Z = (A \land (\sim B)) \lor (\sim C) \lor D$</span></p> <!-- Corrected MMD equation -->
+                        <p>The truth table is as follows:</p>
+                         <div class="table-container">
+                             <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>C</th><th>D</th><th><span class="math-inline">$\overline{B}$</span></th><th><span class="math-inline">$A \cdot \overline{B}$</span></th><th><span class="math-inline">$\overline{C}$</span></th><th><span class="math-inline">$Z=(A \cdot \overline{B}) + \overline{C} + D$</span></th></tr></thead> <!-- Added B-bar column -->
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>0</td><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td></tr> <!-- MMD missing D=0 -->
+                                    <tr><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr> <!-- MMD missing C=1 -->
+                                    <tr><td>0</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td></tr> <!-- MMD typo: 1 - 0 0 -->
+                                    <tr><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td><td>1</td><td>0</td><td>1</td></tr> <!-- Corrected Z -->
+                                    <tr><td>1</td><td>0</td><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>1</td></tr> <!-- Corrected Z -->
+                                    <tr><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>1</td><td>1</td></tr> <!-- Corrected A.Bbar -->
+                                    <tr><td>1</td><td>1</td><td>0</td><td>1</td><td>0</td><td>0</td><td>1</td><td>1</td></tr> <!-- Corrected A.Bbar -->
+                                    <tr><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>0</td><td>0</td></tr> <!-- Corrected A.Bbar and Z -->
+                                    <tr><td>1</td><td>1</td><td>1</td><td>1</td><td>0</td><td>0</td><td>0</td><td>1</td></tr> <!-- Corrected A.Bbar -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Truth Tables can be used to prove the logic equality of two different boolean expressions, as shown in the example below.</p>
+                        <p>Example: To prove: <span class="math-inline">$A \cdot (A+B) = A + A \cdot B = A$</span></p>
+                        <p>Truth table for <span class="math-inline">$A \cdot (A + B)$</span></p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>A + B</th><th>A . (A + B)</th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>1</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>1</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>Truth table for <span class="math-inline">$A + A \cdot B$</span></p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>A</th><th>B</th><th>A . B</th><th>A + A . B</th></tr></thead>
+                                <tbody>
+                                    <tr><td>0</td><td>0</td><td>0</td><td>0</td></tr>
+                                    <tr><td>0</td><td>1</td><td>0</td><td>0</td></tr>
+                                    <tr><td>1</td><td>0</td><td>0</td><td>1</td></tr>
+                                    <tr><td>1</td><td>1</td><td>1</td><td>1</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The two expressions <span class="math-inline">$A \cdot (A+B)$</span> and <span class="math-inline">$A + A \cdot B$</span> are shown to be logically equivalent, because they have the same outputs in the above truth tables.</p>
+                        <p>Note also that these outputs are also exactly the same as the inputs for A.</p> <!-- MMD typo: sane -->
+                        <p>Therefore it is proven that <span class="math-inline">$A \cdot (A+B) = A + A \cdot B = A$</span></p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-logical-equivalence -->
+
+                <!-- START: chapter-5-switching-diagrams -->
+                <section id="section-5-7" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔌</span>
+                        <span class="heading-text">5.7 Switching Diagrams</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>It has long been the practice to illustrate such possibilities, in Control Systems, by reference to diagrams showing the switching On and Off of an electric light.</p> <!-- MMD typo: w -->
+                        <p>The switching function is carried out, within the computer, by circuits known as Logic Gates, for which statements have to be converted to electrical voltages, still identified as '1' or '0' for 'On' and 'Off' but with individual statements, or Inputs, labelled as A, B, C, and so on whilst consequences, or Outputs, are labelled X, Y, Z.</p> <!-- MMD typo: wich, labelied -->
+                        <p>These 'gates' are represented in diagrams as shown below but, just as with a truth table, compound statements may give any number of 'inputs' and gates may be combined in many different ways.</p>
+                        <img src="../assets/images/ch5-logic-gates-and-or.jpg" alt="AND gate symbol">
+                        <p>The AND gate</p>
+                        <img src="../assets/images/ch5-logic-gate-or.jpg" alt="OR gate symbol">
+                        <p>The OR gate</p>
+                        <p>Here <span class="math-inline">$A \land B$</span> is represented as A.B and <span class="math-inline">$A \lor B$</span> is represented as A+B. So the two-input AND gate means that to generate a voltage, indicated by '1' at the output, we must apply voltage at all inputs. For the OR gate, a voltage at the output is generated by an appropriate voltage at any one or more inputs.</p>
+                        <p>If we have a statement, 'IF in A AND NOT in B THEN DO ...', then we see that we need to invert an input (or an output) to conform to our logical model.</p>
+                        <img src="../assets/images/ch5-logic-gate-not.jpg" alt="NOT gate (inverter) symbol and its use with AND/OR gates">
+
+                        <h3 class="subsection-heading">5.7.1 AND Function (or AND gate)</h3>
+                        <p>The AND gate circuit symbol is as follows:</p>
+                        <img src="../assets/images/ch5-and-gate-symbol.jpg" alt="Standard AND gate symbol with inputs A, B and output C">
+                        <p>A basic AND gate has two inputs A and B, and one output C. All A, B and C are logical and binary variables which can only be '0' or '1' i.e. A, B and C are bits in nature.</p>
+                        <p>The analogy of the AND gate is as follows:</p>
+                        <img src="../assets/images/ch5-and-gate-analogy.jpg" alt="Circuit diagram showing two switches in series connected to a lamp, illustrating the AND function">
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Switch A</th><th>Switch B</th><th>Lamp C</th></tr></thead>
+                                <tbody>
+                                    <tr><td>OFF (0)</td><td>OFF (0)</td><td>OFF (0)</td></tr>
+                                    <tr><td>OFF (0)</td><td>ON (1)</td><td>OFF (0)</td></tr>
+                                    <tr><td>ON (1)</td><td>OFF (0)</td><td>OFF (0)</td></tr>
+                                    <tr><td>ON (1)</td><td>ON (1)</td><td>ON (1)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The AND function output C is a 1 (True) only if both inputs A=1 AND B=1, or else, output C=0. This can be better represented by a truth table which relates the output to all possible input conditions.</p>
+                        <p>A Truth Table shows the relationship between input conditions and output.</p>
+                        <!-- Truth table already shown above -->
+                        <p>When input A and B are both '1', the output will be '1'.</p>
+                        <p>Mathematically, this can be expressed in a boolean equation as:</p>
+                        <div class="equation">$$ C = A \cdot B \text{ (read as A AND B)} $$</div>
+                        <p>or</p>
+                        <div class="equation">$$ C = A \land B $$</div> <!-- MMD typo: A ∩ B -->
+                        <p>Example: A 3-input AND gate:</p>
+                        <img src="../assets/images/ch5-and-gate-3input-symbol.jpg" alt="3-input AND gate symbol">
+                        <p>is the same as</p>
+                        <img src="../assets/images/ch5-and-gate-3input-equivalent.jpg" alt="Equivalent circuit using two 2-input AND gates to create a 3-input AND function">
+                        <p>The truth table is as follows.</p>
+                        <!-- Truth table continues in next section -->
+                    </div>
+                </section>
+                <!-- END: chapter-5-switching-diagrams -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-4-part-5.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 5 (Part 1)</span>
+                    </div>
+                    <a href="chapter-5-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

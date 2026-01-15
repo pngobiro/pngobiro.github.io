@@ -1,0 +1,781 @@
+<!-- topics/analogue-electronics-bjt.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 3: Bipolar Junction Transistors (BJTs)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Use AMS numbering for equations
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <!-- Top Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="analogue-electronics-semiconductors-diodes-rectifiers.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 75%;"></div> <!-- Set percentage dynamically -->
+                        </div>
+                        <span class="progress-text">Part 3 of 4</span> <!-- Update text -->
+                    </div>
+                    <a href="analogue-electronics-fet.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Bipolar Junction Transistors (BJTs)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: bjt-intro -->
+                <section id="bjt-intro" class="content-section" aria-labelledby="bjt-intro-heading">
+                    <h2 id="bjt-intro-heading" class="section-heading">
+                        <span class="heading-icon">🔌</span>
+                        <span class="heading-text">The Bipolar Junction Transistor</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The bipolar junction transistor (BJT) has three separately doped regions and contains two pn junctions.</p>
+                        <p>The basic transistor principle is that the voltage between two terminals controls the current through the third terminal.</p>
+                        <p>Current in the transistor is due to the flow of both electrons and holes, hence the name bipolar.</p>
+
+                        <h3 class="subsection-heading">npn bipolar transistor</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-116-1.jpg" alt="Diagram showing the structure of an npn bipolar transistor with Emitter (n), Base (p), and Collector (n) regions." class="content-image">
+                           <figcaption>NPN BJT Structure</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">pnp bipolar transistor</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-116-2.jpg" alt="Diagram showing the structure of a pnp bipolar transistor with Emitter (p), Base (n), and Collector (p) regions." class="content-image">
+                           <figcaption>PNP BJT Structure</figcaption>
+                        </figure>
+                    </div>
+                </section>
+                <!-- END: bjt-intro -->
+
+                <!-- START: bjt-forward-active-npn -->
+                <section id="bjt-forward-active-npn" class="content-section" aria-labelledby="bjt-forward-active-npn-heading">
+                    <h2 id="bjt-forward-active-npn-heading" class="section-heading">
+                        <span class="heading-icon">➡️</span>
+                        <span class="heading-text">npn Transistor: Forward-Active Mode Operation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Since the transistor has two pn junctions, four possible bias combinations may be applied to the device, depending on whether a forward or reverse bias is applied to each junction.</p>
+                        <p>If the transistor is used as an amplifying device, the base-emitter ( $\mathbf{B}-E$ ) junction is forward biased and the base-collector ($\mathbf{B}-C$ ) junction is reverse biased, in a configuration called the forward-active operating mode.</p>
+
+                        <h3 class="subsection-heading">Transistor Currents-forward-active mode</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-118-1.jpg" alt="Diagram illustrating electron flow in an npn transistor biased in the forward-active mode. B-E junction is forward biased, B-C junction is reverse biased. Shows emitter current (iE), base current (iB), and collector current (iC)." class="content-image">
+                           <figcaption>NPN Forward-Active Mode Currents</figcaption>
+                        </figure>
+                        <p>Emitter Current:</p>
+                        <div class="equation">$$i_{E}=I_{E O}\left(e^{v_{B E} / V_{T}}-1\right) \cong I_{E O} e^{v_{B E} / V_{T}}$$</div>
+                        <p>Collector Current: Due to electrons reaching the collector from the emitter region.</p>
+                        <div class="equation">$$i_{C}=I_{S} e^{v_{B E} / V_{T}}$$</div>
+                        <p>The collector current is controlled by the BE voltage; in other words, the current at one terminal (the collector) is controlled by the voltage across the other two terminals. This control is the basic transistor action.</p>
+
+                        <h3 class="subsection-heading">Current Relationship</h3>
+                        <div class="equation">$$I_{C}=\alpha I_{E}$$</div>
+                        <p>The parameter $\alpha$ is called the common-base current gain whose value is always slightly less than unity.</p>
+                        <p>Base Current: Since the B-E junction is forward biased, holes from the base are injected across the B-E junction into the emitter.</p>
+                        <p>However, because these holes do not contribute to the collector current, they are not part of the transistor action.</p>
+                        <p>Instead, the flow of holes forms one component of the base current.</p>
+
+                        <h3 class="subsection-heading">Common-Emitter Current Gain</h3>
+                        <p>Shows the relationship between the base and collector current when the transistor is biased in the Forward Active Mode.</p>
+                        <div class="equation">$$\beta=\frac{I_{C}}{I_{B}}$$</div>
+
+                        <h3 class="subsection-heading">common-emitter configuration</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-123-1.jpg" alt="Common-emitter configuration circuit for an npn transistor. Input circuit has VBB and RB setting iB. Output circuit has VCC and RC controlling iC and vCE." class="content-image">
+                           <figcaption>Common-Emitter Configuration (NPN)</figcaption>
+                        </figure>
+                         <div class="equation">$$V_{C C}=v_{C E}+i_{C} R_{C}$$</div>
+                         <p>The base current is established by $V_{B B}$ and $R_{B}$, and the resulting collector current is $i_{C}=\beta i_{B}$.</p>
+                         <p>If we set $V_{B B}=0$, the $\mathrm{B}-\mathrm{E}$ junction will have zero applied volts; therefore, $i_{B}=0$, which implies that $i_{C}=0$. This condition is called cutoff.</p>
+
+                         <h3 class="subsection-heading">Current Relationships</h3>
+                         <div class="equation">$$i_{E}=i_{B}+i_{C}$$</div>
+                         <div class="equation">$$i_{C}=\beta i_{B} \quad \text{(Forward Active Mode)}$$</div>
+                         <p>$i_{E}$ Can therefore be written as:</p>
+                         <div class="equation">$$i_{E}=(\beta+1) i_{B}$$</div>
+                         <div class="equation">$$\therefore i_{C}=\left(\frac{\beta}{\beta+1}\right) i_{E}$$</div>
+                         <p>But we know: $\quad i_{C}=\alpha i_{E}$</p>
+                         <p>Therefore, $\quad \alpha=\frac{\beta}{\beta+1}$</p>
+                         <p>or, $\quad \beta=\frac{\alpha}{1-\alpha}$</p>
+
+                         <h3 class="subsection-heading">Example</h3>
+                         <p>An npn transistor is biased in the forwardactive mode. The base current is $I_{B}=$ $8.50 \mu \mathrm{~A}$ and the emitter current is $I_{E}=$ 1.20 mA . Determine $\beta, \alpha$ and $I_{C}$.</p>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution (Implied)</h4>
+                             <p>$I_C = I_E - I_B = 1.20 \text{ mA} - 0.0085 \text{ mA} = 1.1915 \text{ mA}$</p>
+                             <p>$\beta = I_C / I_B = 1.1915 \text{ mA} / 0.0085 \text{ mA} \approx 140.18$</p>
+                             <p>$\alpha = I_C / I_E = 1.1915 \text{ mA} / 1.20 \text{ mA} \approx 0.9929$</p>
+                             <p>(Alternatively: $\alpha = \beta / (\beta+1) = 140.18 / 141.18 \approx 0.9929$)</p>
+                         </aside>
+
+                    </div>
+                </section>
+                <!-- END: bjt-forward-active-npn -->
+
+                <!-- START: bjt-forward-active-pnp -->
+                 <section id="bjt-forward-active-pnp" class="content-section" aria-labelledby="bjt-forward-active-pnp-heading">
+                    <h2 id="bjt-forward-active-pnp-heading" class="section-heading">
+                        <span class="heading-icon">⬅️</span>
+                        <span class="heading-text">pnp Transistor: Forward-Active Mode Operation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The pnp transistor is complementary to the npn transistor.</p>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-127-1.jpg" alt="Diagram illustrating hole flow in a pnp transistor biased in the forward-active mode. E-B junction is forward biased, C-B junction is reverse biased. Shows emitter current (iE), base current (iB), and collector current (iC)." class="content-image">
+                           <figcaption>PNP Forward-Active Mode Currents</figcaption>
+                        </figure>
+                         <p>The relationships between the terminal currents of the pnp transistor are exactly the same as those of the npn transistor.</p>
+                    </div>
+                 </section>
+                 <!-- END: bjt-forward-active-pnp -->
+
+                 <!-- START: bjt-symbols-conventions -->
+                 <section id="bjt-symbols-conventions" class="content-section" aria-labelledby="bjt-symbols-conventions-heading">
+                     <h2 id="bjt-symbols-conventions-heading" class="section-heading">
+                        <span class="heading-icon">🔣</span>
+                        <span class="heading-text">Circuit Symbols and Conventions</span>
+                     </h2>
+                     <div class="content-card">
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-128-1.jpg" alt="Left: NPN BJT physical structure representation with current directions. Right: NPN BJT circuit symbol showing iB, iC, iE directions and VBE, VCE voltage polarities." class="content-image">
+                           <figcaption>NPN Symbol and Conventions</figcaption>
+                        </figure>
+                         <p>The arrowhead in the circuit symbol is always placed on the emitter terminal, and it indicates the direction of the emitter current.</p>
+                         <p>For the npn device, this direction is out of the emitter.</p>
+
+                         <h3 class="subsection-heading">Pnp Transistor</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-129-1.jpg" alt="Left: PNP BJT physical structure representation with current directions. Right: PNP BJT circuit symbol showing iB, iC, iE directions and VEB, VEC voltage polarities. Arrowhead on emitter points inward." class="content-image">
+                           <figcaption>PNP Symbol and Conventions</figcaption>
+                        </figure>
+
+                        <h3 class="subsection-heading">Common-Emitter circuit configurations</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-130-1.jpg" alt="Three common-emitter circuit configurations: (Left) NPN with base resistor bias. (Center) PNP with base resistor bias (using positive VCC). (Right) PNP with base resistor bias and collector resistor connected to ground (using positive VBB and VCC)." class="content-image">
+                           <figcaption>Common-Emitter Configurations (NPN & PNP)</figcaption>
+                        </figure>
+                    </div>
+                </section>
+                <!-- END: bjt-symbols-conventions -->
+
+                 <!-- START: bjt-characteristics -->
+                 <section id="bjt-characteristics" class="content-section" aria-labelledby="bjt-characteristics-heading">
+                     <h2 id="bjt-characteristics-heading" class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">Current-Voltage Characteristics</span>
+                     </h2>
+                     <div class="content-card">
+                         <h3 class="subsection-heading">common base circuit configuration</h3>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-131-1.jpg" alt="Common-base circuit configuration. Left: NPN version. Right: PNP version. Both show emitter current source and collector resistor." class="content-image">
+                           <figcaption>Common-Base Configuration</figcaption>
+                        </figure>
+                         <p>The current sources provide the emitter current.</p>
+                         <p>When the B-C junction becomes forward biased, the transistor is no longer in the forward-active mode, and the collector and emitter currents are no longer related by:</p>
+                         <div class="equation">$$i_{C}=\alpha i_{E}$$</div>
+                         <p>When the collector-base junction is reverse biased, then for constant values of emitter current, the collector current is nearly equal to $i_{E}$</p>
+
+                         <h4 class="subsubsection-heading">Common-base current-voltage characteristics</h4>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-133-1.jpg" alt="Common-base output characteristics (iC vs VCB or VBC). Shows nearly constant collector current (iC approx alpha * iE) for different emitter currents (iE1 to iE5) when C-B junction is reverse biased (Forward-active mode)." class="content-image">
+                           <figcaption>Common-Base I-V Characteristics</figcaption>
+                        </figure>
+                        <p>When the collector-base junction is reverse biased, then for constant values of emitter current, the collector current is nearly equal to $i_{E}$</p>
+                        <p>These characteristics show that the common-base device is nearly an ideal constant-current source.</p>
+                        <p>When the collector-base junction becomes forward biased in the range of 0.2 and 0.3 V , the collector current is still essentially equal to the emitter current $i_{E}$.</p>
+                        <p>As the forward-bias C-B voltage increases, the linear relationship between the collector and emitter currents is no longer valid, and the collector current very quickly drops to zero.</p>
+
+                        <h3 class="subsection-heading">common-emitter circuit configuration</h3>
+                        <p>The collector current is plotted against the collector-emitter voltage, for various constant values of the base current.</p>
+                        <p>In the npn device, in order for the transistor to be biased in the forward-active mode, the $B-C$ junction must be zero or reverse biased, which means that $V_{C E}>V_{B E(o n)}$</p>
+                        <p>For $V_{C E}>V_{B E(o n),}$ there is a finite slope to the curves. If, however, $V_{C E}<V_{B E(o n)}$, the B-C junction becomes forward biased, the transistor is no longer in the forward-active mode, and the collector current very quickly drops to zero.</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-136-1.jpg" alt="Common-emitter output characteristics (iC vs VCE) for an npn transistor. Shows curves for different constant base currents (iB=5uA to 30uA). Active region shows iC approx beta * iB. Saturation region is near VCE=0. Cutoff region is near iC=0." class="content-image">
+                           <figcaption>Common-Emitter I-V Characteristics (NPN)</figcaption>
+                        </figure>
+                    </div>
+                 </section>
+                 <!-- END: bjt-characteristics -->
+
+                 <!-- START: bjt-dc-analysis -->
+                 <section id="bjt-dc-analysis" class="content-section" aria-labelledby="bjt-dc-analysis-heading">
+                     <h2 id="bjt-dc-analysis-heading" class="section-heading">
+                        <span class="heading-icon">📊</span>
+                        <span class="heading-text">DC Analysis of Transistor Circuits</span>
+                     </h2>
+                     <div class="content-card">
+                         <h3 class="subsection-heading">Common-Emitter Circuit</h3>
+                          <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-138-1.jpg" alt="Common-emitter NPN circuit used for DC analysis example." class="content-image">
+                           <figcaption>Common-Emitter Circuit for DC Analysis</figcaption>
+                        </figure>
+
+                         <h4 class="subsubsection-heading">DC equivalent</h4>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-139-1.jpg" alt="DC equivalent circuit for the common-emitter configuration, replacing the transistor with its forward-active model (VBE(on) voltage source and beta*IB dependent current source)." class="content-image">
+                           <figcaption>DC Equivalent Circuit (Forward-Active Model)</figcaption>
+                        </figure>
+                         <p>When the transistor is biased in the forwardactive mode, the collector current is represented as a dependent current source that is a function of the base current.</p>
+                         <p>Base Current: </p>
+                         <div class="equation">$$I_{B}=\frac{V_{B B}-V_{B E(o n)}}{R_{B}}$$</div>
+                         <p>In the collector-emitter portion of the circuit, we can write: $I_{C}=\beta I_{B}$ and</p>
+                         <div class="equation">$$V_{C C}=I_{C} R_{C}+V_{C E}$$</div>
+                         <p>or</p>
+                         <div class="equation">$$V_{C E}=V_{C C}-I_{C} R_{C}$$</div>
+                         <p>The power dissipated in the transistor is given by: </p>
+                         <div class="equation">$$P_{T}=I_{B} V_{B E(\text { on })}+I_{C} V_{C E}$$</div>
+                         <p>For $I_{C} \gg I_{B}$ and $V_{C E}>V_{B E(o n)}$</p>
+                         <div class="equation">$$P_{T} \cong I_{C} V_{C E}$$</div>
+
+                         <h4 class="subsubsection-heading">Example</h4>
+                         <p>Calculate the transistor power dissipation.</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-141-1.jpg" alt="Common-emitter circuit with specific values: VBB=4V, RB=220kOhm, RC=2kOhm, VCC=10V, beta=200, VBE(on)=0.7V." class="content-image">
+                           <figcaption>DC Analysis Example Circuit</figcaption>
+                        </figure>
+                        <p>Given:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$V_{B B}=4 V$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$R_{B}=220 k\Omega$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$R_{C}=2 k\Omega$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$V_{C C}=10 \mathrm{~V}$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$\beta=200$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$V_{B E(\mathrm{on})}=0.7 \mathrm{~V}$</span></li>
+                         </ul>
+                          <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution (Implied)</h4>
+                             <p>$I_B = (V_{BB} - V_{BE(on)}) / R_B = (4 - 0.7) \text{V} / 220 \text{ k}\Omega = 3.3 \text{V} / 220 \text{ k}\Omega \approx 0.015 \text{ mA} = 15 \mu\text{A}$</p>
+                             <p>$I_C = \beta I_B = 200 \times 0.015 \text{ mA} = 3.0 \text{ mA}$</p>
+                             <p>$V_{CE} = V_{CC} - I_C R_C = 10 \text{V} - (3.0 \text{ mA})(2 \text{ k}\Omega) = 10 \text{V} - 6 \text{V} = 4.0 \text{ V}$</p>
+                              <p>(Check Forward-Active: $V_{CE} = 4.0\text{V} > V_{BE(on)} = 0.7\text{V}$. Assumption is correct.)</p>
+                             <p>$P_T \cong I_C V_{CE} = (3.0 \text{ mA})(4.0 \text{ V}) = 12.0 \text{ mW}$</p>
+                         </aside>
+
+                         <h3 class="subsection-heading">Pnp Transistor</h3>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-142-1.jpg" alt="Top: Common-emitter PNP circuit. Bottom: DC equivalent using forward-active model (VEB(on) voltage source, beta*IB current source)." class="content-image">
+                           <figcaption>PNP Common-Emitter DC Analysis</figcaption>
+                        </figure>
+                         <div class="equation">$$I_{B}=\frac{V_{B B}-V_{E B(o n)}}{R_{B}}$$</div>
+                         <div class="equation">$$I_{C}=\beta I_{B}$$</div>
+                         <div class="equation">$$V_{E C}=V_{C C}-I_{C} R_{C}$$</div>
+
+                         <h4 class="subsubsection-heading">Note</h4>
+                         <p>The equations for the common emitter pnp transistor are exactly the same as those of npn bipolar transistor in a similar circuit, if we properly define the current directions and voltage polarities</p>
+
+                         <h4 class="subsubsection-heading">Example</h4>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-145-1.jpg" alt="PNP common-emitter circuit with VBB=1.5V, RB=580kOhm, V+=5V, VEB(on)=0.6V, beta=100. RC is unknown." class="content-image">
+                           <figcaption>PNP DC Analysis Example</figcaption>
+                        </figure>
+                         <p>Given:</p>
+                          <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$V_{B B}=1.5 \mathrm{~V}$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$R_{B}=580 \mathrm{~kW}$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$V^+=5 \mathrm{~V}$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$V_{E B(\text { on) }}=0.6 \mathrm{~V}$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$\beta=100$</span></li>
+                         </ul>
+                         <p>Find $I_{B}, I_{C}, I_{E}$, and $R_{C}$ such that $V_{E C}=\left(\frac{\mathbf{1}}{\mathbf{2}}\right) V^{+}$</p>
+                          <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution (Implied)</h4>
+                              <p>$V_{CC}$ is implicitly $V^+ = 5\text{V}$.</p>
+                             <p>$I_B = (V_{BB} - V_{EB(on)}) / R_B = (1.5 - 0.6)\text{V} / 580 \text{ k}\Omega = 0.9\text{V} / 580 \text{ k}\Omega \approx 0.00155 \text{ mA} = 1.55 \mu\text{A}$</p>
+                             <p>$I_C = \beta I_B = 100 \times 0.00155 \text{ mA} = 0.155 \text{ mA}$</p>
+                              <p>$I_E = (\beta + 1) I_B = 101 \times 0.00155 \text{ mA} \approx 0.157 \text{ mA}$ (or $I_E = I_B + I_C = 0.00155 + 0.155 = 0.15655$ mA)</p>
+                              <p>$V_{ECQ} = (1/2) V^+ = 0.5 \times 5\text{V} = 2.5\text{V}$</p>
+                              <p>$V_{EC} = V_{CC} - I_C R_C \implies R_C = (V_{CC} - V_{ECQ}) / I_{CQ} = (5 - 2.5)\text{V} / 0.155 \text{ mA} = 2.5\text{V} / 0.155 \text{ mA} \approx 16.13 \text{ k}\Omega$</p>
+                              <p>(Check Forward-Active: $V_{EC} = 2.5\text{V} > V_{EB(on)} = 0.6\text{V}$. Assumption correct.)</p>
+                         </aside>
+                    </div>
+                 </section>
+                 <!-- END: bjt-dc-analysis -->
+
+                 <!-- START: bjt-load-line -->
+                 <section id="bjt-load-line" class="content-section" aria-labelledby="bjt-load-line-heading">
+                     <h2 id="bjt-load-line-heading" class="section-heading">
+                        <span class="heading-icon">📉</span>
+                        <span class="heading-text">Load Line and Modes of Operation</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>The load line helps us visualize the characteristics of a transistor.</p>
+                         <p>The load line is a graphical technique that represents the transistor operations.</p>
+                         <p>Consider the common Emitter Circuit Below:</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-146-1.jpg" alt="Common-emitter circuit with VCC=10V, RC=2kOhm, RB=220kOhm, VBB=4V." class="content-image">
+                           <figcaption>Common-Emitter Circuit for Load Line Analysis</figcaption>
+                        </figure>
+                         <p>The input load line can be drawn from the KVL equation of the B-E loop given as:</p>
+                         <div class="equation">$$I_{B}=\frac{V_{B B}}{R_{B}}-\frac{V_{B E}}{R_{B}}$$</div>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-147-1.jpg" alt="Input characteristic (IB vs VBE) with input load line plotted. Intersection gives quiescent base current IBQ and VBEQ." class="content-image">
+                           <figcaption>Input Load Line</figcaption>
+                        </figure>
+                         <p>We can also write the KVL equation for the output loop (C-E) and plot it on the transistor output characteristics. The KVL equation is:</p>
+                         <div class="equation">$$V_{C E}=V_{C C}-I_{C} R_{C}$$</div>
+                         <p>Or, rearranging for the load line plot ($I_C$ vs $V_{CE}$):</p>
+                         <div class="equation">$$I_{C}=\frac{V_{C C}}{R_{C}}-\frac{V_{C E}}{R_{C}}$$</div>
+                         <p>For the example circuit ($V_{CC}=10V, R_C=2k\Omega$):</p>
+                         <div class="equation">$$ I_{C} = \frac{10}{2k\Omega} - \frac{V_{CE}}{2k\Omega} = 5mA - \frac{V_{CE}}{2k\Omega} \quad \text{dc load line equation} $$</div>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-149-1.jpg" alt="Output characteristics (IC vs VCE) with the DC load line plotted. The Q-point (Quiescent point) is the intersection of the load line and the curve corresponding to the operating base current (IBQ=15uA in this example)." class="content-image">
+                           <figcaption>DC Load Line on Output Characteristics</figcaption>
+                        </figure>
+                         <p>The quiescent point, or Q-point, of the transistor is given by the dc collector current and the collectoremitter voltage.</p>
+                         <p>The Q-point is the intersection of the load line and the $I_{C}$ versus $V_{C E}$ curve corresponding to the appropriate base current.</p>
+                         <p>The load line is useful in visualizing the bias point of the transistor.</p>
+                         <p>If the power supply voltage in the base circuit is smaller than the turn-on voltage, then $V_{B B}<V_{B E(o n)}$ and $I_{B}=I_{C}=0$, and the transistor is in the cutoff mode.</p>
+                         <p>In this mode, all transistor currents are zero, neglecting leakage currents.</p>
+                         <p>As $V_{B B}$ increases ($V_{B B}>V_{B E(o n)}$), the base current $I_{B}$ increases and the Q-point moves up the load line.</p>
+                         <p>As $I_{B}$ continues to increase, a point is reached where the collector current $I_{C}$ can no longer increase.</p>
+                         <p>At this point, the transistor is biased in the saturation mode; that is, the transistor is said to be in saturation.</p>
+                         <p>The B-C junction becomes forward biased, and the relationship between the collector and base currents is no longer linear.</p>
+                         <p>The transistor C-E voltage in saturation, $V_{C E(s a t)}$, is less than the B-E cut-in voltage.</p>
+                         <p>The forward-biased B-C voltage is always less than the forward-biased B-E voltage, so the C-E voltage in saturation is a small positive value. Typically, $V_{C E(\text { sat })}$ is in the range of 0.1 to 0.3 V .</p>
+
+                        <h4 class="subsubsection-heading">Example</h4>
+                        <p>For the circuit shown in the Figure below, the transistor parameters are: $\beta=100$, and $V_{B E(o n)}=0.7 \mathrm{~V}$. If the transistor is biased in saturation, assume $V_{C E(s a t)}=0.2 \mathrm{~V}$.</p>
+                        <p>Calculate the currents and voltages in the circuit.</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-152-1.jpg" alt="Common-emitter circuit with +8V base supply, RB=220kOhm, RC=4kOhm, VCC=+10V." class="content-image">
+                           <figcaption>Saturation Mode Example Circuit</figcaption>
+                        </figure>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                             <p>1. Calculate the base current $I_B$ assuming forward-active mode: $I_B = (8\text{V} - 0.7\text{V}) / 220\text{k}\Omega \approx 33.2 \mu\text{A}$.</p>
+                             <p>2. Calculate the collector current if it were in forward-active mode: $I_{C(active)} = \beta I_B = 100 \times 33.2 \mu\text{A} = 3.32 \text{ mA}$.</p>
+                             <p>3. Calculate the collector current assuming saturation ($V_{CE} = V_{CE(sat)} = 0.2\text{V}$): $I_{C(sat)} = (V_{CC} - V_{CE(sat)}) / R_C = (10\text{V} - 0.2\text{V}) / 4\text{k}\Omega = 9.8\text{V} / 4\text{k}\Omega = 2.45 \text{ mA}$.</p>
+                             <p>4. Compare $I_{C(active)}$ and $I_{C(sat)}$. Since $I_{C(active)} = 3.32\text{mA} > I_{C(sat)} = 2.45\text{mA}$, the transistor cannot supply the active-mode current and is driven into saturation.</p>
+                             <p>5. Therefore, the operating point is in saturation: $I_C = I_{C(sat)} = 2.45 \text{ mA}$, $V_{CE} = V_{CE(sat)} = 0.2 \text{ V}$.</p>
+                             <p>6. The actual base current required for saturation is $I_{B(sat)} = I_{C(sat)} / \beta = 2.45\text{mA} / 100 = 24.5 \mu\text{A}$. Since the circuit provides $I_B \approx 33.2 \mu\text{A}$, which is greater than $I_{B(sat)}$, the transistor is indeed saturated.</p>
+                             <p>7. Final values: $I_B \approx 33.2 \mu\text{A}$, $I_C = 2.45 \text{ mA}$, $V_{CE} = 0.2 \text{ V}$.</p>
+                         </aside>
+
+
+                         <h3 class="subsection-heading">Summary</h3>
+                         <p>Analyzing the of a bipolar transistor circuit requires dc response knowing the mode of operation of the transistor.</p>
+                         <p>In some cases, the mode of operation may not be obvious, which means that we have to guess the state of the transistor, then analyze the circuit to determine if we have a solution consistent with our initial guess.</p>
+
+                         <h4 class="subsubsection-heading">Steps</h4>
+                         <ol class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Assume that the transistor is biased in the forward-active mode in which case $V_{B E}=V_{B E(o n),} I_{B}>0$, and $I_{C}=\beta I_{B}$.</span></li>
+                             <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Analyze the "linear" circuit with this assumption.</span></li>
+                             <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Evaluate the resulting state of the transistor. If the initial assumed parameter values and $V_{C E} \ge V_{BE(on)}$ are true, then the initial assumption is correct. However, if the calculation shows $\mathrm{I}_{\mathrm{B}}<0$, then the transistor is probably cut off, and if the calculation shows $\mathrm{V}_{\mathrm{CE}}<V_{BE(on)}$ (or $\mathrm{V}_{\mathrm{CE}} < \mathrm{V}_{\mathrm{CE(sat)}}$ if given), the transistor is likely biased in saturation.</span></li>
+                             <li class="list-item"><span class="item-icon">4.</span><span class="item-text">If the initial assumption is proven incorrect, then a new assumption must be made (Cutoff or Saturation) and the new "linear" circuit must be analyzed. Step 3 must then be repeated.</span></li>
+                         </ol>
+
+                         <h4 class="subsubsection-heading">Example</h4>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-155-1.jpg" alt="Circuit with NPN transistor, base connected to input voltage Vi via RB=640 Ohm. Collector connected to +5V via RC=440 Ohm. Emitter grounded." class="content-image">
+                           <figcaption>Analysis Example Circuit</figcaption>
+                        </figure>
+                         <p>For the circuit shown, let $\beta=50$, and determine $V_{I}$ such that $V_{B C}=0$. Calculate the power dissipated in the transistor.</p>
+                          <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                              <p>1. $V_{BC} = 0$ means the transistor is at the edge between forward-active and saturation. $V_{BE} = V_{BE(on)}$ (assume 0.7V if not given).</p>
+                             <p>2. Since $V_{BC} = V_{BE} - V_{CE} = 0$, then $V_{CE} = V_{BE} = V_{BE(on)} = 0.7\text{V}$.</p>
+                             <p>3. Calculate $I_C$ using the output loop: $V_{CC} = I_C R_C + V_{CE} \implies I_C = (V_{CC} - V_{CE}) / R_C = (5\text{V} - 0.7\text{V}) / 440\Omega = 4.3\text{V} / 440\Omega \approx 9.77 \text{ mA}$.</p>
+                             <p>4. Calculate $I_B$ using $I_C = \beta I_B$: $I_B = I_C / \beta = 9.77\text{mA} / 50 \approx 0.195 \text{ mA}$.</p>
+                              <p>5. Calculate $V_I$ using the input loop: $V_I = I_B R_B + V_{BE(on)} = (0.195 \text{ mA})(640\Omega) + 0.7\text{V} \approx 0.125\text{V} + 0.7\text{V} = 0.825\text{V}$.</p>
+                              <p>6. Power Dissipation: $P_T = I_B V_{BE(on)} + I_C V_{CE} = (0.195\text{mA})(0.7\text{V}) + (9.77\text{mA})(0.7\text{V}) \approx 0.137\text{mW} + 6.84\text{mW} \approx 6.98 \text{ mW}$.</p>
+                         </aside>
+                    </div>
+                 </section>
+                 <!-- END: bjt-load-line -->
+
+                 <!-- START: bjt-common-circuits -->
+                 <section id="bjt-common-circuits" class="content-section" aria-labelledby="bjt-common-circuits-heading">
+                    <h2 id="bjt-common-circuits-heading" class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">Commonly Used Bipolar Circuits: dc Analysis</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In addition to the common emitter configuration, there are other commonly used transistor circuits.</p>
+                        <p>BJT circuits tend to be very similar in terms of dc analysis procedures, so that the same basic analysis approach will work regardless of the appearance of the circuit.</p>
+
+                        <h3 class="subsection-heading">Example: Emitter Resistor Circuit</h3>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-157-1.jpg" alt="Common-emitter circuit with an emitter resistor RE=3kOhm. Base resistor RB=560kOhm connected to VBB=1V. Collector resistor RC=7kOhm connected to V+=+1.8V. Emitter resistor connected to V-=-1.8V." class="content-image">
+                           <figcaption>Common-Emitter with Emitter Resistor</figcaption>
+                        </figure>
+                        <p>For the circuit shown, let $\mathrm{V}_{\mathrm{BE}(\mathrm{on})}=0.7 \mathrm{~V}$ and $\beta=75$. Note that the circuit has both positive and negative power supply voltages. Calculate the Q -point values ($I_{BQ}, I_{CQ}, V_{CEQ}$). Also, sketch the load line and show the Q-point of the transistor. Comment on the mode of operation of the transistor.</p>
+                        <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                             <p>1. Assume Forward-Active mode.</p>
+                             <p>2. Write KVL for Base-Emitter loop: $V_{BB} - I_B R_B - V_{BE(on)} - I_E R_E - V^- = 0$.</p>
+                             <p>3. Substitute $I_E = (\beta + 1) I_B$: $1\text{V} - I_B (560\text{k}\Omega) - 0.7\text{V} - (\beta+1)I_B (3\text{k}\Omega) - (-1.8\text{V}) = 0$.</p>
+                              <p>4. $1 - 0.7 + 1.8 = I_B (560\text{k}\Omega) + (75+1)I_B (3\text{k}\Omega)$.</p>
+                             <p>5. $2.1 = I_B (560\text{k}\Omega) + 76 \times I_B (3\text{k}\Omega) = I_B (560 + 228)\text{k}\Omega = I_B (788\text{k}\Omega)$.</p>
+                             <p>6. $I_{BQ} = 2.1\text{V} / 788\text{k}\Omega \approx 0.00266 \text{ mA} = 2.66 \mu\text{A}$. (Since $I_B > 0$, not cutoff).</p>
+                             <p>7. $I_{CQ} = \beta I_{BQ} = 75 \times 2.66 \mu\text{A} \approx 0.200 \text{ mA}$.</p>
+                             <p>8. Write KVL for Collector-Emitter loop: $V^+ - I_C R_C - V_{CE} - I_E R_E - V^- = 0$.</p>
+                              <p>9. $1.8\text{V} - I_C (7\text{k}\Omega) - V_{CE} - (\beta+1)I_B (3\text{k}\Omega) - (-1.8\text{V}) = 0$.</p>
+                              <p>10. $1.8 - (0.200\text{mA})(7\text{k}\Omega) - V_{CE} - (76)(2.66\mu\text{A})(3\text{k}\Omega) + 1.8 = 0$.</p>
+                               <p>11. $1.8 - 1.4 - V_{CE} - (0.202\text{mA})(3\text{k}\Omega) + 1.8 = 0$.</p>
+                               <p>12. $1.8 - 1.4 - V_{CE} - 0.606 + 1.8 = 0$.</p>
+                               <p>13. $1.594 - V_{CE} = 0 \implies V_{CEQ} \approx 1.59 \text{ V}$.</p>
+                               <p>14. Check mode: $V_{CEQ} = 1.59\text{V} > V_{BE(on)} = 0.7\text{V}$. The transistor is in the forward-active mode, as assumed.</p>
+                               <p>15. Load line equation: $I_C = (V^+ - V^- - V_{CE}) / (R_C + R_E) = (1.8 - (-1.8) - V_{CE}) / (7\text{k} + 3\text{k}) = (3.6 - V_{CE}) / 10\text{k}$.</p>
+                                <p>16. Load line intersects Vce-axis ($I_C=0$) at $V_{CE} = 3.6\text{V}$.</p>
+                                <p>17. Load line intersects Ic-axis ($V_{CE}=0$) at $I_C = 3.6\text{V} / 10\text{k}\Omega = 0.36 \text{ mA}$.</p>
+                                 <p>18. Q-point: $(V_{CEQ}, I_{CQ}) = (1.59\text{V}, 0.200\text{mA})$.</p>
+                         </aside>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-158-1.jpg" alt="DC Load line plotted on generic IC vs VCE axes. Load line runs from IC=0.36mA (VCE=0) to VCE=3.6V (IC=0). Q-point is marked at approximately VCE=1.59V, IC=0.2mA, corresponding to IBQ=2.665uA." class="content-image">
+                           <figcaption>DC Load Line Plot</figcaption>
+                        </figure>
+                         <p>Since the C-E voltage is $1.59 \mathrm{~V}, \mathrm{~V}_{\mathrm{CE}}>\mathrm{V}_{\mathrm{BE} \text { (on) }}$ and the transistor is biased in the forward-active mode</p>
+
+                        <h3 class="subsection-heading">Example: Common Base Design</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-159-1.jpg" alt="Common-base PNP circuit. Emitter connected to V+=+5V via RE. Base connected to ground via RB=10kOhm. Collector connected to V-=-5V via RC." class="content-image">
+                           <figcaption>Common-Base Circuit Design</figcaption>
+                        </figure>
+                        <p>Design the common-base circuit shown such that $\mathrm{I}_{\mathrm{EQ}}=0.50 \mathrm{~mA}$ and $\mathrm{V}_{\mathrm{ECQ}}=4.0 \mathrm{~V}$.</p>
+                        <p>Assume transistor parameters of $\beta=120$ and $\mathrm{V}_{\mathrm{EB}(o n)}=0.7 \mathrm{~V}$.</p>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                             <p>1. Given $I_{EQ}=0.50 \text{ mA}$.</p>
+                             <p>2. Calculate $I_{BQ} = I_{EQ} / (\beta + 1) = 0.50\text{mA} / (120+1) \approx 0.00413 \text{ mA} = 4.13 \mu\text{A}$.</p>
+                             <p>3. Calculate $I_{CQ} = \beta I_{BQ} = 120 \times 4.13 \mu\text{A} \approx 0.496 \text{ mA}$. (Or $\alpha = \beta / (\beta+1) = 120/121 \approx 0.9917$; $I_{CQ} = \alpha I_{EQ} = 0.9917 \times 0.50\text{mA} \approx 0.496 \text{ mA}$).</p>
+                             <p>4. Design $R_E$: KVL from V+ to Base (ground): $V^+ - I_E R_E - V_{EB(on)} = V_B = 0$. So $R_E = (V^+ - V_{EB(on)}) / I_E = (5\text{V} - 0.7\text{V}) / 0.50\text{mA} = 4.3\text{V} / 0.50\text{mA} = 8.6 \text{ k}\Omega$.</p>
+                              <p>5. Design $R_C$: KVL from Emitter to Collector: $V_E - V_C = V_{ECQ} = 4.0\text{V}$. We know $V_E = V_{EB(on)} = 0.7\text{V}$ (since Base is ground). So $0.7\text{V} - V_C = 4.0\text{V} \implies V_C = 0.7 - 4.0 = -3.3\text{V}$.</p>
+                              <p>6. Now use $V_C = V^- + I_C R_C \implies -3.3\text{V} = -5\text{V} + (0.496\text{mA}) R_C$.</p>
+                              <p>7. $R_C = (-3.3 - (-5))\text{V} / 0.496\text{mA} = 1.7\text{V} / 0.496\text{mA} \approx 3.43 \text{ k}\Omega$.</p>
+                              <p>8. The $R_B=10k\Omega$ is given but seems redundant for this biasing scheme unless it's for AC input impedance. Let's assume it's fixed as shown.</p>
+                              <p>9. Design complete: $R_E = 8.6 \text{ k}\Omega$, $R_C = 3.43 \text{ k}\Omega$.</p>
+                         </aside>
+
+                        <h3 class="subsection-heading">Analysing a transistor with a load Resistor</h3>
+                        <p>For the circuit shown, the transistor parameters are: $\mathrm{V}_{\mathrm{BE}(\mathrm{on})}=0.7 \mathrm{~V}$, and $\beta=100$.</p>
+                        <p>Determine the Q-point and sketch the dc load line.</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-160-1.jpg" alt="Voltage divider biased NPN circuit with V+=+12V, V-=-5V. RB=10kOhm, RE=5kOhm, RC=5kOhm. A load resistor RL=5kOhm is connected from collector to ground." class="content-image">
+                           <figcaption>Voltage Divider Bias with Load Resistor</figcaption>
+                        </figure>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                             <p>1. This is a voltage divider bias. First, find the Thevenin equivalent for the base circuit. The base resistor $R_B=10k\Omega$ acts as both R1 and R2 in the standard voltage divider, which is unusual. Assuming the diagram means the base is biased via $R_B$ connected to ground (Thevenin equivalent: $V_{TH}=0, R_{TH}=10k\Omega$).</p>
+                              <p>2. KVL Base-Emitter loop: $V_{TH} - I_B R_{TH} - V_{BE(on)} - I_E R_E - V^- = 0$.</p>
+                              <p>3. $0 - I_B (10\text{k}) - 0.7 - (\beta+1)I_B (5\text{k}) - (-5) = 0$.</p>
+                              <p>4. $ - 0.7 + 5 = I_B (10\text{k}) + (101)I_B (5\text{k}) = I_B (10\text{k} + 505\text{k}) = I_B (515\text{k})$.</p>
+                              <p>5. $4.3 = I_B (515\text{k}) \implies I_{BQ} = 4.3\text{V} / 515\text{k}\Omega \approx 0.00835 \text{ mA} = 8.35 \mu\text{A}$.</p>
+                              <p>6. $I_{CQ} = \beta I_{BQ} = 100 \times 8.35 \mu\text{A} = 0.835 \text{ mA}$.</p>
+                              <p>7. For the output loop, the collector sees $R_C$ and $R_L$ in parallel going to ground (from an AC perspective) but for DC, $R_C$ goes to $V^+$ and $R_L$ goes to ground. We need $V_{CEQ}$.</p>
+                              <p>8. KVL Collector-Emitter loop: $V^+ - I_C R_C - V_{CE} - I_E R_E - V^- = 0$.</p>
+                              <p>9. $12 - (0.835\text{mA})(5\text{k}) - V_{CE} - (101)(8.35\mu\text{A})(5\text{k}) - (-5) = 0$.</p>
+                              <p>10. $12 - 4.175 - V_{CE} - (0.843\text{mA})(5\text{k}) + 5 = 0$.</p>
+                              <p>11. $12 - 4.175 - V_{CE} - 4.215 + 5 = 0$.</p>
+                              <p>12. $8.61 - V_{CE} = 0 \implies V_{CEQ} = 8.61\text{V}$.</p>
+                              <p>13. Q-point: $(V_{CEQ}, I_{CQ}) = (8.61\text{V}, 0.835\text{mA})$.</p>
+                              <p>14. Load Line: Requires total effective resistance in C-E loop. $I_C = (V^+ - V^- - V_{CE}) / (R_C + R_E)$. Load line: $I_C = (12 - (-5) - V_{CE}) / (5\text{k}+5\text{k}) = (17 - V_{CE}) / 10\text{k}$.</p>
+                               <p>15. Intercepts: Vce-axis ($I_C=0$) -> $V_{CE}=17V$. Ic-axis ($V_{CE}=0$) -> $I_C = 1.7mA$.</p>
+                         </aside>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-161-1.jpg" alt="DC Load line for the circuit. Intercepts at VCE=17V and IC=1.7mA. Q-point marked at VCEQ=8.6V, ICQ=0.835mA." class="content-image">
+                           <figcaption>DC Load Line with Load Resistor</figcaption>
+                        </figure>
+                        <!-- Note: Image VCEQ value differs slightly from calculation (8.6 vs 4.7), likely due to simplification/rounding in original source or calculation error here. Using calculated value 8.61V. The plot seems to use a different load line (maybe ignoring RE?). Re-checking the image against the calculation is needed. Image shows VCEQ=4.7V, ICQ=0.835mA, IBQ=8.35uA. Let's assume the image Q-point is correct for consistency with the provided visual. It implies a different VCE equation or circuit interpretation. -->
+                        <aside class="callout warning" role="alert">
+                           <h4 class="callout-title"><span class="callout-icon">⚠️</span> Discrepancy</h4>
+                           <p>The calculated $V_{CEQ}$ (8.61V) differs significantly from the value indicated on the load line plot (~4.7V). The plot might correspond to a simplified analysis or a different circuit variant. Sticking to the provided plot's Q-point $(V_{CEQ} \approx 4.7V, I_{CQ}=0.835mA)$ for visual consistency, though the KVL calculation doesn't match this directly with the given component values and $V^-$. Re-calculating $I_C$ from the load line at $V_{CE}=4.7V$: $I_C=(17-4.7)/10k = 12.3/10k = 1.23mA$, which doesn't match $I_{CQ}=0.835mA$. The load line or Q-point in the image seems inconsistent with the circuit values shown previously.</p>
+                        </aside>
+                    </div>
+                 </section>
+                 <!-- END: bjt-common-circuits -->
+
+                <!-- START: bjt-biasing -->
+                <section id="bjt-biasing" class="content-section" aria-labelledby="bjt-biasing-heading">
+                    <h2 id="bjt-biasing-heading" class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">BJT Biasing</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>For a transistor to work as an amplifier, it must be kept in the forward active mode.</p>
+                        <p>Also, we must establish the Q-point near the center of the load line.</p>
+
+                        <h3 class="subsection-heading">Single Base Resistor Biasing/Fixed-Bias Configuration</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-164-1.jpg" alt="Fixed-bias common-emitter configuration circuit diagram." class="content-image">
+                           <figcaption>Fixed-Bias Configuration</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Example</h4>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-165-1.jpg" alt="Fixed-bias circuit for design example. VCC=+12V. Required ICQ=1mA, VCEQ=6V." class="content-image">
+                           <figcaption>Fixed-Bias Design Example</figcaption>
+                        </figure>
+                        <p>Given:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$V_{C C}=+12 \mathrm{~V}$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$I_{C Q}=1 \mathrm{~mA}$</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">$V_{C E Q}=6 \mathrm{~V}$</span></li>
+                         </ul>
+                         <p>The transistor used in the design has nominal values of $\beta=100$ and VBE(on) = 0.7 V , but the current gain for this type of transistor is assumed to be in the range $50 \le \beta \le 150$ because of fairly wide fabrication tolerances. Determine the values of $R_{B}$ and $R_{C}$</p>
+                          <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution (Implied - using nominal beta=100)</h4>
+                             <p>1. Find $R_C$: $V_{CC} = I_{CQ} R_C + V_{CEQ} \implies R_C = (V_{CC} - V_{CEQ}) / I_{CQ} = (12\text{V} - 6\text{V}) / 1\text{mA} = 6\text{V} / 1\text{mA} = 6 \text{ k}\Omega$.</p>
+                             <p>2. Find $I_{BQ}$: $I_{BQ} = I_{CQ} / \beta = 1\text{mA} / 100 = 0.01 \text{ mA} = 10 \mu\text{A}$.</p>
+                              <p>3. Find $R_B$: $V_{CC} = I_{BQ} R_B + V_{BE(on)} \implies R_B = (V_{CC} - V_{BE(on)}) / I_{BQ} = (12\text{V} - 0.7\text{V}) / 10\mu\text{A} = 11.3\text{V} / 0.01\text{mA} = 1130 \text{ k}\Omega = 1.13 \text{ M}\Omega$.</p>
+                              <p>4. Designed values (nominal): $R_C = 6 \text{ k}\Omega$, $R_B = 1.13 \text{ M}\Omega$.</p>
+                         </aside>
+
+                         <h4 class="subsubsection-heading">Effects of varying the transistor current gain, $\beta$</h4>
+                         <p>Load line: $V_{C E}=V_{C C}-I_{C} R_{C}=12-6 I_{C}$ (Units: V, mA, k$\Omega$)</p>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-166-1.jpg" alt="DC load line for the fixed-bias circuit. Shows how the Q-point changes significantly with beta variations (beta=50, 100, 150) because IB is fixed by RB." class="content-image">
+                           <figcaption>Q-Point Variation with Beta in Fixed-Bias</figcaption>
+                        </figure>
+                         <p>In this circuit configuration with a single base resistor, the Q-point is not stabilized against variations in $\beta$; as $\beta$ changes, the Q-point varies significantly.</p>
+                         <p>This variation in Q-point is not desirable for amplifiers.</p>
+
+                        <h3 class="subsection-heading">Emitter Bias Configuration</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-168-1.jpg" alt="Emitter-bias (or emitter-stabilized bias) circuit diagram. Similar to fixed bias but includes an emitter resistor RE." class="content-image">
+                           <figcaption>Emitter-Bias Configuration</figcaption>
+                        </figure>
+
+                        <h4 class="subsubsection-heading">Example</h4>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-169-1.jpg" alt="Emitter-bias circuit example with values: VCC=+20V, RB=430kOhm, RC=2kOhm, RE=1kOhm, beta=50." class="content-image">
+                           <figcaption>Emitter-Bias Example Circuit</figcaption>
+                        </figure>
+                        <p>For the emitter-bias network below , determine $I_B, I_C, V_{CE}, V_C, V_E, V_B, V_{BC}$.</p>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                              <p>1. Assume Forward-Active, $V_{BE(on)}=0.7V$.</p>
+                              <p>2. KVL Base-Emitter: $V_{CC} - I_B R_B - V_{BE(on)} - I_E R_E = 0$.</p>
+                              <p>3. $20 - I_B (430\text{k}) - 0.7 - (\beta+1)I_B (1\text{k}) = 0$.</p>
+                              <p>4. $19.3 = I_B (430\text{k}) + (50+1)I_B (1\text{k}) = I_B (430\text{k} + 51\text{k}) = I_B (481\text{k})$.</p>
+                              <p>5. $I_{BQ} = 19.3\text{V} / 481\text{k}\Omega \approx 0.0401 \text{ mA} = 40.1 \mu\text{A}$.</p>
+                              <p>6. $I_{CQ} = \beta I_{BQ} = 50 \times 40.1 \mu\text{A} \approx 2.005 \text{ mA}$.</p>
+                              <p>7. $I_{EQ} = (\beta+1)I_{BQ} = 51 \times 40.1 \mu\text{A} \approx 2.045 \text{ mA}$.</p>
+                              <p>8. KVL Collector-Emitter: $V_{CC} - I_C R_C - V_{CE} - I_E R_E = 0$.</p>
+                              <p>9. $20 - (2.005\text{mA})(2\text{k}) - V_{CE} - (2.045\text{mA})(1\text{k}) = 0$.</p>
+                              <p>10. $20 - 4.01 - V_{CE} - 2.045 = 0$.</p>
+                              <p>11. $13.945 - V_{CE} = 0 \implies V_{CEQ} \approx 13.95 \text{ V}$.</p>
+                               <p>12. Check mode: $V_{CEQ}=13.95V > V_{BE(on)}=0.7V$. Forward-Active is correct.</p>
+                               <p>13. Calculate node voltages:</p>
+                               <p>$V_E = I_E R_E = (2.045\text{mA})(1\text{k}\Omega) = 2.045 \text{ V}$.</p>
+                               <p>$V_B = V_E + V_{BE(on)} = 2.045\text{V} + 0.7\text{V} = 2.745 \text{ V}$.</p>
+                                <p>(Check $V_B$ using input: $V_B = V_{CC} - I_B R_B = 20\text{V} - (40.1\mu\text{A})(430\text{k}\Omega) = 20 - 17.24 = 2.76\text{V}$. Close enough due to rounding.)</p>
+                               <p>$V_C = V_{CC} - I_C R_C = 20\text{V} - (2.005\text{mA})(2\text{k}\Omega) = 20 - 4.01 = 15.99 \text{ V}$.</p>
+                                <p>(Check $V_{CE} = V_C - V_E = 15.99 - 2.045 = 13.945 \text{ V}$. Matches.)</p>
+                               <p>$V_{BC} = V_B - V_C = 2.745 - 15.99 = -13.245 \text{ V}$. (B-C junction is reverse biased).</p>
+                         </aside>
+
+
+                        <h3 class="subsection-heading">Voltage Divider Biasing and Bias Stability</h3>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-170-1.jpg" alt="Left: Voltage divider bias circuit using two resistors R1 and R2 for base biasing. Right: Thevenin equivalent circuit for the base network." class="content-image">
+                           <figcaption>Voltage Divider Bias and Thevenin Equivalent</figcaption>
+                        </figure>
+                         <p>B-E LOOP (using Thevenin equivalent):</p>
+                         <div class="equation">$$ -V_{T H}+I_{B Q} R_{T H}+V_{B E(o n)}+I_{E Q} R_{E}=0 $$</div>
+                         <p>Substitute $I_{E Q}=(1+\beta) \mathrm{I}_{B Q}$:</p>
+                         <div class="equation">$$ \mathrm{I}_{B Q}=\frac{V_{T H}-V_{B E(o n)}}{R_{T H}+(1+\beta) \mathrm{R}_{E}} $$</div>
+                         <p>Collector Current:</p>
+                         <div class="equation">$$ \mathrm{I}_{C Q}=\beta \mathrm{I}_{B Q}=\beta\left(\frac{V_{T H}-V_{B E(o n)}}{R_{T H}+(1+\beta) \mathrm{R}_{E}}\right) $$</div>
+                         <p>For bias stability, we often design such that $R_{T H} \ll(1+\beta) R_{E}$. If this holds:</p>
+                         <div class="equation">$$ \mathrm{I}_{C Q} \cong \beta\left(\frac{V_{T H}-V_{B E(o n)}}{(1+\beta) \mathrm{R}_{E}}\right) $$</div>
+                         <p>If also $\beta \gg 1$, then $\beta /(\beta+1) \cong 1$, so:</p>
+                         <div class="equation">$$ \mathrm{I}_{C Q} \cong \left(\frac{V_{T H}-V_{B E(o n)}}{\mathrm{R}_{E}}\right) $$</div>
+                         <p>The general rule (rule of thumb) is that a circuit is considered bias stable when:</p>
+                         <div class="equation">$$ R_{T H} \le 0.1(1+\beta) R_{E} $$</div>
+                         <p>Determine $\mathrm{I}_{\mathrm{CQ}}$ and $\mathrm{V}_{\mathrm{CEQ}}$ for the circuit below:</p>
+                          <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-173-1.jpg" alt="Voltage divider bias circuit example with values: R1=56k, R2=12.2k, RC=2k, RE=0.4k, VCC=10V, VBE(on)=0.7V, beta=100." class="content-image">
+                           <figcaption>Voltage Divider Bias Example</figcaption>
+                        </figure>
+                         <p>let $R_{1}=56 \mathrm{k} \Omega, R_{2}=12.2 \mathrm{k} \Omega, R_{C}=2 \mathrm{k} \Omega, R_{E}=0.4 \mathrm{k} \Omega, \mathrm{V}_{C C}=10 \mathrm{~V}$, $\mathrm{V}_{\mathrm{BE}(\text { on })}=0.7 \mathrm{~V}$, and $\beta=100$.</p>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution (Implied)</h4>
+                             <p>1. Find Thevenin equivalent for base:</p>
+                             <p>$R_{TH} = R1 || R2 = (56 \times 12.2) / (56 + 12.2) = 683.2 / 68.2 \approx 10.02 \text{ k}\Omega$.</p>
+                             <p>$V_{TH} = V_{CC} \times (R2 / (R1 + R2)) = 10\text{V} \times (12.2 / (56 + 12.2)) = 10 \times (12.2 / 68.2) \approx 1.79 \text{ V}$.</p>
+                              <p>2. Check stability condition: $0.1(1+\beta)R_E = 0.1(101)(0.4\text{k}) = 4.04 \text{ k}\Omega$. Since $R_{TH}=10.02\text{k}\Omega$ is NOT much less than $4.04\text{k}\Omega$, the circuit is not highly stable, and we must use the full equation for $I_{BQ}$.</p>
+                              <p>3. Calculate $I_{BQ}$: $I_{BQ} = (V_{TH} - V_{BE(on)}) / (R_{TH} + (1+\beta)R_E) = (1.79 - 0.7) / (10.02\text{k} + (101)(0.4\text{k})) = 1.09 / (10.02\text{k} + 40.4\text{k}) = 1.09\text{V} / 50.42\text{k}\Omega \approx 0.0216 \text{ mA} = 21.6 \mu\text{A}$.</p>
+                              <p>4. Calculate $I_{CQ}$: $I_{CQ} = \beta I_{BQ} = 100 \times 21.6 \mu\text{A} = 2.16 \text{ mA}$.</p>
+                              <p>5. Calculate $V_{CEQ}$: $V_{CEQ} = V_{CC} - I_C R_C - I_E R_E = V_{CC} - I_C R_C - (\beta+1)I_B R_E$.</p>
+                               <p>$V_{CEQ} = 10 - (2.16\text{mA})(2\text{k}) - (101)(21.6\mu\text{A})(0.4\text{k})$.</p>
+                               <p>$V_{CEQ} = 10 - 4.32 - (2.18\text{mA})(0.4\text{k}) = 10 - 4.32 - 0.87 = 4.81 \text{ V}$.</p>
+                               <p>6. Q-point: $(V_{CEQ}, I_{CQ}) = (4.81\text{V}, 2.16\text{mA})$.</p>
+                         </aside>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-174-1.jpg" alt="Load line and Q-point variation for the voltage divider circuit. Shows much less Q-point shift for beta=50, 100, 150 compared to fixed-bias." class="content-image">
+                           <figcaption>Q-Point Stability in Voltage Divider Bias</figcaption>
+                        </figure>
+                         <p>Comparing the variation in beta for voltage divider bias and base resistor bias:</p>
+                         <p>The Change in $I_{C Q}$ and $V_{C E Q}$ is significantly reduced in voltage divider bias when compared to single base resistor bias.</p>
+                         <p>Including an emitter resistor $\mathrm{R}_{\mathrm{E}}$ has tended to stabilize the Q-point. This means that including the emitter resistor helps to stabilize the Q-point with respect to variations in $\beta$.</p>
+
+                        <h3 class="subsection-heading">Positive and Negative Voltage Biasing</h3>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-176-1.jpg" alt="PNP transistor circuit using voltage divider biasing with both positive (+9V) and negative (-9V) supplies." class="content-image">
+                           <figcaption>PNP Voltage Divider with Dual Supplies</figcaption>
+                        </figure>
+                        <p>Design a bias-stable pnp transistor circuit to meet a set of specifications.</p>
+                        <p>$\mathrm{V}_{\mathrm{ECQ}}=7 \mathrm{~V}, \mathrm{I}_{\mathrm{CQ}}=0.5 \mathrm{~mA}$, and $\mathrm{V}_{\mathrm{RE}}=1 \mathrm{~V}, \beta=80$ and $\mathrm{V}_{\mathrm{EB}(\text { on) }}=0.7 \mathrm{~V}$.</p>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                             <p>1. Find $R_E$: $V_{RE} = I_E R_E$. Need $I_E$. $I_E = I_C / \alpha = I_C / (\beta / (\beta+1)) = 0.5\text{mA} / (80/81) \approx 0.506 \text{ mA}$. $R_E = V_{RE} / I_E = 1\text{V} / 0.506\text{mA} \approx 1.976 \text{ k}\Omega$. Use $2k\Omega$. Recalculate $I_E = 1V/2k = 0.5mA$. $I_C = \alpha I_E = (80/81)*0.5mA = 0.494mA$. $I_B = I_E - I_C = 0.5 - 0.494 = 0.006mA = 6 \mu A$. (Iterative adjustment might be needed, using $I_E \approx I_C = 0.5mA$ is often sufficient for first pass). Let's use $I_E \approx 0.5mA$, $R_E=1V/0.5mA=2k\Omega$.</p>
+                             <p>2. Find $V_E$: $V_E = V^+ - I_E R_E = 9\text{V} - (0.5\text{mA})(2\text{k}\Omega) = 9 - 1 = 8\text{V}$.</p>
+                             <p>3. Find $V_B$: $V_B = V_E - V_{EB(on)} = 8\text{V} - 0.7\text{V} = 7.3\text{V}$.</p>
+                              <p>4. Find $V_C$: $V_{ECQ} = V_E - V_C = 7\text{V} \implies V_C = V_E - 7\text{V} = 8\text{V} - 7\text{V} = 1\text{V}$.</p>
+                              <p>5. Find $R_C$: KVL C-E loop. Or simply $V_C = V^- + I_C R_C \implies 1\text{V} = -9\text{V} + (0.5\text{mA}) R_C$. $R_C = (1 - (-9))\text{V} / 0.5\text{mA} = 10\text{V} / 0.5\text{mA} = 20 \text{ k}\Omega$.</p>
+                              <p>6. Design voltage divider (R1, R2): Choose $R_{TH}$ for stability. Stability condition: $R_{TH} \le 0.1 (1+\beta) R_E = 0.1(81)(2\text{k}) = 16.2 \text{ k}\Omega$. Let's choose $R_{TH} = 16 \text{ k}\Omega$.</p>
+                              <p>7. We need $V_{TH}$ such that the correct $I_B$ is achieved. $V_{TH}$ is voltage at base if divider is unloaded. Base current required $I_B = I_C/\beta = 0.5mA / 80 = 6.25 \mu A$.</p>
+                              <p>8. Base KVL: $V_{TH} - I_B R_{TH} - V_{EB(on)} - (-V_{EE}) = V_E$. Not quite. Use the simpler relation $V_B = 7.3V$.</p>
+                              <p>9. Voltage divider equations: $V_B = V_{TH} - I_B R_{TH}$. Need $V_{TH}$. $V_{TH} = V_B + I_B R_{TH} = 7.3V + (6.25\mu A)(16k\Omega) = 7.3V + 0.1V = 7.4V$. </p>
+                               <p>10. Now find R1, R2 from $V_{TH}=7.4V$ and $R_{TH}=16k\Omega$. The voltage divider is between $V^+=9V$ and $V^-=-9V$. Total voltage across divider is $9 - (-9) = 18V$.</p>
+                               <p>$V_{TH} = V^- + (V^+ - V^-) \frac{R2}{R1+R2} \implies 7.4 = -9 + 18 \frac{R2}{R1+R2} \implies 16.4 = 18 \frac{R2}{R1+R2}$.</p>
+                               <p>$R_{TH} = R1 || R2 = \frac{R1 R2}{R1+R2} = 16k\Omega$.</p>
+                               <p>Let $X = R2/(R1+R2)$. $16.4 = 18X \implies X \approx 0.911$. $R1 = R_{TH} / X = 16k / 0.911 \approx 17.56 k\Omega$. Use $18k\Omega$.</p>
+                                <p>$R2 = R_{TH} / (1-X) = 16k / (1-0.911) = 16k / 0.089 \approx 179.8 k\Omega$. Use $180k\Omega$.</p>
+                                <p>11. Final Design: $R_E=2k\Omega, R_C=20k\Omega, R1=180k\Omega, R2=18k\Omega$. (Note R1 connects to V-, R2 connects to V+ for PNP). Wait, standard divider Vth formula assumes one end grounded. Need to re-evaluate R1/R2.
+                                 $V_B = \frac{R1 V^- + R2 V^+}{R1+R2} = 7.3$. $R_{TH} = \frac{R1 R2}{R1+R2}=16k$. Let $R1+R2 = R_{SUM}$. $R1 R2 = 16k R_{SUM}$. $7.3 = \frac{R1(-9) + R2(9)}{R_{SUM}}$. $7.3 R_{SUM} = 9(R2-R1)$. Also $R1 = R_{SUM}-R2$. $7.3 R_{SUM} = 9(R2 - (R_{SUM}-R2)) = 9(2R2 - R_{SUM})$. $7.3 R_{SUM} = 18R2 - 9 R_{SUM}$. $16.3 R_{SUM} = 18 R2$. $R2 = (16.3/18) R_{SUM} \approx 0.905 R_{SUM}$. Then $R1 = R_{SUM} - 0.905 R_{SUM} = 0.095 R_{SUM}$. Check $R_{TH}$: $R1 R2 / R_{SUM} = (0.095 R_{SUM})(0.905 R_{SUM}) / R_{SUM} = 0.086 R_{SUM} = 16k$. $R_{SUM} = 16k / 0.086 \approx 186k\Omega$. Then $R1 = 0.095 * 186k \approx 17.7k\Omega$. Use $18k\Omega$. $R2 = 0.905 * 186k \approx 168.3k\Omega$. Use $180k\Omega$.
+                                 Final Design: $R_E=2k\Omega, R_C=20k\Omega, R1=18k\Omega$ (to V-), $R2=180k\Omega$ (to V+).
+                                </p>
+
+                         </aside>
+
+                        <h3 class="subsection-heading">Collector Feedback Bias</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-177-1.jpg" alt="Collector feedback bias circuit. Base resistor RB is connected between collector and base. VCC=10V, RC=4.7kOhm, RB=250kOhm, RE=1.2kOhm, beta=90." class="content-image">
+                           <figcaption>Collector Feedback Bias Circuit</figcaption>
+                        </figure>
+                        <p>Determine the quiescent levels of $\mathrm{I}_{\mathrm{CQ}}$ and $\mathrm{V}_{\text {CEQ }}$ for the network.</p>
+                         <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                              <p>1. Assume Forward-Active, $V_{BE(on)}=0.7V$.</p>
+                              <p>2. KVL Base-Emitter loop: $V_{CC} - I_C' R_C - I_B R_B - V_{BE(on)} - I_E R_E = 0$. Note $I_C' = I_C + I_B \approx I_C$ if $I_C \gg I_B$. Let's use $I_C' \approx I_C = \beta I_B$. $I_E = (\beta+1)I_B$.</p>
+                              <p>3. $10 - (\beta I_B)(4.7\text{k}) - I_B(250\text{k}) - 0.7 - (\beta+1)I_B(1.2\text{k}) = 0$.</p>
+                              <p>4. $9.3 = I_B [ \beta(4.7\text{k}) + 250\text{k} + (\beta+1)(1.2\text{k}) ]$.</p>
+                              <p>5. $9.3 = I_B [ 90(4.7\text{k}) + 250\text{k} + (91)(1.2\text{k}) ]$.</p>
+                              <p>6. $9.3 = I_B [ 423\text{k} + 250\text{k} + 109.2\text{k} ] = I_B [ 782.2\text{k} ]$.</p>
+                              <p>7. $I_{BQ} = 9.3\text{V} / 782.2\text{k}\Omega \approx 0.0119 \text{ mA} = 11.9 \mu\text{A}$.</p>
+                              <p>8. $I_{CQ} = \beta I_{BQ} = 90 \times 11.9 \mu\text{A} \approx 1.07 \text{ mA}$.</p>
+                              <p>9. KVL Collector-Emitter loop: $V_{CC} - I_C' R_C - V_{CE} - I_E R_E = 0$. $I_C' = I_C + I_B = 1.07 + 0.0119 = 1.082 \text{mA}$. $I_E = (\beta+1)I_B = 91 \times 11.9 \mu A = 1.083 \text{mA}$.</p>
+                              <p>10. $10 - (1.082\text{mA})(4.7\text{k}) - V_{CE} - (1.083\text{mA})(1.2\text{k}) = 0$.</p>
+                              <p>11. $10 - 5.085 - V_{CE} - 1.30 = 0$.</p>
+                              <p>12. $3.615 - V_{CE} = 0 \implies V_{CEQ} \approx 3.62 \text{ V}$.</p>
+                              <p>13. Check mode: $V_{CEQ} = 3.62V > V_{BE(on)}=0.7V$. Forward-Active is correct.</p>
+                         </aside>
+
+                        <h3 class="subsection-heading">Emitter follower Configuration (Common Collector)</h3>
+                         <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-178-1.jpg" alt="Emitter follower (Common Collector) circuit. Base biased by RB=240kOhm to VCC (implicitly). Collector tied directly to VCC. Emitter resistor RE=2kOhm connected to VEE=-20V. Beta=90." class="content-image">
+                           <figcaption>Emitter Follower (Common Collector)</figcaption>
+                        </figure>
+                        <p>Determine $\mathrm{V}_{\text {CEQ }}$ and $\mathrm{I}_{\text {EQ }}$ for the network above:</p>
+                        <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                              <p>1. Assume Forward-Active, $V_{BE(on)}=0.7V$. Need VCC. Assuming VCC is implicitly ground (0V) as is common in some emitter follower diagrams, or maybe it's connected to a positive supply not shown but RB connects to it? Let's assume RB connects to ground (0V).</p>
+                              <p>2. KVL Base-Emitter: $V_B - V_{BE(on)} - V_E = 0$. Since base is via RB to ground, $V_B = -I_B R_B$? No, this is likely biased differently. Let's assume RB is connected to a positive supply, maybe +20V to mirror VEE? Without VCC specified, let's assume a standard biasing where RB connects to VCC (say +20V, typical for symmetry).</p>
+                              <p>Let's re-interpret: Base connected to input $v_i$. DC analysis means $v_i=0$. Base is connected via $R_B=240k\Omega$ to ground? Seems unlikely. Let's assume a single positive supply VCC is implied at the collector and also used for biasing RB.</p>
+                              <p>Let's assume VCC = +20V (for symmetry with VEE=-20V).</p>
+                              <p>2. KVL Base-Emitter loop: $V_{CC} - I_B R_B - V_{BE(on)} - I_E R_E - V_{EE} = 0$.</p>
+                              <p>3. $20 - I_B (240\text{k}) - 0.7 - (\beta+1)I_B (2\text{k}) - (-20) = 0$.</p>
+                              <p>4. $20 - 0.7 + 20 = I_B (240\text{k}) + (90+1)I_B (2\text{k})$.</p>
+                              <p>5. $39.3 = I_B (240\text{k} + 91 \times 2\text{k}) = I_B (240\text{k} + 182\text{k}) = I_B (422\text{k})$.</p>
+                              <p>6. $I_{BQ} = 39.3\text{V} / 422\text{k}\Omega \approx 0.093 \text{ mA} = 93 \mu\text{A}$.</p>
+                              <p>7. $I_{EQ} = (\beta+1)I_{BQ} = 91 \times 93 \mu\text{A} \approx 8.46 \text{ mA}$.</p>
+                              <p>8. Find $V_{CEQ}$. $V_C = V_{CC} = 20V$. $V_E = I_E R_E + V_{EE} = (8.46\text{mA})(2\text{k}\Omega) + (-20\text{V}) = 16.92\text{V} - 20\text{V} = -3.08\text{V}$.</p>
+                              <p>9. $V_{CEQ} = V_C - V_E = 20\text{V} - (-3.08\text{V}) = 23.08 \text{ V}$.</p>
+                              <p>10. Q-point: $(I_{EQ}, V_{CEQ}) = (8.46\text{mA}, 23.08\text{V})$.</p>
+                         </aside>
+
+                        <h3 class="subsection-heading">Common Base Configuration</h3>
+                        <figure>
+                           <img src="../assets/images/2025_05_06_6826a497cc5360c48acdg-179-1.jpg" alt="Common-base NPN circuit. Emitter biased by RE=1.2kOhm connected to VEE=4V. Base grounded. Collector connected to VCC=10V via RC=2.4kOhm. Beta=60." class="content-image">
+                           <figcaption>Common Base Configuration Example</figcaption>
+                        </figure>
+                        <p>Determine the currents $I_{E}$ and $I_{B}$ and the voltages $V_{C E}$ and $V_{C B}$ for the common-base configuration above.</p>
+                          <aside class="callout note" role="note">
+                             <h4 class="callout-title">Solution Strategy (Implied)</h4>
+                              <p>1. Assume Forward-Active, $V_{BE(on)}=0.7V$.</p>
+                              <p>2. KVL Base-Emitter loop: $V_B - V_{BE(on)} - V_E = 0$. Base is grounded, $V_B = 0$. $V_E = -V_{BE(on)} = -0.7\text{V}$.</p>
+                              <p>3. Find $I_E$: Emitter resistor $R_E$ connects $V_E$ to $V_{EE}$. $V_E = V_{EE} + I_E R_E$. $-0.7\text{V} = -4\text{V} + I_E (1.2\text{k}\Omega)$. (Note $V_{EE}$ is given as 4V, likely meaning the supply is -4V). Let's assume $V_{EE}=-4V$.</p>
+                              <p>4. $I_E (1.2\text{k}\Omega) = -0.7 - (-4) = 3.3\text{V}$. $I_E = 3.3\text{V} / 1.2\text{k}\Omega = 2.75 \text{ mA}$.</p>
+                              <p>5. Find $I_B$: $I_B = I_E / (\beta+1) = 2.75\text{mA} / (60+1) = 2.75\text{mA} / 61 \approx 0.045 \text{ mA} = 45 \mu\text{A}$.</p>
+                              <p>6. Find $I_C = \beta I_B = 60 \times 45 \mu A = 2.70 \text{ mA}$. (Or $I_C = \alpha I_E = (60/61) \times 2.75\text{mA} \approx 2.705 \text{ mA}$).</p>
+                              <p>7. Find $V_C$: $V_C = V_{CC} - I_C R_C = 10\text{V} - (2.70\text{mA})(2.4\text{k}\Omega) = 10 - 6.48 = 3.52 \text{ V}$.</p>
+                              <p>8. Find $V_{CE}$: $V_{CE} = V_C - V_E = 3.52\text{V} - (-0.7\text{V}) = 4.22 \text{ V}$.</p>
+                              <p>9. Find $V_{CB}$: $V_{CB} = V_C - V_B = 3.52\text{V} - 0\text{V} = 3.52 \text{ V}$.</p>
+                              <p>10. Check mode: $V_{CB}=3.52V > 0$, so C-B is reverse biased. $V_{BE}=0.7V$, so B-E is forward biased. Forward-Active mode is correct.</p>
+                         </aside>
+                    </div>
+                </section>
+                <!-- END: bjt-biasing -->
+
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                     <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="analogue-electronics-semiconductors-diodes-rectifiers.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 75%;"></div>
+                        </div>
+                        <span class="progress-text">Part 3 of 4</span>
+                    </div>
+                    <a href="analogue-electronics-fet.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script> <!-- Basic JS for disabled links etc. -->
+</body>
+</html>

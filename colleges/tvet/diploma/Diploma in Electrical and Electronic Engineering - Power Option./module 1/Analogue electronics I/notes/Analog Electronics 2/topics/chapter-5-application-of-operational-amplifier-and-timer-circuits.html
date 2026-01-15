@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: APPLICATION OF OPERATIONAL AMPLIFIER & TIMER CIRCUITS</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      svg: {
+          fontCache: 'global'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section" role="main">
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-4-operational-amplifier-circuits-and-feedback-configurations.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 71%;"></div> <!-- Approx 5/7 -->
+                        </div>
+                        <span class="progress-text">Chapter 5 of 7</span>
+                    </div>
+                    <a href="chapter-6-ic-voltage-regulators.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">CHAPTER-5. APPLICATION OF OPERATIONAL AMPLIFIER & TIMER CIRCUITS .,</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-5-section-5-1-summing-scaling-averaging -->
+                <section id="chapter-5-section-5-1-summing-scaling-averaging" class="content-section" aria-labelledby="heading-chapter-5-section-5-1-summing-scaling-averaging">
+                    <h2 id="heading-chapter-5-section-5-1-summing-scaling-averaging" class="section-heading">
+                        <span class="heading-icon">➕</span>
+                        <span class="heading-text">5.1 Discuss the summing scaling and averaging of inverting and non-inverting amplifiers Summing amplifier using opamp.</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Summing amplifier is a type operational amplifier circuit which can be used to sum signals. The sum of the input signal is amplified by a certain factor and made available at the output.Any number of input signal can be summed using an opamp. The circuit shown below is a three input summing amplifier in the inverting mode.</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-37-1.jpg" alt="Inverting summing amplifier circuit with three inputs Va, Vb, Vc through resistors Ra, Rb, Rc to the inverting input of an op-amp. Feedback resistor Rf. Non-inverting input grounded via Rm. Output Vo across RL." class="content-image">
+                        <p style="text-align:center;">Summing amplifier circuit</p>
+                        <p>In the circuit, the input signals <span class="math-inline">$\mathrm{Va}, \mathrm{Vb}, \mathrm{Vc}$</span> are applied to the inverting input of the opamp through input resistors <span class="math-inline">$\mathrm{Ra}, \mathrm{Rb}, \mathrm{Rc}$</span>. Any number of input signals can be applied to the inverting input in the above manner. Rf is the feedback resistor.Non inverting input of the opamp is grounded using resistor Rm. RL is the load resistor. By applying kirchhoff's current law at not V2 we get,</p>
+                        <div class="equation">$$\mathrm{la}+\mathrm{lb}+\mathrm{lc}=\mathrm{If}+\mathrm{lb}$$</div>
+                        <p>Since the input resistance of an ideal opamp is close to infinity and has infinite gain. We can neglect lb & V2 There for la+lb+Ic = If <span class="math-inline">$\qquad$</span> .(1)</p>
+                        <p>Equation (1) can be rewritten as</p>
+                        <div class="equation">$$(\mathrm{Va} / \mathrm{Ra})+(\mathrm{Vb} / \mathrm{Rb})+(\mathrm{Vc} / \mathrm{Rc})=(\mathrm{V} 2-\mathrm{Vo}) / \mathrm{Rf}$$</div>
+                        <p>Neglecting Vo, we get</p>
+                        <div class="equation">$$\mathrm{Va} / \mathrm{Ra}+\mathrm{Vb} / \mathrm{Rb}+\mathrm{Vc} / \mathrm{Rc}=-\mathrm{Vo} / \mathrm{Rf}$$</div>
+                        <div class="equation">$$\mathrm{Vo}=-\mathrm{Rf}((\mathrm{Va} / \mathrm{Ra})+(\mathrm{Vb} / \mathrm{Rb})+(\mathrm{Vc} / \mathrm{Rc}))$$</div>
+                        <div class="equation">$$\mathrm{Vo}=-((\mathrm{Rf} / \mathrm{Ra}) \mathrm{Va}+(\mathrm{Rf} / \mathrm{Rb}) \mathrm{Vb}+(\mathrm{Rf} / \mathrm{Rc}) \mathrm{Vc}) \qquad .(2)$$</div>
+                        <p>If resistor Ra , Rb , Rc has same value ie; <span class="math-inline">$\mathrm{Ra}=\mathrm{Rb}=\mathrm{Rc}=\mathrm{R}$</span>, then equation (2) can be written as</p>
+                        <div class="equation">$$Vo=-(Rf / R) x(V a+V b+V c)$$</div>
+                        <p>If the values of Rf and R are made equal , then the equation becomes,</p>
+                        <div class="equation">$$\mathrm{Vo}=-(\mathrm{Va}+\mathrm{Vb}+\mathrm{Vc})$$</div>
+
+                        <h3 class="subsection-heading">Averaging Circuit :</h3>
+                        <p>An averaging circuit can be made from the above circuit by making the all input resistor equal in value ie; Ra = Rb = Rc = R and the gain must be selected such that if there are m inputs, then Rf/R must be equal to 1/m.</p>
+                        
+                        <h3 class="subsection-heading">Scaling amplifier :</h3>
+                        <p>In a scaling amplifier each input will be multiplied by a different factor and then summed together. Scaling amplifier is also called a weighted amplifier. Here different values are chosen for Ra, Rb and Rc. The governing equation is <span class="math-inline">$\mathrm{Vo}=-((\mathrm{Rf} / \mathrm{Ra}) \mathrm{Va}+(\mathrm{Rf} / \mathrm{Rb}) \mathrm{Vb}+(\mathrm{Rf} / \mathrm{Rc}) \mathrm{Vc})$</span>.</p>
+                        
+                        <h3 class="subsection-heading">Summing amplifier in non inverting configuration.</h3>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-38-1.jpg" alt="Non-inverting summing amplifier circuit with three inputs Va, Vb, Vc through resistors R to the non-inverting input of an op-amp. Feedback resistor Rf and resistor R1 to ground from inverting input. Output Vo across RL." class="content-image">
+                        <p style="text-align:center;">Summing amplifier in non inverting configuration</p>
+                        <p>A non inverting summing amplifier circuit with three inputs are shown above. The voltage inputs Va, Vb and Vc are applied to non inverting input of the opamp. Rf is the feedback resistor. The output voltage of the circuit is governed by the equation;</p>
+                        <div class="equation">$$\mathrm{Vo}=(1+(\mathrm{Rf} / \mathrm{R} 1))((\mathrm{Va}+\mathrm{Vb}+\mathrm{Vc}) / 3)$$</div>
+                        <p>Configuration.</p> <!-- This was a standalone line in MMD -->
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-1-summing-scaling-averaging -->
+
+                <!-- START: chapter-5-section-5-2-dc-ac-amplifiers -->
+                <section id="chapter-5-section-5-2-dc-ac-amplifiers" class="content-section" aria-labelledby="heading-chapter-5-section-5-2-dc-ac-amplifiers">
+                    <h2 id="heading-chapter-5-section-5-2-dc-ac-amplifiers" class="section-heading">
+                        <span class="heading-icon">🔌</span>
+                        <span class="heading-text">5.2 Explain DC & AC Amplifies using OP-AMP.</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>One of the most common application problems encountered is the failure to provide a dc return path for bias current in ac-coupled operational- or instrumentation-amplifier circuits. In Figure 1, a capacitor is connected in series with the noninverting (+) input of an op amp to ac couple it, an easy way to block dc voltages that are associated with the input voltage ( <span class="math-inline">$\mathrm{V}_{\text {IN }}$</span> ). This should be especially useful in high-gain applications, where even a small dc voltage at an amplifier's input can limit the dynamic range, or even result in output saturation. However, capacitively coupling into a high-impedance input, without providing a dc path for current flowing in the + input, will lead to trouble!</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-39-1.jpg" alt="AC coupled op-amp circuit. Vin is coupled via a capacitor to the non-inverting input. Resistor R2 connects the non-inverting input to ground. Resistor R3 and a capacitor (0.1uF) are in the feedback loop. Another 0.1uF capacitor is between V+ and V- power supply pins." class="content-image">
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-2-dc-ac-amplifiers -->
+
+                <!-- START: chapter-5-section-5-3-instrumentation-amplifier -->
+                <section id="chapter-5-section-5-3-instrumentation-amplifier" class="content-section" aria-labelledby="heading-chapter-5-section-5-3-instrumentation-amplifier">
+                    <h2 id="heading-chapter-5-section-5-3-instrumentation-amplifier" class="section-heading">
+                        <span class="heading-icon">🔬</span>
+                        <span class="heading-text">5.3 Explain the operation of instrumentation amplifier using Transducer Bridge .</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The resistive transducer bridge is a network of resistors whose resistance varies due to changes in some physical condition. For example, Thermistors change their resistance with temperature and Light Dependent Resistors change their resistance to change in light intensity. By making such a bridge as a part of the circuit, it is possible to produce an electrical signal proportional to the change in the physical quantity being measured. Such an electrical signal can be amplified and used to monitor and control the physical process. An instrumentation amplifier can be constructed with a transducer bridge connected to one of its input terminals, as shown in the figure below.</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-39-2.jpg" alt="Instrumentation amplifier circuit with a transducer bridge. The bridge consists of Rc, Transducer (Rt +/- dR), Ra, Rb. Vdc supplies the bridge. Voltages Va and Vb from the bridge go to the inputs of an instrumentation amplifier (made of three op-amps and resistors R2, R3). The output Vo drives a display device." class="content-image">
+                        <p>Let the resistance of the transducer device in the resistive bridge be <span class="math-inline">$R_{T}$</span> and the change in its resistance be <span class="math-inline">$\Delta R$</span>. The effective resistance of the transducer device is <span class="math-inline">$R_{T} \pm \Delta R$</span>. The resistive bridge is supplied with a <span class="math-inline">$D C$</span> voltage, <span class="math-inline">$V_{d c}$</span>.</p>
+                        <p>When the bridge is balanced, i.e. at some reference condition of the physical quantity being measured, we get,</p>
+                        <p><span class="math-inline">$\mathrm{V}_{\mathrm{a}}=\mathrm{V}_{\mathrm{b}} \quad$</span> and <span class="math-inline">$\quad \mathrm{R}_{\mathrm{A}}(\mathrm{Vdc}) /\left(\mathrm{R}_{\mathrm{A}}+\mathrm{R}_{\mathrm{T}}\right)=\mathrm{R}_{\mathrm{B}}(\mathrm{Vdc}) /\left(\mathrm{R}_{\mathrm{B}}+\mathrm{R}_{\mathrm{C}}\right)$</span></p>
+                        <p>Under this condition, the differential input to the instrumentation amplifier is <span class="math-inline">$\quad V_{\text {Diff }}=V_{b}-V_{a}=0$</span></p>
+                        <p>Thus, the output of the amplifier is zero. Consequently, the display device connected at the output displays the reference value of the physical quantity being measured. The reference condition is generally chosen by the designer and it depends on the device characteristics of the transducer, the type of physical quantity being measured and the type of the application.</p>
+                        <p>When there is a change in the physical quantity being measured, the voltage <span class="math-inline">$V_{a}$</span> will no longer be equal to <span class="math-inline">$V_{b}$</span>. This is because the resistance of the transducer device changes from <span class="math-inline">$R_{T}$</span> to ( <span class="math-inline">$R_{T} \pm \Delta R$</span> ). This produces a differential input for the instrumentation amplifier and the output of the amplifier will no longer be zero.</p>
+                        <p>The resistances <span class="math-inline">$R_{B}$</span> and <span class="math-inline">$R_{C}$</span> are constant and hence the voltage <span class="math-inline">$V_{B}$</span> remains same as before, i.e. <span class="math-inline">$V_{b}=R_{B}(V dc) /\left(R_{B}+R_{C}\right)$</span></p>
+                        <p>But the voltage <span class="math-inline">$\mathrm{V}_{\mathrm{a}}$</span> changes due to the change in resistance of the transducer device and is now given as,</p>
+                        <div class="equation">$$\mathrm{Va}=\mathrm{R}_{\mathrm{A}}(\mathrm{Vdc}) /\left(\mathrm{R}_{\mathrm{A}}+\mathrm{R}_{\mathrm{T}}+\Delta \mathrm{R}\right)$$</div>
+                        <p>The differential voltage <span class="math-inline">$\mathrm{V}_{\text {Diff }}$</span> is,</p>
+                        <div class="equation">$$\begin{aligned}
+                        & V_{\text {Diff }}=V_{b}-V_{a} \\
+                        & V_{\text {Diff }}=\left\{R_{B}\left(V_{d c}\right) /\left(R_{B}+R_{C}\right)\right\}-\left\{R_{A}\left(V_{d c}\right) /\left(R_{A}+R_{T}+\Delta R\right)\right\}
+                        \end{aligned}$$</div>
+                        <p>If all the resistances in the circuit are chosen to be of same value, i.e. <span class="math-inline">$R_{A}=R_{B}=R_{C}=R_{T}=R$</span></p>
+                        <div class="equation">$$V_{\text {Diff }}=\{R(\mathrm{Vdc}) /(2 \mathrm{R})\}-\{\mathrm{R}(\mathrm{Vdc}) /(2 \mathrm{R}+\Delta \mathrm{R})\}$$</div>
+                        <div class="equation">$$V_{\text {Diff }}=\{R V d c[2 R+\Delta R]-R . V d c .2 R\} / 2 R(2 R+\Delta R)$$</div>
+                        <div class="equation">$$\mathrm{V}_{\text {Diff }}=. \mathrm{Vdc}[+\Delta \mathrm{R}-] /\{2(2 \mathrm{R}+\Delta \mathrm{R})\}$$</div>
+                        <div class="equation">$$V_{\text {Diff }}=\Delta R(V d c) /\{2(2 R+\Delta R)\}$$</div>
+                        <p>If the value of <span class="math-inline">$\mathrm{V}_{\text {Diff }}$</span> is positive, it indicates that <span class="math-inline">$\mathrm{V}_{\mathrm{b}}$</span> is greater than <span class="math-inline">$\mathrm{V}_{\mathrm{a}}$</span>.</p>
+                        <p>The output of the instrumentation amplifier is given as, <span class="math-inline">$\quad V_{0}=\left(R_{3} / R_{2}\right) V_{d}$</span></p>
+                        <div class="equation">$$\mathrm{V}_{\mathrm{o}}=\left(\mathrm{R}_{3} / \mathrm{R}_{2}\right)[\Delta \mathrm{R}(\mathrm{Vdc}) /\{2(2 \mathrm{R}+\Delta \mathrm{R})\}]$$</div>
+                        <p>As the change in resistance <span class="math-inline">$\Delta R \ll 2 R, V_{0}$</span> can be written as, <span class="math-inline">$V_{0}=\left(R_{3} / R_{2}\right)[\Delta R / 4 R](V d c)$</span></p>
+                        <p>From the above equation, it can be noted that the output depends on the change in the resistance <span class="math-inline">$\Delta R$</span>. The display can be calibrated in terms of the units of the physical quantity being measured.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-3-instrumentation-amplifier -->
+
+                <!-- START: chapter-5-section-5-4-integrator-differentiator -->
+                <section id="chapter-5-section-5-4-integrator-differentiator" class="content-section" aria-labelledby="heading-chapter-5-section-5-4-integrator-differentiator">
+                    <h2 id="heading-chapter-5-section-5-4-integrator-differentiator" class="section-heading">
+                        <span class="heading-icon">📉</span>
+                        <span class="heading-text">5.4 Discuss the integrator and differentiator using op-amp.</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>By introducing electrical reactance into the feedback loops of op-amp amplifier circuits, we can cause the output to respond to changes in the input voltage over time. Drawing their names from their respective calculus functions, the integrator produces a voltage output proportional to the product (multiplication) of the input voltage and time; and the differentiator (not to be confused with differential) produces a voltage output proportional to the input voltage's rate of change.</p>
+                        <p>Capacitance can be defined as the measure of a capacitor's opposition to changes in voltage. The greater the capacitance, the more the opposition. Capacitors oppose voltage change by creating current in the circuit: that is, they either charge or discharge in response to a change in applied voltage. So, the more capacitance a capacitor has, the greater its charge or discharge current will be for any given rate of voltage change across it. The equation for this is quite simple:</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-41-1.jpg" alt="Diagram showing a changing DC voltage source connected to a capacitor C, with the equation i = C * dv/dt." class="content-image">
+                        <p>The <span class="math-inline">$d v / d t$</span> fraction is a calculus expression representing the rate of voltage change over time. If the DC supply in the above circuit were steadily increased from a voltage of 15 volts to a voltage of 16 volts over a time span of 1 hour, the current through the capacitor would most likely be very small, because of the very low rate of voltage change ( <span class="math-inline">$\mathrm{dv} / \mathrm{dt}=1$</span> volt / 3600 seconds). However, if we steadily increased the DC supply from 15 volts to 16 volts over a shorter time span of 1 second, the rate of voltage change would be much higher, and thus the charging current would be much higher ( 3600 times higher, to be exact). Same amount of change in voltage, but vastly different rates of change, resulting in vastly different amounts of current in the circuit.</p>
+                        <p>To put some definite numbers to this formula, if the voltage across a <span class="math-inline">$47 \mu \mathrm{~F}$</span> capacitor was changing at a linear rate of 3 volts per second, the current "through" the capacitor would be <span class="math-inline">$(47 \mu \mathrm{~F})(3 \mathrm{~V} / \mathrm{s})=141 \mu \mathrm{A}$</span>.</p>
+                        <p>We can build an op-amp circuit which measures change in voltage by measuring current through a capacitor, and outputs a voltage proportional to that current:</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-42-1.jpg" alt="Op-amp differentiator circuit. Vin is connected to a capacitor C, which is connected to the inverting input. A resistor R is in the feedback loop. Non-inverting input is grounded. Output is Vout." class="content-image">
+                        <p>The right-hand side of the capacitor is held to a voltage of 0 volts, due to the "virtual ground" effect. Therefore, current "through" the capacitor is solely due to change in the input voltage. A steady input voltage won't cause a current through C, but a changing input voltage will.</p>
+                        <p>Capacitor current moves through the feedback resistor, producing a drop across it, which is the same as the output voltage. A linear, positive rate of input voltage change will result in a steady negative voltage at the output of the op-amp. Conversely, a linear, negative rate of input voltage change will result in a steady positive voltage at the output of the op-amp. This polarity inversion from input to output is due to the fact that the input signal is being sent (essentially) to the inverting input of the op-amp, so it acts like the inverting amplifier mentioned previously. The faster the rate of voltage change at the input (either positive or negative), the greater the voltage at the output.</p>
+                        <p>The formula for determining voltage output for the differentiator is as follows:</p>
+                        <div class="equation">$$\mathrm{V}_{\text {out }}=-\mathrm{RC} \frac{\mathrm{dv}_{\text {in }}}{\mathrm{dt}}$$</div>
+                        <p>Applications for this, besides representing the derivative calculus function inside of an analog computer, include rate-of-change indicators for process instrumentation. One such rate-of-change signal application might be for monitoring (or controlling) the rate of temperature change in a furnace, where too high or too low of a temperature rise rate could be detrimental. The DC voltage produced by the differentiator circuit could be used to drive a comparator, which would signal an alarm or activate a control if the rate of change exceeded a pre-set level.</p>
+                        <p>In process control, the derivative function is used to make control decisions for maintaining a process at setpoint, by monitoring the rate of process change over time and taking action to prevent excessive rates of change, which can lead to an unstable condition. Analog electronic controllers use variations of this circuitry to perform the derivative function. On the other hand, there are applications where we need precisely the opposite function, called integration in calculus. Here, the op-amp circuit would generate an output voltage proportional to the magnitude and duration that an input voltage signal has deviated from 0 volts. Stated differently, a constant input signal would generate a certain rate of change in the output voltage: differentiation in reverse. To do this, all we have to do is swap the capacitor and resistor in the previous circuit:</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-43-1.jpg" alt="Op-amp integrator circuit. Vin is connected to a resistor R, which is connected to the inverting input. A capacitor C is in the feedback loop. Non-inverting input is grounded. Output is Vout." class="content-image">
+                        <p>As before, the negative feedback of the op-amp ensures that the inverting input will be held at 0 volts (the virtual ground). If the input voltage is exactly 0 volts, there will be no current through the resistor, therefore no charging of the capacitor, and therefore the output voltage will not change. We cannot guarantee what voltage will be at the output with respect to ground in this condition, but we can say that the output voltage will be constant.</p>
+                        <p>However, if we apply a constant, positive voltage to the input, the op-amp output will fall negative at a linear rate, in an attempt to produce the changing voltage across the capacitor necessary to maintain the current established by the voltage difference across the resistor. Conversely, a constant, negative voltage at the input results in a linear, rising (positive) voltage at the output. The output voltage rate-of-change will be proportional to the value of the input voltage.</p>
+                        <p>The formula for determining voltage output for the integrator is as follows:</p>
+                        <div class="equation">$$\frac{\mathrm{dv}_{\text {out }}}{\mathrm{dt}}=-\frac{\mathrm{V}_{\text {in }}}{\mathrm{RC}}$$</div>
+                        <p>or</p>
+                        <div class="equation">$$\mathrm{V}_{\text {out }}=\int_{0}^{\mathrm{t}}-\frac{\mathrm{V}_{\text {in }}}{\mathrm{RC}} \mathrm{dt}+\mathrm{c}$$</div>
+                        <p>Where, <span class="math-inline">$\mathrm{c}=$</span> Output voltage at start time (<span class="math-inline">$\mathrm{t}=0$</span>)</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-4-integrator-differentiator -->
+
+                <!-- START: chapter-5-section-5-5-active-low-pass-filter -->
+                <section id="chapter-5-section-5-5-active-low-pass-filter" class="content-section" aria-labelledby="heading-chapter-5-section-5-5-active-low-pass-filter">
+                    <h2 id="heading-chapter-5-section-5-5-active-low-pass-filter" class="section-heading">
+                        <span class="heading-icon">🌊</span>
+                        <span class="heading-text">5.5 Define active filter and describe the filter design of fast order low Pass Butterworth filter.</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>An active filter is a type of analog electronic filter that uses active components such as an amplifier. Amplifiers included in a filter design can be used to improve the performance and predictability of a filter,<sup>[1]</sup> while avoiding the need for inductors (which are typically expensive compared to other components). An amplifier prevents the load impedance of the following stage from affecting the characteristics of the filter. An active filter can have complex poles and zeros without using a bulky or expensive inductor. The shape of the response, the Q (quality factor), and the tuned frequency can often be set with inexpensive variable resistors. In some active filter circuits, one parameter can be adjusted without affecting the others.<sup>[1]</sup></p>
+                        <p>Using active elements has some limitations. Basic filter design equations neglect the finite bandwidth of amplifiers. Available active devices have limited bandwidth, so they are often impractical at high frequencies. Amplifiers consume power and inject noise into a system. Certain circuit topologies may be impractical if no DC path is provided for bias current to the amplifier elements. An active filter is a type of analog electronic filter that uses active components</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-44-1.jpg" alt="A simple active low-pass filter circuit using an op-amp. Shows input Vin, two resistors R1, R2 (both 10kOhm), two capacitors C1, C2 (both 220nF), and output Vout." class="content-image">
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-5-active-low-pass-filter -->
+
+                <!-- START: chapter-5-section-5-6-active-high-pass-filter -->
+                <section id="chapter-5-section-5-6-active-high-pass-filter" class="content-section" aria-labelledby="heading-chapter-5-section-5-6-active-high-pass-filter">
+                    <h2 id="heading-chapter-5-section-5-6-active-high-pass-filter" class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">5.6 Describe the filter design of fast order High Pass Butterworth filter.</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The Butterworth filter is a type of signal processing filter designed to have as flat a frequency response as possible in the passband. It is also referred to as a maximally flat magnitude filter.</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-44-2.jpg" alt="A simple active high-pass filter circuit using an op-amp. Shows input Vi, two capacitors C1, C2, two resistors R1, R2, and output Vo." class="content-image">
+                        <p>Butterworth stated that: "An ideal electrical filter should not only completely reject the unwanted frequencies but should also have uniform sensitivity for the wanted frequencies".</p>
+                        <p>Such an ideal filter cannot be achieved but Butterworth showed that successively closer approximations were obtained with increasing numbers of filter elements of the right values. At the time, filters generated substantial ripple in the passband, and the choice of component values was highly interactive. Butterworth showed that a low pass filter could be designed whose cutoff frequency was normalized to 1 radian per second and whose frequency response (gain) was</p>
+                        <div class="equation">$$G(\omega)=\sqrt{\frac{1}{1+\omega^{2 n}}},$$</div>
+                        <p>where <span class="math-inline">$\omega$</span> is the angular frequency in radians per second and <span class="math-inline">$n$</span> is the number of poles in the filter-equal to the number of reactive elements in a passive filter. If <span class="math-inline">$\omega=1$</span>, the amplitude response of this type of filter in the passband is <span class="math-inline">$1 / \sqrt{2} \approx 0.707$</span>, which is half power or -3 dB. Butterworth only dealt with filters with an even number of poles in his paper. He may have been unaware that such filters could be designed with an odd number of poles. He built his higher order filters from 2-pole filters separated by vacuum tube amplifiers. His plot of the frequency response of 2, 4, 6, 8, and 10 pole filters is shown as A, B, C, D, and E in his original graph.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-6-active-high-pass-filter -->
+
+                <!-- START: chapter-5-section-5-7-zero-crossing-detector -->
+                <section id="chapter-5-section-5-7-zero-crossing-detector" class="content-section" aria-labelledby="heading-chapter-5-section-5-7-zero-crossing-detector">
+                    <h2 id="heading-chapter-5-section-5-7-zero-crossing-detector" class="section-heading">
+                        <span class="heading-icon">🚦</span>
+                        <span class="heading-text">5.7 Explain the concept of Zero-Crossing Detector using Op-Amp</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Zero crossing detector(ZCD) is a voltage comparator that switches the output between + Vsat and -Vsat (Vsat: Saturation voltage almost equal to 14 V ) when the input crosses zero reference voltage. Then what is a comparator? In simple words comparators are basic operational amplifier circuits that compare two voltages simultaneously and switches the output according to the comparison. We can say zero crossing detection circuit is a comparator example. We will discuss in detail about comparator in our upcoming articles. Inverting zero cross detector circuit schematic using op amp 741 IC is shown below along with working, input output wave forms.</p>
+                        <h3 class="subsection-heading">Zero crossing circuit diagram</h3>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-46-1.jpg" alt="Zero crossing detector circuit diagram using a 741 op-amp. Input Vin is connected to the inverting input. Non-inverting input is grounded. Output is Vout. Power supplies are +15V and -15V." class="content-image">
+                        <h3 class="subsection-heading">ZCD Input and Output Waveform</h3>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-46-2.jpg" alt="Input and Output waveforms for a Zero Crossing Detector. Input is a sine wave. Output is a square wave switching at the zero crossings of the input." class="content-image">
+                        <h3 class="subsection-heading">Working of zero crossing detector circuit</h3>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Working of ZCD can be easily understood if you know the working of a basic opamp comparator.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">In ZCD, we are setting one of the inputs as zero i.e. zero reference voltage.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The output is driven into -Vsat when the input signal passes through zero to positive direction.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Conversely, when input signal passes through zero to negative direction, the output switches to +V sat.</span></li>
+                        </ul>
+                        <h3 class="subsection-heading">Zero crossing detector applications</h3>
+                        <p>ZCD circuit can be used to check whether the op-amp is in good condition. Zero crossing detectors can be used as frequency counters and for switching purposes in power electronics circuits.ZCD is a basic op amp circuit.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-7-zero-crossing-detector -->
+
+                <!-- START: chapter-5-section-5-8-ic555-ic565 -->
+                <section id="chapter-5-section-5-8-ic555-ic565" class="content-section" aria-labelledby="heading-chapter-5-section-5-8-ic555-ic565">
+                    <h2 id="heading-chapter-5-section-5-8-ic555-ic565" class="section-heading">
+                        <span class="heading-icon">⏲️</span>
+                        <span class="heading-text">5.8 Draw the block diagram and operation of IC 555 timer &IC 565 PLL& its applications.</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The <strong>555</strong> timer IC is an integrated circuit (chip) used in a variety of timer, pulse generation, and oscillator applications. The 555 can be used to provide time delays, as an oscillator, and as a flip-flop element. Derivatives provide up to four timing circuits in one package.</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-47-1.jpg" alt="Internal block diagram of a 555 timer IC. Shows VCC, GND, TRIG, THRES, CONT, RESET pins connected to comparators, flip-flop, and output stage." class="content-image">
+                        <p>The 555 timer IC is an integrated circuit (chip) used in a variety of timer, pulse generation, and oscillator applications. The 555 can be used to provide time delays, as an oscillator, and as a flip-flop element. Derivatives provide up to four timing circuits in one package.</p>
+                        <p>Introduced in 1971 by Signetics, the 555 is still in widespread use due to its ease of use, low price, and stability. It is now made by many companies in the original bipolar and also in low-power CMOS types. As of 2003, it was estimated that 1 billion units are manufactured every year.<sup>[1]</sup></p>
+                        <h3 class="subsection-heading">Modes</h3>
+                        <p>The 555 has three operating modes:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Monostable mode: In this mode, the 555 functions as a "one-shot" pulse generator. Applications include timers, missing pulse detection, bouncefree switches, touch switches, frequency divider, capacitance measurement, pulse-width modulation (PWM) and so on.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Astable (free-running) mode: The 555 can operate as an oscillator. Uses include LED and lamp flashers, pulse generation, logic clocks, tone generation, security alarms, pulse position modulation and so on. The 555 can be used as a simple ADC, converting an analog value to a pulse length. E.g. selecting a thermistor as timing resistor allows the use of the 555 in a temperature sensor: the period of the output pulse is determined by the temperature. The use of a microprocessor based circuit can then convert the pulse period to temperature, linearize it and even provide calibration means.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Bistable mode or Schmitt trigger: The 555 can operate as a flip-flop, if the DIS pin is not connected and no capacitor is used. Uses include bounce-free latched switches.</span></li>
+                        </ul>
+                        <h3 class="subsection-heading">IC 565 PLL</h3>
+                        <p>A PLL is also available as an integrated circuit IC. IC 565 PLL can be used for FM detection.</p>
+                        <p>Figure (a) shows the circuit diagram of an FM detector using 565 PLL.</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-49-1.jpg" alt="Figure (a): Circuit Diagram for an FM Detector Using IC 565 PLL. Shows IC 565 with external components: FM signal input, resistors R1, R2, R3, R4, capacitors C1, C2, Cc, Co, Ro. Output Vo (modulating signal) from pin 7." class="content-image">
+                        <p style="text-align:center;">Figure (a): Circuit Diagram for an FM Detector Using IC 565 PLL</p>
+                        <h4 class="subsubsection-heading">Internal Block Diagram of IC 565</h4>
+                        <p>The internal block diagram shows that IC 565 PLL consists of phase detector, VCO, and amplifier. The amplifier also functions as the low pass filter. This is a 14 pin dual in line package.</p>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-50-1.jpg" alt="Figure (b): Internal Block Diagram of IC 565 PLL. Shows pins 1-14. Internal blocks: Phase detector, Amplifier, VCO. Connections between blocks and to pins are shown." class="content-image">
+                        <p style="text-align:center;">Figure (b): Internal Block Diagram of IC 565 PLL</p>
+                        <p>In figure (b), notice that PLL IC consists of two power supply pins marked <span class="math-inline">$\pm \mathrm{Vcc}$</span>. The positive terminal of the Vcc is connected to pin number 10, and the negative (ground) terminal of Vcc is connected to pin number 1. The output signal to the phase detector is applied to pin numbers 2 and 3 . The VCO output is applied to the phase detector through pin number 5 . The output of the phase detector is internally connected to the amplifier (low-pass filter).</p>
+                        <p>The output or the phase detector is low-pass filtered and amplified by the amplifier stage. The Output or the amplifier is the control voltage that is applied to VCO to force it to track the incoming frequency. The control voltage is also available at pin number 7. This is the output signal. In the ease of FM demodulator, the signal at pin number 7 is the modulating signal. The amplifier also generates an output at pin number 6for reference purposes.</p>
+                        <p>The VCO gets its control voltage internally from the amplifier and its output at pin number 4. The VCO output should be given to the phase detector through pin number 5 . It is customary to short pin numbers 4 and 5 so that the VCO output is applied directly to the phase detector. The external resistor and capacitor can set the free-running frequency of the VCO. The resistor and capacitor are called the timing resistor and the timing capacitor. The timing resistor is connected at pin number 8, and the timing capacitor is connected at pin number 9.</p>
+                        <p>Pin numbers <span class="math-inline">$11, 12, 13$</span>, and 14 are not connected because they do not have any internal circuitry with them. These are marked as NC in Figure (b). These pins are there because they are connected to IC.</p>
+                        <h4 class="subsubsection-heading">Circuit Description</h4>
+                        <p>Figure (a) shows the circuit external to the IC 565 PLL for FM detection. The circuit shown in this figure is a general circuit. The choice of the timing components, resistor <span class="math-inline">$R_{0}$</span> and capacitor <span class="math-inline">$C_{0}$</span> decides the various parameters and the free-running frequency of PLL. Accordingly, the values of other components are also chosen.</p>
+                        <p>In Figure (a), only a few components are externally connected to IC. The power supply, <span class="math-inline">$\mathrm{V}_{\mathrm{cc}}$</span>, is connected between pin numbers 1 and 10 , with <span class="math-inline">$+V_{c c}$</span> applied at pin number 10 . The timing resistor <span class="math-inline">$R_{o}$</span> is connected to pin number 8 , and the timing capacitor, <span class="math-inline">$\mathrm{C}_{0}$</span> is connected to pin number 9 . The VCO output, which is available at pin number 4 is applied to phase-detector input at pin number 5 . Pin number 4 is shorted with pin number 5 as no external component is required in this case.</p>
+                        <p>The input FM signal, <span class="math-inline">$\mathrm{V}_{\mathrm{i}}$</span>, is applied to pin number 2 through the coupling capacitor <span class="math-inline">$\mathrm{C}_{\mathrm{c}}$</span>. A part of this signal is also applied to pin number 3 through the potential divider network, consisting of <span class="math-inline">$R_{2}, R_{3}$</span>, and <span class="math-inline">$R_{4}$</span>. The dc power supply is also provided to the input pins 2 and 3 through <span class="math-inline">$R_{1}$</span> from <span class="math-inline">$+V_{c c}$</span> supply. The capacitor <span class="math-inline">$C_{2}$</span> is used to filter out an AC ripple, if present in the DC supply.</p>
+                        <p>The demodulated FM signal is nothing but the control signal, which is available at pin number 7. Therefore, the signal available at pin number 7 is the required modulating signal.</p>
+                        <h4 class="subsubsection-heading">Parameters of Interest</h4>
+                        <p>The manufacturers of IC chips provide information related to the design of the circuit using their IC chips. They provide the design equations for important and key parameters of the circuit in terms of the circuit components and known circuit Conditions.</p>
+                        <p>Some typical design equations for various parameters related to PLL operation are:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Free-running frequency (<span class="math-inline">$\mathrm{f}_{\mathrm{o}}$</span>). The free-running frequency of VCO may he calculated as:
+                                <div class="equation">$$f_{0}=0.3 / R_{0} C_{0}$$</div>
+                                For <span class="math-inline">$\mathrm{C}_{0}=1.5 \mathrm{nF}$</span> and <span class="math-inline">$\mathrm{R}_{0}=20 \mathrm{~K} \Omega$</span>, the free-running frequency is calculated as:
+                                <div class="equation">$$\begin{gathered}
+                                \mathrm{f}_{0}=0.3 /\left(20 \times 10^{3}\right)\left(1.5 \times 10^{-9}\right) \\
+                                \mathrm{f}_{0}=10 \mathrm{KHz}
+                                \end{gathered}$$</div>
+                                Thus, for the central frequency of an FM signal to be 10 kHz , a resistor <span class="math-inline">$420 \mathrm{~K} \Omega$</span> and a capacitor of 1.5 nF can be used as timing components.</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Loop gain<br>
+                                The loop gain of PLL decides the amount of phase change among the input signals of the phase detector for a change in the input signal frequency. The loop may be defined as:
+                                <div class="equation">$$A_{L}=K_{D} K_{o} \text { per second }$$</div>
+                                where<br>
+                                <span class="math-inline">$\mathrm{K}_{\mathrm{D}}=$</span> Phase detector sensitivity in volt/radians<br>
+                                <span class="math-inline">$\mathrm{K}_{0}=$</span> Oscillator sensitivity in radians/see-volt<br>
+                                A typical formula given by a manufacturer nay be given is:
+                                <div class="equation">$$\mathrm{K}_{\mathrm{D}} \mathrm{~K}_{\mathrm{O}}=33.6 \mathrm{fo}_{\mathrm{o}} / \mathrm{V}_{\mathrm{c}}$$</div>
+                                Where<br>
+                                <span class="math-inline">$f_{0}=$</span> free-running frequency of <span class="math-inline">$V_{c o}$</span> in Hz<br>
+                                <span class="math-inline">$\mathrm{V}_{\mathrm{c}}=$</span> Supply voltage<br>
+                                if <span class="math-inline">$\mathrm{V}_{\mathrm{c}}=12 \mathrm{~V}$</span> and <span class="math-inline">$\mathrm{f}=10 \mathrm{KHz}$</span>
+                                <div class="equation">$$\begin{aligned}
+                                & \mathrm{K}_{D} \mathrm{~K}_{o}= 33.6 \times 10 \times 10^{3} \mathrm{f}_{0} / 12 \\
+                                & \mathrm{~K}_{\mathrm{D}} \mathrm{~K}_{\mathrm{o}}=28 \times 10^{3}
+                                \end{aligned}$$</div>
+                                Therefore, the loop given for the given values of <span class="math-inline">$V_{c}$</span> and <span class="math-inline">$f_{0}$</span> is 28,000.</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">•</span>
+                                <span class="item-text">Hold-in range<br>
+                                The hold-in range may be calculated as:
+                                <div class="equation">$$f_{h}= \pm 8 f_{0} / V_{c}$$</div>
+                                Where<br>
+                                <span class="math-inline">$\mathrm{f}_{0}=$</span> free running of VCO<br>
+                                <span class="math-inline">$\mathrm{V}_{\mathrm{c}}=$</span> supply voltage<br>
+                                For <span class="math-inline">$\mathrm{f}_{0}=10 \mathrm{KHz}$</span> and <span class="math-inline">$\mathrm{V}_{\mathrm{c}}=12 \mathrm{~V}$</span>, the hold-in range is calculated from above Equation as:
+                                <div class="equation">$$\begin{gathered}
+                                f_{h}= \pm 8 \times 10 \times 10^{3} / 12 \\
+                                f_{h}= \pm 6.67 \mathrm{KHz}
+                                \end{gathered}$$</div>
+                                Therefore, for the given values, the loop will remain locked over a frequency range of <span class="math-inline">$\pm 6.67 \mathrm{KHz}$</span> after it is locked initially.</span>
+                            </li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-8-ic555-ic565 -->
+
+                <!-- START: chapter-5-section-5-9-wein-bridge-oscillator -->
+                <section id="chapter-5-section-5-9-wein-bridge-oscillator" class="content-section" aria-labelledby="heading-chapter-5-section-5-9-wein-bridge-oscillator">
+                    <h2 id="heading-chapter-5-section-5-9-wein-bridge-oscillator" class="section-heading">
+                        <span class="heading-icon">〰️</span>
+                        <span class="heading-text">5.9 Explain the working of Wein Bridge Oscillator using operational Amplifier.</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Wien bridge oscillator is an audio frequency sine wave oscillator of high stability and simplicity. Before that let us see what is oscillator? An oscillator is a circuit that produces periodic electric signals such as sine wave or square wave. The application of oscillator includes sine wave generator, local oscillator for synchronous receivers etc.</p>
+                        <p>Here we are discussing wein bridge oscillator using <strong>741 op amp IC</strong>. It is a low frequency oscillator. The op-amp used in this oscillator circuit is working as non-inverting amplifier mode. Here the feedback network need not provide any phase shift. The circuit can be viewed as a wien bridge with a series RC network in one arm and parallel RC network in the adjoining arm. Resistors Ri and Rf are connected in the remaining two arms.</p>
+                        <p>Also see:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">RC phase shift oscillator using 741 op amp</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">RC phase shift oscillator using transistor</span></li>
+                        </ul>
+                        <h3 class="subsection-heading">Wien bridge oscillator Circuit Diagram</h3>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-53-1.jpg" alt="Wien bridge oscillator circuit diagram using a 741 op-amp. Shows RC series and parallel arms, resistors Ri (1kOhm) and Rf (4.7kOhm pot), capacitors (10nF), resistors (1.5kOhm). Power supplies +Vcc=15V, -Vcc=-15V. Output Vo." class="content-image">
+                        <h3 class="subsection-heading">Components Required</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Resistors ( <span class="math-inline">$1 \mathrm{~K} \Omega, 1.5 \mathrm{~K} \Omega \times 2$</span> )</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Potentiometer(<span class="math-inline">$4.7 \mathrm{~K} \Omega$</span>)</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Capacitor (<span class="math-inline">$0.1 \mu \mathrm{F} 2$</span>)</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">741 Op amp</span></li>
+                        </ol>
+                        <h3 class="subsection-heading">Output Waveform</h3>
+                        <img src="../assets/images/2025_05_06_b4284c6709692f5eeb41g-54-1.jpg" alt="Sine wave output waveform of a Wien bridge oscillator." class="content-image">
+                        <h3 class="subsection-heading">Working of Wein bridge Oscillator</h3>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The feedback signal in this oscillator circuit is connected to the non-inverting input terminal so that the opamp works as a non-inverting amplifier.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The condition of zero phase shift around the circuit is achieved by balancing the bridge, zero phase shift is essential for sustained oscillations.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The frequency of oscillation is the resonant frequency of the balanced bridge and is given by the expression fo = <span class="math-inline">$1 / 2 \pi R C$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">At resonant frequency ( fo), the inverting and non-inverting input voltages will be equal and "in-phase" so that the negative feedback signal will be cancelled out by the positive feedback causing the circuit to oscillate.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">From the analysis of the circuit, it can be seen that the feedback factor <span class="math-inline">$\beta=1 / 3$</span> at the frequency of oscillation. Therefore for sustained oscillation, the amplifier must have a gain of 3 so that the loop gain becomes unity.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">For an inverting amplifier the gain is set by the feedback resistor network Rf and Ri and is given as the ratio Rf/Ri.</span></li>
+                        </ul>
+                        <h3 class="subsection-heading">Design</h3>
+                        <p>The required frequency of oscillation <strong>fo = 1kHz</strong></p>
+                        <p>we have,</p>
+                        <div class="equation">$$\mathrm{f}_{\mathrm{O}}=\frac{1}{2 \pi R C}$$</div>
+                        <p>Take <strong>C = 0.01μF</strong>, then <strong>R = 1.6kΩ</strong> (Use <strong>1.5kΩ</strong> standard)</p>
+                        <p>Gain of the amplifier section is given by,</p>
+                        <div class="equation">$$G=1+\frac{R_{f}}{R_{i}}=3$$</div>
+                        <p>Take <strong>Ri = 1kΩ</strong>, then <strong>Rf = 2.2kΩ</strong> (Use <strong>4.7kΩ</strong> Potentio meter for fine corrections)</p>
+                        <h3 class="subsection-heading">Wien bridge oscillator Frequency calculator</h3>
+                        <p>R1 and C1 in the series arm and R2 C2 in parallel arm of feedback circuit</p>
+                        <p>Enter the Value of Resistor, R1 :in <span class="math-inline">$\Omega$</span><br>
+                        Enter the Value of Capacitor, C1 :in Farads<br>
+                        Enter the Value of Resistor, R2 :in <span class="math-inline">$\Omega$</span><br>
+                        Enter the Value of Capacitor, C2 :in Farads<br>
+                        Frequency of oscillation, F :in Hz</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-9-wein-bridge-oscillator -->
+
+                <!-- START: chapter-5-section-5-10-current-to-voltage-converter -->
+                <section id="chapter-5-section-5-10-current-to-voltage-converter" class="content-section" aria-labelledby="heading-chapter-5-section-5-10-current-to-voltage-converter">
+                    <h2 id="heading-chapter-5-section-5-10-current-to-voltage-converter" class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">5.10 Explain Current to voltage Convertor using Operational Amplifier:</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The current to voltage converter was presented as a special case of the inverting amplifier in which an input current is converted into a proportional output voltage. One of the most common uses of the current to voltage converter is in digital to analog circuits and in sensing current through photo detectors such as photocells, photodiodes and photovoltaic cells. Photosensitive devices produce a current that is proportional to an incident radiant energy or light and therefore can be used to detect the light.</p>
+                        <p>Voltage to frequency and frequency to voltage converters: This investigates the Teledyne 9400 series, which can be used as voltage to frequency (V/F) or frequency to voltage (F/V) converters. These converters have the same internal circuitry and connection diagrams, but they differ slightly in electrical characteristics. A complete V/F or F/V system can be formed simply by using two external capacitors, three resistors and a reference voltage. The 9400 series consists of CMOS and bipolar devices that can operate on dual or single supply voltages.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-10-current-to-voltage-converter -->
+
+                <!-- START: chapter-5-section-5-11-voltage-to-frequency-converter -->
+                <section id="chapter-5-section-5-11-voltage-to-frequency-converter" class="content-section" aria-labelledby="heading-chapter-5-section-5-11-voltage-to-frequency-converter">
+                    <h2 id="heading-chapter-5-section-5-11-voltage-to-frequency-converter" class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">5.11 Explain the Voltage to Frequency Convertor using Operational Amplifier:</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The 9400 is designed for pulse and square wave outputs having a frequency range of 1 Hz to 100 kHz . The input can be either current or voltage and the output can interface with most forms of logic. The equivalent circuit consists of an integrator, comparators, a delay network, a divide-by-2 network, an open - collector output transistors. The input current is converted to a charge by the integrating capacitor and shows up as a linearly decreasing voltage at the output of the op amp integrator. The output of the integrator is sensed by the comparator. The output of the comparator is then applied via the delay network to the output transistor Q1,the divide-by-2 network, and the charge/discharge control unit. The output of the divide-by-2 network drives the output transistor Q2.</p>
+                        <p>The V/F converter is used in instrumentation and control, digital and communication systems, temperature sensing and control, transducer encoding, analog to digital converters, digital panel meters, phase-locked loops and analog data transmission and recording.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-11-voltage-to-frequency-converter -->
+
+                <!-- START: chapter-5-section-5-12-frequency-to-voltage-converter -->
+                <section id="chapter-5-section-5-12-frequency-to-voltage-converter" class="content-section" aria-labelledby="heading-chapter-5-section-5-12-frequency-to-voltage-converter">
+                    <h2 id="heading-chapter-5-section-5-12-frequency-to-voltage-converter" class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">5.12 Explain the Frequency to Voltage Conversion using Operational Amplifier:</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>When used as an F/V converter the 9400 generates an output voltage that is linearly proportional to the input frequency waveform. The features of the 9400 F/V converter include dc to 100-kHz operation, op-amp output, programmable scale factor, high input impedance ( >10Mohm ), and above all its capability to accept any voltage wave shape.</p>
+                        <p>The 9400 F/V converter can be used in applications such as frequency meters and tachometers, speedometers, rpm indicators,FM demodulation frequency multipliers and dividers and motor control.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-section-5-12-frequency-to-voltage-converter -->
+
+            </main>
+
+            <nav class="document-nav" role="navigation" aria-label="Document Sections">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-4-operational-amplifier-circuits-and-feedback-configurations.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 71%;"></div>
+                        </div>
+                        <span class="progress-text">Chapter 5 of 7</span>
+                    </div>
+                    <a href="chapter-6-ic-voltage-regulators.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

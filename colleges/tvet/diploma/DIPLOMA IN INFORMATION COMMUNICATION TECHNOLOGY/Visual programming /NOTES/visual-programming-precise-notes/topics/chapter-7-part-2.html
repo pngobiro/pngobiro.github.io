@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 7: Sub-Programs (Part 2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 7 (Part 2)</span>
+                    </div>
+                    <a href="chapter-8-part-1.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 7: Sub-Programs (Part 2)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-7-part-2 -->
+                <section id="chapter-7-types" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔒</span>
+                        <span class="heading-text">Types of subprograms: Private and Public</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3>Private</h3>
+                        <p>Private Sub sets the scope so that subs in outside modules cannot call that particular subroutine. This means that a sub in Module 1 could not use the Call method to initiate a Private Sub in Module 2. (Note: If you start at the Application level, you can use Run to override this rule and access a Private Sub)</p>
+                        <p>Private [insert variable name] means that the variable cannot be accessed or used by subroutines in other modules. In order to be used, these variables must be declared outside of a subroutine (usually at the very top of your module). You can use this type of variable when you have one subroutine generating a value and you want to pass that value on to another subroutine in the same module.</p>
+                        <p>Dim [insert variable name] is used to state the scope inside of a subroutine (you cannot use Private in its place). Dim can be used either inside a subroutine or outside a subroutine (using it outside a subroutine would be the same as using Private).</p>
+                        <h3>Public</h3>
+                        <p>Public Sub means that your subroutine can be called or triggered by other subs in different modules. Public is the default scope for all subs so you do not need to add it before the word "sub". However, it does provide further clarity to others who may be reading your code. As a personal preference I do not type Public Sub unless I am creating an intricate program that has a bunch of subroutines with varying scopes (ie I have a mix of Public & Private subs).</p>
+                        <p>Public [insert variable name] means that the variable can be accessed or used by subroutines in outside modules. These variables must be declared outside of a subroutine (usually at the very top of your module). You can use this type of variable when you have one subroutine generating a value and you want to pass that value on to another subroutine stored in a separate module.</p>
+                    </div>
+                </section>
+
+                <section id="chapter-7-private-public-examples" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧩</span>
+                        <span class="heading-text">Private and Public Examples</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Let's look at an example of how Public and Private scopes interact with each other. For this example let's presume that we insert two modules into a new workbook and place the below code in their respective module.</p>
+                        <h3>In Module 1</h3>
+                        <pre><code class="language-vb">Dim x As Integer
+Public y As Integer
+Sub Start_Process()
+    x = 15
+    y = 12
+    Call Print_Values
+End Sub
+
+Private Sub Display_Message()
+    MsgBox "We ran all three subroutines!"
+End Sub
+</code></pre>
+                        <h3>In Module 2</h3>
+                        <pre><code class="language-vb">Sub Print_Values()
+    Debug.Print x
+    Debug.Print y
+    Call Display_Message
+End Sub
+</code></pre>
+                        <p>Before we run any of the subprograms, note that there are two variables <code>x</code> and <code>y</code> that are dimensioned outside of a subroutine. This means that their values can carry over into other subprograms. The variable <code>x</code> has a private scope so only subroutines in the same module can access its value. The variable <code>y</code> has a public scope, meaning that subroutines inside and outside its module can access its value.</p>
+                        <p>Let's start by running Start_Process. All this subprogram does is give x and y a value and then initiates the Print_Values macro to start running. We can Call Print_Values even though it's not in the same module because it is a Public Sub.</p>
+                        <p>Now let's hop on over to Print_Values. In this subprogram we are going to debug print the values of x and y to the immediate window (ctrl+g). Notice that when you try to print variable x it outputs nothing. This is because x does not exist in Module 2. Therefore, a new variable x was created in Module 2 and since we did not give this new x variable a value its output was nothing.</p>
+                        <p>Notice that when we print variable y's value the number 12 is shown in the Immediate Window. This is because Module 2 subroutines have access to the public variables declared in Module 1.</p>
+                        <p>Now the last line in Print_Values is going to give us an error. This is because we are trying to initiate Display_Message from Module 1. Since Display_Message was declared as a private sub, Print_Values does not have the ability to initiate it. There are a few things we can do to fix this:</p>
+                        <ol>
+                            <li>We could remove the word "Private" from Display_Message</li>
+                            <li>We could replace "Private" with "Public" in Display_Message</li>
+                            <li>We can use the Application level and instead of using Call we could write Application.Run "Display_Message" (this method serves as an override in case we wanted to keep Display_Message private in the eyes of other outside module subroutines)</li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section id="chapter-7-scope" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📏</span>
+                        <span class="heading-text">Scope of variables</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A Variable's Scope: The scope of a variable is the section of the application that can see and manipulate the variable. If a variable is declared within a procedure, only the code in the specific procedure has access to that variable. When the variable's scope is limited to a procedure it's called local variable.</p>
+                        <pre><code class="language-vb">Private Sub Command1_Click()
+    Dim i as Integer
+    Dim Sum as Integer
+    For i = 0 to 100 Step 2
+        Sum = Sum + i
+    Next
+    MsgBox "The Sum is " & Sum
+End Sub
+</code></pre>
+                        <p>A variable whose value is available to all procedures within the same Form or Module are called Form-wide or Module-wide (Global variable) and can be accessed from within all procedures in a component. In some situations the entire application must access a certain variable. Such variable must be declared as Public.</p>
+                        <p>Lifetime of a Variable: It is the period for which they retain their value. Variables declared as Public exist for the lifetime of the application. Local variables, declared within procedures with the Dim or Private statement, live as long as the procedure.</p>
+                        <p>You can force a local variable to preserve its value between procedure calls with the Static keyword. The advantage of using static variables is that they help you minimize the number of total variables in the application.</p>
+                        <p>Variables declared in a Form outside any procedure take effect when the Form is loaded and cease to exist when the Form is unloaded. If the Form is loaded again, its variables are initialized, as if it's being loaded for the first time.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-7-part-2 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 7 (Part 2)</span>
+                    </div>
+                    <a href="chapter-8-part-1.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

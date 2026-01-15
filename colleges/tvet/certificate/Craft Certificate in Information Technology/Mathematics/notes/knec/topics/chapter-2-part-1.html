@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Computer Based Arithmetic (Part 1) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-1-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 2 (Part 1)</span>
+                    </div>
+                    <a href="chapter-2-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 2 : Computer Based Arithmetic</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-2-objectives -->
+                <section id="chapter-2-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you should understand how to:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">perform binary calculation;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">store numbers into computer words;</span>
+                                <ul class="sub-list">
+                                    <li>integer</li>
+                                    <li>fraction</li>
+                                    <li>mixed number;</li>
+                                </ul>
+                            </li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">store numbers into computer words using;</span>
+                                <ul class="sub-list">
+                                     <li>sign modulus method</li>
+                                     <li>2's complement method;</li>
+                                </ul>
+                            </li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">perform 2's complement subtraction;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">shift operations.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-2-objectives -->
+
+                <!-- START: chapter-2-binary-addition -->
+                <section id="section-2-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕</span>
+                        <span class="heading-text">2.1 Binary Addition</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Binary addition for fixed point numbers is done as follows:</p>
+                        <ol type="i">
+                            <li>The numbers to be added are aligned by their binary points.</li>
+                            <li>Starting from the least significant (rightmost) digit, a corresponding pair of digits (in the same column) are added according to the rules of binary addition.</li>
+                            <li>If a column has a carry from the previous column, the carry digit has to be added also.</li>
+                            <li>Repeat steps (ii) and (iii) for each column until the most significant (leftmost) digit has been added.</li>
+                        </ol>
+
+                        <h3 class="subsection-heading">2.1.1 Rules for Binary Addition</h3>
+                        <pre class="code-block"><code>1+1 = 0 < and carry over 1 to add to next column
+1+0 = 1 (i.e. 1+1 = 10)
+0+1=1
+0+0=0</code></pre>
+
+                        <h3 class="subsection-heading">2.1.2 Examples of Binary Addition</h3> <!-- MMD typo: Adrifion -->
+                        <p>Example:</p>
+                        <pre class="code-block"><code>  1010
++ 0111
+-------
+ 10001</code></pre>
+
+                        <p>Example:</p>
+                        <pre class="code-block"><code>  1010.01
++ 0111.11
+----------
+ 10001.00</code></pre>
+
+                        <p>Example:</p>
+                        <img src="../assets/images/ch2-binary-addition-example1.jpg" alt="Binary addition example: 1101 + 1011 = 11000">
+
+                        <p>Example:</p>
+                        <img src="../assets/images/ch2-binary-addition-example2.jpg" alt="Binary addition example: 1010.01 + 0111.11 = 10001.00 with decimal equivalents">
+                    </div>
+                </section>
+                <!-- END: chapter-2-binary-addition -->
+
+                <!-- START: chapter-2-binary-subtraction -->
+                <section id="section-2-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➖</span>
+                        <span class="heading-text">2.2 Binary Subtraction</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">2.2.1 Rules for Binary Subtraction</h3>
+                        <div class="equation">$$ \begin{aligned} & 0-0=0 \\ & 1-1=0 \\ & 1-0=1 \\ & 0-1=1 \quad \leftarrow \text{with borrow "1" from the column to the left} \end{aligned} $$</div> <!-- Simplified borrow explanation -->
+
+                        <h3 class="subsection-heading">2.2.2 Examples of Binary Subtraction</h3>
+                        <p>Example:</p>
+                        <img src="../assets/images/ch2-binary-subtraction-example1.jpg" alt="Binary subtraction example: 1101 - 1011 = 0010">
+
+                        <p>Example:</p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Binary</th><th></th><th>Decimal equivalent</th></tr></thead>
+                                <tbody>
+                                    <tr><td>1010.00</td><td></td><td>10</td></tr> <!-- MMD had 80, incorrect -->
+                                    <tr><td>- 1000.11</td><td></td><td>- 8.75</td></tr> <!-- MMD had 17, incorrect -->
+                                    <tr><td colspan="3"><hr></td></tr>
+                                    <tr><td>0001.01</td><td></td><td>1.25</td></tr> <!-- MMD had -17, incorrect -->
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The subtraction process can be more clearly illustrated in the following example.</p>
+                        <p>Example:</p>
+                        <img src="../assets/images/ch2-binary-subtraction-example2.jpg" alt="Detailed binary subtraction example with borrowing: 1000 - 0011 = 0101">
+
+                        <h3 class="subsection-heading">2.2.3 Examples on Successive Borrows in Binary Subtractions</h3>
+                        <p>Example: <span class="math-inline">$8_{10} - 2_{10} = 6_{10}$</span></p>
+                        <!-- Image for 8-2 seems missing in MMD, skipping -->
+                        <p>Example: <span class="math-inline">$9_{10} - 7_{10} = 2_{10}$</span></p>
+                        <img src="../assets/images/ch2-binary-subtraction-example3.jpg" alt="Binary subtraction example with successive borrows: 1001 - 0111 = 0010">
+                    </div>
+                </section>
+                <!-- END: chapter-2-binary-subtraction -->
+
+                <!-- START: chapter-2-binary-multiplication -->
+                <section id="section-2-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✖️</span>
+                        <span class="heading-text">2.3 Binary Multiplication</span> <!-- MMD typo: Nultiplication -->
+                    </h2>
+                    <div class="content-card">
+                         <img src="../assets/images/ch2-binary-multiplication-intro.jpg" alt="Introductory image for binary multiplication">
+                        <h3 class="subsection-heading">2.3.1 Rules for Binary Multiplication</h3>
+                         <div class="equation">$$ \begin{aligned} & 0 \times 0=0 \\ & 0 \times 1=0 \\ & 1 \times 0=0 \\ & 1 \times 1=1 \end{aligned} $$</div> <!-- Corrected 1x0 rule -->
+                        <p>Copy the multiplicand when the multiplier digit is 1; do not when it is 0. Shift as in decimal multiplication. Add the resulting binary numbers according to the binary addition rules.</p>
+
+                        <h3 class="subsection-heading">2.3.2 Examples of Binary Multiplication</h3>
+                        <p>Example:</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Binary</th><th>Decimal equivalent</th></tr></thead>
+                                <tbody>
+                                    <tr><td><pre>  1101\nx 1100\n------\n  0000\n 0000\n1101\n1101\n--------\n10011100</pre></td><td><pre> 13\nx 12\n----\n\n\n\n\n----\n 156</pre></td></tr>
+                               </tbody>
+                            </table>
+                        </div>
+
+                        <p>Example:</p>
+                        <img src="../assets/images/ch2-binary-multiplication-example1.jpg" alt="Binary multiplication example: 1011 x 101 = 110111">
+
+                        <h3 class="subsection-heading">2.3.3 Handling of Carries in Multiplication</h3>
+                        <img src="../assets/images/ch2-binary-multiplication-example2.jpg" alt="Binary multiplication example showing handling of carries: 11101 x 111 = 11010011">
+                        <p>The product is <span class="math-inline">$11010011_{2}$</span></p> <!-- Corrected product from image -->
+
+                        <p>Example: <span class="math-inline">$4_{10} \times 3_{10} = 12_{10}$</span></p>
+                        <pre class="code-block"><code>      0100  (4)
+   x  0011  (3)
+   -------
+      0100
+     0100
+    0000
+   0000
+   -------
+   0001100  (12)</code></pre>
+
+                        <p>Example: <span class="math-inline">$10_{10} \times 14_{10} = 140_{10}$</span></p>
+                        <img src="../assets/images/ch2-binary-multiplication-example3.jpg" alt="Binary multiplication example: 1010 x 1110 = 10001100">
+                    </div>
+                </section>
+                <!-- END: chapter-2-binary-multiplication -->
+
+                <!-- START: chapter-2-binary-division -->
+                <section id="section-2-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➗</span>
+                        <span class="heading-text">2.4 Binary Division</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Just as binary multiplication is a series of shift and add operations, binary division is a series of shift and subtract operations.</p> <!-- MMD typo: ritiplication, se.ies -->
+                        <img src="../assets/images/ch2-binary-division-example1.jpg" alt="Binary division example: 100001 / 110 = 101 with remainder 11">
+                        <p><strong>Binary Explanation:</strong></p>
+                        <ol>
+                            <li>Compare divisor (110) with first bits of dividend (100). Divisor is larger. Quotient bit is 0.</li>
+                            <li>Bring down next bit (0). Compare divisor (110) with 1000. Divisor is smaller. Quotient bit is 1. Subtract 110 from 1000 (Result 10).</li>
+                            <li>Bring down next bit (0). Compare divisor (110) with 100. Divisor is larger. Quotient bit is 0.</li>
+                            <li>Bring down next bit (1). Compare divisor (110) with 1001. Divisor is smaller. Quotient bit is 1. Subtract 110 from 1001 (Result 11).</li>
+                            <li>Remainder (11) is smaller than divisor (110). Stop.</li>
+                        </ol>
+                        <p><strong>Decimal Equivalent:</strong> <span class="math-inline">$33 \div 6 = 5$</span> remainder 3</p> <!-- Corrected decimal equivalent -->
+
+                        <h3 class="subsection-heading">2.4.1 Example of Binary Division</h3>
+                        <p>Example: <span class="math-inline">$\frac{32_{10}}{3_{10}} = (10 \frac{2}{3})_{10}$</span> or 10 remainder 2</p>
+                        <pre class="code-block"><code>        1010   (Quotient = 10 decimal)
+      _______
+11 | 100000
+     11
+     ---
+      0100
+       11
+       ---
+        010  (Remainder = 2 decimal)</code></pre> <!-- Simplified MMD layout -->
+                    </div>
+                </section>
+                <!-- END: chapter-2-binary-division -->
+
+                <!-- START: chapter-2-number-storage-word -->
+                <section id="section-2-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💾</span>
+                        <span class="heading-text">2.5 Number Storage in the Computer Word</span> <!-- MMD typo: Wor -->
+                    </h2>
+                    <div class="content-card">
+                        <p>Computer storage is arranged in words. A word is defined as a unit of data for the machine. Words vary in length on different types of machines. Common word sizes are 8, 12, 16, 24 and 32 bits.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead><tr><th>Term</th><th>Description</th></tr></thead>
+                                <tbody>
+                                    <tr><td>Bit</td><td>A 'bit', short for binary digit, is the smallest unit of information stored (0 or 1).</td></tr> <!-- Simplified MMD text -->
+                                    <tr><td>Byte</td><td>8-bit string of binary bits. Often corresponds to one character.</td></tr>
+                                    <tr><td>Word</td><td>A machine-dependent unit of data, usually a multiple number of bytes (e.g., 16-bits, 32-bits).</td></tr>
+                                    <tr><td>Character</td><td>May be represented by binary codes (e.g., ASCII, usually 8 bits). Often used interchangeably with "byte".</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <h3 class="subsection-heading">2.5.1 16 Bit Microcomputers</h3>
+                        <p>Most of the popular microcomputer based systems used in schools and colleges are "16-bit micros". In these "machines" each word in memory is 2 bytes in length (i.e. 16-bits). Each word is sufficiently large to hold the binary code for one character but program instructions are normally too long to fit into a single word and are therefore spread over two or three words in sequence.</p> <!-- Corrected 8-bits to 16-bits -->
+
+                        <h3 class="subsection-heading">2.5.2 32 Bit Machines</h3>
+                        <p>Some of the more modern microcomputers are "32-bit micros". Many minicomputers are also "32-bit machines". Each word is four bytes (32-bits) in length, i.e. the "word length" is 32-bits.</p>
+
+                        <h3 class="subsection-heading">2.5.3 Size Limits of Data</h3>
+                        <p>Computer storage is of finite size. This limits the size of numbers which can be stored and their accuracy.</p>
+                        <p>Example: 16 bit words are common and hold numbers from -32768 to 32767.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-2-number-storage-word -->
+
+                <!-- START: chapter-2-storage-of-numbers -->
+                <section id="section-2-6" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">💾</span>
+                        <span class="heading-text">2.6 Storage of Numbers</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>It is important to know the format of storage before interpreting the given 0's and 1's stored in a computer word. There are many formats of storing numbers:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Integer (using sign modulus format)</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Integer (using 2's complement format)</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Fraction</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Mixed number</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Floating point number</span></li>
+                        </ul>
+
+                        <h3 class="subsection-heading">2.6.1 Storage of Integers Using Sign Modulus Method</h3>
+                        <p>Types of numbers</p>
+                        <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">•</span><span class="item-text">Even if you know that the data is numeric, make sure you have the right format</span></li>
+                        </ul>
+                        <img src="../assets/images/ch2-number-storage-formats.jpg" alt="Diagram showing different interpretations of the same binary string depending on format">
+                        <!-- MMD included interpretations, skipping as they are in image -->
+                        <p>and there are many other formats</p>
+
+                        <h3 class="subsection-heading">2.6.2 Storage of Integers</h3>
+                        <p>735 decimal = 1011011111 (10 bits)</p>
+                        <p>Add 2 bits "padding" in a 12 bit word</p>
+                        <pre class="code-block"><code>|0|0|1|0|1|1|0|1|1|1|1|1|</code></pre>
+                        <p>By convention, the first (left-hand) bit is the sign bit</p>
+                        <p>Therefore only 11 bits are left for the number value</p>
+                        <img src="../assets/images/ch2-integer-storage-sign-bit.jpg" alt="Diagram showing 12-bit word with sign bit and 11 value bits">
+                        <p>Small numbers stored in 12-bit words are mostly "padding" bits</p>
+                        <img src="../assets/images/ch2-integer-storage-padding.jpg" alt="Diagram showing storage of +5 and -5 in 12-bit words with padding">
+                        <p>Padding is not really wasteful, it is necessary to make the calculation methods work properly</p> <!-- MMD typo: mak: -->
+                        <p>The upper limit for storing a number in a 12-bit word is <span class="math-inline">$011111111111 = 2047$</span> decimal</p>
+                        <p>The range of a given computer n bit word for sign modulus is <span class="math-inline">$-(2^{n-1})$</span> to <span class="math-inline">$(2^{n-1}-1)$</span>. Larger numbers need double length.</p> <!-- MMD typo: whar -->
+                        <img src="../assets/images/ch2-integer-storage-double-length.jpg" alt="Diagram showing double length (24-bit) storage for larger numbers">
+                        <p>23 bits can hold <span class="math-inline">$4194303_{10}$</span></p> <!-- MMD had 22 bits -->
+                    </div>
+                </section>
+                <!-- END: chapter-2-storage-of-numbers -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-1-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 2 (Part 1)</span>
+                    </div>
+                    <a href="chapter-2-part-2.html" class="nav-button"> <!-- Placeholder for next chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

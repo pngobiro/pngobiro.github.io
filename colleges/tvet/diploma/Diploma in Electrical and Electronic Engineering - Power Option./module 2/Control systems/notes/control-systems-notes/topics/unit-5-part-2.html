@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 5: Time Domain Analysis (Part 2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-5-part-1.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 5 (Part 2) of 9</span>
+                    </div>
+                    <a href="unit-6.html" class="nav-button"> <!-- Link to next unit -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <!-- Reusing title from part 1 -->
+                <h1 class="section-title">Unit-5: Time Domain Analysis of Control Systems</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: unit-5-first-order-response -->
+                <section id="unit-5-first-order-response" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">Response of 1<sup>st</sup> order system when the input is unit step -</span>
+                    </h2>
+                    <div class="content-card">
+                        <!-- Mathpix converted equations -->
+                        <div class="equation">$$ \frac{C(s)}{R(s)}=\frac{1}{(S T+1)} $$</div>
+                        <div class="equation">$$ C(s)=\frac{1}{(S T+1)} \cdot R(s) $$</div>
+                        <p>For Unit Step,</p>
+                        <div class="equation">$$ R(S)=\frac{1}{S} $$</div>
+                        <div class="equation">$$ C(s)=\frac{1}{(S T+1)} \cdot \frac{1}{s} $$</div>
+                        <!-- MMD seems to skip partial fraction derivation step, showing result -->
+                        <div class="equation">$$ C(s)=\frac{1}{S}-\frac{1}{(S T+1)} $$</div>
+                        <p>Now, the partial fraction of above equation will be:</p> <!-- Text says 'will be', but MMD already shows result -->
+                        <div class="equation">$$ C(s)=\frac{1}{S}-\frac{T}{(S T+1)} = \frac{1}{S}-\frac{1}{(S+\frac{1}{T})} $$</div> <!-- Corrected partial fraction expansion -->
+
+                        <p>Taking the inverse Laplace of above equation is:</p>
+                         <!-- MMD equation looks like result of calculation, not the step response -->
+                         <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-049-1.jpg" alt="u(t) - e^(-t/T)" class="content-image"> -->
+                         <div class="equation">$$ c(t) = \mathcal{L}^{-1}\{C(s)\} = \mathcal{L}^{-1}\left\{\frac{1}{S}\right\} - \mathcal{L}^{-1}\left\{\frac{1}{S+\frac{1}{T}}\right\} = 1 - e^{-t/T} $$</div>
+
+                         <!-- MMD shows calculation at t=T -->
+                         <!-- <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-049-2.jpg" alt="1 - e^(-t/T) at t=T" class="content-image"> -->
+                         <p>At $t=T$:</p>
+                         <div class="equation">$$ 1-e^{-T/T} $$</div>
+                         <div class="equation">$$ 1-e^{-1}=1-0.368=0.632 $$</div>
+                         <p>Where T is known as time constant of the system and it is defined as the time required for the signal to attain 63.2 % of final or steady state value. Time constant means how fast the system reaches the final value. As smaller the time constant, as faster is the system response. If time constant is larger, system goes to move slowly.</p>
+                    </div>
+                </section>
+                <!-- END: unit-5-first-order-response -->
+
+                <!-- START: unit-5-second-order-system -->
+                <section id="unit-5-second-order-system" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">2️⃣</span>
+                        <span class="heading-text">Time response of second order system</span>
+                    </h2>
+                    <div class="content-card">
+                         <!-- Using corrected image filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-050-1.jpg" alt="Block diagram of a standard second-order system." class="content-image">
+                         <!-- Mathpix converted equations -->
+                         <div class="equation">$$ \frac{C(s)}{R(s)}=\frac{G(S)}{1+G(S) H(S)} $$</div>
+                         <div class="equation">$$ G(S)=\frac{\omega_{n}^{2}}{s\left(s+2 \xi \omega_{n}\right)}, \quad H(S)=1 $$</div>
+                         <div class="equation">$$ \frac{C(S)}{R(S)}=\frac{\omega_{n}^{2} / s\left(s+2 \xi \omega_{n}\right)}{1+\frac{\omega_{n}^{2}}{s\left(s+2 \xi \omega_{n}\right)}} $$</div>
+                         <div class="equation">$$ \frac{C(S)}{R(S)}=\frac{\omega_{n}^{2}}{s^{2}+2 \xi \omega_{n} s+\omega_{n}^{2}} \quad \ldots \ldots . . . . . e q .1 $$</div>
+                         <p>In the above transfer function, the power of 's' is two in the denominator. That is why the above transfer function is of a second order, and the system is said to be the second order system.</p>
+
+                         <h3 class="subsection-heading">Time response of second order system with unit step</h3>
+                         <p>From equation 1</p>
+                         <div class="equation">$$ C(S)=\frac{\omega_{n}^{2}}{S^{2}+2 \xi \omega_{n} S+\omega_{n}^{2}} \cdot R(S) $$</div>
+                         <p>For unit step the input is</p>
+                         <div class="equation">$$ R(S)=\frac{1}{s} $$</div>
+                         <div class="equation">$$ C(S)=\frac{1}{s} \cdot \frac{\omega_{n}^{2}}{s^{2}+2 \xi \omega_{n} s+\omega_{n}^{2}} $$</div>
+                         <!-- Following the complex derivation steps from MMD -->
+                         <div class="equation">$$ C(S)=\frac{1}{s} \cdot \frac{\omega_{n}^{2}}{\left(s^{2}+2 \xi \omega_{n} s+\xi^{2} \omega_{n}^{2}+\omega_{n}^{2}-\xi^{2} \omega_{n}^{2}\right)} $$</div>
+                         <div class="equation">$$ =\frac{1}{s} \cdot \frac{\omega_{n}^{2}}{\left(s+\xi \omega_{n}\right)^{2}+\omega_{n}^{2}\left(1-\xi^{2}\right)} $$</div>
+                         <!-- MMD seems to show partial fraction steps -->
+                         <div class="equation">$$ =\frac{\left(s+\xi \omega_{n}\right)^{2}+\omega_{n}^{2}\left(1-\xi^{2}\right)-\left(s+\xi \omega_{n}\right)^{2}+\omega_{n}^{2} \xi^{2}}{s\left\{\left(s+\xi \omega_{n}\right)^{2}+\omega_{n}^{2}\left(1-\xi^{2}\right)\right\}} $$</div> <!-- This step seems incorrect/unnecessary for std partial fraction -->
+                         <div class="equation">$$ =\frac{\left(s+\xi \omega_{n}\right)^{2}+\omega_{n}^{2}\left(1-\xi^{2}\right)-s^{2}-2 s \xi \omega_{n}-\omega_{n}^{2} \xi^{2}+\omega_{n}^{2} \xi^{2}}{s\left\{\left(s+\xi \omega_{n}\right)^{2}+\omega_{n}^{2}\left(1-\xi^{2}\right)\right\}} $$</div> <!-- Also seems incorrect -->
+                         <div class="equation">$$ =\frac{\left(s+\xi \omega_{n}\right)^{2}+\omega_{n}^{2}\left(1-\xi^{2}\right)-s\left(s+2 \xi \omega_{n}\right)}{s\left\{\left(s+\xi \omega_{n}\right)^{2}+\omega_{n}^{2}\left(1-\xi^{2}\right)\right\}} $$</div> <!-- Also seems incorrect -->
+                         <!-- Standard partial fraction result should be derived differently, but preserving MMD flow -->
+                         <div class="equation">$$ =\frac{1}{s}-\frac{s+2 \xi \omega_{n}}{\left(s+\xi \omega_{n}\right)^{2}+\omega_{n}^{2}\left(1-\xi^{2}\right)} $$</div> <!-- Corrected typo 2s -> 2xi -->
+
+                         <p>Now putting, $\omega_{d}=\omega_{n} \sqrt{1-\xi^{2}}$</p>
+                         <div class="equation">$$ =\frac{1}{s}-\frac{s+2 \xi \omega_{n}}{\left(s+\xi \omega_{n}\right)^{2}+\omega_{d}^{2}} $$</div>
+                         <div class="equation">$$ =\frac{1}{s}-\frac{s+\xi \omega_{n}}{\left(s+\xi \omega_{n}\right)^{2}+\omega_{d}^{2}}-\frac{\xi \omega_{n}}{\left(s+\xi \omega_{n}\right)^{2}+\omega_{d}^{2}} $$</div>
+                         <div class="equation">$$ =\frac{1}{s}-\frac{s+\xi \omega_{n}}{\left(s+\xi \omega_{n}\right)^{2}+\omega_{d}^{2}}-\frac{\xi \omega_{n}}{\omega_{d}} \cdot \frac{\omega_{d}}{\left(s+\xi \omega_{n}\right)^{2}+\omega_{d}^{2}} $$</div>
+
+                         <p>Now taking the inverse Laplace of above equation</p>
+                         <!-- MMD formatting of Inverse Laplace is unusual, reformatting slightly for clarity -->
+                         <div class="equation">$$ \mathcal{L}^{-1}[C(s)] = \mathcal{L}^{-1}\left[\frac{1}{s}\right] - \mathcal{L}^{-1}\left[\frac{s+\xi \omega_{n}}{\left(s+\xi \omega_{n}\right)^{2}+\omega_{d}^{2}}\right] - \mathcal{L}^{-1}\left[\frac{\xi \omega_{n}}{\omega_{d}} \cdot \frac{\omega_{d}}{\left(s+\xi \omega_{n}\right)^{2}+\omega_{d}^{2}}\right] $$</div>
+                         <div class="equation">$$ \therefore c(t)=1-e^{-\xi \omega_{n} t} \cdot \cos \omega_{d} t-\frac{\xi \omega_{n}}{\omega_{d}} \cdot e^{-\xi \omega_{n} t} \cdot \sin \omega_{d} t $$</div>
+                         <p>$\because \mathcal{L}^{-1}\left[\frac{1}{s}\right]=1, \mathcal{L}^{-1}\left[\frac{s+\alpha}{(s+\alpha)^{2}+\omega^{2}}\right]=e^{-\alpha t} \cos \omega t, $</p>
+                         <p>$\mathcal{L}^{-1}\left[\frac{\omega}{(s+\alpha)^{2}+\omega^{2}}\right]=e^{-\alpha t} \sin \omega t$</p>
+
+                         <p>This equation can also be written as</p>
+                         <div class="equation">$$ c(t)=1-e^{-\xi \omega_{n} t}\left(\cos \omega_{d} t+\frac{\xi}{\sqrt{1-\xi^{2}}} \cdot \sin \omega_{d} t\right) $$</div>
+                         <div class="equation">$$ =1-\frac{e^{-\xi \omega_{n} t}}{\sqrt{1-\xi^{2}}}\left(\sqrt{1-\xi^{2}} \cos \omega_{d} t+\xi \cdot \sin \omega_{d} t\right) $$</div>
+                         <p>[Let, $\xi=\cos \emptyset$, hence , $\sqrt{1-\xi^{2}}=\sin \emptyset$]</p>
+                         <div class="equation">$$ \therefore \quad c(t)=1-\frac{e^{-\xi \omega_{n} t}}{\sqrt{1-\xi^{2}}}\left(\sin \emptyset \cos \omega_{d} t+\cos \emptyset \sin \omega_{d} t\right) $$</div>
+                         <div class="equation">$$ =1-\frac{e^{-\xi \omega_{n} t}}{\sqrt{1-\xi^{2}}} \sin \left(\omega_{d} t+\emptyset\right) $$</div>
+                         <p>The error signal is given by $e(t)=r(t)-c(t)$, and hence</p>
+                         <div class="equation">$$ e(t)=\frac{e^{-\xi \omega_{n} t}}{\sqrt{1-\xi^{2}}} \sin \left(\omega_{d} t+\emptyset\right) $$</div>
+                    </div>
+                </section>
+                <!-- END: unit-5-second-order-system -->
+
+                 <!-- START: unit-5-transient-specs -->
+                 <section id="unit-5-transient-specs" class="content-section">
+                     <h2 class="section-heading">
+                         <span class="heading-icon">📝</span>
+                         <span class="heading-text">Transient response specification of second order system</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>The performance of the control system are expressed in terms of transient response to a unit step input because it is easy to generate initial condition basically are zero.</p>
+                        <p>Following are the common transient response characteristics:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">Delay Time.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">Rise Time.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">Peak Time.</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">Maximum Peak.</span></li>
+                            <li class="list-item"><span class="item-icon">5.</span> <span class="item-text">Settling Time.</span></li>
+                            <li class="list-item"><span class="item-icon">6.</span> <span class="item-text">Steady State error.</span></li>
+                        </ol>
+
+                        <h3 class="subsection-heading">Delay Time</h3>
+                        <p>The time required for the response to reach 50% of the final value in the first time is called the delay time.</p>
+
+                        <h3 class="subsection-heading">Rise Time</h3>
+                        <p>The time required for response to rising from 10% to 90% of final value, for an overdamped system and 0 to 100% for an underdamped system is called the rise time of the system.</p>
+
+                        <h3 class="subsection-heading">Peak Time</h3>
+                        <p>The time required for the response to reach the 1st peak of the time response or 1st peak overshoot is called the Peak time.</p>
+
+                        <h3 class="subsection-heading">Maximum overshoot</h3>
+                        <p>The difference between the peak of 1st time and steady output is called the maximum overshoot. It is defined by</p>
+                        <div class="equation">$$ \text{Maximum percent overshoot} =\frac{C\left(t_{p}\right)-C(\infty)}{C(\infty)} $$</div>
+                         <div class="equation">$$ \% M_{P}=e^{-\frac{\pi \xi}{\sqrt{1-\xi^{2}}}} \times 100 $$</div> <!-- Corrected minus sign in exponent -->
+
+                        <h3 class="subsection-heading">Settling Time ($t_s$)</h3>
+                        <p>The time that is required for the response to reach and stay within the specified range (2% to 5%) of its final value is called the settling time.</p>
+                         <div class="equation">$$ t_{s}=\frac{4}{\xi \omega_{n}} $$</div> <!-- Standard approx for 2% criteria -->
+
+                        <h3 class="subsection-heading">Steady State Error ($e_{ss}$)</h3>
+                        <p>The difference between actual output and desired output as time't' tends to infinity is called the steady state error of the system.</p>
+                         <div class="equation">$$ e_{s s}=\lim _{t \rightarrow \infty}[r(t)-C(t)] $$</div>
+                     </div>
+                 </section>
+                 <!-- END: unit-5-transient-specs -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-5-part-1.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 5 (Part 2) of 9</span>
+                    </div>
+                    <a href="unit-6.html" class="nav-button"> <!-- Link to next unit -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

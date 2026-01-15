@@ -1,0 +1,545 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Capacitor - Electrical Components</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts - Inter for UI, Source Serif for reading -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <!-- Skip Link for Accessibility -->
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <!-- Theme Toggle (Fixed Position) -->
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <!-- Floating Table of Contents -->
+    <nav class="floating-toc" id="floating-toc">
+        <div class="floating-toc-header">
+            <span>On this page</span>
+        </div>
+        <ul class="floating-toc-list">
+            <!-- Populated by JS -->
+        </ul>
+    </nav>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-02.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Prev: Resistor</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-04.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next: Inductor</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 5</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🔋</span>
+                        <span>Topic 03</span>
+                    </div>
+                    <h1 class="document-title">The Capacitor</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Electrical Components</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>12 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📘</span>
+                                Definition & Structure
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A capacitor (originally known as a condenser) is a passive two-terminal electrical component used to store energy electrostatically in an electric field. The forms of practical capacitors vary widely, but all contain at least two electrical conductors (plates) separated by a dielectric (i.e. insulator). The conductors can be thin films, foils or sintered beads of metal or conductive electrolyte, etc. The "nonconducting" dielectric acts to increase the capacitor's charge capacity. A dielectric can be glass, ceramic, plastic film, air, vacuum, paper, mica, oxide layer etc. Capacitors are widely used as parts of electrical circuits in many common electrical devices.</p>
+                            
+                            <div class="grid grid-3">
+                                <figure class="content-figure" data-lightbox="true">
+                                    <img src="../assets/images/image-20251223-c34553f3.jpeg" alt="A typical electrolytic capacitor" class="figure-image">
+                                    <figcaption class="figure-caption">A typical electrolytic capacitor</figcaption>
+                                </figure>
+                                <figure class="content-figure" data-lightbox="true">
+                                    <img src="../assets/images/image-20251223-1910b1b7.jpeg" alt="4 electrolytic capacitors of different voltages and capacitance" class="figure-image">
+                                    <figcaption class="figure-caption">4 electrolytic capacitors of different voltages and capacitance</figcaption>
+                                </figure>
+                                <figure class="content-figure" data-lightbox="true">
+                                    <img src="../assets/images/image-20251223-e2386696.jpeg" alt="Solid electrolyte, resin-dipped tantalum capacitors" class="figure-image">
+                                    <figcaption class="figure-caption">Solid electrolyte, resin-dipped $10\mu F 35V$ tantalum capacitors. The + sign indicates the positive lead.</figcaption>
+                                </figure>
+                            </div>
+
+                            <p>Unlike a resistor, an ideal capacitor does not dissipate energy. Instead, a capacitor stores energy in the form of an electrostatic field between its plates.</p>
+                            <p>When there is a potential difference across the conductors (e.g., when a capacitor is attached across a battery), an electric field develops across the dielectric, causing positive charge $+Q$ to collect on one plate and negative charge $-Q$ to collect on the other plate. If a battery has been attached to a capacitor for a sufficient amount of time, no current can flow through the capacitor. However, if a time-varying voltage is applied across the leads of the capacitor, a displacement current can flow.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section: History -->
+                    <section class="content-section" id="history">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📜</span>
+                                History
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-14e2a057.jpeg" alt="Battery of four Leyden jars in Museum Boerhaave, Leiden, the Netherlands" class="figure-image" loading="lazy">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Battery of four Leyden jars in Museum Boerhaave, Leiden, the Netherlands</figcaption>
+                            </figure>
+
+                            <p>In October 1745, Ewald Georg von Kleist of Pomerania, Germany, found that charge could be stored by connecting a high-voltage electrostatic generator by a wire to a volume of water in a hand-held glass jar. Von Kleist’s hand and the water acted as conductors, and the jar as a dielectric (although details of the mechanism were incorrectly identified at the time). Von Kleist found that touching the wire resulted in a powerful spark, much more painful than that obtained from an electrostatic machine. The following year, the Dutch physicist Pieter van Musschenbroek invented a similar capacitor, which was named the Leyden jar, after the University of Leiden where he worked. He also was impressed by the power of the shock he received, writing, “I would not take a second shock for the kingdom of France.”</p>
+                            <p>Daniel Gralath was the first to combine several jars in parallel into a “battery” to increase the charge storage capacity. Benjamin Franklin investigated the Leyden jar and came to the conclusion that the charge was stored on the glass, not in the water as others had assumed. He also adopted the term “battery”, (denoting the increasing of power with a row of similar units as in a battery of cannon), subsequently applied to clusters of electrochemical cells. Leyden jars were later made by coating the inside and outside of jars with metal foil, leaving a space at the mouth to prevent arcing between the foils. The earliest unit of capacitance was the jar, equivalent to about 1.11 nanofarads.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section: Theory -->
+                    <section class="content-section" id="theory">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚙️</span>
+                                Theory of Operation
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>A capacitor consists of two conductors separated by a non-conductive region. The non-conductive region is called the dielectric. In simpler terms, the dielectric is just an electrical insulator. Examples of dielectric media are glass, air, paper, vacuum, and even a semiconductor depletion region chemically identical to the conductors.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <img src="../assets/images/image-20251223-8b4045ba.jpeg" alt="Charge separation in a parallel-plate capacitor causes an internal electric field" class="figure-image">
+                                <figcaption class="figure-caption">Charge separation in a parallel-plate capacitor causes an internal electric field. A dielectric (orange) reduces the field and increases the capacitance.</figcaption>
+                            </figure>
+
+                            <p>An ideal capacitor is wholly characterized by a constant capacitance $C$, defined as the ratio of charge $\pm Q$ on each conductor to the voltage $V$ between them:</p>
+                            <div class="equation">
+                                $$C = \frac {Q}{V}$$
+                            </div>
+                            
+                            <p>Sometimes charge build-up affects the capacitor mechanically, causing its capacitance to vary. In this case, capacitance is defined in terms of incremental changes:</p>
+                            <div class="equation">
+                                $$C = \frac {\mathrm {d} Q}{\mathrm {d} V}$$
+                            </div>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💧</span>
+                                    <h4 class="callout-title">Hydraulic Analogy</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <figure class="content-figure" style="float: right; margin: 0 0 1rem 1rem; max-width: 200px;">
+                                        <img src="../assets/images/image-20251223-fbe390fa.jpeg" alt="Hydraulic analogy" class="figure-image">
+                                    </figure>
+                                    <p>In the hydraulic analogy, a capacitor is analogous to a rubber membrane sealed inside a pipe. Water molecules cannot pass through the membrane, but some water can move by stretching the membrane.</p>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item"><span class="list-marker"></span> The current alters the charge on a capacitor, just as the flow of water changes the position of the membrane.</li>
+                                        <li class="list-item"><span class="list-marker"></span> The more a capacitor is charged, the larger its voltage drop; i.e., the more it "pushes back" against the charging current. This is analogous to the fact that the more a membrane is stretched, the more it pushes back on the water.</li>
+                                        <li class="list-item"><span class="list-marker"></span> The capacitance describes how much charge can be stored on one plate of a capacitor for a given "push" (voltage drop). A very stretchy, flexible membrane corresponds to a higher capacitance than a stiff membrane.</li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Energy of electric field</h3>
+                            <p>Work must be done by an external influence to "move" charge between the conductors in a capacitor. The work done in establishing the electric field, and hence the amount of energy stored, is</p>
+                            <div class="equation">
+                                $$W = \int_{0}^{Q} V \mathrm{d}q = \int_{0}^{Q} \frac{q}{C} \mathrm{d}q = \frac{1}{2} \frac{Q^{2}}{C} = \frac{1}{2} CV^{2} = \frac{1}{2} VQ$$
+                            </div>
+
+                            <h3>Current-voltage relation</h3>
+                            <p>The current $I(t)$ through any component in an electric circuit is defined as the rate of flow of a charge $Q(t)$ passing through it, but actual charges—electrons—cannot pass through the dielectric layer of a capacitor. Rather, one electron accumulates on the negative plate for each one that leaves the positive plate. Thus the charge on the electrodes is equal to the integral of the current as well as proportional to the voltage.</p>
+                            <div class="equation">
+                                $$I(t) = \frac{\mathrm{d}Q(t)}{\mathrm{d}t} = C \frac{\mathrm{d}V(t)}{\mathrm{d}t}$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Circuits -->
+                    <section class="content-section" id="circuits">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚡</span>
+                                Circuit Analysis
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>DC circuits</h3>
+                            <p>A series circuit containing only a resistor, a capacitor, a switch and a constant DC source of voltage $V_0$ is known as a charging circuit. If the capacitor is initially uncharged while the switch is open, and the switch is closed at $t_0$, the voltage across the capacitor follows:</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-5e6e7fdd.jpeg" alt="A simple resistor-capacitor circuit" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">A simple resistor-capacitor circuit demonstrates charging of a capacitor.</figcaption>
+                            </figure>
+
+                            <div class="equation">
+                                $$V(t) = V_0 \left(1 - e^{-\frac{t}{t_0}}\right)$$
+                            </div>
+                            <p>where $\tau_0 = RC$ is the time constant of the system.</p>
+
+                            <h3>AC circuits</h3>
+                            <p>Impedance, the vector sum of reactance and resistance, describes the phase difference and the ratio of amplitudes between sinusoidally varying voltage and sinusoidally varying current at a given frequency. The reactance and impedance of a capacitor are respectively:</p>
+                            <div class="equation">
+                                $$X = - \frac {1}{\omega C} = - \frac {1}{2 \pi f C}$$
+                            </div>
+                            <div class="equation">
+                                $$Z = \frac {1}{j \omega C} = - \frac {j}{\omega C} = - \frac {j}{2 \pi f C}$$
+                            </div>
+                            <p>where $j$ is the imaginary unit and $\omega$ is the angular frequency of the sinusoidal signal. The $-j$ phase indicates that the AC voltage lags the AC current by $90^{\circ}$.</p>
+
+                            <h3>Parallel-plate model</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <img src="../assets/images/image-20251223-a2b2988f.jpeg" alt="Dielectric is placed between two conducting plates" class="figure-image">
+                                <figcaption class="figure-caption">Dielectric is placed between two conducting plates, each of area A and with a separation of d</figcaption>
+                            </figure>
+                            <p>The simplest capacitor consists of two parallel conductive plates separated by a dielectric with permittivity $\varepsilon$. The capacitance is:</p>
+                            <div class="equation">
+                                $$C = \frac {\varepsilon A}{d}$$
+                            </div>
+                            <p>The capacitance is therefore greatest in devices made from materials with a high permittivity, large plate area, and small distance between plates.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section: Networks -->
+                    <section class="content-section" id="networks">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🕸️</span>
+                                Networks
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Capacitors in Parallel</h3>
+                            <p>Capacitors in a parallel configuration each have the same applied voltage. Their capacitances add up.</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <img src="../assets/images/image-20251223-ffe2a676.jpeg" alt="Several capacitors in parallel" class="figure-image">
+                            </figure>
+                            <div class="equation">
+                                $$C _ {\mathrm {e q}} = C _ {1} + C _ {2} + \dots + C _ {n}$$
+                            </div>
+
+                            <h3>Capacitors in Series</h3>
+                            <p>Connected in series, the schematic diagram reveals that the separation distance, not the plate area, adds up. The total voltage difference from end to end is apportioned to each capacitor according to the inverse of its capacitance.</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <img src="../assets/images/image-20251223-700151b9.jpeg" alt="Several capacitors in series" class="figure-image">
+                            </figure>
+                            <div class="equation">
+                                $$\frac {1}{C _ {\mathrm {e q}}} = \frac {1}{C _ {1}} + \frac {1}{C _ {2}} + \dots + \frac {1}{C _ {n}}$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Non-ideal behavior -->
+                    <section class="content-section" id="non-ideal">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚠️</span>
+                                Non-ideal behavior
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Capacitors deviate from the ideal capacitor equation in a number of ways.</p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Breakdown voltage:</strong> Above a particular electric field, known as the dielectric strength, the dielectric in a capacitor becomes conductive. The voltage at which this occurs is called the breakdown voltage.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Equivalent circuit (ESR):</strong> All capacitors have imperfections that create resistance. This is specified as the equivalent series resistance or ESR. $R_{\text{C}}=Z+R_{\text{ESR}}=\frac{1}{j\omega C}+R_{\text{ESR}}$</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Ripple current:</strong> Ripple current is the AC component of an applied source. Ripple current causes heat to be generated within the capacitor due to dielectric losses and current flow across resistive supply lines.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Capacitance instability:</strong> The capacitance of certain capacitors decreases as the component ages. Temperature dependence is also a factor.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Current and voltage reversal:</strong> Reversal occurs when the current changes direction. Reversal creates excess electric fields in the dielectric and can shorten life expectancy.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Dielectric absorption:</strong> On discharging a capacitor and disconnecting it, after a short time it may develop a voltage due to hysteresis in the dielectric.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Leakage:</strong> Leakage is equivalent to a resistor in parallel with the capacitor.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section: Types -->
+                    <section class="content-section" id="types">
+                        <div class="section-header">
+                            <div class="section-number">07</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📦</span>
+                                Types & Structure
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <img src="../assets/images/image-20251223-030a70f3.jpeg" alt="Capacitor materials" class="figure-image">
+                                <figcaption class="figure-caption">Capacitor materials. From left: multilayer ceramic, ceramic disc, multilayer polyester film, tubular ceramic, polystyrene, metalized polyester film, aluminum electrolytic.</figcaption>
+                            </figure>
+
+                            <p>Practical capacitors are available commercially in many different forms. The type of internal dielectric, the structure of the plates and the device packaging all strongly affect the characteristics of the capacitor.</p>
+                            
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Electrolytic capacitors</strong> use an aluminum or tantalum plate with an oxide dielectric layer. They offer very high capacitance but suffer from poor tolerances and high leakage.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Polymer capacitors</strong> use solid conductive polymer as electrolyte and offer longer life and lower ESR.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Supercapacitors</strong> store large amounts of energy, up to 5 kF.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Ceramic capacitors</strong> are generally small, cheap and useful for high frequency applications.</span>
+                                </li>
+                            </ul>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-a2f8ca32.jpeg" alt="Capacitor packages" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Capacitor packages: SMD ceramic at top left; SMD tantalum at bottom left; through-hole tantalum at top right; through-hole electrolytic at bottom right.</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section: Applications -->
+                    <section class="content-section" id="applications">
+                        <div class="section-header">
+                            <div class="section-number">08</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🚀</span>
+                                Applications
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <strong>Energy Storage</strong>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>A capacitor can store electric energy when disconnected from its charging circuit, so it can be used like a temporary battery. Capacitors are commonly used in electronic devices to maintain power supply while batteries are being changed.</p>
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <img src="../assets/images/image-20251223-c69ec3f4.jpeg" alt="Mylar-film oil-filled capacitor" class="figure-image">
+                                            <figcaption class="figure-caption">This mylar-film, oil-filled capacitor has very low inductance and low resistance, to provide the high-power (70 megawatt) and high speed (1.2 microsecond) discharge needed to operate a dye laser.</figcaption>
+                                        </figure>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <strong>Power Conditioning</strong>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>Reservoir capacitors are used in power supplies where they smooth the output of a full or half wave rectifier. Capacitors are connected in parallel with the power circuits of most electronic devices to shunt away and conceal current fluctuations.</p>
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <img src="../assets/images/image-20251223-9cb3fccc.jpeg" alt="A 10,000 microfarad capacitor in an amplifier power supply" class="figure-image">
+                                        </figure>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <strong>Signal Processing</strong>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>The energy stored in a capacitor can be used to represent information, either in binary form, as in DRAMs, or in analogue form, as in analog sampled filters and CCDs.</p>
+                                    </div>
+                                </details>
+                            </div>
+
+                            <div class="collapsible-section">
+                                <details>
+                                    <summary class="collapsible-trigger">
+                                        <span class="trigger-icon">▶</span>
+                                        <strong>Oscillators</strong>
+                                    </summary>
+                                    <div class="collapsible-content">
+                                        <p>A capacitor can possess spring-like qualities in an oscillator circuit. In the image example, a capacitor acts to influence the biasing voltage at the npn transistor's base.</p>
+                                        <figure class="content-figure" data-lightbox="true">
+                                            <img src="../assets/images/image-20251223-d47da658.jpeg" alt="Example of a simple oscillator" class="figure-image">
+                                            <figcaption class="figure-caption">Example of a simple oscillator that requires a capacitor to function</figcaption>
+                                        </figure>
+                                    </div>
+                                </details>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section: Hazards -->
+                    <section class="content-section" id="hazards">
+                        <div class="section-header">
+                            <div class="section-number">09</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🛑</span>
+                                Hazards and Safety
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="callout callout--danger">
+                                <div class="callout-header">
+                                    <span class="callout-icon">⚠️</span>
+                                    <h4 class="callout-title">Safety Warning</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Capacitors may retain a charge long after power is removed from a circuit; this charge can cause dangerous or even potentially fatal shocks or damage connected equipment.</p>
+                                </div>
+                            </div>
+                            <p>For example, even a seemingly innocuous device such as a disposable camera flash unit powered by a 1.5 volt AA battery contains a capacitor which may be charged to over 300 volts. Service procedures for electronic devices usually include instructions to discharge large or high-voltage capacitors, for instance using a Brinkley stick.</p>
+                            <p>Capacitors may catastrophically fail when subjected to voltages or currents beyond their rating, or as they reach their normal end of life. Dielectric or metal interconnection failures may create arcing that vaporizes the dielectric fluid, resulting in case bulging, rupture, or even an explosion.</p>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-02.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Prev: Resistor</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-04.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next: Inductor</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 60%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 3 of 5</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

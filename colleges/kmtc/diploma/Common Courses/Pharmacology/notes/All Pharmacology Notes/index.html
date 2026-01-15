@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pharmacology Study Guide - Table of Contents</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="styles/main.css">
+    
+    <!-- Additional Index Specific Styles -->
+    <style>
+        /* Index Page Specific Overrides */
+        .index-main {
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-2xl);
+            box-shadow: var(--shadow-xl);
+            overflow: hidden;
+            min-height: 80vh;
+        }
+
+        .index-hero {
+            position: relative;
+            padding: var(--space-16) var(--space-8);
+            background: var(--gradient-primary);
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .index-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+            border-radius: var(--radius-full);
+            font-size: var(--font-size-sm);
+            font-weight: var(--font-weight-medium);
+            color: white;
+            margin-bottom: var(--space-6);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hero-title {
+            font-family: var(--font-family-serif);
+            font-size: var(--font-size-5xl);
+            font-weight: var(--font-weight-bold);
+            color: white;
+            margin-bottom: var(--space-4);
+            line-height: var(--line-height-tight);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .hero-subtitle {
+            font-size: var(--font-size-lg);
+            color: rgba(255, 255, 255, 0.95);
+            max-width: 600px;
+            margin: 0 auto var(--space-8);
+            font-weight: 300;
+        }
+
+        .hero-meta {
+            display: flex;
+            justify-content: center;
+            gap: var(--space-8);
+            color: white;
+        }
+
+        .hero-meta .meta-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-weight: 500;
+            background: rgba(0,0,0,0.1);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-lg);
+        }
+
+        /* Topics Grid */
+        .topics-section {
+            padding: var(--space-12) var(--space-8);
+            background: var(--color-bg-secondary);
+        }
+
+        .section-heading {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            font-size: var(--font-size-2xl);
+            font-weight: var(--font-weight-bold);
+            margin-bottom: var(--space-8);
+            color: var(--color-text-primary);
+            padding-bottom: var(--space-4);
+            border-bottom: 2px solid var(--color-border);
+        }
+
+        .topics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: var(--space-6);
+        }
+
+        /* Topic Card */
+        .topic-card {
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-6);
+            background: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: var(--radius-xl);
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+            transition: all var(--transition-base);
+            height: 100%;
+        }
+
+        .topic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-card-border);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform var(--transition-base);
+        }
+
+        .topic-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+            border-color: var(--color-primary-light);
+        }
+
+        .topic-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .card-number {
+            font-size: var(--font-size-4xl);
+            font-weight: var(--font-weight-bold);
+            color: var(--color-primary);
+            opacity: 0.15;
+            line-height: 1;
+            margin-bottom: var(--space-2);
+            font-family: var(--font-family-serif);
+        }
+
+        .card-content {
+            flex: 1;
+            position: relative;
+            z-index: 2;
+        }
+
+        .card-title {
+            font-size: var(--font-size-lg);
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text-primary);
+            margin-bottom: var(--space-2);
+            transition: color var(--transition-fast);
+        }
+
+        .topic-card:hover .card-title {
+            color: var(--color-primary);
+        }
+
+        .card-description {
+            font-size: var(--font-size-sm);
+            color: var(--color-text-secondary);
+            margin-bottom: var(--space-6);
+            line-height: 1.5;
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+            padding-top: var(--space-4);
+            border-top: 1px solid var(--color-border-light);
+        }
+
+        .card-arrow {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-full);
+            color: var(--color-text-tertiary);
+            transition: all var(--transition-fast);
+        }
+
+        .topic-card:hover .card-arrow {
+            background: var(--color-primary);
+            color: white;
+            transform: translateX(4px);
+        }
+
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.5rem; }
+            .hero-meta { flex-direction: column; gap: var(--space-2); }
+            .topics-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <main class="index-main" id="main-content">
+                <!-- Hero Section -->
+                <header class="index-hero">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <span class="badge-icon">🎓</span>
+                            <span class="badge-text">Medical Study Guide</span>
+                        </div>
+                        <h1 class="hero-title">Pharmacology</h1>
+                        <p class="hero-subtitle">Comprehensive course notes by Samuel Wamamba covering drug classifications, mechanisms, and nursing considerations.</p>
+                        <div class="hero-meta">
+                            <span class="meta-item">
+                                <span class="meta-icon">📑</span>
+                                <span>16 Topics</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-icon">📖</span>
+                                <span>138 Pages</span>
+                            </span>
+                            <span class="meta-item">
+                                <span class="meta-icon">👨‍⚕️</span>
+                                <span>Clinical Focus</span>
+                            </span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Topics Grid -->
+                <section class="topics-section" aria-labelledby="topics-heading">
+                    <h2 id="topics-heading" class="section-heading">
+                        <span class="heading-icon">📚</span>
+                        <span>Course Modules</span>
+                    </h2>
+                    
+                    <div class="topics-grid">
+                        
+                        <!-- Topic 01 -->
+                        <a href="topics/topic-01-introduction.html" class="topic-card">
+                            <div class="card-number">01</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Introduction to Pharmacology</h3>
+                                <p class="card-description">Branches of pharmacology, pharmacokinetics, drug sources, and FDA categories.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 1-8</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 02 -->
+                        <a href="topics/topic-02-dosage-administration.html" class="topic-card">
+                            <div class="card-number">02</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Dosage & Administration</h3>
+                                <p class="card-description">Factors influencing dosage, routes of administration, and absorption mechanics.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 9-14</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 03 -->
+                        <a href="topics/topic-03-drug-action-orders.html" class="topic-card">
+                            <div class="card-number">03</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Drug Action & Orders</h3>
+                                <p class="card-description">Receptor theory, side effects, toxicity, and interpreting prescriptions/orders.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 14-23</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 04 -->
+                        <a href="topics/topic-04-anti-infectives-penicillins.html" class="topic-card">
+                            <div class="card-number">04</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Anti-infectives: Penicillins</h3>
+                                <p class="card-description">Overview of antibiotics, penicillin classifications, cephalosporins, and aminoglycosides.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 23-40</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 05 -->
+                        <a href="topics/topic-05-other-antibiotics.html" class="topic-card">
+                            <div class="card-number">05</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Other Antibiotics</h3>
+                                <p class="card-description">Tetracyclines, Sulfonamides, Chloramphenicol, and urinary germicides.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 41-46</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 06 -->
+                        <a href="topics/topic-06-antifungals-antivirals.html" class="topic-card">
+                            <div class="card-number">06</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antifungals, Antivirals & Parasitics</h3>
+                                <p class="card-description">Treatment for fungal, viral, and parasitic infections including anthelmintics.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 46-52</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 07 -->
+                        <a href="topics/topic-07-antineoplastics.html" class="topic-card">
+                            <div class="card-number">07</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antineoplastic Agents</h3>
+                                <p class="card-description">Chemotherapy drugs, alkylating agents, and cancer treatment protocols.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 52-56</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 08 -->
+                        <a href="topics/topic-08-blood-drugs.html" class="topic-card">
+                            <div class="card-number">08</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Blood Formation & Coagulation</h3>
+                                <p class="card-description">Antianemics, anticoagulants (Heparin/Warfarin), and thrombolytic agents.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 56-64</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 09 -->
+                        <a href="topics/topic-09-cardiovascular.html" class="topic-card">
+                            <div class="card-number">09</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Cardiovascular Drugs</h3>
+                                <p class="card-description">Cardiac glycosides (Digoxin), coronary vasodilators, and calcium channel blockers.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 64-69</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 10 -->
+                        <a href="topics/topic-10-antihypertensives.html" class="topic-card">
+                            <div class="card-number">10</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Antihypertensives</h3>
+                                <p class="card-description">ACE inhibitors, Beta-blockers, and management of hypertension.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 69-74</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 11 -->
+                        <a href="topics/topic-11-cns-depressants.html" class="topic-card">
+                            <div class="card-number">11</div>
+                            <div class="card-content">
+                                <h3 class="card-title">CNS Depressants & Anticonvulsants</h3>
+                                <p class="card-description">Sedatives, barbiturates, benzodiazepines, and epilepsy management.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 74-82</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 12 -->
+                        <a href="topics/topic-12-psychotropics.html" class="topic-card">
+                            <div class="card-number">12</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Psychotropics & Narcotics</h3>
+                                <p class="card-description">Antipsychotics, antidepressants, and narcotic analgesics (Opioids).</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 82-89</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 13 -->
+                        <a href="topics/topic-13-nsaids.html" class="topic-card">
+                            <div class="card-number">13</div>
+                            <div class="card-content">
+                                <h3 class="card-title">NSAIDs & Analgesics</h3>
+                                <p class="card-description">Aspirin, Acetaminophen, and non-steroidal anti-inflammatory drugs.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 89-93</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 14 -->
+                        <a href="topics/topic-14-autonomic-nervous-system.html" class="topic-card">
+                            <div class="card-number">14</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Autonomic Nervous System</h3>
+                                <p class="card-description">Sympathomimetics, Adrenergic blockers, and Cholinergic blockers.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 93-98</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 15 -->
+                        <a href="topics/topic-15-respiratory-git.html" class="topic-card">
+                            <div class="card-number">15</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Respiratory & GIT Drugs</h3>
+                                <p class="card-description">Antihistamines, bronchodilators, antacids, and antiemetics.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 99-106</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                        <!-- Topic 16 -->
+                        <a href="topics/topic-16-endocrine.html" class="topic-card">
+                            <div class="card-number">16</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Endocrine System</h3>
+                                <p class="card-description">Insulin, oral hypoglycemics, thyroid hormones, corticosteroids, and oxytocics.</p>
+                            </div>
+                            <div class="card-footer">
+                                <span class="meta-item">Pages 106-126</span>
+                                <div class="card-arrow">→</div>
+                            </div>
+                        </a>
+
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/theme.js"></script>
+    <script src="js/interactions.js"></script>
+</body>
+</html>

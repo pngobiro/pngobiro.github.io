@@ -1,0 +1,303 @@
+      
+<!-- module/module6.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6: Data Transmission Modes, Error Detection, and Control - Data Communication and Networking</title>
+    <meta name="description" content="Examine parallel and serial transmission, asynchronous and synchronous methods, and error detection and control mechanisms like CRC and parity checks.">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <article class="learning-module" data-module="6">
+        <nav class="module-nav">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="module5.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module 6 of 9</span>
+                </div>
+                <a href="module7.html" class="nav-button">
+                    Next <span>→</span>
+                </a>
+            </div>
+        </nav>
+
+        <header class="module-header">
+            <h1>Module 6: Data Transmission Modes, Error Detection, and Control</h1>
+            <section class="module-objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Distinguish between parallel and serial transmission.</li>
+                    <li>Explain asynchronous, synchronous, and isochronous serial transmission.</li>
+                    <li>Understand the concept of Cyclic Redundancy Check (CRC) for error detection.</li>
+                    <li>Describe the Parity Check Code for error detection.</li>
+                    <li>Explain High-level Data Link Control (HDLC) and its configurations.</li>
+                    <li>Understand HDLC frame types and formats.</li>
+                </ul>
+            </section>
+        </header>
+
+        <main class="module-content">
+            <section class="content-section">
+                <h2>📚 DATA TRANSMISSION AND MODES</h2>
+                <div class="content-block">
+                    <p>The transmission of binary data across a link can be accomplished in either parallel or serial mode. In parallel mode, multiple bits are sent with each clock tick. In serial mode, 1 bit is sent with each clock tick. While there is only one way to send parallel data, there are three subclasses of serial transmission: asynchronous, synchronous, and isochronous.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/data_transmission_modes_overview.png"
+                             alt="Diagram illustrating Data transmission and modes overview."
+                             width="600" height="300">
+                        <figcaption>Figure 4.31 Data transmission and modes</figcaption>
+                    </figure>
+
+                    <h3>1. Parallel Transmission</h3>
+                    <p>Binary data, consisting of 1s and 0s, may be organized into groups of n bits each. Computers produce and consume data in groups of bits much as we conceive of and use spoken language in the form of words rather than letters. By grouping, we can send data n bits at a time instead of 1. This is called parallel transmission. The mechanism for parallel transmission is a conceptually simple one: Use n wires to send n bits at one time. That way each bit has its own wire, and all n bits of one group can be transmitted with each clock tick from one device to another. Figure 4.32 shows how parallel transmission works for n =8. Typically, the eight wires are bundled in a cable with a connector at each end. The advantage of parallel transmission is speed. All else being equal, parallel transmission can increase the transfer speed by a factor of n over serial transmission.</p>
+                    <p>But there is a significant disadvantage: cost. Parallel transmission requires n communication lines just to transmit the data stream. Because this is expensive, parallel transmission is usually limited to short distances.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/parallel_transmission.png"
+                             alt="Diagram illustrating Parallel transmission."
+                             width="600" height="300">
+                        <figcaption>Figure 4.32 Parallel transmission</figcaption>
+                    </figure>
+
+                    <h3>2. Serial Transmission</h3>
+                    <p>In serial transmission one bit follows another, so we need only one communication channel rather than n to transmit data between two communicating devices (see Figure 4.33).</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/serial_transmission.png"
+                             alt="Diagram illustrating Serial transmission."
+                             width="600" height="300">
+                        <figcaption>Figure 4.33 Serial transmission</figcaption>
+                    </figure>
+                    <p>The advantage of serial over parallel transmission is that with only one communication channel, serial transmission reduces the cost of transmission over parallel by roughly a factor of n. Since communication within devices is parallel, conversion devices are required at the interface between the sender and the line (parallel-to-serial) and between the line and the receiver (serial-to-parallel).</p>
+                    <p>Serial transmission occurs in one of three ways: asynchronous, synchronous, and isochronous.</p>
+                    <h4>a. Asynchronous Transmission</h4>
+                    <p>Asynchronous transmission is so named because the timing of a signal is unimportant. Instead, information is received and translated by agreed upon patterns. As long as those patterns are followed, the receiving device can retrieve the information without regard to the rhythm in which it is sent. Patterns are based on grouping the bit stream into bytes. Each group, usually 8 bits, is sent along the link as a unit. The sending system handles each group independently, relaying it to the link whenever ready, without regard to a timer. Without synchronization, the receiver cannot use timing to predict when the next group will arrive. To alert the receiver to the arrival of a new group, therefore, an extra bit is added to the beginning of each byte. This bit, usually a 0, is called the start bit. To let the receiver know that the byte is finished, 1 or more additional bits are appended to the end of the byte. These bits, usually I s, are called stop bits. By this method, each byte is increased in size to at least 10 bits, of which 8 bits is information and 2 bits or more are signals to the receiver. In addition, the transmission of each byte may then be followed by a gap of varying duration. This gap can be represented either by an idle channel or by a stream of additional stop bits. The start and stop bits and the gap alert the receiver to the beginning and end of each byte and allow it to synchronize with the data stream. This mechanism is called <i>asynchronous</i> because, at the byte level, the sender and receiver do not have to be synchronized. But within each byte, the receiver must still be synchronized with the incoming bit stream. That is, some synchronization is required, but only for the duration of a single byte. The receiving device resynchronizes at the onset of each new byte. When the receiver detects a start bit, it sets a timer and begins counting bits as they come in. After n bits, the receiver looks for a stop bit. As soon as it detects the stop bit, it waits until it detects the next start bit. Figure 4.34 is a schematic illustration of asynchronous transmission. In this example, the start bits are as, the stop bits are 1s, and the gap is represented by an idle line rather than by additional stop bits.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/asynchronous_transmission.png"
+                             alt="Diagram illustrating Asynchronous transmission."
+                             width="600" height="300">
+                        <figcaption>Figure 4.34 Asynchronous transmission</figcaption>
+                    </figure>
+                    <p>The addition of stop and start bits and the insertion of gaps into the bit stream make asynchronous transmission slower than forms of transmission that can operate without the addition of control information. But it is cheap and effective, two advantages that make it an attractive choice for situations such as low-speed communication. For example, the connection of a keyboard to a computer is a natural application for asynchronous transmission. A user types slowly in data processing terms, and leaves unpredictable gaps of time between each character.</p>
+
+                    <h4>b. Synchronous Transmission</h4>
+                    <p>In synchronous transmission, the bit stream is combined into longer "frames," which may contain multiple bytes. Each byte, however, is introduced onto the transmission link without a gap between it and the next one. It is left to the receiver to separate the bit stream into bytes for decoding purposes. In other words, data are transmitted as an unbroken string of 1s and 0s, and the receiver separates that string into the bytes, or characters, it needs to reconstruct the information. Figure 4.35 gives a schematic illustration of synchronous transmission. We have drawn in the divisions between bytes. In reality, those divisions do not exist; the sender puts its data onto the line as one long string. If the sender wishes to send data in separate bursts, the gaps between bursts must be filled with a special sequence of 0s and 1s that means idle. The receiver counts the bits as they arrive and groups them in 8-bit units. Without gaps and start and stop bits, there is no built-in mechanism to help the receiving device adjust its bit synchronization midstream. Timing becomes very important, therefore, because the accuracy of the received information is completely dependent on the ability of the receiving device to keep an accurate count of the bits as they come in. The advantage of synchronous transmission is speed. With no extra bits or gaps to introduce at the sending end and remove at the receiving end, and, by extension, with fewer bits to move across the link, synchronous transmission is faster than asynchronous transmission. For this reason, it is more useful for high-speed applications such as the transmission of data from one computer to another. Byte synchronization is accomplished in the data link layer.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/synchronous_transmission.png"
+                             alt="Diagram illustrating Synchronous transmission."
+                             width="600" height="300">
+                        <figcaption>Figure 4.35 Synchronous transmission</figcaption>
+                    </figure>
+
+                    <h4>c. Isochronous</h4>
+                    <p>In real-time audio and video, in which uneven delays between frames are not acceptable, synchronous transmission fails. For example, TV images are broadcast at the rate of 30 images per second; they must be viewed at the same rate. If each image is sent by using one or more frames, there should be no delays between frames. For this type of application, synchronization between characters is not enough; the entire stream of bits must be synchronized. The isochronous transmission guarantees that the data arrive at a fixed rate.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 CYCLIC REDUNDANCY CHECK (CRC)</h2>
+                <div class="content-block">
+                    <p>Cyclic codes are special linear block codes with one extra property. In a cyclic code, if a codeword is cyclically shifted (rotated), the result is another codeword. For example, if 1011000 is a codeword and we cyclically left-shift, then 0110001 is also a codeword. In this case, if we call the bits in the first word a<sub>0</sub> to a<sub>6</sub>' and the bits in the second word b<sub>0</sub> to b<sub>6</sub>.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/crc_encoder_decoder.png"
+                             alt="Diagram illustrating CRC encoder and decoder process."
+                             width="600" height="300">
+                        <figcaption>Figure 10.14 CRC encoder and decoder</figcaption>
+                    </figure>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/crc_division_encoder.png"
+                             alt="Diagram illustrating Division in CRC encoder."
+                             width="600" height="300">
+                        <figcaption>Figure 10.15 Division in CRC encoder</figcaption>
+                    </figure>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/crc_division_decoder.png"
+                             alt="Diagram illustrating Division in CRC decoder for two cases."
+                             width="600" height="300">
+                        <figcaption>Figure 10.7 Division in the CRC decoder for two cases</figcaption>
+                    </figure>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/polynomial_binary_word.png"
+                             alt="Diagram illustrating Polynomial to represent a binary word."
+                             width="600" height="300">
+                        <figcaption>Figure 10.21 A polynomial to represent a binary word</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 PARITY CHECK CODE</h2>
+                <div class="content-block">
+                    <p>The most familiar error-detecting code is the simple parity-check code. In this code, a k-bit dataword is changed to an n-bit codeword where n = k + 1. The extra bit, called the parity bit, is selected to make the total number of 1s in the codeword even. Although some implementations specify an odd number of 1's. The minimum Hamming distance for this category is d<sub>min</sub> =2, which means that the code is a single-bit error-detecting code; it cannot correct any error.</p>
+                    <p>Our first code (Table 10.1) is a parity-check code with k -= 4 and n =5.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/parity_check_code_table.png"
+                             alt="Table showing Simple parity-check code C(5, 4)."
+                             width="600" height="300">
+                        <figcaption>Table 10.3 Simple parity-check code C(5, 4)</figcaption>
+                    </figure>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/parity_check_encoder_decoder.png"
+                             alt="Diagram illustrating Encoder and decoder for simple parity-check code."
+                             width="600" height="300">
+                        <figcaption>Figure 10.10 Encoder and decoder for simple parity-check code</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 HDLC</h2>
+                <div class="content-block">
+                    <p>High-level Data Link Control (HDLC) is a bit-oriented protocol for communication over point-to-point and multipoint links.</p>
+                    <h3>Configurations and Transfer Modes</h3>
+                    <p>HDLC provides two common transfer modes that can be used in different configurations: normal response mode (NRM) and asynchronous balanced mode (ABM).</p>
+                    <h4>Normal Response Mode</h4>
+                    <p>In normal response mode (NRM), the station configuration is unbalanced. We have one primary station and multiple secondary stations. A primary station can send commands; a secondary station can only respond. The NRM is used for both point-to-point and multiple-point links, as shown in Figure 11.25.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/hdlc_normal_response_mode.png"
+                             alt="Diagram illustrating HDLC Normal response mode."
+                             width="600" height="300">
+                        <figcaption>Figure 11.25 Normal response mode</figcaption>
+                    </figure>
+                    <h4>Asynchronous Balanced Mode</h4>
+                    <p>In asynchronous balanced mode (ABM), the configuration is balanced. The link is point-to-point, and each station can function as a primary and a secondary (acting as peers), as shown in Figure 11.26. This is the common mode today.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/hdlc_async_balanced_mode.png"
+                             alt="Diagram illustrating HDLC Asynchronous balanced mode."
+                             width="600" height="300">
+                        <figcaption>Figure 11.26 Asynchronous balanced mode</figcaption>
+                    </figure>
+
+                    <h3>Frames</h3>
+                    <p>To provide the flexibility necessary to support all the options possible in the modes and configurations just described, HDLC defines three types of frames: information frames (I-frames), supervisory frames (S-frames), and unnumbered frames (V-frames). Each type of frame serves as an envelope for the transmission of a different type of message. I-frames are used to transport user data and control information relating to user data (piggybacking). S-frames are used only to transport control information. V-frames are reserved for system management. Information carried by V-frames is intended for managing the link itself.</p>
+                    <h4>Frame Format</h4>
+                    <p>Each frame in HDLC may contain up to six fields, as shown in Figure 11.27: a beginning flag field, an address field, a control field, an information field, a frame check sequence (FCS) field, and an ending flag field. In multiple-frame transmissions, the ending flag of one frame can serve as the beginning flag of the next frame.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/hdlc_frames.png"
+                             alt="Diagram illustrating HDLC frame format."
+                             width="600" height="300">
+                        <figcaption>Figure 11.27 HDLC frames</figcaption>
+                    </figure>
+                    <h4>Fields</h4>
+                    <p>Let us now discuss the fields and their use in different frame types.</p>
+                    <ul>
+                        <li><strong>Flag field.</strong> The flag field of an HDLC frame is an 8-bit sequence with the bit pattern 01111110 that identifies both the beginning and the end of a frame and serves as a synchronization pattern for the receiver.</li>
+                        <li><strong>Address field.</strong> The second field of an HDLC frame contains the address of the secondary station. If a primary station created the frame, it contains a <i>to</i> address. If a secondary creates the frame, it contains a <i>from</i> address. An address field can be 1 byte or several bytes long, depending on the needs of the network. One byte can identify up to 128 stations (1 bit is used for another purpose). Larger networks require multiple-byte address fields. If the address field is only 1 byte, the last bit is always a 1. If the address is more than 1 byte, all bytes but the last one will end with 0; only the last will end with 1. Ending each intermediate byte with 0 indicates to the receiver that there are more address bytes to come.</li>
+                        <li><strong>Control field.</strong> The control field is a 1- or 2-byte segment of the frame used for flow and error control. The interpretation of bits in this field depends on the frame type.</li>
+                        <li><strong>Information field.</strong> The information field contains the user's data from the network layer or management information. Its length can vary from one network to another.</li>
+                        <li><strong>FCS field.</strong> The frame check sequence (FCS) is the HDLC error detection field.</li>
+                    </ul>
+                    <h4>Control Field</h4>
+                    <p>The control field determines the type of frame and defines its functionality. The format is specific for the type of frame, as shown in Figure 11.28.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/hdlc_control_field_format.png"
+                             alt="Diagram illustrating HDLC Control field format for different frame types."
+                             width="600" height="300">
+                        <figcaption>Figure 11.28 Control field format for the different frame types</figcaption>
+                    </figure>
+                    <h5>Control Field for I-Frames</h5>
+                    <p>I-frames are designed to carry user data from the network layer. In addition, they can include flow and error control information (piggybacking). The subfields in the control field are used to the control field is 0, this means the frame is an I-frame. The next 3 bits, called N(S), define the sequence number of the frame. Note that with 3 bits, we can define a sequence number between 0 and 7; but in the extension format, in which the control field is 2 bytes, this field is larger. The last 3 bits, called N(R), correspond to the acknowledgment number when piggybacking is used. The single bit between N(S) and N(R) is called the P/F bit. The P/F field is a single bit with a dual purpose. It has meaning only when it is set (bit = 1) and can mean poll or final. It means <i>poll</i> when the frame is sent by a primary station to a secondary (when the address field contains the address of the receiver). It means <i>final</i> when the frame is sent by a secondary to a primary.</p>
+                    <h5>Control Field for S-Frames</h5>
+                    <p>Supervisory frames are used for flow and error control whenever piggybacking is either impossible or inappropriate. S-frames do not have information fields. If the first 2 bits of the control field is 10, this means the frame is an S-frame. The last 3 bits, called N(R), corresponds to the acknowledgment number (ACK) or negative acknowledgment number (NAK) depending on the type of S-frame. The 2 bits called code is used to define the type of S-frame itself. With 2 bits, we can have four types of S-frames, as described below:</p>
+                    <ul>
+                        <li><strong>Receive ready (RR).</strong> If the value of the code subfield is 00, it is an RR S-frame. This kind of frame acknowledges the receipt of a safe and sound frame or group of frames. In this case, the value N(R) field defines the acknowledgment number.</li>
+                        <li><strong>Receive not ready (RNR).</strong> If the value of the code subfield is 10, it is an RNR S-frame. This kind of frame is an RR frame with additional functions. It acknowledges the receipt of a frame or group of frames, and it announces that the receiver is busy and cannot receive more frames. It acts as a kind of congestion control mechanism by asking the sender to slow down. The value of NCR is the acknowledgment number.</li>
+                        <li><strong>Reject (REJ).</strong> If the value of the code subfield is 01, it is a REJ S-frame. This is a NAK frame, but not like the one used for Selective Repeat ARQ. It is a NAK that can be used in Go-Back-N ARQ to improve the efficiency of the process by informing the sender, before the sender time expires, that the last frame is lost or damaged. The value of NCR) is the negative acknowledgment number.</li>
+                        <li><strong>Selective reject (SREJ).</strong> If the value of the code subfield is 11, it is an SREJ S-frame. This is a NAK frame used in Selective Repeat ARQ. Note that the HDLC Protocol uses the term <i>selective reject</i> instead of <i>selective repeat</i>. The value of N(R) is the negative acknowledgment number.</li>
+                    </ul>
+                    <h5>Control Field for V-Frames</h5>
+                    <p>Unnumbered frames are used to exchange session management and control information between connected devices. Unlike S-frames, U-frames contain an information field, but one used for system management information, not user data. As with S-frames, however, much of the information carried by U-frames is contained in codes included in the control field. U-frame codes are divided into two sections: a 2-bit prefix before the P/F bit and a 3-bit suffix after the P/F bit. Together, these two segments (5 bits) can be used to create up to 32 different types of U-frames.</p>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="module-footer">
+            <section class="key-takeaways">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Parallel transmission sends multiple bits simultaneously, faster but costlier; serial sends bits sequentially, slower but cheaper.</li>
+                    <li>Serial transmission types: asynchronous (start/stop bits, gaps), synchronous (frames, timing), isochronous (fixed rate, real-time).</li>
+                    <li>CRC is a powerful error detection method using cyclic codes and polynomial division.</li>
+                    <li>Parity check code is a simple error detection code, detecting single-bit errors.</li>
+                    <li>HDLC is a bit-oriented data link protocol with NRM and ABM configurations.</li>
+                    <li>HDLC frames include I-frames (data), S-frames (supervisory), and U-frames (unnumbered), each with specific formats and control fields.</li>
+                </ul>
+            </section>
+
+            <section class="knowledge-check">
+                <h2>⚡ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <p><strong>Question 1:</strong> What is the main advantage of parallel transmission over serial transmission?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Speed. Parallel transmission can achieve higher data transfer rates.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 2:</strong> Explain the key difference between asynchronous and synchronous serial transmission.</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Asynchronous transmission uses start and stop bits and gaps for synchronization, while synchronous transmission relies on precise timing and frames without gaps.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 3:</strong> What is the purpose of CRC in data communication?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Cyclic Redundancy Check (CRC) is used for error detection, ensuring data integrity during transmission.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 4:</strong> What is the limitation of the simple parity check code in error detection?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>It can only detect single-bit errors and cannot correct errors.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 5:</strong> Name the three types of frames defined in HDLC.</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <ol>
+                                <li>Information frames (I-frames)</li>
+                                <li>Supervisory frames (S-frames)</li>
+                                <li>Unnumbered frames (U-frames)</li>
+                            </ol>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="module5.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module 6 of 9</span>
+                    </div>
+                    <a href="module7.html" class="nav-button">
+                        Next <span>→</span>
+                    </a>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</body>
+</html>
+
+    

@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 4: Discrete Counting - Part 1</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-3-part-5.html" class="nav-button"> <!-- Link to previous chapter's last part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 4 Part 1 of 3</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-4-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 4: DISCRETE COUNTING</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-4-basic-rules -->
+                <section id="chapter-4-basic-rules" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧮</span>
+                        <span class="heading-text">The Basic Rules/Principles of Counting</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The Inclusion-Exclusion and the Pigeonhole Principles are the most fundamental combinatorial techniques. There are two additional rules which are basic to most elementary counting. One is known as the Sum Rule (or Disjunctive Rule), the other is called Product Rule (or Sequential Rule.)</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-basic-rules -->
+
+                <!-- START: chapter-4-sum-product-rules -->
+                <section id="chapter-4-sum-product-rules" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕✖️</span>
+                        <span class="heading-text">The Rules of Sum and Product</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The Rule of Sum and Rule of Product are used to decompose difficult counting problems into simple problems.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The Rule of Sum - If a sequence of tasks <span class="math-inline">$T_{1}, T_{2}, \ldots, T_{m}$</span> can be done in <span class="math-inline">$w 1, w 2, \ldots w m$</span> ways respectively (the condition is that no tasks can be performed simultaneously), then the number of ways to do one of these tasks is <span class="math-inline">$w 1+w 2+\cdots+w m$</span>. If we consider two tasks A and B which are disjoint (i.e. <span class="math-inline">$A \cap B=\varnothing$</span> ), then mathematically <span class="math-inline">$|A \cup B|=|A|+|B|$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The Rule of Product - If a sequence of tasks <span class="math-inline">$T_{1}, T_{2}, \ldots, T_{m}$</span> can be done in <span class="math-inline">$w 1, w 2, \ldots w m$</span> ways respectively and every task arrives after the occurrence of the previous task, then there are <span class="math-inline">$w 1 \times w 2 \times \cdots \times w m$</span> ways to perform the tasks. Mathematically, if a task B arrives after a task A , then <span class="math-inline">$|A \times B|=|A| \times|B|$</span></span></li>
+                        </ul>
+                        <h3 class="subsection-heading">Example</h3>
+                        <p>Question - A boy lives at X and wants to go to School at Z. From his home X he has to first reach Y and then Y to Z . He may go X to Y by either 3 bus routes or 2 train routes. From there, he can either choose 4 bus routes or 5 train routes to reach Z . How many ways are there to go from X to Z ?</p>
+                        <p>Solution - From <span class="math-inline">$X$</span> to <span class="math-inline">$Y$</span>, he can go in <span class="math-inline">$3+2=5$</span> ways (Rule of Sum). Thereafter, he can go <span class="math-inline">$Y$</span> to <span class="math-inline">$Z$</span> in <span class="math-inline">$4+5=9$</span> ways (Rule of Sum). Hence from <span class="math-inline">$X$</span> to <span class="math-inline">$Z$</span> he can go in <span class="math-inline">$5 \times 9=45$</span> ways (Rule of Product).</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-sum-product-rules -->
+
+                <!-- START: chapter-4-pigeonhole -->
+                <section id="chapter-4-pigeonhole" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🐦</span>
+                        <span class="heading-text">Pigeonhole Principle</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>In 1834, German mathematician, Peter Gustav Lejeune Dirichlet, stated a principle which he called the drawer principle. Now, it is known as the pigeonhole principle.</p>
+                        <p>Pigeonhole Principle states that if there are fewer pigeon holes than total number of pigeons and each pigeon is put in a pigeon hole, then there must be at least one pigeon hole with more than one pigeon. If <span class="math-inline">$n$</span> pigeons are put into <span class="math-inline">$m$</span> pigeonholes where <span class="math-inline">$n>m$</span>, there's a hole with more than one pigeon.</p>
+                        <p>Downloaded by Patrick Ngobiro (pngobiro@gmail.com)</p>
+                        <h3 class="subsection-heading">Examples</h3>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Ten men are in a room and they are taking part in handshakes. If each person shakes hands at least once and no man shakes the same man's hand more than once then two men took part in the same number of handshakes.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">There must be at least two people in a class of 30 whose names start with the same alphabet.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-4-pigeonhole -->
+
+                <!-- START: chapter-4-inclusion-exclusion -->
+                <section id="chapter-4-inclusion-exclusion" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕➖</span>
+                        <span class="heading-text">The Inclusion-Exclusion principle</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The Inclusion-exclusion principle computes the cardinal number of the union of multiple nondisjoint sets. For two sets A and B, the principle states -</p>
+                        <div class="equation">$$|A \cup B|=|A|+|B|-|A \cap B|$$</div>
+                        <p>For three sets A, B and C, the principle states -</p>
+                        <div class="equation">$$|A \cup B \cup C|=|A|+|B|+|C|-|A \cap B|-|A \cap C|-|B \cap C|+|A \cap B \cap C|$$</div>
+                        <p>The generalized formula -</p>
+                        <!-- MMD formula seems incorrect/hard to parse, representing general idea -->
+                        <p><span class="math-inline">$\left|\bigcup_{i=1}^n A_i\right| = \sum_{i} |A_i| - \sum_{i<j} |A_i \cap A_j| + \sum_{i<j<k} |A_i \cap A_j \cap A_k| - \cdots + (-1)^{n-1} |A_1 \cap \cdots \cap A_n|$</span></p>
+                        <h3 class="subsection-heading">Problem 1</h3>
+                        <p>How many integers from 1 to 50 are multiples of 2 or 3 but not both?</p>
+                        <p>Solution</p>
+                        <p>From 1 to 50, there are <span class="math-inline">$50/2=25$</span> numbers which are multiples of 2 . (Set A)</p>
+                        <p>There are <span class="math-inline">$\lfloor 50 / 3 \rfloor = 16$</span> numbers which are multiples of 3 . (Set B)</p> <!-- Floor function for integer division -->
+                        <p>There are <span class="math-inline">$\lfloor 50 / 6 \rfloor = 8$</span> numbers which are multiples of both 2 and 3 (multiples of 6). (Set <span class="math-inline">$A \cap B$</span>)</p>
+                        <p>So, <span class="math-inline">$|A|=25, |B|=16$</span> and <span class="math-inline">$|A \cap B|=8$</span>.</p>
+                        <p>Numbers multiples of 2 OR 3: <span class="math-inline">$|A \cup B|=|A|+|B|-|A \cap B|=25+16-8=33$</span></p>
+                        <p>Numbers multiples of 2 OR 3 BUT NOT BOTH: <span class="math-inline">$|A \cup B| - |A \cap B| = 33 - 8 = 25$</span></p> <!-- Added calculation for "but not both" -->
+
+                        <h3 class="subsection-heading">Problem 2</h3>
+                        <p>In a group of 50 students 24 like cold drinks and 36 like hot drinks and each student likes at least one of the two drinks. How many like both coffee and tea?</p> <!-- Assuming drinks are coffee/tea -->
+                        <p>Solution</p>
+                        <p>Let X be the set of students who like cold drinks and Y be the set of people who like hot drinks.</p>
+                        <p>So, <span class="math-inline">$|X \cup Y|=50, |X|=24, |Y|=36$</span></p>
+                        <p>Using the Inclusion-Exclusion Principle: <span class="math-inline">$|X \cup Y| = |X| + |Y| - |X \cap Y|$</span></p>
+                        <p><span class="math-inline">$50 = 24 + 36 - |X \cap Y|$</span></p>
+                        <p><span class="math-inline">$50 = 60 - |X \cap Y|$</span></p>
+                        <p><span class="math-inline">$|X \cap Y| = 60 - 50 = 10$</span></p>
+                        <p>Therefore, 10 students like both drinks.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-inclusion-exclusion -->
+
+                <!-- START: chapter-4-counting-techniques -->
+                <section id="chapter-4-counting-techniques" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🛠️</span>
+                        <span class="heading-text">Counting Techniques</span>
+                    </h2>
+                    <div class="content-card">
+                        <!-- This section seems to just be a heading for Permutations/Combinations -->
+                    </div>
+                </section>
+                <!-- END: chapter-4-counting-techniques -->
+
+                <!-- START: chapter-4-permutations -->
+                <section id="chapter-4-permutations" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">Permutations</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A permutation is an arrangement of some elements in which order matters. In other words a Permutation is an ordered Combination of elements.</p>
+                        <h3 class="subsection-heading">Examples</h3>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">From a set <span class="math-inline">$\mathrm{S}=\{\mathrm{x}, \mathrm{y}, \mathrm{z}\}$</span> by taking two at a time, all permutations are - xy, yx, xz, zx, yz, zy</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">We have to form a permutation of three digit numbers from a set of numbers <span class="math-inline">$S=\{1,2,3\}$</span>. Different three digit numbers will be formed when we arrange the digits. The permutation will be = 123, 132, 213, 231, 312, 321</span></li>
+                        </ul>
+                        <h3 class="subsection-heading">Number of Permutations</h3>
+                        <p>The number of permutations of ' <span class="math-inline">$n$</span> ' different things taken ' <span class="math-inline">$r$</span> ' at a time is denoted by <span class="math-inline">$n P r$</span></p>
+                        <div class="equation">$$n P_{r}=\frac{n!}{(n-r)!}$$</div>
+                        <p>where <span class="math-inline">$n!=1 \cdot 2 \cdot 3 \ldots (n-1) \cdot n$</span></p>
+                        <p>Proof - Let there be ' <span class="math-inline">$n$</span> ' different elements.</p>
+                        <p>There are <span class="math-inline">$n$</span> numbers of ways to fill up the first place. After filling the first place ( <span class="math-inline">$n-1$</span> ) number of elements is left. Hence, there are ( <span class="math-inline">$n-1$</span> ) ways to fill up the second place. After filling the first and second place, (<span class="math-inline">$n-2$</span>) number of elements is left. Hence, there are ( <span class="math-inline">$n-2$</span> ) ways to fill up the third place. We can now generalize the number of ways to fill up r-th place as <span class="math-inline">$[n-(r-1)]=n-r+1$</span></p>
+                        <p>So, the total no. of ways to fill up from first place up to r-th-place -</p>
+                        <div class="equation">$$\begin{aligned} n P_{r} & =n(n-1)(n-2) \ldots . .(n-r+1) \\ & =\frac{[n(n-1)(n-2) \ldots(n-r+1)][(n-r)(n-r-1) \ldots 3 \cdot 2 \cdot 1]}{[(n-r)(n-r-1) \ldots 3 \cdot 2 \cdot 1]} \end{aligned}$$</div>
+                        <p>Hence,</p>
+                        <div class="equation">$$n P_{r}=\frac{n!}{(n-r)!}$$</div>
+                        <h3 class="subsection-heading">Some important formulas of permutation</h3>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">If there are <span class="math-inline">$n$</span> elements of which <span class="math-inline">$a_{1}$</span> are alike of some kind, <span class="math-inline">$a_{2}$</span> are alike of another kind; <span class="math-inline">$a 3$</span> are alike of third kind and so on and <span class="math-inline">$a r$</span> are of <span class="math-inline">$r^{th}$</span> kind, where <span class="math-inline">$(a 1+a 2+\ldots a r)=n$</span>.</span></li>
+                        </ul>
+                        <p>Then, number of permutations of these n objects is = <span class="math-inline">$n!/\left[\left(a_{1}!\right)\left(a_{2}!\right) \ldots\left(a_{r}!\right)\right]$</span>.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Number of permutations of n distinct elements taking n elements at a time = <span class="math-inline">$n P_{n}=n !$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The number of permutations of <span class="math-inline">$n$</span> dissimilar elements taking <span class="math-inline">$r$</span> elements at a time, when <span class="math-inline">$x$</span> particular things always occupy definite places = <span class="math-inline">$n-x_{p_{r-x}}$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The number of permutations of <span class="math-inline">$n$</span> dissimilar elements when r specified things always come together is - <span class="math-inline">$r!(n-r+1) !$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The number of permutations of <span class="math-inline">$n$</span> dissimilar elements when r specified things never come together is - <span class="math-inline">$n!-[r!(n-r+1)!]$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The number of circular permutations of n different elements taken x elements at time = <span class="math-inline">${ }_{n} p_{x} / x$</span></span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The number of circular permutations of n different things = <span class="math-inline">$n p n / n = (n-1)!$</span></span></li> <!-- Added simplification -->
+                        </ul>
+                        <h3 class="subsection-heading">Some Problems</h3>
+                        <p>Problem 1 - From a bunch of 6 different cards, how many ways we can permute it?</p>
+                        <p>Solution - As we are taking 6 cards at a time from a deck of 6 cards, the permutation will be <span class="math-inline">${ }_{6} P_{6}=6!=720$</span></p>
+                        <p>Problem 2 - In how many ways can the letters of the word 'READER' be arranged?</p>
+                        <p>Solution - There are 6 letters word (2 E, 1 A, 1 D and 2R.) in the word 'READER'.</p>
+                        <p>The permutation will be = <span class="math-inline">$6!/[(2!)(1!)(1!)(2!)]=720 / (2 \times 1 \times 1 \times 2) = 720 / 4 = 180$</span>.</p> <!-- Added calculation -->
+                        <p>Problem 3 - In how ways can the letters of the word 'ORANGE' be arranged so that the consonants occupy only the even positions?</p>
+                        <p>Solution - There are 3 vowels (O,A,E) and 3 consonants (R,N,G) in the word 'ORANGE'. The 6 positions are 1 2 3 4 5 6. The even positions are 2, 4, 6 (3 positions). Number of ways of arranging the 3 consonants in the 3 even positions = <span class="math-inline">$3 P_{3}=3!=6$</span>. The remaining 3 odd positions (1, 3, 5) will be filled up by 3 vowels in <span class="math-inline">$3 P 3=3!=6$</span> ways. Hence, the total number of permutation is <span class="math-inline">$6 \times 6=36$</span></p>
+                    </div>
+                </section>
+                <!-- END: chapter-4-permutations -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-3-part-5.html" class="nav-button"> <!-- Link to previous chapter's last part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 4 Part 1 of 3</span> <!-- Updated progress -->
+                    </div>
+                    <a href="chapter-4-part-2.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

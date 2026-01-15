@@ -1,0 +1,519 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Types of Projections - Engineering Drawing</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+    
+    <!-- Tab Styles -->
+    <style>
+        .tabs-container {
+            margin: var(--space-6) 0;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-xl);
+            padding: var(--space-2);
+        }
+        .tabs-header {
+            display: flex;
+            gap: var(--space-2);
+            overflow-x: auto;
+            padding-bottom: var(--space-2);
+            border-bottom: 1px solid var(--color-border);
+        }
+        .tab-btn {
+            padding: var(--space-3) var(--space-6);
+            border: none;
+            background: transparent;
+            color: var(--color-text-secondary);
+            font-weight: var(--font-weight-medium);
+            border-radius: var(--radius-lg);
+            cursor: pointer;
+            transition: all var(--transition-fast);
+            white-space: nowrap;
+        }
+        .tab-btn:hover {
+            color: var(--color-primary);
+            background: var(--color-surface-hover);
+        }
+        .tab-btn.active {
+            background: var(--color-surface);
+            color: var(--color-primary);
+            box-shadow: var(--shadow-sm);
+            font-weight: var(--font-weight-semibold);
+        }
+        .tab-content {
+            padding: var(--space-6);
+            display: none;
+            background: var(--color-surface);
+            border-radius: var(--radius-lg);
+            margin-top: var(--space-2);
+            animation: fadeIn var(--transition-base);
+        }
+        .tab-content.active {
+            display: block;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(5px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-06.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-08.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 53%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 7 of 13</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🧊</span>
+                        <span>Topic 07</span>
+                    </div>
+                    <h1 class="document-title">Types of Pictorial Projection</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Module 3: Sectional Views</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>25 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Section 1: Oblique Projections -->
+                    <section class="content-section" id="oblique">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Oblique Projections
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>There are two primary types of oblique projection used in engineering drawing.</p>
+
+                            <!-- Interactive Tabs for Oblique Types -->
+                            <div class="tabs-container">
+                                <div class="tabs-header" role="tablist">
+                                    <button class="tab-btn active" data-tab="cavalier" role="tab" aria-selected="true">Cavalier Oblique</button>
+                                    <button class="tab-btn" data-tab="cabinet" role="tab" aria-selected="false">Cabinet Oblique</button>
+                                </div>
+                                
+                                <div class="tabs-content">
+                                    <div class="tab-content active" id="cavalier" role="tabpanel">
+                                        <h4>Characteristics</h4>
+                                        <ul class="enhanced-list">
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content">Front view true size</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content">Receding Axis Angle (Normally $30^{\circ}$, $45^{\circ}$ or $60^{\circ}$) is Variable</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Depth dimension (receding axis) true size</strong></span>
+                                            </li>
+                                        </ul>
+                                        <figure class="content-figure">
+                                            <img src="../assets/images/image-20251222-b86d2fe6.jpeg" alt="Cavalier Oblique Example" class="figure-image">
+                                        </figure>
+                                    </div>
+                                    
+                                    <div class="tab-content" id="cabinet" role="tabpanel">
+                                        <h4>Characteristics</h4>
+                                        <ul class="enhanced-list">
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content">Front view true size</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content">Receding Axis Angle (Normally $30^{\circ}$, $45^{\circ}$ or $60^{\circ}$) is Variable</span>
+                                            </li>
+                                            <li class="list-item">
+                                                <span class="list-marker"></span>
+                                                <span class="list-content"><strong>Depth dimension (receding axis) half size</strong></span>
+                                            </li>
+                                        </ul>
+                                        <figure class="content-figure">
+                                            <img src="../assets/images/image-20251222-d9c502ad.jpeg" alt="Cabinet Oblique Example" class="figure-image">
+                                        </figure>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <h3>Side by Side Comparison</h3>
+                            <div class="grid grid-2">
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251222-6a58bd74.jpeg" alt="Cavalier Oblique Comparison" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">Cavalier Oblique</figcaption>
+                                </figure>
+                                <figure class="content-figure" data-lightbox="true">
+                                    <div class="figure-image-wrapper">
+                                        <img src="../assets/images/image-20251222-0849784a.jpeg" alt="Cabinet Oblique Comparison" class="figure-image">
+                                        <div class="figure-overlay">
+                                            <span class="overlay-icon">🔍</span>
+                                        </div>
+                                    </div>
+                                    <figcaption class="figure-caption">Cabinet Oblique</figcaption>
+                                </figure>
+                            </div>
+
+                            <hr>
+
+                            <h3>Visual Quiz: Which is the cube?</h3>
+                            <p>Test your perception of oblique projections.</p>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-2134d8a1.jpeg" alt="Cube Visual Quiz" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">❓</span>
+                                        <span class="overlay-text">Which one is the cube?</span>
+                                    </div>
+                                </div>
+                            </figure>
+
+                            <details class="collapsible-section">
+                                <summary class="collapsible-trigger">
+                                    <span class="trigger-icon">💡</span>
+                                    <span class="trigger-text">Reveal Answer</span>
+                                </summary>
+                                <div class="collapsible-content">
+                                    <p><strong>Were you right?</strong></p>
+                                    <figure class="content-figure">
+                                        <img src="../assets/images/image-20251222-47d8e807.jpeg" alt="Cube Answer Key" class="figure-image">
+                                    </figure>
+                                    <p>Even though Cavalier projection uses true depth, it often appears distorted to the human eye compared to Cabinet projection which uses half depth.</p>
+                                </div>
+                            </details>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Features in Oblique -->
+                    <section class="content-section" id="oblique-features">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⭕</span>
+                                Features in Oblique
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Angles in Oblique</h4>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Angles in front view are drawn true size.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Other angles must be located using coordinates.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Appearance of angles may be distorted.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Circles in Oblique</h4>
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Drawn true size in front view.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Drawn as ellipses on receding planes.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Layout using a Rhombus.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Cylinders in Oblique</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Front and Back surfaces are circular.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">"Sides" are drawn as lines tangent to the front and back.</span>
+                                </li>
+                            </ul>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-a0647d59.jpeg" alt="Cylinders in Oblique" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Axonometric Projections -->
+                    <section class="content-section" id="axonometric">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧊</span>
+                                Axonometric Projections
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Axonometric projections are classified based on the orientation of the object axes.</p>
+                            
+                            <div class="table-responsive">
+                                <table class="comparison-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Type</th>
+                                            <th>Axes Condition</th>
+                                            <th>Angles Condition</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td><strong>A. ISOMETRIC</strong></td>
+                                            <td>3 Equal axes</td>
+                                            <td>3 Equal angles</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>B. DIMETRIC</strong></td>
+                                            <td>2 Equal axes</td>
+                                            <td>2 Equal angles</td>
+                                        </tr>
+                                        <tr>
+                                            <td><strong>C. TRIMETRIC</strong></td>
+                                            <td>0 Equal axes</td>
+                                            <td>0 Equal angles</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                            <div class="grid grid-3">
+                                <div class="grid-item" style="text-align: center;">
+                                    <img src="../assets/images/image-20251222-5d00bb84.jpeg" alt="Isometric Projection" class="figure-image" style="height: 150px; object-fit: contain;">
+                                    <p><strong>A. ISOMETRIC</strong></p>
+                                </div>
+                                <div class="grid-item" style="text-align: center;">
+                                    <img src="../assets/images/image-20251222-0acec18b.jpeg" alt="Dimetric Projection" class="figure-image" style="height: 150px; object-fit: contain;">
+                                    <p><strong>B. DIMETRIC</strong></p>
+                                </div>
+                                <div class="grid-item" style="text-align: center;">
+                                    <img src="../assets/images/image-20251222-a2cadeea.jpeg" alt="Trimetric Projection" class="figure-image" style="height: 150px; object-fit: contain;">
+                                    <p><strong>C. TRIMETRIC</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Isometric Projections -->
+                    <section class="content-section" id="isometric">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔷</span>
+                                Isometrics
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">📋</span>
+                                    <h4 class="callout-title">Key Rules</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <ul class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Axes equally separated ($120^{\circ}$).</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">H, W, and D measurements are true size along iso. axes.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Angles must be located by coordinates.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Circles appear as ellipses on all surfaces.</span>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <h3>Isometric Ellipses</h3>
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-a8b5f4d0.jpeg" alt="Isometric Ellipses" class="figure-image">
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                    </div>
+                                </div>
+                            </figure>
+
+                            <h3>Construction of Cylinders</h3>
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <ol class="enhanced-list">
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Lightly block in the cylinder.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Sketch the upper and lower ellipses.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Connect the ellipses with Tangent lines.</span>
+                                        </li>
+                                        <li class="list-item">
+                                            <span class="list-marker"></span>
+                                            <span class="list-content">Darken the lines.</span>
+                                        </li>
+                                    </ol>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251222-a63adc59.jpeg" alt="Completed Cylinder Construction" class="figure-image">
+                                            <div class="figure-overlay">
+                                                <span class="overlay-icon">🔍</span>
+                                            </div>
+                                        </div>
+                                        <figcaption class="figure-caption">Final Step: Darkened Lines</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-06.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-08.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 53%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 7 of 13</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+    <script src="../js/tabs.js"></script>
+</body>
+</html>

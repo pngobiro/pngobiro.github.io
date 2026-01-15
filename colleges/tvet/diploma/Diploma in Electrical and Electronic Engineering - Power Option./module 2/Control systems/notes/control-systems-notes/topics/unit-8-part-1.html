@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 8: Frequency Response & Bode Plot (Part 1)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-7-part-2.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 8 (Part 1) of 9</span>
+                    </div>
+                    <a href="unit-8-part-2.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Unit-8: Frequency-Response Analysis & Bode Plot</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: unit-8-freq-response-intro -->
+                <section id="unit-8-freq-response-intro" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🌊</span>
+                        <span class="heading-text">Basic concepts of frequency response</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>The frequency of the input signal is varied over a specific range, and the system's output is studied. The change in the system's output response with respect to the varied input is known as the system's frequency response.</p>
+                        <p>The frequency response is represented as $T(j\omega)$, and it comprises of phase function and the magnitude function. They are also known as the system's frequency response, which can be evaluated both for the open-loop and closed-loop systems.</p>
+                        <p>The open-loop transfer function is given by:</p>
+                        <p>$G(s) = G(j\omega)$ Where, $s = j\omega$</p>
+                        <p>$|G(s)|$ or $|G(j\omega)|$ represents the magnitude of the transfer function.</p>
+                        <p>$\angle G(j\omega)$ represents the phase of the transfer function.</p>
+                        <p>Here, we will consider the response of the system with the input at different frequencies. The frequency response is a steady state response of the system to a sinusoidal input signal. For example, if a system has sinusoidal input, the output will also be sinusoidal. The changes can occur in the magnitude and the phase shift.</p>
+                        <p>Let $G(s) = 1/(Ts + 1)$</p>
+                        <p>It is the transfer function in the time-constant form. We are assuming all the parameters in the steady state.</p>
+                        <p>$G(j\omega) = 1/(Tj\omega + 1)$</p>
+                        <p>Let the input be $A\sin(\omega t)$.</p> <!-- Corrected omega -->
+                        <div class="equation">$$ |G(j\omega)| = K/\sqrt{1 + \omega^2 T^2} $$</div> <!-- Corrected omega, sqrt -->
+                        <p>It represents the magnitude.</p>
+                        <p>The angle G(s) is given by:</p> <!-- Should be G(jw) -->
+                        <div class="equation">$$ \text{Angle} = -\tan^{-1}(\omega T) $$</div> <!-- Added minus sign for denominator phase -->
+                        <p>The above analysis tells that the steady state output (Css) when the input was $A\sin(\omega t)$ is given by:</p> <!-- Corrected omega -->
+                        <div class="equation">$$ Css(t) = \frac{A \cdot K}{\sqrt{1 + \omega^2 T^2}} \sin(\omega t - \tan^{-1}(\omega T)) $$</div> <!-- Corrected formula structure -->
+                     </div>
+                </section>
+                <!-- END: unit-8-freq-response-intro -->
+
+                <!-- START: unit-8-freq-response-adv-disadv -->
+                <section id="unit-8-freq-response-adv-disadv" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➕➖</span>
+                        <span class="heading-text">Advantages and Disadvantages of Frequency Response</span>
+                    </h2>
+                    <div class="content-card">
+                        <h3 class="subsection-heading">Advantages of frequency response</h3>
+                        <p>The advantages of the frequency response method are as follows:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">It includes simple calculations.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The frequency response method is easy to implement in the designs of the control system. It also helps us to find the stability of the system.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">It provides the stability analysis of the system without the need for any complex and timeconsuming processes.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The frequency response and the step response of the system are closely related. One known parameter gives us the idea of the other parameter.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">We can obtain the frequency response of the given control system without the knowledge of the transfer function.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The stability analysis of the system can be performed even if it incorporates moderate degree of non-linearity.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">We can also apply the frequency response on the system that has irrational transfer function. For example, $e^{-2Ts}$.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">It involves simple and inexpensive apparatus.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">In case of the complex cases of the control system, it is better to use the Nyquist plot technique. It is the only method to analyze the stability in such conditions.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The effect of the noise disturbance can be easily analyzed.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The adjustment and performance of the closed loop system using the frequency response is easy as compared to the time domain.</span></li>
+                        </ul>
+                         <h3 class="subsection-heading">Disadvantages of frequency response</h3>
+                         <p>The disadvantages of the frequency response method are as follows:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The frequency response method works better with the linear system. The result in the cases of non-linear systems or the system with moderate non-linearity does not show the exact results. Hence, it is generally applied only to linear systems.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The practical method to obtain the frequency response is time-consuming.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">There is a relation between the frequency response and the step response, but it is not exact as expected. But, the exact relation is possible if we use the Fourier transformation to describe it, which is difficult to apply due to complex calculations.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: unit-8-freq-response-adv-disadv -->
+
+                 <!-- START: unit-8-polar-plot-intro -->
+                 <section id="unit-8-polar-plot-intro" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🧭</span>
+                        <span class="heading-text">Polar plot</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>The polar plot of a sinusoidal transfer function is the plot of the magnitude $G(j\omega)$ versus the phase angle of $G(j\omega)$ on the <strong>polar coordinates</strong>. The frequency in the polar plot is varied from <strong>zero to infinity</strong>. The polar plot is drawn on the polar sheet, which is the form of a graph, and the graph consists of concentric circles and radial lines.</p>
+                        <p>The concentric circles on the polar sheet graph represent the magnitude, and the radial lines represent phase angles. Each point on the graph displays information about the magnitude and the phase angle.</p>
+                        <p>The example of a polar graph is shown below:</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-071-1.jpg" alt="Polar plot axes showing angles from -270 to +90 degrees, with example vectors |G(jw)| at positive and negative angles." class="content-image">
+                        <p>The positive angle in a polar graph is measured in the anti-clockwise direction, while the negative angle is measured clockwise direction. Both the angles are measured with respect to the reference point, i.e., 0 degree axis.</p>
+                        <p>The transfer function $G(j\omega)$ in the rectangular form can be written as:</p>
+                        <p>$G(j\omega) = GR(j\omega) + jGI(j\omega)$</p> <!-- Added 'j' -->
+                        <p>Where,</p>
+                        <p>$GR(j\omega)$ is the real part of the transfer function $G(j\omega)$</p>
+                        <p>$GI(j\omega)$ is the imaginary part of the transfer function $G(j\omega)$</p>
+                        <p>As discussed, the angular frequency in the polar plot varies from zero to infinity. We should not get confused with the Nyquist plot, which is the extension of the polar plot. The angular frequency ($\omega$) varies from zero to infinity, while the Nyquist plot varies from a negative value of infinity to positive infinity.</p> <!-- Corrected statement about Nyquist range -->
+                        <p>The primary advantage of the polar plot is that it depicts the <strong>frequency response</strong> characteristics of a system over the entire frequency range in a single plot. Since everything seems to be a single block, it fails to show the contributions of each factor of the open-loop transfer function.</p>
+
+                        <h3 class="subsection-heading">Integral and Derivative Factors</h3>
+                        <p>The <strong>integral</strong> factor of the polar plot is given by:</p>
+                        <p>$G(s) = 1/s$</p>
+                        <p>Where,</p>
+                        <p>$s = j\omega$</p>
+                        <p>s is the transfer function</p> <!-- This seems wrong, s is the variable -->
+                        <p>$G(j\omega) = 1/j\omega = -j/\omega = (1/\omega) \angle -90^\circ$</p> <!-- Corrected representation -->
+                        <p>It is the negative imaginary axis.</p>
+                        <p>The <strong>derivative</strong> factor of the polar plot is given by:</p>
+                        <p>$G(j\omega) = j\omega = \omega \angle +90^\circ$</p> <!-- Corrected representation -->
+                        <p>It is the positive imaginary axis.</p>
+
+                        <h3 class="subsection-heading">Effect of addition of pole and zero</h3>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The addition of pole in the polar plot will shift its end by -90 degrees.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The addition of zero in the polar plot will shift its end by +90 degrees.</span></li>
+                         </ul>
+
+                        <h3 class="subsection-heading">Type and order of the system</h3>
+                        <p>The <strong>type</strong> of the system in the polar plot determines the quadrant at which the polar plot starts. The start of the polar plot of all poles is shown in the below diagram.</p>
+                         <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-073-1.jpg" alt="Polar plot diagram showing starting points based on system type: Type 0 starts on positive real axis, Type 1 starts at -infinity on negative imaginary axis, Type 2 starts at -infinity on negative real axis etc." class="content-image">
+                        <p>The <strong>order</strong> of the system in the polar plot determines the quadrant at which the polar plot ends. The end of the polar plot of all poles is shown in the below diagram.</p>
+                         <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-073-2.jpg" alt="Polar plot diagram showing ending points based on system order: 1st order ends on negative imaginary axis, 2nd order on negative real axis, 3rd on positive imaginary, 4th on positive real." class="content-image">
+                     </div>
+                 </section>
+                <!-- END: unit-8-polar-plot-intro -->
+
+                 <!-- START: unit-8-polar-plot-std-tf -->
+                 <section id="unit-8-polar-plot-std-tf" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">📈</span>
+                        <span class="heading-text">Polar plot of standard transfer function</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>Here, we will discuss the polar plots of various standard transfer functions.</p>
+
+                        <h3 class="subsection-heading">Type 0</h3>
+                        <h4 class="subsubsection-heading">Order: 1</h4>
+                        <p>Let, $G(s) = 1/(1 + sT)$</p>
+                        <p>Put, $s= j\omega$</p>
+                        <p>$G(j\omega) = 1/(1 + j\omega T)$</p>
+                        <p>The above transfer function in the form of magnitude and angle can be represented as:</p>
+                        <div class="equation">$$ G(j\omega) = \frac{1}{\sqrt{1 + \omega^2 T^2} \angle \tan^{-1}(\omega T)} $$</div>
+                        <p>If we consider the angle part in the numerator, we need to insert a negative sign due to the transition from the denominator to the numerator or vice-versa.</p>
+                        <div class="equation">$$ G(j\omega) = \frac{1 \angle -\tan^{-1}(\omega T)}{\sqrt{1 + \omega^2 T^2}} $$</div>
+                        <p>Let's find the value of the above function at zero and infinity.</p>
+                        <p>When, $\omega = 0$</p>
+                        <p>$G(j\omega) = 1\angle 0 / \sqrt{1} = 1\angle 0$</p>
+                        <!-- <p>$G(j\omega) = 1\angle 0$</p> -->
+                        <p>It is because $\tan^{-1}(0) = 0$</p>
+                        <p>When, $\omega = \infty$</p>
+                        <p>$G(j\omega) = \frac{1 \angle -90^\circ}{\infty} = 0\angle -90^\circ$</p>
+                        <!-- <p>$G(j\omega) = 0\angle -90$</p> -->
+                        <p>It is because $\tan^{-1}(\infty) = 90$ degrees</p>
+                        <p>The polar plot at value 0 and infinity will appear as:</p>
+                        <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-074-1.jpg" alt="Polar plot for Type 0 Order 1 system, starting at 1 on real axis (w=0) and ending at origin along negative imaginary axis (w=inf)." class="content-image">
+
+                        <h4 class="subsubsection-heading">Order 2:</h4>
+                        <p>Since, it is a 2 order system; the function includes the highest derivative variable (s) with the power 2.</p>
+                        <p>Let, $G(s) = 1/[(1 + sT_1) (1 + sT_2)]$</p>
+                        <p>Put, $s= j\omega$</p>
+                        <p>$G(j\omega) = 1/[(1 + j\omega T_1) (1 + j\omega T_2)]$</p>
+                        <p>The above transfer function in the form of magnitude and angle can be represented as:</p>
+                        <div class="equation">$$ G(j\omega) = \frac{1}{[\sqrt{1 + \omega^2 T_1^2} \angle \tan^{-1}(\omega T_1)][\sqrt{1 + \omega^2 T_2^2} \angle \tan^{-1}(\omega T_2)]} $$</div>
+                        <p>If we consider the angle part in the numerator, we need to insert a negative sign due to the transition from the denominator to the numerator, as shown below:</p>
+                         <div class="equation">$$ G(j\omega) = \frac{1 \angle (-\tan^{-1}(\omega T_1) - \tan^{-1}(\omega T_2))}{\sqrt{1 + \omega^2 T_1^2}\sqrt{1 + \omega^2 T_2^2}} $$</div>
+                        <p>Let's find the value of the above function at zero and infinity.</p>
+                        <p>When, $\omega = 0$</p>
+                        <p>$G(j\omega) = 1\angle (-0 - 0)/(1 \times 1) = 1\angle 0$</p>
+                        <!-- <p>$G(j\omega) = 1\angle 0$</p> -->
+                        <p>It is because $\tan^{-1}(0) = 0$</p>
+                        <p>When, $\omega = \infty$</p>
+                        <p>$G(j\omega) = 0 \angle (-90^\circ - 90^\circ)/(\infty \times \infty) = 0\angle -180^\circ$</p>
+                        <!-- <p>$G(j\omega) = 0\angle -180$</p> -->
+                        <p>It is because $\tan^{-1}(\infty) = 90$ degrees</p>
+                        <p>The polar plot at value 0 and infinity will appear as:</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-076-1.jpg" alt="Polar plot for Type 0 Order 2 system, starting at 1 on real axis (w=0) and ending at origin along negative real axis (w=inf)." class="content-image">
+
+
+                        <h3 class="subsection-heading">Type 1</h3>
+                        <h4 class="subsubsection-heading">Order: 1</h4>
+                        <p>Let, $G(s) = 1/s$</p>
+                        <p>Put, $s= j\omega$</p>
+                        <p>$G(j\omega) = 1/j\omega$</p>
+                        <p>$G(j\omega) = 1/(\omega\angle 90^\circ)$</p>
+                        <p>If we consider the angle part in the numerator, we need to insert a negative sign due to the transition from the denominator to the numerator, as shown below:</p>
+                        <p>$G(j\omega) = (1\angle -90^\circ) /\omega$</p>
+                        <p>Let's find the value of the above function at zero and infinity.</p>
+                        <p>When, $\omega = 0$</p>
+                        <p>$G(j\omega) = \infty \angle -90^\circ$</p>
+                        <p>It is because the function is directly divided by $\omega$. $1/0 = \infty$.</p>
+                        <!-- MMD has tan^-1(0)=0 here, seems irrelevant? -->
+                        <p>When, $\omega = \infty$</p>
+                        <p>$G(j\omega) = 0\angle -90^\circ$</p>
+                        <p>It is because the function is directly divided by $\omega$. $1/\infty = zero$.</p>
+                         <!-- MMD has tan^-1(inf)=90 here, seems irrelevant? -->
+                        <p>The polar plot at value 0 and infinity will appear as:</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-077-1.jpg" alt="Polar plot for Type 1 Order 1 system (integrator), a straight line along the negative imaginary axis from -inf (w=0) to origin (w=inf)." class="content-image">
+
+
+                        <h4 class="subsubsection-heading">Order: 2</h4>
+                        <p>Let, $G(s) = 1/[s(1 + sT)]$</p>
+                        <p>Put, $s= j\omega$</p>
+                        <p>$G(j\omega) = 1/ [j\omega(1 + j\omega T)]$</p>
+                        <p>The above transfer function in the form of magnitude and angle can be represented as:</p>
+                        <div class="equation">$$ G(j\omega) = \frac{1}{\omega\angle 90^\circ [\sqrt{1 + \omega^2 T^2} \angle \tan^{-1}(\omega T)]} $$</div>
+                        <p>If we consider the angle part in the numerator, we need to insert a negative sign due to the transition from the denominator to the numerator or vice-versa.</p>
+                        <div class="equation">$$ G(j\omega) = \frac{1 \angle (-90^\circ - \tan^{-1}(\omega T))}{\omega\sqrt{1 + \omega^2 T^2}} $$</div>
+                        <p>Let's find the value of the above function at zero and infinity.</p>
+                        <p>When, $\omega = 0$</p>
+                        <p>$G(j\omega) =\infty \angle -90^\circ$</p>
+                        <p>It is because the function is directly divided by $\omega$. $1/0 = \infty$.</p>
+                        <p>$\tan^{-1}(0) = 0$</p>
+                        <p>When, $\omega = \infty$</p>
+                        <p>$G(j\omega) = 0\angle (-90^\circ - 90^\circ) = 0\angle -180^\circ$</p>
+                        <!-- <p>$G(j\omega) = 0\angle -180$</p> -->
+                        <p>It is because the function is directly divided by $\omega$. $1/\infty = zero$.</p>
+                        <p>$\tan^{-1}(\infty) = 90$ degrees</p>
+                        <p>The polar plot at value 0 and infinity will appear as:</p>
+                        <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-078-1.jpg" alt="Polar plot for Type 1 Order 2 system, starting at -inf on negative imaginary axis (w=0) and ending at origin along negative real axis (w=inf)." class="content-image">
+
+
+                        <h4 class="subsubsection-heading">Order: 3</h4>
+                        <p>Let, $G(s) = 1/[s(1 + sT_1) (1 + sT_2)]$</p>
+                        <p>Put, $s= j\omega$</p>
+                        <p>$G(j\omega) = 1/ [j\omega (1 + j\omega T_1) (1 + j\omega T_2)]$</p>
+                        <p>The above transfer function in the form of magnitude and angle can be represented as:</p>
+                        <div class="equation">$$ G(j\omega) = \frac{1}{\omega\angle 90^\circ [\sqrt{1 + \omega^2 T_1^2} \angle \tan^{-1}(\omega T_1)][ \sqrt{1 + \omega^2 T_2^2} \angle \tan^{-1}(\omega T_2)]} $$</div>
+                        <p>If we consider the angle part in the numerator, we need to insert a negative sign due to the transition from the denominator to the numerator, as shown below:</p>
+                        <div class="equation">$$ G(j\omega) = \frac{1 \angle (-90^\circ - \tan^{-1}(\omega T_1) - \tan^{-1}(\omega T_2))}{\omega\sqrt{1 + \omega^2 T_1^2}\sqrt{1 + \omega^2 T_2^2}} $$</div>
+                        <p>Let's find the value of the above function at zero and infinity.</p>
+                        <p>When, $\omega = 0$</p>
+                        <p>$G(j\omega) =\infty \angle -90^\circ$</p>
+                        <p>It is because the function is directly divided by $\omega$. $1/0 = \infty$.</p>
+                        <p>$\tan^{-1}(0) = 0$</p>
+                        <p>When, $\omega = \infty$</p>
+                        <p>$G(j\omega) = 0\angle (-90^\circ - 90^\circ - 90^\circ) = 0\angle -270^\circ$</p>
+                        <!-- <p>$G(j\omega) = 0\angle -270$</p> -->
+                        <p>It is because the function is directly divided by $\omega$. $1/\infty = zero$.</p>
+                        <p>$\tan^{-1}(\infty) = 90$ degrees</p>
+                        <p>The polar plot at value 0 and infinity will appear as:</p>
+                        <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-079-1.jpg" alt="Polar plot for Type 1 Order 3 system, starting at -inf on negative imaginary axis (w=0) and ending at origin along positive imaginary axis (w=inf)." class="content-image">
+
+
+                         <h3 class="subsection-heading">Type 2</h3>
+                         <h4 class="subsubsection-heading">Order: 4</h4> <!-- MMD text says Order 4, which matches the example G(s) -->
+                         <p>Let, $G(s) = 1/[s^2(1 + sT_1) (1 + sT_2)]$</p>
+                         <p>Put, $s= j\omega$</p>
+                         <p>$G(j\omega) = 1/ [j^2 \omega^2 (1 + j\omega T_1) (1 + j\omega T_2)]$</p> <!-- Corrected j^2 -->
+                         <p>The above transfer function in the form of magnitude and angle can be represented as:</p>
+                         <div class="equation">$$ G(j\omega) = \frac{1}{\omega^2\angle -180^\circ [\sqrt{1 + \omega^2 T_1^2} \angle \tan^{-1}(\omega T_1)][ \sqrt{1 + \omega^2 T_2^2} \angle \tan^{-1}(\omega T_2)]} $$</div> <!-- Corrected angle for (jw)^2 -->
+                         <p>If we consider the angle part in the numerator, we need to insert a negative sign due to the transition from the denominator to the numerator, as shown below:</p>
+                          <div class="equation">$$ G(j\omega) = \frac{1 \angle (-180^\circ-\tan^{-1}(\omega T_1) - \tan^{-1}(\omega T_2))}{\omega^2\sqrt{1 + \omega^2 T_1^2}\sqrt{1 + \omega^2 T_2^2}} $$</div>
+                         <p>Let's find the value of the above function at zero and infinity.</p>
+                         <p>When, $\omega = 0$</p>
+                         <p>$G(j\omega) = \infty \angle (-180^\circ - 0 - 0)/(1\times 1) = \infty \angle -180^\circ$</p>
+                         <!-- <p>$G(j\omega) = \infty \angle -180$</p> -->
+                         <p>It is because the function is directly divided by $\omega^2$. $1/0$ is equal to infinity.</p>
+                         <p>$\tan^{-1}(0) = 0$</p>
+                         <p>When, $\omega = \infty$</p>
+                         <p>$G(j\omega) = 0\angle (-180^\circ - 90^\circ - 90^\circ)/(\infty \times \infty) = 0\angle -360^\circ$</p>
+                         <!-- <p>$G(j\omega) = 0\angle -360$</p> -->
+                         <p>It is because the function is directly divided by $\omega^2$. $1/\infty$ is equal to zero.</p>
+                         <p>$\tan^{-1}(\infty) = 90$ degrees</p>
+                         <p>The polar plot at value 0 and infinity will appear as:</p>
+                          <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-081-1.jpg" alt="Polar plot for Type 2 Order 4 system, starting at -inf on negative real axis (w=0) and ending at origin along positive real axis (w=inf)." class="content-image">
+
+                    </div>
+                 </section>
+                 <!-- END: unit-8-polar-plot-std-tf -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-7-part-2.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 8 (Part 1) of 9</span>
+                    </div>
+                    <a href="unit-8-part-2.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

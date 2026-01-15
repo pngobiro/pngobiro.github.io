@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logic Gates - Digital Circuits Study Guide</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-01-boolean-algebra.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-03-karnaugh-map.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 25%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 2 of 8</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🔌</span>
+                        <span>Topic 02</span>
+                    </div>
+                    <h1 class="document-title">Logic Gates</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Digital Electronics</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>12 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">💡</span>
+                                Introduction
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>In electronics, a logic gate is an idealized or physical device implementing a Boolean function; that is, it performs a logical operation on one or more logical inputs, and produces a single logical output. Depending on the context, the term may refer to an ideal logic gate, one that has for instance zero rise time and unlimited fan-out, or it may refer to a non-ideal physical device (see Ideal and real op-amps for comparison).</p>
+                            
+                            <p>Logic gates are primarily implemented using diodes or transistors acting as electronic switches, but can also be constructed using electromagnetic relays (relay logic), fluidic logic, pneumatic logic, optics, molecules, or even mechanical elements. With amplification, logic gates can be cascaded in the same way that Boolean functions can be composed, allowing the construction of a physical model of all of Boolean logic, and therefore, all of the algorithms and mathematics that can be described with Boolean logic.</p>
+                            
+                            <p>Logic circuits include such devices as multiplexers, registers, arithmetic logic units (ALUs), and computer memory, all the way up through complete microprocessors, which may contain more than 100 million gates. In practice, the gates are made from field-effect transistors (FETs), particularly MOSFETs (metal-oxide-semiconductor field-effect transistors).</p>
+                            
+                            <p>Compound logic gates AND-OR-Invert (AOI) and OR-AND-Invert (OAI) are often employed in circuit design because their construction using MOSFETs is simpler and more efficient than the sum of the individual gates.</p>
+                            
+                            <p>In reversible logic, Toffoli gates are used.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: Electronic Gates -->
+                    <section class="content-section" id="electronic-gates">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚡</span>
+                                Electronic Gates
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>To build a functionally complete logic system, relays, valves (vacuum tubes), or transistors can be used. The simplest family of logic gates using bipolar transistors is called resistor-transistor logic (RTL). Unlike simple diode logic gates (which do not have a gain element), RTL gates can be cascaded indefinitely to produce more complex logic functions. RTL gates were used in early integrated circuits. For higher speed and better density, the resistors used in RTL were replaced by diodes resulting in diode-transistor logic (DTL). Transistor-transistor logic (TTL) then supplanted DTL. As integrated circuits became more complex, bipolar transistors were replaced with smaller field-effect transistors (MOSFETs); see PMOS and NMOS. To reduce power consumption still further, most contemporary chip implementations of digital systems now use CMOS logic. CMOS uses complementary (both n-channel and p-channel) MOSFET devices to achieve a high speed with low power dissipation.</p>
+                            
+                            <p>For small-scale logic, designers now use prefabricated logic gates from families of devices such as the TTL 7400 series by Texas Instruments, the CMOS 4000 series by RCA, and their more recent descendants. Increasingly, these fixed-function logic gates are being replaced by programmable logic devices, which allow designers to pack a large number of mixed logic gates into a single integrated circuit. The field-programmable nature of programmable logic devices such as FPGAs has removed the 'hard' property of hardware; it is now possible to change the logic design of a hardware system by reprogramming some of its components, thus allowing the features or function of a hardware implementation of a logic system to be changed.</p>
+                            
+                            <div class="callout callout--note">
+                                <div class="callout-header">
+                                    <span class="callout-icon">ℹ️</span>
+                                    <h4 class="callout-title">Semiconductor vs. Switch</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Electronic logic gates differ significantly from their relay-and-switch equivalents. They are much faster, consume much less power, and are much smaller (all by a factor of a million or more in most cases). Also, there is a fundamental structural difference. The switch circuit creates a continuous metallic path for current to flow (in either direction) between its input and its output. The semiconductor logic gate, on the other hand, acts as a high-gain voltage amplifier, which sinks a tiny current at its input and produces a low-impedance voltage at its output. It is not possible for current to flow between the output and the input of a semiconductor logic gate.</p>
+                                </div>
+                            </div>
+
+                            <p>Another important advantage of standardized integrated circuit logic families, such as the 7400 and 4000 families, is that they can be cascaded. This means that the output of one gate can be wired to the inputs of one or several other gates, and so on. Systems with varying degrees of complexity can be built without great concern of the designer for the internal workings of the gates, provided the limitations of each integrated circuit are considered.</p>
+                            
+                            <p>The output of one gate can only drive a finite number of inputs to other gates, a number called the 'fanout limit'. Also, there is always a delay, called the 'propagation delay', from a change in input of a gate to the corresponding change in its output. When gates are cascaded, the total propagation delay is approximately the sum of the individual delays, an effect which can become a problem in high-speed circuits. Additional delay can be caused when a large number of inputs are connected to an output, due to the distributed capacitance of all the inputs and wiring and the finite amount of current that each output can provide.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Symbols -->
+                    <section class="content-section" id="symbols">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📐</span>
+                                Symbols
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>There are two sets of symbols for elementary logic gates in common use, both defined in ANSI/IEEE Std 91-1984 and its supplement ANSI/IEEE Std 91a-1991. The "distinctive shape" set, based on traditional schematics, is used for simple drawings, and derives from MIL-STD-806 of the 1950s and 1960s. It is sometimes unofficially described as "military", reflecting its origin. The "rectangular shape" set, based on ANSI Y32.14 and other early industry standards, as later refined by IEEE and IEC, has rectangular outlines for all types of gate and allows representation of a much wider range of devices than is possible with the traditional symbols. The IEC standard, IEC 60617-12, has been adopted by other standards, such as EN 60617-12:1999 in Europe and BS EN 60617-12:1999 in the United Kingdom.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-af624b0d.jpeg" alt="Standard Logic Gate Symbols" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Common logic gate symbols showing distinctive shapes.</figcaption>
+                            </figure>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-faa1d143.jpeg" alt="74LS192 Counter Symbol" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">A synchronous 4-bit up/down decade counter symbol (74LS192) in accordance with ANSI/IEEE Std. 91-1984 and IEC Publication 60617-12.</figcaption>
+                            </figure>
+
+                            <p>The mutual goal of IEEE Std 91-1984 and IEC 60617-12 was to provide a uniform method of describing the complex logic functions of digital circuits with schematic symbols. These functions were more complex than simple AND and OR gates. They could be medium scale circuits such as a 4-bit counter to a large scale circuit such as a microprocessor.</p>
+                            
+                            <p>IEC 617-12 and its successor IEC 60617-12 do not explicitly show the "distinctive shape" symbols, but do not prohibit them. These are, however, shown in ANSI/IEEE 91 (and 91a) with this note: "The distinctive-shape symbol is, according to IEC Publication 617, Part 12, not preferred, but is not considered to be in contradiction to that standard." IEC 60617-12 correspondingly contains the note (Section 2.1) "Although non-preferred, the use of other symbols recognized by official national standards, that is distinctive shapes in place of symbols [list of basic gates], shall not be considered to be in contradiction with this standard. Usage of these other symbols in combination to form complex symbols (for example, use as embedded symbols) is discouraged." This compromise was reached between the respective IEEE and IEC working groups to permit the IEEE and IEC standards to be in mutual compliance with one another.</p>
+                            
+                            <p>A third style of symbols was in use in Europe and is still preferred by some, see the column "DIN 40700" in the table in the German Wikipedia.</p>
+                            
+                            <p>In the 1980s, schematics were the predominant method to design both circuit boards and custom ICs known as gate arrays. Today custom ICs and the field-programmable gate array are typically designed with Hardware Description Languages (HDL) such as Verilog or VHDL.</p>
+                            
+                            <p>Two more gates are (1) the exclusive-OR or XOR function and (2) its complement, the exclusive-NOR or XNOR or EQV (equivalent) function. The two input exclusive-OR is true only when the two input values are different, false if they are equal, regardless of the value. If there are more than two inputs, the gate generates a true at its output if the number of trues at its input is odd. In practice, these gates are built from combinations of simpler logic gates.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Universal Logic Gates -->
+                    <section class="content-section" id="universal-gates">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🌐</span>
+                                Universal Logic Gates
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Charles Sanders Peirce (winter of 1880-81) showed that NOR gates alone (or alternatively NAND gates alone) can be used to reproduce the functions of all the other logic gates, but his work on it was unpublished until 1933. The first published proof was by Henry M. Sheffer in 1913, so the NAND logical operation is sometimes called Sheffer stroke; the logical NOR is sometimes called Peirce's arrow. Consequently, these gates are sometimes called universal logic gates.</p>
+                            
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-f39501ff.jpeg" alt="Charles Sanders Peirce" class="figure-image">
+                                        </div>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-90416f09.jpeg" alt="7400 Chip" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">The 7400 chip, containing four NANDs. The two additional pins supply power $(+5\text{V})$ and connect the ground.</figcaption>
+                                    </figure>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: De Morgan Equivalent Symbols -->
+                    <section class="content-section" id="de-morgan-symbols">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔄</span>
+                                De Morgan Equivalent Symbols
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>By use of De Morgan's laws, an AND function is identical to an OR function with negated inputs and outputs. Likewise, an OR function is identical to an AND function with negated inputs and outputs. A NAND gate is equivalent to an OR gate with negated inputs, and a NOR gate is equivalent to an AND gate with negated inputs.</p>
+                            
+                            <p>This leads to an alternative set of symbols for basic gates that use the opposite core symbol (AND or OR) but with the inputs and outputs negated. Use of these alternative symbols can make logic circuit diagrams much clearer and help to show accidental connection of an active high output to an active low input or vice-versa. Any connection that has logic negations at both ends can be replaced by a negationless connection and a suitable change of gate or vice-versa. Any connection that has a negation at one end and no negation at the other can be made easier to interpret by instead using the De Morgan equivalent symbol at either of the two ends. When negation or polarity indicators on both ends of a connection match, there is no logic negation in that path (effectively, bubbles "cancel"), making it easier to follow logic states from one symbol to the next. This is commonly seen in real logic diagrams - thus the reader must not get into the habit of associating the shapes exclusively as OR or AND shapes, but also take into account the bubbles at both inputs and outputs in order to determine the "true" logic function indicated.</p>
+                            
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">💡</span>
+                                    <h4 class="callout-title">Clarifying Logic Intent</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>A De Morgan symbol can show more clearly a gate's primary logical purpose and the polarity of its nodes that are considered in the "signaled" (active, on) state. Consider the simplified case where a two-input NAND gate is used to drive a motor when either of its inputs are brought low by a switch. The "signaled" state (motor on) occurs when either one OR the other switch is on. Unlike a regular NAND symbol, which suggests AND logic, the De Morgan version, a two negative-input OR gate, correctly shows that OR is of interest. The regular NAND symbol has a bubble at the output and none at the inputs (the opposite of the states that will turn the motor on), but the De Morgan symbol shows both inputs and output in the polarity that will drive the motor.</p>
+                                </div>
+                            </div>
+
+                            <p>De Morgan's theorem is most commonly used to implement logic gates as combinations of only NAND gates, or as combinations of only NOR gates, for economic reasons.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-6e17fab4.jpeg" alt="De Morgan equivalents" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Figure 4. De Morgan equivalents</figcaption>
+                            </figure>
+                        </div>
+                    </section>
+
+                    <!-- Section 6: Data Storage -->
+                    <section class="content-section" id="data-storage">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">💾</span>
+                                Data Storage
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Logic gates can also be used to store data. A storage element can be constructed by connecting several gates in a "latch" circuit. More complicated designs that use clock signals and that change only on a rising or falling edge of the clock are called edge-triggered "flip-flops". The combination of multiple flip-flops in parallel, to store a multiple-bit value, is known as a register. When using any of these gate setups the overall system has memory; it is then called a sequential logic system since its output can be influenced by its previous state(s).</p>
+                            
+                            <p>These logic circuits are known as computer memory. They vary in performance, based on factors of speed, complexity, and reliability of storage, and many different types of designs are used based on the application.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 7: Three-State Logic Gates -->
+                    <section class="content-section" id="three-state-gates">
+                        <div class="section-header">
+                            <div class="section-number">07</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🚦</span>
+                                Three-State Logic Gates
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-13dc4129.jpeg" alt="Tristate buffer switch analogy" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">A tristate buffer can be thought of as a switch. If B is on, the switch is closed. If B is off, the switch is open.</figcaption>
+                            </figure>
+
+                            <p>A three-state logic gate is a type of logic gate that can have three different outputs: high (H), low (L) and high-impedance (Z). The high-impedance state plays no role in the logic, which is strictly binary. These devices are used on buses of the CPU to allow multiple chips to send data. A group of three-states driving a line with a suitable control circuit is basically equivalent to a multiplexer, which may be physically distributed over separate devices or plug-in cards.</p>
+                            
+                            <p>In electronics, a high output would mean the output is sourcing current from the positive power terminal (positive voltage). A low output would mean the output is sinking current to the negative power terminal (zero voltage). High impedance would mean that the output is effectively disconnected from the circuit.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 8: History and Development -->
+                    <section class="content-section" id="history-development">
+                        <div class="section-header">
+                            <div class="section-number">08</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🕰️</span>
+                                History and Development
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The binary number system was refined by Gottfried Wilhelm Leibniz (published in 1705) and he also established that by using the binary system, the principles of arithmetic and logic could be combined. In an 1886 letter, Charles Sanders Peirce described how logical operations could be carried out by electrical switching circuits. Eventually, vacuum tubes replaced relays for logic operations. Lee De Forest's modification, in 1907, of the Fleming valve can be used as AND logic gate. Ludwig Wittgenstein introduced a version of the 16-row truth table as proposition 5.101 of Tractatus Logico-Philosophicus (1921). Walther Bothe, inventor of the coincidence circuit, got part of the 1954 Nobel Prize in physics, for the first modern electronic AND gate in 1924. Konrad Zuse designed and built electromechanical logic gates for his computer Z1 (from 1935-38). Claude E. Shannon introduced the use of Boolean algebra in the analysis and design of switching circuits in 1937. Active research is taking place in molecular logic gates.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 9: Implementations -->
+                    <section class="content-section" id="implementations">
+                        <div class="section-header">
+                            <div class="section-number">09</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🏭</span>
+                                Implementations
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Since the 1990s, most logic gates are made in CMOS technology (i.e. NMOS and PMOS transistors are used). Often millions of logic gates are packaged in a single integrated circuit.</p>
+                            
+                            <p>There are several logic families with different characteristics (power consumption, speed, cost, size) such as: RDL (resistor-diode logic), RTL (resistor-transistor logic), DTL (diode-transistor logic), TTL (transistor-transistor logic) and CMOS (complementary metal oxide semiconductor). There are also sub-variants, e.g. standard CMOS logic vs. advanced types using still CMOS technology, but with some optimizations for avoiding loss of speed due to slower PMOS transistors.</p>
+                            
+                            <p>Non-electronic implementations are varied, though few of them are used in practical applications. Many early electromechanical digital computers, such as the Harvard Mark I, were built from relay logic gates, using electromechanical relays. Logic gates can be made using pneumatic devices, such as the Sorteberg relay or mechanical logic gates, including on a molecular scale. Logic gates have been made out of DNA (see DNA nanotechnology) and used to create a computer called MAYA (see MAYA II). Logic gates can be made from quantum mechanical effects (though quantum computing usually diverges from boolean design). Photonic logic gates use non-linear optical effects.</p>
+                            
+                            <p>In principle any method that leads to a gate that is functionally complete (for example, either a NOR or a NAND gate) can be used to make any kind of digital logic circuit. Note that the use of 3-state logic for bus systems is not needed, and can be replaced by digital multiplexers.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 10: See Also -->
+                    <section class="content-section" id="see-also">
+                        <div class="section-header">
+                            <div class="section-number">10</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔗</span>
+                                See Also
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">And-inverter graph</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Boolean algebra topics</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Boolean function</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Digital circuit</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Espresso heuristic logic minimizer</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Fanout</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Flip-flop (electronics)</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Functional completeness</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Karnaugh map</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Combinational logic</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Logic family</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Logical graph</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">NMOS logic</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Programmable Logic Controller (PLC)</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Programmable Logic Device (PLD)</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Propositional calculus</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Quantum gate</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Race hazard</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Reversible computing</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Truth table</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 11: References -->
+                    <section class="content-section" id="references">
+                        <div class="section-header">
+                            <div class="section-number">11</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📚</span>
+                                References
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ol class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Jaeger, Microelectronic Circuit Design, McGraw-Hill 1997, ISBN 0-07-032482-4, pp. 226-233</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Tinder, Richard F. (2000). Engineering digital design: Revised Second Edition. pp. 317-319. ISBN 0-12-691295-5. Retrieved 2008-07-04.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Overview of IEEE Standard 91-1984 Explanation of Logic Symbols, Doc. No. SDYZ001A, Texas Instruments Semiconductor Group, 1996</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Peirce, C. S. (manuscript winter of 1880-81), "A Boolean Algebra with One Constant", published 1933 in Collected Papers v. 4, paragraphs 12-20. Reprinted 1989 in Writings of Charles S. Peirce v. 4, pp. 218-21, Google Preview. See Roberts, Don D. (2009), The Existential Graphs of Charles S. Peirce, p. 131.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Hans Kleine Büning; Theodor Lettmann (1999). Propositional logic: deduction and algorithms. Cambridge University Press. p. 2. ISBN 978-0-521-63017-7.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">John Bird (2007). Engineering mathematics. Newnes. p. 532. ISBN 978-0-7506-8555-9.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Peirce, C. S., "Letter, Peirce to A. Marquand", dated 1886, Writings of Charles S. Peirce, v. 5, 1993, pp. 541–3. Google Preview. See Burks, Arthur W., "Review: Charles S. Peirce, The new elements of mathematics", Bulletin of the American Mathematical Society v. 84, n. 5 (1978), pp. 913–18, see 917. PDF Eprint.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Mechanical Logic gates (focused on molecular scale)</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">DNA Logic gates</span></li>
+                            </ol>
+                        </div>
+                    </section>
+
+                    <!-- Key Points Summary -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>In electronics, a logic gate is an idealized or physical device implementing a Boolean function; that is, it performs a logical operation on one or more logical inputs, and produces a single logical output.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Logic gates are primarily implemented using diodes or transistors acting as electronic switches, but can also be constructed using electromagnetic relays (relay logic), fluidic logic, pneumatic logic, optics, molecules, or even mechanical elements.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>To build a functionally complete logic system, relays, valves (vacuum tubes), or transistors can be used.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Electronic logic gates differ significantly from their relay-and-switch equivalents. They are much faster, consume much less power, and are much smaller (all by a factor of a million or more in most cases).</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>NOR gates alone (or alternatively NAND gates alone) can be used to reproduce the functions of all the other logic gates... Consequently, these gates are sometimes called universal logic gates.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>A three-state logic gate is a type of logic gate that can have three different outputs: high (H), low (L) and high-impedance (Z).</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-01-boolean-algebra.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="topic-03-karnaugh-map.html" class="nav-button nav-button--next">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 25%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 2 of 8</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop" data-close-lightbox></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" data-close-lightbox aria-label="Close image viewer">&times;</button>
+            <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

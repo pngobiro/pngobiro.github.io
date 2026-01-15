@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 8: Frequency Response & Bode Plot (Part 2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-8-part-1.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 8 (Part 2) of 9</span>
+                    </div>
+                    <a href="unit-8-part-3.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <!-- Reusing title from part 1 -->
+                <h1 class="section-title">Unit-8: Frequency-Response Analysis & Bode Plot</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: unit-8-polar-margins -->
+                <section id="unit-8-polar-margins" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📐</span>
+                        <span class="heading-text">Gain margin and phase margin of polar plot</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The gain margin is Kg. It is given by:</p>
+                        <div class="equation">$$ Kg = 1/G_B $$</div>
+                        <p>$G_B$ is the value at a point (B) on the magnitude circle that cuts the 180 degree axis. The gain margin is positive if the point B lies within unit circle. Otherwise, it is negative.</p>
+                        <p>The phase margin is given by:</p>
+                        <div class="equation">$$ Y = 180^\circ + \theta $$</div> <!-- Added degree, corrected 'theta' -->
+                        <p>Where,</p>
+                        <p>Theta ($\theta$) is the phase angle of $G(j\omega)$ at the gain crossover frequency. The phase angle is calculated when the magnitude curve line intersects with the external unity circle. The line drawn from that intersection point to the end of the graph determines the angle theta. It can be positive or negative.</p>
+                        <p>Both the phase margin and the gain margin can be better understood with the help of an example.</p>
+                    </div>
+                </section>
+                <!-- END: unit-8-polar-margins -->
+
+                <!-- START: unit-8-polar-example -->
+                <section id="unit-8-polar-example" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✍️</span>
+                        <span class="heading-text">Examples</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Let's discuss an example of the polar plot.</p>
+                        <p><strong>Example:</strong> The open loop transfer function of a unity feedback system is given by $G(s) = 1/[s(s + 1)(2s + 1)]$. Sketch the polar plot and also determine the gain margin and the phase margin.</p>
+                        <p><strong>Solution:</strong> The transfer function is given by:</p>
+                        <div class="equation">$$ G(s) = 1/[s(s + 1)(2s + 1)] $$</div>
+                        <p>The above function clearly depicts that the system is of type 1 and order 3. It is in the form:</p>
+                         <div class="equation">$$ G(s) = 1/[s(1 + sT_1) (1 + sT_2)] $$</div> <!-- General form doesn't quite match T1=1, T2=1/2 -->
+                        <p>Put, $s = j\omega$</p>
+                        <div class="equation">$$ G(s) = 1/ [j\omega (j\omega + 1)(2j\omega + 1)] $$</div> <!-- Should be G(jw) -->
+                        <p>The above transfer function in the form of magnitude and angle can be represented as:</p>
+                        <div class="equation">$$ G(j\omega) = \frac{1}{\omega\angle 90^\circ [\sqrt{1 + \omega^2} \angle \tan^{-1}(\omega)][ \sqrt{1 + 4\omega^2} \angle \tan^{-1}(2\omega)]} $$</div> <!-- Corrected 4w^2, tan(2w) -->
+                        <p>If we consider the angle part in the numerator, we need to insert a negative sign due to the transition from the denominator to the numerator, as shown below:</p>
+                        <div class="equation">$$ G(j\omega) = \frac{1 \angle (-90^\circ - \tan^{-1}(\omega) - \tan^{-1}(2\omega))}{\omega\sqrt{1 + \omega^2}\sqrt{1 + 4\omega^2}} $$</div>
+                        <p>Now, let us separate the magnitude and angle terms from the above equation.</p>
+                         <div class="equation">$$ |G(j\omega)| = \frac{1}{\omega\sqrt{(1 + \omega^2) (1 + 4\omega^2)}} $$</div>
+                         <div class="equation">$$ |G(j\omega)| = \frac{1}{\omega\sqrt{1 + 4\omega^2 + \omega^2+ 4\omega^4}} $$</div>
+                         <div class="equation">$$ |G(j\omega)| = \frac{1}{\omega\sqrt{1 + 5\omega^2 + 4\omega^4}} $$</div>
+                         <div class="equation">$$ \text{Angle } G(j\omega) = -90^\circ -\tan^{-1}(\omega) - \tan^{-1}(2\omega) $$</div>
+                        <p>We know the value of the above function at zero and infinity.</p>
+                        <p>When, $\omega = 0$</p>
+                        <p>$G(j\omega) = \infty \angle -90^\circ$</p>
+                        <p>When, $\omega = \infty$</p>
+                        <p>$G(j\omega) = 0\angle -270^\circ$</p>
+                        <p>Let's find the magnitude and phase of $G(j\omega)$ at different frequencies.</p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <caption>Magnitude and Phase at Specific Frequencies</caption>
+                                <thead>
+                                    <tr><th>Radians/ second ($\omega$)</th><th>0.35</th><th>0.5</th><th>0.6</th><th>0.7</th><th>1.0</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>$|G(j\omega)|$</td><td>2.22</td><td>1.2</td><td>0.9</td><td>0.7</td><td>0.3</td></tr>
+                                    <tr><td>Angle $G(j\omega)$ (degrees)</td><td>-144</td><td>-162</td><td>-171</td><td>-180</td><td>-198</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <p>The polar plot is shown below:</p>
+                         <!-- Using corrected filename -->
+                        <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-083-1.jpg" alt="Polar plot for the example G(s)=1/[s(s+1)(2s+1)], starting at -inf on neg imaginary axis, crossing neg real axis at -0.7, and ending at origin near +90 deg." class="content-image">
+                        <p>Here, every two lines have a gap of <strong>15 degrees</strong>. We have specified both the positive and negative angle value at a point. It is based on the concept that the positive angles are measured anti-clockwise and the negative angles are measured clockwise. As we start from the 0 angle in the clockwise direction, we can notice the increase in the negative values of the angle. Similarly, as we begin from the 0 angle in the clockwise direction, we can notice the rise in the positive values of the angle.</p> <!-- MMD description is confusing, rephrased slightly -->
+                        <p>Let's calculate the gain margin and the phase margin.</p>
+                        <p>We can see in the polar plot that the magnitude circle cuts the 180 degree axis at point 0.7. Hence, it will be the value of $G_B$.</p>
+                        <p>The gain margin is $Kg = 1/G_B$</p>
+                        <p>$Kg = 1/0.7$</p>
+                        <p>$Kg = 1.428$</p>
+                        <p>The phase margin is given by:</p>
+                        <p>$Y = 180^\circ + \theta$</p>
+                        <p>We can clearly see the point marked with the red color. It is the intersection point of the magnitude curve with the unity circle. The line drawn from the intersection point (marked in red) determines the theta angle, which is equal to (-168) degrees.</p>
+                        <p>So, phase angle is equal to</p> <!-- Should be phase margin Y -->
+                        <p>$Y = 180^\circ - 168^\circ$</p>
+                        <p>$Y = 12$ degrees</p>
+                        <p>Thus, the gain margin is 1.428 and the phase angle is 12 degrees.</p> <!-- Should be phase margin -->
+                    </div>
+                </section>
+                <!-- END: unit-8-polar-example -->
+
+                 <!-- START: unit-8-nyquist-intro -->
+                 <section id="unit-8-nyquist-intro" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span>
+                        <span class="heading-text">Nyquist plot</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The extension of the polar plot is known as the Nyquist plot. The frequency in the case of the Nyquist plot varies from <strong>-infinity to infinity</strong>. The primary difference between the polar plots and the Nyquist plot is that the polar plots are based on frequencies range from zero to infinity, while the Nyquist plot also deals with negative frequencies.</p>
+                        <p>The Nyquist criteria help us determine the closed-loop system's stability from the frequency response of the open-loop poles and plot.</p>
+                        <p>We know that F(s) is a function of s. The polynomial in the numerator and denominator of the system in terms of s can be represented as:</p>
+                        <div class="equation">$$ F(s) = \frac{(s - z1)(s - z2)... (s - zm)}{(s - p1)(s - p2)... (s - pn)} $$</div>
+                        <p>The roots of the numerator, when equated to zero, determine the <strong>zeroes</strong> of the system, and the root of the denominator determines the <strong>poles</strong> of the system. It means that the given function has m number of zeroes and n number of poles. The numerical value of n is usually greater or equal to m.</p>
+                        <p>S in the function is a complex variable, and it is given by $\sigma + j\omega$. Thus, F(s) is also a complex function that can be represented in the form $u + jv$.</p>
+                        <p>It means that for every point of s in the s-plane at which the F(s) is analytic, there exists a corresponding point in the F(s) plane. The function f(s) maps into the f(s) plane. There is a contour that maps on the contour on the other side.</p>
+                        <p>In the Nyquist plot, we will detect the presence of the closed-loop system poles in the right half of the s-plane to determine the system's stability. It is because the Nyquist plot relates the open loop frequency response (given by $G(j\omega)H(j\omega)$) to the number of poles and zeroes of $1 + G(s)H(s)$ that lie in the right-half of the s-plane.</p>
+                    </div>
+                 </section>
+                <!-- END: unit-8-nyquist-intro -->
+
+                <!-- START: unit-8-s-plane-contour -->
+                 <section id="unit-8-s-plane-contour" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🗺️</span>
+                        <span class="heading-text">Contour in s-plane</span>
+                    </h2>
+                    <div class="content-card">
+                         <p>The direction of the contour in the s-plane can either enclose or encircle the point in the s-plane, and the point can be a zero or a pole. First, let's discuss the concept of encircle and enclose because both terms are useful while implementing the Nyquist stability criterion.</p>
+                         <p><strong>Encircled:</strong> If a point is said to lie inside the closed path, it is said to be encircled. It is shown below:</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-085-1.jpg" alt="Diagram showing a closed contour encircling point B but not point A." class="content-image">
+                         <p>Here, point B is encircled in the closed path in a clockwise direction, while the point A lies outside the path.</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text"><strong>Enclosed:</strong> If a point lies to the right side of path when the path is traversed in a specific direction, it is said to be enclosed by a closed path. Let's consider two closed path in the clockwise and anticlockwise direction, as shown below:</span></li>
+                         </ul>
+                          <!-- Using corrected filenames -->
+                         <div style="text-align: center;">
+                             <div style="display: inline-block; width: 48%; margin-right: 2%;">
+                                 <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-085-2.jpg" alt="Figure 1: Clockwise contour enclosing point B (shaded region to the right)." class="content-image">
+                                 <p>Figure 1</p>
+                             </div>
+                             <div style="display: inline-block; width: 48%;">
+                                <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-085-3.jpg" alt="Figure 2: Anti-clockwise contour enclosing point A (shaded region to the right)." class="content-image">
+                                <p>Figure 2</p>
+                            </div>
+                        </div>
+                        <p>The shaded region represents the region enclosed by the closed path. In the first figure, point B lies to the right when traversed in the clockwise direction, while A does not. Thus, <strong>point B</strong> is said to be enclosed by a closed path.</p>
+                        <p>Similarly, point A lies to the right when traversed in the anticlockwise direction in the second figure, while B does not. Thus, <strong>point A</strong> is said to be enclosed by a closed path.</p>
+                    </div>
+                 </section>
+                <!-- END: unit-8-s-plane-contour -->
+
+                <!-- START: unit-8-nyquist-criteria -->
+                 <section id="unit-8-nyquist-criteria" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✅</span>
+                        <span class="heading-text">Nyquist stability criteria</span>
+                    </h2>
+                    <div class="content-card">
+                         <p>The closed loop transfer function is given by:</p>
+                         <div class="equation">$$ \frac{C(s)}{R(s)} = \frac{G(s)}{1 + G(s)H(s)} $$</div>
+                         <p>Where,</p>
+                         <p>C(s) is the output of the given control system</p>
+                         <p>R(s) in the input of the given control system</p>
+                         <p>H(s) is the feedback path</p>
+                         <p>G(s) is the forward path of a system</p>
+                         <p>The characteristic equation of the system is given by the condition $1 + G(s)H(s) = 0$.</p>
+                         <p>We know that $G(s)H(s)$ in terms of zeroes and poles is given by:</p>
+                         <!-- Mathpix converted equation -->
+                         <div class="equation">$$ G(s) H(s)=\frac{K\left(s+z_{1}\right)\left(s+z_{2}\right)\left(s+z_{3}\right) \ldots\left(s+z_{m}\right)}{\left(s+p_{1}\right)\left(s+p_{2}\right)\left(s+p_{3}\right) \ldots\left(s+p_{n}\right)} $$</div>
+                         <p>The value of m is less or equal to n. It means that for an ideal control system, the number of zeroes is always less than or equal to the number of poles in a given control system.</p>
+                         <p>Let, $F(s) = 1 + G(s)H(s)$</p>
+                         <p>Putting the value of $G(s)H(s)$ in the above equation, we get:</p>
+                         <!-- Mathpix converted equations -->
+                         <div class="equation">$$ F(s)=\frac{K\left(s+z_{1}\right)\left(s+z_{2}\right)\left(s+z_{3}\right) \ldots\left(s+z_{m}\right)}{\left(s+p_{1}\right)\left(s+p_{2}\right)\left(s+p_{3}\right) \ldots\left(s+p_{n}\right)}+1 $$</div>
+                         <div class="equation">$$ F(s)=\frac{\left(s+p_{1}\right)\left(s+p_{2}\right)\left(s+p_{3}\right) \ldots\left(s+p_{n}\right)+K\left(s+z_{1}\right)\left(s+z_{2}\right)\left(s+z_{3}\right) \ldots\left(s+z_{m}\right)}{\left(s+p_{1}\right)\left(s+p_{2}\right)\left(s+p_{3}\right) \ldots\left(s+p_{n}\right)} $$</div>
+                         <div class="equation">$$ F(s)=\frac{K\left(s+z_{1}^{\prime}\right)\left(s+z_{2}^{\prime}\right)\left(s+z_{3}^{\prime}\right) \ldots\left(s+z_{n}^{\prime}\right)}{\left(s+p_{1}\right)\left(s+p_{2}\right)\left(s+p_{3}\right) \ldots\left(s+p_{n}\right)} $$</div> <!-- MMD had zm', should be zn' based on characteristic eqn order -->
+                         <p>Thus, $z1', z2'... zn'$ are the zeroes of the function F(s).</p>
+                         <p>Now, let's combine the values of $G(s)$, $1 + G(s)H(s)$ in the transfer function, which is given by:</p>
+                         <p>$C(s)/R(s) = G(s)/(1 + G(s)H(s))$</p>
+                          <!-- Mathpix converted equations -->
+                          <div class="equation">$$ \frac{C(s)}{R(s)}=\frac{\frac{K\left(s+z_{1}\right)\left(s+z_{2}\right)\left(s+z_{3}\right) \ldots\left(s+z_{m}\right)}{\left(s+p_{1}\right)\left(s+p_{2}\right)\left(s+p_{3}\right) \ldots\left(s+p_{n}\right)}}{1+\frac{K\left(s+z_{1}\right)\left(s+z_{2}\right)\left(s+z_{3}\right) \ldots\left(s+z_{m}\right)}{\left(s+p_{1}\right)\left(s+p_{2}\right)\left(s+p_{3}\right) \ldots\left(s+p_{n}\right)}} $$</div>
+                          <div class="equation">$$ \frac{C(s)}{R(s)}=\frac{K\left(s+z_{1}\right)\left(s+z_{2}\right)\left(s+z_{3}\right) \ldots\left(s+z_{m}\right)}{\left(s+z_{1}^{\prime}\right)\left(s+z_{2}^{\prime}\right)\left(s+z_{3}^{\prime}\right) \ldots\left(s+z_{n}^{\prime}\right)} $$</div>
+                         <p>$z1', z2', z3'$, and $zn'$ are the poles of the above transfer function.</p>
+                         <p>The Nyquist stability criterion is based on the point -1 + j0 to determine the stability of the closed loop system. It is because the contour of the function F(s) with respect to the origin of the plane is same as the contour of the F(s) -1 plane with respect to the point -1 + j0.</p> <!-- Reworded slightly for clarity -->
+                         <p>The point -1 + j0 on the axis will appear as:</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-088-1.jpg" alt="Point -1+j0 marked on the real axis of the complex plane." class="content-image">
+                         <p>Let's discuss the Nyquist stability criteria in terms of encirclement, anticlockwise encircle, and clockwise encirclement.</p>
+                         <h4 class="subsubsection-heading">Encirclement of point -1 + j0</h4>
+                         <p>There should be no encirclement of point -1 + j0. We know that the system is stable if the poles are present on the left half of the s-plane. Here, no encirclement means that the system is stable if there are no poles on the right side of the s-plane. The poles present on the right half of the s-plane makes the system unstable.</p>
+                         <h4 class="subsubsection-heading">Anticlockwise encirclements of point -1 + j0</h4>
+                         <p>The anticlockwise encirclements of the point -1 + j0 are equal to the number of poles present in the right half of the s-plane. If such encirclements are not equal to the number of poles, the system becomes unstable.</p>
+                         <p>For example,</p>
+                         <p>A given system has two poles. For the system to be stable, the encirclements of the point -1 + j0 should also be two.</p>
+                         <h4 class="subsubsection-heading">Clockwise encirclements of point -1 + j0</h4>
+                         <p>There should be no clockwise encirclements of the point -1 + j0 in the Nyquist plot to stabilize the system. If such encirclements are present in the plot, the system is always unstable.</p>
+                    </div>
+                 </section>
+                 <!-- END: unit-8-nyquist-criteria -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-8-part-1.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 8 (Part 2) of 9</span>
+                    </div>
+                    <a href="unit-8-part-3.html" class="nav-button"> <!-- Link to next part -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

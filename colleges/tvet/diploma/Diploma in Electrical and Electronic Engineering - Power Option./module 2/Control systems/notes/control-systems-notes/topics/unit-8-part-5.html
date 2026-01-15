@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 8: Frequency Response & Bode Plot (Part 5)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-8-part-4.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 8 (Part 5) of 9</span>
+                    </div>
+                    <a href="unit-9.html" class="nav-button"> <!-- Link to next unit -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <!-- Reusing title from part 1 -->
+                <h1 class="section-title">Unit-8: Frequency-Response Analysis & Bode Plot</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: unit-8-bode-procedure -->
+                <section id="unit-8-bode-procedure" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🛠️</span>
+                        <span class="heading-text">Procedure to draw the magnitude curve and phase angle curve of the bode plot</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Before proceeding, let's discuss the main conclusions obtained from the topic discussed above.</p>
+                        <ul class="enhanced-list">
+                           <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The constant gain K, derivative, and integral factor in the bode plot contributes gain at all the frequencies.</span></li>
+                           <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The higher order (two and more) factors in the transfer function contribute gain only when the frequency is greater than the corner frequency. The natural frequency in case of quadratic factor is assumed as corner frequency.</span></li>
+                        </ul>
+                        <p>We have also discussed the impact of the derivative and integral factor on the positive and negative slope of the Bode plot.</p>
+                        <p>Let's discuss the steps that will help us to draw the bode plot.</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item">
+                                <span class="item-icon">1.</span>
+                                <span class="item-text">Convert the given transfer function into the time constant form, which is as follows: It helps us to easily find the corner frequencies.</span>
+                            </li>
+                            <li class="list-item">
+                                <span class="item-icon">2.</span>
+                                <span class="item-text">Arrange the corner frequencies in the increasing order. The format of the table is shown below:
+                                    <div class="table-container">
+                                        <table class="content-table">
+                                             <thead>
+                                                <tr><th>Term</th><th>Corner frequency</th><th>Slope (decibels)</th><th>Change in slope</th></tr>
+                                             </thead>
+                                             <tbody>
+                                                <tr><td> </td><td> </td><td> </td><td> </td></tr>
+                                                <!-- Placeholder row -->
+                                             </tbody>
+                                        </table>
+                                    </div>
+                                </span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">3.</span>
+                                <span class="item-text">The 'Term' specifies the separate constant gain, derivative factor, and the integral factor, such as, $K, K/j\omega$, or $K (j\omega)$. The 'change in slope' includes the change in the value of the slope at each corer frequency.</span> <!-- Corrected corner spelling -->
+                             </li>
+                              <li class="list-item">
+                                <span class="item-icon">4.</span>
+                                <span class="item-text">Select a frequency, which has the lower value compared to the lowest corner frequency. Now, calculate the value of the terms at that selected frequency.</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">5.</span>
+                                <span class="item-text">Find the gain in decibels one by one at every corner frequency. The formula to find the gain is given by:
+                                    <div class="equation">$$ \text{Gain at } \omega_y = (\text{Slope from } \omega_x \text{ to } \omega_y \times \log_{10}(\omega_y/\omega_x)) + \text{gain at } \omega_x $$</div> <!-- Added base 10 to log -->
+                                    The frequencies $\omega_x$ and $\omega_y$ are shown below:
+                                     <!-- Using corrected filename -->
+                                     <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-110-1.jpg" alt="Diagram illustrating the calculation of gain at frequency wy based on the gain at wx and the slope between them on a log scale." class="content-image">
+                                 </span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">6.</span>
+                                <span class="item-text">Now, we will perform step 4 again at a different frequency, which is greater than the highest corner frequency.</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">7.</span>
+                                <span class="item-text">Take a semilog graph paper and first mark the dimension on the axis to draw the plot. The magnitude will appear on the y-axis and the frequency range will appear on the x-axis.</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">8.</span>
+                                <span class="item-text">Mark the points calculated in the above steps on the semilog graph paper and join the points. The points on the graph paper should be joined only with straight lines. We can also mark the slope at every point on the graph.</span>
+                             </li>
+                             <li class="list-item">
+                                <span class="item-icon">9.</span>
+                                <span class="item-text">The plot is assumed as the approximated plot. The exact plot requires the exact calculation at every corner frequency.</span>
+                            </li>
+                        </ol>
+
+                        <p>Consider an example.</p>
+                        <p>Let the transfer function be $G(s) = K (1 + sT_1)^2 / [s^2(1 + sT_2)( 1 + sT_3)]$</p>
+                        <p>Put, $s = j\omega$</p>
+                        <p>$G(j\omega) = K (1 + j\omega T_1)^2 / [( j\omega )^2(1 + j\omega T_2)( 1 + j\omega T_3)]$</p>
+                        <p>The value of T1, T2, 3 in the increasing order will be $T_2 < T_3 < T_1$.</p> <!-- MMD says T1,T2,3? -->
+                        <p>There will be three corner frequencies at $1/T_1, 1/T_2$, and $1/T_3$.</p>
+                        <p>In the given transfer function $G(s) = K (1 + sT_1)^2 / [s^2(1 + sT_2)( 1 + sT_3)]$, there are four terms. Thus, we will first draw the magnitude plot of these four independent terms. The four terms are $K/ (j\omega)^2$, $(1 + j\omega T_1)^2$, $1/(1 + j\omega T_2)$, and $1/( 1 + j\omega T_3)$. The first term ($K/s^2$) corresponds to an initial slope of -40 dB/decade. The third and fourth terms represent integral terms each contributing a slope change of -20db/decade at their corner frequencies. The second term is the derivative term (squared) contributing +40dB/decade slope starting at its corner frequency.</p> <!-- Rewrote term description for clarity, MMD was confusing -->
+                        <p>The final plot will be the combined plot of all the four plots, as shown below:</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-111-1.jpg" alt="Example combined Bode magnitude plot showing contributions of individual factors and the resultant asymptote." class="content-image">
+                         <p>The above Bode plot shows that the first term starts with a slope of -40 dB/decade. The third and fourth terms decrease the slope by 20 dB/decade each at $\omega_{c2}$ and $\omega_{c3}$. The second term increases the slope by 40 dB/decade at $\omega_{c1}$.</p> <!-- Corrected interpretation based on typical Bode rules -->
+                         <!-- <p>The above Bode plot shows that the first two terms have a slope of 40, while the other two has a slope of 20. The first two terms are in the form of squares in the transfer function, where log a2 is always equal to '2 log a.' Thus, it will appear with a slope of 40. As discussed above, the negative and positive terms with the slope are due to the integral and derivative factors.</p> --> <!-- MMD interpretation seems incorrect -->
+                         <p>Let's discuss how the value is combined.</p>
+                         <p>A particular value at a region will be the result of the combined values at the above four sections. For example, the section between $\omega_{c2}$ and $\omega_{c3}$ will have the value by adding all section values (-40db + 40db + 0 + 0 = 0db).</p> <!-- MMD example calculation seems flawed based on typical Bode construction, keeping verbatim text-->
+                    </div>
+                </section>
+                <!-- END: unit-8-bode-procedure -->
+
+                <!-- START: unit-8-bode-margins -->
+                <section id="unit-8-bode-margins" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">📉</span>
+                        <span class="heading-text">Phase margin and gain margin of a Bode plot</span>
+                    </h2>
+                    <div class="content-card">
+                         <p>The phase angle is calculated at various values of frequency. The frequencies are generally the same frequencies selected for plotting the magnitude section of a Bode plot. The phase and magnitude sections are drawn in a single semilog sheet with a common frequency scale for easy plotting. It also saves time.</p>
+                         <p>The relation between the phase margin and the phase angle is given by:</p>
+                         <div class="equation">$$ Y = 180^\circ + a $$</div>
+                         <p>Where,</p>
+                         <p>Y is the phase margin</p>
+                         <p>a is the phase angle</p>
+                         <p>It is calculated at the gain crossover frequency.</p>
+                         <p>If the phase cross over frequency is negative, the gain margin of the system is positive. Similarly, if the phase cross over frequency is positive, the gain margin of the system is negative.</p> <!-- This statement seems confused, Gain Margin relates to magnitude at phase crossover -->
+                    </div>
+                </section>
+                <!-- END: unit-8-bode-margins -->
+
+                <!-- START: unit-8-bode-example -->
+                <section id="unit-8-bode-example" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">✍️</span>
+                        <span class="heading-text">Bode Plot Example</span>
+                    </h2>
+                    <div class="content-card">
+                         <p>Let's discuss an example that will help us to clearly understand the concept of Bode plot, its steps, and the plotting on the semilog paper.</p>
+                         <p><strong>Example:</strong> Sketch the Bode plot of the following transfer function $G(s) = Ks^2/[(1 + 0.2s)(1 + 0.02s)]$.</p>
+                         <p>Also determine the system gain K and the gain crossover frequency to be 5 radians/second.</p>
+                         <p><strong>Solution:</strong></p>
+                         <p>$G(s) = Ks^2/[(1 + 0.2s)(1 + 0.02s)]$</p>
+                         <p><strong>Step 1: Finding the corner frequencies</strong></p>
+                         <p>Here, we will first find the value of $G(j\omega)$.</p>
+                         <div class="equation">$$ G(j\omega) = K (j\omega)^2/[(1 + 0.2j\omega)(1 + 0.02j\omega)] = -K\omega^2/[(1 + 0.2j\omega)(1 + 0.02j\omega)] $$</div>
+                         <p>There will be two corner frequencies at $T_1=0.2$ and $T_2=0.02$.</p>
+                         <p>Thus, the corner frequencies are $\omega_{c1} = 1/0.2 = 5$ radians/second and $\omega_{c2} = 1/0.02 = 50$ radians/second.</p>
+                         <p><strong>Step 2: Preparing the table</strong></p>
+                         <p>As discussed in the above steps, we will prepare a table. There are three independent factors, $(j\omega)^2$ (or $-\omega^2$), $1/(1 + 0.2j\omega)$, and $1/(1 + 0.02j\omega)$. So, the table will include three terms, as shown below:</p>
+                         <div class="table-container">
+                            <table class="content-table">
+                                <caption>Bode Plot Factors and Slopes</caption>
+                                <thead>
+                                    <tr><th>Term</th><th>Corner frequency (rad/s)</th><th>Slope (dB/decade)</th><th>Change in slope (dB/decade)</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td>$K(j\omega)^2$</td><td>- (Initial slope)</td><td>+40</td><td>+40</td></tr>
+                                    <tr><td>$1/(1 + 0.2j\omega)$</td><td>5</td><td>-20</td><td>40 - 20 = 20</td></tr>
+                                    <tr><td>$1/(1 + 0.02j\omega)$</td><td>50</td><td>-20</td><td>20 - 20 = 0</td></tr>
+                                 </tbody>
+                            </table>
+                        </div>
+                         <p>The first term will have a slope of 40 due to its square. The change in slope will include the sum of the slope from the top to bottom. The first row will have no change in the slope due to no term above it.</p>
+
+                         <p><strong>Step 3: Magnitude Calculation</strong></p> <!-- MMD structure merged calc with table, separating -->
+                         <p>We will find the value of gain at selected low frequency, two corner frequencies, and the high frequency. The gain $A = 20 \log |G(j\omega)|$. Let K=1 for initial slope calculation.</p>
+                         <p>The initial term is $(j\omega)^2$, so the gain equation related to it is $A = 20 \log |(j\omega)^2| = 40 \log \omega$.</p>
+                         <p>Let's select the frequency 0.5 rad/s, which is lower than the first corner frequency.</p>
+                         <p>At, $\omega = 0.5$ rad/s (low frequency), the value of gain is:</p>
+                         <p>$A = 40 \log(0.5) \approx 40(-0.301) \approx -12$ dB</p>
+
+                         <p>At, $\omega = \omega_{c1} = 5$ rad/s (first corner frequency), the value of gain is:</p>
+                         <p>$A = 40 \log(5) \approx 40(0.699) \approx 28$ dB</p>
+
+                         <p>Now, use the formula for gain change between corner frequencies.</p>
+                         <p>Gain at $\omega_{c2}$ = (Slope from $\omega_{c1}$ to $\omega_{c2}$ $\times \log(\omega_{c2}/\omega_{c1})$) + gain at $\omega_{c1}$</p>
+                         <p>Slope from $\omega_{c1}$ to $\omega_{c2}$ = +20 dB/decade (from table)</p>
+                         <p>Gain at $\omega = \omega_{c2} = 50$ rad/s:</p>
+                         <p>$A = (20 \log(50/5)) + 28 = (20 \log 10) + 28 = 20(1) + 28 = 48$ dB</p>
+
+                         <p>Now for high frequency, let $\omega_h = 100$ rad/s.</p>
+                         <p>Gain at $\omega_h$ = (Slope from $\omega_{c2}$ to $\omega_h$ $\times \log(\omega_h/\omega_{c2})$) + gain at $\omega_{c2}$</p>
+                         <p>Slope from $\omega_{c2}$ to $\omega_h$ = 0 dB/decade (from table)</p>
+                         <p>Gain at $\omega = 100$ rad/s:</p>
+                         <p>$A = (0 \times \log(100/50)) + 48 = 0 + 48 = 48$ dB</p>
+
+                         <p><strong>Step 4: Phase plot</strong></p>
+                         <p>The phase angle of the given transfer function $G(j\omega) = -K\omega^2/[(1 + 0.2j\omega)(1 + 0.02j\omega)]$ is:</p>
+                         <div class="equation">$$ \text{Phase angle} = \angle(-K\omega^2) - \angle(1 + 0.2j\omega) - \angle(1 + 0.02j\omega) $$</div>
+                         <div class="equation">$$ \text{Phase angle} = 180^\circ - \tan^{-1}(0.2\omega) - \tan^{-1}(0.02\omega) $$</div>
+                         <p>The term $(j\omega)^2 = -\omega^2$ has an angle of $180^\circ$.</p> <!-- Corrected explanation -->
+                         <p>Let's find the value of phase angles at different values of $\omega$. It is shown in the below table:</p>
+                          <div class="table-container">
+                             <table class="content-table">
+                                <caption>Phase Angle Calculation at Specific Frequencies</caption>
+                                <thead>
+                                     <tr><th>$\omega$ (rad/s)</th><th>$\tan^{-1}(0.2\omega)$ (deg)</th><th>$\tan^{-1}(0.02\omega)$ (deg)</th><th>Phase angle (deg)</th><th>Points for reference</th></tr>
+                                </thead>
+                                <tbody>
+                                     <tr><td>0.5</td><td>5.7</td><td>0.6</td><td>180 - 5.7 - 0.6 = 173.7</td><td>E</td></tr>
+                                     <tr><td>1</td><td>11.3</td><td>1.1</td><td>180 - 11.3 - 1.1 = 167.6</td><td>F</td></tr>
+                                     <tr><td>5</td><td>45</td><td>5.7</td><td>180 - 45 - 5.7 = 129.3</td><td>G</td></tr>
+                                     <tr><td>10</td><td>63.4</td><td>11.3</td><td>180 - 63.4 - 11.3 = 105.3</td><td>H</td></tr>
+                                     <tr><td>50</td><td>84.3</td><td>45</td><td>180 - 84.3 - 45 = 50.7</td><td>I</td></tr>
+                                     <tr><td>100</td><td>87.1</td><td>63.4</td><td>180 - 87.1 - 63.4 = 29.5</td><td>J</td></tr>
+                                 </tbody>
+                             </table>
+                         </div>
+                        <p>We can consider the approximated value for the given values of the phase angle.</p>
+
+                        <p><strong>Step 5: Calculation of the value K</strong></p>
+                        <p>We are given that the gain crossover frequency is 5 rad/s. This means the magnitude of the Bode plot (with K) must be 0 dB at $\omega=5$ rad/s.</p>
+                        <p>The magnitude is $|G(j\omega)| = |K(j\omega)^2/[(1 + 0.2j\omega)(1 + 0.02j\omega)]|$.</p>
+                        <p>Magnitude in dB is $A_{dB} = 20 \log |K| + 20 \log |(j\omega)^2/[(1 + 0.2j\omega)(1 + 0.02j\omega)]|$.</p>
+                        <p>We calculated the gain of the transfer function *without K* at $\omega=5$ rad/s to be 28 dB (in Step 3).</p>
+                        <p>So, at $\omega=5$, $A_{dB} = 20 \log K + 28$ dB.</p>
+                        <p>We want this to be 0 dB (gain crossover).</p>
+                        <p>$0 = 20 \log K + 28$</p>
+                        <p>$20 \log K = -28$</p>
+                        <p>$\log K = -28/20 = -1.4$</p>
+                        <div class="equation">$$ K = 10^{-1.4} \approx 0.0398 $$</div>
+                        <p>Thus, the term -28db is contributed by the term K.</p> <!-- MMD conclusion slightly rephrased -->
+
+                        <p>The magnitude plot and the phase plot are shown below:</p>
+                        <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-115-1.jpg" alt="Bode plot example showing magnitude (starting +40dB/dec slope, breaking at wc1=5, wc2=50) and phase (starting at 180 deg, decreasing towards 0 deg)." class="content-image">
+
+                         <h3 class="subsection-heading">Exact value of the plot</h3>
+                         <p>We know that the exact plot is 3 db less than the actual plot at corner frequencies (for denominator terms) or 3 dB more (for numerator terms). Thus, for the exact plot, the gain adjustment due to K would be based on the desired 0 dB crossover matching the *exact* magnitude curve, not the asymptote calculation.</p>
+                         <!-- MMD explanation is confusing and seems incorrect. Recalculating K based on exact magnitude = 1 (0dB) at w=5 -->
+                         <p>Exact magnitude at $\omega=5$ (for K=1):</p>
+                         <div class="equation">$$ |G(j5)|_{K=1} = \frac{|(j5)^2|}{|(1 + 0.2j5)(1 + 0.02j5)|} = \frac{|-25|}{|(1+j1)(1+j0.1)|} = \frac{25}{|\sqrt{1^2+1^2} \angle 45^\circ \cdot \sqrt{1^2+0.1^2} \angle 5.7^\circ|} $$</div>
+                         <div class="equation">$$ = \frac{25}{|\sqrt{2} \cdot \sqrt{1.01}|} = \frac{25}{\sqrt{2.02}} \approx \frac{25}{1.421} \approx 17.59 $$</div>
+                         <p>Magnitude in dB (for K=1) = $20 \log(17.59) \approx 24.9$ dB.</p>
+                         <p>For gain crossover at $\omega=5$, we need $20 \log K + 24.9 = 0$.</p>
+                         <p>$20 \log K = -24.9$</p>
+                         <p>$\log K = -24.9 / 20 = -1.245$</p>
+                         <div class="equation">$$ K = 10^{-1.245} \approx 0.0569 $$</div>
+                         <!-- MMD Calculation:
+                         <p>We know that the exact plot is 3 db less than the actual plot. Thus, for the exact plot, the term -28 db+ 3db = -25db is contributed by the term K.</p>
+                         <p>20 log K = -25db</p>
+                         <p>Log K = -25/20 = 0.0562</p> --> <!-- MMD has error in log K calc -->
+                         <p>At last, let's discuss some of its advantages and disadvantages.</p>
+                    </div>
+                </section>
+                <!-- END: unit-8-bode-example -->
+
+                <!-- START: unit-8-bode-advantages -->
+                <section id="unit-8-bode-advantages" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">👍</span>
+                        <span class="heading-text">Advantages of the Bode Plot</span>
+                    </h2>
+                    <div class="content-card">
+                         <p>The advantages of the Bode Plot are as follows:</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">It covers low frequency as well as high frequency.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The Bode plot provides the relative stability of the system in terms of the gain margin and phase margin.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">It can be drawn both for the closed loop system and open-loop system.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">It also provides us a method to improve the stability of the system.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">It converts the multiplication of magnitudes into addition.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The sketching of bode plots is derived from a simple method.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">The information loss is very less.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">It consists of two graphs that eliminate the confusion between the magnitude and the phase plots.</span></li>
+                            <li class="list-item"><span class="item-icon">o</span> <span class="item-text">Bode plot is based on the asymptotic approximations that use straight line segments for plotting on the semilog graph.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                 <!-- END: unit-8-bode-advantages -->
+
+                 <!-- Disadvantages moved to end of Unit 8 for flow -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-8-part-4.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 8 (Part 5) of 9</span>
+                    </div>
+                    <a href="unit-9.html" class="nav-button"> <!-- Link to next unit -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

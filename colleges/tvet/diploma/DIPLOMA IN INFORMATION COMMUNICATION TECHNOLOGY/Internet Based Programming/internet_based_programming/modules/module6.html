@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Module 6: WEB SECURITY - Internet Based Programming</title>
+  <meta name="description" content="Examine web security, issues, challenges, and security measures to protect web applications.">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="6">
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="../index.html" class="nav-button">
+          <span>←</span> Home
+        </a>
+        <a href="module5.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 6 of 7</span>
+        </div>
+        <a href="module7.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+    <header class="module-header">
+      <h1>TOPIC 6: WEB SECURITY</h1>
+      <section class="module-objectives">
+        <h2>🎯 Learning Objectives</h2>
+        <ul>
+          <li>Define web security and its importance.</li>
+          <li>Identify common web security issues and threats.</li>
+          <li>Discuss challenges in implementing web security.</li>
+          <li>Explain web security measures and best practices.</li>
+        </ul>
+      </section>
+    </header>
+    <main class="module-content">
+      <section class="topic-section" id="topic-6-1">
+        <h2>📚 T6.1) Explaining web security</h2>
+        <h3>Definition of Web Security</h3>
+        <ol>
+          <li>Web application security is the process of securing confidential data stored online from unauthorized access and modification. This is accomplished by enforcing stringent policy measures. Security threats can compromise the data stored by an organization is hackers with malicious intentions try to gain access to sensitive information.</li>
+          <li>a set of procedures, practices, and technologies for assuring the reliable, predictable operation of web servers, web browsers, other programs that communicate with web servers, and the surrounding Internet infrastructure.</li>
+        </ol>
+        <p>The aim of Web application security is to identify the following:</p>
+        <ul>
+          <li>Critical assets of the organization</li>
+          <li>Genuine users who may access the data</li>
+          <li>Level of access provided to each user</li>
+          <li>Various vulnerabilities that may exist in the application</li>
+          <li>Data criticality and risk analysis on data exposure</li>
+          <li>Appropriate remediation measures</li>
+        </ul>
+        <p>Web application security aims to address and fulfill the four conditions of security, also referred to as principles of security:</p>
+        <ul>
+          <li><b>Confidentiality</b>: States that the sensitive data stored in the Web application should not be exposed under any circumstances.</li>
+          <li><b>Integrity</b>: States that the data contained in the Web application is consistent and is not modified by an unauthorized user.</li>
+          <li><b>Availability</b>: States that the Web application should be accessible to the genuine user within a specified period of time depending on the request.</li>
+          <li><b>Nonrepudiation</b>: States that the genuine user cannot deny modifying the data contained in the Web application and that the Web application can prove its identity to the genuine user.</li>
+        </ul>
+        <p>The process of security analysis runs parallel with Web application development. The group of programmers and developers who are responsible for code development are also responsible for the execution of various strategies, post-risk analysis, mitigation and monitoring.</p>
+      </section>
+
+      <section class="topic-section" id="topic-6-2">
+        <h2>📚 T6.2) Identifying web security issues</h2>
+        <p>What are the different types of website security issues, risks or threats, and what can make your business and website an attractive or susceptible target? Many small businesses feel they do not represent a worthwhile target to attackers, but as you will read, this assumption is plain wrong. All online entities face a variety of security risks and threats that should be understood and assessed.</p>
+        <p>For all too many companies, it8s not until <i>after</i> a breach has occurred that web security becomes a priority. An effective approach to IT security must, by definition, be proactive and defensive. Toward that end, this discussion is aimed at sparking a security mindset, hopefully injecting the reader with a healthy dose of paranoia.</p>
+        <p>In particular, this guide focuses on common and significant web security pitfalls to be aware of, including recommendations on how they can be avoided.</p>
+
+        <h4>A little web security primer before we start – authentication and authorization</h4>
+        <p>There usually is a confusion regarding the distinction between authorization and authentication. And of course, the fact the abbreviation <i>auth</i> is often used for both helps aggravate this common confusion. This confusion is so common that maybe this issue should be included in this post as 5Common Web Vulnerability Zero6.</p>
+        <p>So before we proceed, let8s clearly the distinction between these two terms:</p>
+        <ul>
+          <li><b>Authentication</b>: Verifying that a person is (or at least appears to be) a specific user, since he/she has correctly provided their security credentials (password, answers to security questions, fingerprint scan, etc.).</li>
+          <li><b>Authorization</b>: Confirming that a particular user has access to a specific resource or is granted permission to perform a particular action.</li>
+        </ul>
+        <p>Stated another way, <b>authentication</b> is knowing who an entity is, while <b>authorization</b> is knowing what a given entity can do.</p>
+
+        <h4>1. Common Mistake #1: Injection flaws</h4>
+        <p>Injection flaws result from a classic failure to filter untrusted input. It can happen when you pass unfiltered data to the SQL server (SQL injection), to the browser (XSS 3 we8ll talk about this later), to the LDAP server (LDAP injection), or anywhere else. The problem here is that the attacker can inject commands to these entities, resulting in loss of data and hijacking clients8 browsers.</p>
+        <p>Anything that your application receives from untrusted sources must be filtered, preferably according to a whitelist. You should almost never use a blacklist, as getting that right is very hard and usually easy to bypass. Antivirus software products typically provide stellar examples of failing blacklists. Pattern matching does not work.</p>
+        <p><b>Prevention</b>: The good news is that protecting against injection is 5simply6 a matter of filtering your input properly and thinking about whether an input can be trusted. But the bad news is that <i>all</i> input needs to be properly filtered, unless it can unquestionably be trusted (but the saying 5never say never6 does come to mind here).</p>
+        <p>In a system with 1,000 inputs, for example, successfully filtering 999 of them is not sufficient, as this still leaves one field that can serve as the Achilles heal to bring down your system. And you might think that putting an SQL query result into another query is a good idea, as the database is trusted, but if the perimeter is not, the input comes indirectly from guys with malintent. This is called <b>Second Order SQL Injection</b> in case you8re interested.</p>
+        <p>Since filtering is pretty hard to do right (like crypto), what I usually advise is to rely on your framework8s filtering functions: they are proven to work and are thoroughly scrutinized. If you do not use frameworks, you really need to think hard about whether not using them really makes sense in your environment. 99% of the time it does not.</p>
+
+        <h4>2. Common Mistake #2: Broken Authentication</h4>
+        <p>This is a collection of multiple problems that might occur during broken authentication, but they don8t all stem from the same root cause.</p>
+        <p>Assuming that anyone still wants to roll their own authentication code in 2014 (what are you thinking??), I advise against it. It is extremely hard to get right, and there are a myriad of possible pitfalls, just to mention a few:</p>
+        <ol>
+          <li>The URL might contain the session id and leak it in the referer header to someone else.</li>
+          <li>The passwords might not be encrypted either in storage or transit.</li>
+          <li>The session ids might be predictable, thus gaining access is trivial.</li>
+          <li>Session fixation might be possible.</li>
+          <li>Session hijacking might be possible, timeouts not implemented right or using HTTP (no SSL), etc…</li>
+        </ol>
+        <p><b>Prevention</b>: The most straightforward way to avoid this web security vulnerability is to use a framework. You might be able to implement this correctly, but the former is much easier. In case you do want to roll your own code, be extremely paranoid and educate yourself on what the pitfalls are. There are quite a few.</p>
+
+        <h4>3. Common Mistake #3: Cross Site Scripting (XSS)</h4>
+        <p>This is a fairly widespread input sanitization failure (essentially a special case of common mistake #1). An attacker gives your web application JavaScript tags on input. When this input is returned to the user unsanitized, the user8s browser will execute it. It can be as simple as crafting a link and persuading a user to click it, or it can be something much more sinister. On page load the script runs and, for example, can be used to post your cookies to the attacker.</p>
+        <p><b>Prevention</b>: There8s a simple web security solution: don8t return HTML tags to the client. This has the added benefit of defending against HTML injection, a similar attack whereby the attacker injects plain HTML content (such as images or loud invisible flash players) 3 not high-impact but surely annoying (5please make it stop!6). Usually, the workaround is simply converting all HTML entities, so that <code>&lt;script&gt;</code> is returned as <code>&amp;lt;script&amp;gt;</code>. The other often employed method of sanitization is using regular expressions to strip away HTML tags using regular expressions on <code>&lt;</code> and <code>&gt;</code>, but this is dangerous as a lot of browsers will interpret severely broken HTML just fine. Better to convert all characters to their escaped counterparts.</p>
+
+        <h4>4. Common Mistake #4: Insecure Direct Object References</h4>
+        <p>This is a classic case of trusting user input and paying the price in a resulting security vulnerability. A direct object reference means that an internal object such as a file or database key is exposed to the user. The problem with this is that the attacker can provide this reference and, if authorization is either not enforced (or is broken), the attacker can access or do things that they should be precluded from.</p>
+        <p>For example, the code has a <code>download.php</code> module that reads and lets the user download files, using a CGI parameter to specify the file name (e.g., <code>download.php?file=something.txt</code>). Either by mistake or due to laziness, the developer omitted authorization from the code. The attacker can now use this to download any system files that the user running PHP has access to, like the application code itself or other data left lying around on the server, like backups. Uh-oh.</p>
+        <p>Another common vulnerability example is a password reset function that relies on user input to determine whose password we8re resetting. After clicking the valid URL, an attacker can just modify the <code>username</code> field in the URL to say something like 5admin6.</p>
+        <p>Incidentally, both of these examples are things I myself have seen appearing often 5in the wild6.</p>
+        <p><b>Prevention</b>: Perform user authorization properly and consistently, and whitelist the choices. More often than not though, the whole problem can be avoided by storing data internally and not relying on it being passed from the client via CGI parameters. Session variables in most frameworks are well suited for this purpose.</p>
+
+        <h4>5. Common Mistake #5: Security misconfiguration</h4>
+        <p>In my experience, web servers and applications that have been misconfigured are way more common than those that have been configured properly. Perhaps this because there is no shortage of ways to screw up. Some examples:</p>
+        <ol>
+          <li>Running the application with debug enabled in production.</li>
+          <li>Having directory listing enabled on the server, which leaks valuable information.</li>
+          <li>Running outdated software (think WordPress plugins, old PhpMyAdmin).</li>
+          <li>Having unnecessary services running on the machine.</li>
+          <li>Not changing default keys and passwords. (Happens way more frequently than you8d believe!)</li>
+          <li>Revealing error handling information to the attackers, such as stack traces.</li>
+        </ol>
+        <p><b>Prevention</b>: Have a good (preferably automated) 5build and deploy6 process, which can run tests on deploy. The poor man8s security misconfiguration solution is post-commit hooks, to prevent the code from going out with default passwords and/or development stuff built in.</p>
+
+        <h4>6. Common Mistake #6: Sensitive data exposure</h4>
+        <p>This web security vulnerability is about crypto and resource protection. Sensitive data should be encrypted at all times, including in transit and at rest. No exceptions. Credit card information and user passwords should never travel or be stored unencrypted, and passwords should always be hashed. Obviously the crypto/hashing algorithm must not be a weak one 3 when in doubt, use AES (256 bits and up) and RSA (2048 bits and up).</p>
+        <p>And while it goes without saying that session IDs and sensitive data should not be traveling in the URLs and sensitive cookies should have the secure flag on, this is very important and cannot be over-emphasized.</p>
+        <p><b>Prevention</b>:</p>
+        <ul>
+          <li><b>In transit</b>: Use HTTPS with a proper certificate and PFS (Perfect Forward Secrecy). Do not accept anything over non-HTTPS connections. Have the secure flag on cookies.</li>
+          <li><b>In storage</b>: This is harder. First and foremost, you need to lower your exposure. If you don8t need sensitive data, shred it. Data you don8t have can8t be stolen. Do not store credit card information ever, as you probably don8t want to have to deal with being PCI compliant. Sign up with a payment processor such as Stripe or Braintree. Second, if you have sensitive data that you actually do need, store it encrypted and make sure all passwords are hashed. For hashing, use of bcrypt is recommended. If you don8t use bcrypt, educate yourself on salting and rainbow tables.</li>
+        </ul>
+        <p>And at the risk of stating the obvious, do not store the encryption keys next to the protected data. That8s like storing your bike with a lock that has the key in it. Protect your backups with encryption and keep your keys very private. And of course, don8t lose the keys!</p>
+
+        <h4>7. Common Mistake #7: Missing function level access control</h4>
+        <p>This is simply an authorization failure. It means that when a function is called on the server, proper authorization was not performed. A lot of times, developers rely on the fact that the server side generated the UI and they think that the functionality that is not supplied by the server cannot be accessed by the client. It is not as simple as that, as an attacker can always forge requests to the 5hidden6 functionality and will not be deterred by the fact that the UI doesn8t make this functionality easily accessible. Imagine there8s an <code>/admin</code> panel, and the button is only present in the UI if the user is actually an admin. Nothing keeps an attacker from discovering this functionality and misusing it if authorization is missing.</p>
+        <p><b>Prevention</b>: On the server side, authorization must always be done. Yes, always. No exceptions or vulnerabilities will result in serious problems.</p>
+
+        <h4>8. Common Mistake #8: Cross Site Request Forgery (CSRF)</h4>
+        <p>This is a nice example of a confused deputy attack whereby the browser is fooled by some other party into misusing its authority. A 3rd party site, for example, can make the user8s browser misuse it8s authority to do something for the attacker.</p>
+
+        <h4>9. Common Mistake #9: Using components with known vulnerabilities</h4>
+        <p>The title says it all. I8d again classify this as more of a maintenance/deployment issue. Before incorporating new code, do some research, possibly some auditing. Using code that you got from a random person on GitHub or some forum might be very convenient, but is not without risk of serious web security vulnerability.</p>
+
+        <h4>10. Common Mistake #10: Unvalidated redirects and forwards</h4>
+        <p>This is once again an input filtering issue. Suppose that the target site has a <code>redirect.php</code> module that takes a URL as a GET parameter. Manipulating the parameter can create a URL on <code>targetsite.com</code> that redirects the browser to <code>malwareinstall.com</code>. When the user sees the link, they will see <code>targetsite.com/blahblahblah</code> which the user thinks is trusted and is safe to click. Little do they know that this will actually transfer them onto a malware drop (or any other malicious) page. Alternatively, the attacker might redirect the browser to <code>targetsite.com/deleteprofile?confirm=1</code>.</p>
+        <p>It is worth mentioning, that stuffing unsanitized user-defined input into an HTTP header might lead to header injection which is pretty bad.</p>
+        <p><b>Prevention</b>: Options include:</p>
+        <ul>
+          <li>Don8t do redirects at all (they are seldom necessary).</li>
+          <li>Have a static list of valid locations to redirect to.</li>
+          <li>Whitelist the user-defined parameter, but this can be tricky.</li>
+        </ul>
+      </section>
+
+      <section class="topic-section" id="topic-6-3">
+        <h2>📚 T6.3) Challenges of web security</h2>
+        <p>Overreliance on Web gateways is putting data, users, customers, organizations, and reputation in harm's way.</p>
+        <p>Once upon a time, organizations primarily used Web gateways to prevent employees from wasting time surfing the Web 4 or worse, from visiting gambling, adult, and other unauthorized websites.</p>
+        <p>A few decades later, Web gateways do much more than enforce regulatory compliance and HR policies. Organizations rely on them to thwart Internet-borne threats in three ways:</p>
+        <ul>
+          <li>Advanced URL filtering, which uses categorization, reputation analysis, and/or blacklists to control access to categories of malicious or suspicious websites.</li>
+          <li>Anti-malware protection, which uses various capabilities (such as antivirus, sandboxing, advanced threat protection, content inspection, etc.), to guard against infections caused by various kinds of malware (including rootkits, worms, Trojans, viruses, ransomware, spyware, adware, etc.).</li>
+          <li>Application control capabilities, which manage and limit what users are allowed to do in specific applications.</li>
+        </ul>
+        <p>However, although Web gateways have been around for decades and continue to evolve, they aren't bulletproof, and overreliance on them is putting data, users, customers, organizations, and reputation in harm's way. Here are five of the biggest Web gatway security challenges:</p>
+
+        <h4>1. Filtering out malicious sites</h4>
+        <p>Although URL categorization sounds appealing, this approach is actually very limited. To categorize malicious sites with 100% accuracy, Web gateways need to know how to identify even the most advanced threats. Unfortunately, the attackers' rate of innovation combined with frequent zero-day exploits are leaving Web gateways behind the curve.</p>
+        <p>To make things worse, it's also hard to keep up when 571 new websites are created every second, which generates a high volume of domains and increases the chance that some will be missed by security controls. It8s difficult for filters to detect the malicious URLs that attackers use for three reasons: URLs may be triggered only by the target organization and remain stealthy during categorization, they8re short lived (less than 24 hours), and they use dynamic domains that are harder to thwart than static ones.</p>
+
+        <h4>2. Protecting against uncategorized websites without compromising productivity</h4>
+        <p>Employees need access to information to be productive. However, many organizations block access to uncategorized sites because of security concerns, and in the process they reduce end user productivity. Not only does this practice hinder end users, but security teams are forced to deal with an onslaught of support tickets for users who legitimately need to access information. As a result, security teams find themselves maintaining a growing number of policies and rules. This is a major Web security problem because 1% to 10% of URLs can't be classified because of a lack of information.</p>
+
+        <h4>3. Fighting infections from websites considered safe</h4>
+        <p>The belief that infections occur only through websites that are categorized as suspicious or malicious is false. Websense estimates that 85% of infections occur through websites considered legitimate and safe. It's becoming increasingly common for so-called safe websites to knowingly serve malicious content.</p>
+        <p>A good example is "malvertizing," which injects malicious ads into legitimate online advertising networks later served by publishers that don't know that ads are malicious. These malicious ads may not even require any user interaction to infect unsuspecting victims. A recent example is the large-scale malvertising attacks that occurred in June and July this year against several Yahoo properties. To circumvent ad blockers8 ability to separate banner and display ads, some publishers are integrating ads into their general content. Others, including GQ publisher Condé Nast, insist that users disable their ad blockers in order to access content.</p>
+        <p>Then there's the fact that many seemingly safe websites use common content management systems that are vulnerable to zero-day exploits and can therefore be compromised by attackers to serve malicious content. In July, thousands of websites running WordPress and Joomla 4 which account for about 60% of all website traffic 4 served ransomware to all their visitors. And you may remember that back in early 2015, Forbes.com was breached by Chinese hackers who served malicious code via its "Thought of the Day" Flash widget.</p>
+
+        <h4>4. Identifying malicious files and keeping them out</h4>
+        <p>Although some Web gateways integrate antivirus engines and other file-scanning services, antivirus scanners detect only 20% to 30% of malware.</p>
+        <p>Leveraging sandboxes to detect malware requires time to run and analyze files. To avoid affecting user experience, Web gateways often pass files to users while sandboxes complete their analysis in the background 4 which essentially means users are exposed to attacks. Moreover, with the proliferation of sandbox evasion techniques and as malware is often target-specific, sandboxes are proving to be less effective.</p>
+
+        <h4>5. Neutralizing malware on infected machines</h4>
+        <p>Web gateways only analyze network traffic, not what users are actually doing. As such, gateways have a hard time differentiating between legitimate and malicious traffic, and detecting and neutralizing malware on infected machines. In fact, some advanced threats can be active for weeks or even months without being detected.</p>
+        <p>Indeed, recent research has found that 80% of Web gateways failed to block malicious outbound traffic. Remote access Trojans are another example of how Web gateways can't detect and stop malicious traffic.</p>
+      </section>
+
+      <section class="topic-section" id="topic-6-4">
+        <h2>📚 T6.4) Explaining web security measures</h2>
+        <h3>A. Basic System Security Measures</h3>
+        <p>The <b>Basic System Security Measures</b> apply to all systems at NYU, regardless of the level of their System Classification. It is a baseline, which all systems must meet. Note that for most personal workstations, these are the only Measures that apply. The requirements are:</p>
+        <ol>
+          <li><b>Password Protection</b>: All accounts and resources must be protected by passwords which meet the following requirements, which must be automatically enforced by the system:
+            <ol>
+              <li>Must be at least eight characters long</li>
+              <li>Must NOT be dictionary or common slang words in any language, or be readily guessable</li>
+              <li>Must include at least three of the following four characteristics in any order:upper case letters, lower case letters, numbers, and special characters, such as*!@#$%^&*.</li>
+              <li>Must be changed at least once per year.</li>
+            </ol>
+          </li>
+          <li><b>Software Updates</b>: Systems must be configured to automatically update operating system software, server applications (webserver, mailserver, database server, etc), client software (web-browsers, mail-clients, office suites, etc), and malware protection software (anti-virus, anti-spyware, etc). For <b>Medium or High Availability</b> systems, a plan to manually apply new updates within a documented time period is an acceptable alternative.</li>
+          <li><b>Firewall</b>: Systems must be protected by a firewall which allows only those incoming connections necessary to fulfill the business need of that system. Client systems which have no business need to provide network services must deny all incoming connections. Systems that provide network services must limit access those services to the smallest reasonably manageable group of hosts that need to reach them.</li>
+          <li><b>Malware Protection</b>: Systems running Microsoft or Apple operating systems must have anti-virus software installed and it must be configured to automatically scan and update.</li>
+        </ol>
+
+        <h3>B. Intermediate System Security Measures</h3>
+        <p>The <b>Intermediate System Security Measures</b> define the Security Measures that must be applied to medium criticality and high criticality systems. Note that except under special circumstances, they do not apply to desktop and laptop computers. The requirements are:</p>
+        <ol>
+          <li><b>Authentication and Authorization</b>
+            <ol>
+              <li><b>Remove or disable accounts upon loss of eligibility</b>: Accounts which are no longer needed must be disabled in a timely fashion using an automated or documented procedure.</li>
+              <li><b>Separate user and administrator accounts</b>: Administrator accounts must not be used for non-administrative purposes. System administrators must be provisioned with non-administrator accounts for end-user activities, and a separate administrator account that is used only for system-administration purposes.</li>
+              <li><b>Use unique passwords for administrator accounts</b>: Privileged accounts must use unique passwords that are not shared among multiple systems. Credentials which are managed centrally, such as the NetID/password combination, are considered a single account, regardless of how many systems they provide access to.</li>
+              <li><b>Throttle repeated unsuccessful login-attempts</b>: A maximum rate for unsuccessful login attempts must be enforced. Account lockout is not required, but the rate of unsuccessful logins must be limited.</li>
+              <li><b>Enable session timeout</b>: Sessions must be locked or closed after some reasonable period.</li>
+              <li><b>Enforce least privilege</b>: Non-administrative accounts must be used whenever possible. User accounts and server processes must be granted the least-possible level of privilege that allows them to perform their function.</li>
+            </ol>
+          </li>
+          <li><b>Audit and Accountability</b>
+            <ol>
+              <li><b>Synchronize system clock</b>: The system clock must be synchronized to an authoritative time server run by NYU (currently tick.nyu.edu and tock.nyu.edu) at least once per day.</li>
+              <li><b>Enable system logging and auditing</b>: The facilities required to automatically generate, retain, and expire system logs must be enabled.</li>
+              <li><b>Follow an appropriate log retention schedule</b>: System logs must be retained for 30-90 days and then destroyed unless further retention is necessary due to legal, regulatory, or contractual requirements.</li>
+              <li><b>Audit successful logins</b>: Generate a log message whenever a user successfully logs on.</li>
+              <li><b>Audit failed login attempts</b>: Generate a log message whenever a user attempts to log on without success.</li>
+              <li><b>Audit when a system service is started or stopped</b>: Generate a log message when a system service is started or stopped.</li>
+              <li><b>Audit serious or unusual errors</b>: Generate a log message when a serious or unusual error occurs, such as crashes.</li>
+              <li><b>Audit resource exhaustion errors</b>: Generate a log message when a resource exhaustion error occurs, such as an out-of-memory error or an out-of-disk error.</li>
+              <li><b>Audit failed access attempts</b>: Generate a log message when an attempt to access a file or resource is denied due to insufficient privilege.</li>
+              <li><b>Audit permissions changes</b>: Generate a log message when the permissions of a user or group are changed.</li>
+              <li><b>Include appropriate correlation data in audit events</b>: For each audit event logged be sure to include sufficient information to investigate the event, including related IP address, timestamp, hostname, username, application name and/or other details as appropriate.</li>
+            </ol>
+          </li>
+          <li><b>Configuration and Maintenance</b>
+            <ol>
+              <li><b>Security Partitioning</b>: Systems may share hardware and resources only with other systems that have similar security requirements, regardless of their <i>criticality</i> classification. Systems which share similar security requirements have user communities of similar size and character, similar firewall profiles, and similar technical requirements. For example:
+                <ol>
+                  <li>Multiple systems of the same criticality may be aggregated together to share hardware and resources provided they have similar security requirements.</li>
+                  <li>Medium criticality systems may share hardware and resources with low criticality systems provided that all systems meet the <i>intermediate systems Security Measures</i>, and share similar security requirements.</li>
+                </ol>
+              </li>
+              <li><b>Follow vendor hardening guidelines</b>: This document cannot be comprehensive for all systems available. Follow basic vendor recommendations to harden and secure systems.</li>
+              <li><b>Disable vendor default accounts and passwords</b>: Many systems come with default accounts which are publicly known. These accounts should be disabled.</li>
+              <li><b>Disable all unnecessary network services</b>: Processes and services which are not necessary to complete the function of a system must be disabled.</li>
+            </ol>
+          </li>
+          <li><b>Additional Requirements</b>
+            <ol>
+              <li><b>Report potential security incidents</b>: Potential security incidents must be reported to the IT Office of Information Security.</li>
+              <li><b>Security review</b>: During the design of the technical architecture, a review of the system must be requested from the NYU IT Office of Information Security.</li>
+              <li><b>Vulnerability assessment</b>: Before system deployment, a vulnerability assessment must be requested from the NYU IT Office of Information Security.</li>
+              <li><b>Physical access</b>: The system must reside in a locked facility, to which only authorized personnel have access.</li>
+              <li><b>Documentation</b>: Create and maintain documentation summarizing the business-process, major system components, and network communications associated with a system.</li>
+            </ol>
+          </li>
+        </ol>
+
+        <h3>C. Advanced System Security Measures</h3>
+        <p>The <b>Advanced System Security Measures</b> define the Security Measures that must be applied to high criticality systems. The requirements are:</p>
+        <ol>
+          <li><b>Audit and Accountability</b>
+            <ol>
+              <li><b>Enable process auditing or accounting</b>: Enable process auditing or accounting, which generates logs information about the creation of new processes and their system activity.</li>
+              <li><b>Audit privilege escalation or change in privilege</b>: Generate a log message whenever a user changes their level of privilege.</li>
+              <li><b>Audit firewall denial</b>: Generate a log message when the host-based firewall denies a network connection.</li>
+              <li><b>Audit all significant application events</b>: Log all significant application events.</li>
+              <li><b>Write audit events to a separate system</b>: System logs must be written to a remote system in such a way that they cannot be altered by any user on the system being logged.</li>
+            </ol>
+          </li>
+          <li><b>Configuration and Maintenance</b>
+            <ol>
+              <li><b>Follow advanced vendor security recommendations</b>: This document cannot be comprehensive for all systems and applications available. Conform to best practices and recommendations outlined in vendor security whitepapers and documentation.</li>
+              <li><b>Host-based and network-based firewalls</b>: Systems must be protected by both a host-based and a network-based firewall that allows only those incoming connections necessary to fulfill the business need of that system.</li>
+              <li><b>Configuration management process</b>: Configuration changes must be regulated by a documented configuration and change management process.</li>
+              <li><b>Partitioning</b>: Systems may share hardware and resources only with other systems that have similar security requirements, regardless of their <i>criticality</i> classification. Systems which share similar security requirements have user communities of similar size and character, similar firewall profiles, and similar technical requirements. For example:
+                <ol>
+                  <li>Multiple systems of the same criticality may be aggregated together to share hardware and resources provided they have similar security requirements.</li>
+                  <li>High criticality systems may share hardware and resources with medium and low criticality systems provided that all systems meet the <i>advanced systems Security Measures</i>, and share similar security requirements.</li>
+                </ol>
+              </li>
+            </ol>
+          </li>
+          <li><b>Additional Requirements</b>
+            <ol>
+              <li><b>Physical access</b>: The system must reside in a secured, managed data-center.</li>
+            </ol>
+          </li>
+        </ol>
+
+        <h3>D. Data Handling Security Measures</h3>
+        <p>These <b>Data Security Measures</b> define the minimum security requirements that must be applied to the data types defined in the <i>Reference for Data and System Classification</i>. Some data elements, such as credit card numbers and patient health records, have additional security requirements defined in external standards. In addition, access and use of University Data is covered by the Administrative Data Management Policy. Please be sure to consult all appropriate documents when determining the appropriate measure to safeguard your data.</p>
+        <p>The best way to safeguard sensitive data is not to handle it at all, and business processes that can be amended to reduce or eliminate dependence on restricted data should be corrected. For example, the University ID number can often be substituted for a social security number and poses much less risk if accidentally disclosed.</p>
+
+        <h4>1. Requirements for Handling Confidential Data</h4>
+        <ol>
+          <li><b>Access control</b>: Access to confidential data must be provided on a least-privilege basis. No person or system should be given access to the data unless required by business process. In such cases where access is required, permission to use the data must be granted by the <i>data steward</i>.</li>
+          <li><b>Sharing</b>: Confidential data may be shared among the NYU community. It may be released publicly only according to well-defined business processes, and with the permission of the <i>data steward</i>.</li>
+          <li><b>Retention</b>: Confidential data should only be stored for as long as is necessary to accomplish the documented business process.</li>
+        </ol>
+
+        <h4>2. Requirements for Handling Protected Data</h4>
+        <ol>
+          <li><b>Access control</b>: Access to protected data must be provided on a least-privilege basis. No person or system should be given access to the data unless required by business process. In such cases where access is required, permission to use the data must be granted by the <i>data steward</i>.</li>
+          <li><b>Sharing</b>: Protected data may be shared among University employees according to well-defined business process approved by the data steward. It may be released publicly only according to well-defined business processes, and with the permission of the <i>data steward</i>.</li>
+          <li><b>Retention</b>: Protected data should only be stored for as long as is necessary to accomplish the documented business process.</li>
+          <li><b>Incident Notification</b>: If there is a potential security incident that may place protected data at risk of unauthorized access, the NYU IT Office of Information Security must be notified.</li>
+        </ol>
+
+        <h4>3. Requirements for Handling Restricted Data</h4>
+        <ol>
+          <li><b>Collection</b>: Restricted data should only be collected when all of the following conditions are met:
+            <ol>
+              <li>The data is not available from another authoritative source, and</li>
+              <li>The data is required by business process, and</li>
+              <li>You have permission to collect the data from the appropriate <i>data steward</i>; or</li>
+              <li>If the data is requested by the Office of General Counsel in response to litigation.</li>
+            </ol>
+          </li>
+          <li><b>Access control</b>: Individuals must be granted access to restricted data on a least-privilege basis. No person or system may access the data unless required by a documented business process. In such cases where access is required, permission to use the data must be granted by the <i>data steward</i>.</li>
+          <li><b>Access auditing</b>: Enable file access auditing to log access to files containing restricted data.</li>
+          <li><b>Labeling</b>: Portable media containing restricted data should be clearly marked.</li>
+          <li><b>Sharing</b>: Access to restricted data can be granted only by a <i>data steward</i>. No individual may share restricted data with another individual who has not been granted access by a data steward.</li>
+          <li><b>Idle Access</b>: Devices which can be used to access restricted data must automatically lock after some period of inactivity, through the use of screensaver passwords, automatic logout, or similar controls.</li>
+          <li><b>Transit encryption</b>: Restricted data must be encrypted during transmission with a method that meets the following requirements.
+            <ol>
+              <li>Cryptographic algorithm(s), the list of approved security functions.</li>
+              <li>Cryptographic key lengths meet best-practices for length, given current computer processing capabilities.</li>
+              <li>Both the source and destination of the transmission must be verified.</li>
+            </ol>
+          </li>
+          <li><b>Storage encryption</b>: Restricted data must be encrypted using strong, public cryptographic algorithms and reasonable key lengths given current computer processing capabilities. Keys must be stored securely, and access to them provided on a least-privilege basis (see ISO 11568 for recommendations on securing keys). If one-way hashing is used in lieu of reversible encryption, salted hashes must be used.
+            <ol>
+              <li>Encrypt files containing restricted data using different keys or passwords than those used for system logon.</li>
+              <li>Encrypt data stored in databases at the column-level.</li>
+              <li>In addition to file and/or database encryption, implement full-disk encryption on portable devices containing restricted data.</li>
+            </ol>
+          </li>
+          <li><b>Retention</b>: Restricted data should only be stored for as long as is necessary to accomplish the documented business process.</li>
+          <li><b>Destruction</b>: When restricted data is no longer needed it should be destroyed in accordance with applicable policies, using methods that are resistant to data-recovery attempts such as cryptographic data destruction utilities, on-site physical device destruction, or NAID certified data destruction service.</li>
+        </ol>
+      </section>
+    </main>
+    <footer class="module-footer">
+      <section class="module-summary">
+        <h2>📝 Summary: Topic 6</h2>
+        <ul>
+          <li>Web security is crucial for protecting confidential online data from unauthorized access and modification.</li>
+          <li>Common web security issues include injection flaws, broken authentication, cross-site scripting (XSS), insecure direct object references, security misconfiguration, sensitive data exposure, missing function level access control, cross-site request forgery (CSRF), and using components with known vulnerabilities.</li>
+          <li>Challenges in web security involve filtering malicious sites, protecting against uncategorized websites, fighting infections from safe websites, identifying malware, and neutralizing malware on infected machines.</li>
+          <li>Web security measures include basic, intermediate, and advanced system security measures, as well as data handling security measures, focusing on prevention, detection, and response to security threats.</li>
+        </ul>
+      </section>
+    </footer>
+  </article>
+</body>
+</html>

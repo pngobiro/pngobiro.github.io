@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flip-Flop (Electronics) - Digital Circuits Study Guide</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-07-shift-register.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="#" class="nav-button nav-button--next disabled" aria-disabled="true">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 8 of 8</span>
+                    </div>
+                </nav>
+
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>💾</span>
+                        <span>Topic 08</span>
+                    </div>
+                    <h1 class="document-title">Flip-Flop (Electronics)</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Sequential Logic</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>15 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    <!-- Section 1: Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">💡</span>
+                                Overview
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>In electronics, a flip-flop or latch is a circuit that has two stable states and can be used to store state information. A flip-flop is a bistable multivibrator. The circuit can be made to change state by signals applied to one or more control inputs and will have one or two outputs. It is the basic storage element in sequential logic. Flip-flops and latches are a fundamental building block of digital electronics systems used in computers, communications, and many other types of systems.</p>
+                            
+                            <p>Flip-flops and latches are used as data storage elements. Such data storage can be used for storage of state, and such a circuit is described as sequential logic. When used in a finite-state machine, the output and next state depend not only on its current input, but also on its current state (and hence, previous inputs). It can also be used for counting of pulses, and for synchronizing variably-timed input signals to some reference timing signal.</p>
+
+                            <div class="callout callout--info">
+                                <div class="callout-header">
+                                    <span class="callout-icon">ℹ️</span>
+                                    <h4 class="callout-title">Terminology: Flip-Flop vs Latch</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>Flip-flops can be either simple (transparent or opaque) or clocked (synchronous or edge-triggered). Although the term flip-flop has historically referred generically to both simple and clocked circuits, in modern usage it is common to reserve the term flip-flop exclusively for discussing clocked circuits; the simple ones are commonly called latches.</p>
+                                    <p>Using this terminology, a latch is level-sensitive, whereas a flip-flop is edge-sensitive. That is, when a latch is enabled it becomes transparent, while a flip flop's output only changes on a single type (positive going or negative going) of clock edge.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 2: History -->
+                    <section class="content-section" id="history">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📜</span>
+                                History
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>The first electronic flip-flop was invented in 1918 by William Eccles and F. W. Jordan. It was initially called the Eccles-Jordan trigger circuit and consisted of two active elements (vacuum tubes). Such circuits and their transistorized versions were common in computers even after the introduction of integrated circuits, though flip-flops made from logic gates are also common now. Early flip-flops were known variously as trigger circuits or multivibrators.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-7f7d77f9.jpeg" alt="Eccles-Jordan Flip-Flop Schematics" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Flip-flop schematics from the Eccles and Jordan patent filed 1918.</figcaption>
+                            </figure>
+
+                            <p>According to P. L. Lindley, a JPL engineer, the flip-flop types discussed below (RS, D, T, JK) were first discussed in a 1954 UCLA course on computer design by Montgomery Phister, and then appeared in his book <em>Logical Design of Digital Computers</em>. Lindley explains that he heard the story of the JK flip-flop from Eldred Nelson, who is responsible for coining the term while working at Hughes Aircraft. In designing a logical system, Nelson assigned letters to flip-flop inputs as follows: #1: A & B, #2: C & D, #3: E & F, #4: G & H, #5: J & K.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 3: Implementation -->
+                    <section class="content-section" id="implementation">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🛠️</span>
+                                Implementation
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-065b962c.jpeg" alt="Bipolar Junction Transistor Flip-Flop" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">A traditional flip-flop circuit based on bipolar junction transistors</figcaption>
+                            </figure>
+
+                            <p>Flip-flops can be either simple (transparent or asynchronous) or clocked (synchronous); the transparent ones are commonly called latches. The word latch is mainly used for storage elements, while clocked devices are described as flip-flops.</p>
+                            
+                            <p>Simple flip-flops can be built around a pair of cross-coupled inverting elements: vacuum tubes, bipolar transistors, field effect transistors, inverters, and inverting logic gates have all been used in practical circuits. Clocked devices are specially designed for synchronous systems; such devices ignore their inputs except at the transition of a dedicated clock signal (known as clocking, pulsing, or strobing).</p>
+                            
+                            <p>Since the elementary amplifying stages are inverting, two stages can be connected in succession (as a cascade) to form the needed non-inverting amplifier. In this configuration, each amplifier may be considered as an active inverting feedback network for the other inverting amplifier.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 4: Flip-Flop Types -->
+                    <section class="content-section" id="types">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🎛️</span>
+                                Flip-Flop Types
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Flip-flops can be divided into common types: the SR ("set-reset"), D ("data" or "delay"), T ("toggle"), and JK types are the common ones. The behavior of a particular type can be described by what is termed the characteristic equation, which derives the "next" (i.e., after the next clock pulse) output, $Q_{\text{next}}$, in terms of the input signal(s) and/or the current output, $Q$.</p>
+
+                            <h3>Simple Set-Reset Latches</h3>
+                            
+                            <h4>SR NOR Latch</h4>
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <figure class="content-figure" data-lightbox="true">
+                                        <div class="figure-image-wrapper">
+                                            <img src="../assets/images/image-20251223-8f4657eb.jpeg" alt="SR Latch Circuit" class="figure-image">
+                                        </div>
+                                        <figcaption class="figure-caption">An SR latch, constructed from a pair of cross-coupled NOR gates.</figcaption>
+                                    </figure>
+                                </div>
+                                <div class="grid-item">
+                                    <p>When using static gates as building blocks, the most fundamental latch is the simple SR latch. It can be constructed from a pair of cross-coupled NOR logic gates. The stored bit is present on the output marked Q.</p>
+                                    <p>The $\mathrm{R} = \mathrm{S} = 1$ combination is called a restricted combination or a forbidden state because it breaks the logical equation $\mathrm{Q} = \mathrm{not}\mathrm{Q}$.</p>
+                                </div>
+                            </div>
+
+                            <h4>Gated SR Latch</h4>
+                            <p>A synchronous SR latch (sometimes clocked SR flip-flop) can be made by adding a second level of NAND gates to the inverted SR latch. With E high (enable true), the signals can pass through the input gates to the encapsulated latch; all signal combinations except for $(0,0) = hold$ then immediately reproduce on the $(\mathrm{Q},\mathrm{Q})$ output, i.e. the latch is transparent. With E low (enable false) the latch is closed (opaque).</p>
+                            
+                            <h3>D Flip-Flop</h3>
+                            <p>The D flip-flop is widely used. It is also known as a "data" or "delay" flip-flop. The D flip-flop captures the value of the D-input at a definite portion of the clock cycle (such as the rising edge of the clock). That captured value becomes the Q output. At other times, the output Q does not change.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-bbc764b0.jpeg" alt="D Flip-Flop Symbol" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">D flip-flop symbol</figcaption>
+                            </figure>
+
+                            <h4>Master-Slave Edge-Triggered D Flip-Flop</h4>
+                            <p>A master-slave D flip-flop is created by connecting two gated D latches in series, and inverting the enable input to one of them. It is called master-slave because the second latch in the series only changes in response to a change in the first (master) latch.</p>
+                            
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-a71c31db.jpeg" alt="Master-Slave D Flip-Flop" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">An implementation of a master-slave D flip-flop that is triggered on the rising edge of the clock</figcaption>
+                            </figure>
+
+                            <h3>T Flip-Flop</h3>
+                            <p>If the T input is high, the T flip-flop changes state ("toggles") whenever the clock input is strobed. If the T input is low, the flip-flop holds the previous value. This behavior is described by the characteristic equation:</p>
+                            
+                            <div class="equation">
+                                $$Q_{next} = T\oplus Q = T\overline{Q} +\overline{T} Q$$
+                            </div>
+                            
+                            <p>When T is held high, the toggle flip-flop divides the clock frequency by two; that is, if clock frequency is $4\mathrm{MHz}$, the output frequency obtained from the flip-flop will be 2 MHz.</p>
+
+                            <h3>JK Flip-Flop</h3>
+                            <p>The JK flip-flop augments the behavior of the SR flip-flop by interpreting the $S = R = 1$ condition as a "flip" or toggle command. Specifically, the combination $\mathrm{J} = 1$, $\mathrm{K} = 0$ is a command to set the flip-flop; the combination $\mathrm{J} = 0$, $\mathrm{K} = 1$ is a command to reset the flip-flop; and the combination $\mathrm{J} = \mathrm{K} = 1$ is a command to toggle the flip-flop.</p>
+                            
+                            <div class="equation">
+                                $$Q _ {n e x t} = J \overline {{Q}} + \overline {{K}} Q$$
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Section 5: Metastability -->
+                    <section class="content-section" id="metastability">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚠️</span>
+                                Metastability
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Flip-flops are subject to a problem called metastability, which can happen when two inputs, such as data and clock or clock and reset, are changing at about the same time. When the order is not clear, within appropriate timing constraints, the result is that the output may behave unpredictably, taking many times longer than normal to settle to one state or the other, or even oscillating several times before settling. In a computer system, this metastability can cause corruption of data or a program crash if the state is not stable before another circuit uses its value.</p>
+                        </div>
+                    </section>
+
+                    <!-- Section 6: Timing Considerations -->
+                    <section class="content-section" id="timing">
+                        <div class="section-header">
+                            <div class="section-number">06</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⏱️</span>
+                                Timing Considerations
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251223-2c293f87.jpeg" alt="Timing Parameters" class="figure-image">
+                                </div>
+                                <figcaption class="figure-caption">Flip-flop setup, hold and clock-to-output timing parameters</figcaption>
+                            </figure>
+
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Setup time ($t_{su}$):</strong> The minimum amount of time the data signal should be held steady before the clock event so that the data is reliably sampled.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Hold time ($t_{h}$):</strong> The minimum amount of time the data signal should be held steady after the clock event so that the data are reliably sampled.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Recovery time:</strong> The time available between the asynchronous signals going inactive and the active clock edge.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Removal time:</strong> The time between active clock edge and asynchronous signal going inactive.</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Section 7: References -->
+                    <section class="content-section" id="references">
+                        <div class="section-header">
+                            <div class="section-number">07</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📚</span>
+                                References
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <ul class="enhanced-list">
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Volnei A. Pedroni (2008). Digital electronics and design with VHDL. Morgan Kaufmann. p. 329. ISBN 978-0-12-374270-4.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">William Henry Eccles and Frank Wilfred Jordan, "Improvements in ionic relays" British patent number: GB 148582 (filed: 21 June 1918; published: 5 August 1920).</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Montgomery Phister (1958). Logical Design of Digital Computers.. Wiley. p. 128.</span></li>
+                                <li class="list-item"><span class="list-marker"></span><span class="list-content">Sajjan G. Shiva (2000). Computer design and architecture (3rd ed.). CRC Press. p. 81. ISBN 978-0-8247-0368-4.</span></li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Key Points Summary -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>A flip-flop or latch is a circuit that has two stable states and can be used to store state information.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Latches are level-sensitive (transparent), whereas flip-flops are edge-sensitive (clocked).</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Common types include SR (Set-Reset), D (Data/Delay), T (Toggle), and JK flip-flops.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Metastability occurs when input changes coincide with the clock edge, leading to unpredictable output states.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Timing constraints like setup time and hold time must be met for reliable operation.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="topic-07-shift-register.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="#" class="nav-button nav-button--next disabled" aria-disabled="true">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 8 of 8</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop" data-close-lightbox></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" data-close-lightbox aria-label="Close image viewer">&times;</button>
+            <img src="" alt="" class="lightbox-image" id="lightbox-img">
+            <p class="lightbox-caption" id="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

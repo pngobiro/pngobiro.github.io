@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>I/O Systems - Module 3</title>
+  <meta name="description" content="Detailed transcription of Polling and Interrupts sections">
+  <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+  <article class="learning-module" data-module="3">
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module2.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 3 of 8</span>
+        </div>
+        <a href="module4.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+
+    <main class="module-content">
+      <h2>5.1.2.1 Polling</h2>
+      
+      <p>One simple means of device handshaking involves polling:</p>
+      <ol>
+        <li>The host repeatedly checks the busy bit on the device until it becomes clear.</li>
+        <li>The host writes a byte of data into the data-out register and sets the write bit in the command register (in either order.)</li>
+        <li>The host sets the command ready bit in the command register to notify the device of the pending command.</li>
+        <li>When the device controller sees the command-ready bit set it first sets the busy bit.</li>
+        <li>Then the device controller reads the command register sees the write bit set reads the byte of data from the data-out register and outputs the byte of data.</li>
+        <li>The device controller then clears the error bit in the status register the command-ready bit and finally clears the busy bit signaling the completion of the operation.</li>
+      </ol>
+      
+      <p>Polling can be very fast and efficient if both the device and the controller are fast and if there is significant data to transfer. It becomes inefficient however if the host must wait a long time in the busy loop waiting for the device or if frequent checks need to be made for data that is infrequently there.</p>
+
+      <h2>5.1.2.2 Interrupts</h2>
+      
+      <p>Interrupts allow devices to notify the CPU when they have data to transfer or when an operation is complete allowing the CPU to perform other duties when no I/O transfers need its immediate attention.</p>
+      
+      <p>The CPU has an interrupt-request line that is sensed after every instruction.</p>
+      <ul>
+        <li>A device's controller raises an interrupt by asserting a signal on the interrupt request line.</li>
+        <li>The CPU then performs a state save and transfers control to the interrupt handler routine at a fixed address in memory. (The CPU catches the interrupt and dispatches the interrupt handler.)</li>
+        <li>The interrupt handler determines the cause of the interrupt performs the necessary processing performs a state restore and executes a return from interrupt instruction to return control to the CPU. (The interrupt handler clears the interrupt by servicing the device.)</li>
+        <li>(Note that the state restored does not need to be the same state as the one that was saved when the interrupt went off. See below for an example involving time-slicing.)</li>
+      </ul>
+      
+      <p>Below Figure illustrates the interrupt-driven I/O procedure:</p>
+      
+      <figure>
+        <img src="../assets/images/module3-interrupt-driven-io-cycle.jpg" alt="Interrupt Driven I/O Cycle showing the sequence of steps in interrupt processing" width="600" height="400">
+        <figcaption>Fig: Interrupt Driven I/O Cycle</figcaption>
+      </figure>
+      
+      <p>The above description is adequate for simple interrupt-driven I/O but there are three needs in modern computing which complicate the picture:</p>
+      
+      <ol>
+        <li>The need to defer interrupt handling during critical processing</li>
+        <li>The need to determine which interrupt handler to invoke without having to poll all devices to see which one needs attention and</li>
+        <li>The need for multi-level interrupts so the system can differentiate between high- and low-priority interrupts for proper response.</li>
+      </ol>
+      
+      <p>These issues are handled in modern computer architectures with interrupt-controller hardware.</p>
+      
+      <ul>
+        <li>Most CPUs now have two interrupt-request lines: One that is non-maskable for critical error conditions and one that is maskable that the CPU can temporarily ignore during critical processing.</li>
+        <li>The interrupt mechanism accepts an address which is usually one of a small set of numbers for an offset into a table called the interrupt vector. This table (usually located at physical address zero?) holds the addresses of routines prepared to process specific interrupts.</li>
+        <li>The number of possible interrupt handlers still exceeds the range of defined interrupt numbers so multiple handlers can be interrupt chained. Effectively the addresses held in the interrupt vectors are the head pointers for linked-lists of interrupt handlers.</li>
+        <li>Figure below shows the Intel Pentium interrupt vector. Interrupts 0 to 31 are non-maskable and reserved for serious hardware and other errors. Maskable interrupts including normal device I/O interrupts begin at interrupt 32.</li>
+        <li>Modern interrupt hardware also supports interrupt priority levels allowing systems to mask off only lower-priority interrupts while servicing a high-priority interrupt or conversely to allow a high-priority signal to interrupt the processing of a low-priority one.</li>
+      </ul>
+      
+      <ul>
+        <li>At boot time the system determines which devices are present and loads the appropriate handler addresses into the interrupt table.</li>
+        <li>During operation devices signal errors or the completion of commands via interrupts.</li>
+        <li>Exceptions such as dividing by zero invalid memory accesses or attempts to access kernel mode instructions can be signaled via interrupts.</li>
+        <li>Time slicing and context switches can also be implemented using the interrupt mechanism.</li>
+        <ul>
+          <li>The scheduler sets a hardware timer before transferring control over to a user process.</li>
+          <li>When the timer raises the interrupt request line the CPU performs a state-save and transfers control over to the proper interrupt handler which in turn runs the scheduler.</li>
+          <li>The scheduler does a state-restore of a different process before resetting the timer and issuing the return-from-interrupt instruction.</li>
+        </ul>
+        <li>A similar example involves the paging system for virtual memory - A page fault causes an interrupt which in turn issues an I/O request and a context switch as described above moving the interrupted process into the wait queue and selecting a different process to run. When the I/O request has completed (i.e. when the requested page has been loaded up into physical memory) then the device interrupts and the interrupt handler moves the process from the wait queue into the ready queue (or depending on scheduling algorithms and policies may go ahead and context switch it back onto the CPU.)</li>
+        <li>System calls are implemented via software interrupts a.k.a. traps. When a (library) program needs work performed in kernel mode it sets command information and possibly data addresses in certain registers and then raises a software interrupt. (E.g. 21 hex in DOS.) The system does a state save and then calls on the proper interrupt handler to process the request in kernel mode. Software interrupts generally have low priority as they are not as urgent as devices with limited buffering space.</li>
+        <li>Interrupts are also used to control kernel operations and to schedule activities for optimal performance. For example the completion of a disk read operation involves two interrupts:
+          <ul>
+            <li>A high-priority interrupt acknowledges the device completion and issues the next disk request so that the hardware does not sit idle.</li>
+            <li>A lower-priority interrupt transfers the data from the kernel memory space to the user space and then transfers the process from the waiting queue to the ready queue.</li>
+            <li>The Solaris OS uses a multi-threaded kernel and priority threads to assign different threads to different interrupt handlers. This allows for the "simultaneous" handling of multiple interrupts and the assurance that high-priority interrupts will take precedence over low-priority ones and over user processes.</li>
+          </ul>
+        </li>
+      </ul>
+    </main>
+
+    <nav class="module-nav">
+      <div class="nav-links">
+        <a href="module2.html" class="nav-button">
+          <span>←</span> Previous
+        </a>
+        <div class="module-progress">
+          <span>Module 3 of 8</span>
+        </div>
+        <a href="module4.html" class="nav-button">
+          Next <span>→</span>
+        </a>
+      </div>
+    </nav>
+  </article>
+</body>
+</html>

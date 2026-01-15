@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 8: Connecting Devices and Network Addresses - Data Communication and Networking</title>
+    <meta name="description" content="Learn about different connecting devices such as repeaters, bridges, hubs, routers, gateways, and explore Ethernet and IP addressing.">
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <article class="learning-module" data-module="8">
+        <nav class="module-nav">
+            <div class="nav-links">
+                <a href="../index.html" class="nav-button">
+                    <span>←</span> Home
+                </a>
+                <a href="module7.html" class="nav-button">
+                    <span>←</span> Previous
+                </a>
+                <div class="module-progress">
+                    <span>Module 8 of 9</span>
+                </div>
+                <a href="module9.html" class="nav-button">
+                    Next <span>→</span>
+                </a>
+            </div>
+        </nav>
+
+        <header class="module-header">
+            <h1>Module 8: Connecting Devices and Network Addresses</h1>
+            <section class="module-objectives">
+                <h2>🎯 Learning Objectives</h2>
+                <ul>
+                    <li>Describe the function of Repeaters and their operation at the physical layer.</li>
+                    <li>Explain Bridges or Link Layer Switches and their operation at both physical and data link layers.</li>
+                    <li>Understand the role of Hubs and their limitations.</li>
+                    <li>Describe Routers as network layer devices and their routing function.</li>
+                    <li>Explain Gateways and their operation across all layers of the OSI model.</li>
+                    <li>Differentiate between Ethernet Addresses (MAC addresses) and Internet Protocol Addresses (IP addresses).</li>
+                    <li>Understand IP address classes and notations.</li>
+                </ul>
+            </section>
+        </header>
+
+        <main class="module-content">
+            <section class="content-section">
+                <h2>📚 CONNECTING DEVICES</h2>
+                <div class="content-block">
+                    <h3>1. Repeaters</h3>
+                    <p>A repeater is a device that operates only in the physical layer. Signals that carry information within a network can travel a fixed distance before attenuation endangers the integrity of the data. A repeater receives a signal and, before it becomes too weak or corrupted, regenerates the original bit pattern. The repeater then sends the refreshed signal. A repeater can extend the physical length of a LAN, as shown in Figure 15.2.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/repeater_lan_segments.png"
+                             alt="Diagram illustrating A repeater connecting two segments of a LAN."
+                             width="600" height="300">
+                        <figcaption>Figure 15.2 A repeater connecting two segments of a LAN</figcaption>
+                    </figure>
+                    <p>A repeater does not actually connect two LANs; it connects two segments of the same LAN. The segments connected are still part of one single LAN. A repeater is not a device that can connect two LANs of different protocols.</p>
+                    <p>It is tempting to compare a repeater to an amplifier, but the comparison is inaccurate. An amplifier cannot discriminate between the intended signal and noise; it amplifies equally everything fed into it. A repeater does not amplify the signal; it regenerates the signal. When it receives a weakened or corrupted signal, it creates a copy, bit for bit, at the original strength.</p>
+
+                    <h3>2. Bridges or Link Layer Switches</h3>
+                    <p>A bridge or Link layer switch (or simply Switch) operates in both the physical and the data link layer. As a physical layer device, it regenerates the signal it receives. As a data link layer device, the bridge can check the physical (MAC) addresses (source and destination) contained in the frame. A bridge has filtering capability. It can check the destination address of a frame and decide if the frame should be forwarded or dropped. If the frame is to be forwarded, the decision must specify the port. A bridge has a table that maps addresses to ports.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/bridge_connecting_lans.png"
+                             alt="Diagram illustrating A bridge connecting two LANs."
+                             width="600" height="300">
+                        <figcaption>Figure 15.5 A bridge connecting two LANs</figcaption>
+                    </figure>
+                    <p>Let us give an example. In Figure 15.5, two LANs are connected by a bridge. If a frame destined for station 712B13456142 arrives at port 1, the bridge consults its table to find the departing port. According to its table, frames for 712B13456142 leave through port 1; therefore, there is no need for forwarding, and the frame is dropped. On the other hand, if a frame for 712B13456141 arrives at port 2, the departing port is port 1 and the frame is forwarded. In the first case, LAN 2 remains free of traffic; in the second case, both LANs have traffic. In our example, we show a two-port bridge; in reality a bridge usually has more ports.</p>
+
+                    <h3>3. Hubs</h3>
+                    <p>A Hub is a device that operates only in the physical layer. Signals that carry information within a network can travel a fixed distance before attenuation endangers the integrity of the data. A repeater receives a signal and, before it becomes too weak or corrupted, regenerates and retimes the original bit pattern. The repeater then sends the refreshed signal. In a star topology a repeater is a multiport device, often called as hub, that can be used to serve as the connecting point and at the same time function as a repeater. Figure below shows that when a packet from station A to station B arrives at the hub, the signal representing the frame is regenerated to remove any possible corrupting noise, but the hub forwards the packet from all outgoing ports except the one from which the signal was received. In other words, the frame is broadcast. All the stations in the LAN receive the frame, but only station B keeps it. The rest of the stations discard it.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/hub_operation.png"
+                             alt="Diagram illustrating Hub operation in a network."
+                             width="600" height="300">
+                        <figcaption>Hub Operation</figcaption>
+                    </figure>
+                    <p>A hub is a physical layer device. They do not have a link layer address and they do not check the link layer address of the received frame. They just regenerate the corrupted bits and send them out from every port.</p>
+
+                    <h3>4. Routers</h3>
+                    <p>A router is a three-layer device that routes packets based on their logical addresses (host-to-host addressing). A router normally connects LANs and WANs in the Internet and has a routing table that is used for making decisions about the route. The routing tables are normally dynamic and are updated using routing protocols. Figure 15.11 shows a part of the Internet that uses routers to connect LANs and WANs.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/routers_connecting_lans_wans.png"
+                             alt="Diagram illustrating Routers connecting independent LANs and WANs."
+                             width="600" height="300">
+                        <figcaption>Figure 15.11 Routers connecting independent LANs and WANs</figcaption>
+                    </figure>
+                    <p>A router is a three layer device. It operates in the physical, data link and network layers. As a physical layer device, it regenerates the signal it receives. As a link layer device the router checks the physical addresses contained in the packet. As a network layer device a router , checks the network layer addresses. A router can connect networks. In other words, a router is an internetworking device; it connects independent networks to form an internetwork.</p>
+                    <p>There are three major differences between a router and a repeater or switch.</p>
+                    <ol type="a">
+                        <li>A router has a physical and logical address for each of its interfaces.</li>
+                        <li>A router acts only on those packets in which the link layer destination address matches the address of the interface at which the packet arrives.</li>
+                        <li>A router changes the link layer address of the packet when it forwards the packet.</li>
+                    </ol>
+
+                    <h3>5. Gateways</h3>
+                    <p>A gateway is normally a computer that operates in all five layers of the Internet or seven layers of OSI model. A gateway takes an application message, reads it, and interprets it. This means that it can be used as a connecting device between two internetworks that use different models. For example, a network designed to use the OSI model can be connected to another network using the Internet model. The gateway connecting the two systems can take a frame as it arrives from the first system, move it up to the OSI application layer, and remove the message.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 ETHERNET ADDRESS</h2>
+                <div class="content-block">
+                    <h3>Ethernet or physical or MAC address</h3>
+                    <p>Each station on an Ethernet network (such as a PC, workstation, or printer) has its own network interface card (NIC). The NIC fits inside the station and provides the station with a 6-byte physical address. As shown in Figure 13.6, the Ethernet address is 6 bytes (48 bits), normally written in hexadecimal notation, with a colon between the bytes.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/ethernet_address_hex.png"
+                             alt="Diagram illustrating Example of an Ethernet address in hexadecimal notation."
+                             width="600" height="300">
+                        <figcaption>Figure 13.6 Example of an Ethernet address in hexadecimal notation</figcaption>
+                    </figure>
+
+                    <h3>Unicast, Multicast, and Broadcast Addresses:</h3>
+                    <p>A source address is always a unicast address-the frame comes from only one station. The destination address, however, can be unicast, multicast, or broadcast. If the least significant bit of the first byte in a destination address is 0, the address is unicast; otherwise, it is multicast. A unicast destination address defines only one recipient; the relationship between the sender and the receiver is one-to-one. A multicast destination address defines a group of addresses; the relationship between the sender and the receivers is one-to-many. The broadcast address is a special case of the multicast address; the recipients are all the stations on the LAN. A broadcast destination address is forty-eight 1's.</p>
+                    <p>For Example:</p>
+                    <ol type="a">
+                        <li>4A:30:10:21:10:1A - This is a unicast address because A in binary is 1010 (even).</li>
+                        <li>47:20:1B:2E:08:EE - This is a multicast address because 7 in binary is 0111 (odd).</li>
+                        <li>FF:FF:FF:FF:FF:FF - This is a broadcast address because all digits are F's.</li>
+                    </ol>
+                    <p>The way the addresses are sent out on line is different from the way they are written in hexadecimal notation. The transmission is left-to-right, byte by byte; however, for each byte, the least significant bit is sent first and the most significant bit is sent last. This means that the bit that defines an address as unicast or multicast arrives first at the receiver.</p>
+                </div>
+            </section>
+
+            <section class="content-section">
+                <h2>📚 INTERNET PROTOCOL ADDRESS</h2>
+                <div class="content-block">
+                    <h3>IP Address or Network address or logical address</h3>
+                    <p>An IPv4 address is a 32-bit address that <i>uniquely</i> and <i>universally</i> defines the connection of a device (for example, a computer or a router) to the Internet. IPv4 addresses are unique. They are unique in the sense that each address defines one, and only one, connection to the Internet. Two devices on the Internet can never have the same address at the same time. The IPv4 addresses are universal in the sense that the addressing system must be accepted by any host that wants to be connected to the Internet.</p>
+                    <h4>Address Space</h4>
+                    <p>A protocol such as IPv4 that defines addresses has an address space. An address space is the total number of addresses used by the protocol. If a protocol uses N bits to define an address, the address space is 2<sup>N</sup> because each bit can have two different values (0 or 1) and N bits can have 2<sup>N</sup> values. IPv4 uses 32-bit addresses, which means that the address space is 2<sup>32</sup> or 4,294,967,296 (more than 4 billion). This means that, theoretically, if there were no restrictions, more than 4 billion devices could be connected to the Internet.</p>
+                    <h4>Notations</h4>
+                    <p>There are two prevalent notations to show an IPv4 address: binary notation and dotted decimal notation.</p>
+                    <h5>Binary Notation</h5>
+                    <p>In binary notation, the IPv4 address is displayed as 32 bits. Each octet is often referred to as a byte. So it is common to hear an IPv4 address referred to as a 32-bit address or a 4-byte address. The following is an example of an IPv4 address in binary notation:</p>
+                    <p>01110101 10010101 00011101 00000010</p>
+                    <h5>Dotted-Decimal Notation</h5>
+                    <p>To make the IPv4 address more compact and easier to read, Internet addresses are usually written in decimal form with a decimal point (dot) separating the bytes. The following is the dotted decimal notation of the above address:</p>
+                    <p>117.149.29.2</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/ip_address_notations.png"
+                             alt="Diagram illustrating Dotted-decimal notation and binary notation for an IPv4 address."
+                             width="600" height="300">
+                        <figcaption>Figure 19.1 Dotted-decimal notation and binary notation for an IPv4 address</figcaption>
+                    </figure>
+
+                    <h3>IP Address Classes:</h3>
+                    <p>IPv4 addressing, at its inception, used the concept of classes. This architecture is called classful addressing. In classful addressing, the address space is divided into five classes: A, B, C, D, and E. Each class occupies some part of the address space. We can find the class of an address when given the address in binary notation or dotted-decimal notation. If the address is given in binary notation, the first few bits can immediately tell us the class of the address. If the address is given in decimal-dotted notation, the first byte defines the class. Both methods are shown in Figure 19.2.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/ip_address_classes.png"
+                             alt="Diagram illustrating Finding the classes in binary and dotted-decimal notation."
+                             width="600" height="300">
+                        <figcaption>Figure 19.2 Finding the classes in binary and dotted-decimal notation</figcaption>
+                    </figure>
+
+                    <h3>Classes and Blocks</h3>
+                    <p>One problem with classful addressing is that each class is divided into a fixed number of blocks with each block having a fixed size as shown in Table 19.1.</p>
+                     <figure class="content-image">
+                        <img src="../assets/diagrams/ip_address_classes_table.png"
+                             alt="Table showing Number of blocks and block size in classfulIPv4 addressing."
+                             width="600" height="300">
+                        <figcaption>Table 19.1 Number of blocks and block size in classfulIPv4 addressing</figcaption>
+                    </figure>
+                </div>
+            </section>
+
+        </main>
+
+        <footer class="module-footer">
+            <section class="key-takeaways">
+                <h2>📚 Key Takeaways</h2>
+                <ul>
+                    <li>Repeaters regenerate signals at the physical layer to extend network length.</li>
+                    <li>Bridges/Switches operate at physical and data link layers, filtering traffic based on MAC addresses.</li>
+                    <li>Hubs are physical layer devices that broadcast received signals to all ports.</li>
+                    <li>Routers operate at physical, data link, and network layers, routing packets based on logical addresses (IP addresses).</li>
+                    <li>Gateways operate across all OSI layers, translating between different network models.</li>
+                    <li>Ethernet addresses (MAC) are physical addresses; IP addresses are logical network addresses.</li>
+                    <li>IPv4 addresses are 32-bit and are classified into classes A, B, C, D, and E, each with different address ranges and block sizes.</li>
+                </ul>
+            </section>
+
+            <section class="knowledge-check">
+                <h2>⚡ Knowledge Check</h2>
+                <div class="quiz-content">
+                    <p><strong>Question 1:</strong> At which layer of the OSI model does a repeater operate?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Physical Layer (Layer 1).</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 2:</strong> What type of address does a bridge use for filtering traffic?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Physical or MAC addresses.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 3:</strong> What is a major limitation of hubs compared to switches?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Hubs broadcast traffic to all ports, while switches can filter and forward traffic more efficiently.</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 4:</strong>  At which layer does a router primarily operate?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>Network Layer (Layer 3).</p>
+                        </div>
+                    </details>
+
+                    <p><strong>Question 5:</strong> What is the main function of a gateway?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>To connect networks using different models by translating protocols across all layers.</p>
+                        </div>
+                    </details>
+
+                     <p><strong>Question 6:</strong> How many bits are there in an IPv4 address?</p>
+                    <details class="solution">
+                        <summary>View Solution</summary>
+                        <div class="solution-content">
+                            <p>32 bits.</p>
+                        </div>
+                    </details>
+                </div>
+            </section>
+
+            <nav class="module-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span>←</span> Home
+                    </a>
+                    <a href="module7.html" class="nav-button">
+                        <span>←</span> Previous
+                    </a>
+                    <div class="module-progress">
+                        <span>Module 8 of 9</span>
+                    </div>
+                    <a href="module9.html" class="nav-button">
+                        Next <span>→</span>
+                    </a>
+                </div>
+            </nav>
+        </footer>
+    </article>
+</body>
+</html>

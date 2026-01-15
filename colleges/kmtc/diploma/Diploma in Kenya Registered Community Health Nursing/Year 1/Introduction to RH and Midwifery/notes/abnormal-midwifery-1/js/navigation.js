@@ -1,0 +1,1 @@
+// JavaScript navigation functionality will be added later

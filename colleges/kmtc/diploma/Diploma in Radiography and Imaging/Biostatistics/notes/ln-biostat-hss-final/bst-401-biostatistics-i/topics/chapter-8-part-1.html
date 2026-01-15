@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 8 (Part 1): Hypothesis Testing Intro - Biostatistics Lecture Notes</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams'
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-3.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 1): Hypothesis Testing Intro</span>
+                    </div>
+                    <a href="chapter-8-part-2.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <!-- START: chapter-8-part-1 -->
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER EIGHT <br> Hypothesis Testing</h1>
+                 <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <section class="content-section" id="chapter-8-learning-objectives">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">8.1 Learning Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the end of this chapter, the student is expected to be able to:</p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Define hypothesis testing and understand its purpose</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Formulate null and alternative hypotheses</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Understand the concepts of Type I and Type II errors, level of significance ($\alpha$), and power (1-$\beta$)</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Perform hypothesis tests for population means and proportions (large samples) using the Z-test</span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text">Perform hypothesis tests for population means (small samples) using the t-test</span></li>
+                            <li class="list-item"><span class="item-icon">6.</span><span class="item-text">Perform hypothesis tests for comparing two population means (independent and paired samples) using Z-tests and t-tests</span></li>
+                            <li class="list-item"><span class="item-icon">7.</span><span class="item-text">Perform hypothesis tests for comparing two population proportions using the Z-test</span></li>
+                            <li class="list-item"><span class="item-icon">8.</span><span class="item-text">Perform hypothesis tests using the Chi-square test (goodness-of-fit, independence, homogeneity)</span></li>
+                            <li class="list-item"><span class="item-icon">9.</span><span class="item-text">Understand the concept of p-value and its interpretation</span></li>
+                            <li class="list-item"><span class="item-icon">10.</span><span class="item-text">Differentiate between statistical significance and practical significance</span></li>
+                        </ol>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-8-introduction">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">📖</span>
+                        <span class="heading-text">8.2 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Hypothesis testing is a procedure based on sample evidence and probability theory used to determine whether a statement (hypothesis) about a population parameter is reasonable and should not be rejected, or is unreasonable and should be rejected.</p>
+                        <p>It helps us make decisions or draw conclusions about a population based on sample results.</p>
+                        <p>Examples of hypotheses we might test:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Is the average blood pressure of patients taking a new drug lower than the average blood pressure of patients taking a standard drug?</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Is the proportion of smokers in a community different from the national average?</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Does a new health education program increase the rate of vaccination coverage?</span></li>
+                        </ul>
+                        <p><strong>General Steps in Hypothesis Testing:</strong></p>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">State the null hypothesis ($H_0$) and the alternative hypothesis ($H_1$ or $H_a$).</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Choose the level of significance ($\alpha$).</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Select the appropriate test statistic (e.g., Z, t, Chi-square).</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span><span class="item-text">Formulate the decision rule (determine the critical region based on $\alpha$ and the test statistic distribution).</span></li>
+                            <li class="list-item"><span class="item-icon">5.</span><span class="item-text">Collect data and compute the value of the test statistic from the sample data.</span></li>
+                            <li class="list-item"><span class="item-icon">6.</span><span class="item-text">Make a decision: Reject $H_0$ if the test statistic falls in the critical region; otherwise, do not reject $H_0$.</span></li>
+                            <li class="list-item"><span class="item-icon">7.</span><span class="item-text">Interpret the results in the context of the problem.</span></li>
+                        </ol>
+                        <p>(Alternatively, steps 4 and 6 can be replaced by calculating the p-value and comparing it to $\alpha$).</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-8-hypotheses">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">8.3 The Null and Alternative Hypotheses</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>Null Hypothesis ($H_0$):</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">A statement about the population parameter that is assumed to be true until evidence suggests otherwise.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Usually represents the status quo, no effect, or no difference.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Always contains an equality sign (=, $\le$, or $\ge$).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The hypothesis that we attempt to reject based on sample evidence.</span></li>
+                        </ul>
+                        <p><strong>Alternative Hypothesis ($H_1$ or $H_a$):</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">A statement that contradicts the null hypothesis.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Represents what the researcher is trying to find evidence for (e.g., an effect, a difference).</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Never contains an equality sign; uses $\ne$, <, or >.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">If $H_0$ is rejected, we conclude there is evidence in favor of $H_1$.</span></li>
+                        </ul>
+                        <p>$H_0$ and $H_1$ are mutually exclusive and exhaustive (one of them must be true).</p>
+
+                        <p><strong>Types of Tests based on $H_1$:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text"><strong>Two-tailed test:</strong> Tests for a difference in either direction. $H_1$ uses $\ne$. (e.g., $H_0: \mu = 100$, $H_1: \mu \ne 100$).</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text"><strong>One-tailed test (Left-tailed):</strong> Tests for a decrease. $H_1$ uses <. (e.g., $H_0: \mu \ge 100$, $H_1: \mu < 100$).</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text"><strong>One-tailed test (Right-tailed):</strong> Tests for an increase. $H_1$ uses >. (e.g., $H_0: \mu \le 100$, $H_1: \mu > 100$).</span></li>
+                        </ul>
+
+                        <p><strong>Example:</strong> A researcher wants to test if a new drug lowers blood pressure compared to a standard drug where the mean reduction is 10 mmHg.</p>
+                        <p>$H_0: \mu \ge 10$ (The new drug is not better; reduction is 10 or more)</p>
+                        <p>$H_1: \mu < 10$ (The new drug is better; reduction is less than 10)</p>
+                        <p>This is a left-tailed test.</p>
+
+                        <p><strong>Example:</strong> Testing if the proportion of smokers in a town ($P$) is different from the national proportion of 0.20.</p>
+                        <p>$H_0: P = 0.20$</p>
+                        <p>$H_1: P \ne 0.20$</p>
+                        <p>This is a two-tailed test.</p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-8-level-significance">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚖️</span>
+                        <span class="heading-text">8.4 Level of significance</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>When making a decision based on sample data, there is always a risk of making an error.</p>
+                        <p><strong>Types of Errors in Hypothesis Testing:</strong></p>
+                        <div class="table-container">
+                            <table class="content-table">
+                                <thead>
+                                    <tr><th></th><th>Decision: Do Not Reject $H_0$</th><th>Decision: Reject $H_0$</th></tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td><strong>Reality: $H_0$ is True</strong></td><td>Correct Decision<br>(Confidence = $1-\alpha$)</td><td><strong>Type I Error</strong><br>(Probability = $\alpha$)</td></tr>
+                                    <tr><td><strong>Reality: $H_0$ is False</strong></td><td><strong>Type II Error</strong><br>(Probability = $\beta$)</td><td>Correct Decision<br>(Power = $1-\beta$)</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Type I Error:</strong> Rejecting the null hypothesis ($H_0$) when it is actually true. (False positive). The probability of committing a Type I error is denoted by $\alpha$.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Type II Error:</strong> Failing to reject the null hypothesis ($H_0$) when it is actually false. (False negative). The probability of committing a Type II error is denoted by $\beta$.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Level of Significance ($\alpha$):</strong> The maximum acceptable probability of making a Type I error. It is set by the researcher before the test (commonly $\alpha = 0.05$ or $\alpha = 0.01$). It defines the critical region for rejecting $H_0$.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text"><strong>Power of the Test ($1-\beta$):</strong> The probability of correctly rejecting a false null hypothesis. It is the ability of the test to detect a true effect or difference.</span></li>
+                        </ul>
+                        <p>There is a trade-off between $\alpha$ and $\beta$. Decreasing $\alpha$ (making it harder to reject $H_0$) generally increases $\beta$ (making it harder to detect a true effect), and vice versa, for a fixed sample size.</p>
+                        <p>The choice of $\alpha$ depends on the consequences of making each type of error. If a Type I error is more serious (e.g., approving an ineffective drug), a smaller $\alpha$ (like 0.01) is chosen. If a Type II error is more serious (e.g., failing to detect a beneficial drug), a larger $\alpha$ (like 0.05 or 0.10) might be acceptable to increase power.</p>
+                        <img src="../assets/images/chapter-8-normal-curve-1.jpg" alt="Type I and Type II Errors" class="content-image">
+                        <p><em>Figure shows critical region ($\alpha$) for a two-tailed test.</em></p>
+                    </div>
+                </section>
+
+                <section class="content-section" id="chapter-8-tests-means-large">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🧪</span>
+                        <span class="heading-text">8.5 Tests of significance on means and proportions (large samples)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>When the sample size is large ($n \ge 30$) or the population standard deviation ($\sigma$) is known, we use the Z-test statistic based on the standard normal distribution.</p>
+
+                        <h3 class="subsection-heading">Hypothesis Test for a Single Population Mean ($\mu$) (Large Sample)</h3>
+                        <p><strong>Assumptions:</strong> Sample is random, $n \ge 30$ or population is normal and $\sigma$ is known.</p>
+                        <p><strong>Hypotheses:</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Two-tailed: $H_0: \mu = \mu_0$ vs $H_1: \mu \ne \mu_0$</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Left-tailed: $H_0: \mu \ge \mu_0$ vs $H_1: \mu < \mu_0$</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Right-tailed: $H_0: \mu \le \mu_0$ vs $H_1: \mu > \mu_0$</span></li>
+                        </ul>
+                        <p>(Where $\mu_0$ is the hypothesized value of the population mean).</p>
+                        <p><strong>Test Statistic (Z-test):</strong></p>
+                        <div class="equation">
+                            $$ Z_{calc} = \frac{\bar{x} - \mu_0}{\sigma / \sqrt{n}} \quad (\text{if } \sigma \text{ known}) $$
+                        </div>
+                        <p>Or</p>
+                        <div class="equation">
+                            $$ Z_{calc} = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} \quad (\text{if } \sigma \text{ unknown, } n \ge 30) $$
+                        </div>
+                        <p><strong>Decision Rule (Critical Value Approach):</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Two-tailed: Reject $H_0$ if $|Z_{calc}| > Z_{\alpha/2}$.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Left-tailed: Reject $H_0$ if $Z_{calc} < -Z_{\alpha}$.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Right-tailed: Reject $H_0$ if $Z_{calc} > Z_{\alpha}$.</span></li>
+                        </ul>
+                        <p>(Where $Z_{\alpha/2}$ and $Z_{\alpha}$ are critical values from the standard normal table corresponding to the chosen $\alpha$).</p>
+                        <img src="../assets/images/chapter-8-normal-curve-2.jpg" alt="Critical Regions for Z-test" class="content-image">
+
+                        <p><strong>Decision Rule (P-value Approach):</strong></p>
+                        <p>The <strong>p-value</strong> is the probability of observing a test statistic as extreme as, or more extreme than, the one calculated from the sample, assuming the null hypothesis ($H_0$) is true.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span><span class="item-text">Two-tailed: p-value = $2 \times P(Z > |Z_{calc}|)$.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span><span class="item-text">Left-tailed: p-value = $P(Z < Z_{calc})$.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span><span class="item-text">Right-tailed: p-value = $P(Z > Z_{calc})$.</span></li>
+                        </ul>
+                        <p>Decision: Reject $H_0$ if p-value $\le \alpha$. Do not reject $H_0$ if p-value $> \alpha$.</p>
+
+                        <p><strong>Example:</strong> A researcher believes the average recovery time for a certain illness is more than 10 days. A random sample of 50 patients ($n=50$) has a mean recovery time of $\bar{x} = 10.8$ days with a standard deviation of $s = 3$ days. Test the researcher's belief at $\alpha = 0.05$.</p>
+                        <p><strong>Step 1: Hypotheses</strong></p>
+                        <p>$H_0: \mu \le 10$ (Average recovery time is not more than 10 days)</p>
+                        <p>$H_1: \mu > 10$ (Average recovery time is more than 10 days) (Right-tailed test)</p>
+                        <p><strong>Step 2: Level of Significance</strong></p>
+                        <p>$\alpha = 0.05$</p>
+                        <p><strong>Step 3: Test Statistic</strong></p>
+                        <p>Since $n=50 \ge 30$, use Z-test. $\sigma$ is unknown, use $s$.</p>
+                        <div class="equation">
+                            $$ Z_{calc} = \frac{\bar{x} - \mu_0}{s / \sqrt{n}} = \frac{10.8 - 10}{3 / \sqrt{50}} = \frac{0.8}{3 / 7.071} = \frac{0.8}{0.424} \approx 1.886 $$
+                        </div>
+                        <p><strong>Step 4: Decision Rule (Critical Value Approach)</strong></p>
+                        <p>For a right-tailed test with $\alpha = 0.05$, the critical value is $Z_{\alpha} = Z_{0.05} = 1.645$.</p>
+                        <p>Reject $H_0$ if $Z_{calc} > 1.645$.</p>
+                        <p><strong>Step 5: Decision</strong></p>
+                        <p>Since $Z_{calc} = 1.886$ is greater than the critical value $1.645$, we reject $H_0$.</p>
+                        <p><strong>Step 6: Interpretation</strong></p>
+                        <p>There is sufficient evidence at the 0.05 significance level to conclude that the average recovery time for this illness is more than 10 days.</p>
+
+                        <p><strong>Decision Rule (P-value Approach for the example):</strong></p>
+                        <p>For a right-tailed test, p-value = $P(Z > Z_{calc}) = P(Z > 1.886)$.</p>
+                        <p>Using a Z-table or software, $P(Z < 1.886) \approx 0.9704$.</p>
+                        <p>p-value = $1 - P(Z < 1.886) = 1 - 0.9704 = 0.0296$.</p>
+                        <p>Decision: Since p-value (0.0296) $\le \alpha (0.05)$, we reject $H_0$. (Same conclusion).</p>
+                        <!-- Tests for Proportions in next chunk -->
+                    </div>
+                </section>
+
+            </main>
+            <!-- END: chapter-8-part-1 -->
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-7-part-3.html" class="nav-button"> <!-- Link to Previous Chunk -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 8 (Part 1): Hypothesis Testing Intro</span>
+                    </div>
+                    <a href="chapter-8-part-2.html" class="nav-button"> <!-- Link to Next Chunk -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

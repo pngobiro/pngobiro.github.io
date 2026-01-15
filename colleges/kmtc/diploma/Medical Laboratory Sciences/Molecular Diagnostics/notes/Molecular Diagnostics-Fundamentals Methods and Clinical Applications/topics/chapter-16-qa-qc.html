@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 16: Quality Assurance & QC - Molecular Diagnostics</title>
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
+    
+    <!-- KaTeX for Math rendering -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js" onload="renderMathInElement(document.body, {
+        delimiters: [
+            {left: '$$', right: '$$', display: true},
+            {left: '$', right: '$', display: false}
+        ]
+    });"></script>
+    
+    <!-- Main Stylesheet -->
+    <link rel="stylesheet" href="../styles/main.css">
+</head>
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+    
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress-container">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <div class="page-wrapper">
+        <!-- Floating Table of Contents -->
+        <nav class="floating-toc" id="floating-toc">
+            <div class="floating-toc-header">
+                <span>📑</span> Table of Contents
+            </div>
+            <ul class="floating-toc-list">
+                <!-- Links will be populated by JS -->
+            </ul>
+        </nav>
+
+        <div class="container">
+            <article class="document-article">
+                
+                <!-- TOP NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="chapter-15-tissue-typing.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="#" class="nav-button nav-button--next disabled" aria-disabled="true">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 16 of 16</span>
+                    </div>
+                </nav>
+
+                <!-- Document Header -->
+                <header class="document-header">
+                    <div class="header-badge">
+                        <span>🛡️</span>
+                        <span>Topic 16</span>
+                    </div>
+                    <h1 class="document-title">Quality Assurance and Quality Control in the Molecular Laboratory</h1>
+                    <div class="title-meta">
+                        <div class="meta-item">
+                            <span>📚</span>
+                            <span>Techniques in the Clinical Lab</span>
+                        </div>
+                        <div class="meta-item">
+                            <span>⏱️</span>
+                            <span>35 min read</span>
+                        </div>
+                    </div>
+                </header>
+
+                <main id="main-content" class="content-wrapper">
+                    
+                    <!-- Introduction -->
+                    <section class="content-section" id="introduction">
+                        <div class="content-card">
+                            <p>Quality Assurance (QA) and Quality Control (QC) are critical components of the molecular diagnostics laboratory. Because molecular methods are highly sensitive, they are susceptible to contamination and inhibition, which can lead to false-positive or false-negative results. A comprehensive quality management system ensures the accuracy, reliability, and timeliness of test results.</p>
+                        </div>
+                    </section>
+
+                    <!-- Specimen Handling -->
+                    <section class="content-section" id="specimen-handling">
+                        <div class="section-header">
+                            <div class="section-number">01</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧪</span>
+                                Specimen Handling
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Proper specimen collection and handling are the first steps in ensuring quality results. Nucleic acids, particularly RNA, are labile and can be degraded by nucleases present in the environment or the specimen itself.</p>
+
+                            <h3>Collection Tubes</h3>
+                            <p>The choice of anticoagulant is vital for PCR-based tests.</p>
+                            
+                            <div class="table-wrapper">
+                                <div class="table-header">
+                                    <span class="table-icon">🩸</span>
+                                    <span class="table-title">Table 16.1 Anticoagulants for Molecular Testing</span>
+                                </div>
+                                <div class="table-container">
+                                    <table class="content-table">
+                                        <thead>
+                                            <tr>
+                                                <th>Anticoagulant</th>
+                                                <th>Tube Color</th>
+                                                <th>Suitability</th>
+                                                <th>Mechanism/Notes</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td><strong>EDTA</strong></td>
+                                                <td>Lavender</td>
+                                                <td><span style="color:var(--color-success)"><strong>Preferred</strong></span></td>
+                                                <td>Chelates magnesium. Inhibits DNases. Does not inhibit PCR polymerases significantly at moderate concentrations.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>ACD</strong> (Acid Citrate Dextrose)</td>
+                                                <td>Yellow</td>
+                                                <td>Acceptable</td>
+                                                <td>Maintains cellular integrity well. Used for lymphoblastoid cell lines.</td>
+                                            </tr>
+                                            <tr>
+                                                <td><strong>Heparin</strong></td>
+                                                <td>Green</td>
+                                                <td><span style="color:var(--color-danger)"><strong>Avoid</strong></span></td>
+                                                <td>Inhibits Taq polymerase and restriction enzymes. Can sometimes be removed by specific extraction methods, but generally not recommended.</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <h3>Storage and Transport</h3>
+                            <p><strong>DNA</strong> is relatively stable. Whole blood for DNA analysis can be stored at $4^{\circ}\text{C}$ for up to 72 hours. Long-term storage of extracted DNA should be at $-20^{\circ}\text{C}$ or $-70^{\circ}\text{C}$ in TE buffer.</p>
+                            
+                            <p><strong>RNA</strong> is extremely labile. Specimens for RNA analysis (e.g., HIV viral load, gene expression) should be processed immediately (within 2–4 hours) or collected in specialized stabilizing tubes (e.g., PAXgene). Plasma must be separated from cells quickly to prevent leakage of cellular RNA. Extracted RNA is stored at $-70^{\circ}\text{C}$ or lower.</p>
+
+                            <div class="callout callout--warning">
+                                <div class="callout-header">
+                                    <span class="callout-icon">⚠️</span>
+                                    <h4 class="callout-title">Precautions</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p>To prevent contamination with RNases, a separate RNase-free area should be designated. Use RNase-free plasticware, DEPC-treated water, and wear gloves at all times.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Test Performance -->
+                    <section class="content-section" id="test-performance">
+                        <div class="section-header">
+                            <div class="section-number">02</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">⚙️</span>
+                                Test Performance & Controls
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Controls are essential to verify the performance of the assay and interpret patient results.</p>
+
+                            <h3>Types of Controls</h3>
+                            <ul class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Positive Control:</strong> A sample known to contain the target sequence. Verifies that the enzyme, primers, and thermal cycling conditions worked properly.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Negative Control (No Template Control - NTC):</strong> Contains all reagents but no DNA/RNA. Checks for contamination.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Sensitivity Control:</strong> A low-copy number positive control (near the Limit of Detection) to ensure the assay can detect low levels of target.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content"><strong>Amplification Control (Internal Control):</strong> A second target (e.g., housekeeping gene) amplified in the same tube. It distinguishes true negatives from false negatives caused by inhibition.</span>
+                                </li>
+                            </ul>
+
+                            <figure class="content-figure" data-lightbox="true">
+                                <div class="figure-image-wrapper">
+                                    <img src="../assets/images/image-20251222-55bfd8e8.jpeg" alt="PCR Gel with Controls" class="figure-image"> <!-- Reusing Fig 7-11 concept as representative of QC -->
+                                    <div class="figure-overlay">
+                                        <span class="overlay-icon">🔍</span>
+                                        <span class="overlay-text">Click to enlarge</span>
+                                    </div>
+                                </div>
+                                <figcaption class="figure-caption">Figure 16-1 PCR gel electrophoresis showing molecular weight marker (Lane 1), positive samples, and a clean negative control (Lane 8), confirming no contamination.</figcaption>
+                            </figure>
+
+                            <h3>Assay Validation</h3>
+                            <p>Before a new test is implemented, it must be validated. Key parameters include:</p>
+                            <ul>
+                                <li><strong>Accuracy:</strong> Agreement with a reference method or gold standard.</li>
+                                <li><strong>Precision:</strong> Reproducibility of results (intra-run and inter-run).</li>
+                                <li><strong>Analytic Sensitivity (Limit of Detection):</strong> The lowest amount of target that can be consistently detected.</li>
+                                <li><strong>Analytic Specificity:</strong> Ability to detect only the target without cross-reactivity to other organisms or sequences.</li>
+                                <li><strong>Linearity:</strong> For quantitative tests, the range over which the result is proportional to the concentration.</li>
+                            </ul>
+                        </div>
+                    </section>
+
+                    <!-- Instrument Maintenance -->
+                    <section class="content-section" id="instrument-maintenance">
+                        <div class="section-header">
+                            <div class="section-number">03</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🔧</span>
+                                Instrument Maintenance
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Proper function of equipment is vital for assay reproducibility. A schedule of maintenance and calibration must be documented.</p>
+
+                            <div class="grid grid-2">
+                                <div class="grid-item">
+                                    <h4>Thermal Cyclers</h4>
+                                    <p>The accuracy of heating and cooling rates (ramp speeds) and well temperatures affects PCR efficiency. Temperature verification systems (thermocouple probes) are used to check well accuracy ($\pm 0.5^{\circ}\text{C}$) and uniformity across the block.</p>
+                                </div>
+                                <div class="grid-item">
+                                    <h4>Pipettes</h4>
+                                    <p>Pipettes must be calibrated (gravimetrically or photometrically) at least every 6 months to ensure accurate volume delivery. Poor pipetting causes variation in quantification and reagent formulation.</p>
+                                </div>
+                            </div>
+
+                            <p><strong>Other Equipment:</strong>
+                            <ul>
+                                <li><strong>Centrifuges:</strong> Check RPM with a tachometer; check timers.</li>
+                                <li><strong>Spectrophotometers:</strong> Check wavelength accuracy and linearity filters.</li>
+                                <li><strong>Refrigerators/Freezers:</strong> Continuous temperature monitoring with alarm systems.</li>
+                            </ul>
+                            </p>
+                        </div>
+                    </section>
+
+                    <!-- Reagents -->
+                    <section class="content-section" id="reagents">
+                        <div class="section-header">
+                            <div class="section-number">04</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">🧪</span>
+                                Reagents & Safety
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <h3>Reagent QC</h3>
+                            <p>All reagents (primers, probes, enzymes, buffers) must be tested before use in patient testing. New lots of reagents are tested in parallel with old lots using positive and negative controls to ensure consistent performance. Expiration dates must be strictly observed.</p>
+                            
+                            <p><strong>Primers and Probes:</strong> Oligonucleotides are susceptible to degradation by repeated freeze-thaw cycles. They should be aliquoted into single-use volumes.</p>
+
+                            <h3>Chemical Safety</h3>
+                            <div class="callout callout--danger">
+                                <div class="callout-header">
+                                    <span class="callout-icon">☣️</span>
+                                    <h4 class="callout-title">Hazardous Chemicals</h4>
+                                </div>
+                                <div class="callout-content">
+                                    <p><strong>Ethidium Bromide (EtBr):</strong> A potent mutagen used to stain DNA. It intercalates into double-stranded DNA. Alternatives like SYBR Green are less toxic but still bind DNA. Waste must be handled according to specific hazardous waste regulations.</p>
+                                    <p><strong>Phenol/Chloroform:</strong> Organic solvents used for extraction. Phenol causes severe burns; chloroform is a carcinogen. Use in a chemical fume hood.</p>
+                                    <p><strong>Polyacrylamide:</strong> Unpolymerized acrylamide is a neurotoxin. Polymerized gels are safer but may contain residual monomers.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Documentation -->
+                    <section class="content-section" id="documentation">
+                        <div class="section-header">
+                            <div class="section-number">05</div>
+                            <h2 class="section-title">
+                                <span class="title-icon">📄</span>
+                                Documentation & Reporting
+                            </h2>
+                        </div>
+
+                        <div class="content-card">
+                            <p>Accurate documentation is required for regulatory compliance (CLIA, CAP).</p>
+                            
+                            <h3>Test Reports</h3>
+                            <p>Molecular reports should include:</p>
+                            <ul>
+                                <li><strong>Methodology:</strong> Description of the test method (e.g., "Real-time PCR", "Sanger Sequencing").</li>
+                                <li><strong>Locus/Mutation Tested:</strong> Specific gene and mutation (using standard nomenclature, e.g., <em>Factor V</em> R506Q).</li>
+                                <li><strong>Result:</strong> "Detected", "Not Detected", or quantitative value (copies/mL).</li>
+                                <li><strong>Interpretation:</strong> Clinical significance of the result (e.g., "Heterozygous for Factor V Leiden mutation; associated with increased risk of thrombosis").</li>
+                                <li><strong>Limitations:</strong> Limits of detection, specific mutations <em>not</em> detected by the assay.</li>
+                            </ul>
+
+                            <h3>Proficiency Testing</h3>
+                            <p>Laboratories must participate in external proficiency testing (PT) programs (e.g., CAP surveys) for all analytes. Blind samples are received, tested, and reported; results are graded against peer laboratories.</p>
+                        </div>
+                    </section>
+
+                    <!-- Key Points -->
+                    <aside class="key-points-section" role="region" aria-labelledby="key-points-title">
+                        <div class="key-points-wrapper">
+                            <div class="key-points-header">
+                                <span class="key-points-icon">⭐</span>
+                                <h3 id="key-points-title" class="key-points-title">Key Points</h3>
+                            </div>
+                            <ul class="key-points-list">
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Specimen handling (anticoagulant choice, time to processing) is critical for nucleic acid integrity.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Controls (Positive, Negative, Internal) must be run with every assay to validate results.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Unidirectional workflow (Pre-PCR to Post-PCR) prevents amplicon contamination.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Assay validation establishes accuracy, precision, sensitivity, and specificity before clinical use.</strong></p>
+                                </li>
+                                <li class="key-point-item">
+                                    <span class="point-marker">✓</span>
+                                    <p><strong>Standardized nomenclature (e.g., HGVS) should be used for reporting mutations.</strong></p>
+                                </li>
+                            </ul>
+                        </div>
+                    </aside>
+
+                    <!-- Study Questions -->
+                    <section class="content-section" id="study-questions">
+                        <div class="section-header">
+                            <div class="section-number">?</div>
+                            <h2 class="section-title">Study Questions</h2>
+                        </div>
+                        <div class="content-card">
+                            <ol class="enhanced-list">
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Why is heparin generally avoided as an anticoagulant for PCR testing?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">In a PCR run, the negative control (NTC) yields a positive band. What is the likely cause and what action should be taken?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">What is the purpose of an internal amplification control?</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">Define "Analytic Sensitivity" in the context of molecular diagnostics.</span>
+                                </li>
+                                <li class="list-item">
+                                    <span class="list-marker"></span>
+                                    <span class="list-content">How often should thermal cycler well temperatures be verified?</span>
+                                </li>
+                            </ol>
+                        </div>
+                    </section>
+
+                </main>
+
+                <!-- BOTTOM NAVIGATION -->
+                <nav class="document-nav" role="navigation" aria-label="Document Navigation">
+                    <div class="nav-links">
+                        <a href="chapter-15-tissue-typing.html" class="nav-button nav-button--previous">
+                            <span class="nav-icon">←</span>
+                            <span class="nav-text">Previous</span>
+                        </a>
+                        
+                        <a href="../index.html" class="nav-button">
+                            <span class="nav-icon">🏠</span>
+                            <span class="nav-text">Home</span>
+                        </a>
+                        
+                        <a href="#" class="nav-button nav-button--next disabled" aria-disabled="true">
+                            <span class="nav-text">Next</span>
+                            <span class="nav-icon">→</span>
+                        </a>
+                    </div>
+                    <div class="document-progress">
+                        <div class="progress-bar" aria-hidden="true">
+                            <div class="progress-fill" style="width: 100%;"></div>
+                        </div>
+                        <span class="progress-text">Topic 16 of 16</span>
+                    </div>
+                </nav>
+
+            </article>
+        </div>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox-modal" hidden aria-hidden="true" role="dialog" aria-label="Image viewer">
+        <div class="lightbox-backdrop"></div>
+        <div class="lightbox-content">
+            <button class="lightbox-close" aria-label="Close image viewer">×</button>
+            <img class="lightbox-image" src="" alt="">
+            <p class="lightbox-caption"></p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/theme.js"></script>
+    <script src="../js/navigation.js"></script>
+    <script src="../js/interactions.js"></script>
+</body>
+</html>

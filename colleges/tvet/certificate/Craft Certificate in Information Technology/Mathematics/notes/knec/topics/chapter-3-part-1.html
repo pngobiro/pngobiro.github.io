@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 3: Floating Point Representation (Part 1) - Computational Mathematics</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                        <span class="progress-text">Chapter 3 (Part 1)</span>
+                    </div>
+                    <a href="chapter-4-part-1a.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 3 : Floating Point Representation</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+
+                <!-- START: chapter-3-objectives -->
+                <section id="chapter-3-objectives" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🎯</span>
+                        <span class="heading-text">Chapter Objectives</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>At the completion of this chapter, you would have learnt how to:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">perform floating point arithmetic;</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">perform number storage.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-3-objectives -->
+
+                <!-- START: chapter-3-introduction -->
+                <section id="section-3-1" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💡</span>
+                        <span class="heading-text">3.1 Introduction</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>When working with a single-length 12-bit word size we can cope with integral values in the range of -2048 to +2047. Similar limitations are imposed upon mixed or fractional values. However, we do have the option of extending these ranges by the use of double-length words but this is not always convenient.</p>
+                        <p>A better alternative to fixed-point representation is the floating-point representation. It is capable of holding, in a single-length word, a greater range of numbers. It also uses the same form for coping with integer mixed numbers or fractions but at a cost of reduced accuracy.</p> <!-- MMD typos: silizite, cuping, accurasy -->
+                        <p>Generally, the floating-point form is suitable for handling quantities of far higher values than usual, or whose values are very small.</p> <!-- MMD typos: s, every -->
+                    </div>
+                </section>
+                <!-- END: chapter-3-introduction -->
+
+                <!-- START: chapter-3-fixed-vs-floating -->
+                <section id="section-3-2" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚖️</span>
+                        <span class="heading-text">3.2 Fixed Point and Floating Point Binary</span> <!-- MMD typo: Fwating -->
+                    </h2>
+                    <div class="content-card">
+                        <p>For fixed point binary the binary places are fixed.</p> <!-- MMD typo: biraty -->
+                        <p>0000.0000 (4 bits is reserved for integer part and the other 4 bits is reserved for fraction part)</p>
+                        <p>Using such representation the numbers that can be represented are limited.</p>
+                        <p>Example, if 01110.11 is to be stored using the above format only 1110.1100 could be reflected (note that most significant bit is a sign bit). To be more precise in representing number the floating-point format is used.</p>
+                        <p>Using Floating Point, 01110.11 could be represented as follow:</p>
+                        <p><span class="math-inline">$01110.11 = 0.1110110 \times 2^{100}$</span> (Using 8 bits to store number. The power is 100 or 4 in denary as four decimal places are shifted)</p>
+                        <p>Floating Point numbers are made up of three parts</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Mantissa (e.g. 0.1110110)</span></li> <!-- MMD typo: 0.11101102 -->
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Base (Radix) (e.g. 2)</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Exponent (Power) (e.g. <span class="math-inline">$100_{2}$</span>)</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-3-fixed-vs-floating -->
+
+                <!-- START: chapter-3-fp-storage-concepts -->
+                <section id="section-3-3" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💾</span>
+                        <span class="heading-text">3.3 Floating Point Storage Concepts</span>
+                    </h2>
+                    <div class="content-card">
+                        <div class="equation">$$ m \times B^{E} \text{ where} $$</div>
+                        <p>Mantissa can be in</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Sign modulus</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">2's complement</span></li>
+                        </ul>
+                        <p>Exponent can be in</p>
+                         <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">2's complements</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Excess <span class="math-inline">$2^{n-1}$</span> where n is the no. of storage bits for exponent</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-3-fp-storage-concepts -->
+
+                 <!-- START: chapter-3-fp-storage-steps -->
+                <section id="section-3-4" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💾</span>
+                        <span class="heading-text">3.4 Floating Point Storage Steps & Formats</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Storing numbers in normalised floating point form can be defined with the following steps.</p> <!-- MMD typo: form be -->
+                        <p><strong>Steps:</strong></p>
+                        <ol>
+                            <li>Convert given numbers into binary</li>
+                            <li>Check if converted is normalised, if not normalise it.</li> <!-- MMD typo: nornelised -->
+                            <li>Store mantissa based on given format. (which can be sign modulus or 2's complement.)</li> <!-- MMD typo: compiement -->
+                            <li>Store exponent based on given format. (which can be 2's complements or excess <span class="math-inline">$2^{n-1}$</span> method.)</li> <!-- MMD typo: complements (1) -->
+                        </ol>
+
+                        <h3 class="subsection-heading">3.4.1 Stored Floating Point Format Examples</h3> <!-- MMD typo: Store Reating -->
+
+                        <p><strong>Format A</strong></p>
+                        <p>Sign modulus mantissa and 2's complement exponent.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Floating point numbers are stored using 16 bits. The first bit is the mantissa sign bit, next 9 are the normalised mantissa and the final six bits are the exponents in 2's complement.</span></li>
+                        </ul>
+
+                        <p><strong>Format B</strong></p>
+                        <p>2's complement mantissa and 2's complement exponent.</p> <!-- MMD typo: complement's -->
+                        <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">Floating point numbers are stored using 16 bits. The first ten bits 2's complement mantissa followed by a six-bit 2's complement exponent.</span></li>
+                        </ul>
+
+                        <p><strong>Format C</strong></p>
+                        <p>Sign modulus mantissa and excess <span class="math-inline">$2^{n-1}$</span> method.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">The first bit is the mantissa sign bit, the next 9 bits are normalised mantissa, the final six bits the exponent in excess <span class="math-inline">$2^{n-1}$</span> form.</span></li> <!-- MMD typo: 2n-1 -->
+                        </ul>
+
+                        <p><strong>Format D</strong></p>
+                        <p>2's complement mantissa and excess <span class="math-inline">$2^{n-1}$</span> method.</p> <!-- MMD typo: complement's -->
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Given 16 bits storage. First 10 bits 2's complement mantissa followed by 6 bits exponent in excess <span class="math-inline">$2^{n-1}$</span> form.</span></li>
+                        </ul>
+                        <p>Note:</p>
+                        <ol type="i">
+                            <li>For mantissa stored using sign modulus form, 1 bit will be reserved to represent the sign, the absolute value of mantissa is stored without including the first bit before the decimal point.</li>
+                            <li>For mantissa stored using the 2's complement method, the first bit before the decimal point will be stored as it indicates the sign of the mantissa.</li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-3-fp-storage-steps -->
+
+                <!-- START: chapter-3-fp-notation -->
+                <section id="section-3-5" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✍️</span>
+                        <span class="heading-text">3.5 Floating Point Notation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Scientific notation (decimal).</p>
+                        <img src="../assets/images/ch3-scientific-notation-example.jpg" alt="Examples of scientific notation: 9.3 x 10^7, 9 x 10^-29">
+                        <p>Mantissa always 1 or greater, but less than 10</p>
+                        <div class="equation">$$ 1 \leq |M| < 10 $$</div>
+                        <p>Exponent always integer.</p>
+                        <p>Note: Mantissa can also be negative.</p> <!-- MMD typo: ne radive -->
+                    </div>
+                </section>
+                <!-- END: chapter-3-fp-notation -->
+
+                <!-- START: chapter-3-normalised-decimal -->
+                <section id="section-3-6" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✅</span>
+                        <span class="heading-text">3.6 Normalised Floating Point Form (Decimal)</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Divide mantissa by 10, increase exponent by 1.</p> <!-- MMD typo: mantissab -->
+                        <p>Mantissa now always fraction, 0.1 or bigger.</p> <!-- MMD typo: no w llways -->
+                        <div class="equation">$$ 0.1 \leq |M| < 1 $$</div> <!-- Corrected MMD: 0.1 < |M| < 1 -->
+                        <p>Example: <span class="math-inline">$0.93 \times 10^{8}, 0.9 \times 10^{-28}$</span></p>
+                        <p>Normalisation gets rid of mixed numbers.</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">Better for computers.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-3-normalised-decimal -->
+
+                <!-- START: chapter-3-normalised-binary -->
+                 <section id="section-3-7" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✅</span>
+                        <span class="heading-text">3.7 Normalised Exponent Form (Binary)</span> <!-- MMD typo: Exponent -->
+                    </h2>
+                    <div class="content-card">
+                        <p>Same principles as decimal.</p>
+                        <p>Mantissa always fraction 0.1 (binary) or bigger.</p>
+                        <div class="equation">$$ 0.1_{2} \leq |M| < 1 $$</div> <!-- Clarified base 2 -->
+                        <p>Exponent is positive or negative integer.</p>
+                        <p>Note: Mantissa needs a sign bit but doesn't use two's complement (in sign-magnitude formats).</p>
+                    </div>
+                </section>
+                <!-- END: chapter-3-normalised-binary -->
+
+                <!-- START: chapter-3-storing-neg-mantissa -->
+                <section id="section-3-8" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➖</span>
+                        <span class="heading-text">3.8 Storing Negative Mantissa</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>The mantissa can either be positive or negative. There are two alternative conventions used for storing the mantissa:</p>
+                        <p><strong>Sign Bit</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">'0' is assigned if the mantissa is positive;</span></li>
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">'1' is assigned if the mantissa is negative.</span></li>
+                        </ul>
+                        <p><strong>Two's Complement Method.</strong></p>
+                        <ul class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">-</span><span class="item-text">The two's complement of the mantissa is used if it is negative.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-3-storing-neg-mantissa -->
+
+                <!-- START: chapter-3-storing-neg-exponent -->
+                <section id="section-3-9" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">➖</span>
+                        <span class="heading-text">3.9 Storing Negative Exponent</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Two alternative conventions also exist with respect to the storage of the exponent:</p>
+                        <p><strong>Two's complement form.</strong></p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">The exponent is stored in its two's complement form if it is negative and so we do not need to allocate a separate space to hold the sign of the exponent. Although we must always do so for that of the mantissa (in sign-magnitude formats).</span></li> <!-- MMD typo: aseparate -->
+                        </ul>
+                        <p><strong>Excess <span class="math-inline">$2^{n-1}$</span> code form.</strong></p> <!-- MMD typo: code of form -->
+                        <p>(where <strong>n</strong> is the number of bits assigned for the exponent)</p> <!-- MMD typo: hits -->
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">-</span><span class="item-text">In this method, the value of <span class="math-inline">$2^{n-1}$</span> is added to the actual exponent whether positive or negative to give the stored exponent.</span></li> <!-- MMD typo: negatice -->
+                        </ul>
+                        <p>Stored Exponent = True Exponent + <span class="math-inline">$2^{n-1}$</span></p> <!-- MMD typo: Oiored, n-1 -->
+                        <p>OR</p>
+                        <p>True Exponent = Stored Exponent - <span class="math-inline">$2^{n-1}$</span></p> <!-- MMD typo: Store, n-1 -->
+                    </div>
+                </section>
+                <!-- END: chapter-3-storing-neg-exponent -->
+
+                <!-- START: chapter-3-exercises -->
+                <section id="section-3-10" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">✏️</span>
+                        <span class="heading-text">3.10 Exercises</span>
+                    </h2>
+                    <div class="content-card">
+                        <p><strong>Exercise 1:</strong> Express the decimal number +20.25 in sign modulus mantissa and 2's complement exponent format (Format A).</p>
+                        <p><strong>Solution:</strong></p>
+                        <p>Steps:</p>
+                        <ol type="i">
+                            <li><span class="math-inline">$20.25 = 20 + 0.25 = 10100 + 0.01 = 10100.01_{2}$</span></li>
+                            <li>Normalise: <span class="math-inline">$10100.01 = 0.1010001 \times 2^{5}$</span></li>
+                            <li>Store Mantissa (Sign + 9 bits): Sign=0 (positive), Mantissa=101000100 (padded) -> 0 101000100</li>
+                            <li>Store Exponent (6 bits 2's comp): Exponent=5 = <span class="math-inline">$000101_{2}$</span> -> 000101</li>
+                            <li>Combine:</li>
+                        </ol>
+                        <img src="../assets/images/ch3-exercise-format-a.jpg" alt="Diagram showing +20.25 stored in Format A: 0 101000100 000101">
+
+                        <p><strong>Exercise 2:</strong> Express decimal number +20.25 in 2's complement mantissa and 2's complement exponent format (Format B).</p>
+                        <p><strong>Solution:</strong></p>
+                        <p>Steps:</p>
+                        <ol type="i">
+                            <li><span class="math-inline">$20.25 = 10100.01_{2}$</span></li>
+                            <li>Normalise: <span class="math-inline">$0.1010001 \times 2^{5}$</span></li>
+                            <li>Store Mantissa (10 bits 2's comp): Positive, so store directly including leading 0: 0.101000100 -> 0101000100</li>
+                            <li>Store Exponent (6 bits 2's comp): Exponent=5 = <span class="math-inline">$000101_{2}$</span> -> 000101</li>
+                            <li>Combine: 0101000100 000101</li>
+                        </ol>
+                        <!-- MMD shows table for step iii/iv, represented above -->
+
+                        <p><strong>Exercise 3:</strong> Express -20.25 in 2's complement mantissa and 2's complement exponent format (Format B).</p>
+                        <p><strong>Solution:</strong></p>
+                        <p>Steps:</p>
+                        <ol type="i">
+                             <li><span class="math-inline">$-20.25 = -(10100.01_{2})$</span></li>
+                             <li>Normalise: <span class="math-inline">$-(0.1010001 \times 2^{5})$</span></li>
+                             <li>Store Mantissa (10 bits 2's comp):
+                                 <ol>
+                                     <li>Positive Mantissa: 0.101000100 -> 0101000100</li>
+                                     <li>Invert: 1010111011</li>
+                                     <li>Add 1: 1010111100 (This is the 2's complement mantissa)</li>
+                                 </ol>
+                             </li>
+                             <img src="../assets/images/ch3-exercise-format-b-neg1.jpg" alt="Calculation of 2's complement for mantissa of -20.25">
+                             <li>Store Exponent (6 bits 2's comp): Exponent=5 = <span class="math-inline">$000101_{2}$</span> -> 000101</li>
+                             <li>Combine:</li>
+                         </ol>
+                         <img src="../assets/images/ch3-exercise-format-b-neg2.jpg" alt="Diagram showing -20.25 stored in Format B: 1010111100 000101">
+
+                        <p><strong>Exercise 4:</strong> Express -0.375 decimal in Format B.</p>
+                        <!-- Solution not provided in MMD -->
+
+                        <p><strong>Exercise 5:</strong> Express 20.25 in sign modulus mantissa and excess <span class="math-inline">$2^{n-1}$</span> method format (Format C).</p>
+                        <p><strong>Solution:</strong></p>
+                        <p>Steps:</p>
+                         <ol type="i">
+                            <li><span class="math-inline">$20.25 = 10100.01_{2}$</span></li>
+                            <li>Normalise: <span class="math-inline">$0.1010001 \times 2^{5}$</span></li>
+                            <li>Store Mantissa (Sign + 9 bits): Sign=0, Mantissa=101000100 -> 0 101000100</li>
+                             <img src="../assets/images/ch3-exercise-format-c-mantissa.jpg" alt="Diagram showing mantissa storage for +20.25 in Format C">
+                            <li>Store Exponent (6 bits excess <span class="math-inline">$2^{6-1}$</span> = excess 32):
+                                <ol>
+                                    <li>Excess value = <span class="math-inline">$2^{6-1} = 2^5 = 32$</span></li>
+                                    <li>Stored exponent = True exponent + Excess = 5 + 32 = 37</li>
+                                    <li>37 in binary (6 bits): <span class="math-inline">$100101_{2}$</span> -> 100101</li>
+                                </ol>
+                             </li>
+                             <img src="../assets/images/ch3-exercise-format-c-exponent.jpg" alt="Diagram showing exponent storage for +20.25 in Format C">
+                             <li>Combine: 0 101000100 100101</li>
+                         </ol>
+
+                        <p><strong>Exercise 6:</strong> Express -0.375 in sign modulus mantissa and excess <span class="math-inline">$2^{n-1}$</span> method format (Format C).</p>
+                        <!-- Solution not provided in MMD -->
+
+                        <p><strong>Exercise 7:</strong> Express the floating point register 0110000000011111 in decimal (Assume Format C).</p>
+                        <p><strong>Solution:</strong></p>
+                        <img src="../assets/images/ch3-conversion-bin-to-dec.jpg" alt="Diagram showing register 0110000000011111 split into sign, mantissa, exponent">
+                        <p>Steps:</p>
+                        <ol type="i">
+                            <li>Split into parts: Sign=0, Mantissa=110000000, Exponent=011111</li>
+                            <li>Interpret Mantissa: Sign=0 (+), Value = <span class="math-inline">$0.110000000_{2}$</span></li>
+                            <li>Interpret Exponent (Excess 32): Stored=011111 = 31. True Exp = Stored - Excess = 31 - 32 = -1</li>
+                            <li>Combine: <span class="math-inline">$+0.11_{2} \times 2^{-1}$</span></li> <!-- Simplified mantissa -->
+                            <li>Convert to fixed point: <span class="math-inline">$0.011_{2}$</span></li>
+                            <li>Convert to decimal: <span class="math-inline">$0 \times 1 + 0 \times 2^{-1} + 1 \times 2^{-2} + 1 \times 2^{-3} = 0 + 0 + 1/4 + 1/8 = 0.25 + 0.125 = 0.375$</span></li>
+                        </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-3-exercises -->
+
+                <!-- START: chapter-3-past-questions -->
+                <section id="section-3-11" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">3.11 Past Years Questions</span>
+                    </h2>
+                    <div class="content-card">
+                         <p>8. A floating point number is stored in normalised form using a ten-bit TWO's complement mantissa followed by a six-bit excess 32 exponent.</p>
+                         <ol type="a"> <!-- Assuming 'w' starts list 'a' -->
+                             <li>Express 39.41634 in this form.</li>
+                             <li>Express 0111011100011101 as a decimal number.</li>
+                         </ol>
+                         <p>An 8 bits register is used to store value in excess form.</p>
+                         <ol type="a"> <!-- Assuming 'y' starts list 'a' -->
+                             <li>Show how 14 is stored in it.</li>
+                             <li>Calculate the true value from 10101011 which is in excess form. [ 2 ]</li>
+                         </ol>
+                         <p>The number 25.828125 is to be stored using a 24 bit word floating point format. First bit is reserved for sign bit for mantissa, the next 8 bits for exponent in Excess form and the rest for Normalised mantissa.</p>
+                         <ol type="a"> <!-- Assuming 'aa' starts list 'a' -->
+                             <li>Show how the number would be stored.</li>
+                             <li>Convert 010000100101101000000000 into denary.</li> <!-- MMD typo: int -->
+                         </ol>
+                         <p>Five bits of computer cell are allocated to store exponent in TWO's complement form.</p>
+                         <ol type="a"> <!-- Assuming 'cc' starts list 'a' -->
+                             <li>Show how exponent -12 is stored in it.</li> <!-- MMD typo: (t) re -->
+                             <li>Derive the true value from the stored number, in TWO's complement form, as shown below-
+                                 <div class="table-container">
+                                     <table class="content-table">
+                                         <tbody><tr><td>1</td><td>0</td><td>1</td><td>0</td><td>1</td></tr></tbody> <!-- MMD typo: 10 0 1 0 1 -->
+                                 </table>
+                                 </div>
+                             </li>
+                         </ol>
+                         <p>A normalised floating point number uses a 10 bit TWO's complement mantissa followed by a 6-bit exponent in excess-32 form.</p>
+                         <ol type="a"> <!-- Assuming 'ee' starts list 'a' -->
+                             <li>Store the denary number -43.123 into the above word format.</li>
+                             <li>Convert the following binary word from the above format into denary. <span class="math-inline">$1010010010101000$</span></li>
+                         </ol>
+                         <p>A normalised floating point number, using a 10 bit TWO's complement mantissa followed by a 6-bit exponent in TWO's complement.</p>
+                         <ol type="a"> <!-- Assuming 'gg' starts list 'a' -->
+                             <li>Store the denary number 68.25 into the above word.</li>
+                             <li>Store the denary number -0.1267 into the above word.</li>
+                         </ol>
+                         <p>The number -17.546875 is to be stored in floating point format is a SIXTEEN-BIT word. ONE bit is to be used for the sign of the mantissa, the next FIVE bits for the exponent in TWO's COMPLEMENT and TEN bits for the NORMALISED mantissa. Show how the number would be stored.</p>
+                         <ol type="i">
+                             <li>What DENARY value is actually held?</li>
+                         </ol>
+                         <p>In a SIXTEEN bit register, numbers are stored in NORMALISED, FLOATING-POINT form i.e. MANTISSA (first 10 bits) then EXPONENT (last 6 bits). Each part is in TWO's COMPLEMENT form, with the binary point assumed to be AFTER the LEFT HAND binary digit of the mantissa.</p>
+                         <ol type="a"> <!-- Assuming 'jj' starts list 'a' -->
+                             <li>What DENARY number is represented 1001011010001001? [ 3 ]</li>
+                             <li>Express the denary number, -23.875 in this format.</li>
+                         </ol>
+                         <p>A floating point number is stored in normalised form using a 16 bit word, with the bit reserved as sign for the mantissa, the next 9 bits reserved for the mantissa itself, and the remaining 6 bits reserved for the exponent in excess 32 form.</p>
+                         <ol>
+                             <li>Express -36.4515 in this form.</li>
+                         </ol>
+                         <p>A floating point number is stored in normalised form using a 16-bit word, with the first bit reserved as the sign for the mantissa, and the last 6 bits reserved for the exponent in TWO's complement. The remaining bits are for the mantissa itself.</p> <!-- MMD typo: 1t1-6 -->
+                         <ol type="a"> <!-- Assuming 'll' starts list 'a' -->
+                             <li>Express -16.875 in this form. [4]</li>
+                             <li>Express -0.09375 in this form.</li>
+                         </ol>
+                    </div>
+                </section>
+                <!-- END: chapter-3-past-questions -->
+
+            </main>
+
+            <!-- Same navigation at bottom -->
+            <nav class="document-nav">
+                 <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                     <a href="chapter-2-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <!-- Progress indicator TBD -->
+                         <span class="progress-text">Chapter 3 (Part 1)</span>
+                    </div>
+                    <a href="chapter-4-part-1a.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

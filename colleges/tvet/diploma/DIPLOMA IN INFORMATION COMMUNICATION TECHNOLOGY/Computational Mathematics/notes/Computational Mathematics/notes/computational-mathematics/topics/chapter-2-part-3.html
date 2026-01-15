@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 2: Number System and Binary Arithmetic - Part 3</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- MathJax Configuration -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 2 Part 3 of 3</span>
+                    </div>
+                    <a href="chapter-3-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                 <h1 class="section-title">CHAPTER 2: NUMBER SYSTEM AND BINARY ARITHMETIC (Continued)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-2-data-formats -->
+                <section id="chapter-2-data-formats" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">💻</span>
+                        <span class="heading-text">Computer data formats/coding</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Successful programming requires a precise data format.</p>
+                        <p>Data appears in different forms as below</p>
+                        <h3 class="subsection-heading">a) Alphanumeric codes</h3>
+                        <p>Codes have been developed to represent data as well as numbers and special symbols as ' <span class="math-inline">$=$</span> ', ' <span class="math-inline">$\&$</span> ', etc</p>
+                        <p>The codes are called alphanumeric codes</p>
+                        <p>The American Standard Code for Information Interchange (ASCII) is a seven bit code that is commonly used in computer systems.</p>
+                        <p>Since ASCII is a seven bit code, there are <span class="math-inline">$2^{7}$</span> or 128 possible coding combinations which mean that each letter of alphabet both upper and lower case as well as decimal digits <span class="math-inline">$0-9$</span> and special characters are represented by a unique code.</p>
+                        <p>i.e. - A - 100001, 0 - 0110000 and & - 0101010</p> <!-- Assuming these are examples, not exact ASCII -->
+                        <p>Many window based applications use the Unicode system to store alphanumeric data. This systems store each character as 16 bit data</p>
+                        <p>The code <span class="math-inline">$0000 \mathrm{H}-00 \mathrm{FFH}$</span> is the same as the standard ASCII code</p>
+
+                        <h3 class="subsection-heading">b) Binary Coded Decimal (BCD)</h3>
+                        <p>The BCD system provides a convenient way of handling large numbers that need to be input/output from a microcomputer system.</p>
+                        <p>The BCD system provides a means of converting a code readily handled by human (decimal) to a code readily handled by machine (binary).</p>
+                        <p>LED displays are examples that may use BCD system.</p>
+                        <p>BCD system uses four bits to represent each decimal digit. The four bits used are the binary equivalent of the numbers <span class="math-inline">$0-9$</span></p>
+                        <p>The binary representation of a decimal number is obtained by replacing each decimal digit by its BCD equivalent</p>
+
+                        <h3 class="subsection-heading">c) Float point numbers</h3>
+                        <p>Fixed point representation is convenient for representing numbers with bounded order s of magnitude</p>
+                        <p>i.e. - in a digital computer that uses 32 bits to represent numbers, the range of integers that can be used is limited to <span class="math-inline">$\pm\left(2^{31}-1\right) \approx \pm 10^{11}$</span></p>
+                        <p>In scientific computing environment, a wide range of numbers may be needed. In such a case float-point representation is used.</p>
+                        <p>The general form of a float-point representation is given by</p>
+                        <div class="equation">$$\mathrm{N}=\mathrm{F} \times \mathrm{R}^{\mathrm{E}}$$</div>
+                        <p>Where</p>
+                        <div class="equation">$$\begin{aligned} & N-\text { Number } \\ & F \text { - Fraction or mantissa } \\ & R \text { - Radix } \\ & \text { E - Exponent } \end{aligned}$$</div>
+                        <p>Consider the number <span class="math-inline">$\mathrm{N}=3560000$</span>, there are several ways of writing same number</p>
+                        <div class="equation">$$\mathrm{N}=0.356 \times 10^{7}=0.0356 \times 10^{8}=3.56 \times 10^{6} \mathrm{etc}$$</div>
+                        <p>All these forms are valid float point representation.</p>
+                        <p>We can remove the zeros in the first two forms and the integer will still be valid in which case the resulting form requires the fewest integers to represent the mantissa since all significant zeros have been eliminated from the mantissa. This is known as the normalized form of float point representation.</p>
+                        <p>Float point numbers are generally stored in the memory in the format shown below</p>
+                        <img src="../assets/images/chapter-2-float-format.jpg" alt="Diagram showing float point number format with sign bits for exponent and mantissa" class="content-image">
+                        <p>Note</p>
+                        <p>The MSB of the exponent is the exponent sign bit and the MSB of the mantissa is the mantissa sign bit</p>
+                    </div>
+                </section>
+                <!-- END: chapter-2-data-formats -->
+
+                <!-- START: chapter-2-other-binary-coding -->
+                <section id="chapter-2-other-binary-coding" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⌨️</span>
+                        <span class="heading-text">e) Other Binary Coding</span> <!-- Assuming e) follows c) -->
+                    </h2>
+                    <div class="content-card">
+                        <p>Binary codes are codes which are represented in binary system with modification from the original ones. Below we will be seeing the following:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Weighted Binary Systems</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Non Weighted Codes</span></li>
+                        </ul>
+                        <h3 class="subsection-heading">Weighted Binary Systems</h3>
+                        <p>Weighted binary codes are those which obey the positional weighting principles, each position of the number represents a specific weight. The binary counting sequence is an example.</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead>
+                               <tr><th>Decimal</th><th><span class="math-inline">$\mathbf{8 4 2 1}$</span></th><th><span class="math-inline">$\mathbf{2 4 2 1}$</span></th><th><span class="math-inline">$\mathbf{5 2 1 1}$</span></th><th>Excess-3</th></tr>
+                             </thead>
+                             <tbody>
+                               <tr><td>0</td><td>0000</td><td>0000</td><td>0000</td><td>0011</td></tr>
+                               <tr><td>1</td><td>0001</td><td>0001</td><td>0001</td><td>0100</td></tr>
+                               <tr><td>2</td><td>0010</td><td>0010</td><td>0011</td><td>0101</td></tr>
+                               <tr><td>3</td><td>0011</td><td>0011</td><td>0101</td><td>0110</td></tr>
+                               <tr><td>4</td><td>0100</td><td>0100</td><td>0111</td><td>0111</td></tr>
+                               <tr><td>5</td><td>0101</td><td>1011</td><td>1000</td><td>1000</td></tr>
+                               <tr><td>6</td><td>0110</td><td>1100</td><td>1010</td><td>1001</td></tr>
+                               <tr><td>7</td><td>0111</td><td>1101</td><td>1100</td><td>1010</td></tr>
+                               <tr><td>8</td><td>1000</td><td>1110</td><td>1110</td><td>1011</td></tr>
+                               <tr><td>9</td><td>1001</td><td>1111</td><td>1111</td><td>1100</td></tr>
+                             </tbody>
+                           </table>
+                        </div>
+                        <p>8421 Code/BCD Code: The BCD (Binary Coded Decimal) is a straight assignment of the binary equivalent. It is possible to assign weights to the binary bits according to their positions. The weights in the BCD code are 8,4,2,1.</p>
+                        <p>Example: The bit assignment 1001, can be seen by its weights to represent the decimal 9 because:</p>
+                        <div class="equation">$$1 \times 8+0 \times 4+0 \times 2+1 \times 1=9$$</div>
+                        <p>2421 Code: This is a weighted code, its weights are <span class="math-inline">$2, 4, 2$</span> and 1 . A decimal number is represented in 4-bit form and the total four bits weight is <span class="math-inline">$2+4+2+1=9$</span>. Hence the 2421 code represents the decimal numbers from 0 to 9 .</p>
+                        <p>5211 Code : This is a weighted code, its weights are <span class="math-inline">$5, 2, 1$</span> and 1 . A decimal number is represented in 4-bit form and the total four bits weight is <span class="math-inline">$5+2+1+1=9$</span>. Hence the 5211 code represents the decimal numbers from 0 to 9 .</p>
+                        <p>Downloaded by Patrick Ngobiro (pngobiro@gmail.com)</p>
+                        <p>Reflective Code: A code is said to be reflective when code for 9 is complement for the code for 0 , and so is for 8 and 1 codes, 7 and 2, 6 and 3, 5 and 4 . Codes 2421, 5211 , and excess -3 are reflective, whereas the 8421 code is not.</p>
+                        <p>Sequential Codes: A code is said to be sequential when two subsequent codes, seen as numbers in binary representation, differ by one. This greatly aids mathematical manipulation of data. The 8421 and Excess-3 codes are sequential, whereas the 2421 and 5211 codes are not.</p>
+
+                        <h3 class="subsection-heading">Non Weighted Codes</h3>
+                        <p>Non weighted codes are codes that are not positionally weighted. That is, each position within the binary number is not assigned a fixed value.</p>
+                        <p>Excess-3 Code: Excess-3 is a non-weighted code used to express decimal numbers. The code derives its name from the fact that each binary code is the corresponding 8421 code plus 0011(3).</p>
+                        <p>Example: 1000 of <span class="math-inline">$8421=1011$</span> in Excess-3</p>
+                        <h4 class="subsection-heading">Note</h4>
+                        <p>Excess-3 binary-coded decimal (XS-3), also called biased representation or Excess- <span class="math-inline">$\mathbf{N}$</span>, is a numeral system used on some older computers that uses a pre-specified number <span class="math-inline">$N$</span> as a biasing value. It is a way to represent values with a balanced number of positive and negative numbers. In XS-3, numbers are represented as decimal digits, and each digit is represented by four bits as the BCD value plus 3 (the "excess" amount):</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The smallest binary number represents the smallest value. (i.e. 0 - Excess Value)</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">The greatest binary number represents the largest value. (i.e. <span class="math-inline">$2^{N+1}$</span> - Excess Value - 1)</span></li> <!-- Assuming N is number of bits -->
+                        </ul>
+                        <p>Decimal Binary Decimal Binary Decimal Binary Decimal Binary</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <tbody>
+                               <tr><td><span class="math-inline">$\mathbf{- 3}$</span></td><td>0000</td><td><span class="math-inline">$\mathbf{1}$</span></td><td>0100</td><td><span class="math-inline">$\mathbf{5}$</span></td><td>1000</td><td><span class="math-inline">$\mathbf{9}$</span></td><td>1100</td></tr>
+                               <tr><td><span class="math-inline">$\mathbf{- 2}$</span></td><td>0001</td><td><span class="math-inline">$\mathbf{2}$</span></td><td>0101</td><td><span class="math-inline">$\mathbf{6}$</span></td><td>1001</td><td><span class="math-inline">$\mathbf{1 0}$</span></td><td>1101</td></tr>
+                               <tr><td><span class="math-inline">$\mathbf{- 1}$</span></td><td>0010</td><td><span class="math-inline">$\mathbf{3}$</span></td><td>0110</td><td><span class="math-inline">$\mathbf{7}$</span></td><td>1010</td><td><span class="math-inline">$\mathbf{1 1}$</span></td><td>1110</td></tr>
+                               <tr><td><span class="math-inline">$\mathbf{0}$</span></td><td>0011</td><td><span class="math-inline">$\mathbf{4}$</span></td><td>0111</td><td><span class="math-inline">$\mathbf{8}$</span></td><td>1011</td><td><span class="math-inline">$\mathbf{1 2}$</span></td><td>1111</td></tr>
+                             </tbody>
+                           </table>
+                        </div>
+                        <p>To encode a number such as 127 , then, one simply encodes each of the decimal digits as above, giving (0100, 0101, 1010).</p>
+                        <p>The primary advantage of XS-3 coding over BCD coding is that a decimal number can be nines' complemented (for subtraction) as easily as a binary number can be ones' complemented; just invert all bits.</p>
+                        <p>Adding Excess-3 works on a different algorithm than BCD coding or regular binary numbers. When you add two XS-3 numbers together, the result is not an XS-3 number. For instance, when you add 1 and 0 in XS-3 the answer seems to be 4/3 instead of 1 . In order to correct this problem, when you are finished adding each digit, you have to subtract 3 (binary 11) if the digit is less than decimal 10 and add three if the number is greater than or equal to decimal 10 (thus causing the number to wrap).</p>
+                        <p>Gray Code: The gray code belongs to a class of codes called minimum change codes, in which only one bit in the code changes when moving from one code to the next. The Gray code is non-weighted code, as the position of bit does not contain any weight. The gray code is a reflective digital code which has the special property that any two subsequent numbers codes differ by only one bit. This is also called a unit-distance code. In digital Gray code has got a special place.</p>
+                        <div class="table-container">
+                           <table class="content-table">
+                             <thead>
+                               <tr><th>Decimal Number</th><th>Binary Code</th><th>Gray Code</th></tr>
+                             </thead>
+                             <tbody>
+                               <tr><td>0</td><td>0000</td><td>0000</td></tr>
+                               <tr><td>1</td><td>0001</td><td>0001</td></tr>
+                               <tr><td>2</td><td>0010</td><td>0011</td></tr>
+                               <tr><td>3</td><td>0011</td><td>0010</td></tr>
+                               <tr><td>4</td><td>0100</td><td>0110</td></tr>
+                               <tr><td>5</td><td>0101</td><td>0111</td></tr>
+                               <tr><td>6</td><td>0110</td><td>0101</td></tr>
+                               <tr><td>7</td><td>0111</td><td>0100</td></tr>
+                               <tr><td>8</td><td>1000</td><td>1100</td></tr>
+                               <tr><td>9</td><td>1001</td><td>1101</td></tr>
+                               <tr><td>10</td><td>1010</td><td>1111</td></tr>
+                               <tr><td>11</td><td>1011</td><td>1110</td></tr>
+                               <tr><td>12</td><td>1100</td><td>1010</td></tr>
+                               <tr><td>13</td><td>1101</td><td>1011</td></tr>
+                               <tr><td>14</td><td>1110</td><td>1001</td></tr>
+                               <tr><td>15</td><td>1111</td><td>1000</td></tr>
+                             </tbody>
+                           </table>
+                        </div>
+                        <h4 class="subsection-heading">* Binary to Gray Conversion</h4>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Gray Code MSB is binary code MSB.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Gray Code MSB-1 is the XOR of binary code MSB and MSB-1.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">MSB-2 bit of gray code is XOR of MSB-1 and MSB-2 bit of binary code.</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">MSB-N bit of gray code is XOR of MSB-N-1 and MSB-N bit of binary code.</span></li>
+                        </ul>
+                    </div>
+                </section>
+                <!-- END: chapter-2-other-binary-coding -->
+
+            </main>
+
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-2-part-2.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                         <span class="progress-text">Chapter 2 Part 3 of 3</span>
+                    </div>
+                    <a href="chapter-3-part-1.html" class="nav-button"> <!-- Link to next chapter -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

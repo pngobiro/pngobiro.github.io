@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chapter 5: Control Structures (Part 2)</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax for potential math content -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Top Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 5 (Part 2)</span>
+                    </div>
+                    <a href="chapter-6-part-1.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Chapter 5: Control Structures (Part 2 - Loops)</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: chapter-5-part-2 -->
+                <section id="chapter-5-loop-structure" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">🔄</span> <!-- Placeholder Icon -->
+                        <span class="heading-text">Loop Structure</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>A loop structure is used to execute a certain set of actions for a predefined number of times or until a particular condition is satisfied. There are 3 control statements available in C/C++ to implement loop structures. While, Do while and For statements.</p>
+                        <h3>Loop structures chart</h3>
+                        <figure>
+                           <img src="../assets/images/chapter-5-loop-structures.jpg" alt="Loop structures flowchart: While, Do-While, and For" class="content-image">
+                           <figcaption>Loop Structures Flowchart</figcaption>
+                        </figure>
+                        <p>Loop Structure<br>Implemented using: While, Do While and For control statements</p>
+                    </div>
+                </section>
+
+                <section id="chapter-5-loop-impl" class="content-section">
+                    <h2 class="section-heading">
+                        <span class="heading-icon">⚙️</span> <!-- Placeholder Icon -->
+                        <span class="heading-text">Loop Structure Implementation</span>
+                    </h2>
+                    <div class="content-card">
+                        <p>Loops are control structures used to repeat a given section of code a certain number of times or until a particular condition is met.</p>
+                        <p>Visual Basic has three main types of loops: for..next loops, do loops and while loops.</p>
+                        <p>Note: 'Debug' may be a reserved word in Visual Basic, and this may cause the code samples shown here to fail for some versions of Visual Basic.</p>
+
+                        <h3 class="subsection-heading">For..Next Loops</h3>
+                        <p>The syntax of a For..Next loop has three components: a counter, a range, and a step. A basic for..next loop appears as follows:</p>
+                        <pre><code class="language-vb">For X = 1 To 100 Step 2
+    Debug.Print X
+Next X</code></pre>
+                        <p>In this example, X is the counter, "1 to 100" is the range, and "2" is the step.</p>
+                        <p>The variable reference in the Next part of the statement is optional and it is common practice to leave this out. There is no ambiguity in doing this if code is correctly indented.</p>
+                        <p>When a For..Next loop is initialized, the counter is set to the first number in the range; in this case, X is set to 1. The program then executes any code between the for and next statements normally. Upon reaching the next statement, the program returns to the for statement and increases the value of the counter by the step. In this instance, <span class="math-inline">$X$</span> will be increased to 3 on the second iteration, 5 on the third, etc.</p>
+                        <p>To change the amount by which the counter variable increases on each iteration, simply change the value of the step. For example, if you use a step 3, <span class="math-inline">$X$</span> will increase from 1 to 4, then to 7, 10, 13, and so on. When the step is not explicitly stated, 1 is used by default. (Note that the step can be a negative value. For instance, <code>For X = 100 To 1 Step -1</code> would decrease the value of X from 100 to 99 to 98, etc.)</p>
+                        <p>When X reaches the end of the range (100 in the example above), the loop will cease to execute, and the program will continue to the code beyond the next statement.</p>
+                        <p>It is possible to edit the value of the counter variable within a for..next loop, although this is generally considered bad programming practice:</p>
+                        <pre><code class="language-vb">For X = 1 To 100 Step 1
+    Debug.Print X
+    X = 7
+Next</code></pre>
+                        <p>While you may on rare occasions find good reasons to edit the counter in this manner, the example above illustrates one potential pitfall:</p>
+                        <p>Because X is set to 7 at the end of every iteration, this code creates an infinite loop. To avoid this and other unexpected behavior, use extreme caution when editing the counter variable!</p>
+                        <p>It is not required by the compiler that you specify the name of the loop variable in the Next statement but it will be checked by the compiler if you do, so it is a small help in writing correct programs.</p>
+
+                        <h3 class="subsection-heading">For loop on list</h3>
+                        <p>Another very common situation is the need for a loop which enumerates every element of a list. The following sample code shows you how to do this:</p>
+                        <pre><code class="language-vb">Dim v As Variant
+For Each v In list
+    Debug.Print v
+Next</code></pre>
+                        <p>The list is commonly a Collection or Array, but can be any other object that implements an enumerator. Note that the iterating variable has to be either a Variant, Object or class that matches the type of elements in the list.</p>
+
+                        <h3 class="subsection-heading">Do Loops</h3>
+                        <p>Do loops are a bit more flexible than For loops, but should generally only be used when necessary.</p>
+                        <p>Do loops come in the following formats:</p>
+                        <ul class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Do while</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Do until</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Loop while</span></li>
+                            <li class="list-item"><span class="item-icon">•</span><span class="item-text">Loop until</span></li>
+                        </ul>
+                        <p>While loops (both do while and loop while) will continue to execute as long as a certain conditional is true. An Until loop will loop as long as a certain condition is false, on the other hand. The only difference between putting either While or Until in the Do section or the Loop section, is that Do checks when the loop starts, and Loop checks when the loop ends. An example of a basic loop is as follows:</p>
+                        <pre><code class="language-vb">Do
+    Debug.Print "hello"
+    x = x + 1
+Loop Until x = 10</code></pre>
+                        <p>This loop will print hello several times, depending on the initial value of x. As you may have noticed, Do loops have no built in counters. However, they may be made manually as shown above. In this case, I chose x as my counter variable, and every time the loop execute, x increase itself by one. When X reaches 10, the loop will cease to execute. The advantage of Do loops is that you may exit at any time whenever any certain conditional is met. You may have it loop as long as a certain variable is false, or true, or as long as a variable remains in a certain range.</p>
+
+                        <h4 class="subsection-heading">Endless loop: Do..Loop</h4>
+                        <p>The endless loop is a loop which never ends and the statements inside are repeated forever. Never is meant as a relative term here - if the computer is switched off then even endless loops will end very abruptly.</p>
+                        <pre><code class="language-vb">Do
+    Do_Something
+Loop</code></pre>
+                        <p>In Visual Basic you cannot label the loop but you can of course place a label just before it, inside it or just after it if you wish.</p>
+
+                        <h4 class="subsection-heading">Loop with condition at the beginning: Do While..Loop</h4>
+                        <p>This loop has a condition at the beginning. The statements are repeated as long as the condition is met. If the condition is not met at the very beginning then the statements inside the loop are never executed.</p>
+                        <pre><code class="language-vb">Do While X <= 5
+    X = X + 5
+Loop</code></pre>
+
+                        <h4 class="subsection-heading">Loop with condition at the end: Do..Loop Until</h4>
+                        <p>This loop has a condition at the end and the statements are repeated until the condition is met. Since the check is at the end the statements are at least executed once.</p>
+                        <pre><code class="language-vb">Do
+    X = 5+2
+Loop Until X > 5</code></pre>
+
+                        <h4 class="subsection-heading">Loop with condition in the middle: Do..Exit Do..Loop</h4>
+                        <p>Sometimes you need to first make a calculation and exit the loop when a certain criterion is met. However when the criterion is not met there is something else to be done. Hence you need a loop where the exit condition is in the middle.</p>
+                        <pre><code class="language-vb">Do
+    X = Calculate_Something
+    If X > 10 then
+        Exit Do
+    End If
+    Do_Something (X)
+Loop</code></pre>
+                        <p>In Visual Basic you can also have more than one exit statement. You cannot exit named outer loops using Exit Do because Visual Basic does not provide named loops; you can of course use Goto instead to jump to a label that follows the outer loop.</p>
+
+                        <h3 class="subsection-heading">While Loops</h3>
+                        <p>While loops are similar to Do loops except that the tested condition always appears at the top of the loop. If on the first entry into the loop block the condition is false, the contents of the loop are never executed. The condition is retested before every loop iteration.</p>
+                        <p>An example of a While loop is as follows:</p>
+                        <pre><code class="language-vb">price = 2
+While price < 64
+    Debug.Print "Price = " & price
+    price = price ^ 2
+Wend
+Debug.Print "Price = " & price & ": Too much for the market to bear!"</code></pre>
+                        <p>The While loop will run until the condition tests false - or until an "Exit While" statement is encountered.</p>
+
+                        <h3 class="subsection-heading">Nested Loops</h3>
+                        <p>A nested loop is any type of loop inside an already existing loop. They can involve any type of loop. For this, we will use For loops. It is important to remember that the inner loop will execute its normal amount multiplied by how many times the outer loop runs. For example:</p>
+                        <pre><code class="language-vb">For i = 1 To 10
+    For j = 1 To 2
+        Debug.Print "hi"
+    Next
+Next</code></pre>
+                        <p>This will print the word 'hi' twenty times. Upon the first pass of the <span class="math-inline">$i$</span> loop, it will run the <span class="math-inline">$j$</span> loop twice. Then on the second pass of the <span class="math-inline">$i$</span> loop, it will run the <span class="math-inline">$j$</span> loop another two times, and so on.</p>
+                    </div>
+                </section>
+                <!-- END: chapter-5-part-2 -->
+            </main>
+
+            <!-- Bottom Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="chapter-5-part-1.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Chapter 5 (Part 2)</span>
+                    </div>
+                    <a href="chapter-6-part-1.html" class="nav-button">
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>

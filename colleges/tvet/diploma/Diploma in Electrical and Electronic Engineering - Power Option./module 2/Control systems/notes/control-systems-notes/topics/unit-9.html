@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 9: State Variable Analysis</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/main.css">
+    <!-- Include MathJax -->
+    <script>
+    MathJax = {
+      tex: {
+        inlineMath: [['$', '$'], ['\\(', '\\)']],
+        displayMath: [['$$', '$$'], ['\\[', '\\]']],
+        processEscapes: true,
+        processEnvironments: true,
+        tags: 'ams' // Enable equation numbering if needed
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+      }
+    };
+    </script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+</head>
+<body>
+    <div class="container">
+        <article class="document-section">
+            <!-- Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-8-part-5.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 9 of 9</span>
+                    </div>
+                    <a href="references.html" class="nav-button"> <!-- Link to next section (References) -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+
+            <header class="section-header">
+                <h1 class="section-title">Unit-9: State Variable Analysis</h1>
+                <div class="title-underline"></div>
+            </header>
+
+            <main class="section-content">
+                <!-- START: unit-9-state-space-model -->
+                <section id="unit-9-state-space-model" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">🔢</span>
+                        <span class="heading-text">State Space Model</span>
+                     </h2>
+                     <div class="content-card">
+                        <p>The process by which the state of a system is determined is called state variable analysis.</p>
+                        <h3 class="subsection-heading">Advantages of State Space Techniques</h3>
+                        <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">This technique can be used for linear or nonlinear, time-variant or time-invariant systems.</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">It is easier to apply where Laplace transform cannot be applied.</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">The nth order differential equation can be expressed as 'n' equation of first order.</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">It is a time domain method.</span></li>
+                            <li class="list-item"><span class="item-icon">5.</span> <span class="item-text">As this is time domain method, therefore this method is suitable for digital computer computation.</span></li>
+                            <li class="list-item"><span class="item-icon">6.</span> <span class="item-text">On the basis of the given performance index, this system can be designed for an optimal condition.</span></li>
+                        </ol>
+                     </div>
+                </section>
+                <!-- END: unit-9-state-space-model -->
+
+                 <!-- START: unit-9-state-space-electrical -->
+                <section id="unit-9-state-space-electrical" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">⚡</span>
+                        <span class="heading-text">State Space representation of electrical system:</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>Consider an RLC network,</p>
+                         <p>At time t=0</p>
+                         <p>Current = $i_L(0)$</p>
+                         <p>Capacitor Voltage = $V_c(0)$</p>
+                         <p>Thus, the state of the network at time t=0 is specified by the inductor current and capacitor voltage.</p>
+                         <p>Therefore $i_L(0)$ and $V_c(0)$ is called the initial state of the network and the pair $i_L(t)$, $V_c(t)$ is called the state of the network at 't'. The variable iL and vc are called the state variables of the network.</p>
+                         <!-- Using corrected filename -->
+                         <img src="../assets/images/2025_05_05_fe94132467efe45f3516g-117-1.jpg" alt="RLC circuit diagram showing resistor, inductor L with current iL, and capacitor C with voltage Vc." class="content-image">
+                         <p>Apply KVL</p>
+                         <div class="equation">$$ R i_{L}+L \frac{d i_{L}}{d t}+V_{c}=0 \qquad \text{Eq.1} $$</div>
+                         <p>Also,</p>
+                         <div class="equation">$$ i_{c}=i_{L}=C \frac{d V_{c}}{d t} \qquad \text{Eq.2} $$</div>
+                         <p>From eq.1</p>
+                         <div class="equation">$$ \frac{d i_{L}}{d t}=-\frac{R}{L} i_{L}-\frac{1}{L} V_{c} \qquad \text{Eq.3} $$</div>
+                         <p>From eq.2 (rearranged)</p>
+                         <div class="equation">$$ \frac{d v_{c}}{d t}=\frac{1}{C} i_{L} \qquad \text{Eq.4} $$</div>
+                         <p>This type of equation is called State equation. And the variables present in this equation are called state variables.</p>
+                         <p>Eq. 3 and Eq. 4 can be written in matrix form as</p>
+                         <div class="equation">$$ \begin{bmatrix} \frac{d i_{L}}{d t} \\ \frac{d v_{c}}{d t} \end{bmatrix} = \begin{bmatrix} -\frac{R}{L} & -\frac{1}{L} \\ \frac{1}{c} & 0 \end{bmatrix} \begin{bmatrix} i_L \\ V_{c} \end{bmatrix} \qquad \text{Eq.5} $$</div> <!-- Corrected state vector order -->
+                         <p>Let</p>
+                         <div class="equation">$$ x(t) \triangleq \begin{bmatrix} i_{L} \\ V_{c} \end{bmatrix} \quad \text{and} \quad A = \begin{bmatrix} -\frac{R}{L} & -\frac{1}{L} \\ \frac{1}{c} & 0 \end{bmatrix} $$</div>
+                         <p>Then equation 5 can be written as</p>
+                         <div class="equation">$$ \frac{d}{d t} x(t)=A x(t) $$</div>
+                         <p>Or, $\dot{x}(t)=A x(t)$</p>
+                     </div>
+                </section>
+                <!-- END: unit-9-state-space-electrical -->
+
+                <!-- START: unit-9-state-space-general -->
+                 <section id="unit-9-state-space-general" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">📜</span>
+                        <span class="heading-text">General State Space Form</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>The general form of state equation is</p>
+                         <p>1. $\dot{x}(t)=Ax(t)+Bu(t) \quad \ldots \ldots \text{Eq.6}$ </p>
+                         <p>2. $y(t)=Cx(t)+Du(t) \quad \ldots \ldots \text{Eq.7}$ </p> <!-- MMD had numbering 1. and 1., corrected to 1. and 2. -->
+                         <p>Y = n- dimensional output vector</p>
+                         <p>U = r-dimensional control vector or input vector</p>
+                         <p>A = n × n system matrix</p>
+                         <p>B = n × r control matrix</p>
+                         <p>C = p × n output matrix</p> <!-- Corrected dimension, output Y is p-dimensional -->
+                         <p>D = p × r feedforward matrix</p> <!-- Added definition for D -->
+                         <p>When there is no direct connection between input and output in that case D u(t) is not taken (i.e., D=0).</p>
+                         <!-- MMD showed generic matrix structures, representing them below -->
+                          <p>State Equation:</p>
+                         <div class="equation">$$ \begin{bmatrix} \dot{x}_{1} \\ \dot{x}_{2} \\ \vdots \\ \dot{x}_{n} \end{bmatrix} = \begin{bmatrix} a_{11} & a_{12} & \cdots & a_{1n} \\ a_{21} & a_{22} & \cdots & a_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ a_{n1} & a_{n2} & \cdots & a_{nn} \end{bmatrix} \begin{bmatrix} x_{1} \\ x_{2} \\ \vdots \\ x_{n} \end{bmatrix} + \begin{bmatrix} b_{11} & b_{12} & \cdots & b_{1r} \\ b_{21} & b_{22} & \cdots & b_{2r} \\ \vdots & \vdots & \ddots & \vdots \\ b_{n1} & b_{n2} & \cdots & b_{nr} \end{bmatrix} \begin{bmatrix} u_{1} \\ u_{2} \\ \vdots \\ u_{r} \end{bmatrix} $$</div>
+                          <p>Output Equation:</p>
+                         <div class="equation">$$ \begin{bmatrix} y_{1} \\ y_{2} \\ \vdots \\ y_{p} \end{bmatrix} = \begin{bmatrix} c_{11} & c_{12} & \cdots & c_{1n} \\ c_{21} & c_{22} & \cdots & c_{2n} \\ \vdots & \vdots & \ddots & \vdots \\ c_{p1} & c_{p2} & \cdots & c_{pn} \end{bmatrix} \begin{bmatrix} x_{1} \\ x_{2} \\ \vdots \\ x_{n} \end{bmatrix} + \begin{bmatrix} d_{11} & d_{12} & \cdots & d_{1r} \\ d_{21} & d_{22} & \cdots & d_{2r} \\ \vdots & \vdots & \ddots & \vdots \\ d_{p1} & d_{p2} & \cdots & d_{pr} \end{bmatrix} \begin{bmatrix} u_{1} \\ u_{2} \\ \vdots \\ u_{r} \end{bmatrix} $$</div> <!-- Added D matrix and corrected C dimension -->
+                     </div>
+                 </section>
+                 <!-- END: unit-9-state-space-general -->
+
+                 <!-- START: unit-9-state-space-nth-order -->
+                 <section id="unit-9-state-space-nth-order" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">⚙️</span>
+                        <span class="heading-text">State Space Representation of nth order differential Equation</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>For the nth order differential equation</p>
+                         <h3 class="subsection-heading">Example 1</h3>
+                         <p>A system is described by the differential equation</p>
+                         <div class="equation">$$ \frac{d^{3} y}{d t^{3}}+6 \frac{d^{2} y}{d t^{2}}+11 \frac{d y}{d t}+10 y=8 u(t) $$</div>
+                         <p>Where y is the output and u is the input to the system. Obtain the state space representation of the system.</p>
+                         <p><strong>Solution</strong></p>
+                         <p>Let $x_{1}=y, x_{2}=\dot{y}$ and $x_{3}=\ddot{y}$ then</p>
+                         <div class="equation">$$ \dot{x}_{1} = x_{2} $$</div>
+                         <div class="equation">$$ \dot{x}_{2} = x_{3} $$</div>
+                          <p>Rearranging the original equation to solve for $\dddot{y} = \dot{x}_3$:</p>
+                         <div class="equation">$$ \dot{x}_{3} = \dddot{y} = -10y - 11\dot{y} - 6\ddot{y} + 8u(t) $$</div>
+                         <div class="equation">$$ \dot{x}_{3} = -10x_{1} - 11x_{2} - 6x_{3} + 8u(t) $$</div>
+                         <p>And the last equation will be</p> <!-- This text seems misplaced -->
+                         <p>In matrix form:</p>
+                         <div class="equation">$$ \begin{bmatrix} \dot{x}_{1} \\ \dot{x}_{2} \\ \dot{x}_{3} \end{bmatrix} = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ -10 & -11 & -6 \end{bmatrix} \begin{bmatrix} x_{1} \\ x_{2} \\ x_{3} \end{bmatrix} + \begin{bmatrix} 0 \\ 0 \\ 8 \end{bmatrix} u(t) $$</div>
+                         <p>Now comparing Eq. 6 and above equation</p>
+                         <div class="equation">$$ A=\begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ -10 & -11 & -6 \end{bmatrix}, \quad B=\begin{bmatrix} 0 \\ 0 \\ 8 \end{bmatrix}, \quad x(t)=\begin{bmatrix} x_{1} \\ x_{2} \\ x_{3} \end{bmatrix} $$</div>
+                         <p>The output equation is $y = x_1$. In matrix form:</p>
+                         <div class="equation">$$ y = \begin{bmatrix} 1 & 0 & 0 \end{bmatrix} \begin{bmatrix} x_{1} \\ x_{2} \\ x_{3} \end{bmatrix} \quad \implies C = \begin{bmatrix} 1 & 0 & 0 \end{bmatrix}, D = [0] $$</div>
+                     </div>
+                 </section>
+                 <!-- END: unit-9-state-space-nth-order -->
+
+                <!-- START: unit-9-state-variable-analysis-examples -->
+                <section id="unit-9-state-variable-analysis-examples" class="content-section">
+                     <h2 class="section-heading">
+                        <span class="heading-icon">❓</span>
+                        <span class="heading-text">State variable analysis: Examples with explanation</span>
+                     </h2>
+                     <div class="content-card">
+                         <p>Let's first discuss a small introduction about the state variables before proceeding with the examples.</p>
+                         <p><strong>State</strong> means a set of variables whose knowledge helps us to predict the <strong>behaviour</strong> of the control system. The state variable with the input functions provides the future state and the output of the system. The elements of the state variable analysis include <strong>state vector</strong>, <strong>state space</strong>, <strong>state equations</strong>, and the <strong>state variable representation</strong>.</p>
+                         <p>The state variables are the n variables needed to describe the system's behaviour, and the state axis is the area where coordinate axes are described. Similarly, state equations are the set of n equations, and state variable representation is described in terms of state variables, such as x1(t), x2(t), and so on. The system's input, output, initial conditions, etc., is described in terms of these elements.</p>
+                         <p>Here, we will discuss the examples in the form of Multiple Choice Questions because they will help us in the competitive exams.</p>
+
+                         <h3 class="subsection-heading">Example 1:</h3>
+                         <p>A system is described by the state equation $X' = AX + BU$. The output is given by $Y = CX$, where</p>
+                         <div class="equation">$$ A=\begin{bmatrix} -4 & -1 \\ 3 & -1 \end{bmatrix} \quad \text{and} \quad B=\begin{bmatrix} 1 \\ 1 \end{bmatrix} $$</div>
+                         <p>And $C = \begin{bmatrix} 1 & 0 \end{bmatrix}$</p>
+                         <p>The transfer function of the system is:</p>
+                         <ol class="enhanced-list">
+                            <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">$s/(s^2 + 5s + 7)$</span></li>
+                            <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">$2s/(s^2 + 5s + 7)$</span></li>
+                            <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">$1/(s^2 + 5s + 7)$</span></li>
+                            <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">$s/(s^2 + 3s + 5)$</span></li>
+                         </ol>
+                         <p><strong>Answer: (a) $s/(s^2 + 5s + 7)$</strong></p> <!-- MMD option 1 -->
+                         <p><strong>Explanation:</strong> The equation to find the transfer function of the system is given by:</p>
+                         <div class="equation">$$ G(s) = C [SI - A]^{-1} B + D $$</div>
+                         <p>Where,</p>
+                         <p>I is always an identity matrix. D=0 as it's not given.</p>
+                         <p>Computing the values of A, B, I, and C in the above equation, we get:</p>
+                         <p>$SI - A = s\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} - \begin{bmatrix} -4 & -1 \\ 3 & -1 \end{bmatrix} = \begin{bmatrix} s+4 & 1 \\ -3 & s+1 \end{bmatrix}$</p>
+                         <p>Inverse: $[SI - A]^{-1} = \frac{1}{\det(SI-A)} \text{adj}(SI-A)$</p>
+                         <p>$\det(SI-A) = (s+4)(s+1) - (1)(-3) = s^2 + 5s + 4 + 3 = s^2 + 5s + 7$</p>
+                         <p>$\text{adj}(SI-A) = \begin{bmatrix} s+1 & -1 \\ 3 & s+4 \end{bmatrix}$</p>
+                         <div class="equation">$$ [SI - A]^{-1} = \frac{1}{s^2 + 5s + 7} \begin{bmatrix} s+1 & -1 \\ 3 & s+4 \end{bmatrix} $$</div>
+                         <p>Transfer function = $C [SI - A]^{-1} B$</p>
+                         <div class="equation">$$ = \begin{bmatrix} 1 & 0 \end{bmatrix} \frac{1}{s^2 + 5s + 7} \begin{bmatrix} s+1 & -1 \\ 3 & s+4 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \end{bmatrix} $$</div>
+                         <div class="equation">$$ = \frac{1}{s^2 + 5s + 7} \begin{bmatrix} 1 & 0 \end{bmatrix} \begin{bmatrix} (s+1)(1) + (-1)(1) \\ (3)(1) + (s+4)(1) \end{bmatrix} $$</div>
+                         <div class="equation">$$ = \frac{1}{s^2 + 5s + 7} \begin{bmatrix} 1 & 0 \end{bmatrix} \begin{bmatrix} s \\ s+7 \end{bmatrix} $$</div>
+                         <div class="equation">$$ = \frac{1}{s^2 + 5s + 7} [ (1)(s) + (0)(s+7) ] $$</div>
+                         <div class="equation">$$ = \frac{s}{s^2 + 5s + 7} $$</div>
+                         <p>Thus, the correct answer is an option (a).</p>
+
+                         <h3 class="subsection-heading">Example 2:</h3>
+                          <p>Find the sum of the Eigen values of the matrix given below:</p>
+                          <div class="equation">$$ \begin{bmatrix} 2 & 0 & 0 & -1 \\ 0 & 1 & 0 & 0 \\ 0 & 0 & 3 & 0 \\ -1 & 0 & 0 & 4 \end{bmatrix} $$</div>
+                          <ol class="enhanced-list">
+                             <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">15</span></li>
+                             <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">12</span></li>
+                             <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">-10</span></li>
+                             <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">10</span></li>
+                          </ol>
+                          <p><strong>Answer: (d) 10</strong></p>
+                          <p><strong>Explanation:</strong> The shortcut approach to find the sum of the Eigen values is to add the elements present in the diagonal of the given matrix (Trace of the matrix).</p>
+                          <p>The diagonal elements are 2, 1, 3, and 4. It sum is equal to $2 + 1 + 3 + 4 = 10$</p>
+                          <p>Hence, the correct answer is 10.</p>
+
+                          <h3 class="subsection-heading">Example 3:</h3>
+                           <p>A system represented by the equations is given by:</p>
+                           <div class="equation">$$ X^{\prime}=\begin{bmatrix} 0 & 1 \\ -2 & -3 \end{bmatrix} x+\begin{bmatrix} 0 \\ 1 \end{bmatrix} u $$</div>
+                           <p>And $Y = \begin{bmatrix} 1 & 0 \end{bmatrix} x$</p> <!-- MMD omitted x -->
+                           <p>Find the equivalent transfer function of the system.</p>
+                            <ol class="enhanced-list">
+                               <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">$s/(s^2 + 3s + 3)$</span></li>
+                               <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">$1/(s^2 + 3s + 2)$</span></li>
+                               <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">$5/(s^2 + 5s + 2)$</span></li>
+                               <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">$2/(s^2 + 3s + 5)$</span></li>
+                            </ol>
+                           <p><strong>Answer: (b) $1/(s^2 + 3s + 2)$</strong></p>
+                           <p><strong>Explanation:</strong> The equation to find the transfer function of the system is given by:</p>
+                           <div class="equation">$$ G(s) = C [SI - A]^{-1} B + D $$</div>
+                           <p>Where D=0.</p>
+                           <p>$SI - A = s\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} - \begin{bmatrix} 0 & 1 \\ -2 & -3 \end{bmatrix} = \begin{bmatrix} s & -1 \\ 2 & s+3 \end{bmatrix}$</p>
+                           <p>$\det(SI-A) = s(s+3) - (-1)(2) = s^2 + 3s + 2$</p>
+                           <p>$\text{adj}(SI-A) = \begin{bmatrix} s+3 & 1 \\ -2 & s \end{bmatrix}$</p>
+                           <div class="equation">$$ [SI - A]^{-1} = \frac{1}{s^2 + 3s + 2} \begin{bmatrix} s+3 & 1 \\ -2 & s \end{bmatrix} $$</div>
+                           <p>Transfer function = $C [SI - A]^{-1} B$</p>
+                           <div class="equation">$$ = \begin{bmatrix} 1 & 0 \end{bmatrix} \frac{1}{s^2 + 3s + 2} \begin{bmatrix} s+3 & 1 \\ -2 & s \end{bmatrix} \begin{bmatrix} 0 \\ 1 \end{bmatrix} $$</div>
+                            <div class="equation">$$ = \frac{1}{s^2 + 3s + 2} \begin{bmatrix} 1 & 0 \end{bmatrix} \begin{bmatrix} (s+3)(0) + (1)(1) \\ (-2)(0) + (s)(1) \end{bmatrix} $$</div>
+                            <div class="equation">$$ = \frac{1}{s^2 + 3s + 2} \begin{bmatrix} 1 & 0 \end{bmatrix} \begin{bmatrix} 1 \\ s \end{bmatrix} $$</div>
+                            <div class="equation">$$ = \frac{1}{s^2 + 3s + 2} [ (1)(1) + (0)(s) ] $$</div>
+                           <div class="equation">$$ = \frac{1}{s^2 + 3s + 2} $$</div>
+
+                           <h3 class="subsection-heading">Example 4:</h3>
+                            <p>The observability condition in the state space representation can be determined with the condition given by:</p>
+                             <ol class="enhanced-list">
+                                <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">$[C^T \quad A^T C^T \quad (A^T)^2 C^T \dots]$</span></li> <!-- Corrected formula -->
+                                <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">$[B^T \quad A^T B^T \quad (A^T)^2 B^T \dots]$</span></li>
+                                <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">$[A^T \quad A^T C^T]$</span></li>
+                                <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">None of these</span></li>
+                             </ol>
+                            <p><strong>Answer: (a) $[C^T \quad A^T C^T \quad \dots (A^T)^{n-1}C^T]$</strong></p> <!-- Corrected to standard form -->
+                            <p><strong>Explanation:</strong> The observability condition can be determined from the condition matrix $O = [C^T \quad A^T C^T \quad \dots \quad (A^T)^{n-1}C^T]$. The system is observable if the rank of this matrix is n.</p>
+
+                            <h3 class="subsection-heading">Example 5:</h3>
+                            <p>The system model given by the equation is:</p>
+                             <div class="equation">$$ X^{\prime}=\begin{bmatrix} 0 & 1 \\ 2 & -3 \end{bmatrix} x+\begin{bmatrix} 0 \\ 1 \end{bmatrix} u $$</div>
+                             <p>$Y'=\begin{bmatrix} 1 & 1 \end{bmatrix} x$</p> <!-- Primed Y implies derivative, but likely meant Y = Cx -->
+                            <p>Consider $Y=\begin{bmatrix} 1 & 1 \end{bmatrix} x$</p>
+                             <ol class="enhanced-list">
+                                <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">Controllable</span></li>
+                                <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">Observable</span></li>
+                                <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">Both (a) and (b)</span></li>
+                                <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">Neither (a) nor (b)</span></li>
+                             </ol>
+                             <p><strong>Answer: (c) Both (a) and (b)</strong></p>
+                             <p><strong>Explanation:</strong> We know that the equation is represented in the form of $AX + BU$.</p>
+                             <p>By comparing, we get:</p>
+                             <div class="equation">$$ A=\begin{bmatrix} 0 & 1 \\ 2 & -3 \end{bmatrix} \quad \text{and} \quad B=\begin{bmatrix} 0 \\ 1 \end{bmatrix} $$</div>
+                             <p>$C = \begin{bmatrix} 1 & 1 \end{bmatrix}$</p>
+                             <p>The controllability of the given state equation can be checked by forming the matrix $[B \quad AB]$. The observability of the given state equation can be checked by forming the matrix $[C^T \quad A^T C^T]$. If the determinant of these matrixes is not equal to zero (for n=2), it is said to observable or controllable.</p>
+                             <p>Controllability matrix: $M_c = [B \quad AB]$</p>
+                             <p>$AB = \begin{bmatrix} 0 & 1 \\ 2 & -3 \end{bmatrix} \begin{bmatrix} 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 1 \\ -3 \end{bmatrix}$</p>
+                             <div class="equation">$$ M_c = \begin{bmatrix} 0 & 1 \\ 1 & -3 \end{bmatrix} $$</div>
+                             <p>The determinant of the above matrix is: $(0)(-3) - (1)(1) = -1$</p>
+                             <p>It is not equal to 0. Hence, the matrix is controllable.</p>
+                             <p>Now, let's check for observability.</p>
+                             <p>Observability matrix: $O = [C^T \quad A^T C^T]$</p>
+                             <p>$C^T = \begin{bmatrix} 1 \\ 1 \end{bmatrix}$</p>
+                             <p>$A^T = \begin{bmatrix} 0 & 2 \\ 1 & -3 \end{bmatrix}$</p>
+                             <p>$A^T C^T = \begin{bmatrix} 0 & 2 \\ 1 & -3 \end{bmatrix} \begin{bmatrix} 1 \\ 1 \end{bmatrix} = \begin{bmatrix} 2 \\ 1-3 \end{bmatrix} = \begin{bmatrix} 2 \\ -2 \end{bmatrix}$</p>
+                             <div class="equation">$$ O = \begin{bmatrix} 1 & 2 \\ 1 & -2 \end{bmatrix} $$</div>
+                             <p>The determinant of the above matrix is: $(1)(-2) - (2)(1) = -2 - 2 = -4$</p>
+                             <p>It is not equal to 0. Hence, the matrix is observable.</p>
+                             <p>Thus, the system model described by the given state equation is both controllable and observable.</p>
+
+                            <h3 class="subsection-heading">Example 6:</h3>
+                             <p>The state of a system equation can be written in the form of:</p>
+                             <ol class="enhanced-list">
+                                <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">First order differential equation</span></li>
+                                <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">Second order differential equation</span></li>
+                                <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">Third order differential equation</span></li>
+                                <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">None of the above</span></li>
+                             </ol>
+                             <p><strong>Answer: (a) First order differential equation</strong></p>
+                             <p><strong>Explanation:</strong> The state of a system equation is written in the form of first order differential equation using the state variables x1, x2, x3 ... xn.</p>
+
+                             <h3 class="subsection-heading">Example 7:</h3>
+                             <p>A LTI system is described by the state model given by:</p>
+                              <div class="equation">$$ X^{\prime}=\begin{bmatrix} -1 & 0 \\ 0 & -2 \end{bmatrix} X +\begin{bmatrix} 0 \\ 1 \end{bmatrix} u, \quad Y=\begin{bmatrix} 1 & 2 \end{bmatrix} X $$</div> <!-- MMD formatting was split, combined -->
+                             <p>Find if the system is:</p>
+                              <ol class="enhanced-list">
+                                 <li class="list-item"><span class="item-icon">1.</span> <span class="item-text">Completely controllable</span></li>
+                                 <li class="list-item"><span class="item-icon">2.</span> <span class="item-text">Completely observable</span></li>
+                                 <li class="list-item"><span class="item-icon">3.</span> <span class="item-text">Not completely controllable but completely observable</span></li>
+                                 <li class="list-item"><span class="item-icon">4.</span> <span class="item-text">Not completely observable but completely controllable</span></li>
+                              </ol>
+                              <p><strong>Answer: (c) Not completely controllable but completely observable</strong></p>
+                              <p><strong>Explanation:</strong> The controllability of the given state equation can be checked by forming the matrix $[B \quad AB]$. The observability of the given state equation can be checked by forming the matrix $[C^T \quad A^T C^T]$.</p>
+                              <p>We will use the above two conditions to determine controllability and observability.</p>
+                              <p>We can check either the determinant or the rank of the formed matrix. If the determinant of these matrixes is not equal to zero, it is said to observable or controllable. If the rank of the matrix is equal to its order, it is said to be observable or controllable.</p>
+                              <p>Let's start.</p>
+                              <p>By comparing the given state model, the parameters are:</p>
+                              <div class="equation">$$ A=\begin{bmatrix} -1 & 0 \\ 0 & -2 \end{bmatrix} $$</div>
+                              <div class="equation">$$ A^{T}=\begin{bmatrix} -1 & 0 \\ 0 & -2 \end{bmatrix} $$</div>
+                              <div class="equation">$$ B=\begin{bmatrix} 0 \\ 1 \end{bmatrix} $$</div>
+                              <p>$C = \begin{bmatrix} 1 & 2 \end{bmatrix}$</p>
+                              <div class="equation">$$ C^{T}=\begin{bmatrix} 1 \\ 2 \end{bmatrix} $$</div>
+                              <p>Now, the matrix $[B \quad AB]$ is given by:</p>
+                              <p>$AB = \begin{bmatrix} -1 & 0 \\ 0 & -2 \end{bmatrix} \begin{bmatrix} 0 \\ 1 \end{bmatrix} = \begin{bmatrix} 0 \\ -2 \end{bmatrix}$</p>
+                              <div class="equation">$$ M_c = [B \quad AB] = \begin{bmatrix} 0 & 0 \\ 1 & -2 \end{bmatrix} $$</div>
+                              <p>The determinant of the above matrix is equal to $(0)(-2) - (0)(1) = 0$. Hence, it is not completely controllable. We can also say that the rank of the matrix (1) is not equal to its order (2).</p>
+                              <p>Now, the matrix $[C^T \quad A^T C^T]$ is given by:</p>
+                              <p>$A^T C^T = \begin{bmatrix} -1 & 0 \\ 0 & -2 \end{bmatrix} \begin{bmatrix} 1 \\ 2 \end{bmatrix} = \begin{bmatrix} -1 \\ -4 \end{bmatrix}$</p>
+                              <div class="equation">$$ O = [C^T \quad A^T C^T] = \begin{bmatrix} 1 & -1 \\ 2 & -4 \end{bmatrix} $$</div>
+                               <p>The determinant of the above matrix is not equal to $(1)(-4) - (-1)(2) = -4 + 2 = -2$. Hence, it is completely observable. We can also say that the rank of the matrix (2) is equal to its order (2).</p>
+                               <p>Thus, the given state model is completely observable but not completely controllable.</p>
+                     </div>
+                </section>
+                <!-- END: unit-9-state-variable-analysis-examples -->
+
+                 <!-- START: unit-9-references-placeholder -->
+                 <!-- References will be in a separate file -->
+                 <!-- END: unit-9-references-placeholder -->
+
+            </main>
+
+            <!-- Footer Navigation -->
+            <nav class="document-nav">
+                <div class="nav-links">
+                    <a href="../index.html" class="nav-button">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Table of Contents</span>
+                    </a>
+                    <a href="unit-8-part-5.html" class="nav-button"> <!-- Link to previous part -->
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Previous Section</span>
+                    </a>
+                    <div class="document-progress">
+                        <span class="progress-text">Unit 9 of 9</span>
+                    </div>
+                    <a href="references.html" class="nav-button"> <!-- Link to next section (References) -->
+                        <span class="nav-text">Next Section</span>
+                        <span class="nav-icon">→</span>
+                    </a>
+                </div>
+            </nav>
+        </article>
+    </div>
+    <script src="../js/navigation.js"></script>
+</body>
+</html>
