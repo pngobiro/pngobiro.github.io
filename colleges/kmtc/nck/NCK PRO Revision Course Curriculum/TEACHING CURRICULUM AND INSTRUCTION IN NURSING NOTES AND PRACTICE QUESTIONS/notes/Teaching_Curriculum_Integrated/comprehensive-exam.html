@@ -1,0 +1,354 @@
+
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Final Exam - Teaching Methodology in Nursing</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/main.css">
+
+    <style>
+        /* --- Exam Portal Specific Styles --- */
+        .exam-body { background-color: var(--color-bg-secondary); }
+
+        .exam-hero {
+            background: var(--gradient-primary);
+            color: white;
+            padding: var(--space-12) var(--space-6) var(--space-16);
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+            margin-bottom: -4rem;
+        }
+
+        .exam-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: radial-gradient(circle at 20% 150%, rgba(255,255,255,0.1) 0%, transparent 50%),
+                              radial-gradient(circle at 80% -50%, rgba(255,255,255,0.15) 0%, transparent 50%);
+            z-index: 0;
+        }
+
+        .exam-hero-content { position: relative; z-index: 1; max-width: 800px; margin: 0 auto; }
+
+        .exam-badge-lg {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: var(--space-6);
+        }
+
+        .exam-title-lg {
+            font-family: var(--font-family-sans);
+            font-size: 3rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: var(--space-4);
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        .exam-subtitle-lg { font-size: 1.25rem; opacity: 0.9; font-weight: 400; }
+
+        .exam-dashboard {
+            max-width: 1000px;
+            margin: 0 auto var(--space-12);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: var(--space-6);
+            padding: 0 var(--space-6);
+            position: relative;
+            z-index: 2;
+        }
+
+        .dashboard-card {
+            background: var(--color-surface);
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s ease;
+        }
+
+        .dash-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--color-bg-tertiary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin: 0 auto var(--space-3);
+            color: var(--color-primary);
+        }
+
+        .dash-value {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: var(--space-1);
+        }
+
+        .dash-label {
+            font-size: 0.875rem;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-weight: 600;
+        }
+
+        .syllabus-section { max-width: 900px; margin: 0 auto var(--space-12); padding: 0 var(--space-6); }
+
+        .section-label {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-4);
+        }
+        
+        .section-label::before, .section-label::after { content: ''; height: 1px; width: 40px; background: var(--color-border); }
+
+        .topics-grid-visual { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--space-4); }
+
+        .topic-pill {
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            background: var(--color-surface);
+            padding: var(--space-3) var(--space-4);
+            border-radius: var(--radius-lg);
+            border: 1px solid var(--color-border);
+            font-weight: 500;
+            color: var(--color-text-secondary);
+        }
+
+        .topic-pill-icon {
+            width: 32px;
+            height: 32px;
+            background: var(--color-bg-tertiary);
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.1rem;
+        }
+
+        .exam-arena { max-width: 800px; margin: 0 auto; padding: 0 var(--space-6) var(--space-12); }
+
+        .instructions-card {
+            background: #fffbeb;
+            border: 1px solid #fcd34d;
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+        
+        [data-theme="dark"] .instructions-card {
+            background: rgba(245, 158, 11, 0.1);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .instructions-title {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-weight: 700;
+            color: #92400e;
+            margin-bottom: var(--space-4);
+        }
+        
+        [data-theme="dark"] .instructions-title { color: #fbbf24; }
+
+        .instruction-steps { list-style: none; padding: 0; display: grid; gap: var(--space-3); }
+
+        .instruction-step { display: flex; gap: var(--space-3); align-items: flex-start; font-size: 0.95rem; color: var(--color-text-secondary); }
+
+        .step-marker {
+            min-width: 24px;
+            height: 24px;
+            background: rgba(245, 158, 11, 0.2);
+            color: #d97706;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-top: 2px;
+        }
+
+        .quiz-section {
+            box-shadow: var(--shadow-2xl);
+            border: 1px solid var(--color-border-focus);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quiz-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 6px;
+            background: var(--gradient-primary);
+        }
+    </style>
+</head>
+
+<body class="exam-body">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="page-wrapper">
+        <div style="width: 100%;">
+            
+            <header class="exam-hero">
+                <div class="exam-hero-content">
+                    <div class="exam-badge-lg">
+                        <span>🎓</span>
+                        <span>FINAL ASSESSMENT</span>
+                    </div>
+                    <h1 class="exam-title-lg">Comprehensive Exam</h1>
+                    <p class="exam-subtitle-lg">Teaching Methodology in Nursing</p>
+                </div>
+            </header>
+
+            <section class="exam-dashboard">
+                <div class="dashboard-card">
+                    <div class="dash-icon">📚</div>
+                    <span class="dash-value">6</span>
+                    <span class="dash-label">Topics Covered</span>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dash-icon">❓</div>
+                    <span class="dash-value">50</span>
+                    <span class="dash-label">Questions</span>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dash-icon">⏱️</div>
+                    <span class="dash-value">120</span>
+                    <span class="dash-label">Minutes</span>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dash-icon">🎯</div>
+                    <span class="dash-value">70%</span>
+                    <span class="dash-label">Pass Mark</span>
+                </div>
+            </section>
+
+            <main id="main-content" class="exam-arena">
+
+                <div class="syllabus-section">
+                    <div class="section-label">Assessment Syllabus</div>
+                    <div class="topics-grid-visual">
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">📜</span>
+                            <span>Historical Background & Principles</span>
+                        </div>
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">🏫</span>
+                            <span>Teaching & Learning Processes</span>
+                        </div>
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">🛠️</span>
+                            <span>Teaching Methodologies</span>
+                        </div>
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">📝</span>
+                            <span>Curriculum Design</span>
+                        </div>
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">📽️</span>
+                            <span>Instructional Media</span>
+                        </div>
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">📊</span>
+                            <span>Evaluation & Assessment</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructions-card">
+                    <div class="instructions-title">
+                        <span>⚠️</span> Important Instructions
+                    </div>
+                    <ul class="instruction-steps">
+                        <li class="instruction-step">
+                            <span class="step-marker">1</span>
+                            <span>ALL questions are compulsory.</span>
+                        </li>
+                        <li class="instruction-step">
+                            <span class="step-marker">2</span>
+                            <span>Read the questions carefully and answer exactly what is asked.</span>
+                        </li>
+                        <li class="instruction-step">
+                            <span class="step-marker">3</span>
+                            <span>The exam consists of Multiple Choice, Short Answer, and Long Answer sections.</span>
+                        </li>
+                        <li class="instruction-step">
+                            <span class="step-marker">4</span>
+                            <span>Review your answers before submitting.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <section class="quiz-section" id="exam-quiz">
+                    <div class="quiz-container" data-quiz-id="comprehensive-exam"
+                        data-quiz-js="quizzes/comprehensive-exam.js">
+                        <div class="quiz-loading">
+                            <div class="quiz-spinner"></div>
+                            <p>Initializing exam environment...</p>
+                        </div>
+                        <div class="quiz-content" hidden></div>
+                        <div class="quiz-results" hidden></div>
+                    </div>
+                </section>
+
+                <nav style="margin-top: var(--space-8); display: flex; justify-content: center; gap: var(--space-4);">
+                    <a href="quiz-hub.html" class="nav-button nav-button--secondary">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Back to Quiz Hub</span>
+                    </a>
+                    <a href="index.html" class="nav-button nav-button--secondary">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </nav>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+
+</html>
