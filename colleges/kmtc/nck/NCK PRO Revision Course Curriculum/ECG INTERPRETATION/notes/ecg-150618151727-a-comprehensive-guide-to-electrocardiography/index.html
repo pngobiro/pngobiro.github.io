@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Guide to ECG - Nairobi West Hospital College</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&family=JetBrains+Mono:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/main.css">
+
+    <style>
+        /* Simulator Specific Styles */
+        .ecg-monitor-wrapper {
+            background: #111;
+            border-radius: var(--radius-xl);
+            border: 4px solid #333;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+            margin: var(--space-8) auto;
+            max-width: 900px;
+        }
+
+        .monitor-screen {
+            position: relative;
+            height: 300px;
+            background: #000;
+            border-bottom: 2px solid #333;
+            cursor: crosshair;
+        }
+
+        canvas {
+            display: block;
+            width: 100%;
+            height: 100%;
+        }
+
+        .monitor-overlay {
+            position: absolute;
+            top: var(--space-4);
+            right: var(--space-4);
+            text-align: right;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .monitor-label {
+            display: block;
+            color: #0f0;
+            font-family: var(--font-family-mono);
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+            margin-bottom: var(--space-1);
+        }
+
+        .monitor-rate {
+            display: flex;
+            align-items: baseline;
+            justify-content: flex-end;
+            gap: 5px;
+            color: #10b981;
+            font-family: var(--font-family-mono);
+        }
+
+        .monitor-rate span {
+            font-size: 3rem;
+            font-weight: bold;
+            line-height: 1;
+            text-shadow: 0 0 10px rgba(16, 185, 129, 0.5);
+        }
+
+        .monitor-controls {
+            padding: var(--space-4);
+            background: #222;
+            display: flex;
+            flex-wrap: wrap;
+            gap: var(--space-2);
+            justify-content: center;
+        }
+
+        .rhythm-btn {
+            background: #333;
+            color: #ccc;
+            border: 1px solid #444;
+            padding: var(--space-2) var(--space-3);
+            border-radius: var(--radius-md);
+            font-family: var(--font-family-mono);
+            font-size: 0.8rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .rhythm-btn:hover {
+            background: #444;
+            color: white;
+        }
+
+        .rhythm-btn.active {
+            background: var(--color-primary);
+            color: white;
+            border-color: var(--color-primary-light);
+            box-shadow: 0 0 10px rgba(79, 70, 229, 0.4);
+        }
+
+        /* Hero Adjustments */
+        .index-hero {
+            padding-bottom: var(--space-20);
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="page-wrapper">
+        <div class="container">
+            <main id="main-content" class="index-main">
+
+                <!-- Hero Section -->
+                <header class="index-hero">
+                    <div class="hero-content">
+                        <div class="hero-badge">
+                            <span>🫀</span>
+                            <span>Clinical Skills</span>
+                        </div>
+                        <h1 class="hero-title">ElectroCardioGraphy (ECG)</h1>
+                        <p class="hero-subtitle">Comprehensive guide for Nursing Assistants - Nairobi West Hospital
+                            College of Health Sciences</p>
+                        <div class="hero-meta">
+                            <div class="meta-item">
+                                <span>📚</span>
+                                <span>12 Topics</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>⏱️</span>
+                                <span>60 min read</span>
+                            </div>
+                            <div class="meta-item">
+                                <span>🏥</span>
+                                <span>Practical Skills</span>
+                            </div>
+                        </div>
+
+                        <!-- Interactive Simulator Section -->
+                        <div class="ecg-monitor-wrapper">
+                            <div class="monitor-screen">
+                                <canvas id="ecgCanvas"></canvas>
+                                <div class="monitor-overlay">
+                                    <span class="monitor-label" id="rhythmLabel">NORMAL SINUS RHYTHM</span>
+                                    <div class="monitor-rate">
+                                        <span>HR</span>
+                                        <span id="heartRateValue">72</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="monitor-controls">
+                                <div class="controls-group"
+                                    style="width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #333;">
+                                    <span
+                                        style="color: #666; font-family: var(--font-family-mono); font-size: 0.8rem; text-transform: uppercase;">Simulation
+                                        Controls</span>
+                                    <!-- NEW AUDIO BUTTON -->
+                                    <button id="muteBtn" class="rhythm-btn"
+                                        style="background: #444; border-color: #555;">🔇 Unmute Sound</button>
+                                </div>
+
+                                <button class="rhythm-btn active" data-rhythm="nsr">NSR</button>
+                                <button class="rhythm-btn" data-rhythm="brady">Brady</button>
+                                <button class="rhythm-btn" data-rhythm="tachy">Tachy</button>
+                                <button class="rhythm-btn" data-rhythm="afib">A-Fib</button>
+                                <button class="rhythm-btn" data-rhythm="flutter">Flutter</button>
+                                <button class="rhythm-btn" data-rhythm="vtach">V-Tach</button>
+                                <button class="rhythm-btn" data-rhythm="asystole">Asystole</button>
+                            </div>
+                        </div>
+                        <p style="color: rgba(255,255,255,0.7); font-size: 0.9rem; margin-top: 1rem;">
+                            Interactive Simulator: Select a rhythm to view the waveform. Unmute to hear the monitor.
+                        </p>
+
+
+                    </div>
+                </header>
+
+                <!-- Topics Section -->
+                <section class="topics-section" aria-labelledby="topics-heading">
+                    <h2 id="topics-heading" class="section-heading">
+                        <span class="heading-icon">📖</span>
+                        <span>Course Modules</span>
+                    </h2>
+
+                    <div class="topics-grid">
+
+                        <!-- Topic 1: Introduction -->
+                        <a href="topics/topic-01-introduction.html" class="topic-card">
+                            <div class="card-number">01</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Fundamentals of ECG</h3>
+                                <p class="card-description">Definitions, objectives, and the GRIP protocol for patient
+                                    preparation.</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 5 min</span>
+                                    <span>📄 3 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- Topic 2: Procedure -->
+                        <a href="topics/topic-02-procedure.html" class="topic-card">
+                            <div class="card-number">02</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Electrode Placement</h3>
+                                <p class="card-description">Correct placement for 12-lead ECG (Limb leads & Chest leads)
+                                    and recording the trace.</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 10 min</span>
+                                    <span>📄 4 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- Topic 3: Physiology -->
+                        <a href="topics/topic-03-electrophysiology.html" class="topic-card">
+                            <div class="card-number">03</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Electrophysiology</h3>
+                                <p class="card-description">The conduction pathway: SA node to Purkinje fibres, and how
+                                    ECGs sense voltage.</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 8 min</span>
+                                    <span>📄 3 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- Topic 4: Leads -->
+                        <a href="topics/topic-04-leads-axis.html" class="topic-card">
+                            <div class="card-number">04</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Leads & Axis</h3>
+                                <p class="card-description">Understanding Einthoven's triangle, limb leads, chest leads,
+                                    and Axis Deviation.</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 12 min</span>
+                                    <span>📄 5 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- Topic 5: Analysis 1 -->
+                        <a href="topics/topic-05-calibration-rate-rhythm.html" class="topic-card">
+                            <div class="card-number">05</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Calibration, Rate & Rhythm</h3>
+                                <p class="card-description">Paper speed, calculating heart rate (300/RR), and
+                                    determining rhythm regularity.</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 10 min</span>
+                                    <span>📄 4 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- Topic 6: Analysis 2 -->
+                        <a href="topics/topic-06-p-wave-pr-interval.html" class="topic-card">
+                            <div class="card-number">06</div>
+                            <div class="card-content">
+                                <h3 class="card-title">P Wave & PR Interval</h3>
+                                <p class="card-description">P pulmonale, P mitrale, and Heart Blocks (1st, 2nd, and 3rd
+                                    degree).</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 15 min</span>
+                                    <span>📄 6 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- Topic 7: Analysis 3 -->
+                        <a href="topics/topic-07-qrs-complex.html" class="topic-card">
+                            <div class="card-number">07</div>
+                            <div class="card-content">
+                                <h3 class="card-title">The QRS Complex</h3>
+                                <p class="card-description">Pathological Q waves, LVH criteria, and Bundle Branch Blocks
+                                    (LBBB/RBBB).</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 10 min</span>
+                                    <span>📄 4 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- Topic 8: Analysis 4 -->
+                        <a href="topics/topic-08-st-t-qt.html" class="topic-card">
+                            <div class="card-number">08</div>
+                            <div class="card-content">
+                                <h3 class="card-title">ST, T Wave & QT</h3>
+                                <p class="card-description">ST elevation/depression, Hyperkalemia, and QT interval
+                                    correction.</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 10 min</span>
+                                    <span>📄 4 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- Topic 9: Pathology -->
+                        <a href="topics/topic-09-myocardial-infarction.html" class="topic-card">
+                            <div class="card-number">09</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Myocardial Infarction</h3>
+                                <p class="card-description">Identifying MIs, evolution of changes, and localization
+                                    (Inferior vs Anterior).</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 12 min</span>
+                                    <span>📄 3 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- Topic 10: Arrhythmias -->
+                        <a href="topics/topic-10-tachycardias.html" class="topic-card">
+                            <div class="card-number">10</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Tachycardias</h3>
+                                <p class="card-description">Supraventricular Tachycardias, Atrial Fibrillation, and
+                                    Atrial Flutter.</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 10 min</span>
+                                    <span>📄 4 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                        <!-- Topic 11: Critical -->
+                        <a href="topics/topic-11-ventricular-arrhythmias.html" class="topic-card">
+                            <div class="card-number">11</div>
+                            <div class="card-content">
+                                <h3 class="card-title">Ventricular Arrhythmias</h3>
+                                <p class="card-description">Identifying Ventricular Tachycardia (VT) and Ventricular
+                                    Fibrillation (VF).</p>
+                                <div class="card-meta">
+                                    <span>⏱️ 5 min</span>
+                                    <span>📄 2 sections</span>
+                                </div>
+                            </div>
+                            <div class="card-arrow">→</div>
+                        </a>
+
+                    </div>
+
+                    <!-- Comprehensive Exam Link -->
+                    <div style="margin-top: var(--space-12);">
+                        <div class="exam-banner">
+                            <div class="exam-banner-content">
+                                <div class="exam-banner-icon">🎓</div>
+                                <div class="exam-banner-text">
+                                    <h3>ECG Interpretation Final Exam</h3>
+                                    <p>Test your ability to interpret traces and diagnose pathologies.</p>
+                                </div>
+                                <div class="exam-banner-meta">
+                                    <span>📚 All Topics</span>
+                                    <span>❓ 25 Questions</span>
+                                </div>
+                            </div>
+                            <a href="comprehensive-exam.html" class="exam-banner-btn">
+                                Start Exam →
+                            </a>
+                        </div>
+                    </div>
+
+                </section>
+
+            </main>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script>
+        // Theme toggle functionality
+        const themeToggle = document.getElementById('theme-toggle');
+        const html = document.documentElement;
+
+        themeToggle.addEventListener('click', () => {
+            const currentTheme = html.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+
+            html.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+        });
+
+        // Load saved theme
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        html.setAttribute('data-theme', savedTheme);
+    </script>
+
+    <!-- Link to the ECG Simulator Logic -->
+    <script src="js/ecg-monitor.js"></script>
+</body>
+
+</html>
