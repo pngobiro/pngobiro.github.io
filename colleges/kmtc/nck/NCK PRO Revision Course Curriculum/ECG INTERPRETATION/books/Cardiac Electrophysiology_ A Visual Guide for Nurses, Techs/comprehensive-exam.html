@@ -1,0 +1,470 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comprehensive Final Exam - Cardiac Electrophysiology</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="styles/main.css">
+
+    <style>
+        /* --- Exam Portal Specific Animations & Styles --- */
+        .exam-body { background-color: var(--color-bg-secondary); }
+
+        /* Dynamic Background for Hero */
+        @keyframes gradientFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        @keyframes pulse-slow {
+            0%, 100% { transform: scale(1); opacity: 0.1; }
+            50% { transform: scale(1.05); opacity: 0.2; }
+        }
+
+        .exam-hero {
+            background: linear-gradient(-45deg, #1e3a8a, #3b82f6, #4f46e5, #4338ca);
+            background-size: 400% 400%;
+            animation: gradientFlow 15s ease infinite;
+            color: white;
+            padding: var(--space-16) var(--space-6) var(--space-20);
+            text-align: center;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 50% 100%, 0 85%);
+            margin-bottom: -5rem;
+            overflow: hidden;
+        }
+
+        /* Abstract EKG Background Effect */
+        .exam-hero::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 50 L10 50 L15 30 L20 70 L25 50 L40 50 L45 20 L50 80 L55 50 L100 50' stroke='rgba(255,255,255,0.1)' fill='none' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: 200px 100px;
+            opacity: 0.3;
+            animation: slideLeft 10s linear infinite;
+        }
+
+        @keyframes slideLeft {
+            from { background-position: 0 0; }
+            to { background-position: -200px 0; }
+        }
+
+        .exam-hero-content { 
+            position: relative; 
+            z-index: 2; 
+            max-width: 800px; 
+            margin: 0 auto; 
+        }
+
+        /* Heartbeat Animation for Badge */
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            14% { transform: scale(1.1); }
+            28% { transform: scale(1); }
+            42% { transform: scale(1.1); }
+            70% { transform: scale(1); }
+        }
+
+        .exam-badge-lg {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-2);
+            padding: var(--space-2) var(--space-4);
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(8px);
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            font-weight: 600;
+            font-size: 0.9rem;
+            margin-bottom: var(--space-6);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .pulse-icon {
+            animation: heartbeat 2s infinite;
+            display: inline-block;
+        }
+
+        .exam-title-lg {
+            font-family: var(--font-family-serif);
+            font-size: 3.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: var(--space-4);
+            text-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        .exam-subtitle-lg { 
+            font-size: 1.25rem; 
+            opacity: 0.9; 
+            font-weight: 400; 
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Staggered Entrance for Dashboard */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .exam-dashboard {
+            max-width: 1000px;
+            margin: 0 auto var(--space-12);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-6);
+            padding: 0 var(--space-6);
+            position: relative;
+            z-index: 3;
+        }
+
+        .dashboard-card {
+            background: var(--color-bg-primary);
+            padding: var(--space-6);
+            border-radius: var(--radius-xl);
+            box-shadow: var(--shadow-xl);
+            text-align: center;
+            border: 1px solid var(--color-border);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            animation: fadeInUp 0.6s ease-out forwards;
+            opacity: 0; /* Initial state for animation */
+        }
+
+        .dashboard-card:nth-child(1) { animation-delay: 0.1s; }
+        .dashboard-card:nth-child(2) { animation-delay: 0.2s; }
+        .dashboard-card:nth-child(3) { animation-delay: 0.3s; }
+        .dashboard-card:nth-child(4) { animation-delay: 0.4s; }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            border-color: var(--color-primary-light);
+        }
+
+        .dash-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--color-bg-tertiary), var(--color-bg-secondary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.75rem;
+            margin: 0 auto var(--space-3);
+            color: var(--color-primary);
+            box-shadow: inset 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .dash-value {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--color-text-primary);
+            line-height: 1;
+            margin-bottom: var(--space-1);
+            background: var(--gradient-primary);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .dash-label {
+            font-size: 0.75rem;
+            color: var(--color-text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 700;
+        }
+
+        /* Syllabus Pills */
+        .syllabus-section { max-width: 900px; margin: 0 auto var(--space-12); padding: 0 var(--space-6); }
+
+        .section-label {
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: var(--color-text-tertiary);
+            margin-bottom: var(--space-6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-4);
+            opacity: 0.8;
+        }
+        
+        .section-label::before, .section-label::after { 
+            content: ''; 
+            height: 1px; 
+            width: 40px; 
+            background: var(--color-border); 
+        }
+
+        .topics-grid-visual { 
+            display: flex; 
+            flex-wrap: wrap; 
+            justify-content: center; 
+            gap: var(--space-3); 
+        }
+
+        .topic-pill {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            background: var(--color-surface);
+            padding: var(--space-2) var(--space-4);
+            border-radius: var(--radius-full);
+            border: 1px solid var(--color-border);
+            font-weight: 500;
+            font-size: 0.9rem;
+            color: var(--color-text-secondary);
+            transition: all 0.2s ease;
+            cursor: default;
+        }
+
+        .topic-pill:hover {
+            border-color: var(--color-primary);
+            color: var(--color-primary);
+            background: var(--color-surface-hover);
+            transform: translateY(-2px);
+        }
+
+        .topic-pill-icon { opacity: 0.7; }
+
+        .exam-arena { max-width: 800px; margin: 0 auto; padding: 0 var(--space-6) var(--space-16); }
+
+        /* Instructions Card */
+        .instructions-card {
+            background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+            border: 1px solid #fcd34d;
+            border-radius: var(--radius-xl);
+            padding: var(--space-6);
+            margin-bottom: var(--space-10);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .instructions-card::after {
+            content: '⚠️';
+            position: absolute;
+            right: -20px;
+            top: -20px;
+            font-size: 10rem;
+            opacity: 0.05;
+            transform: rotate(15deg);
+            pointer-events: none;
+        }
+        
+        [data-theme="dark"] .instructions-card {
+            background: linear-gradient(135deg, rgba(245, 158, 11, 0.1) 0%, rgba(180, 83, 9, 0.1) 100%);
+            border-color: rgba(245, 158, 11, 0.3);
+        }
+
+        .instructions-title {
+            display: flex;
+            align-items: center;
+            gap: var(--space-2);
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: #92400e;
+            margin-bottom: var(--space-4);
+        }
+        
+        [data-theme="dark"] .instructions-title { color: #fbbf24; }
+
+        .instruction-steps { list-style: none; padding: 0; display: grid; gap: var(--space-3); }
+
+        .instruction-step { 
+            display: flex; 
+            gap: var(--space-3); 
+            align-items: flex-start; 
+            font-size: 0.95rem; 
+            color: var(--color-text-secondary); 
+        }
+
+        .step-marker {
+            min-width: 24px;
+            height: 24px;
+            background: white;
+            color: #d97706;
+            border: 2px solid #fcd34d;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: 800;
+            margin-top: 2px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        [data-theme="dark"] .step-marker {
+            background: #2d2a20;
+            border-color: #b45309;
+        }
+
+        .quiz-section {
+            background: var(--color-bg-primary);
+            border-radius: var(--radius-2xl);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            border: 1px solid var(--color-border);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .quiz-section::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0; height: 6px;
+            background: var(--gradient-primary);
+        }
+
+        @media (max-width: 768px) {
+            .exam-title-lg { font-size: 2.25rem; }
+            .exam-hero { padding-bottom: var(--space-20); clip-path: polygon(0 0, 100% 0, 100% 90%, 50% 100%, 0 90%); }
+            .dashboard-card { padding: var(--space-4); }
+            .dash-value { font-size: 2rem; }
+        }
+    </style>
+</head>
+
+<body class="exam-body">
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+        <span class="theme-toggle-icon light-icon">☀️</span>
+        <span class="theme-toggle-icon dark-icon">🌙</span>
+    </button>
+
+    <div class="page-wrapper">
+        <div style="width: 100%;">
+            
+            <header class="exam-hero">
+                <div class="exam-hero-content">
+                    <div class="exam-badge-lg">
+                        <span class="pulse-icon">❤️</span>
+                        <span>FINAL ASSESSMENT</span>
+                    </div>
+                    <h1 class="exam-title-lg">Comprehensive Exam</h1>
+                    <p class="exam-subtitle-lg">Cardiac Electrophysiology: A Visual Guide for Nurses, Techs, and Fellows</p>
+                </div>
+            </header>
+
+            <section class="exam-dashboard">
+                <div class="dashboard-card">
+                    <div class="dash-icon">📚</div>
+                    <span class="dash-value">5</span>
+                    <span class="dash-label">Units Covered</span>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dash-icon">❓</div>
+                    <span class="dash-value">50</span>
+                    <span class="dash-label">Questions</span>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dash-icon">⏱️</div>
+                    <span class="dash-value">60</span>
+                    <span class="dash-label">Minutes</span>
+                </div>
+                <div class="dashboard-card">
+                    <div class="dash-icon">🎯</div>
+                    <span class="dash-value">80%</span>
+                    <span class="dash-label">Pass Mark</span>
+                </div>
+            </section>
+
+            <main id="main-content" class="exam-arena">
+
+                <div class="syllabus-section">
+                    <div class="section-label">Assessment Syllabus</div>
+                    <div class="topics-grid-visual">
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">⚡</span>
+                            <span>The Basics</span>
+                        </div>
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">💓</span>
+                            <span>Common Tachycardias</span>
+                        </div>
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">🧠</span>
+                            <span>Advanced Concepts</span>
+                        </div>
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">📈</span>
+                            <span>Advanced Tracings</span>
+                        </div>
+                        <div class="topic-pill">
+                            <span class="topic-pill-icon">🧭</span>
+                            <span>Cardiac Axis</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instructions-card">
+                    <div class="instructions-title">
+                        <span>⚠️</span> Examination Rules
+                    </div>
+                    <ul class="instruction-steps">
+                        <li class="instruction-step">
+                            <span class="step-marker">1</span>
+                            <span>This exam tests cumulative knowledge from all 5 units. Questions are randomized.</span>
+                        </li>
+                        <li class="instruction-step">
+                            <span class="step-marker">2</span>
+                            <span>You have 60 minutes to complete the assessment. The timer begins when you click "Start".</span>
+                        </li>
+                        <li class="instruction-step">
+                            <span class="step-marker">3</span>
+                            <span>Questions include multiple choice, multiple select, image identification, and matching.</span>
+                        </li>
+                        <li class="instruction-step">
+                            <span class="step-marker">4</span>
+                            <span>You cannot pause the exam once started. Ensure you have a stable connection.</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <section class="quiz-section" id="exam-quiz">
+                    <div class="quiz-container" data-quiz-id="comprehensive-exam"
+                        data-quiz-js="quizzes/comprehensive-exam.js">
+                        <div class="quiz-loading">
+                            <div class="quiz-spinner"></div>
+                            <p>Initializing exam environment...</p>
+                        </div>
+                        <div class="quiz-content" hidden></div>
+                        <div class="quiz-results" hidden></div>
+                    </div>
+                </section>
+
+                <nav style="margin-top: var(--space-8); display: flex; justify-content: center; gap: var(--space-4);">
+                    <a href="quiz-hub.html" class="nav-button nav-button--secondary">
+                        <span class="nav-icon">←</span>
+                        <span class="nav-text">Back to Quiz Hub</span>
+                    </a>
+                    <a href="index.html" class="nav-button nav-button--secondary">
+                        <span class="nav-icon">🏠</span>
+                        <span class="nav-text">Home</span>
+                    </a>
+                </nav>
+
+            </main>
+        </div>
+    </div>
+
+    <script src="js/theme.js"></script>
+    <script src="js/quiz.js"></script>
+</body>
+
+</html>
