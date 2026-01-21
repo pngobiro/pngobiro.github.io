@@ -37,7 +37,7 @@
     
     if (lightboxModal) {
         // Open lightbox
-        document.querySelectorAll('.content-figure[data-lightbox="true"]').forEach(figure => {
+        document.querySelectorAll('.content-figure').forEach(figure => {
             const img = figure.querySelector('.figure-image');
             const caption = figure.querySelector('.figure-caption');
             
