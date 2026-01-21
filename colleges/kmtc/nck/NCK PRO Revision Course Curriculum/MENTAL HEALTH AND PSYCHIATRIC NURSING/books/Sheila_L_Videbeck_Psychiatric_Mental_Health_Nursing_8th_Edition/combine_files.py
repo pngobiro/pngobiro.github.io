@@ -29,7 +29,6 @@ def combine_files(output_file="combined_output.txt"):
     # Define files to combine with their display names
     files_to_combine = [
         ("styles/main.css", "main.css"),
-        ("content_cleaned.txt", "content_cleaned.txt"),
         ("exam-template.html", "exam-template.html"),
         ("index-template-v1.1.html", "index-template-v1.1.html"),
         ("pdf-to-html-conversion-prompt-v9.9.md", "pdf-to-html-conversion-prompt-v9.9.md"),
