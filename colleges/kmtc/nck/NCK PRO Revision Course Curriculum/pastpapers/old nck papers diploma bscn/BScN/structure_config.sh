@@ -17,7 +17,7 @@ COLLEGES=(
 # Add the specific subjects or paper names found in your documents.
 # Based on your PDF, we have identified these specific papers.
 SUBJECTS=(
-	"PAPER TWO"
+	"PAPER FOUR"
 )
 
 # 3. EXAM CATEGORIES
