@@ -621,9 +621,9 @@ def main():
     config.timeout = 30
     config.between_page_delay = 3
     
-    BASE_URL = "https://www.studocu.com/en-us/search/Kenya%20Medical%20Training%20College%20FQE?p=1&institutionId=6230"
-    OUTPUT_JSON = "studocu_fqe_documents.json"
-    OUTPUT_CSV = "studocu_fqe_documents.csv"
+    BASE_URL = "https://www.studocu.com/en-us/search/Kenya%20Medical%20Training%20College%20Final%20Qualifying%20Exam?p=1&institutionId=6230"
+    OUTPUT_JSON = "studocu_documents_restored.json"
+    OUTPUT_CSV = "studocu_documents_restored.csv"
     
     logger.info(f"Configuration: Max pages={config.max_pages}, Headless={config.headless}")
     logger.info(f"Target URL: {BASE_URL}")
@@ -634,12 +634,11 @@ def main():
         scraper = StudocuSeleniumScraper(config)
         
         # Scrape all pages
-        documents = scraper.scrape_all_pages(BASE_URL)
+        documents = scraper.scrape_all_pages(BASE_URL, OUTPUT_JSON, OUTPUT_CSV)
         
         if documents:
-            # Save to both JSON and CSV
-            scraper.save_to_json(documents, OUTPUT_JSON)
-            scraper.save_to_csv(documents, OUTPUT_CSV)
+            # Documents already saved incrementally, skip final save to avoid overwriting
+            logger.info("Documents saved incrementally during scraping")
             
             # Print statistics
             scraper.print_stats()

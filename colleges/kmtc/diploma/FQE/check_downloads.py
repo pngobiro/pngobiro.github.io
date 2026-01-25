@@ -162,7 +162,7 @@ def main():
     )
     parser.add_argument(
         '--json-file',
-        default='studocu_documents.json',
+        default='studocu_hrit_documents.json',
         help='Path to StudoCU documents JSON (default: studocu_documents.json)'
     )
     parser.add_argument(
