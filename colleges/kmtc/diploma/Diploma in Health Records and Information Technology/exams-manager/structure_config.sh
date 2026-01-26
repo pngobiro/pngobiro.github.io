@@ -29,6 +29,7 @@ SUBJECTS=(
     "Medical Terminology"
     "Mental Health"
     "Monitoring and Evaluation"
+    "Epidemiology"
 )
 
 # Base Directories (where to start creating structure if not root)
