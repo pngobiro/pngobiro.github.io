@@ -117,6 +117,33 @@ Adding a new college (e.g., "MKU" or "UoN") is fully supported and requires no c
     - Add an "MKU" button to the Subject Dashboard.
     - Generate a dedicated dashboard for MKU.
 
+## Using in a New Course
+
+The Exam Manager is fully portable and can be used for any other diploma or degree course.
+
+1.  **Copy the Tool**:
+    Copy `exam_manager.py` to the root folder of the new course (e.g., `Diploma in Nursing/`).
+
+2.  **Define Subjects**:
+    Create a `modules.txt` file in the same folder and list the subjects for that course (one per line).
+    ```text
+    Anatomy and Physiology
+    Nursing Ethics
+    Pharmacology
+    ...
+    ```
+
+3.  **Initialize**:
+    Run the index command.
+    ```bash
+    ./exam_manager.py index --force
+    ```
+
+    The tool will automatically:
+    - Read the new subject list.
+    - Create the standard folder structure (`Subject/exams/KMTC/...`) for all subjects.
+    - Generate the dashboards.
+
 ## Handling Images
 
 If your converted HTML files contain remote images (e.g., from Mathpix or other URLs), you can automatically download and link them locally.

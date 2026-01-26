@@ -11,6 +11,8 @@ from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
 
+__version__ = "1.0.0"
+
 # ANSI colors for better CLI output
 class Colors:
     HEADER = '\033[95m'
@@ -273,7 +275,7 @@ class ExamManager:
 }
 
 /* Dark Mode Theme - Enhanced */
-[data-theme=\"dark\"] {
+[data-theme="dark"] {
     --primary-color: #8b9cf7;
     --primary-dark: #7c3aed;
     --primary-light: #a5b4fc;
@@ -1158,7 +1160,7 @@ footer p {
         --text-secondary: #000000;
     }
     
-    [data-theme=\"dark\"] {
+    [data-theme="dark"] {
         --border-light: #ffffff;
         --border-medium: #ffffff;
         --text-secondary: #ffffff;
@@ -1187,7 +1189,7 @@ footer p {
     animation: loading 1.5s infinite;
 }
 
-[data-theme=\"dark\"] .loading::after {
+[data-theme="dark"] .loading::after {
     background: linear-gradient(
         90deg,
         transparent,
@@ -1733,13 +1735,71 @@ img {
 
 /* --- Stats Cards Mobile --- */
 @media (max-width: 640px) {
-    [style*=\"display: flex\"][style*=\"gap: 1rem\"] {
+    [style*="display: flex"][style*="gap: 1rem"] {
         flex-direction: column !important;
     }
     
-    [style*=\"min-width: 200px\"] {
+    [style*="min-width: 200px"] {
         min-width: 100% !important;
     }
+}
+
+.badge.practical {
+    background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+    color: #1a472a;
+}
+
+.badge.supplementary {
+    background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+    color: #5d2b2b;
+}
+
+.badge.end-of-semester {
+    background: linear-gradient(120deg, #89f7fe 0%, #66a6ff 100%);
+}
+
+.badge.end-of-year {
+    background: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+    color: #5d3a1a;
+}
+
+.badge.upgrading {
+    background: linear-gradient(to top, #96fbc4 0%, #f9f586 100%);
+    color: #3b4218;
+}
+
+.badge.final-qualifying-exam {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.badge.cats {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.badge.processed {
+    background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%);
+    color: #1e3c72;
+}
+
+/* College Badges */
+.badge.kmtc {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); /* Purple/Blue */
+    color: white;
+}
+
+.badge.mku {
+    background: linear-gradient(135deg, #00c6ff 0%, #0072ff 100%); /* Cyan/Blue */
+    color: white;
+}
+
+.badge.ku {
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); /* Green */
+    color: white;
+}
+
+.badge.uon {
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%); /* Red/Orange */
+    color: white;
 }
 """
         # JS CONTENT
@@ -2256,7 +2316,8 @@ document.querySelectorAll('[id$=\"-count\"]').forEach(el => observer.observe(el)
                 # Count files
                 # Count files
                 cat_path = exams_dir / cat
-                count = len(list(cat_path.glob("*.pdf"))) + len([f for f in cat_path.glob("*.html") if f.name != "index.html"])
+                # Only count non-index HTML files (ignore PDFs)
+                count = len([f for f in cat_path.glob("*.html") if f.name != "index.html"])
                 
                 if count == 0:
                     continue
@@ -2333,9 +2394,16 @@ document.querySelectorAll('[id$=\"-count\"]').forEach(el => observer.observe(el)
             for subject in self.subjects:
                 name = subject.name
                 exams_root = subject / "exams"
-                colleges = []
-                if exams_root.exists():
-                    colleges = sorted([item.name for item in exams_root.iterdir() if item.is_dir() and item.name != "assets"])
+                
+                if not exams_root.exists():
+                    continue
+                    
+                # Check if subject has any content (Only HTML files, no PDFs)
+                content_count = len([f for f in exams_root.rglob("*.html") if f.name != "index.html"])
+                if content_count == 0:
+                    continue
+
+                colleges = sorted([item.name for item in exams_root.iterdir() if item.is_dir() and item.name != "assets"])
                 
                 html_content.append("<div class='paper-card'>")
                 html_content.append(f"<h3>{name}</h3>")
@@ -2344,7 +2412,8 @@ document.querySelectorAll('[id$=\"-count\"]').forEach(el => observer.observe(el)
                     html_content.append("<div class='meta' style='display:flex; gap:0.5rem; flex-wrap:wrap; margin-top:0.5rem;'>")
                     for college in colleges:
                         link = f"{name}/exams/{college}/index.html"
-                        html_content.append(f"<a href='{link}' class='btn' style='font-size:0.75rem; padding:0.25rem 0.5rem; border-radius: var(--radius-sm);'><i class='fas fa-university'></i> {college}</a>")
+                        clazz = college.lower().replace(" ", "-")
+                        html_content.append(f"<a href='{link}' class='badge {clazz}' style='font-size:0.75rem; padding:0.25rem 0.6rem; border-radius: var(--radius-sm); color: white; text-decoration: none;'><i class='fas fa-university'></i> {college}</a>")
                     html_content.append("</div>")
                 else:
                     html_content.append("<p style='color: var(--text-muted); font-size:0.875rem;'>Repository Under Setup</p>")
