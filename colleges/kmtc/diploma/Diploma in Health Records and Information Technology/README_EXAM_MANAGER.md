@@ -1,84 +1,141 @@
 # Exam Manager AI Agent
 
-This tool helps manage the lifecycle of exam papers across multiple subjects in your course. It automates tracking, discovery, and reporting.
+This tool manages the lifecycle of exam papers across multiple subjects and colleges. It automates tracking, OCR processing, and reporting in a subject-centric structure.
+
+## New Structure
+
+The tool expects (and `organize_subjects.py` creates) the following structure:
+```
+Subject Name/
+├── notes/
+├── books/
+└── exams/
+    ├── assets/               (Shared CSS/JS)
+    ├── KMTC/                 (College specific folder)
+    │   ├── processing-status.json
+    │   ├── UNPROCESSED/      (Drop new PDFs here)
+    │   └── [Category]/       (FQE, CATs, etc.)
+    └── [Other Colleges]/
+```
 
 ## Features
 
-- **Dashboard**: See a global view of all subjects and the status of their past papers (Total, Unprocessed, HTML Generated).
-- **Auto-Discovery**: Recursively scans all subject folders for new PDF files in `UNPROCESSED` directories and adds them to the tracking system.
-- **Distributed Tracking**: Uses `processing-status.json` in each subject's `pastpapers` folder to maintain state.
+- **Unified Dashboard**: See a global view of all subjects and their status across all colleges (KMTC, MKU, etc.).
+- **Auto-Discovery**: Recursively scans `UNPROCESSED` folders for new PDF files.
+- **OCR Processing**: Integrated Mathpix OCR conversion from PDF to MMD.
+- **Subject Validation**: Cross-references folder names with `modules.txt` using fuzzy matching to flag missing folders.
 
 ## Usage
 
-Run the script from the root of your course directory:
+Run the script from the root directory:
 
-### 1. View Dashboard
-See the current status of all your subjects.
+### 1. Unified Dashboard
+View status of all subjects and processing queues.
 ```bash
 ./exam_manager.py dashboard
 ```
 
-### 2. Scan for New Files
-Find new PDFs that you've dropped into `UNPROCESSED` folders and register them in the system.
+### 2. File Discovery & Scanning
+Finds new PDFs in `UNPROCESSED` folders and registers them.
 ```bash
 ./exam_manager.py scan
+# Optional: Target specific college
+./exam_manager.py scan --college MKU
 ```
-You can also scan a specific subject:
+
+### 3. Web Navigation Generation (Dashboard)
+Generates the static HTML structure (Root, Subject, and Category indices).
+**Note:** Use `--force` to regenerate existing index files.
 ```bash
-./exam_manager.py scan --subject "Computer Application in Health Care"
+./exam_manager.py index
+# Regen all indices
+./exam_manager.py index --force
 ```
 
-### 3. List Subjects
-List all detected subject folders.
+### 4. General Paper Extraction
+Splits merged MMD files into individual question papers.
 ```bash
-./exam_manager.py list
+# Extract specific file
+./exam_manager.py extract "Subject/exams/KMTC/UNPROCESSED/merged_file.mmd"
 ```
 
-## Structure Management
-
-I have incorporated the tools from `educational_pastpapers2.0.zip` to standardise your folder structure and generate HTML navigation.
-
-### 1. Create/Reset Structure
-To generate the standard folder hierarchy (Colleges -> Subjects -> Categories) and initial HTML indexes:
+### 5. Content Analysis
+Analyzes a PDF to determine if it's "digital born" (text-selectable) or "scanned" (image-based).
 ```bash
-./exams-manager/create_structure.sh
+./exam_manager.py analyze "path/to/paper.pdf"
 ```
-This reads from `exams-manager/structure_config.sh` to determine which subjects and categories to create.
 
-### 2. Update Indexes
-After adding new HTML papers to a category folder, run this to update the navigation menus and lists:
+### 6. Course Packing
+Creates a starter kit zip file for a specific subject, including folder structure and initial assets.
 ```bash
-./exams-manager/update_index.sh
+./exam_manager.py pack "Subject Name"
 ```
-You can also update a specific college or subject:
+
+### 7. Asset Path Fixing
+Fixes relative paths in HTML files to correctly point to the shared `assets/` directory.
 ```bash
-./exams-manager/update_index.sh "Year 1" "Computer Application in Health Care"
+./exam_manager.py fix-paths
 ```
 
-### 4. Split PDF Files
-If you have large PDF files or files with mixed content (e.g., multiple subjects in one file), you can split them into smaller parts.
+### 8. Image Downloading
+Downloads remote images (e.g., from Mathpix) to local storage.
 ```bash
-./exam_manager.py split --file "path/to/large_file.pdf" --out "path/to/output_part1.pdf" --pages "1-10"
+./exam_manager.py download-images
 ```
-You can specify multiple ranges:
+
+### 9. PDF Splitting (Utility)
+Splits a large PDF into smaller parts.
 ```bash
-./exam_manager.py split --file "exam_bundle.pdf" --out "subject_a.pdf" --pages "1-5, 10-15"
+./exam_manager.py split --file "bundle.pdf" --out "part.pdf" --pages "1-5"
 ```
 
-## Directory Structure
+## Adding a New College
 
+Adding a new college (e.g., "MKU" or "UoN") is fully supported and requires no code changes.
 
-The tool expects the following structure:
-```
-Subject Name/
-├── notes/
-└── pastpapers/
-    ├── processing-status.json  (Auto-created/managed)
-    ├── UNPROCESSED/           (Drop new PDFs here)
-    └── FQE/                   (Processed files go here)
-```
+1.  **Create the Folder**:
+    Navigate to the subject's `exams/` directory and create a folder with the college name.
+    ```bash
+    mkdir -p "Epidemiology/exams/MKU"
+    ```
+
+2.  **Add Content**:
+    Create category folders (e.g., `FQE`, `CATs`) inside the college folder and add your papers.
+    ```bash
+    mkdir -p "Epidemiology/exams/MKU/FQE"
+    # Copy your PDF/HTML files here
+    ```
+
+3.  **Regenerate Index**:
+    Run the index command to automatically detect the new college and generate its dashboard.
+    ```bash
+    ./exam_manager.py index --force
+    ```
+
+    The tool will:
+    - Detect the new `MKU` folder.
+    - Add an "MKU" button to the Subject Dashboard.
+    - Generate a dedicated dashboard for MKU.
+
+## Handling Images
+
+If your converted HTML files contain remote images (e.g., from Mathpix or other URLs), you can automatically download and link them locally.
+
+1.  **Download Remote Images**:
+    This command scans all HTML files, finds `img src` tags with remote URLs, downloads the images to an `assets/images/` folder, and updates the HTML to point to the local file.
+    ```bash
+    ./exam_manager.py download-images
+    ```
+
+2.  **Fix Relative Paths**:
+    After moving files or downloading images, ensure all paths are correct.
+    ```bash
+    ./exam_manager.py fix-paths
+    ```
+
+    This combination ensures your exam papers work offline and all diagrams/charts are preserved.
 
 ## Tracking Statuses
 - `unprocessed`: New file detected.
-- `mmd_generated`: OCR conversion complete (handled by other scripts).
-- `html_generated`: Final HTML ready.
+- `mmd_generated`: OCR conversion complete.
+- `html_generated`: Final HTML ready (handled by other scripts).
