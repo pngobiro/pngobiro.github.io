@@ -2256,7 +2256,7 @@ document.querySelectorAll('[id$=\"-count\"]').forEach(el => observer.observe(el)
                             <p><i class='far {icon}'></i> {f.suffix[1:].upper()} Format</p>
                         </div>
                         <div class='actions'>
-                            <a href='{f.name}' class='btn' target='_blank'><i class='fas fa-external-link-alt'></i> View Paper</a>
+                            <a href='{f.name}' class='btn'><i class='fas fa-eye'></i> View Paper</a>
                         </div>
                     </div>
             """)
