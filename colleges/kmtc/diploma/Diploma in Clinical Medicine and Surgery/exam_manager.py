@@ -7,8 +7,6 @@ import argparse
 import subprocess
 import re
 import zipfile
-import glob
-from bs4 import BeautifulSoup
 from pathlib import Path
 from datetime import datetime
 from collections import defaultdict
@@ -64,8 +62,7 @@ class ExamManager:
         for item in self.root_dir.iterdir():
             if item.is_dir() and not item.name.startswith('.') and item.name not in ['assets', 'exams-manager', 'KMTC', 'DHRIT Diploma in Health Records & Information Technology Curriculum', 'quizzes', 'starter_kit_temp']:
                 # It's a subject folder if it contains 'exams' or 'notes' or it's a module
-                clean_name = re.sub(r'\s+(I|II|III|IV|V|VI|VII|VIII|IX|X)$', '', item.name, flags=re.IGNORECASE)
-                if (item / 'exams').exists() or (item / 'notes').exists() or item.name in self.modules or clean_name in self.modules:
+                if (item / 'exams').exists() or (item / 'notes').exists() or item.name in self.modules:
                     self.subjects.append(item)
         self.subjects.sort()
         return self.subjects
@@ -2198,34 +2195,6 @@ document.querySelectorAll('[id$=\"-count\"]').forEach(el => observer.observe(el)
 </head>
 """
 
-    def set_title(self, file_path, title):
-        """Sets a custom display title in the HTML file metadata."""
-        path = Path(file_path)
-        if not path.exists():
-            self.log(f"Error: File {path} not found.", Colors.FAIL)
-            return
-
-        content = path.read_text(encoding='utf-8')
-        
-        # Check if meta tag already exists
-        meta_pattern = r"<meta\s+name=['\"]display-title['\"]\s+content=['\"][^'\"]*['\"]\s*\/?>"
-        new_tag = f"<meta name='display-title' content='{title}'>"
-        
-        if re.search(meta_pattern, content):
-            content = re.sub(meta_pattern, new_tag, content)
-        else:
-            # Insert after <title> or <head>
-            if "<title>" in content:
-                content = re.sub(r"(</title>)", r"\1\n    " + new_tag, content)
-            elif "<head>" in content:
-                content = re.sub(r"(<head>)", r"\1\n    " + new_tag, content)
-            else:
-                self.log("Warning: Could not find <head> or <title> tag. Appending to top.", Colors.WARNING)
-                content = new_tag + "\n" + content
-                
-        path.write_text(content, encoding='utf-8')
-        self.log(f"Updated title for {path.name} to: '{title}'", Colors.GREEN)
-
     def generate_category_html(self, subject_name, college, category, force=False):
         """Generates an index.html for a specific category list."""
         subject_path = self.root_dir / subject_name
@@ -2279,22 +2248,10 @@ document.querySelectorAll('[id$=\"-count\"]').forEach(el => observer.observe(el)
             html.append("<p style='padding:3rem; text-align:center; color:var(--text-tertiary); background:var(--bg-card); border-radius:var(--radius-lg);'>No papers available in this collection yet.</p>")
         
         for f in files:
-            display_title = f.stem
-            
-            # Try to read custom title from metadata
-            if f.suffix == '.html':
-                try:
-                    content = f.read_text(encoding='utf-8')
-                    match = re.search(r"<meta\s+name=['\"]display-title['\"]\s+content=['\"]([^'\"]*)['\"]\s*\/?>", content)
-                    if match:
-                        display_title = match.group(1)
-                except Exception:
-                    pass
-
             icon = "fa-file-pdf" if f.suffix == ".pdf" else "fa-file-code"
             html.append(f"""
                     <div class='paper-card'>
-                        <h3>{display_title}</h3>
+                        <h3>{f.stem}</h3>
                         <div class='meta'>
                             <p><i class='far {icon}'></i> {f.suffix[1:].upper()} Format</p>
                         </div>
@@ -2534,207 +2491,15 @@ document.querySelectorAll('[id$=\"-count\"]').forEach(el => observer.observe(el)
                     except Exception as e: self.log(f"Error: {e}", Colors.FAIL)
             if updated: self.save_status(subject, status_data, college)
 
-    def generate_quizzes(self, subject_filter=None, semester="2.2"):
-        """Generates JSON quizzes from HTML files."""
-        generator = QuizGenerator(self.root_dir)
-        generator.process_subject_directory(subject_filter, semester)
-
-    def test_regex(self, text):
-        """Tests the regex extraction logic on a provided string."""
-        print(f"Testing Regex on: '{text}'")
-        
-        # 1. Answer Extraction
-        print(f"\n{Colors.BOLD}Step 1: Extracting Answer Section{Colors.ENDC}")
-        pattern_extract = r'Correct Answer:?\s*(.+?)(?=\s*Explanation:|$)'
-        match = re.search(pattern_extract, text, re.IGNORECASE)
-        
-        extracted_text = None
-        if match:
-            extracted_text = match.group(1).strip()
-            print(f"  {Colors.GREEN}MATCH:{Colors.ENDC} '{extracted_text}'")
-        else:
-            print(f"  {Colors.FAIL}NO MATCH{Colors.ENDC} for extraction pattern.")
-            return
-
-        # 2. ID Extraction
-        print(f"\n{Colors.BOLD}Step 2: Extracting Option ID{Colors.ENDC}")
-        pattern_id = r'^([A-D])[\.\)\s]'
-        id_match = re.match(pattern_id, extracted_text, re.IGNORECASE)
-        
-        if id_match:
-            print(f"  {Colors.GREEN}MATCH:{Colors.ENDC} ID = '{id_match.group(1).lower()}'")
-        else:
-            print(f"  {Colors.FAIL}NO MATCH{Colors.ENDC} for ID pattern in '{extracted_text}'")
-
-
-class QuizGenerator:
-    def __init__(self, root_dir):
-        self.root_dir = root_dir
-
-    def process_subject_directory(self, target_subject=None, semester="2.2"):
-        print(f"{Colors.HEADER}Starting Quiz Generation for Semester {semester}...{Colors.ENDC}")
-        for dirpath, dirnames, filenames in os.walk(self.root_dir):
-            if dirpath.endswith(os.path.join("exams", "KMTC", semester)):
-                # Filter by subject if provided
-                if target_subject and target_subject.lower() not in dirpath.lower():
-                    continue
-                    
-                print(f"Scanning: {dirpath}")
-                self.process_folder(dirpath)
-
-    def process_folder(self, folder_path):
-        prompt_files = glob.glob(os.path.join(folder_path, "quiz_prompt_*.md"))
-        if not prompt_files:
-            return
-        
-        prompt_file = prompt_files[0]
-        try:
-            topic_id = self.extract_topic_id_from_filename(os.path.basename(prompt_file))
-            subject_id = self.extract_subject_id_from_content(prompt_file)
-            topic_name = self.extract_topic_name_from_content(prompt_file)
-        except Exception as e:
-            print(f"{Colors.FAIL}Error reading prompt {prompt_file}: {e}{Colors.ENDC}")
-            return
-
-        if not subject_id:
-            print(f"{Colors.WARNING}Skipping {folder_path}: No subjectId found.{Colors.ENDC}")
-            return
-
-        html_files = [f for f in os.listdir(folder_path) if f.endswith(".html") and f != "index.html"]
-        
-        for i, html_file in enumerate(html_files):
-            full_path = os.path.join(folder_path, html_file)
-            try:
-                quiz_json = self.convert_html_to_json(full_path, subject_id, topic_id, topic_name, i + 1)
-                
-                if quiz_json:
-                    json_filename = os.path.splitext(html_file)[0] + ".json"
-                    json_path = os.path.join(folder_path, json_filename)
-                    with open(json_path, 'w') as f:
-                        json.dump(quiz_json, f, indent=2)
-                    print(f"  {Colors.GREEN}Generated:{Colors.ENDC} {json_filename}")
-            except Exception as e:
-                print(f"  {Colors.FAIL}Failed to process {html_file}: {e}{Colors.ENDC}")
-
-    def extract_topic_id_from_filename(self, filename):
-        match = re.search(r'quiz_prompt_(.+)\.md', filename)
-        return match.group(1) if match else "unknown_topic"
-
-    def extract_subject_id_from_content(self, filepath):
-        with open(filepath, 'r') as f:
-            content = f.read()
-            match = re.search(r'"subjectId":\s*"([^"]+)"', content)
-            return match.group(1) if match else None
-
-    def extract_topic_name_from_content(self, filepath):
-        with open(filepath, 'r') as f:
-            content = f.read()
-            match = re.search(r'"topicName":\s*"([^"]+)"', content)
-            return match.group(1) if match else "Unknown Topic"
-
-    def convert_html_to_json(self, html_path, subject_id, topic_id, topic_name, order):
-        with open(html_path, 'r') as f:
-            soup = BeautifulSoup(f, 'html.parser')
-
-        title = soup.find('h1').get_text(strip=True) if soup.find('h1') else "Untitled Quiz"
-        subtitle_tag = soup.find('p', class_='subtitle')
-        description = subtitle_tag.get_text(strip=True) if subtitle_tag else ""
-
-        questions = []
-        for idx, card in enumerate(soup.find_all('div', class_='question-card')):
-            q_obj = self.parse_question_card(card, idx + 1)
-            if q_obj: questions.append(q_obj)
-
-        if not questions: return None
-
-        return {
-            "id": f"{subject_id}_{topic_id}_{str(order).zfill(3)}",
-            "title": f"Quiz {order}: {title}",
-            "subjectId": subject_id,
-            "topicId": topic_id,
-            "topicName": topic_name,
-            "description": description,
-            "isPaid": True,
-            "timeLimit": len(questions) * 2,
-            "passingScore": 70,
-            "version": 1,
-            "order": order,
-            "questions": questions
-        }
-
-    def parse_question_card(self, card, index):
-        q_text_div = card.find('div', class_='q-text')
-        if not q_text_div: return None
-        
-        q_text = q_text_div.get_text(strip=True)
-        options_grid = card.find('div', class_='options-grid')
-        answer_content = card.find('div', class_='answer-content')
-        
-        explanation_text = ""
-        correct_answer_text = ""
-        
-        if answer_content:
-            full_text = answer_content.get_text(separator=' ', strip=True)
-            explanation_text = full_text
-            # Robust Regex 1: Extract answer section
-            correct_match = re.search(r'Correct Answer:?\s*(.+?)(?=\s*Explanation:|$)', full_text, re.IGNORECASE)
-            if correct_match:
-                correct_answer_text = correct_match.group(1).strip()
-
-        q_id = f"q{index}"
-        
-        if options_grid:
-            options = []
-            html_options = options_grid.find_all('div', class_='option')
-            correct_opt_id = None
-            
-            if correct_answer_text:
-                # Robust Regex 2: Extract ID from answer text
-                match = re.match(r'^([A-D])[\.\)\s]', correct_answer_text, re.IGNORECASE)
-                if match: correct_opt_id = match.group(1).lower()
-            
-            for i, opt in enumerate(html_options):
-                opt_text = opt.get_text(strip=True)
-                # Robust Regex 3: Extract ID from option text
-                opt_id_match = re.match(r'^([A-D])[\.\)\s]', opt_text, re.IGNORECASE)
-                
-                if opt_id_match:
-                    opt_id = opt_id_match.group(1).lower()
-                    clean_text = re.sub(r'^([A-D])[\.\)\s]+', '', opt_text).strip()
-                else:
-                    opt_ids = ['a', 'b', 'c', 'd', 'e', 'f']
-                    opt_id = opt_ids[i] if i < len(opt_ids) else f"opt{i}"
-                    clean_text = opt_text
-
-                options.append({
-                    "id": opt_id,
-                    "text": clean_text,
-                    "isCorrect": (opt_id == correct_opt_id) if correct_opt_id else False
-                })
-                
-            return {
-                "id": q_id, "type": "multiple-choice", "question": q_text, "points": 10,
-                "options": options, "explanation": explanation_text, "hint": None
-            }
-        else:
-            return {
-                "id": q_id, "type": "short-answer", "question": q_text, "points": 20,
-                "acceptedAnswers": [], "caseSensitive": False, "partialMatch": False,
-                "explanation": explanation_text, "hint": None
-            }
-
 def main():
     parser = argparse.ArgumentParser(description="Exam Manager AI Agent")
-    parser.add_argument('action', choices=['dashboard', 'scan', 'process', 'list', 'split', 'analyze', 'fix-paths', 'pack', 'download-images', 'index', 'extract', 'init-structure', 'fix-styling', 'set-title', 'generate-quizzes', 'test-regex'], help='Action to perform')
-    parser.add_argument('--subject', help='Specific subject filter')
+    parser.add_argument('action', choices=['dashboard', 'scan', 'process', 'list', 'split', 'analyze', 'fix-paths', 'pack', 'download-images', 'index', 'extract', 'init-structure', 'fix-styling'], help='Action to perform')
+    parser.add_argument('--subject', help='Specific subject')
     parser.add_argument('--college', default='KMTC', help='College (default: KMTC)')
-    parser.add_argument('--semester', default='2.2', help='Semester folder to target (e.g., 1.2, 2.2). Default: 2.2')
-    parser.add_argument('--file', help='File path or input text for regex testing')
+    parser.add_argument('--file', help='File path')
     parser.add_argument('--out', help='Output path')
     parser.add_argument('--pages', help='Page ranges')
-    parser.add_argument('--title', help='Custom display title for set-title command')
     parser.add_argument('--force', action='store_true', help='Force overwrite existing index files')
-    parser.add_argument('--text', help='Text input for regex testing (alias for --file if strictly text)')
     
     args = parser.parse_args()
     manager = ExamManager(os.getcwd())
@@ -2751,18 +2516,6 @@ def main():
     elif args.action == 'extract': manager.extract_papers(args.file, args.college)
     elif args.action == 'init-structure': manager.init_structure(args.college)
     elif args.action == 'fix-styling': manager.fix_styling()
-    elif args.action == 'generate-quizzes': manager.generate_quizzes(args.subject, args.semester)
-    elif args.action == 'test-regex':
-        text_input = args.text or args.file
-        if not text_input:
-            print(f"{Colors.FAIL}Error: Please provide text to test using --text or --file{Colors.ENDC}")
-        else:
-            manager.test_regex(text_input)
-    elif args.action == 'set-title':
-        if not args.file or not args.title:
-            print(f"{Colors.FAIL}Error: --file and --title arguments are required for set-title{Colors.ENDC}")
-        else:
-            manager.set_title(args.file, args.title)
 
 if __name__ == "__main__":
     main()
